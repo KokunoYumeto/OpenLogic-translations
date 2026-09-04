@@ -2,7 +2,22 @@
 
 The fuller laptop copy was supplied to recover a known incomplete GitHub upload. It contains substantial work in nine language lanes. The source books are mainly **OpenStax mathematics**, not nine finished OpenLogic editions. Existing canon, terminology and script-aware infrastructure may help subsequent OpenLogic work after exact-language and subject checks.
 
-## Books and actual recovered scope
+## Completed bounded packages
+
+The existing book owners finished six recovered-package assignments. Each remains a **partial textbook edition**. Source translations, added solutions, learner adaptations and alternate registers are separately identified. The book coordinator records full anonymous byte checks; this catalogue independently checked the receipt identities and one current public metadata file per book, not every payload again. See the [delivery evidence](evidence/RECOVERED_BOOK_DELIVERY_CHECK_20260904.json).
+
+| Book | Public package | Completed boundary |
+|---|---|---|
+| OpenStax Prealgebra 2e | [files](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/releases/tag/recovered-a00-20260904) | Six partial locale packages: Gujarati, Javanese, India Bengali, Telugu, Bangladesh Bengali and Tamil. |
+| OpenStax Elementary Algebra 2e | [files](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/64f50c5e969e7dcfe8e324314091b50b36125292/translations/books/A10) | Gujarati13drafts and41new fraction answers; four Javanese sections in three registers; Punjabi three modules plus opening/section material. |
+| OpenStax Intermediate Algebra 2e | [Marathi](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/88ae2d0f3fe46b3efeee662eddcdb098b27b0c29/translations/mr-Deva-IN/A20-readers-20260904) · [Punjabi](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/88ae2d0f3fe46b3efeee662eddcdb098b27b0c29/translations/pnb-Arab-PK/A20-preface-20260904) | Marathi two source modules, with23overlapping/full HTML readers and two PDFs; Punjabi preface only. |
+| OpenStax Precalculus 2e | [files](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/d59087b930e43cc31130e59005a2f09f552d11d4/translations/recovered-books/precalculus-2e/2026-09-04) | Punjabi four source modules; Vietnamese two sections plus33smaller readers. |
+| Levin — Discrete Mathematics (4th edition) | [files](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/cbf1dc97d208c1ae67991915db9efed86c1c4a3b/translations/pnb-Arab-PK/books/levin-dmoi4-opening) | Punjabi front matter, Chapter0, Chapter1opening and section1.1;29source exercises and six separately authored self-checks. |
+| Hefferon — Linear Algebra | [files](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/1fcddf1ccac621ab8c4aefa14ed1ca4d0e9d680e/translations/recovered-books/hefferon-pnb-20260904) | Punjabi opening material, contents and legend; four original examples/eight answered exercises;26-page PDF. Main chapter bodies excluded. |
+
+The full original book-language work is separate from these bounded recovery releases. The source-unit inventory below is the historical intake baseline, not a statement that the new packages still have every old defect. Preserved intake receipts remain historical; they are not silently replaced by current release acceptance.
+
+## Original intake scope — historical baseline
 
 A source unit can be a textbook section, a preface or a chapter introduction. The counts below are full-source **draft units present**, not whole books and not uniform reader acceptance. The machine-readable catalogue gives every counted source ID.
 
@@ -32,7 +47,7 @@ The bounded inventory covers 8,758 files and rechecks 4,192 selected artifact ha
 
 The [machine-readable catalogue](catalogue/related-mathematics.json) records actual source IDs, reader-entry locators, canon-use records, limitations and the public recovery identity. The referenced reader trees are now included in the verified public snapshot. Keep each nested workspace intact when downloading readers and their local figures/styles.
 
-Some saved QA receipts reference older builders, figures, reports or translation inputs. Their historical PASS records are not fresh QA certification. Canon-use logs were located, but this inventory does not claim to have reviewed every translated sentence. In particular, the later Indian Bengali m81295 reader needs its changed inputs reconciled. The Bangladesh historical offline ZIPs contained documented private workflow text; the exported ZIPs are explicitly sanitized derivatives with repaired current manifests, and originals remain preserved.
+Some saved intake QA receipts reference older builders, figures, reports or translation inputs. Their historical PASS records are not fresh QA certification. Canon-use logs were located, but the intake inventory did not claim to review every translated sentence. At intake, the later Indian Bengali m81295 reader required changed-input reconciliation; the later bounded package acceptance above does not retroactively validate that old receipt. The Bangladesh historical offline ZIPs contained documented private workflow text; the exported ZIPs are explicitly sanitized derivatives with repaired current manifests, and originals remain preserved.
 
 ## OpenLogic coordination
 

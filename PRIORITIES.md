@@ -31,6 +31,8 @@ This is a model-conditional planning order, not an observed count of readers and
 
 The laptop intake has now been indexed from actual source, translation and reader files. It contains serious mathematics work in Punjabi, Indian Bengali, Marathi, Telugu, Tamil, Javanese and Gujarati, plus Bangladesh Bengali and Vietnamese. See the [book-named recovery inventory](RELATED_MATHEMATICS.md). Reuse their applicable canon and infrastructure after exact-language checks; do not create duplicate mathematics producers. Their OpenStax work is not evidence of completed OpenLogic translations. No Pashto lane was present in this particular dump.
 
+The [machine-readable candidate pipeline](catalogue/candidate-editions.json) keeps the eight not-yet-public shortlist targets and two additional motivated candidates distinct. A bounded inspection of 1,293 indexed target-source/reader files found no established OpenLogic translation start in the recovered outputs. Punjabi's apparent OpenLogic references belong to Levin source manifests; acquired OpenLogic snapshots are auxiliary sources, not translated OpenLogic sections.
+
 ## Canon plans for the eight not-yet-public targets
 
 ### Punjabi (`pnb-Arab-PK`)
@@ -64,6 +66,14 @@ Use the [Government of India English–Hindi–Gujarati Fundamental Glossary of 
 ### Pashto (`ps-Arab-PK`)
 
 Use the [Pashto Academy, University of Peshawar](https://www.uop.edu.pk/departments/?q=Pashto-Academy) for dictionary, grammar, translation, and research witnesses, and the [Khyber Pakhtunkhwa Directorate of Curriculum and Teacher Education](https://dcte.kp.gov.pk/) for curriculum authority. Add Pashto-medium mathematics and university scientific prose. Urdu, Persian, and Arabic can explain loan histories but may not decide Pashto syntax or terminology. Test Pashto-specific letters, diacritics, joining, font coverage, RTL punctuation, and LTR math isolation.
+
+## Additional motivated candidates outside this shortlist
+
+**Bangladesh Bengali (`bn-Beng-BD`)** and **Vietnamese (`vi-Latn-VN`)** are also in the OpenLogic pipeline. They are not promoted into the frozen Top 10. Bangladesh's existing early-numeracy and worked-answer design and Vietnamese self-study/prerequisite design supply reusable pedagogical evidence, not a requirement to reshape the whole OpenLogic text into those textbooks. Keep faithful full-source translation distinct from optional local learning pathways.
+
+For Bangladesh Bengali, begin with the recovered government-hosted teacher-material and dictionary passage index, preserve its regional distinction from India-standard Bengali, and add actual Bengali logic and university mathematical usage. For Vietnamese, reuse the documented mathematical language witnesses and prerequisite crosswalks, then add logic-specific sources for proof systems, model theory, computability and metamathematics. Ordinary dictionary entries or introductory calculus examples do not by themselves attest those technical senses.
+
+Recovered textbook production is routed through existing owners by book/work. That does not create an OpenLogic producer or silently transfer OpenLogic ownership. Each future OpenLogic owner must adopt explicit language/script scope, a source-aligned terminology ledger, per-segment canon-use records and the standard complete-reader gates.
 
 ## Shared execution order
 

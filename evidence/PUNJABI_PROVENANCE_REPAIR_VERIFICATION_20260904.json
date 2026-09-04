@@ -1,0 +1,38 @@
+{
+  "schema": "openlogic-manager-punjabi-provenance-repair/1.0.0",
+  "verified_utc": "2026-09-04T19:20:50.8504295Z",
+  "language_tag": "pnb-Arab-PK",
+  "repair": "Public raw provenance bytes differed from the packaged authoritative CRLF bytes because Git normalized line endings.",
+  "repository": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK",
+  "public_main_commit": "fe2a57fb8c37d1f4d407114a715f59676feae1d3",
+  "commit_message": "Complete Punjabi Functions source translations",
+  "public_source_units": 26,
+  "public_reader_units": 7,
+  "complete_edition": false,
+  "release_assets_changed": false,
+  "anonymous_commit_readback": {
+    "files_checked": 11,
+    "all_expected_hashes_match": true,
+    "source_manifest": {
+      "bytes": 356467,
+      "sha256": "5a6fef5c16c15a5b2f90f874c268512cfd6ed2e846bdfa850a67304a4c05a155",
+      "exact_manager_seed_match": true
+    },
+    "gitattributes": {
+      "bytes": 470,
+      "sha256": "d596dc1f31986555f0b30a09c848deb50f027775a1c622bbdeb49c2504af5dd2",
+      "explicit_nontext_paths": [
+        "provenance/SOURCE_MANIFEST.jsonl",
+        "provenance/ALL_TRANSLATED_SEGMENT_CANON_USE.jsonl",
+        "provenance/AUDIT-REGRESSION-0026.json",
+        "provenance/TERMINOLOGY_REVIEW_LOG.jsonl"
+      ]
+    },
+    "line_endings": {
+      "four_byte_addressed_files": "CRLF and explicitly -text",
+      "source_corrections": "LF already; exact public hash passes and no -text rule is needed"
+    }
+  },
+  "manager_note": "An initial manager check incorrectly expected SOURCE_CORRECTIONS.jsonl to be marked -text. Direct byte inspection showed it contains LF only; the expectation was rejected rather than manufacturing a failure.",
+  "result": "repair_verified_public"
+}

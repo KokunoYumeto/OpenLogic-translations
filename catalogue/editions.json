@@ -1,6 +1,6 @@
 {
   "schema": "openlogic-translations-catalogue/1.0.0",
-  "generated_utc": "2026-09-04T18:04:06.4932742Z",
+  "generated_utc": "2026-09-04T19:28:14.8293205Z",
   "catalogue_repository": "https://github.com/KokunoYumeto/OpenLogic-translations",
   "source_authority": {
     "repository": "https://github.com/OpenLogicProject/OpenLogic",
@@ -484,7 +484,7 @@
       "profiles": [
         "Complete Sets chapter in Naskh",
         "Complete Sets chapter in Nastaliq",
-        "Additional Relations and opening Functions source translations"
+        "Relations and Functions complete as source translations on public main; no integrated reader"
       ],
       "repository": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK",
       "release": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK/releases/tag/v0.1.0",
@@ -492,11 +492,15 @@
       "concept_doi": "10.5281/zenodo.22308436",
       "version_doi": "10.5281/zenodo.22308437",
       "license": "CC-BY-4.0; inherited component and OFL font exceptions retained",
-      "source_units_translated": 21,
+      "source_units_translated": 26,
+      "release_source_units_translated": 21,
+      "public_source_checkpoint_units": 26,
+      "public_source_checkpoint_commit": "fe2a57fb8c37d1f4d407114a715f59676feae1d3",
       "standalone_reader_units": 7,
-      "coverage_basis": "Published editable source has21 source-aligned units; accepted Naskh and Nastaliq readers contain the complete seven-unit Sets chapter.",
+      "coverage_basis": "The tagged v0.1.0 release contains21 source-aligned units and accepted Naskh/Nastaliq readers for the seven-unit Sets chapter. Public main commit fe2a57fb8c37d1f4d407114a715f59676feae1d3 contains26 verified source-aligned units through Functions; it does not add a reader release.",
       "status": [
-        "partial-21/722"
+        "partial-26/722-source-checkpoint",
+        "reader-release-7/722"
       ],
       "readers": [
         {
@@ -518,9 +522,11 @@
       ],
       "evidence": {
         "public_readback": "evidence/PUNJABI_PUBLIC_READBACK_20260904.json",
+        "provenance_repair_readback": "evidence/PUNJABI_PROVENANCE_REPAIR_VERIFICATION_20260904.json",
         "manager_anonymous_github_assets_verified": 7,
         "manager_anonymous_zenodo_assets_verified": 7,
-        "github_main_commit": "8004743f887f966ccca58c3101aabe831f44c7af",
+        "github_main_commit": "fe2a57fb8c37d1f4d407114a715f59676feae1d3",
+        "public_source_checkpoint_files_verified": 11,
         "source_canon_spot_check_unit": "OLP-0021",
         "shared_corrections_verified": [
           "OLFUN-002",
@@ -528,14 +534,13 @@
         ],
         "manager_visual_pages_sampled": 6,
         "manager_full_semantic_rereview": false,
-        "raw_representation_note": "Seven checked GitHub text paths use LF while release-ZIP copies use CRLF; content equal after exact normalization. No corruption; owner asked to pin or document both representations."
+        "raw_representation_note": "Resolved on public main: four byte-addressed provenance ledgers are marked -text and anonymously match their authoritative CRLF hashes; SOURCE_CORRECTIONS.jsonl is naturally LF and needs no override."
       },
       "limitations": [
-        "Full722-unit edition unfinished;701 source units remain.",
+        "Full722-unit edition unfinished;696 source units remain.",
         "Only the seven-unit Sets chapter has accepted readers; other translated units remain editable-source progress.",
         "Specialist mathematical terminology is provisional because the acquired canon chiefly supports native prose/register.",
-        "Manager visual review sampled six of28pages and source/canon review sampled OLP-0021; same-agent all-page and wider semantic evidence remains labelled as such.",
-        "GitHub raw and ZIP provenance text require dual-hash/line-ending clarification."
+        "Manager visual review sampled six of28pages and source/canon review sampled OLP-0021; same-agent all-page and wider semantic evidence remains labelled as such."
       ],
       "previous_public_release": null
     },
@@ -650,7 +655,8 @@
         "Beng"
       ],
       "profiles": [
-        "Sets and Relations:18 translated source files, including one alternative driver supplied as configuration; no count of18 distinct reader inclusions inferred"
+        "Tagged Sets-and-Relations release:18 source files and15 nonduplicated prose sections",
+        "Public-main source checkpoint:47 files through Arithmetization; no newer reader"
       ],
       "repository": "https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN",
       "release": "https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN/releases/tag/v0.2.0-sets-relations",
@@ -658,11 +664,15 @@
       "concept_doi": null,
       "version_doi": null,
       "license": "CC-BY-4.0; inherited component and font exceptions retained",
-      "source_units_translated": 18,
+      "source_units_translated": 47,
+      "release_source_units_translated": 18,
+      "public_source_checkpoint_units": 47,
+      "public_source_checkpoint_commit": "046803c8cfd5c1ecd0e602bee45fe8adf6158811",
       "standalone_reader_units": null,
-      "coverage_basis": "Sets and Relations:18 translated source files, including one alternative driver supplied as configuration; no count of18 distinct reader inclusions inferred; published tag checkpoint, not later local drafts.",
+      "coverage_basis": "The tagged v0.2.0 release contains18 translated source files, including one alternative driver supplied as configuration, and no scalar count of18 distinct reader inclusions is inferred. Public main commit 046803c8cfd5c1ecd0e602bee45fe8adf6158811 contains47 verified source-aligned files through Arithmetization; it does not add a PDF or HTML release.",
       "status": [
-        "partial-18/722"
+        "partial-47/722-source-checkpoint",
+        "reader-release-scalar-unasserted"
       ],
       "readers": [
         {
@@ -676,7 +686,11 @@
       ],
       "evidence": {
         "public_readback": "evidence/CUMULATIVE_PUBLIC_READBACK_20260904.json",
+        "source_checkpoint_readback": "evidence/BENGALI_OLSIZ_REPAIR_PUBLIC_READBACK_20260904.json",
         "manager_anonymous_release_assets_verified": 4,
+        "manager_anonymous_source_checkpoint_files_verified": 850,
+        "manager_replayed_source_checkpoint_units": 47,
+        "manager_rehashed_canon_passages_actually_used": 28,
         "tagged_readme_hub_backlink_verified": true,
         "coverage_from_tagged_edition_records": true,
         "manager_full_semantic_rereview": false,
@@ -684,6 +698,7 @@
       },
       "limitations": [
         "Full 722-unit edition unfinished.",
+        "The47-file public-main source checkpoint has no newer built reader or release asset.",
         "Byte verification is not independent semantic or linguistic certification.",
         "Scholarly canon originals are private research copies where redistribution rights are unestablished.",
         "Standalone scalar unit count left unasserted: one of18 source files is alternate configuration, not duplicated chapter content.",

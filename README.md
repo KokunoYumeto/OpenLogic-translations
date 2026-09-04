@@ -36,6 +36,12 @@ A new complete edition must translate all 722 tracked source files **and** provi
 
 The next-language shortlist and its limitations are in [`PRIORITIES.md`](PRIORITIES.md). The shortlist is a planning input, not a timeless or unquestionable ranking.
 
+## New editions in production
+
+Dedicated full-edition tasks have been commissioned for Punjabi (Pakistan, Shahmukhi), Bengali (India), Marathi, Telugu, Tamil (India), Javanese, Gujarati and Pashto (Pakistan). All eight have begun source/canon intake against the same verified 722-file English source boundary. This is an ownership and production-start checkpoint, **not** evidence of completed translations or a fully assembled scholarly canon. Public edition links will be added when useful, checked artifacts exist. The [ownership register](catalogue/ownership.json) records the assignments and shared requirements; Bangladesh Bengali and Vietnamese remain additional, unassigned candidates.
+
+Arabic has its own edition owner. Standard Iranian Persian and conceptual Inter-Farsi share a separate owner but remain distinct editions. Existing released-reader coverage in the table above is unchanged by these assignments.
+
 ## Recovered mathematics translation work
 
 The fuller laptop copy contains substantial work in nine language lanes. Those projects mainly translate **OpenStax Prealgebra, Elementary Algebra, Intermediate Algebra and Precalculus**, with further mathematics in some lanes. They are related translation resources, not nine completed OpenLogic editions. The [book-named recovery inventory](RELATED_MATHEMATICS.md) identifies the exact scope and distinguishes source drafts, readers and unfinished books; its [machine-readable catalogue](catalogue/related-mathematics.json) preserves the evidence boundaries. The [fuller recovered files are now public](https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/ed6f2e2020118723c2a12fe3377d2273c3d8ec50/translations), with all 8,758 published files anonymously verified by size and SHA-256. The separate [OpenLogic candidate pipeline](catalogue/candidate-editions.json) records eight provisional shortlist targets and two additional motivated candidates, without crediting textbook work as translated OpenLogic.

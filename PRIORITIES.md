@@ -75,6 +75,12 @@ For Bangladesh Bengali, begin with the recovered government-hosted teacher-mater
 
 Recovered textbook production is routed through existing owners by book/work. That does not create an OpenLogic producer or silently transfer OpenLogic ownership. Each future OpenLogic owner must adopt explicit language/script scope, a source-aligned terminology ledger, per-segment canon-use records and the standard complete-reader gates.
 
+## Production assignments — 4 September 2026
+
+The post-intake ownership check is complete. All eight missing shortlist targets now have distinct OpenLogic owners and isolated production/state directories, recorded in [the ownership register](catalogue/ownership.json). Their initial live tasks are performing source/canon intake. The shared source handoff verifies the raw Git hashes of all 722 content files and preserves the historical checkout representation separately; none of this establishes translation or canon completion. Bangladesh Bengali and Vietnamese remain additional candidates, not newly commissioned full-edition tasks at this checkpoint.
+
+Recovered textbook portions remain with the six existing book owners. No OpenLogic owner is commissioned to restart those textbook programmes. The first owner milestone must identify actual acquired scholarly sources, consulted passages and a real source-aligned translation boundary; acknowledgment alone is not delivery.
+
 ## Shared execution order
 
 For every target: acquire and hash canon bytes; index passages and terms; translate against the frozen 722-file source; record canon use per segment; build one standalone reader; run language- and script-specific QA; publish editable sources, evidence, and checksums; and anonymously read the public bytes back. Adjacent-language reuse is limited to infrastructure, candidate discovery, and contrastive checking.

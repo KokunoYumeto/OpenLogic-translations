@@ -3,7 +3,7 @@
 ## First: make the existing estate truthful and usable
 
 1. **Iranian Persian:** turn the current 642-unit reader plus separate 80-unit supplement into one coherent 722-unit reader, then replay RTL/BiDi, formula, citation, build, visual, and public-byte QA.
-2. **Spanish and Brazilian Portuguese:** reconcile the exact local r5 artifacts with their public GitHub releases and Zenodo version metadata. Current README links and available public versions disagree.
+2. **Spanish and Brazilian Portuguese:** integrate the retained source material into complete standalone readers from the verified existing translations. Fresh checks bind all722targets each, but current local r6 reader logs/recorders load642; current bytes differ from historical r5 QA. Public GitHub r4 packages are verified, while Zenodo serves Spanish r2 and Portuguese r5 PDF/r1 sources. Preserve those historical bytes while producing a coherent corrected edition; see [the mirror audit](evidence/ROMANCE_MIRROR_AUDIT.json).
 3. **Accessibility:** finish cumulative semantic acceptance for tranches 50–79 and complete whole-book browser, keyboard, reflow, MathML, and deterministic-source gates.
 4. **Interslavic:** continue from the exact accepted OLP-0182 boundary; do not relabel the QA PDF or 182-unit HTML prefix as a complete book.
 5. **Hindi, Indonesian, Chinese, and Turkish:** retain their honest 722-source/642-reader status and integrate the retained 80 units into standalone readers without changing mathematical content. The Hindi correction is based on its actual accepted build log, not its source-translation completion label.

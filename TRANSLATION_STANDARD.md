@@ -12,6 +12,8 @@ Before production, acquire lawful target-language mathematical-logic sources: of
 
 Create machine-readable document, passage, term, citation, and hash indexes. Each translated segment must record the exact canon passage IDs and term IDs actually consulted. A bibliography that cannot be traced to decisions is not canon use.
 
+When earlier source/canon work has been recovered, give the edition owner exact indexed original paths and hashes. Reconcile those references with new acquisitions and record what is reused, duplicated, irrelevant or superseded. The owner must actually read the relevant originals; an inherited consultation claim or old QA receipt is not fresh consultation or current acceptance. Date later re-review honestly rather than retrospectively claiming that newly read sources informed an earlier release. Preserve regional distinctions and separate local-needs learner adaptations from faithful source translation.
+
 A minimum aligned record contains:
 
 ```json
@@ -49,6 +51,8 @@ Transliteration is not translation. A script or digit profile must never be adve
 
 The ordinary upstream reader graph reaches 642 of the 722 tracked files. For this programme, “standalone 722/722 reader” means that the other 80 tracked units are incorporated in an explicit, navigable section of the same PDF. Keeping them only in editable sources or a separate supplement is source-complete but not standalone-reader-complete.
 
+Those 80 paths are not necessarily 80 chapters. Distinguish omitted mathematical reading content, shared contextual imports, alternative drivers and formal-only controls. Document placement and legitimate repetition, isolate conflicting alternative namespaces, and verify the actual build closure. Do not satisfy a file count by blindly duplicating chapters or inserting empty headings.
+
 Legacy editions may retain the 642+80 architecture, but the catalogue must say so. Future complete editions should ship:
 
 - one primary standalone 722-unit reader;
@@ -72,6 +76,7 @@ Build under the project’s machine-wide TeX mutex. Require zero fatal errors, u
 - Compare source and target semantic propositions, not just token counts.
 - Back-translate stratified samples, including definitions, theorem statements, proofs, exercises, captions, and high-risk negation/quantifier passages.
 - Run corpus-wide term consistency checks with documented allowed variants.
+- Identify whether semantic review is same-agent or independent. Hash/reference integrity, successful compilation and sampled reverse-paraphrase do not certify every sentence or native-register choice. Keep explicit uncertainty and continue source-bound review without mislabelling the evidence.
 - Log genuine upstream errors separately from translation choices. Do not silently inherit an obvious source typo when the intended reading is established; preserve evidence and report it upstream.
 
 ## 8. Publish and read back

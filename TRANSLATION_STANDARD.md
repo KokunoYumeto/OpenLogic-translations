@@ -92,3 +92,15 @@ Statuses are evidence claims:
 - `scaffold`: structural or provisional content not canon-admitted as a finished edition;
 - `cross-mirror-repair`: GitHub, Zenodo, or README identities do not agree;
 - `audit-needed`: a public claim exists without enough replayed evidence for a stronger label.
+
+## 9. Audit throughput as well as correctness
+
+Per-segment evidence must scale to a complete edition. Record source-unit and language-bearing-segment gains between material checkpoints, alongside QA-only actions, full regressions, TeX attempts, reader builds, and releases.
+
+- Run cheap deterministic checks on changed units and one cumulative regression per coherent batch. Prefer chapter-sized batches, or roughly 20–50 source files where the topology permits.
+- Deduplicate canon, terminology, lexicon, schema, and formula-control data. Unit records should refer to shared IDs rather than copy multi-megabyte tables or require bespoke assemblers.
+- Run the full adversarial schema suite when shared tooling changes and at meaningful release gates, not after every paragraph.
+- If the TeX mutex is occupied, advance source, canon, semantic, or non-TeX reader work. Do not repeatedly poll an unchanged build input.
+- Two consecutive material checkpoints without a source-unit or segment gain require a workflow review unless they close a concrete deterministic defect or publication transaction. Three QA-only checkpoints on unchanged content require refactoring before more QA.
+
+Workflow repair preserves accepted artifacts and the 722-unit outcome. It removes duplicated computation; it does not weaken source fidelity, canon-use evidence, semantic review, or final exhaustive QA.

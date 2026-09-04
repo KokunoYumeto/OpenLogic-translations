@@ -78,6 +78,7 @@ Build under the project’s machine-wide TeX mutex. Require zero fatal errors, u
 - Run corpus-wide term consistency checks with documented allowed variants.
 - Identify whether semantic review is same-agent or independent. Hash/reference integrity, successful compilation and sampled reverse-paraphrase do not certify every sentence or native-register choice. Keep explicit uncertainty and continue source-bound review without mislabelling the evidence.
 - Log genuine upstream errors separately from translation choices. Do not silently inherit an obvious source typo when the intended reading is established; preserve evidence and report it upstream.
+- Reuse stable cross-edition finding IDs from [shared source notes](SOURCE_NOTES.md). Verify the cited frozen bytes before applying a correction, keep the untouched source in provenance, and distinguish a false theorem, a wording defect, a terminology imprecision, and an explanatory inconsistency. A copied `upstream` directory without its own `.git` must be identified by its archive/manifest/file hashes, not by a parent repository HEAD discovered through directory ascent.
 
 ## 8. Publish and read back
 

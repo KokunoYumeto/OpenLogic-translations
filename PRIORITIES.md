@@ -6,7 +6,7 @@
 2. **Spanish and Brazilian Portuguese:** reconcile the exact local r5 artifacts with their public GitHub releases and Zenodo version metadata. Current README links and available public versions disagree.
 3. **Accessibility:** finish cumulative semantic acceptance for tranches 50–79 and complete whole-book browser, keyboard, reflow, MathML, and deterministic-source gates.
 4. **Interslavic:** continue from the exact accepted OLP-0182 boundary; do not relabel the QA PDF or 182-unit HTML prefix as a complete book.
-5. **Indonesian, Chinese, and Turkish:** retain their honest 722-source/642-reader status, then consider integrating the retained 80 units into standalone readers without altering translations.
+5. **Hindi, Indonesian, Chinese, and Turkish:** retain their honest 722-source/642-reader status and integrate the retained 80 units into standalone readers without changing mathematical content. The Hindi correction is based on its actual accepted build log, not its source-translation completion label.
 
 ## Provisional new-language shortlist
 
@@ -29,7 +29,7 @@ This is a model-conditional planning order, not an observed count of readers and
 - `TOP10_LANGUAGE_GROUPS_v3.csv`: 3,106 bytes; SHA-256 `32413813c59a2960362385bb092e79a831bf78e11cb9d2dfb122a5996447fc55`;
 - ranking QA: SHA-256 `c29f1a15bcfbae73e61a7022baf6a8b8595a61b5f91edf174b333952f80e13df`.
 
-The laptop-intake reconciliation must finish before any new producer is created. Candidate Punjabi, Bengali, Marathi, and Gujarati lane directories already exist in that intake, but directory names alone do not establish coverage or quality.
+The laptop intake has now been indexed from actual source, translation and reader files. It contains serious mathematics work in Punjabi, Indian Bengali, Marathi, Telugu, Tamil, Javanese and Gujarati, plus Bangladesh Bengali and Vietnamese. See the [book-named recovery inventory](RELATED_MATHEMATICS.md). Reuse their applicable canon and infrastructure after exact-language checks; do not create duplicate mathematics producers. Their OpenStax work is not evidence of completed OpenLogic translations. No Pashto lane was present in this particular dump.
 
 ## Canon plans for the eight not-yet-public targets
 

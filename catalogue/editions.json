@@ -1,6 +1,6 @@
 {
   "schema": "openlogic-translations-catalogue/1.0.0",
-  "generated_utc": "2026-09-04T10:45:00Z",
+  "generated_utc": "2026-09-04T12:39:17.579Z",
   "catalogue_repository": "https://github.com/KokunoYumeto/OpenLogic-translations",
   "source_authority": {
     "repository": "https://github.com/OpenLogicProject/OpenLogic",
@@ -13,6 +13,7 @@
   "status_vocabulary": [
     "verified-standalone-722",
     "published-source-722-reader-642",
+    "published-constructed-722",
     "partial",
     "scaffold",
     "cross-mirror-repair",
@@ -75,11 +76,11 @@
       "version_doi": "10.5281/zenodo.21987019",
       "license": "CC-BY-4.0",
       "source_units_translated": 722,
-      "standalone_reader_units": 722,
-      "retained_units_outside_reader": 0,
-      "status": ["verified-standalone-722"],
+      "standalone_reader_units": 642,
+      "retained_units_outside_reader": 80,
+      "status": ["published-source-722-reader-642", "audit-needed"],
       "reader": {"pages":842,"paper":"A4","bytes":6584887,"sha256":"db3018d15bc9aa597a3dcc71495a9c3d7e7071272bdccba85c3205ff17e93be0"},
-      "evidence": {"state_sha256":"c155255517ca9b57b9556abd18cadb8a4e31e52725934f8a090c25d8c7d3b1c5","github_and_zenodo_anonymous_readback":true},
+      "evidence": {"state_sha256":"c155255517ca9b57b9556abd18cadb8a4e31e52725934f8a090c25d8c7d3b1c5","github_and_zenodo_anonymous_readback":true,"reader_coverage_report":"evidence/HINDI_READER_COVERAGE.json","reader_coverage_report_sha256":"eb3e6ad61c93b57decd5f3071f652ef78361cdd14c88a37f8a76d6269b3cf118","original_local_report_sha256":"276d07fedb75880f01f3305cc90cf0c70890777fb71f2f20d7022fa22cf7d252","report_serialization":"Public JSON uses LF newlines; source-file, build-log and PDF hashes inside the report are unchanged.","source_paths_in_accepted_build_log":642,"source_paths_absent_from_accepted_build_log":80},
       "limitations": ["not human- or peer-reviewed", "not PDF/UA certified", "full 842-page raster review not recorded in current state"]
     },
     {
@@ -172,7 +173,7 @@
       "source_units_translated": 722,
       "local_r5_standalone_reader_units": 722,
       "status": ["cross-mirror-repair"],
-      "local_r5_reader": {"pages":1029,"bytes":5954807,"sha256":"f77c16455c8f8a5526569899e8afa83f7e4151c90d8fdae8d2453f983f31196b","qa":"PASS","zenodo_current_bytes_match":true,"github_r5_release_present":false},
+      "local_r5_reader": {"pages":1029,"bytes":5954807,"sha256":"f77c16455c8f8a5526569899e8afa83f7e4151c90d8fdae8d2453f983f31196b","qa":"PASS","zenodo_current_bytes_match":null,"zenodo_identity_verification":"not established by manager; current anonymous API read returned HTTP403","github_r5_release_present":false},
       "evidence": {"workflow_state_sha256":"f2a940018eb87b959112b71ee8435d23c24469925728cbfddb8af15717b4afd0"},
       "limitations": ["repository README points to an unavailable GitHub r5 release and a gone version DOI"]
     },
@@ -191,7 +192,8 @@
       "source_units_translated": 722,
       "standalone_reader_units": 722,
       "retained_units_outside_reader": 0,
-      "status": ["verified-standalone-722"],
+      "status": ["published-constructed-722"],
+      "coverage_evidence_scope": "Published 722-record constructed edition; not a claim that this manager repeated every edition-owner semantic, build or public-byte QA gate.",
       "reader_assets": [
         {"script":"Latn","bytes":3330477},
         {"script":"Cyrl","bytes":3405355},
@@ -213,7 +215,7 @@
       "accepted_reader_units": 182,
       "total_units": 722,
       "status": ["partial"],
-      "evidence": {"checkpoint":"OLP-0182","source_token_coverage_percent":27.70,"public_readme_sha256":"8b1d90f508fdd8b07bbf0b28e60a859d4a123d2bf5246b6471e2fc73b67eb9b5"},
+      "evidence": {"checkpoint":"OLP-0182","source_token_coverage_percent":27.70,"public_readme_sha256":"b92ad2055192534e1186ccc2f6985c52149fd75374e6749cd9300c51572b081a","historical_checkpoint_readme_sha256":"8b1d90f508fdd8b07bbf0b28e60a859d4a123d2bf5246b6471e2fc73b67eb9b5","readme_change":"Central catalogue backlink added; current README was anonymously hash-verified. Historical R2 manifest retains its original README identity."},
       "limitations": ["540 units pending", "public HTML is a bounded prefix", "QA PDF is not a finished public book"]
     },
     {
@@ -256,10 +258,13 @@
       "limitations": ["tranches 50-79 are not yet cumulatively accepted", "no public repository currently claimed"]
     }
   ],
-  "laptop_intake_candidates": [
-    {"language_tag":"pnb-Arab-PK","state":"directory discovered during active extraction; manifest replay pending"},
-    {"language_tag":"bn-Beng-IN","state":"directory and takeover handoff discovered during active extraction; manifest replay pending"},
-    {"language_tag":"mr-Deva-IN","state":"directory discovered during active extraction; manifest replay pending"},
-    {"language_tag":"gu-Gujr-IN","state":"directory discovered during active extraction; manifest replay pending"}
-  ]
+  "related_mathematics_recovery": {
+    "catalogue": "catalogue/related-mathematics.json",
+    "report": "RELATED_MATHEMATICS.md",
+    "locales": 9,
+    "indexed_files": 8758,
+    "selected_artifact_hashes_rechecked": 4192,
+    "scope": "Recovered OpenStax and related mathematics work, not nine completed OpenLogic editions",
+    "recovery_destination": "https://github.com/KokunoYumeto/allocating-ai-translation-compute-for-educational-access/tree/codex/additional-translations-review/translations"
+  }
 }

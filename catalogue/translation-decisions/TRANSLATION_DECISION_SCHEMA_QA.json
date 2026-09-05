@@ -1,0 +1,46 @@
+{
+  "schema": "openlogic-translation-decision-schema-qa/1.0.0",
+  "generated_utc": "2026-09-05T11:54:49.0095459Z",
+  "status": "PASS",
+  "normative_schema": {
+    "path": "translation-decision.schema.json",
+    "bytes": 10787,
+    "sha256": "50e7fa407b62c711f92f8b93be591d3b4a6e1c4adb1386c398bb5f76844d9f90",
+    "draft": "2020-12",
+    "metaschema_validation": "PASS"
+  },
+  "adapter_fixture": {
+    "path": "example.valid.json",
+    "bytes": 4486,
+    "sha256": "0b12f85178d6a264edd59e78e4f7120c4c2fbe1fce718d97d0a4152d26092d2a",
+    "schema_validation": "PASS",
+    "classification": "synthetic adapter fixture; not canon or translation evidence"
+  },
+  "negative_controls": [
+    {
+      "mutation": "replace OLP-0001 with unit-one",
+      "expected": "REJECT",
+      "observed": "REJECT"
+    }
+  ],
+  "state_and_hub_schema_byte_identity": true,
+  "required_release_surfaces": [
+    "START_HERE.md",
+    "TRANSLATION_DECISIONS_FULL.md",
+    "PRIORITY_REVIEW.md",
+    "DECISION_OCCURRENCES.csv",
+    "DECISIONS.json",
+    "translation-decision.schema.json",
+    "TRANSLATION_DECISION_QA.json"
+  ],
+  "generator_level_obligations": [
+    "unique decision_id values",
+    "unique occurrence_id values",
+    "one occurrence per exact source-target locus",
+    "accepted language-bearing segments linked to actual canon-use and term decisions",
+    "resolvable source and target spans and exact hashes",
+    "formula, citation, identifier, link, hierarchy, Unicode and script/BiDi parity",
+    "agreement of Markdown, CSV and JSON projections",
+    "zero placeholders or silent omissions in complete editions"
+  ]
+}

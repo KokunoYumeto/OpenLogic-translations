@@ -23,6 +23,8 @@ The [Spanish/Portuguese mirror audit](evidence/ROMANCE_MIRROR_AUDIT.json) includ
 
 The machine-readable record is [`catalogue/editions.json`](catalogue/editions.json). It records release and DOI versions, script profiles, reader/source coverage, hashes, limitations, and the evidence class behind each status. The separate [script and orthography policy](SCRIPT_AND_ORTHOGRAPHY.md) and [machine-readable surface catalogue](catalogue/script-surfaces.json) distinguish typography, deterministic script projections, accessibility companions, and genuinely separate language or locale editions.
 
+Every edition should publish a reusable translation-decision register under the shared [`translation-decision.schema.json`](catalogue/translation-decisions/translation-decision.schema.json). The [decision-contract guide](catalogue/translation-decisions/README.md) defines the human-readable, priority-review, occurrence-CSV, JSON, schema, and deterministic-QA views expected at material releases.
+
 ## Accessibility infrastructure
 
 The accessible Open Logic book is infrastructure, not another language edition. Its latest accepted checkpoint integrates 50 of 80 planned source tranches (62.5%). Later tranches have prepared or authored material but have not all passed cumulative acceptance. No public repository is claimed here yet. Across editions, semantic responsive HTML, reflowable EPUB, native MathML, image descriptions, offline packaging, and applicable low-bitrate media are publication baselines; missing modes remain explicit rather than being hidden behind a PDF claim.
@@ -31,6 +33,7 @@ The accessible Open Logic book is infrastructure, not another language edition. 
 
 - **Inter-Farsi OpenLogic:** active corpus-wide scaffold/edition work. Its design separates a controlled pluricentric register from Iranian Persian and keeps Perso-Arabic and Tajik Cyrillic realization, regional adaptation, and notation profiles as typed layers. It is not yet listed as a public complete translation.
 - **Romance interlanguage:** 722 provisional baseline files exist, but zero units were canon-admitted at the last exact checkpoint. It is research scaffolding, not a complete edition.
+- **Latin:** planned as a complete `la-Latn` Neo-Latin edition plus a separate bilingual learner companion for mathematically minded Latin readers. Historical mathematical and logical Latin, modern Latinity guidance, and an explicit neologism ledger will govern the prose; Peano's *Latino sine flexione* is comparative evidence, not the target register. No translated unit or owner is claimed yet.
 
 ## What “done” means here
 

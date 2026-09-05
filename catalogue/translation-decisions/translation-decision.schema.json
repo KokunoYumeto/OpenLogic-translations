@@ -1,0 +1,319 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/KokunoYumeto/OpenLogic-translations/raw/main/catalogue/translation-decisions/translation-decision.schema.json",
+  "title": "OpenLogic translation decision register",
+  "description": "Canonical decision and occurrence records for source-faithful, canon-first OpenLogic editions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "edition_release",
+    "decisions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "openlogic-translation-decisions/1.0.0"
+    },
+    "edition_release": {
+      "$ref": "#/$defs/editionRelease"
+    },
+    "generated_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "generator": {
+      "$ref": "#/$defs/hashedArtifact"
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/decision"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonEmpty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lineSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["available", "pending", "not_applicable"]
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmpty"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "available"}}},
+          "then": {"required": ["start", "end"]},
+          "else": {"required": ["reason"]}
+        }
+      ]
+    },
+    "byteSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["available", "pending", "not_applicable"]
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_exclusive": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmpty"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "available"}}},
+          "then": {"required": ["start", "end_exclusive"]},
+          "else": {"required": ["reason"]}
+        }
+      ]
+    },
+    "hashedArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path_or_uri", "sha256"],
+      "properties": {
+        "path_or_uri": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "version_or_ref": {
+          "$ref": "#/$defs/nonEmpty"
+        }
+      }
+    },
+    "editionIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edition_id", "language_tag", "language_name", "script", "register_or_variant", "layer_type"],
+      "properties": {
+        "edition_id": {"$ref": "#/$defs/nonEmpty"},
+        "language_tag": {"$ref": "#/$defs/nonEmpty"},
+        "language_name": {"$ref": "#/$defs/nonEmpty"},
+        "script": {"$ref": "#/$defs/nonEmpty"},
+        "territory": {"type": ["string", "null"]},
+        "locale": {"type": ["string", "null"]},
+        "register_or_variant": {"$ref": "#/$defs/nonEmpty"},
+        "notation_profile": {"type": ["string", "null"]},
+        "layer_type": {
+          "enum": [
+            "semantic_translation",
+            "regional_adaptation",
+            "deterministic_script_projection",
+            "notation_or_typography_profile",
+            "pronunciation_accessibility_companion",
+            "constructed_interlanguage"
+          ]
+        },
+        "parent_semantic_edition_id": {"type": ["string", "null"]}
+      }
+    },
+    "editionRelease": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edition", "source_revision", "coverage_state"],
+      "properties": {
+        "edition": {"$ref": "#/$defs/editionIdentity"},
+        "release_tag": {"type": ["string", "null"]},
+        "repository": {"type": ["string", "null"]},
+        "doi": {"type": ["string", "null"]},
+        "source_revision": {"$ref": "#/$defs/nonEmpty"},
+        "coverage_state": {
+          "enum": ["complete", "partial", "scaffold", "audit_needed"]
+        },
+        "source_units": {"type": "integer", "minimum": 0, "maximum": 722},
+        "reader_units": {"type": ["integer", "null"], "minimum": 0, "maximum": 722}
+      }
+    },
+    "textLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "file_id", "file_sha256", "line_span", "byte_span", "excerpt"],
+      "properties": {
+        "path": {"$ref": "#/$defs/nonEmpty"},
+        "file_id": {"$ref": "#/$defs/nonEmpty"},
+        "file_sha256": {"$ref": "#/$defs/sha256"},
+        "line_span": {"$ref": "#/$defs/lineSpan"},
+        "byte_span": {"$ref": "#/$defs/byteSpan"},
+        "printed_page": {"type": ["string", "null"]},
+        "excerpt": {"$ref": "#/$defs/nonEmpty"},
+        "term": {"type": ["string", "null"]},
+        "intended_sense": {"type": ["string", "null"]},
+        "context": {"type": ["string", "null"]}
+      }
+    },
+    "readerLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {"enum": ["available", "pending", "not_applicable"]},
+        "artifact_filename": {"type": "string"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "profile": {"type": "string"},
+        "printed_page": {"type": ["string", "null"]},
+        "assembled_pdf_page": {"type": ["integer", "null"], "minimum": 1},
+        "provenance": {"type": "string"},
+        "reason": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "available"}}},
+          "then": {"required": ["artifact_filename", "artifact_sha256", "profile", "provenance"]},
+          "else": {"required": ["reason"]}
+        }
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority_id", "citation", "status"],
+      "properties": {
+        "authority_id": {"$ref": "#/$defs/nonEmpty"},
+        "citation": {"$ref": "#/$defs/nonEmpty"},
+        "passage_id": {"type": ["string", "null"]},
+        "locator": {"type": ["string", "null"]},
+        "source_sha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "passage_sha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "status": {
+          "enum": ["checked_supports", "checked_adverse", "checked_context_only", "not_found", "not_checked"]
+        },
+        "note": {"$ref": "#/$defs/nonEmpty"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"enum": ["checked_supports", "checked_adverse", "checked_context_only"]}}},
+          "then": {"required": ["passage_id", "locator", "passage_sha256", "note"]},
+          "else": {"required": ["note"]}
+        }
+      ]
+    },
+    "alternative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rendering", "disposition", "reason"],
+      "properties": {
+        "rendering": {"$ref": "#/$defs/nonEmpty"},
+        "disposition": {
+          "enum": ["rejected", "reserved_for_other_sense", "reserved_for_other_register", "superseded", "viable_alternative"]
+        },
+        "reason": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "occurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["occurrence_id", "unit_id", "semantic_unit_id", "source", "target", "reader_locator", "evidence_refs"],
+      "properties": {
+        "occurrence_id": {"$ref": "#/$defs/nonEmpty"},
+        "unit_id": {"pattern": "^OLP-[0-9]{4}$"},
+        "semantic_unit_id": {"$ref": "#/$defs/nonEmpty"},
+        "part_title": {"type": ["string", "null"]},
+        "chapter_title": {"type": ["string", "null"]},
+        "section_title": {"type": ["string", "null"]},
+        "source": {"$ref": "#/$defs/textLocator"},
+        "target": {"$ref": "#/$defs/textLocator"},
+        "reader_locator": {"$ref": "#/$defs/readerLocator"},
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/hashedArtifact"}
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id",
+        "record_kind",
+        "recording_mode",
+        "edition",
+        "source_term_or_construction",
+        "intended_sense",
+        "chosen_rendering",
+        "rationale",
+        "authorities_checked",
+        "alternatives",
+        "confidence",
+        "confidence_reason",
+        "provisional",
+        "review_priority",
+        "expert_review_useful",
+        "please_double_check_question",
+        "occurrences"
+      ],
+      "properties": {
+        "decision_id": {"$ref": "#/$defs/nonEmpty"},
+        "supersedes": {"type": "array", "items": {"$ref": "#/$defs/nonEmpty"}},
+        "record_kind": {
+          "enum": ["terminology", "syntax", "register", "orthography", "script", "notation", "citation", "source_correction", "accessibility"]
+        },
+        "recording_mode": {
+          "enum": ["contemporaneous", "retrospective", "derived"]
+        },
+        "recorded_utc": {"type": "string", "format": "date-time"},
+        "edition": {"$ref": "#/$defs/editionIdentity"},
+        "source_term_or_construction": {"$ref": "#/$defs/nonEmpty"},
+        "intended_sense": {"$ref": "#/$defs/nonEmpty"},
+        "chosen_rendering": {"$ref": "#/$defs/nonEmpty"},
+        "rationale": {"$ref": "#/$defs/nonEmpty"},
+        "authorities_checked": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/authority"}
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/alternative"}
+        },
+        "confidence": {"enum": ["high", "medium", "low"]},
+        "confidence_reason": {"$ref": "#/$defs/nonEmpty"},
+        "provisional": {"type": "boolean"},
+        "review_priority": {"enum": ["urgent", "high", "normal", "low"]},
+        "expert_review_useful": {"type": "boolean"},
+        "expert_review_reason": {"type": ["string", "null"]},
+        "please_double_check_question": {"type": ["string", "null"]},
+        "occurrences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/occurrence"}
+        }
+      }
+    }
+  }
+}

@@ -29,6 +29,8 @@ A minimum aligned record contains:
 }
 ```
 
+The normative cross-edition decision contract is published at [`catalogue/translation-decisions/translation-decision.schema.json`](catalogue/translation-decisions/translation-decision.schema.json), with release surfaces and operating rules in its [`README.md`](catalogue/translation-decisions/README.md). It distinguishes reusable semantic decisions from exact textual occurrences and records contemporaneous versus later evidence explicitly.
+
 ## 3. Keep language and presentation layers distinct
 
 The production model has four typed layers:

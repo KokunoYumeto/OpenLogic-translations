@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open Logic translations</title>
+  <meta name="description" content="Choose a language and find verified, partial, and research editions of the Open Logic Project.">
+  <meta name="theme-color" content="#07111f">
+  <link rel="canonical" href="https://kokunoyumeto.github.io/OpenLogic-translations/">
+  <link rel="stylesheet" href="site.css">
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#languages">Skip to languages</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Open Logic translations home">
+      <span class="brand-mark" aria-hidden="true">∀</span>
+      <span>Open Logic translations</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#languages">Languages</a>
+      <a href="README.md">Standards &amp; evidence</a>
+      <a href="https://openlogicproject.org/">Open Logic Project ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="chooser" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">One source · many scholarly traditions</p>
+        <h1 id="page-title">Choose an Open Logic edition.</h1>
+        <p class="lede">Find a complete reader, inspect a translation in progress, or follow a research interlanguage. Source coverage and readable-book coverage are reported separately.</p>
+      </div>
+
+      <form class="language-picker" id="language-picker">
+        <label for="language-select">Select a language or register</label>
+        <div class="select-wrap">
+          <select id="language-select" name="language">
+            <option value="">Choose an edition…</option>
+          </select>
+          <span aria-hidden="true">↓</span>
+        </div>
+        <p id="picker-help">Selecting an edition moves directly to its card.</p>
+      </form>
+
+      <div class="scope-note" role="note">
+        <span class="scope-symbol" aria-hidden="true">722</span>
+        <p><strong>Frozen source scope</strong><br>Every completion claim is measured against 722 tracked English content files.</p>
+      </div>
+    </section>
+
+    <section class="catalogue" id="languages" aria-labelledby="languages-title">
+      <div class="catalogue-head">
+        <div>
+          <p class="eyebrow">Edition catalogue</p>
+          <h2 id="languages-title">Languages, scripts, and research registers</h2>
+        </div>
+        <p class="catalogue-summary" id="catalogue-summary" aria-live="polite">Loading the current catalogue…</p>
+      </div>
+
+      <div class="controls" aria-label="Catalogue controls">
+        <label class="search-control" for="search">
+          <span>Search</span>
+          <input id="search" type="search" placeholder="Arabic, தமிழ், Cyrillic…" autocomplete="off">
+        </label>
+        <div class="filter-group" aria-label="Filter by publication state">
+          <button class="filter active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="complete" aria-pressed="false">Complete</button>
+          <button class="filter" type="button" data-filter="source-complete" aria-pressed="false">Source complete</button>
+          <button class="filter" type="button" data-filter="partial" aria-pressed="false">In progress</button>
+          <button class="filter" type="button" data-filter="research" aria-pressed="false">Research</button>
+        </div>
+      </div>
+
+      <div class="edition-grid" id="edition-grid" aria-live="polite" aria-busy="true"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <p>No edition matches that search and filter.</p>
+        <button type="button" id="clear-filters">Show every edition</button>
+      </div>
+
+      <noscript>
+        <div class="noscript-card">
+          <h3>JavaScript is off</h3>
+          <p>The language chooser needs JavaScript, but every edition remains available in the <a href="README.md#read-or-inspect-an-edition">plain-language catalogue</a> and <a href="catalogue/editions.json">machine-readable catalogue</a>.</p>
+        </div>
+      </noscript>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div>
+        <p class="eyebrow">What the labels mean</p>
+        <h2 id="method-title">A translation file is not automatically a finished book.</h2>
+      </div>
+      <div class="method-grid">
+        <article>
+          <span>01</span>
+          <h3>Source coverage</h3>
+          <p>How many of the 722 frozen English content files have a translated counterpart.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Reader coverage</h3>
+          <p>How many units are actually integrated into one readable, released edition.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Evidence</h3>
+          <p>Canon use, structural checks, public-byte verification, and known limitations stay attached to each claim.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Independent adaptations based on the <a href="https://openlogicproject.org/">Open Logic Project</a>; listing does not imply upstream endorsement.</p>
+    <div class="footer-links">
+      <a href="https://kokunoyumeto.github.io/program-matematika-indonesia/">Open mathematics programme · Indonesian / English ↗</a>
+      <a href="https://github.com/KokunoYumeto/OpenLogic-translations">GitHub source ↗</a>
+      <a href="catalogue/editions.json">Catalogue JSON</a>
+    </div>
+  </footer>
+</body>
+</html>

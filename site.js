@@ -60,7 +60,7 @@ function editionClass(edition) {
 }
 
 function classLabel(edition, state) {
-  if ((edition.status || []).join(" ").includes("published-constructed-722")) return "Constructed 722";
+  if ((edition.status || []).join(" ").includes("published-constructed-722")) return "Complete interlanguage";
   return {
     "complete": "Complete reader",
     "source-complete": "Source complete",

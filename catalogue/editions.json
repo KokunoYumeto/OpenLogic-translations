@@ -739,7 +739,7 @@
       ],
       "profiles": [
         "Sets, Relations, and Functions reader",
-        "80-unit exact public source checkpoint in first-order proof systems"
+        "118-unit exact public source checkpoint through first-order axiomatic-deduction proof-theoretic notions"
       ],
       "repository": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID",
       "release": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.1.2",
@@ -747,12 +747,12 @@
       "concept_doi": null,
       "version_doi": null,
       "license": "CC-BY-4.0; inherited component and font exceptions retained",
-      "source_units_translated": 80,
+      "source_units_translated": 118,
       "translated_source_units_supporting_reader": 26,
       "standalone_reader_units": 24,
-      "coverage_basis": "Exact public checkpoint 32b60cd4b4d0fb30512ecd352c9eea72c1a6adce contains a manager-replayed 80/722 source snapshot with 1,318 aligned segments and canon evidence for all 856 translated segments. The unchanged v0.1.2 36-page reader loads 24 source units and is supported by 26 translated units; these scopes are explicitly distinct.",
+      "coverage_basis": "Exact public checkpoint bf8172c7585986612b181aa5d5a6d72fea90f108 contains a manager-replayed 118/722 source snapshot with 1,921 aligned segments and canon evidence for all 1,210 linguistic segments. A fresh independent invocation of the repository generator reproduced all 118 QA unit rows and the 1,921-row canon-use ledger byte-for-byte. The unchanged v0.1.2 36-page reader loads 24 source units and is supported by 26 translated units; these scopes are explicitly distinct.",
       "status": [
-        "partial-80/722-source-checkpoint",
+        "partial-118/722-source-checkpoint",
         "reader-release-24/722"
       ],
       "readers": [
@@ -767,25 +767,31 @@
       ],
       "evidence": {
         "manager_verification": "evidence/JAVANESE_V012_MANAGER_VERIFICATION_20260905.json",
-        "current_source_checkpoint_audit": "evidence/SOURCE_CHECKPOINTS_JV80_TA65_PNB52_20260905.json",
-        "github_source_checkpoint_commit": "32b60cd4b4d0fb30512ecd352c9eea72c1a6adce",
-        "manager_anonymous_source_checkpoint_files_verified": 877,
+        "current_source_checkpoint_audit": "evidence/JAVANESE_SOURCE118_MANAGER_AUDIT_20260905.json",
+        "github_source_checkpoint_commit": "bf8172c7585986612b181aa5d5a6d72fea90f108",
+        "manager_anonymous_codeload_bytes": 2839625,
+        "manager_anonymous_codeload_sha256": "674edc1429c7fba24118b1f242f9b3e0dec0e77518e3a9de90c657955f8ceaf0",
+        "manager_hash_bound_source_and_target_files": 840,
         "manager_anonymous_release_assets_verified": 4,
         "manager_replayed_frozen_sources": 722,
-        "manager_replayed_translated_units": 80,
-        "manager_replayed_segment_records": 1318,
-        "manager_replayed_translated_segments_with_canon": 856,
+        "manager_replayed_translated_units": 118,
+        "manager_replayed_segment_records": 1921,
+        "manager_replayed_translated_segments_with_canon": 1210,
         "manager_replayed_canon_passages": 21,
-        "manager_replayed_term_decisions": 103,
-        "manager_replayed_semantic_unit_reviews": 80,
-        "manager_replayed_applied_source_corrections": 15,
+        "manager_replayed_term_decisions": 115,
+        "manager_replayed_semantic_unit_reviews": 118,
+        "manager_replayed_applied_source_corrections": 36,
+        "manager_replayed_translation_decisions": 177,
+        "manager_replayed_decision_occurrences": 430,
+        "manager_generator_replay_passed": true,
+        "manager_privacy_findings": 0,
         "manager_visual_pages_sampled": 5,
         "tagged_readme_hub_backlink_verified": true,
         "manager_full_semantic_rereview": false
       },
       "limitations": [
         "Full 722-unit edition unfinished.",
-        "The reader contains 24 source units and is supported by 26 translations although the exact source checkpoint contains 80 translated source files; no wider reader claim is made.",
+        "The reader contains 24 source units and is supported by 26 translations although the exact source checkpoint contains 118 translated source files; no wider reader claim is made.",
         "Same-author semantic review, not independent native-scholar certification.",
         "Specialist terminology remains provisional where the available Javanese canon supports register or lexical form rather than exact mathematical-logic senses.",
         "No Zenodo DOI is claimed for this release."
@@ -1153,6 +1159,7 @@
       "id": "openlogic-accessible-book",
       "name": "Accessible Open Logic book",
       "kind": "accessibility-infrastructure",
+      "owner_task_id": "019ffc65-3d4d-7e21-a913-21cc33a9be4a",
       "repository": null,
       "accepted_tranches": 50,
       "planned_tranches": 80,
@@ -1161,7 +1168,25 @@
         "partial"
       ],
       "evidence": {
-        "current_production_sha256": "fe9c1df7eec298d03ac766acef2b2afc6fb6343265f89a8ff88bd65f2613808e"
+        "current_production_sha256": "fe9c1df7eec298d03ac766acef2b2afc6fb6343265f89a8ff88bd65f2613808e",
+        "plain_language_english_scope": "evidence/PLAIN_LANGUAGE_ENGLISH_SCOPE_20260905.json"
+      },
+      "plain_language_english": {
+        "classification": "distinct aligned accessibility/register edition; not a replacement language edition or delivery-format duplicate",
+        "status": "research-and-representative-pilot-assigned; zero translated units claimed",
+        "source_alignment_required": true,
+        "semantic_invariants": [
+          "definitions",
+          "quantifier and logical scope",
+          "notation and formulae",
+          "proof validity",
+          "identifiers, citations and cross-references"
+        ],
+        "delivery_targets": [
+          "screen-reader-native HTML and MathML",
+          "reflowable mobile presentation",
+          "downloadable offline package"
+        ]
       },
       "limitations": [
         "tranches 50-79 are not yet cumulatively accepted",

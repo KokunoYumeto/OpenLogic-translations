@@ -1,6 +1,7 @@
 const TOTAL_UNITS = 722;
 
 const nativeNames = {
+  "en": "English",
   "ar": "العربية",
   "fa-IR": "فارسی",
   "hi-Deva-IN": "हिन्दी",
@@ -50,8 +51,11 @@ function editionClass(edition) {
   if (edition.standalone_reader_units === TOTAL_UNITS || statuses.includes("published-constructed-722")) {
     return "complete";
   }
-  if (edition.source_units_translated === TOTAL_UNITS) return "source-complete";
-  if (Number.isFinite(edition.source_units_translated) && edition.source_units_translated > 0) return "partial";
+  const sourceUnits = Number.isFinite(edition.source_units_translated)
+    ? edition.source_units_translated
+    : edition.source_units_preserved;
+  if (sourceUnits === TOTAL_UNITS) return "source-complete";
+  if (Number.isFinite(sourceUnits) && sourceUnits > 0) return "partial";
   return "research";
 }
 
@@ -153,8 +157,11 @@ function cardFor(edition) {
 
   const coverage = document.createElement("div");
   coverage.className = "coverage";
+  const sourceUnits = Number.isFinite(edition.source_units_translated)
+    ? edition.source_units_translated
+    : edition.source_units_preserved;
   coverage.append(
-    coverageRow("Translated source files", units(edition.source_units_translated)),
+    coverageRow(edition.source_coverage_label || "Translated source files", units(sourceUnits)),
     coverageRow("Standalone reader", units(edition.standalone_reader_units))
   );
 

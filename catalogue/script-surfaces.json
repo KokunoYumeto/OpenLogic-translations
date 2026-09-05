@@ -1,0 +1,152 @@
+{
+  "schema": "openlogic-script-and-orthography-catalogue/1.0.0",
+  "generated_utc": "2026-09-05T03:16:38.1658800Z",
+  "policy": "../SCRIPT_AND_ORTHOGRAPHY.md",
+  "classes": {
+    "notation_or_typography_profile": "Same linguistic translation; digits, formula conventions, or fonts differ.",
+    "deterministic_script_projection": "Same constructed-language semantic record; reversible script mapping plus an exception ledger.",
+    "pronunciation_accessibility_companion": "ID-aligned pronunciation-resolved output, distinct from graphemic transliteration and never a replacement translation.",
+    "separate_language_or_locale_edition": "Terminology, syntax, register, orthography, or educational convention requires its own canon and semantic QA.",
+    "research_candidate": "Evidence is insufficient for a full 722-unit production commitment."
+  },
+  "current_surfaces": [
+    {
+      "language_tag": "ar-Arab",
+      "surfaces": ["international-math-digits", "machrek-arabic-indic-math-notation"],
+      "class": "notation_or_typography_profile",
+      "decision": "retain_complete_dual_722_readers"
+    },
+    {
+      "language_tag": "fa-IR",
+      "surfaces": ["Perso-Arabic"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "keep_distinct_from_Dari_and_Tajik"
+    },
+    {
+      "language_tag": "art-x-interfarsi",
+      "surfaces": ["Perso-Arabic", "Tajik-Cyrillic", "Latin-graphemic-from-Arab", "Latin-graphemic-from-Cyrillic", "Latin-pronunciation-accessibility"],
+      "class": "deterministic_script_projection_plus_pronunciation_accessibility_companion",
+      "decision": "one_semantic_layer_typed_surfaces_no_completion_claim"
+    },
+    {
+      "language_tag": "isv",
+      "surfaces": ["Latin-editable-authority", "Cyrillic-deterministic-projection"],
+      "class": "deterministic_script_projection",
+      "decision": "retain_one_semantic_record_and_mapping_exceptions"
+    },
+    {
+      "language_tag": "art-x-interturkic",
+      "surfaces": ["Latin", "Cyrillic", "Arabic"],
+      "class": "deterministic_script_projection",
+      "decision": "retain_synchronized_722_record_architecture_rotating_audit_due"
+    },
+    {
+      "language_tag": "pnb-Arab-PK",
+      "surfaces": ["Shahmukhi-Naskh", "Shahmukhi-Nastaliq"],
+      "class": "notation_or_typography_profile",
+      "decision": "retain_both_fonts_keep_Gurmukhi_separate"
+    },
+    {
+      "language_tag": "hi-Deva-IN",
+      "surfaces": ["Devanagari"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "preserve_alignment_for_future_independent_Urdu_edition"
+    },
+    {
+      "language_tag": "bn-Beng-IN",
+      "surfaces": ["Bengali"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "no_automatic_alternate_script"
+    },
+    {
+      "language_tag": "mr-Deva-IN",
+      "surfaces": ["Devanagari"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "Modi_research_only"
+    },
+    {
+      "language_tag": "te-Telu-IN",
+      "surfaces": ["Telugu"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "no_automatic_alternate_script"
+    },
+    {
+      "language_tag": "ta-Taml-IN",
+      "surfaces": ["Tamil"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "no_automatic_alternate_script"
+    },
+    {
+      "language_tag": "gu-Gujr-IN",
+      "surfaces": ["Gujarati"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "no_automatic_alternate_script"
+    },
+    {
+      "language_tag": "jv-Latn-ID",
+      "surfaces": ["Latin"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "Aksara_Jawa_research_only_pending_reader_and_rendering_evidence"
+    },
+    {
+      "language_tag": "ps-Arab-PK",
+      "surfaces": ["Pakistan-Pashto-Arabic-derived"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "Afghan_Pashto_requires_separate_canon_and_register"
+    },
+    {
+      "language_tag": "zh-Hans-CN",
+      "surfaces": ["Simplified-Han"],
+      "class": "separate_language_or_locale_edition",
+      "decision": "Traditional_Chinese_requires_explicit_locale_and_terminology_QA"
+    }
+  ],
+  "recommended_separate_editions": [
+    {"language_tag": "pa-Guru-IN", "priority": "high", "reason": "Eastern Punjabi in Gurmukhi requires Indian Punjabi canon and semantic adjudication."},
+    {"language_tag": "ur-Arab-PK", "priority": "high", "reason": "Urdu in Nastaliq may align with Hindi but requires its own formal register and canon."},
+    {"language_tag": "prs-Arab-AF", "priority": "high", "reason": "Dari is not an automatic Iranian Persian variant."},
+    {"language_tag": "tg-Cyrl-TJ", "priority": "high", "reason": "Tajik Cyrillic requires Tajik canon rather than transliteration acceptance."},
+    {"language_tag": "zh-Hant", "priority": "high", "reason": "Traditional Chinese needs an explicit locale and terminology QA."},
+    {"language_tag": "kmr-Latn", "priority": "conditional", "reason": "Kurmanji Latin route requires explicit regional provenance."},
+    {"language_tag": "kmr-Arab", "priority": "conditional", "reason": "Arabic-script or Badini route requires explicit regional provenance."}
+  ],
+  "research_pilots": [
+    "Hausa_Boko_Latin_and_Ajami",
+    "Wolof_Latin_Wolofal_Ajami_and_Garay",
+    "named_Manding_editions_and_NKo_shared_layer",
+    "separately_evidenced_Central_Asian_language_script_cohorts"
+  ],
+  "do_not_duplicate_now": [
+    "generic_Latin_transliterations_of_Indic_editions",
+    "Marathi_Modi_full_reader",
+    "Javanese_Aksara_Jawa_full_reader",
+    "automatic_Gurmukhi_from_Shahmukhi",
+    "automatic_Urdu_from_Hindi",
+    "automatic_Tajik_or_Dari_from_Iranian_Persian",
+    "blind_Traditional_Chinese_character_conversion"
+  ],
+  "qa_requirements": [
+    "stable_source_and_segment_IDs",
+    "formula_citation_link_and_semantic_hash_preservation",
+    "reversible_mapping_and_exception_ledger_for_projections",
+    "Unicode_normalization_and_BiDi_isolation",
+    "glyph_coverage_copy_search_extraction_and_line_breaking",
+    "representative_rendered_page_QA",
+    "coverage_reported_separately_from_authoritative_translation",
+    "own_machine_readable_canon_use_and_semantic_QA_for_separate_editions"
+  ],
+  "official_references": [
+    {"title": "Unicode Bidirectional Algorithm", "url": "https://www.unicode.org/reports/tr9/"},
+    {"title": "Unicode 17 Chapter 12: South and Central Asia-I", "url": "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-12/"},
+    {"title": "Unicode 17 Chapter 15: South and Central Asia-IV", "url": "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-15/"},
+    {"title": "Unicode 17 Chapter 17: Indonesia and Oceania", "url": "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-17/"},
+    {"title": "Unicode 17 Chapter 19: Africa", "url": "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-19/"},
+    {"title": "Unicode 17 Chapter 22: Symbols", "url": "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-22/"},
+    {"title": "Unicode CLDR likely subtags", "url": "https://www.unicode.org/cldr/charts/latest/supplemental/likely_subtags.html"}
+  ],
+  "evidence": {
+    "adjacent_allocation_findings": "../evidence/ADJACENT_COMPUTE_ACTIONABLE_FINDINGS_20260905.json",
+    "manager_private_matrix_sha256": "c683ec5d7233f031a31696cae665d49b741e03d1384371f2baa28a32e85f6e24",
+    "caveat": "Allocation evidence supplies package-design constraints, not a validated current global language ranking."
+  }
+}

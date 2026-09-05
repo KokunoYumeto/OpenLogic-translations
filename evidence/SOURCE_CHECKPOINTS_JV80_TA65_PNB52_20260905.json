@@ -1,0 +1,167 @@
+{
+  "schema": "openlogic-manager-source-checkpoint-verification/1",
+  "verified_utc": "2026-09-05T03:09:56.0117239Z",
+  "scope": "Anonymous, commit-addressed verification of the Javanese 80-unit, Tamil 65-unit, and Punjabi 52-unit public-main source checkpoints. Reader/release scope is kept separate.",
+  "method": {
+    "public_surface": "GitHub codeload archives fetched without credentials",
+    "repository_comparator": "git archive from the exact commit with core.autocrlf=false, expanded and compared path-for-path and byte-for-byte",
+    "source_authority_check": "Every public upstream/<source_path> Git blob was compared against the 722-row frozen source manifest",
+    "semantic_evidence_check": "Unit QA, segment-to-canon ledgers, terminology ledgers, semantic review and source-correction records were parsed from the public commit",
+    "caveat": "These deterministic and provenance checks are not independent native-speaker certification."
+  },
+  "accepted": [
+    {
+      "language_tag": "jv-Latn-ID",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID",
+      "source_checkpoint_commit": "32b60cd4b4d0fb30512ecd352c9eea72c1a6adce",
+      "public_main_at_verification": "32b60cd4b4d0fb30512ecd352c9eea72c1a6adce",
+      "public_codeload": {
+        "bytes": 2250104,
+        "sha256": "03b01780284709f72944f926c1e2d8231be531097260cc9d43e29141615b65f2",
+        "files": 877
+      },
+      "exact_commit_archive": {
+        "bytes": 2125018,
+        "sha256": "58691ee87d85a6f4f65b2e36646b8b96a7ab896621f292e03e147356d938b519",
+        "files": 877,
+        "path_mismatches": 0,
+        "content_mismatches": 0
+      },
+      "windows_archive_note": "A first local git archive made under core.autocrlf=true differed at .gitattributes, .gitignore and tools/build-reader.ps1. Public codeload bytes equal the Git blobs; regenerating the comparator with core.autocrlf=false removed all three differences. This was a manager comparison-method defect, not a public-byte defect.",
+      "frozen_source_manifest": {
+        "rows": 722,
+        "public_source_hash_matches": 722,
+        "mismatches": 0
+      },
+      "translation": {
+        "source_units": 80,
+        "unit_range": "OLP-0001--OLP-0080",
+        "unit_ids_contiguous": true,
+        "structural_checks_pass": true,
+        "full_source_and_translation_file_hashes_match": true,
+        "segments": 1318,
+        "translated_segments": 856,
+        "formal_segments": 462,
+        "segment_ids_unique": true,
+        "translated_segments_without_canon": 0,
+        "term_decisions": 103,
+        "term_ids_unique": true,
+        "semantic_unit_reviews": 80,
+        "source_corrections_applied_and_verified": 15
+      },
+      "reader_boundary": {
+        "release": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.1.2",
+        "reader_units": 24,
+        "supporting_translated_units": 26,
+        "source_snapshot_units": 48,
+        "unchanged": true
+      },
+      "owner_receipt": {
+        "bytes": 179358,
+        "sha256": "a16de6ba16804d3297fd67ac3721943de704f9dd7f29de0af940d4eea63d83b3"
+      },
+      "result": "accept_source_checkpoint_80_keep_reader_24"
+    },
+    {
+      "language_tag": "ta-Taml-IN",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-ta-Taml-IN",
+      "source_checkpoint_commit": "ef7a360177e04239a4ed5763a8fcd73ff948ca7b",
+      "receipt_commit": "f993e917448e0bd7da1c8bfbaa460e97b489eb2d",
+      "public_main_at_verification": "f993e917448e0bd7da1c8bfbaa460e97b489eb2d",
+      "public_codeload": {
+        "bytes": 3481220,
+        "sha256": "3046e5b7862934e410738e240eb2028c29dafb0766eb7dd1481a3f2a7166b552",
+        "files": 948
+      },
+      "exact_commit_archive": {
+        "bytes": 3347330,
+        "sha256": "368ee5e58b49141b55201343eaf34d2f058048035138069e144616ffb2f1f2b0",
+        "files": 948,
+        "path_mismatches": 0,
+        "content_mismatches": 0
+      },
+      "frozen_source_manifest": {
+        "rows": 722,
+        "public_source_hash_matches": 722,
+        "mismatches": 0
+      },
+      "translation": {
+        "source_units": 65,
+        "unit_range": "OLP-0004--OLP-0068",
+        "unit_ids_contiguous_within_declared_start": true,
+        "correction_aware_structural_checks_pass": true,
+        "full_source_and_translation_file_hashes_match": true,
+        "segments": 523,
+        "segment_ids_unique": true,
+        "segments_without_canon": 0,
+        "term_decisions": 96,
+        "term_ids_unique": true,
+        "semantic_samples": 93,
+        "semantic_unit_bindings": 65,
+        "raw_parity_exceptions_are_audited_corrections": true
+      },
+      "reader_boundary": {
+        "release": "https://github.com/KokunoYumeto/OpenLogic-ta-Taml-IN/releases/tag/v0.2.1-sets-functions-relations",
+        "reader_units": 51,
+        "pages": 99,
+        "pdf_bytes": 810122,
+        "pdf_sha256": "e845fd5f83a95dbb060477a82caac74e2b8c51a1a407bf862ddee15defbdba83",
+        "unchanged": true
+      },
+      "owner_receipts": {
+        "source_checkpoint": {
+          "bytes": 4498,
+          "sha256": "0ca2fa37c525e625dcfac17fee153abb3709d6e2922cac23a88a9f12f5a57939"
+        },
+        "public_evidence": {
+          "bytes": 1953,
+          "sha256": "0353a37f2dcb66fb9851e09f145f07665ea0c76a86dfde44ff0e422403e6ca6b"
+        }
+      },
+      "result": "accept_source_checkpoint_65_keep_reader_51"
+    }
+  ],
+  "withheld": [
+    {
+      "language_tag": "pnb-Arab-PK",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK",
+      "candidate_commit": "b841fac587eb78fa12c183524e45e1c82c9e0eeb",
+      "candidate_source_units": 52,
+      "translation_and_canon_checks_pass": true,
+      "public_codeload": {
+        "bytes": 9587101,
+        "sha256": "11f944bab6965a9e6f5ecc90346a7ef815b1e57d93fe808635688356eb644b61",
+        "files": 924
+      },
+      "git_blob_archive_comparison": {
+        "bytes": 9454329,
+        "sha256": "1624374cecbd1f8e5a96c89b2e564927fb029c420f67587c023e990981432ea2",
+        "files": 924,
+        "content_mismatches": 0
+      },
+      "frozen_source_manifest": {
+        "rows": 722,
+        "public_source_hash_matches": 638,
+        "mismatches": 84,
+        "newline_only_mismatches": 84,
+        "translated_unit_mismatches": [
+          "OLP-0037",
+          "OLP-0042",
+          "OLP-0043",
+          "OLP-0044",
+          "OLP-0045",
+          "OLP-0046",
+          "OLP-0047",
+          "OLP-0048",
+          "OLP-0050",
+          "OLP-0051",
+          "OLP-0052"
+        ]
+      },
+      "cause": "The public Git blobs are LF-normalized while the frozen source manifest binds original CRLF bytes. Windows core.autocrlf=true reconstructed the manifest representation in the owner checkout and masked the public mismatch.",
+      "required_repair": "Protect upstream/** as binary/non-text, re-stage all 722 exact frozen bytes, verify 722/722 from anonymous codeload, and regenerate only affected receipts. No translation or TeX rerun is required.",
+      "result": "withhold_hub_source_promotion_until_public_source_bytes_match_manifest"
+    }
+  ],
+  "overall_result": "pass_javanese_80_and_tamil_65; withhold_punjabi_52_pending_eol_provenance_repair"
+}

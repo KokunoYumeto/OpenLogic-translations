@@ -8,6 +8,12 @@
 4. **Interslavic:** continue from the exact accepted OLP-0182 boundary; do not relabel the QA PDF or 182-unit HTML prefix as a complete book.
 5. **Hindi, Indonesian, Chinese, and Turkish:** retain their honest 722-source/642-reader status and integrate the retained 80 units into standalone readers without changing mathematical content. The Hindi correction is based on its actual accepted build log, not its source-translation completion label.
 
+## Script and orthography routing
+
+The [script and orthography policy](SCRIPT_AND_ORTHOGRAPHY.md) distinguishes reader profiles, deterministic projections, pronunciation accessibility, and separate editions. Arabic's international/Machrek pair and Punjabi's Naskh/Nastaliq pair share one translation in each language; Interslavic, Inter-Turkic, and Inter-Farsi use typed shared-semantic projections. Those outputs must not be counted as duplicate translations.
+
+The strongest additional **separate-edition** routes are Eastern Punjabi in Gurmukhi (`pa-Guru-IN`), Urdu in Nastaliq (`ur-Arab-PK`), Dari (`prs-Arab-AF`), Tajik Cyrillic (`tg-Cyrl-TJ`), and Traditional Chinese with an explicit locale (`zh-Hant`). Each needs its own canon and semantic QA; none is accepted by transliterating or character-converting the existing edition. Kurmanji Latin and Arabic/Badini routes are conditional candidates once regional provenance is established. Hausa Ajami, Wolofal/Ajami and Garay, N’Ko, and Central Asian multi-script cohorts remain bounded research pilots rather than automatic 722-unit commitments. The machine-readable plan is [`catalogue/script-surfaces.json`](catalogue/script-surfaces.json).
+
 ## Historical commissioning shortlist; no current global rank
 
 The compute project’s frozen 1 September 2026 v3 language-group shortlist was:

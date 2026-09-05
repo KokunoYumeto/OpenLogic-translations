@@ -2,6 +2,8 @@ const TOTAL_UNITS = 722;
 
 const nativeNames = {
   "en": "English",
+  "nl": "Nederlands",
+  "nl-x-gewoon": "Nederlands — gewone mensentaal",
   "ar": "العربية",
   "fa-IR": "فارسی",
   "hi-Deva-IN": "हिन्दी",
@@ -108,7 +110,7 @@ function link(label, href, primary = false) {
 
 function localEvidenceLink(edition) {
   const evidence = edition.evidence || {};
-  const relative = evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback;
+  const relative = evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback || evidence.commission_scope;
   if (!relative || /^(?:[a-z]+:|\/)/i.test(relative) || relative.includes("..")) return null;
   const anchor = document.createElement("a");
   anchor.href = relative;

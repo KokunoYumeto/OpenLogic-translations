@@ -25,7 +25,7 @@ The machine-readable record is [`catalogue/editions.json`](catalogue/editions.js
 
 ## Accessibility infrastructure
 
-The accessible Open Logic book is infrastructure, not another language edition. Its latest accepted checkpoint integrates 50 of 80 planned source tranches (62.5%). Later tranches have prepared or authored material but have not all passed cumulative acceptance. No public repository is claimed here yet.
+The accessible Open Logic book is infrastructure, not another language edition. Its latest accepted checkpoint integrates 50 of 80 planned source tranches (62.5%). Later tranches have prepared or authored material but have not all passed cumulative acceptance. No public repository is claimed here yet. Across editions, semantic responsive HTML, reflowable EPUB, native MathML, image descriptions, offline packaging, and applicable low-bitrate media are publication baselines; missing modes remain explicit rather than being hidden behind a PDF claim.
 
 ## Active research editions
 
@@ -36,7 +36,7 @@ The accessible Open Logic book is infrastructure, not another language edition. 
 
 A new complete edition must translate all 722 tracked source files **and** provide one coherent standalone reader containing the complete declared closure. It must bind every segment to the language’s actual scholarly canon, preserve formulas and identifiers, pass script-aware structural and visual QA, publish editable sources and evidence, and verify released bytes anonymously. See [`TRANSLATION_STANDARD.md`](TRANSLATION_STANDARD.md).
 
-The next-language shortlist and its limitations are in [`PRIORITIES.md`](PRIORITIES.md). The shortlist is a planning input, not a timeless or unquestionable ranking.
+The next-language shortlist and its limitations are in [`PRIORITIES.md`](PRIORITIES.md). The frozen v3 order is a historical planning input under which lanes were commissioned; the current allocation study does not establish a live global Top 10. Its actionable production constraints are recorded in the [adjacent-evidence audit](evidence/ADJACENT_COMPUTE_ACTIONABLE_FINDINGS_20260905.json).
 
 ## New editions in production
 

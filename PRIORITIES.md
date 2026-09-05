@@ -8,9 +8,9 @@
 4. **Interslavic:** continue from the exact accepted OLP-0182 boundary; do not relabel the QA PDF or 182-unit HTML prefix as a complete book.
 5. **Hindi, Indonesian, Chinese, and Turkish:** retain their honest 722-source/642-reader status and integrate the retained 80 units into standalone readers without changing mathematical content. The Hindi correction is based on its actual accepted build log, not its source-translation completion label.
 
-## Provisional new-language shortlist
+## Historical commissioning shortlist; no current global rank
 
-The compute project’s current v3 language-group shortlist is:
+The compute project’s frozen 1 September 2026 v3 language-group shortlist was:
 
 1. Hindi (`hi-Deva-IN`) — public edition exists.
 2. Bahasa Indonesia (`id-Latn-ID`) — public edition exists.
@@ -23,7 +23,7 @@ The compute project’s current v3 language-group shortlist is:
 9. Gujarati (`gu-Gujr-IN`).
 10. Pashto, Pakistan curriculum target (`ps-Arab-PK`).
 
-This is a model-conditional planning order, not an observed count of readers and not an eternal “top ten.” Existing translations were intentionally not predictors of need. The frozen shortlist artifacts are:
+This was a model-conditional planning order, not an observed count of readers and not an eternal “top ten.” The live allocation study is still active and currently leaves exact-language audience, effect, physical compute, currency cost, and rank null. Its raw turns contain conflicting Top-10 formulations, so no current global order is accepted. The already commissioned lanes remain active as a continuity decision; they are not cancelled or re-ranked by missing evidence. See the [bounded actionable-findings audit](evidence/ADJACENT_COMPUTE_ACTIONABLE_FINDINGS_20260905.json). Existing translations were intentionally not predictors of need. The frozen shortlist artifacts are:
 
 - `TOP10_NEEDS_ONLY_v3.csv`: 13,303 bytes; SHA-256 `c8886394fd96b0c292baf80028b888e41523a2eec713f36e03a21a8239461777`;
 - `TOP10_LANGUAGE_GROUPS_v3.csv`: 3,106 bytes; SHA-256 `32413813c59a2960362385bb092e79a831bf78e11cb9d2dfb122a5996447fc55`;
@@ -84,3 +84,5 @@ Recovered textbook portions remain with the six existing book owners. No OpenLog
 ## Shared execution order
 
 For every target: acquire and hash canon bytes; index passages and terms; translate against the frozen 722-file source; record canon use per segment; build one standalone reader; run language- and script-specific QA; publish editable sources, evidence, and checksums; and anonymously read the public bytes back. Adjacent-language reuse is limited to infrastructure, candidate discovery, and contrastive checking.
+
+OpenLogic/forall x is principally a proof-and-research-access source. Treat ordinary use as U/R, or S only with explicit prerequisites. Any foundational or early-literacy package is separately authored, separately scoped, and receives no OpenLogic coverage credit. Optional prerequisite, navigation, diagnostic, or worked-answer companions supplement the faithful 722-unit edition; they never replace source units.

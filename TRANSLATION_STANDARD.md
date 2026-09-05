@@ -60,6 +60,18 @@ Legacy editions may retain the 642+80 architecture, but the catalogue must say s
 - source, canon-use, decision, build, and QA evidence;
 - an external SHA-256 manifest.
 
+### Stage and companion scope
+
+OpenLogic/forall x is principally a proof-and-research-access source. Classify the ordinary edition as university/research, or secondary only where prerequisites are explicit. It is not an early-literacy or foundational-numeracy curriculum. Age-appropriate preschool/foundational material must be separately authored and separately catalogued.
+
+A local prerequisite, navigation, diagnostic, worked-answer, curriculum-bridge, or oral-support package may accompany a translation. It has its own source and coverage manifest and does not earn OpenLogic unit credit. Existing local provision is a comparator that shapes such a companion; it neither lowers underlying need nor permits omissions from the faithful 722-unit edition.
+
+### Accessibility and offline publication baseline
+
+Design each edition for semantic responsive HTML, reflowable EPUB 3.3, native MathML, concise and extended descriptions for meaningful images, and self-contained offline download. Provide low-bitrate media variants when media exist. Missing baseline modes must be disclosed; a PDF-only or bounded output is not a completely accessible edition.
+
+Named sign-language video, synchronized narration, captions, transcripts, plain language, Easy Read, declared-code braille, tactile graphics, audio description, and large print are conditional parallel routes. Bind each route to an exact language/community and content scope. Written translation, captions, transcripts, and sign video complement rather than replace one another. Every bounded accessibility release publishes an exact mode-by-unit coverage manifest.
+
 ## 6. Script-specific QA
 
 Every edition runs UTF-8/NFC, replacement-character, raw-command, placeholder, citation, reference, link, formula, label, and structure checks. Additional gates include:

@@ -1,0 +1,89 @@
+{
+  "schema": "openlogic-hub-marathi-seven-chapters-v05-manager-audit/1",
+  "date": "2026-09-06",
+  "edition": "mr-Deva-IN",
+  "classification": "partial-edition-audit-needed-presentation-patch",
+  "release": {
+    "tag": "seven-chapters-v0.5",
+    "github_url": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/seven-chapters-v0.5",
+    "commit": "7665d1fd5e0cea08f32ecd2375697bc88e8736b3",
+    "zenodo_record": 22449519,
+    "version_doi": "10.5281/zenodo.22449519",
+    "concept_doi": "10.5281/zenodo.22307960",
+    "access": "open",
+    "license": "CC-BY-4.0"
+  },
+  "coverage": {
+    "frozen_source_manifest_units": 722,
+    "translated_source_units": 59,
+    "reader_units": 59,
+    "first_unit": "OLP-0004",
+    "last_unit": "OLP-0062",
+    "aligned_segments": 716,
+    "canon_passage_occurrences": 3149,
+    "canonical_review_decisions": 187,
+    "review_occurrences": 4474,
+    "reader_pages": 83,
+    "html_mathml": 3373,
+    "diagrams": 13,
+    "complete_edition": false
+  },
+  "public_asset_identity": {
+    "github_and_zenodo_filename_size_sha256_sets_equal": true,
+    "assets_verified": 7,
+    "reader": {
+      "filename": "openlogic-mr-seven-chapters.pdf",
+      "bytes": 433898,
+      "sha256": "f6ae9a94357502d022b16f71c2638b497dc61f67750575c731b7d8690bf6a2df"
+    },
+    "editable_sources": {
+      "filename": "openlogic-mr-seven-chapters-editable-sources.zip",
+      "bytes": 13924645,
+      "sha256": "7814bea2e4084368e7c991e3837daddbe605dddc3d862e5ba3864d1ac26a772a"
+    },
+    "html": {
+      "filename": "openlogic-mr-seven-chapters-html.zip",
+      "bytes": 1369025,
+      "sha256": "b74d666dfca6b7bb349e55eee027c7dc14aa102268273321307e97d26dedf524"
+    },
+    "review": {
+      "filename": "openlogic-mr-seven-chapters-review.zip",
+      "bytes": 4089612,
+      "sha256": "afc644cea7ef826c432bbcebcd777df0e0acce86e0b648de7aaf664432081593"
+    }
+  },
+  "independent_replay": {
+    "checks": 100,
+    "all_722_frozen_source_hashes": "pass",
+    "all_59_target_hashes": "pass",
+    "all_716_segment_hashes_and_canon_references": "pass",
+    "all_4474_source_target_byte_spans": "pass",
+    "html_math_and_asset_identity": "pass",
+    "all_13_diagram_crop_replays": "pass",
+    "two_clean_build_receipts": "pass",
+    "all_83_pages_rendered_and_visually_inspected": "pass_except_front_matter_policy"
+  },
+  "hard_failure": {
+    "check": "reader_facing_front_matter_has_no_technical_revision_hash",
+    "locations": [
+      "PDF page 1",
+      "released TeX front matter",
+      "HTML front matter"
+    ],
+    "repair": "Remove the raw revision from reader-facing surfaces, retain it in technical provenance, rebuild and publish a bounded successor in the same lineages, then anonymously verify replacement bytes.",
+    "owner_notified": true,
+    "owner_acknowledged": true
+  },
+  "advisory": {
+    "check": "official_web_canon_origin_bytes_preserved",
+    "status": "not_complete",
+    "affected_source_records": 21,
+    "effect": "URLs, terms and consultation records are public, but exact origin response bytes are unavailable; preserve them prospectively."
+  },
+  "result": "FAIL_PRESENTATION_PATCH_REQUIRED__CONTENT_PROVENANCE_AND_PUBLIC_BYTES_PASS",
+  "limitations": [
+    "This is a partial 59/722 edition, not a complete book.",
+    "Byte, structure and visual verification are not independent native-scholar linguistic certification.",
+    "The current release remains public while its bounded presentation successor is prepared."
+  ]
+}

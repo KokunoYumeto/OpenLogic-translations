@@ -8,6 +8,8 @@ The [frozen English source snapshot](https://github.com/OpenLogicProject/OpenLog
 
 ## Read or inspect an edition
 
+**French is now in production.** [Read the first complete chapter, « Ensembles »](https://github.com/KokunoYumeto/OpenLogic-fr/releases/download/v0.1.0-ensembles/openlogic-fr-ensembles.pdf): 11 pages, six sections, ten exercises and three figures. This is **7/722 source files**, not the complete edition; 715 units remain outside the release. [Repository](https://github.com/KokunoYumeto/OpenLogic-fr) · [release and sources](https://github.com/KokunoYumeto/OpenLogic-fr/releases/tag/v0.1.0-ensembles) · [Zenodo](https://doi.org/10.5281/zenodo.22650158) · [manager verification](evidence/FRENCH_FIRST_CHAPTER_MANAGER_VERIFICATION_20260907.json). The chapter includes passage-specific French scholarly references and 26 documented editorial choices. Independent whole-chapter human validation is not claimed.
+
 | Edition | Public home | Evidence-based status |
 |---|---|---|
 | English — frozen complete reader | [release](https://github.com/KokunoYumeto/OpenLogic-translations/releases/tag/en-olp-0722-frozen-20260905) · [direct reader](https://github.com/KokunoYumeto/OpenLogic-translations/releases/download/en-olp-0722-frozen-20260905/OpenLogic-en-722-complete-reader.pdf) · [DOI](https://doi.org/10.5281/zenodo.22385785) · [verified public bytes](evidence/ENGLISH_722_READER_PUBLIC_READBACK_20260905.json) | **Standalone 722/722 reader verified.** A 1,177-page preservation assembly contains the ordinary 642-unit graph plus all 80 retained source units; all source/body hashes, two deterministic builds, 3,190 internal links and the complete additive section passed QA. It is not a new translation or an official upstream release. |

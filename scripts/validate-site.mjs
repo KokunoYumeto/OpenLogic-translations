@@ -20,6 +20,13 @@ check(Array.isArray(catalogue.editions), "catalogue.editions must be an array");
 check(catalogue.editions.length >= 20, "expected at least 20 edition records");
 check(new Set(catalogue.editions.map(item => item.id)).size === catalogue.editions.length, "edition IDs must be unique");
 check(catalogue.editions.every(item => item.id && item.name && item.language_tag), "every edition needs id, name, and language tag");
+const french = catalogue.editions.find(item => item.id === "openlogic-fr");
+check(french?.language_tag === "fr", "French catalogue entry missing");
+if (french?.release_tag === "v0.1.0-ensembles") {
+  check(french.source_units_translated === 7 && french.standalone_reader_units === 7, "French v0.1.0 contains exactly 7/722 units");
+  check(french.status?.includes("partial") && french.readers?.[0]?.pages === 11, "French v0.1.0 is an 11-page partial edition, not a complete reader");
+}
+check(script.includes('"fr": "Français"'), "French native-language selector label missing");
 check(catalogue.editions.every(item => !item.repository || /^https:\/\//.test(item.repository)), "repository links must use HTTPS");
 check(catalogue.editions.every(item => !item.release || /^https:\/\//.test(item.release)), "release links must use HTTPS");
 check(catalogue.editions.every(item => item.source_units_translated == null || (item.source_units_translated >= 0 && item.source_units_translated <= 722)), "source counts must stay within 0..722");

@@ -2,6 +2,7 @@ const TOTAL_UNITS = 722;
 
 const nativeNames = {
   "en": "English",
+  "fr": "Français",
   "nl": "Nederlands",
   "nl-x-gewoon": "Nederlands — gewone mensentaal",
   "ar": "العربية",

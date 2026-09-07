@@ -1,0 +1,50 @@
+{
+  "current_status": "HISTORY_ONLY_CURRENT_PRODUCER_GATES_MUST_BE_REVALIDATED",
+  "events": [
+    {
+      "finding": "Initial formal partition used environment IDs for prooftree objects while the rebind inventory correctly uses stable proof-diagram IDs.",
+      "resolution": "Rebound every prooftree environment through proof_diagrams.source_record_id and retained both identities in the formal source record.",
+      "superseded_status": "FAIL_RESOLVED_BEFORE_PRODUCER_PASS"
+    },
+    {
+      "finding": "Initial new-display formal containment tested only formula start offsets and missed an align environment represented by one spanning formula occurrence.",
+      "resolution": "Changed formal containment to exact interval overlap and retained the environment-wide formula packet.",
+      "superseded_status": "FAIL_RESOLVED_BEFORE_PRODUCER_PASS"
+    },
+    {
+      "finding": "Initial proof-command range logic overlapped a prooftree containing a postfix displayed sibling.",
+      "resolution": "Derived nonoverlapping spans from reviewed proof-step formula coordinates plus each oracle proof anchor.",
+      "superseded_status": "FAIL_RESOLVED_BEFORE_PRODUCER_PASS"
+    },
+    {
+      "finding": "Initial proof spans omitted empty AxiomC commands before the first printed formula.",
+      "resolution": "Extended spans through exact prooftree/postfix source anchors and command boundaries.",
+      "superseded_status": "FAIL_RESOLVED_BEFORE_PRODUCER_PASS"
+    },
+    {
+      "finding": "Initial continuous replay bound 956 of 963 formulas because seven section-heading formulas were rendered as normalized heading prose without anchors.",
+      "resolution": "Added explicit source-order heading formula anchors; the replay now binds all 963 exactly once.",
+      "superseded_status": "FAIL_RESOLVED_BEFORE_PRODUCER_PASS"
+    },
+    {
+      "finding": "Frozen independent finding TR021-INDEPENDENT-001 identified seven raw occurrence placeholders left in words-only heading text.",
+      "resolution": "Render each heading through the same stable occurrence-binding path as prose, exactly once, with zero raw placeholders.",
+      "source_fail_bundle_sha256": "11f669a6c9a51be5e3e24eccfac3a0eda1c81180c24084513bdf6b7329db6778",
+      "superseded_status": "FAIL_REPAIRED_PRODUCER_SIDE_INDEPENDENT_REAUDIT_REQUIRED"
+    },
+    {
+      "finding": "Frozen independent finding TR021-INDEPENDENT-002 identified 283 adjacent formula boundaries without spoken separation in 80 proof-anchor groups.",
+      "resolution": "Retain the source-order marker and insert deterministic next-proof-formula ordinal speech at every one of the 283 boundaries.",
+      "source_fail_bundle_sha256": "11f669a6c9a51be5e3e24eccfac3a0eda1c81180c24084513bdf6b7329db6778",
+      "superseded_status": "FAIL_REPAIRED_PRODUCER_SIDE_INDEPENDENT_REAUDIT_REQUIRED"
+    },
+    {
+      "finding": "Frozen independent finding TR021-INDEPENDENT-003 identified all ten resolved reference targets as ledger-only rather than listener-replayed.",
+      "resolution": "Replace each generic legacy reference phrase at its exact block anchor with the stable target description and record deterministic source and word spans.",
+      "source_fail_bundle_sha256": "11f669a6c9a51be5e3e24eccfac3a0eda1c81180c24084513bdf6b7329db6778",
+      "superseded_status": "FAIL_REPAIRED_PRODUCER_SIDE_INDEPENDENT_REAUDIT_REQUIRED"
+    }
+  ],
+  "history_preserved": true,
+  "schema": "openlogic-tr021-producer-self-audit-fail-history-v1"
+}

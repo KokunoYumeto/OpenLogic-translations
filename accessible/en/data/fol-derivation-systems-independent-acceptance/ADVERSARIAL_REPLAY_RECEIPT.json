@@ -1,0 +1,115 @@
+{
+  "schema": "openlogic-independent-tr019-superseding-adversarial-replay-v1",
+  "status": "PASS_ALL_REJECTED",
+  "test_count": 18,
+  "tests": [
+    {
+      "diagnostic": "expression record count drift",
+      "expected_gate": "expression_closure",
+      "name": "missing_expression",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited/repaired expression payload drift: expr-01208e159d2aec8c",
+      "expected_gate": "exact_audited_semantic_payload",
+      "name": "semantic_meaning_drift",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited/repaired expression payload drift: expr-01208e159d2aec8c",
+      "expected_gate": "words_only_speech",
+      "name": "raw_tex_in_speech",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited/repaired expression payload drift: expr-01208e159d2aec8c",
+      "expected_gate": "unflattened_mathml_root",
+      "name": "root_role_flattening",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited/repaired expression payload drift: expr-27d5651e66d95235",
+      "expected_gate": "tableau_truth_sign_style",
+      "name": "unstyled_double_struck_true",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited/repaired expression payload drift: expr-0ab83730c263f0b7",
+      "expected_gate": "first_order_validity_profile",
+      "name": "fol_validity_propositional_regression",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited/repaired expression payload drift: expr-ab733e02bed54e75",
+      "expected_gate": "first_order_consequence_profile",
+      "name": "fol_consequence_propositional_regression",
+      "rejected": true
+    },
+    {
+      "diagnostic": "TR-019 occurrence source drift at projected-formula-0008068: column",
+      "expected_gate": "exact_source_coordinate_rebind",
+      "name": "occurrence_source_coordinate_drift",
+      "rejected": true
+    },
+    {
+      "diagnostic": "TR-019 three-line context drift: projected-formula-0008068",
+      "expected_gate": "exact_context_packet",
+      "name": "three_line_context_drift",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited/repaired occurrence semantics drift: projected-formula-0008072",
+      "expected_gate": "contextual_override_preservation",
+      "name": "contextual_override_lost",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited formal semantics drift: projected-env-001228",
+      "expected_gate": "content_facing_formal_name",
+      "name": "formal_navigation_coordinate_leak",
+      "rejected": true
+    },
+    {
+      "diagnostic": "audited formal semantics drift: projected-env-001230",
+      "expected_gate": "tableau_source_label_disclosure",
+      "name": "tableau_disclosure_lost",
+      "rejected": true
+    },
+    {
+      "diagnostic": "proof command closure drift",
+      "expected_gate": "proof_object_closure",
+      "name": "proof_command_removed",
+      "rejected": true
+    },
+    {
+      "diagnostic": "independent equality proof replay drift",
+      "expected_gate": "independent_equality_replay",
+      "name": "equality_proof_count_forged",
+      "rejected": true
+    },
+    {
+      "diagnostic": "declared input hash drift: evidence/independent_tranche_009_pl_derivation_systems_semantic_audit/superseding_reaudit/SUPERSEDING_AUDIT_RECEIPT.json",
+      "expected_gate": "upstream_hash_binding",
+      "name": "stale_upstream_hash",
+      "rejected": true
+    },
+    {
+      "diagnostic": "upstream input inventory drift",
+      "expected_gate": "immutable_semantic_input_boundary",
+      "name": "mutable_control_rebound_as_semantic_input",
+      "rejected": true
+    },
+    {
+      "diagnostic": "dependency pin set drift",
+      "expected_gate": "dependency_pin_binding",
+      "name": "independent_pass_pin_forged",
+      "rejected": true
+    },
+    {
+      "diagnostic": "projection evidence inventory drift: ['UNMANIFESTED.txt']",
+      "expected_gate": "evidence_inventory",
+      "name": "unmanifested_artifact",
+      "rejected": true
+    }
+  ]
+}

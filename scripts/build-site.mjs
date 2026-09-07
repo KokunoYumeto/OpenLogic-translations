@@ -13,6 +13,7 @@ await cp(resolve(root, "catalogue", "editions.json"), resolve(dist, "catalogue",
 await cp(resolve(root, "README.md"), resolve(dist, "README.md"));
 await mkdir(resolve(dist, "evidence"), { recursive: true });
 await cp(resolve(root, "evidence"), resolve(dist, "evidence"), { recursive: true });
+await cp(resolve(root, "accessible"), resolve(dist, "accessible"), { recursive: true });
 await writeFile(resolve(dist, ".nojekyll"), "", "utf8");
 
 console.log(JSON.stringify({ status: "built", output: "dist" }));

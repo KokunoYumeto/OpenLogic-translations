@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Listen continuously — The Open Logic Text</title>
+  <link rel="stylesheet" href="assets/handsfree-listen.css">
+  <script defer src="assets/handsfree-listen-manifest.js"></script>
+  <script defer src="assets/handsfree-core.js"></script>
+  <script defer src="assets/handsfree-browser.js"></script>
+<link rel="stylesheet" href="assets/reader.css"><script defer src="assets/reader.js"></script></head>
+<body>
+  <a class="skip-link" href="#player">Skip to player</a>
+  <main id="player" tabindex="-1">
+    <p><a href="index.html">Back to the accessible shelf</a></p>
+    <header>
+      <p class="eyebrow">Silent until you ask</p>
+      <h1>Listen continuously</h1>
+      <p>Press Play once. The browser then reads every available words-only chapter in order and remembers your place, voice, and speed when browser storage is available.</p>
+    </header>
+    <section class="player-card" aria-labelledby="playback-heading">
+      <h2 id="playback-heading">Playback</h2>
+      <div class="primary-actions">
+        <button id="play-toggle" type="button" aria-pressed="false">Play / resume</button>
+        <button id="restart-book" type="button" class="secondary">Restart book</button>
+      </div>
+      <p id="player-status" role="status" aria-live="polite">Loading the silent player…</p>
+      <p id="player-progress"></p>
+    </section>
+    <section class="settings" aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Voice and pace</h2>
+      <label for="speech-voice">Voice</label>
+      <select id="speech-voice"><option>Browser default voice</option></select>
+      <p id="voice-note" class="note">The browser voice list is loading.</p>
+      <label for="speech-rate">Speed</label> <output id="speech-rate-output" for="speech-rate">1.0×</output>
+      <input id="speech-rate" type="range" min="0.5" max="3" step="0.1" value="1">
+      <label for="chapter-select">Start at chapter</label>
+      <select id="chapter-select"></select>
+      <p class="note">Changing chapter pauses playback. Press Play / resume when you are ready.</p>
+    </section>
+    <section aria-labelledby="now-reading-heading">
+      <h2 id="now-reading-heading">Current passage</h2>
+      <p id="current-text" class="current-text"></p>
+    </section>
+    <section aria-labelledby="limits-heading">
+      <h2 id="limits-heading">What to expect</h2>
+      <p>This uses the voices that this browser exposes. Some voices may need a network connection, and a browser or operating system may suspend a background tab. This is browser text-to-speech, not a recorded audiobook or a screen reader.</p>
+    </section>
+    <noscript><p>This player needs JavaScript for browser speech. Every chapter's Listen / words only page remains readable without JavaScript.</p></noscript>
+  </main>
+</body>
+</html>

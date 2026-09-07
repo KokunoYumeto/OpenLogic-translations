@@ -1,0 +1,111 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+body {
+  margin: 0;
+  background: Canvas;
+  color: CanvasText;
+}
+
+main {
+  width: min(48rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 5rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -5rem;
+  padding: 0.75rem;
+  background: Canvas;
+  color: LinkText;
+  z-index: 2;
+}
+
+.skip-link:focus { top: 0.5rem; }
+
+.eyebrow {
+  margin-bottom: 0;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h1 { margin-top: 0.25rem; }
+
+section {
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.player-card {
+  border: 2px solid ButtonBorder;
+  border-radius: 0.8rem;
+  padding: 1rem 1.25rem;
+}
+
+.primary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+button,
+select,
+input { font: inherit; }
+
+button {
+  min-height: 3rem;
+  border: 2px solid ButtonBorder;
+  border-radius: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  background: Highlight;
+  color: HighlightText;
+  font-weight: 700;
+}
+
+button.secondary {
+  background: ButtonFace;
+  color: ButtonText;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid LinkText;
+  outline-offset: 3px;
+}
+
+.settings {
+  display: grid;
+  gap: 0.6rem;
+}
+
+label { font-weight: 700; }
+
+select,
+input[type="range"] { width: 100%; }
+
+select {
+  min-height: 2.75rem;
+  padding: 0.45rem;
+}
+
+.note {
+  margin-top: 0;
+  color: GrayText;
+}
+
+.current-text {
+  border-inline-start: 0.35rem solid Highlight;
+  padding-inline-start: 1rem;
+  font-size: 1.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}

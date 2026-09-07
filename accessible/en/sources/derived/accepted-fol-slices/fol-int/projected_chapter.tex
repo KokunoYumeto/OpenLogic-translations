@@ -1,0 +1,625 @@
+
+
+
+
+\olpart{fol}{First-order Logic}
+
+\begin{editorial}
+  This part covers the metatheory of first-order logic through
+  completeness.  Currently it does not rely on a separate treatment of
+  propositional logic; everything is proved.  The source files will
+  exclude the material on quantifiers (and replace ``!!{structure}''
+  with ``!!{valuation}'', $\Struct{M}$ with $\pAssign{v}$, etc.) if
+  the ``FOL'' tag is false. In fact, most of the material in the part
+  on propositional logic is simply the first-order material with the
+  ``FOL'' tag turned off.
+
+  If the part on propositional logic is included, this results in a
+  lot of repetition. It is planned, however, to make it possible to
+  let this part take into account the material on propositional logic
+  (and exclude the material already covered, as well as shorten proofs
+  with references to the respective places in the propositional
+  part).
+\end{editorial}
+
+
+
+\olchapter{fol}{int}{Introduction to First-Order Logic}
+
+
+
+\olfileid{fol}{int}{fol}
+
+\olsection{First-Order Logic}
+
+You are probably familiar with first-order logic from your first
+introduction to formal logic.\footnote{In fact, we more or less assume
+you are!{} If you're not, you could review a more elementary textbook,
+such as \emph{forall x} \citep{Magnus2021}.} You may know it as
+``quantificational logic'' or ``predicate logic.''  First-order
+logic, first of all, is a formal language.  That means, it has a
+certain vocabulary, and its expressions are strings from this
+vocabulary.  But not every string is permitted.  There are different
+kinds of permitted expressions: terms, !!{formula}s, and
+!!{sentence}s.  We are mainly interested in !!{sentence}s of
+first-order logic: they provide us with a formal analogue of sentences
+of English, and about them we can ask the questions a logician
+typically is interested in. For instance: 
+\begin{itemize}
+    \item Does $!B$ follow from~$!A$ logically?
+    \item Is $!A$ logically true, logically false, or
+contingent?
+    \item Are $!A$ and $!B$ equivalent?
+\end{itemize}
+
+These questions are primarily questions about the ``meaning'' of
+!!{sentence}s of first-order logic.  For instance, a philosopher would
+analyze the question of whether $!B$ follows logically from~$!A$ as
+asking: is there a case where $!A$ is true but~$!B$ is false ($!B$
+doesn't follow from~$!A$), or does every case that makes $!A$ true
+also make~$!B$ true ($!B$ does follow from~$!A$)?  But we haven't been
+told yet what a ``case'' is---that is the job of \emph{semantics}.  The
+semantics of first-order logic provides a mathematically precise model
+of the philosopher's intuitive idea of ``case,'' and also---and this
+is important---of what it is for !!a{sentence}~$!A$ to be \emph{true
+in} a case. We call the mathematically precise model that we will
+develop !!a{structure}. The relation which makes ``true in'' precise,
+is called the relation of \emph{satisfaction}.  So what we will define
+is ``$!A$ is satisfied in~$\Struct{M}$'' (in symbols: $\Sat{M}{!A}$)
+for !!{sentence}s~$!A$ and !!{structure}s~$\Struct{M}$. Once this is
+done, we can also give precise definitions of the other semantical
+terms such as ``follows from'' or ``is logically true.'' These
+definitions will make it possible to settle, again with mathematical
+precision, whether, e.g., $\lforall[x][(!A(x) \lif !B(x)),
+\lexists[x][!A(x)] \Entails \lexists[x][!B(x)]]$. The answer will, of
+course, be ``yes.'' If you've already been trained to symbolize
+sentences of English in first-order logic, you will recognize this as,
+e.g., the symbolizations of, say, ``All ants are insects, there are
+ants, therefore there are insects.'' That is obviously a valid
+argument, and so our mathematical model of ``follows from'' for our
+formal language should give the same answer.
+
+Another topic you probably remember from your first introduction to
+formal logic is that there are \emph{!!{derivation}s}.  If you have
+taken a first formal logic course, your instructor will have made you
+practice finding such !!{derivation}s, perhaps even !!a{derivation}
+that shows that the above entailment holds.  There are many different
+ways to give !!{derivation}s: you may have done something called
+``natural deduction'' or ``truth trees,'' but there are many others.
+The purpose of !!{derivation} systems is to provide tools using which the
+logicians' questions above can be answered: e.g., a natural deduction
+!!{derivation} in which $\lforall[x][(!A(x) \lif !B(x))$ and
+$\lexists[x][!A(x)]$ are premises and $\lexists[x][!B(x)]]$ is the
+conclusion (last line) \emph{verifies} that $\lexists[x][!B(x)]$
+logically follows from $\lforall[x][(!A(x) \lif !B(x))]$ and
+$\lexists[x][!A(x)]$.  
+
+But why is that?  On the face of it, !!{derivation} systems have nothing to do
+with semantics: giving a formal !!{derivation} merely involves arranging symbols
+in certain rule-governed ways; they don't mention ``cases'' or ``true
+in'' at all.  The connection between !!{derivation} systems and semantics has
+to be established by a meta-logical investigation. What's needed is a
+mathematical proof, e.g., that a formal !!{derivation} of $\lexists[x][!B(x)]$
+from premises $\lforall[x][(!A(x) \lif !B(x))]$ and
+$\lexists[x][!A(x)]$ is possible, if, and only if, $\lforall[x][(!A(x)
+\lif !B(x))$ and $\lexists[x][!A(x)]$ together
+entail~$\lexists[x][!B(x)]]$.  Before this can be done, however, a
+lot of painstaking work has to be carried out to get the definitions
+of syntax and semantics correct.
+
+
+
+
+
+\olfileid{fol}{int}{syn}
+
+\olsection{Syntax}
+
+We first must make precise what strings of symbols count as
+!!{sentence}s of first-order logic.  We'll do this later; for now
+we'll just proceed by example.  The basic building blocks---the
+vocabulary---of first-order logic divides into two parts. The first
+part is the symbols we use to say specific things or to pick out
+specific things. We pick out things using !!{constant}s, and we say
+stuff about the things we pick out using !!{predicate}s.  E.g, we
+might use $\Obj a$ as !!a{constant} to pick out a single thing, and
+then say something about it using the !!{sentence}~$\Atom{\Obj P}{\Obj
+a}$.  If you have meanings for ``$\Obj a$'' and ``$\Obj P$'' in mind,
+you can read $\Atom{\Obj P}{\Obj a}$ as a sentence of English (and you
+probably have done so when you first learned formal logic).  Once you
+have such simple !!{sentence}s of first-order logic, you can build
+more complex ones using the second part of the vocabulary: the logical
+symbols (connectives and quantifiers). So, for instance, we can form
+expressions like $(\Atom{\Obj P}{\Obj a} \land \Atom{\Obj Q}{\Obj b})$
+or~$\lexists[\Obj x][\Atom{\Obj P}{\Obj x}]$.
+
+In order to provide the precise definitions of semantics and the rules
+of our !!{derivation} systems required for rigorous meta-logical study, we
+first of all have to give a precise definition of what counts as
+!!a{sentence} of first-order logic. The basic idea is easy enough to
+understand: there are some simple !!{sentence}s we can form from just
+!!{predicate}s and !!{constant}s, such as~$\Atom{\Obj P}{\Obj a}$. And
+then from these we form more complex ones using the connectives and
+quantifiers. But what exactly are the rules by which we are allowed to
+form more complex !!{sentence}s?  These must be specified, otherwise
+we have not defined ``!!{sentence} of first-order logic'' precisely
+enough. There are a few issues. The first one is to get the right
+strings to count as !!{sentence}s. The second one is to do this in
+such a way that we can give mathematical proofs about \emph{all}
+!!{sentence}s. Finally, we'll have to also give precise definitions of
+some rudimentary operations with !!{sentence}s, such as ``replace
+every $\Obj x$ in~$!A$ by~$\Obj b$.'' The trouble is that the
+quantifiers and !!{variable}s we have in first-order logic make it not
+entirely obvious how this should be done. E.g., should $\lexists[\Obj
+x][\Atom{\Obj P}{\Obj a}]$ count as !!a{sentence}? What about
+$\lexists[\Obj x][\lexists[\Obj x][\Atom{\Obj P}{\Obj x}]]$? What
+should the result of ``replace $\Obj x$ by~$\Obj b$ in $(\Atom{\Obj
+P}{\Obj x} \land \lexists[\Obj x][\Atom{\Obj P}{\Obj x}])$'' be?
+
+
+
+
+
+\olfileid{fol}{int}{fml}
+
+\section{\usetoken{P}{formula}}
+
+Here is the approach we will use to rigorously specify !!{sentence}s
+of first-order logic and to deal with the issues arising from the use
+of !!{variable}s. We first define a \emph{different} set of
+expressions: !!{formula}s. Once we've done that, we can consider the
+role !!{variable}s play in them---and on the basis of some other
+ideas, namely those of ``free'' and ``bound'' !!{variable}s, we can
+define what !!a{sentence} is (namely, !!a{formula} without free
+!!{variable}s). We do this not just because it makes the definition of
+``!!{sentence}'' more manageable, but also because it will be crucial
+to the way we define the semantic notion of satisfaction.
+
+Let's define ``!!{formula}'' for a simple first-order language, one
+containing only a single !!{predicate}~$\Obj P$ and a single
+!!{constant}~$\Obj a$, and only the logical symbols $\lnot$, $\land$,
+and~$\lexists$. Our full definitions will be much more general:
+we'll allow infinitely many !!{predicate}s and !!{constant}s. In fact,
+we will also consider !!{function}s which can be combined with
+!!{constant}s and !!{variable}s to form ``terms.'' For now, $\Obj a$
+and the variables will be our only terms.  We do need infinitely many
+!!{variable}s.  We'll officially use the symbols $\Obj v_0$, $\Obj
+v_1$, \dots, as variables.
+
+\begin{defn}
+The set of \emph{!!{formula}s}~$\Frm$ is defined as follows:
+\begin{enumerate}
+\item\ollabel{fmls-atom} $\Atom{\Obj P}{\Obj a}$ and $\Atom{\Obj
+  P}{\Obj v_i}$ are !!{formula}s ($i \in \Nat$).
+
+\ollabel{fmls-not}If $!A$ is !!a{formula}, then $\lnot !A$ is
+  !!{formula}.
+
+If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is !!a{formula}.
+
+\ollabel{fmls-ex}If $!A$ is !!a{formula} and $x$ is !!a{variable},
+  then $\lexists[x][!A]$ is !!a{formula}.
+
+\ollabel{fmls-limit}Nothing else is !!a{formula}.
+\end{enumerate}
+\end{defn}
+
+\olref{fmls-atom} tells us that $\Atom{\Obj P}{\Obj a}$ and
+$\Atom{\Obj P}{\Obj v_i}$ are !!{formula}s, for any $i \in
+\Nat$. These are the so-called \emph{atomic} !!{formula}s. They give
+us something to start from.  The other clauses give us ways of forming
+new !!{formula}s from ones we have already formed. So for instance, by
+\olref{fmls-not}, we get that $\lnot \Atom{\Obj P}{\Obj v_2}$ is
+!!a{formula}, since $\Atom{\Obj P}{\Obj v_2}$ is already !!a{formula}
+by \olref{fmls-atom}. Then, by \olref{fmls-ex}, we get that
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$ is another
+!!{formula}, and so on.  \olref{fmls-limit} tells us that \emph{only}
+strings we can form in this way count as !!{formula}s. In particular,
+$\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]$ and $\lexists[\Obj
+  v_0][\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]]$ \emph{do} count as
+!!{formula}s, and $(\lnot \Atom{\Obj P}{\Obj a})$ does not, because of
+the extraneous outer parentheses.
+
+This way of defining !!{formula}s is called an \emph{inductive
+definition}, and it allows us to prove things about !!{formula}s using
+a version of proof by induction called \emph{structural induction}.
+These are discussed in a general way in \olref[mth][ind][idf]{sec} and
+\olref[mth][ind][sti]{sec}, which you should review before delving
+into the proofs later on. Basically, the idea is that if you want to
+give a proof that something is true for all !!{formula}s, you show
+first that it is true for the atomic !!{formula}s, and then that
+\emph{if} it's true for any !!{formula}~$!A$ (and~$!B$), it's
+\emph{also} true for $\lnot !A$, $(!A \land !B)$, and
+$\lexists[x][!A]$. For instance, this proves that it's true for
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$: from the first
+part you know that it's true for the atomic !!{formula}~$\Atom{\Obj
+P}{\Obj v_2}$. Then you get that it's true for $\lnot \Atom{\Obj
+P}{\Obj v_2}$ by the second part, and then again that it's true for
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$ itself. Since all
+!!{formula}s are inductively generated from atomic !!{formula}s, this
+works for any of them.
+
+
+
+
+
+\olfileid{fol}{int}{sat}
+
+\olsection{Satisfaction}
+
+We can already skip ahead to the semantics of first-order logic once
+we know what !!{formula}s are: here, the basic definition is that of 
+!!a{structure}. For our simple language, !!a{structure}~$\Struct M$ has
+just three components: a non-empty set $\Domain{M}$ called the
+\emph{!!{domain}}, what $\Obj a$ picks out in~$\Struct M$, and what
+$\Obj P$ is true of in~$\Struct M$.  The object picked out by~$\Obj a$
+is denoted~$\Assign{\Obj a}{M}$ and the set of things $\Obj P$ is true
+of by~$\Assign{\Obj P}{M}$. !!^a{structure}~$\Struct{M}$ consists of
+just these three things: $\Domain{M}$, $\Assign{\Obj a}{M} \in
+\Domain{M}$ and $\Assign{\Obj P}{M} \subseteq \Domain{M}$. The general
+case will be more complicated, since there will be many !!{predicate}s
+and !!{constant}s, the !!{constant}s can have more than one place, and
+there will also be !!{function}s.
+
+This is enough to give a definition of satisfaction for !!{formula}s
+that don't contain !!{variable}s.  The idea is to give an inductive
+definition that mirrors the way we have defined !!{formula}s. We
+specify when an atomic formula is satisfied in~$\Struct{M}$, and then
+when, e.g., $\lnot !A$ is satisfied in~$\Struct{M}$ on the basis of
+whether or not $!A$ is satisfied in~$\Struct{M}$. E.g., we could
+define:
+\begin{enumerate}
+  \item $\Atom{\Obj P}{\Obj a}$ is satisfied in~$\Struct{M}$ iff
+  $\Assign{\Obj a}{M} \in \Assign{\Obj P}{M}$.
+  \item $\lnot !A$ is satisfied in~$\Struct{M}$ iff $!A$ is not
+  satisfied in~$\Struct{M}$.
+  \item $(!A \land !B)$ is satisfied in~$\Struct{M}$ iff $!A$ is
+  satisfied in~$\Struct{M}$, and $!B$ is satisfied in~$\Struct{M}$ as
+  well.
+\end{enumerate}
+Let's say that $\Domain{M} = \{0, 1, 2\}$, $\Assign{\Obj a}{M} = 1$,
+and $\Assign{\Obj P}{M} = \{1, 2\}$. This definition would tell us
+that $\Atom{\Obj P}{\Obj a}$ is satisfied in~$\Struct{M}$ (since
+$\Assign{\Obj a}{M} =  1 \in \{1,2\} = \Assign{\Obj P}{M}$). It tells
+us further that $\lnot \Atom{\Obj P}{\Obj a}$ is not satisfied
+in~$\Struct{M}$, and that in turn $\lnot\lnot \Atom{\Obj P}{\Obj
+a}$ is and $(\lnot \Atom{\Obj P}{\Obj a} \land \Atom{\Obj P}{\Obj a})$
+is not satisfied, and so on.
+
+The trouble comes when we want to give a definition for the
+quantifiers: we'd like to say something like, ``$\lexists[\Obj
+v_0][\Atom{\Obj P}{\Obj v_0}]$ is satisfied iff $\Atom{\Obj P}{\Obj
+v_0}$ is satisfied.'' But the !!{structure}~$\Struct{M}$ doesn't tell
+us what to do about !!{variable}s. What we actually want to say is
+that $\Atom{\Obj P}{\Obj v_0}$ is satisfied \emph{for some value
+of~$\Obj v_0$}.  To make this precise we need a way to assign
+!!{element}s of~$\Domain{M}$ not just to $\Obj a$ but also to~$\Obj
+v_0$. To this end, we introduce !!{variable} \emph{assignments}.
+!!^a{variable} assignment is simply a function~$s$ that maps
+!!{variable}s to !!{element}s of~$\Domain{M}$ (in our example, to one
+of $1$, $2$, or~$3$).  Since we don't know beforehand which
+!!{variable}s might appear in !!a{formula} we can't limit which
+!!{variable}s $s$ assigns values to. The simple solution is to
+require that $s$ assigns values to \emph{all} !!{variable}s~$\Obj
+v_0$, $\Obj v_1$, \dots\@ We'll just use only the ones we need.
+
+Instead of defining satisfaction of !!{formula}s just relative to
+!!a{structure}, we'll define it relative to
+!!a{structure}~$\Struct{M}$ \emph{and} !!a{variable} assignment~$s$,
+and write $\Sat{M}{!A}[s]$ for short. Our definition will now include
+an additional clause to deal with atomic !!{formula}s containing
+!!{variable}s:
+\begin{enumerate}
+  \item $\Sat{M}{\Atom{\Obj P}{\Obj a}}[s]$ iff
+  $\Assign{\Obj a}{M} \in \Assign{\Obj P}{M}$.
+  \item $\Sat{M}{\Atom{\Obj P}{\Obj v_i}}[s]$ iff
+  $s(\Obj v_i) \in \Assign{\Obj P}{M}$.
+  \item $\Sat{M}{\lnot !A}[s]$ iff not $\Sat{M}{!A}[s]$.
+  \item $\Sat{M}{(!A \land !B)}[s]$ iff $\Sat{M}{!A}[s]$ and $\Sat{M}{!B}[s]$.
+\end{enumerate}
+Ok, this solves one problem: we can now say when $\Struct{M}$
+satisfies $\Atom{\Obj P}{\Obj v_0}$ for the value~$s(\Obj v_0)$. To
+get the definition right for $\lexists[\Obj v_0][\Atom{\Obj P}{\Obj
+v_0}]$ we have to do one more thing:  We want to have that
+$\Sat{M}{\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]}[s]$ iff
+$\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[s']$ for \emph{some} way $s'$ of
+assigning a value to~$\Obj v_0$. But the value assigned to~$\Obj v_0$
+does not necessarily have to be the value that $s(\Obj v_0)$ picks
+out.  We'll introduce a notation for that: if $m \in \Domain{M}$, then
+we let $\Subst{s}{m}{\Obj v_0}$ be the assignment that is just
+like~$s$ (for all !!{variable}s other than~$\Obj v_0$), except to
+$\Obj v_0$ it assigns~$m$. Now our definition can be:
+\begin{enumerate}\setcounter{enumi}{4}
+  \item $\Sat{M}{\lexists[\Obj v_i][!A]}[s]$ iff
+  $\Sat{M}{!A}[\Subst{s}{m}{\Obj v_i}]$ for some~$m \in \Domain{M}$.
+\end{enumerate}
+Does it work out? Let's say we let $s(\Obj v_i) = 0$ for all~$i \in
+\Nat$. $\Sat{M}{\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]}[s]$ iff
+there is an $m \in \Domain{M}$ so that $\Sat{M}{\Atom{\Obj P}{\Obj
+v_0}}[\Subst{s}{m}{\Obj v_0}]$. And there is: we can choose $m = 1$ or
+$m = 2$. Note that this is true even if the value~$s(\Obj v_0)$
+assigned to~$\Obj v_0$ by $s$ itself---in this case, $0$---doesn't do
+the job. We have $\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[\Subst{s}{1}{\Obj
+v_0}]$ but not $\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[s]$.
+
+If this looks confusing and cumbersome: it is. But the added
+complexity is required to give a precise, inductive definition of
+satisfaction for all !!{formula}s, and we need something like it to
+precisely define the semantic notions.  There are other ways of doing
+it, but they are all equally (in)elegant.
+
+
+
+
+
+\olfileid{fol}{int}{snt}
+
+\olsection{\usetoken{P}{sentence}}
+
+Ok, now we have a (sketch of a) definition of satisfaction (``true
+in'') for !!{structure}s and !!{formula}s. But it needs this
+additional bit---!!a{variable} assignment---and what we wanted is a
+definition of !!{sentence}s. How do we get rid of assignments, and
+what are !!{sentence}s?
+
+You probably remember a discussion in your first introduction to
+formal logic about the relation between !!{variable}s and quantifiers.
+A quantifier is always followed by !!a{variable}, and then in the part
+of the !!{sentence} to which that quantifier applies (its ``scope''),
+we understand that the !!{variable} is ``bound'' by that quantifier.
+In !!{formula}s it was not required that every !!{variable} has a
+matching quantifier, and !!{variable}s without matching quantifiers
+are ``free'' or ``unbound.''  We will take !!{sentence}s to be all
+those !!{formula}s that have no free !!{variable}s.
+
+Again, the intuitive idea of when an occurrence of !!a{variable} in
+!!a{formula}~$!A$ is bound, which quantifier binds it, and when it is
+free, is not difficult to get. You may have learned a method for
+testing this, perhaps involving counting parentheses.  We have to
+insist on a precise definition---and because we have defined
+!!{formula}s by induction, we can give a definition of the free and
+bound occurrences of !!a{variable}~$x$ in !!a{formula}~$!A$ also by
+induction.  E.g., it might look like this for our simplified language:
+\begin{enumerate}
+  \item If $!A$ is atomic, all occurrences of $x$ in it are free (that
+  is, the occurrence of $x$ in~$\Atom{\Obj P}{x}$ is free).
+  \item If $!A$ is of the form $\lnot !B$, then an occurrence of~$x$
+  in~$\lnot !B$ is free iff the corresponding occurrence of~$x$ is
+  free in~$!B$ (that is, the free occurrences of variables in~$
+  !B$ are exactly the corresponding occurrences in~$\lnot !B$).
+  \item If $!A$ is of the form $(!B \land !C)$, then an occurrence of~$x$
+  in~$(!B \land !C)$ is free iff the corresponding occurrence of~$x$ is
+  free in~$!B$ or in~$!C$.
+  \item If $!A$ is of the form $\lexists[x][!B]$, then no occurrence
+  of $x$ in~$!A$ is free; if it is of the form $\lexists[y][!B]$ where
+  $y$ is a different !!{variable} than~$x$, then an occurrence of~$x$
+  in $\lexists[y][!B]$ is free iff the corresponding occurrence of~$x$
+  is free in~$!B$.
+\end{enumerate}
+
+Once we have a precise definition of free and bound occurrences of
+variables, we can simply say: !!a{sentence} is any !!{formula} without
+free occurrences of !!{variable}s.
+
+
+
+
+
+\olfileid{fol}{int}{sem}
+
+\olsection{Semantic Notions}
+
+We mentioned above that when we consider whether $\Sat{M}{!A}[s]$
+holds, we (for convenience) let $s$ assign values to all !!{variable}s,
+but only the values it assigns to !!{variable}s in~$!A$ are used.  In
+fact, it's only the values of \emph{free} variables in~$!A$ that
+matter. Of course, because we're careful, we are going to prove this
+fact. Since !!{sentence}s have no free variables, $s$~doesn't matter
+at all when it comes to whether or not they are satisfied in
+!!a{structure}.  So, when $!A$ is !!a{sentence} we can define
+$\Sat{M}{!A}$ to mean ``$\Sat{M}{!A}[s]$ for all~$s$,'' which as it
+happens is true iff $\Sat{M}{!A}[s]$ for at least one~$s$. We need to
+introduce !!{variable} assignments to get a working definition of
+satisfaction for !!{formula}s, but for !!{sentence}s, satisfaction is
+independent of the !!{variable} assignments.
+
+Once we have a definition of ``$\Sat{M}{!A}$,'' we know what ``case''
+and ``true in'' mean as far as !!{sentence}s of first-order logic are
+concerned. On the basis of the definition of $\Sat{M}{!A}$ for
+!!{sentence}s we can then define the basic semantic notions of
+validity, entailment, and satisfiability.  A sentence is valid,
+$\Entails !A$, if every !!{structure} satisfies it. It is entailed by
+a set of !!{sentence}s, $\Gamma \Entails !A$, if every !!{structure}
+that satisfies all the !!{sentence}s in~$\Gamma$ also satisfies~$!A$.
+And a set of !!{sentence}s is satisfiable if some !!{structure}
+satisfies all !!{sentence}s in it at the same time.
+
+Because !!{formula}s are inductively defined, and satisfaction is in
+turn defined by induction on the structure of !!{formula}s, we can use
+induction to prove properties of our semantics and to relate the
+semantic notions defined.  We'll collect and prove some of these
+properties, partly because they are individually interesting, but
+mainly because many of them will come in handy when we go on to
+investigate the relation between semantics and !!{derivation} systems. In order
+to do so, we'll also have to define (precisely, i.e., by induction)
+some syntactic notions and operations we haven't mentioned yet.
+
+
+
+
+
+\olfileid{fol}{int}{sub}
+
+\olsection{Substitution}
+
+We'll discuss an example to illustrate how things hang together, and
+how the development of syntax and semantics lays the foundation for
+our more advanced investigations later. Our !!{derivation} systems should let
+us !!{derive} $\Atom{\Obj P}{\Obj a}$ from $\lforall[\Obj
+v_0][\Atom{\Obj P}]{\Obj v_0}$. Maybe we even want to state this as a
+rule of inference. However, to do so, we must be able to state it in
+the most general terms: not just for $\Obj P$, $\Obj a$, and $\Obj
+v_0$, but for any !!{formula}~$!A$, and term~$t$, and
+!!{variable}~$x$. (Recall that !!{constant}s are terms, but we'll
+consider also more complicated terms built from !!{constant}s and
+!!{function}s.) So we want to be able to say something like,
+``whenever you have !!{derive}d $\lforall[x][!A(x)]$ you are justified
+in inferring~$!A(t)$---the result of removing $\lforall[x]$ and
+replacing~$x$ by~$t$.'' But what exactly does ``replacing $x$ by~$t$''
+mean? What is the relation between $!A(x)$ and~$!A(t)$?  Does this
+always work?
+
+To make this precise, we define the operation of \emph{substitution}.
+Substitution is actually tricky, because we can't just replace
+all~$x$'s in~$!A$ by~$t$, and not every~$t$ can be substituted for
+any~$x$. We'll deal with this, again, using inductive definitions. But
+once this is done, specifying an inference rule as ``infer $!A(t)$
+from $\lforall[x][!A(x)]$'' becomes a precise definition.  Moreover,
+we'll be able to show that this is a good inference rule in the sense
+that $\lforall[x][!A(x)]$ entails~$!A(t)$. But to prove this, we have
+to again prove something that may at first glance prompt you to ask
+``why are we doing this?'' That $\lforall[x][!A(x)]$ entails~$!A(t)$
+relies on the fact that whether or not $\Sat{M}{!A(t)}$ holds depends
+only on the value of the term~$t$, i.e., if we let $m$ be whatever
+!!{element} of~$\Domain{M}$ is picked out by~$t$, then
+$\Sat{M}{!A(t)}[s]$ iff $\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$. This holds
+even when $t$ contains !!{variable}s, but we'll have to be careful
+with how exactly we state the result.
+
+
+
+
+
+\olfileid{fol}{int}{mod}
+
+\olsection{Models and Theories}
+
+Once we've defined the syntax and semantics of first-order logic, we
+can get to work investigating the properties of !!{structure}s and the
+semantic notions. We can also define !!{derivation} systems, and
+investigate those.  For a set of !!{sentence}s, we can ask: what
+!!{structure}s make all the !!{sentence}s in that set true?  Given a
+set of !!{sentence}s~$\Gamma$, !!a{structure}~$\Struct{M}$ that
+satisfies them is called a \emph{model of~$\Gamma$}.  We might start
+from~$\Gamma$ and try to find its models---what do they look like? How
+big or small do they have to be? But we might also start with a single
+!!{structure} or collection of !!{structure}s and ask: what
+!!{sentence}s are true in them?  Are there !!{sentence}s that
+\emph{characterize} these !!{structure}s in the sense that they, and
+only they, are true in them? These kinds of questions are the domain
+of \emph{model theory}.  They also underlie the \emph{axiomatic
+  method}: describing a collection of !!{structure}s by a set of
+!!{sentence}s, the axioms of a theory. This is made possible by the
+observation that exactly those !!{sentence}s entailed in first-order
+logic by the axioms are true in all models of the axioms.
+
+As a very simple example, consider preorders. A preorder is a
+relation~$R$ on some set~$A$ which is both reflexive and transitive.
+A set~$A$ with a two-place relation $R \subseteq A \times A$ on it is
+exactly what we would need to give !!a{structure} for a first-order
+language with a single two-place relation symbol~$\Obj P$: we would
+set $\Domain{M} = A$ and $\Assign{\Obj P}{M} = R$.  Since $R$~is a
+preorder, it is reflexive and transitive, and we can find a
+set~$\Gamma$ of !!{sentence}s of first-order logic that say this:
+\begin{align*}
+  & \lforall[\Obj v_0][\Atom{\Obj P}{\Obj v_0,\Obj v_0}]\\
+  & \lforall[\Obj v_0][\lforall[\Obj v_1][\lforall[\Obj v_2][((\Atom{\Obj P}{\Obj v_0,\Obj v_1} \land \Atom{\Obj P}{\Obj v_1,\Obj v_2}) \lif \Atom{\Obj P}{\Obj v_0,\Obj v_2})]]]
+\end{align*}
+These !!{sentence}s are just the symbolizations of ``for any~$x$,
+$Rxx$'' ($R$ is reflexive) and ``whenever $Rxy$ and $Ryz$ then also
+$Rxz$'' ($R$ is transitive). We see that !!a{structure}~$\Struct{M}$
+is a model of these two !!{sentence}s~$\Gamma$ iff $R$ (i.e.,
+$\Assign{\Obj P}{M}$), is a preorder on~$A$ (i.e., $\Domain{M}$). In
+other words, the models of $\Gamma$ are exactly the preorders. Any
+property of all preorders that can be expressed in the first-order
+language with just~$\Obj P$ as !!{predicate} (like reflexivity and
+transitivity above), is entailed by the two !!{sentence}s in~$\Gamma$
+and vice versa.  So anything we can prove about models of~$\Gamma$ we
+have proved about all preorders.
+
+For any particular theory and class of models (such as $\Gamma$ and
+all preorders), there will be interesting questions about what can be
+expressed in the corresponding first-order language, and what cannot
+be expressed. There are some properties of !!{structure}s that are
+interesting for all languages and classes of models, namely those
+concerning the size of the !!{domain}.  One can always express, for
+instance, that the !!{domain} contains exactly $n$~!!{element}s, for
+any~$n \in \PosInt$.  One can also express, using a set of infinitely
+many !!{sentence}s, that the !!{domain} is infinite.  But one cannot
+express that the domain is finite, or that the domain is
+!!{nonenumerable}. These results about the limitations of first-order
+languages are consequences of the compactness and L\"owenheim--Skolem
+theorems.
+
+
+
+
+
+\olfileid{fol}{int}{scp}
+
+\olsection{Soundness and Completeness}
+
+We'll also introduce !!{derivation} systems for first-order logic.  There are
+many !!{derivation} systems that logicians have developed, but they all define
+the same !!{derivability} relation between !!{sentence}s. We say that
+$\Gamma$ \emph{!!{derive}s}~$!A$, $\Gamma \Proves !A$, if there is
+!!a{derivation} of a certain precisely defined sort. !!^{derivation}s
+are always finite arrangements of symbols---perhaps a list of
+!!{sentence}s, or some more complicated structure.  The purpose of
+!!{derivation} systems is to provide a tool to determine if !!a{sentence} is
+entailed by some set~$\Gamma$.  In order to serve that purpose, it
+must be true that $\Gamma \Entails !A$ if, and only if, $\Gamma
+\Proves !A$.
+
+If $\Gamma \Proves !A$ but not $\Gamma \Entails !A$, our !!{derivation} system
+would be too strong, prove too much.  The property that if $\Gamma
+\Proves !A$ then $\Gamma \Entails !A$ is called \emph{soundness}, and
+it is a minimal requirement on any good !!{derivation} system. On the other
+hand, if $\Gamma \Entails !A$ but not $\Gamma \Proves !A$, then our
+!!{derivation} system is too weak, it doesn't prove enough.  The property that
+if $\Gamma \Entails !A$ then $\Gamma \Proves !A$ is called
+\emph{completeness}. Soundness is usually relatively easy to prove (by
+induction on the structure of !!{derivation}s, which are inductively
+defined). Completeness is harder to prove.
+
+Soundness and completeness have a number of important consequences. If
+a set of !!{sentence}s~$\Gamma$ !!{derive}s a contradiction (such as
+$!A \land \lnot !A$) it is called \emph{inconsistent}. Inconsistent
+$\Gamma$s cannot have any models, they are unsatisfiable. From
+completeness the converse follows: any $\Gamma$ that is not
+inconsistent---or, as we will say, \emph{consistent}---has a model. In
+fact, this is equivalent to completeness, and is the form of
+completeness we will actually prove.  It is a deep and perhaps
+surprising result: just because you cannot prove $!A \land \lnot !A$
+from $\Gamma$ guarantees that there is !!a{structure} that is as
+$\Gamma$ describes it.  So completeness gives an answer to the
+question: which sets of !!{sentence}s have models? Answer: all and only
+consistent sets do.
+
+The soundness and completeness theorems have two important
+consequences: the compactness and the L\"owenheim--Skolem theorem.
+These are important results in the theory of models, and can be used
+to establish many interesting results. We've already mentioned two:
+first-order logic cannot express that the !!{domain} of !!a{structure}
+is finite or that it is !!{nonenumerable}.
+
+Historically, all of this---how to define syntax and semantics of
+first-order logic, how to define good !!{derivation} systems, how to prove that
+they are sound and complete, getting clear about what can and cannot
+be expressed in first-order languages---took a long time to figure out
+and get right.  We now know how to do it, but going through all the
+details can still be confusing and tedious.  But it's also important,
+because the methods developed here for the formal language of
+first-order logic are applied all over the place in logic, computer
+science, and linguistics. So working through the details pays off in
+the long run.
+
+
+
+\OLEndChapterHook
+
+
+
+
+

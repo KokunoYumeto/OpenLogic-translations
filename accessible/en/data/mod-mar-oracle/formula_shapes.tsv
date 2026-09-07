@@ -1,0 +1,344 @@
+expression_id	physical_unique_source_occurrences	canonical_projected_occurrences	normalized_tex
+expr-006404e30663f504	3	3	y \nsless x
+expr-017dde88b4e1167d	3	3	\Assign{<}{M}
+expr-039bfb4b8d6e9ab8	1	1	g(n+1) & = \Value{\num{n+1}}{M} \text{ by definition of~$g$}\\ & = \Value{\num{n}'}{M} \text{ since $\num{n+1}\ident \num{n}'$}\\ & = \Assign{\prime}{M}(\Value{\num{n}}{M}) \text{ by definition of $\Value{t'}{M}$}\\ & = \Assign{\prime}{M}(g(n)) \text{ by definition of~$g$}\\ & = \Assign{\prime}{M}(h(n)) \text{ by induction hypothesis}\\ & = h(\Assign{\prime}{N}(n)) \text{ since $h$ is an isomorphism}\\ & = h(n+1)
+expr-03c11090a6819839	1	1	\Value{\num{n+1}}{M} = \Value{\num{n}'}{M}
+expr-0406bef11fd3ef6e	1	1	z \nsless z
+expr-043a718774c572bd	214	211	s
+expr-07895d7664c7c350	2	2	g(n) = x
+expr-08f271887ce94707	240	240	M
+expr-0978a05425bd9699	2	2	\Struct{N_k}
+expr-0a5a0cdb7119bde3	9	9	n \neq m
+expr-0ad7f3c221bc0326	1	1	\Sat/{M_1}{!Q_3}
+expr-0b365347fe525225	1	1	\Assign{c}{N_k} = k+1
+expr-0b553c0abe4e83fb	1	1	y = n^\nssucc
+expr-0c9d5ea213d46118	1	1	b^\nssucc = b
+expr-0ccffa9a51d83d76	1	1	x \nsplus m^\nssucc = v \nsplus m^\nssucc = y
+expr-0dd678d817d436c0	2	2	y \in \Domain{M}
+expr-0e5677e25a3f86bf	2	2	\Domain{M_2}
+expr-0fedd08b6cbc4828	3	3	u \nsless y
+expr-1051f75badfb2416	1	1	\Sat{K}{\Th{Q}}
+expr-11d1d21b415e5513	1	1	z \in \Domain{M}
+expr-1348c58056d80b83	1	1	\tuple{x,y} \in \Assign{<}{K}
+expr-13713c198833258e	1	1	g(n+m) = \Value{\num{n+m}}{M}
+expr-139c7c04318de35e	13	14	n = 0
+expr-13e0d4a85c4a6f89	2	2	\Domain{N} = \Nat
+expr-143122bc4b4cc29e	2	2	y > 0
+expr-14e42bdd0cd93c23	1	1	\Assign{\prime}{K'}(0) = 0
+expr-159ac566157bb5d0	1	1	\Th{PA} \Proves \lforall[x][\lexists[y][(\eq[(y+y)][x] \lor \eq[(y+y)'][x])]]
+expr-15db4a4d10c456bd	1	1	n \nsplus 0 = n+0 = n
+expr-15fd307d7f46f8c3	4	4	\num{2}
+expr-17643b1ab6160008	1	1	\Sat/{N}{\lnot \OCon[\Th{PA}]}
+expr-1a3aa9c185711857	1	1	g(\Value{\num{n}}{N}) = \Value{\num{n}}{M}
+expr-1a4057b9c504ea3e	6	6	\Value{\num{n}}{M}
+expr-1a4913b9bbd60fea	1	1	n \nsless x
+expr-1a97e063166f2cca	8	8	\Struct{M_2}
+expr-1abbec202796afbe	1	1	x \oplus y = z \oplus z
+expr-1ac8df29b44efcfb	1	1	g(0) = \Assign{\Obj{0}}{M}
+expr-1b16b1df538ba12d	467	478	n
+expr-1ba7cc51e07e96b0	1	1	g(\Assign{\Obj{0}}{N}) = \Assign{\Obj{0}}{M}
+expr-1cb09e48b857f437	1	1	x = \Assign{c}{M}
+expr-1daa1ce23477c28c	1	1	= \Assign{\prime}{M}(\Value{\num{n}}{M})
+expr-1dc624e8ee0d484d	1	1	\Th{Q} \Proves/ \lforall[x][\lforall[y][\eq[(x + y)][(y+x)]]]
+expr-1f97d653b7ed2d2b	18	19	n+1
+expr-208b35a67a1b06a7	1	1	x > 0
+expr-20d4e8d8e48bc766	1	1	x \in \Domain{K}
+expr-22073f71a9807028	1	1	^\nssucc x
+expr-222a04cfe2947cc3	1	1	x^{\nssucc\dots\nssucc} = y
+expr-225055cd888818f2	1	1	\Sat{K}{\lforall[x][\eq/[\Obj 0][x']]}
+expr-225893dd7e0e2c46	3	3	[x]
+expr-22eafe5016ba8c2e	1	1	\Struct{M}_1
+expr-237cc5a10b68c894	6	6	u \nsless v
+expr-2395f5fb0a93cb4f	3	3	\nstimes
+expr-26ffbab17785b03c	1	1	u \nsplus n^\nssucc \nsless v
+expr-283a62bfa767b25a	2	2	x^\nssucc
+expr-283ef62c2999e1c8	1	1	x \nstimes y
+expr-29372440ea32446f	1	1	\Sat{K}{\lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]}
+expr-2c83a8d95120b06f	1	1	(n \nsplus m^\nssucc) & = (n+(m+1)) = (n+m)+1 = (n \nsplus m)^\nssucc \intertext{since $\nsplus$ and $^\nssucc$ agree with $+$ and $\prime$ on standard numbers. Now suppose $x \in \Domain{K}$. Then} (x \nsplus a^\nssucc) & = (x \nsplus a) = a = a^\nssucc = (x \nsplus a)^\nssucc \intertext{The remaining case is if $y \in \Domain{K}$ but $x = a$. Here we also have to distinguish cases according to whether $y = n$ is standard or $y = b$:} (a \nsplus n^\nssucc) & = (a \nsplus (n+1)) = a = a^\nssucc = (a \nsplus n)^\nssucc\\ (a \nsplus a^\nssucc) & = (a \nsplus a) = a = a^\nssucc = (a \nsplus a)^\nssucc
+expr-2d316be2374534aa	1	1	g(n) \neq g(m)
+expr-2d65e3b5556d0619	2	2	\lforall[x][\lnot x < x]
+expr-2d711642b726b044	501	497	x
+expr-2e4c535d9027cbf2	1	1	x \nsplus n^\nssucc = x \nsplus y
+expr-2e7d2c03a9507ae2	73	71	c
+expr-2fe51accbfe15482	1	1	\lnot \OCon[\Th{PA}]
+expr-3036b38016cdb222	1	1	[x] \nsless [y]
+expr-31669d24727a80d1	2	2	\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}
+expr-330958166addde73	1	1	y = v \nsplus m^\nssucc \nsless x
+expr-3328b69c6fa0174e	2	2	\tuple{n,m} \in \Assign{<}{N}
+expr-33a9c96304bcc292	64	65	\Domain{M}
+expr-347326a58919f311	1	1	a^\nssucc = a
+expr-349ba76d907adfab	26	26	\times
+expr-34c01bca980af229	1	1	\Sat{M}{!Q_1}
+expr-353eb8fc63aeaf0d	1	1	\Sat{M}{\lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]}
+expr-35ad5b7ab055aabd	8	8	\OCon[\Th{PA}]
+expr-380918b946a52664	16	16	=
+expr-38ec0b929988bc6a	2	2	u \nsless x
+expr-3a23ba27fcf6211e	1	1	b^\nssucc = a
+expr-3bd52a5f8fc05fb1	9	9	x \in \Domain{M}
+expr-3cf05f70af180d8b	1	1	^\nssucc y \nsless y
+expr-3d2df79065b6f165	236	236	\Th{Q}
+expr-3dcb6b7ac71da736	2	2	\Assign{<}{K'}
+expr-3dddf911c3c51204	2	2	\Obj{0}'
+expr-3f1b6dc519af96a7	16	16	\prime
+expr-40868eaef720dafe	1	1	[z] \neq [y]
+expr-40e5bef92681d093	1	1	y \nsless z
+expr-41250d4b85c7140e	1	1	[x] \cap [y] = \emptyset
+expr-420f248cbf45b001	1	1	x \oplus y = (z \oplus z)^\nssucc
+expr-42b8f19ae63d24a4	233	251	\Struct{M}
+expr-44a4dd050d25890f	3	3	y^\nssucc
+expr-453c586275863be2	1	1	\Assign{\Obj{0}}{N} & = 0\\ \Assign{\prime}{N}(n) & = n + 1\\ \Assign{+}{N}(n, m) & = n + m\\ \Assign{\times}{N}(n, m) & = nm
+expr-459fb36100506069	1	1	\Assign{\Obj{0}}{K'} = 1
+expr-4740cf756818ec1a	1	1	u \in [y]
+expr-49701f19cef82f09	2	2	x \neq \Value{\num{n}}{M}
+expr-497d497fc35ba36e	4	4	!Q_1
+expr-49efc4a74c809357	1	1	g(\Assign{+}{N}(n,m)) = g(n+m)
+expr-4bd91d4ea88664d5	1	1	x \nsplus y^\nssucc = x = x^\nssucc = (x \nsplus y)^\nssucc
+expr-4cfdffc3b4c5ca1e	1	1	\Assign{\prime}{K}(x)
+expr-4d05672a6bd868b6	5	5	\Domain{N}
+expr-4d63a9ed6e68cfa9	1	1	\Struct{M_3}
+expr-4e1259f09671da63	2	2	\Value{\num{n}}{M} \in \Domain{M}
+expr-4f1dbaf1624767fe	3	3	x \nsless z
+expr-508401e3bdfc7cdc	1	1	n = (n-1)^\nssucc
+expr-50ef1c914f20b27a	2	2	\Domain{K} = \Nat \cup \{a\}
+expr-5184679dafbcaceb	2	2	z \nsless y
+expr-52366a79f02698fb	1	1	\Sat{L}{!Q_5}
+expr-5305e79612ebbb95	1	1	n \le k
+expr-53c172b5c4c61663	1	1	\begin{array}{c|c} x & x^\nssucc \\ \hline n & n+1 \\ a & a \end{array} \qquad \begin{array}{c|ccc} x \nsplus y & 0 & m & a \\ \hline 0 & 0 & m & a \\ n & n & n+m & a \\ a & a & a & a \\ \end{array} \qquad \begin{array}{c|ccc} x \nstimes y & 0 & m & a \\ \hline 0 & 0 & 0 & 0 \\ n & 0 & nm & a \\ a & 0 & a & a \\ \end{array}
+expr-551dd6df4b87de67	5	5	\nsplus
+expr-5553c013c717e9a8	9	9	!Q_5
+expr-558ceefeb1805369	1	1	\Sat{M_3}{!Q_3}
+expr-55f1e7f6d4b13259	1	1	a \nsplus a^\nssucc = a
+expr-5690ed5ba5408aeb	1	1	\Th{PA} \Proves \lforall[x][\lforall[y][\lforall[z][(\eq[(x+y)][(x+z)] \lif y = z)]]]
+expr-57885e4c75965b23	626	824	\Gamma
+expr-584217d5434c513b	1	1	[x] \neq [z]
+expr-58685177734bcab8	1	1	g(\Assign{\Obj{0}}{N}) = g(0)
+expr-5923c70e4f9e1836	1	1	\Domain{M_1}
+expr-594e519ae499312b	66	66	z
+expr-599089bbf5cc9773	2	2	g = h
+expr-5afa20230f875253	42	42	n \in \Nat
+expr-5b63a60fdb499c3a	110	110	\Struct{N}
+expr-5b99169f1ea82aec	1	1	x \nsplus y \notin [x]
+expr-5bb0ee0ef2e6d5c0	1	1	\Assign{\times}{K}(x, y)
+expr-5cd888c50377bc38	4	4	\Domain{M} = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}
+expr-5d0cd28f3e4437b2	1	1	x \in \Domain{L}
+expr-5f15f283815babac	1	1	y \nsplus y \notin [y]
+expr-5f489910b4a5daaa	2	2	\Assign{\times}{M}
+expr-5feceb66ffc86f38	220	219	0
+expr-607e495a98cb5559	25	25	\Int
+expr-61cd24e4f0d1b008	1	1	\Domain{K}
+expr-61e81c890ea8af25	1	1	\Assign{+}{N}
+expr-62c66a7a5dd70c31	105	105	m
+expr-6373869f2e570647	1	1	\Sat{N_k}{\eq/[c][\num{n}]}
+expr-63a88d95adb12b74	1	1	h\colon \Nat \to \Domain{M}
+expr-6403429ad98d3b9f	1	1	y \in [x]
+expr-6584d9b01c7229a9	1	1	\dots ^{\nssucc\nssucc\nssucc}x \nsless ^{\nssucc\nssucc}x \nsless ^{\nssucc}x \nsless x \nsless x^{\nssucc} \nsless x^{\nssucc\nssucc} \nsless x^{\nssucc\nssucc\nssucc} \nsless \dots
+expr-65d632215315c00d	1	1	g(n) = \Value{\num{n}}{M}
+expr-67500429cdd36beb	6	6	n>0
+expr-68c90ebed2206f6f	1	1	\Assign{+}{K}(x, y)
+expr-68d1cfddb85baf20	1	1	x \nsplus y^\nssucc
+expr-6989b47ac8292e9b	1	1	\Assign{+}{L} = \nsplus
+expr-6b86b273ff34fce1	238	241	1
+expr-6c310303f3eccfee	1	1	a \nsless n
+expr-6d0bd856c59b0434	1	1	\mathfrak{M}_2
+expr-6d2288fc9569ee71	1	1	\Sat{M_2}{!Q_1}
+expr-6d774ede383fb1aa	1	1	z \nsless u
+expr-6dd77695ea5d9238	1	1	{} \nsless 0
+expr-6de6646caf3df8f3	1	1	a = a^\nssucc
+expr-6e4cbbf82204396a	2	2	!A \in \Th{TA}
+expr-6e597bff7579f4b0	1	1	\Th{Q} \Proves/ \lforall[x][\lnot x < x]
+expr-6e788ae1b2e697c9	1	1	g(n+1) = \Value{\num{n+1}}{M}
+expr-6f5de70bcb4734dd	1	1	\Th{PA} \Proves \lforall[x][(y \neq \Obj{0} \lif x < (x+y))]
+expr-7031abeb145ec3b6	1	1	(x \nsplus y)^\nssucc
+expr-70843ec890890170	1	1	(y \nsplus y)^\nssucc \notin [y]
+expr-72111011ea259203	1	1	g(0) = a
+expr-729ded21f178dd5b	1	1	\Th{Q} \Proves \num{n+m} = (\num{n} + \num{m})
+expr-72fcd7dafa1f7007	3	3	\num{n+1}
+expr-732d2b595bb1b287	1	1	s\colon M \to M \setminus \{z\}
+expr-74bb1ccd6fcdeca0	1	1	g(n) = n+1
+expr-758f984f4043d173	1	1	\Th{Q} \Proves \lforall[x][\lnot x<0]
+expr-759ee9455773a9db	2	2	x \nsless x \nsplus y
+expr-7639b12da173ed30	2	2	\Struct{K'}
+expr-783819f2e7b1882c	2	2	\Sat{N}{\Th{Q}}
+expr-79d4c7f9c8579543	117	115	\Nat
+expr-7a19604a81b74d4e	1	1	y \nsless (y \nsplus y)^\nssucc
+expr-7ac6071350b06b46	1	1	g\colon \Nat \to \Domain{K}
+expr-7bb0687703a6f9db	1	1	\Sat/{M}{\num{n} < \num{m}}
+expr-7d8f56a89cb46e85	1	1	\mathfrak{M}_1
+expr-7e351a02195c132d	1	1	\Sat{M_1}{!Q_2}
+expr-7e901baa2083cacd	1	1	x \nsplus y \in [x]
+expr-7f024b2d7f1db4d4	19	19	\num{n}
+expr-7f8a70388b5fe1dc	1	1	g(\Assign{\prime}{N}(n)) = \Assign{\prime}{M}(g(n))
+expr-80fce15b99d444a5	2	2	\Th{Q} \Proves \eq/[\num{n}][\num{m}]
+expr-8238c028f61fc0f7	1065	1252	!A
+expr-8254c329a92850f6	120	120	k
+expr-82e7769d356674f8	1	1	& a \nsplus a^\nssucc = b = b^\nssucc = (a \nsplus a)^\nssucc\\ & b \nsplus b^\nssucc = a = a^\nssucc = (b \nsplus b)^\nssucc\\ & b \nsplus a^\nssucc = b = b^\nssucc = (b \nsplus y)^\nssucc\\ & a \nsplus b^\nssucc = a = a^\nssucc = (a \nsplus b)^\nssucc\\ \intertext{If $x$ is standard, but $y$ is non-standard, we have} & n \nsplus a^\nssucc = n \nsplus a = b = b^\nssucc = (n \nsplus a)^\nssucc\\ & n \nsplus b^\nssucc = n \nsplus b = a = a^\nssucc = (n \nsplus b)^\nssucc
+expr-83dfe28eff40ebc8	1	1	x \nsplus 0 = x
+expr-84b7ce4ca30c3a69	1	1	[x] = [y]
+expr-84d7c29eb5648796	6	6	\Struct{M_1}
+expr-84e3d6b9a99b9671	1	1	\Th{Q} \Proves \lnot \num{n} < \num{m}
+expr-8553d2666d3f9c70	1	1	g(n) = g(\Value{\num{n}}{N}) = \Value{\num{n}}{M}
+expr-8721b86268d9e793	15	15	x \neq y
+expr-8a0db34747ba3a70	1	1	x \neq v
+expr-8a232bbbd111f249	1	1	\Domain{L} = \Nat \cup \{a, b\}
+expr-8b9ac2febf771814	1	1	x \nsless x
+expr-8c2fb3955b2ad990	5	5	u \in [x]
+expr-8c347d705767246f	1	1	\Assign{\prime}{L} = \nssucc
+expr-8d2cacefc75ba038	31	31	\emptyset
+expr-8e6faa0d85c79ab4	2	2	z \in M
+expr-8eb7afb84080c1e7	1	1	g(0) = \Value{\num{0}}{M}
+expr-8feac84deb26f044	1	1	\Assign{+}{K'}(x, y) & = \begin{cases} x+y-1 & \text{if $x$, $y >0$}\\ 0 & \text{otherwise} \end{cases}\\ \Assign{\times}{K'}(x, y) & = \begin{cases} 1 & \text{if $x = 1$ or $y = 1$}\\ xy - x - y + 2 & \text{if $x$, $y > 1$}\\ 0 & \text{otherwise}\\ \end{cases}
+expr-914ad04bc7458404	1	1	\Th{Q} \Proves \lforall[x][(x < \num{n}' \lif (\eq[x][\num{0}] \lor \eq[x][\num{1}] \lor \dots \lor \eq[x][\num{n}]))]
+expr-91596408b1c392b6	3	3	g\colon \Nat \to \Domain{M}
+expr-91910acfc0bcd121	1	1	[u] \neq [v]
+expr-92fcc8fed3e157e4	2	2	x \nsless u
+expr-95a688d1cb8a0175	1	1	\Sat{K}{\lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])]}
+expr-961b6dd3ede3cb8e	1	1	aa
+expr-963871c44bfd6245	1	1	\Sat{M}{\num{n} < \num{m}}
+expr-977f19219c49b665	3	3	\Assign{\Obj{0}}{M}
+expr-9829f2e34e8f0b11	5	5	\num{1}
+expr-9834876dcfb05cb1	1	1	aaa
+expr-9a0a248c7cf1bc9a	1	1	h(0) = h(\Assign{\Obj{0}}{N}) =\Assign{\Obj{0}}{M}
+expr-9b7ba6bb774a5ef4	2	2	\Obj{0}''
+expr-9be604010dbe3b65	1	1	\eq/[c][\num{k}] \in \Gamma_0
+expr-9d1357a55d31c1dc	1	1	\Value{\num{n}}{M} \neq \Value{\num{m}}{M}
+expr-9d69f823e877748c	1	1	\Assign{\Obj{0}}{M_i}
+expr-9d7103ac3526e8f6	3	3	m \in \Nat
+expr-9d752b1bdf8ee617	1	1	\Domain{L'} = \Nat
+expr-9e8238f66180fc0d	1	1	\Assign{\Obj{0}}{K} & = 0\\ \Assign{\prime}{K}(x) & = \begin{cases} x+1 & \text{if $x\in \Nat$}\\ a & \text{if $x = a$} \end{cases}\\ \Assign{+}{K}(x, y) & = \begin{cases} x+y & \text{if $x$, $y \in\Nat$}\\ a & \text{otherwise} \end{cases}\\ \Assign{\times}{K}(x, y) & = \begin{cases} xy & \text{if $x$, $y \in\Nat$}\\ 0 & \text{if $x=0$ or $y=0$}\\ a & \text{otherwise}\\ \end{cases}\\ \Assign{<}{K} & = \Setabs{\tuple{x,y}}{x, y \in \Nat \text{ and } x<y} \cup \Setabs{\tuple{x,a}}{n \in \Domain{K}}
+expr-9f3504db545ac1c7	8	8	!Q_3
+expr-a05ec4216c67a667	1	1	^\nssucc y
+expr-a0d301e223047dbc	1	1	\Assign{\Obj{0}}{N} = 0
+expr-a1d6db5e88eabe33	1	1	x \nsless n
+expr-a1f6a667c564fd72	1	1	\Assign{\Obj{0}}{M} & = \emptyset\\ \Assign{\prime}{M}(s) & = s \concat a\\ \Assign{+}{M}(n, m) & = a^{n + m}\\ \Assign{\times}{M}(n, m) & = a^{nm}
+expr-a1fce4363854ff88	196	196	y
+expr-a25d9c9866c45520	32	55	\Gamma_0 \subseteq \Gamma
+expr-a318c24216defe20	29	29	+
+expr-a4cd1fc4fcb08699	2	2	\lforall[x][\eq/[x][x']]
+expr-a512bb4cdc87ca19	1	1	\lforall[x][\lforall[y][\lforall[z][((x < y \land y < z) \lif x < z)]]]
+expr-a6bee7fe74bd9fbc	1	1	a \nsplus z = a
+expr-a70f68efa165fda2	13	13	\Struct{K}
+expr-a87ea6068a057b68	1	1	\lforall[x][\eq/[\Obj 0][x']]
+expr-a9d9783f1e8a9800	1	1	\lforall[x][(x < \num{n}' \lif (\eq[x][\num{0}] \lor \eq[x][\num{1}] \lor \dots \lor \eq[x][\num{n}]))]
+expr-aaa481df509e0b59	1	1	\Sat/{K}{\lforall[x][\lnot x<x]}
+expr-aaa9402664f1a41f	127	127	h
+expr-aaf312d2d7202d5e	2	2	y \nsless v
+expr-aafda2cc5bdbea48	3	3	\Domain{M} = \Nat
+expr-abada9758f3a5636	1	1	\Sat{N_k}{!A}
+expr-abb8457b17402949	1	1	\Sat{M_3}{!Q_2}
+expr-abbabd08b7256c52	1	1	\eq/[c][\num{n}]
+expr-adedc2ab1c653ff0	2	2	\num{n}'
+expr-af2142063ac551b1	1	1	z \in [y]
+expr-b0c5509775e74bbe	2	2	\tuple{g(n), g(m)} \in \Assign{<}{M}
+expr-b2854ea5ad90299c	1	1	\Value{\num{m}}{M} = g(m)
+expr-b2c5dd670eb86662	1	1	x \nsplus n^\nssucc \nsless v
+expr-b2c77c7c4e824567	1	1	x \nsless a
+expr-b49424a3e015731b	1	1	= \Assign{+}{M}(\Value{\num{n}}{M},\Value{\num{m}}{M})
+expr-b568c602ff399c22	9	9	\nssucc
+expr-b620f7fd0a05aeb7	9	9	\num{0}
+expr-b6c5ccae5ba847ef	1	1	\Sat{N}{\OCon[\Th{PA}]}
+expr-b6e5b1770fd606ae	1	1	\Sat{M}{\Th{TA}}
+expr-b7358701e22a7a6c	2	2	y = 0
+expr-b7a6f691649904e4	3	3	\Assign{+}{M}
+expr-b823156ebb35cc81	1	1	x \nsless v
+expr-b9a7f1a2870ae925	1	1	\tuple{\Value{\num{n}}{M}, \Value{\num{m}}{M}} \in \Assign{<}{M}
+expr-ba5936fc01df4efc	3	3	v \in [y]
+expr-ba7f48f632bd9b6b	2	2	\Value{\num{n}}{M} = g(n)
+expr-bbeadda1f333e3cd	1	1	a \nsplus 0 \neq 0 \nsplus a
+expr-bca5ed895ceeecf9	3	3	\Th{PA} \Proves !A
+expr-bcf24cbd57d12979	1	1	y \notin [x]
+expr-bd8f49440da17235	1	1	a^\nssucc = b
+expr-be58d8ae65b26403	8	8	\Obj{0}
+expr-bec16f173b11c6e6	1	1	\Domain{M} = \{a\}^*
+expr-bf751aee037ca7f2	1	1	\Sat/{M_3}{!Q_1}
+expr-c06a5a25579ef1ae	5	5	\Struct{L}
+expr-c083db45c1828d6e	1	1	\Sat{K}{\lforall[x][\eq[(x + \Obj 0)][x]]}
+expr-c08c20bd9d545010	1	1	\Sat{M^c}{\Th{TA}}
+expr-c17b77e97a7ee2ac	1	1	\lforall[x][\eq/[x'][\Obj{0}]]
+expr-c1881d6c6b847110	2	2	\nsless y
+expr-c377e14aefa77170	1	1	\Sat{M_2}{!Q_3}
+expr-c41149824f043317	1	1	\Struct{L'}
+expr-c5140ca684997fc0	1	1	\Sat{K}{\lexists[x][x < x]}
+expr-c63c8e0f289a448b	2	2	n > 0
+expr-c6569e52b7ade4dd	1	1	\Assign{<}{N}
+expr-c738cff2cb5da3e7	1	1	n \not< m
+expr-c75669186bb89f88	2	2	\Struct{M^c}
+expr-c89068b466452277	2	2	y \nsless y^\nssucc
+expr-c9ad2bbe9b9f9327	1	1	x \nsplus n = y
+expr-c9c35d45f3c4a346	1	1	\tuple{x, y} \in \Assign{<}{K'}
+expr-ca978112ca1bbdca	123	123	a
+expr-cc04574ab4892531	1	1	\Th{PA} \Proves \lnot \OPrf[\Th{PA}](\num{n}, \gn{\lfalse})
+expr-cc1dbf63b81157ee	1	1	\Th{PA} \Proves \lforall[x][\lforall[y][(x < y \lif (x' < y \lor x' = y))]]
+expr-ccd0d23b56b6a247	1	1	\Assign{\Obj{0}}{K} & = 0\\ \Assign{\prime}{K}(x) & = \begin{cases} x+1 & \text{if $x\in \Nat$}\\ a & \text{if $x = a$} \end{cases}\\ \Assign{+}{K}(x, y) & = \begin{cases} x+y & \text{if $x$, $y \in\Nat$}\\ a & \text{otherwise} \end{cases}\\ \Assign{\times}{K}(x, y) & = \begin{cases} xy & \text{if $x$, $y \in\Nat$}\\ 0 & \text{if $x = 0$ or $y = 0$}\\ a & \text{otherwise}\\ \end{cases}\\ \Assign{<}{K} & = \Setabs{\tuple{x,y}}{x, y \in \Nat \text{ and } x<y} \cup \Setabs{\tuple{x,a}}{x \in \Domain{K}}
+expr-cd0aa9856147b6c5	176	172	g
+expr-ce9368c8dae3b133	1	1	x \neq n
+expr-cf441df67cb93045	1	1	\Sat{M_1}{!Q_1}
+expr-cf7cfe5cf35ef9ef	1	1	x = (y \nsplus y)^\nssucc
+expr-cfd32f3e0dec89aa	1	1	\begin{array}{c|c} x & x^\nssucc \\ \hline n & n+1 \\ a & a\\ b & b \end{array} \qquad \begin{array}{c|ccc} x \nsplus y & m & a & b\\ \hline n & n+m & b & a\\ a & a & b & a\\ b & b & b & a \end{array}
+expr-d03543adcda36df1	28	43	\Gamma_0
+expr-d0590eaf020b9397	3	3	[x] \neq [y]
+expr-d0bca111f8628137	1	1	[0]
+expr-d112c3f30fc91b94	5	5	\Assign{\prime}{M}
+expr-d1730165aac18061	1	1	g(\Assign{\prime}{N}(n)) = g(n+1)
+expr-d2385b32131f4418	1	1	g(\Assign{\times}{N}(n, m)) = \Assign{\times}{M}(g(n), g(m))
+expr-d26ef72670d8de2a	1	1	\Sat{M}{\eq/[\num{n}][\num{m}]}
+expr-d27e20ea5ad139aa	1	1	\lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[y'][x]])]
+expr-d2e40107b4474ff8	1	1	y \nsless y \nsplus y
+expr-d33d5093ec487a6e	5	5	!Q_4
+expr-d438a18a7da07bf0	7	7	x < y
+expr-d4735e3a265e16ee	71	75	2
+expr-d71d4e9daa035bf4	1	1	\Th{Q} \Proves \num{n} < \num{m}
+expr-d79de11401d04ba7	1	1	\Assign{\prime}{M_i}
+expr-d7f383f004b491a2	1	1	\Sat/{L}{\lforall[x][\lforall[y][\eq[(x+y)][(y+x)]]]}
+expr-d87bd6818219a861	12	12	\nsless
+expr-d89ad7af62404a57	64	64	\Th{PA}
+expr-d91c636a7ce3b46c	1	1	v \nsless x
+expr-d91cdf33b3f39f3e	1	1	n \nsless m
+expr-da8100dd647be368	1	1	\Sat/{M_2}{!Q_2}
+expr-dabd3aff769f07eb	73	73	<
+expr-dbe1b003f68155cb	1	1	x \in M \setminus \{z\}
+expr-dc048264506c2d20	1	1	\lexists[x][\OPrf[\Th{PA}](\gn{\lfalse})]
+expr-dd7d690b005e955c	30	51	\Sat{M}{!A}
+expr-de9daef818c950d3	9	9	x \nsless y
+expr-df1bf796764e65b7	1	1	\Th{TA} \subseteq \Gamma
+expr-e09761ce764b32fc	1	1	\Value{c}{N_k} = k+1
+expr-e1692d3a86e0857f	1	1	u = x\nsplus n^\nssucc
+expr-e290e5a48eb0ada3	1	1	\lforall[x][\lforall[y][\eq[(x + y)][(y+x)]]]
+expr-e2b0ae2042a4f135	1	1	& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]] \tag{$!Q_1$}\\ & \lforall[x][\eq/[\Obj 0][x']] \tag{$!Q_2$}\\ & \lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])] \tag{$!Q_3$}
+expr-e31bc64d3cd9db17	1	1	x \nsless x^\nssucc
+expr-e3b22a412737ce02	1	1	g(0) = h(0)
+expr-e3d3dea30e3a6e26	2	2	y^{\nssucc\dots\nssucc} = x
+expr-e3ec9bf763c3dd61	1	1	\lforall[x][\lforall[y][((x < y \lor y < x) \lor \eq[x][y]))]]
+expr-e441d80407d5fd85	1	1	\Gamma = \Th{TA} \cup \{\eq/[c][\num{0}], \eq/[c][\num{1}], \eq/[c][\num{2}], \dots\}
+expr-e45a7db4b0dbd77f	2	2	y \nsplus n = x
+expr-e64eeeddb7abd26a	1	1	g(\Assign{+}{N}(n, m)) = \Assign{+}{M}(g(n), g(m))
+expr-e748c72d469dd4ac	1	1	\Sat{K}{\lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]}
+expr-e8ab09ef10f0f9d8	1	1	x = y \nsplus y
+expr-e8c1c380abe0ebe9	2	2	n < m
+expr-ea57f1b2ecb2ac97	3	3	\Assign{\prime}{N}
+expr-eaf752fb46657da6	1	1	a\nsplus 0 = a
+expr-edf17661d9f030f8	1	1	v \nsplus m^\nssucc = y
+expr-ee0aa86822cf4ecd	1	1	a \nsless a
+expr-ee4ebdda4c0c38a5	1	1	& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]] \tag{$!Q_6$}\\ & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]] \tag{$!Q_7$}\\ & \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y]])]] \tag{$!Q_8$}
+expr-ee677c8abaa4c9ad	1	1	x \in [y]
+expr-eee1c230c6f27590	21	21	\Th{TA}
+expr-f17b5cafdf6c80da	2	2	x \nsplus y
+expr-f24501cd355c999c	3	3	\Th{TA} = \Setabs{!A}{\Sat{N}{!A}}
+expr-f37e06896eecca0a	2	2	\Sat{M}{\Th{Q}}
+expr-f396f29509427e56	17	17	\Lang{L_A}
+expr-f39dfa197e69c9c0	1	1	\lnot \lexists[x][\OPrf[\Th{PA}](x, \gn{\lfalse})]
+expr-f48cc60070f00c24	2	2	[z]
+expr-f564121517eb7a6a	1	1	\tuple{g(n), g(m)} \notin \Assign{<}{M}
+expr-f658d14a295d231e	1	1	\Sat{N_k}{\Gamma_0}
+expr-f722ebf867640c5c	1	1	\Value{\num{n+m}}{M} = \Value{\num{n}+\num{m}}{M}
+expr-f8ef16f248355710	1	1	\Domain{N} = \Setabs{\Value{\num{n}}{N}}{n \in \Nat}
+expr-f91c5260de97716d	1	1	\Th{PA} \Proves \lforall[x][\eq[x^{\prime\dots\prime}][(x + \num{n})]]
+expr-f9759825d81d4ea6	1	1	\lforall[x][\lforall[y][\eq[(x+y)][(y+x)]]]
+expr-faa7280221a24d1c	1	1	\nsless \nszero
+expr-fb365187c776daa2	1	1	y^\nssucc = x
+expr-fd301322eabfd16b	1	1	& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]] \tag{$!Q_6$}\\ & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]] \tag{$!Q_7$}\\ & \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z'+x)][y]])]] \tag{$!Q_8$}
+expr-fd876049c4809e5a	1	1	z \in [x]
+expr-fe2826cc3bc75bdd	1	1	\Assign{\times}{N}
+expr-fe4bfa85965f8d89	4	4	\nszero
+expr-ff2a63ac44a2d5a2	3	3	n<m
+expr-ff85001e894570fd	1	1	\Value{\Obj{0}}{M} = \Assign{\Obj{0}}{M}
+expr-ffef7f79544747c9	1	1	y \neq \nszero

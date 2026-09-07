@@ -1,0 +1,61 @@
+{
+  "case_id": "mutation-003-formal-scheme-omission",
+  "mutated_payload": {
+    "accessible_name": "The fourteen propositional axiom schemes",
+    "authoring_status": "PASS_DISTINCT_SOURCE_GROUNDED_FORMAL_DESCRIPTION",
+    "chapter_key": "pl:axd",
+    "column": 1,
+    "content_end": 406327,
+    "content_start": 405548,
+    "environment_id": "projected-env-000866",
+    "exercise_solution_status": null,
+    "expression_ids": [
+      "expr-767e19047750a558"
+    ],
+    "file": "content/first-order-logic/axiomatic-deduction/axioms-rules-propositional.tex",
+    "formal_object_id": "projected-env-000866",
+    "formula_ids": [
+      "projected-formula-0005305"
+    ],
+    "instance_id": "inst-00099",
+    "line": 18,
+    "listen_text": "The fourteen propositional axiom schemes. The display lists fourteen schemes in source order: three for conjunction, three for disjunction, two for the conditional, two for negation, one for truth, two for falsity, and double-negation elimination. Expression one, in source order: fourteen axiom schemes in source order. Conjunction elimination left: open parenthesis A and B close parenthesis implies A. Conjunction elimination right: open parenthesis A and B close parenthesis implies B. Conjunction introduction: A implies open parenthesis B implies open parenthesis A and B close parenthesis close parenthesis. Disjunction introduction left: A implies open parenthesis A or B close parenthesis. Disjunction introduction right: A implies open parenthesis B or A close parenthesis. Disjunction elimination: open parenthesis A implies C close parenthesis implies open parenthesis open parenthesis B implies C close parenthesis implies open parenthesis open parenthesis A or B close parenthesis implies C close parenthesis close parenthesis. Conditional scheme one: A implies open parenthesis B implies A close parenthesis. Conditional scheme two: open parenthesis A implies open parenthesis B implies C close parenthesis close parenthesis implies open parenthesis open parenthesis A implies B close parenthesis implies open parenthesis A implies C close parenthesis close parenthesis. Negation scheme one: open parenthesis A implies B close parenthesis implies open parenthesis open parenthesis A implies not B close parenthesis implies not A close parenthesis. Negation scheme two: not A implies open parenthesis A implies B close parenthesis. Truth scheme: verum. Falsity scheme one: falsum implies A. Falsity scheme two: open parenthesis A implies falsum close parenthesis implies not A. ",
+    "long_description": "The display lists fourteen schemes in source order: three for conjunction, three for disjunction, two for the conditional, two for negation, one for truth, two for falsity, and double-negation elimination.",
+    "name": "align",
+    "object_class": "display_math",
+    "object_role": "display math",
+    "offset": 477,
+    "ordered_steps": [
+      "Expression one, in source order: fourteen axiom schemes in source order. Conjunction elimination left: open parenthesis A and B close parenthesis implies A. Conjunction elimination right: open parenthesis A and B close parenthesis implies B. Conjunction introduction: A implies open parenthesis B implies open parenthesis A and B close parenthesis close parenthesis. Disjunction introduction left: A implies open parenthesis A or B close parenthesis. Disjunction introduction right: A implies open parenthesis B or A close parenthesis. Disjunction elimination: open parenthesis A implies C close parenthesis implies open parenthesis open parenthesis B implies C close parenthesis implies open parenthesis open parenthesis A or B close parenthesis implies C close parenthesis close parenthesis. Conditional scheme one: A implies open parenthesis B implies A close parenthesis. Conditional scheme two: open parenthesis A implies open parenthesis B implies C close parenthesis close parenthesis implies open parenthesis open parenthesis A implies B close parenthesis implies open parenthesis A implies C close parenthesis close parenthesis. Negation scheme one: open parenthesis A implies B close parenthesis implies open parenthesis open parenthesis A implies not B close parenthesis implies not A close parenthesis. Negation scheme two: not A implies open parenthesis A implies B close parenthesis. Truth scheme: verum. Falsity scheme one: falsum implies A. Falsity scheme two: open parenthesis A implies falsum close parenthesis implies not A. Double negation elimination: not not A implies A."
+    ],
+    "part_key": "pl",
+    "record_sha256": "bb9eb2302b16c9b2a6572aca409fae869e65d863a01fcd68151e80a40842eb30",
+    "reference_ids": [],
+    "scope": "projected",
+    "source_binding": {
+      "chapter_key": "pl:axd",
+      "column": 1,
+      "content_end": 406327,
+      "content_start": 405548,
+      "end_line": 33,
+      "environment_id": "projected-env-000866",
+      "file": "content/first-order-logic/axiomatic-deduction/axioms-rules-propositional.tex",
+      "instance_id": "inst-00099",
+      "line": 18,
+      "name": "align",
+      "object_class": "display_math",
+      "offset": 477,
+      "part_key": "pl",
+      "scope": "projected",
+      "source_block": "\\begin{align}\n  & (!A \\land !B) \\lif !A \\ollabel{ax:land1}\\\\\n  & (!A \\land !B) \\lif !B \\ollabel{ax:land2}\\\\\n  & !A \\lif (!B \\lif (!A \\land !B)) \\ollabel{ax:land3}\\\\\n  & !A \\lif (!A \\lor !B) \\ollabel{ax:lor1}\\\\\n  & !A \\lif (!B \\lor !A) \\ollabel{ax:lor2}\\\\\n  & (!A \\lif !C) \\lif ((!B \\lif !C) \\lif ((!A \\lor !B) \\lif !C)) \\ollabel{ax:lor3}\\\\\n  & !A \\lif (!B \\lif !A) \\ollabel{ax:lif1}\\\\\n  & (!A \\lif (!B \\lif !C)) \\lif ((!A \\lif !B) \\lif (!A \\lif !C)) \\ollabel{ax:lif2}\\\\\n  & (!A \\lif !B) \\lif ((!A \\lif \\lnot !B) \\lif \\lnot !A) \\ollabel{ax:lnot1}\\\\\n  & \\lnot !A \\lif (!A \\lif !B) \\ollabel{ax:lnot2}\\\\\n  & \\ltrue \\ollabel{ax:ltrue}\\\\\n  & \\lfalse \\lif !A \\ollabel{ax:lfalse1}\\\\\n  & (!A \\lif \\lfalse) \\lif \\lnot !A \\ollabel{ax:lfalse2}\\\\\n  & \\lnot\\lnot !A \\lif !A \\ollabel{ax:dne}\n\\end{align}",
+      "source_block_sha256": "7c6f2cd92e87418fbf345564af33104e3fd4d32028b0f42dea485caab990bfed",
+      "source_block_utf8_bytes": 788,
+      "source_file_sha256": "8d19f7612edbb87db30f052b75e8208638a5c68570ef05faf6332111fbbc69fe",
+      "stream_end": 406338,
+      "stream_start": 405535
+    },
+    "stream_end": 406338,
+    "stream_start": 405535
+  },
+  "target": "projected-env-000866.listen_text"
+}

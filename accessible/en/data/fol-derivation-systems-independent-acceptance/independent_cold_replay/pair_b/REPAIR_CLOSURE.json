@@ -1,0 +1,40 @@
+{
+  "independent_superseding_reaudit": "PENDING",
+  "initial_audit_preserved_untouched": true,
+  "initial_fail_receipt_sha256": "ebf1814616fa2eef0bb4dd71b4afa2a66959705eac1aceca2d81062599fa2918",
+  "initial_fail_report_sha256": "e5de41aeaa5a49c6ce702476b3bb5c09b316af527224ee517d6fe7ad415da8fc",
+  "resolutions": [
+    {
+      "expression_ids": [
+        "expr-0ab83730c263f0b7"
+      ],
+      "finding_id": "TR019-IND-SEM-001",
+      "occurrence_ids": [
+        "projected-formula-0008076"
+      ],
+      "resolution": "First-order validity now quantifies over every first-order structure and every variable assignment relevant to free variables."
+    },
+    {
+      "expression_ids": [
+        "expr-ab733e02bed54e75"
+      ],
+      "finding_id": "TR019-IND-SEM-002",
+      "occurrence_ids": [
+        "projected-formula-0008078",
+        "projected-formula-0008082"
+      ],
+      "resolution": "First-order consequence now quantifies over every first-order structure and relevant assignment satisfying Gamma and requires satisfaction of A under that assignment."
+    },
+    {
+      "affected_canonical_contract": [
+        "UPSTREAM_INPUTS.json",
+        "DEPENDENCY_BOUNDARY.json",
+        "OPERATIONAL_CONTEXT_CONTRACT.json"
+      ],
+      "finding_id": "TR019-IND-DET-001",
+      "resolution": "Mutable durable controls are documented without live bytes or hashes and are excluded from the deterministic semantic build boundary."
+    }
+  ],
+  "schema": "openlogic-tr019-initial-independent-fail-repair-closure-v1",
+  "status": "PASS_PRODUCER_REPAIR_READY_FOR_SUPERSEDING_REAUDIT"
+}

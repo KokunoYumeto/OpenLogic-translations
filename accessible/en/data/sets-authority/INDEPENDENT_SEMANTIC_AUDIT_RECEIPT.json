@@ -1,0 +1,235 @@
+{
+  "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "check_count": 30,
+  "checks": [
+    {
+      "check_id": "AUTH-HEAD",
+      "detail": "immutable authority HEAD equals the pinned commit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-RECEIPT-COMMIT",
+      "detail": "source authority receipt carries the pinned commit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-NO-MUTATION",
+      "detail": "source authority declares no mutation",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-HASHES",
+      "detail": "all seven source and three asset hashes match SOURCE_AUTHORITY",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-SIZES",
+      "detail": "all seven source and three asset byte sizes match SOURCE_AUTHORITY",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-LINES",
+      "detail": "all seven source line counts match SOURCE_AUTHORITY",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROFILE-NAME",
+      "detail": "frozen profile is open-logic-complete",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROFILE-COMMIT",
+      "detail": "profile oracle carries the pinned commit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROFILE-DECISIONS",
+      "detail": "all seven frozen profile decisions are present",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROFILE-BLOCKERS",
+      "detail": "profile oracle reports no blocker or source mutation",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COUNT-EXPRESSIONS",
+      "detail": "exactly 163 expression semantic records",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COUNT-OCCURRENCES",
+      "detail": "exactly 327 semantic occurrence records",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COUNT-FORMAL",
+      "detail": "exactly 52 formal-object semantic bindings",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COUNT-DIAGRAMS",
+      "detail": "exactly three diagram accessibility records",
+      "status": "PASS"
+    },
+    {
+      "check_id": "UNIQUE-EXPRESSIONS",
+      "detail": "all expression IDs are unique",
+      "status": "PASS"
+    },
+    {
+      "check_id": "UNIQUE-OCCURRENCES",
+      "detail": "all formula IDs are unique",
+      "status": "PASS"
+    },
+    {
+      "check_id": "UNIQUE-FORMAL",
+      "detail": "all formal-object IDs are unique",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COVER-EXPRESSIONS",
+      "detail": "expression semantic IDs exactly cover shape IDs",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COVER-OCCURRENCES",
+      "detail": "semantic occurrence IDs exactly cover formula oracle IDs",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COVER-FORMULA-BINDINGS",
+      "detail": "semantic occurrences exactly cover projection formula bindings",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COVER-FORMAL",
+      "detail": "formal semantic bindings exactly cover projection and oracle formal objects",
+      "status": "PASS"
+    },
+    {
+      "check_id": "EXPRESSION-MECHANICS",
+      "detail": "all 163 expression records pass independent structure, hash, MathML, and spoken-form checks",
+      "status": "PASS"
+    },
+    {
+      "check_id": "OCCURRENCE-MECHANICS",
+      "detail": "all 327 occurrences close independently to oracle fields, immutable source coordinates, expression semantics, and native MathML",
+      "status": "PASS"
+    },
+    {
+      "check_id": "OCCURRENCE-OVERRIDE",
+      "detail": "there is exactly one context override and it is the empty sequence at formula 0000290",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FORMAL-MECHANICS",
+      "detail": "all 52 formal-object bindings preserve structural fields, accessible roles, and exact semantic occurrence membership",
+      "status": "PASS"
+    },
+    {
+      "check_id": "DIAGRAM-MECHANICS",
+      "detail": "all three diagrams match source semantics, immutable assets, path topology, and TeX-free accessibility contracts",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SETS-SEM-001",
+      "detail": "historical semantic finding SETS-SEM-001 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SETS-SEM-002",
+      "detail": "historical semantic finding SETS-SEM-002 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SETS-SEM-003",
+      "detail": "historical semantic finding SETS-SEM-003 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "INPUT-STABILITY",
+      "detail": "all frozen projection, oracle, source, and asset inputs are byte-identical before and after audit",
+      "status": "PASS"
+    }
+  ],
+  "frozen_input_file_count": 59,
+  "frozen_input_tree_after_sha256": "701558ee7b2e410b92c7eecd66ae371837e0317c0e5ea23913ee5580f08d6da7",
+  "frozen_input_tree_before_sha256": "701558ee7b2e410b92c7eecd66ae371837e0317c0e5ea23913ee5580f08d6da7",
+  "input_stability": "PASS_BYTE_IDENTICAL",
+  "output_files": [
+    {
+      "bytes": 1231,
+      "namespace": "audit_output",
+      "path": "DIAGRAM_REVIEW.jsonl",
+      "sha256": "6b5094035e1c3a3f423fe8b24949caa6b5c66e92a1ff8c144131595c4f1dba82"
+    },
+    {
+      "bytes": 54057,
+      "namespace": "audit_output",
+      "path": "EXPRESSION_REVIEW.jsonl",
+      "sha256": "bc99fda1395a7fa744f0fc0ff5c7f2816386c30addce6845afde8f03f847c2a4"
+    },
+    {
+      "bytes": 2027,
+      "namespace": "audit_output",
+      "path": "FINDINGS_CURRENT.jsonl",
+      "sha256": "065c64a5f30494a0c8883a0154f9b454a8611bae8999ec500cbe75ed2f962d9e"
+    },
+    {
+      "bytes": 1670,
+      "namespace": "audit_output",
+      "path": "FINDINGS_HISTORY.jsonl",
+      "sha256": "353d1cfa069e1546d7c89f68ec72843523ab378a029baa43dce707e8bf02fbfb"
+    },
+    {
+      "bytes": 16898,
+      "namespace": "audit_output",
+      "path": "FORMAL_OBJECT_REVIEW.jsonl",
+      "sha256": "9773015d2e397c29643cec185d43dd0fc1cc4c2ca8337dff8fb70eae52b91dbb"
+    },
+    {
+      "bytes": 11727,
+      "namespace": "audit_output",
+      "path": "INPUT_HASHES_AFTER.json",
+      "sha256": "25c3ef6b30ca37fe494c378076a2f3064968a3dd750f457fe8f6410aeb8f5aae"
+    },
+    {
+      "bytes": 11701,
+      "namespace": "audit_output",
+      "path": "INPUT_HASHES_BEFORE.json",
+      "sha256": "a9a5ca50c42b1d65ae9a69d70aad128a2c255a2e79f6149491bffa48a0c1aac9"
+    },
+    {
+      "bytes": 165675,
+      "namespace": "audit_output",
+      "path": "OCCURRENCE_REVIEW.jsonl",
+      "sha256": "227bdc08684acd847ac155eb9d9760029f8eeac401aea1e80b8e6b0a51e31b9f"
+    },
+    {
+      "bytes": 2440,
+      "namespace": "audit_output",
+      "path": "REPORT.md",
+      "sha256": "2288daf879c0ef69a10d9b3a99f7ac290827f89d442b6c34e856f4654f0512ab"
+    },
+    {
+      "bytes": 47124,
+      "namespace": "audit_output",
+      "path": "audit_sets_semantics.py",
+      "sha256": "48524a0e7de31bba8fabe69278de32afb78405a14c189866568d10a25fa58e44"
+    }
+  ],
+  "producer_tooling_imported_or_invoked": false,
+  "result": "PASS",
+  "review_counts": {
+    "diagram_records": 3,
+    "expression_records": 163,
+    "formal_object_binding_records": 52,
+    "occurrence_context_records": 327
+  },
+  "schema": "openlogic-independent-sets-semantic-accessibility-audit-v1",
+  "source_mutated": false,
+  "tranche_id": "OLAB-TR-002",
+  "unresolved_mechanical_findings": 0,
+  "unresolved_semantic_findings": 0
+}

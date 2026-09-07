@@ -1,0 +1,365 @@
+{
+  "all_occurrence_continuous_reading_records": 1082,
+  "assigned_input_hashes": {
+    "oracle_manifest": "f8519c44ed8bd84fdb833599ca5449876dd5f948c7bd17eba9653b4b9fea2087",
+    "oracle_validation": "b6cd3df655f982746e32e9e5f47251369b2ceb184d11c75efba0a9c7c0a07758",
+    "projection_manifest": "4a02e8d0d83c6477115582d2bda2069543ab96d40d8009735bf65020ff10dfd3",
+    "projection_validation": "8b065ff9faceeed977f8b4ce4ca390e8855822a6b96c148eeaab7e53e6ccdb72"
+  },
+  "auditor_sha256": "09c0aea6e9dd7b16fb01555da55283f113d23a2883c399826e862a1afcc903d3",
+  "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "authority_mutated": false,
+  "base_audit_result": "PASS",
+  "base_audit_return": 0,
+  "check_count": 51,
+  "checks": [
+    {
+      "check_id": "PINNED-INPUTS",
+      "detail": "the four assigned oracle/projection hashes are exact on first audit and remain preserved in failed-audit history after repairs",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTHORITY-HEAD",
+      "detail": "immutable authority HEAD is the pinned detached commit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTHORITY-DECLARATION",
+      "detail": "source authority pins the commit and declares no mutation",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SOURCE-FILES",
+      "detail": "all fourteen immutable source files replay exactly (73,714 bytes / 1,820 lines)",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SOURCE-INSTANCES",
+      "detail": "the exact fourteen source instances and files are present once",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORACLE-FORMULAS",
+      "detail": "oracle has exactly 1,082 uniquely identified projected formula occurrences",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORACLE-SHAPES",
+      "detail": "oracle has exactly 398 unique expression shapes whose occurrence totals are 1,082",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORACLE-FORMALS",
+      "detail": "oracle has exactly 73 formal objects including all 39 exercises",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORACLE-ENVIRONMENTS",
+      "detail": "oracle has exactly 137 projected environments",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORACLE-REFERENCES",
+      "detail": "oracle preserves exactly 42 reference rows: 41 resolved plus the one duplicate-label error",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORACLE-HEADLINES",
+      "detail": "independently replayed headline counts equal the frozen oracle summary",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROJECTION-CLOSURE",
+      "detail": "projection ledgers close exactly over 398 shapes, 1,082 occurrences, and 73 formal objects",
+      "status": "PASS"
+    },
+    {
+      "check_id": "OVERRIDE-BOUNDARY",
+      "detail": "all occurrence overrides are explicit, counted, and formula-bound (the assigned snapshot contains zero)",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-001",
+      "detail": "independent semantic finding SIZ-IND-SEM-001 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-002",
+      "detail": "independent semantic finding SIZ-IND-SEM-002 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-003",
+      "detail": "independent semantic finding SIZ-IND-SEM-003 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-004",
+      "detail": "independent semantic finding SIZ-IND-SEM-004 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-005",
+      "detail": "independent semantic finding SIZ-IND-SEM-005 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-006",
+      "detail": "independent semantic finding SIZ-IND-SEM-006 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-007",
+      "detail": "independent semantic finding SIZ-IND-SEM-007 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SEMANTIC-SIZ-IND-SEM-008",
+      "detail": "independent semantic finding SIZ-IND-SEM-008 is resolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "EXPRESSION-REVIEW",
+      "detail": "all 398 distinct expression records mechanically close to every source context and both MathML variants",
+      "status": "PASS"
+    },
+    {
+      "check_id": "MATHML-STRUCTURE",
+      "detail": "all 796 expression MathML variants are native, parseable, nonempty, annotation-free trees with exact hashes",
+      "status": "PASS"
+    },
+    {
+      "check_id": "READER-ROOT-BOUNDARY",
+      "detail": "the cumulative reader sanitizer strips aria-label, aria-labelledby, alttext, and role at every MathML root while preserving all 796 subtrees",
+      "status": "PASS"
+    },
+    {
+      "check_id": "OCCURRENCE-REVIEW",
+      "detail": "all 1,082 occurrences mechanically close to immutable source coordinates, explicit context bindings, and native MathML",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FORMAL-OBJECT-REVIEW",
+      "detail": "all 73 formal objects mechanically preserve exact spans, roles, hierarchy, formula membership, speech, names, and descriptions",
+      "status": "PASS"
+    },
+    {
+      "check_id": "EXERCISE-REVIEW",
+      "detail": "all 39 exercises receive complete mechanically closed source-bound review",
+      "status": "PASS"
+    },
+    {
+      "check_id": "REFERENCE-REVIEW",
+      "detail": "all 42 source reference rows were reviewed; the one source duplicate remains visible while the effective projection closes",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SAR-003-REFRULE-002",
+      "detail": "SAR-003 is an exact four-character derived-stream edit with one visible local note; REFRULE-002 deterministically targets the unchanged primary exercise",
+      "status": "PASS"
+    },
+    {
+      "check_id": "INPUT-STABILITY",
+      "detail": "all producer, sidecar, and immutable authority inputs remained byte-identical during the audit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAILURE-HISTORY",
+      "detail": "the exact initial eight-finding FAIL and its assigned input hashes remain preserved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SUPERSEDING-PINS",
+      "detail": "the repaired producer freeze matches both newly assigned hashes and the unchanged oracle pins",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PRODUCER-MANIFEST-CLOSURE",
+      "detail": "every repaired producer artifact closes to the assigned manifest and its 1,717-check validation receipt",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORIGINAL-FAIL-BUNDLE",
+      "detail": "the frozen initial FAIL evidence validates against its original manifest and exact receipt hashes",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORIGINAL-FAIL-STABILITY",
+      "detail": "no file in the original independent FAIL bundle changed during the superseding audit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "EIGHT-REPAIR-PREDICATES",
+      "detail": "all eight frozen semantic resolution predicates now pass",
+      "status": "PASS"
+    },
+    {
+      "check_id": "REPAIRED-EXPRESSION-CENSUS",
+      "detail": "all 78 repaired expression records were independently reread for speech and meaning",
+      "status": "PASS"
+    },
+    {
+      "check_id": "REPAIRED-CONTEXT-CENSUS",
+      "detail": "all 90 repaired occurrences were reread in source context and adjacent continuous speech",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FORMAL-NAVIGATION-UNIQUENESS",
+      "detail": "all 73 formal objects have unique source-grounded names and topics with complete descriptions",
+      "status": "PASS"
+    },
+    {
+      "check_id": "REPAIRED-MEANING-SPECIFICITY",
+      "detail": "every notation-sensitive repaired expression has a mathematically specific authored meaning rather than the generic script-or-power fallback",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FINAL-PRODUCER-THREE-PIN-FREEZE",
+      "detail": "ARTIFACT_MANIFEST, VALIDATION_RECEIPT, and EVIDENCE_MANIFEST match the final assigned producer hashes",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SIZ-IND-SEM-009-RETENTION",
+      "detail": "the triangular-index and both Kleene-closure meanings remain exact",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SIZ-IND-SEM-010-EXACT-OVERRIDE",
+      "detail": "exactly projected-formula-0001538 has the explicit context-only ordinal speech override",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SIZ-IND-SEM-010-CONTINUOUS-SPEECH",
+      "detail": "the repaired ordinal now composes into one grammatical, nonduplicated source sentence",
+      "status": "PASS"
+    },
+    {
+      "check_id": "OCCURRENCE-ONLY-REPAIR-DIFF",
+      "detail": "the producer diff is exactly one occurrence record; all 398 expression records remain byte-identical",
+      "status": "PASS"
+    },
+    {
+      "check_id": "EXPRESSION-MATHML-STABILITY",
+      "detail": "all 796 expression-level native MathML variants remain byte-identical",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COMPLETE-CONTINUOUS-READING-REPLAY",
+      "detail": "all 1,082 source occurrences have source-bound adjacent continuous-reading review rows",
+      "status": "PASS"
+    },
+    {
+      "check_id": "UNCHANGED-CONTINUITY-INHERITANCE",
+      "detail": "the other 1,081 occurrence records are byte-identical to the prior semantic audit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FORMAL-BINDING-STABILITY",
+      "detail": "all 73 formal semantic bindings remain byte-identical",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ALL-PRIOR-FAIL-BUNDLES",
+      "detail": "the initial, SIZ-IND-SEM-009, and SIZ-IND-SEM-010 FAIL evidence bundles retain their exact hashes and manifest closure",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ALL-PRIOR-FAIL-STABILITY",
+      "detail": "no file in any prior FAIL evidence bundle changed during the final audit",
+      "status": "PASS"
+    }
+  ],
+  "counts_replayed": {
+    "exercises": 39,
+    "expression_shapes": 398,
+    "formal_objects": 73,
+    "formula_occurrences": 1082,
+    "mathml_expression_variants": 796,
+    "mathml_occurrence_trees": 1082,
+    "occurrence_overrides": 1,
+    "references": 42,
+    "source_bytes": 73714,
+    "source_files": 14,
+    "source_instances": 14,
+    "source_lines": 1820
+  },
+  "current_input_hashes": {
+    "oracle_manifest": "f8519c44ed8bd84fdb833599ca5449876dd5f948c7bd17eba9653b4b9fea2087",
+    "oracle_validation": "b6cd3df655f982746e32e9e5f47251369b2ceb184d11c75efba0a9c7c0a07758",
+    "projection_manifest": "bddbbd793e4165cc8b2512acb7d9bd6690b885f7a544e76bd4c75481c1e20b61",
+    "projection_validation": "1e3fd4bdc9dfd617941f78cd31f10657afffa60f003407f341a65feebc874fea"
+  },
+  "expected_current_input_hashes": {
+    "oracle_manifest": "f8519c44ed8bd84fdb833599ca5449876dd5f948c7bd17eba9653b4b9fea2087",
+    "oracle_validation": "b6cd3df655f982746e32e9e5f47251369b2ceb184d11c75efba0a9c7c0a07758",
+    "projection_manifest": "bddbbd793e4165cc8b2512acb7d9bd6690b885f7a544e76bd4c75481c1e20b61",
+    "projection_validation": "1e3fd4bdc9dfd617941f78cd31f10657afffa60f003407f341a65feebc874fea"
+  },
+  "expected_producer_pins": {
+    "artifact_manifest": "d2fb938a193a3baefe0e64dca0ec8f28c3430a9af8fc5339e81fbda314f5666f",
+    "evidence_manifest": "bddbbd793e4165cc8b2512acb7d9bd6690b885f7a544e76bd4c75481c1e20b61",
+    "validation_receipt": "1e3fd4bdc9dfd617941f78cd31f10657afffa60f003407f341a65feebc874fea"
+  },
+  "formal_navigation_records_reviewed": 73,
+  "git_used": false,
+  "historical_semantic_findings": 8,
+  "independent_semantic_review": "COMPLETE_EVERY_EXPRESSION_OCCURRENCE_AND_FORMAL_OBJECT",
+  "input_stability": "PASS_BYTE_IDENTICAL",
+  "occurrence_context_overrides": 1,
+  "original_fail_bundle_stable": true,
+  "original_fail_bundle_validation_errors": [],
+  "prior_fail_bundle_validation_errors": [],
+  "prior_fail_bundles_stable": true,
+  "producer_manifest_validation_errors": [],
+  "producer_pins": {
+    "artifact_manifest": "d2fb938a193a3baefe0e64dca0ec8f28c3430a9af8fc5339e81fbda314f5666f",
+    "evidence_manifest": "bddbbd793e4165cc8b2512acb7d9bd6690b885f7a544e76bd4c75481c1e20b61",
+    "validation_receipt": "1e3fd4bdc9dfd617941f78cd31f10657afffa60f003407f341a65feebc874fea"
+  },
+  "publication": false,
+  "reader_root_boundary": {
+    "builder_path": "work/tranche_003_relations_reader/build_relations_reader.py",
+    "builder_sha256": "b00a462478b53d92871de8f0b8a11a4016891193b87ff7d7cfbaeab0c4052eda",
+    "policy": "strip aria-label, aria-labelledby, alttext, and role from every Read/Explore MathML root while retaining the navigable subtree",
+    "result": "PASS"
+  },
+  "remote_mutation": false,
+  "repair_diff_errors": [],
+  "repair_predicates": {
+    "SIZ-IND-SEM-001": true,
+    "SIZ-IND-SEM-002": true,
+    "SIZ-IND-SEM-003": true,
+    "SIZ-IND-SEM-004": true,
+    "SIZ-IND-SEM-005": true,
+    "SIZ-IND-SEM-006": true,
+    "SIZ-IND-SEM-007": true,
+    "SIZ-IND-SEM-008": true
+  },
+  "repaired_expression_records_reviewed": 78,
+  "repaired_occurrence_contexts_reviewed": 90,
+  "result": "PASS",
+  "schema": "openlogic-independent-size-of-sets-final-superseding-semantic-reaudit-v1",
+  "supersedes_receipt_sha256": "2fec75c5b126eed8705968c77714f4efa097754a129c1332a4f3d49110d67439",
+  "supersedes_receipts": [
+    {
+      "result": "FAIL",
+      "scope": "initial eight findings",
+      "sha256": "2fec75c5b126eed8705968c77714f4efa097754a129c1332a4f3d49110d67439"
+    },
+    {
+      "result": "FAIL",
+      "scope": "SIZ-IND-SEM-009",
+      "sha256": "7b99d2ef0e327473967def60ddee216ab26b52808a65455f9453f4dc3ead5d72"
+    },
+    {
+      "result": "FAIL",
+      "scope": "SIZ-IND-SEM-010",
+      "sha256": "a273003e1d09d526f6c7db65be0a1ff31ab868dd13eb6e8dc1d54759d2bb7dec"
+    }
+  ],
+  "supersedes_result": "FAIL",
+  "superseding_unresolved_semantic_findings": 0,
+  "tranche_id": "OLAB-TR-005",
+  "unresolved_mechanical_findings": 0,
+  "unresolved_semantic_findings": 0
+}

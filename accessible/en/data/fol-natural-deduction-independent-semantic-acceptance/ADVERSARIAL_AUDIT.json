@@ -1,0 +1,157 @@
+{
+  "risk_families": 25,
+  "schema": "openlogic-tr021-repaired-independent-adversarial-audit-v1",
+  "status": "PASS_ALL_FRESH_AND_TARGETED_MUTATIONS_REJECTED",
+  "tests": [
+    {
+      "mutation": "delete one expression",
+      "rejection": "expression closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "missing_expression"
+    },
+    {
+      "mutation": "blank expression speech and refresh its row hash",
+      "rejection": "empty speech/meaning: expr-011df05c0ddce663",
+      "status": "PASS_REJECTED",
+      "test_id": "blank_expression_speech"
+    },
+    {
+      "mutation": "inject root-level speech into structural MathML",
+      "rejection": "flattened root speech: expr-011df05c0ddce663",
+      "status": "PASS_REJECTED",
+      "test_id": "flattened_mathml_root"
+    },
+    {
+      "mutation": "move one occurrence by one source line",
+      "rejection": "occurrence coordinate drift",
+      "status": "PASS_REJECTED",
+      "test_id": "occurrence_coordinate_shift"
+    },
+    {
+      "mutation": "alter one exact three-line source packet",
+      "rejection": "context packet drift",
+      "status": "PASS_REJECTED",
+      "test_id": "context_packet_drift"
+    },
+    {
+      "mutation": "delete one formal object",
+      "rejection": "formal closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "missing_formal"
+    },
+    {
+      "mutation": "reverse a reviewed proof's ordered steps",
+      "rejection": "'candidate_ordered_steps'",
+      "status": "PASS_REJECTED",
+      "test_id": "proof_step_reorder"
+    },
+    {
+      "mutation": "mark a source-unsolved exercise solved",
+      "rejection": "exercise solution invented",
+      "status": "PASS_REJECTED",
+      "test_id": "invented_exercise_solution"
+    },
+    {
+      "mutation": "delete one oracle proof command binding",
+      "rejection": "proof-command closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "missing_proof_command"
+    },
+    {
+      "mutation": "bind one proof command to a formula at another coordinate",
+      "rejection": "proof-command formula coordinate drift",
+      "status": "PASS_REJECTED",
+      "test_id": "proof_command_crosswire"
+    },
+    {
+      "mutation": "replace one stable reference target binding",
+      "rejection": "reference target drift",
+      "status": "PASS_REJECTED",
+      "test_id": "reference_target_swap"
+    },
+    {
+      "mutation": "remove the missing-of correction",
+      "rejection": "correction closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "correction_loss"
+    },
+    {
+      "mutation": "remove one continuous formula anchor",
+      "rejection": "continuous replay formula closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "replay_binding_loss"
+    },
+    {
+      "mutation": "remove one frozen source line",
+      "rejection": "source-line replay closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "source_line_replay_loss"
+    },
+    {
+      "mutation": "alter one immutable-source digest",
+      "rejection": "immutable source digest drift",
+      "status": "PASS_REJECTED",
+      "test_id": "source_digest_drift"
+    },
+    {
+      "mutation": "alter one artifact-manifest digest",
+      "rejection": "artifact manifest digest drift",
+      "status": "PASS_REJECTED",
+      "test_id": "artifact_digest_drift"
+    },
+    {
+      "mutation": "inject a raw occurrence placeholder into a clean listener string",
+      "rejection": "listener placeholder residue",
+      "status": "PASS_REJECTED",
+      "test_id": "listener_placeholder_injection"
+    },
+    {
+      "mutation": "reintroduce a raw heading placeholder at a frozen stable formula anchor",
+      "rejection": "raw heading placeholder reintroduced",
+      "status": "PASS_REJECTED",
+      "test_id": "repaired_heading_placeholder_reintroduction"
+    },
+    {
+      "mutation": "delete one of the 283 spoken proof-boundary separators",
+      "rejection": "proof boundary separator drift: TR021-REPAIRED-PROOF-BOUNDARY-001",
+      "status": "PASS_REJECTED",
+      "test_id": "repaired_proof_separator_loss"
+    },
+    {
+      "mutation": "change one separator's deterministic ordinal",
+      "rejection": "proof boundary separator drift: TR021-REPAIRED-PROOF-BOUNDARY-001",
+      "status": "PASS_REJECTED",
+      "test_id": "repaired_proof_separator_wrong_ordinal"
+    },
+    {
+      "mutation": "replace an exact stable listener target with generic referenced-result wording",
+      "rejection": "reference listener span drift: reference-000317",
+      "status": "PASS_REJECTED",
+      "test_id": "repaired_reference_generic_reversion"
+    },
+    {
+      "mutation": "shift a listener reference binding away from its exact source anchor",
+      "rejection": "reference source/target closure drift: reference-000318",
+      "status": "PASS_REJECTED",
+      "test_id": "repaired_reference_source_shift"
+    },
+    {
+      "mutation": "remove the stable target from a source-unsolved exercise's listener text",
+      "rejection": "formal reference target absent: reference-000317",
+      "status": "PASS_REJECTED",
+      "test_id": "repaired_formal_reference_loss"
+    },
+    {
+      "mutation": "remove both spoken equality terms while retaining two equality macros",
+      "rejection": "semantic speech lost \\eq: expr-d1b2eb82a064c167",
+      "status": "PASS_REJECTED",
+      "test_id": "legacy_equality_actual_speech_loss"
+    },
+    {
+      "mutation": "remove the belongs-to-Gamma meaning from the contextual subset occurrence",
+      "rejection": "semantic speech lost \\subseteq: projected-formula-0009675",
+      "status": "PASS_REJECTED",
+      "test_id": "contextual_subset_meaning_loss"
+    }
+  ]
+}

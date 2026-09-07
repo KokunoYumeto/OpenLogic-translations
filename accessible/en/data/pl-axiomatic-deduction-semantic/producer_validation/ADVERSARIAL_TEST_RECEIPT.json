@@ -1,0 +1,214 @@
+{
+  "cache_cleanup_status": "PASS_NO_TEST_CACHE_OR_MUTATION_RESIDUE",
+  "independent_audit_status": "NOT_RUN_NOT_CLAIMED",
+  "schema": "openlogic-accessible-tr013-adversarial-test-receipt-v1",
+  "status": "PASS_ALL_ADVERSARIAL_MUTATIONS_REJECTED",
+  "test_count": 34,
+  "tests": [
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "manifested_byte_tamper",
+      "rejection": "manifested byte drift: expression_semantics.jsonl"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "missing_expression_with_rehashed_manifests",
+      "rejection": "expression closure drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "missing_occurrence_with_rehashed_manifests",
+      "rejection": "occurrence closure drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "missing_context_review_with_rehashed_manifests",
+      "rejection": "occurrence closure drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "raw_tex_in_words_only_speech",
+      "rejection": "occurrence authored field drift: projected-formula-0005246/speech"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "digit_in_words_only_speech",
+      "rejection": "occurrence authored field drift: projected-formula-0005246/speech"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "generic_semantic_fallback",
+      "rejection": "expression authority drift: expr-013900bacaac5a80"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "flattened_mathml_root",
+      "rejection": "expression authority drift: expr-013900bacaac5a80"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "changed_mathml_operator",
+      "rejection": "occurrence MathML drift: projected-formula-0005246"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "falsified_context_packet",
+      "rejection": "context review authority drift: projected-formula-0005246/source_packet_sha256"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "tampered_formula_coordinate",
+      "rejection": "occurrence source record drift: projected-formula-0005246"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "missing_derivation_structure",
+      "rejection": "derivation structure drift: projected-env-000869"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "reordered_derivation_lines",
+      "rejection": "derivation structure drift: projected-env-000869"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "solved_source_exercise",
+      "rejection": "formal authored field drift: projected-env-000878/exercise_solution_status"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "duplicate_formal_name",
+      "rejection": "formal authored field drift: projected-env-000859/accessible_name"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "missing_reference_with_rehashed_manifests",
+      "rejection": "reference closure drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "corrupted_reference_target",
+      "rejection": "reference authority drift: reference-000168"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "unresolved_reference",
+      "rejection": "reference authority drift: reference-000168"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "missing_source_correction",
+      "rejection": "correction closure drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "under_scoped_source_correction",
+      "rejection": "correction authority drift: TR013-SOURCE-FORMULA-001"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "falsified_source_closure",
+      "rejection": "source closure receipt drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "falsified_speech_closure",
+      "rejection": "speech closure drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "protected_input_hash_falsification",
+      "rejection": "upstream/protected ledger drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "producer_builder_hash_falsification",
+      "rejection": "producer builder hash drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "independent_audit_overclaim",
+      "rejection": "independent audit overclaim"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "index_bound_meaning_regression",
+      "rejection": "expression authority drift: expr-d826a37801d792cd"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "fourteen_scheme_linearization_regression",
+      "rejection": "expression authority drift: expr-767e19047750a558"
+    },
+    {
+      "exception_type": "BuildError",
+      "mutation_rejected": true,
+      "name": "unsafe_output_boundary",
+      "rejection": "output outside isolated TR-013 producer paths: [project-root]\\control\\tr013_adversarial_probe"
+    },
+    {
+      "exception_type": "BuildError",
+      "mutation_rejected": true,
+      "name": "wrong_oracle_pin",
+      "rejection": "adversarial oracle pin hash drift: expected 0000000000000000000000000000000000000000000000000000000000000000, got 24dacc904510be02d661c572f8da68bc2f8e4df6cd9a0f66f025ff19c584c751"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "direct_flattening_attribute_gate",
+      "rejection": "flattening root attribute: adversarial direct MathML"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "direct_words_only_residue_gate",
+      "rejection": "raw notation residue in adversarial direct speech: 'Gamma \\\\Proves A'"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "direct_index_bound_semantic_gate",
+      "rejection": "index-bound meaning repair drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "direct_fourteen_scheme_linearization_gate",
+      "rejection": "fourteen-scheme speech repair drift"
+    },
+    {
+      "exception_type": "ValidationError",
+      "mutation_rejected": true,
+      "name": "cache_residue",
+      "rejection": "cache or adversarial residue: ['[project-root]\\\\work\\\\tranche_013_pl_axiomatic_deduction_projection\\\\__pycache__', '[project-root]\\\\work\\\\tranche_013_pl_axiomatic_deduction_projection\\\\__pycache__\\\\tr013_adversarial_probe.pyc']"
+    }
+  ],
+  "tranche_id": "OLAB-TR-013"
+}

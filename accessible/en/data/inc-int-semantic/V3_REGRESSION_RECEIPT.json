@@ -1,0 +1,39 @@
+{
+  "independent_audit_claimed": false,
+  "inherited_actual_defect_mutations_rejected": 19,
+  "new_actual_defect_mutations": [
+    {
+      "reason": "chapter ends before final imported section",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "chapter_end_wrong_position_with_unchanged_global_count"
+    },
+    {
+      "reason": "exact source slice mismatch: TR034-SAR-002:2514:2534",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "normalized_text_falsely_claimed_as_exact_CRLF_slice"
+    },
+    {
+      "reason": "source correction packet encoding drift: TR034-SAR-020",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "compact_hash_in_established_pretty_source_packet"
+    }
+  ],
+  "positive_checks": {
+    "actual_listener_defects_absent": true,
+    "balanced_environment_pairs": 29,
+    "chapter_ends": 1,
+    "contextual_note_only_corrections": 2,
+    "enacted_prose_corrections": 17,
+    "encoding": "UTF8_SORTED_PRETTY_JSON_INDENT_2_WITH_FINAL_LF",
+    "exact_application_source_slices": 24,
+    "exact_prose_source_slices": 17,
+    "exact_source_line_packets": 25,
+    "missing_subscript_reader_repair": true,
+    "section_ends": 4,
+    "source_formula_preserved": true,
+    "source_order_chapter_end_after_final_import": true
+  },
+  "schema": "openlogic-tr034-v3-actual-content-regressions-v1",
+  "status": "PASS_EXACT_SLICES_SOURCE_ORDER_AND_PACKET_HASH_REGRESSIONS",
+  "total_mutations_rejected": 22
+}

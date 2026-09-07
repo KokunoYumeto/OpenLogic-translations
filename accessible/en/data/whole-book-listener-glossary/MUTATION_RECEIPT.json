@@ -1,0 +1,58 @@
+{
+  "base_overlay_tree_sha256": "257ece142f63263962d341291d3c69c7eb0d8e5454fa8a3648fc072a38fe8809",
+  "case_count": 7,
+  "cases": [
+    {
+      "case": "public-listener-term-deletion",
+      "expected_gate": "candidate public row/rebased stream mismatch",
+      "mutated_tree_sha256": "c012782bb38b3df7cadcca8bc2e921ef815e9ad4703b6072c908d1e66b14c263",
+      "observed_gate": "candidate public row/rebased stream mismatch",
+      "status": "PASS_MUTATION_REJECTED_BY_EXPECTED_DOMAIN_GATE"
+    },
+    {
+      "case": "frozen-source-coordinate-shift",
+      "expected_gate": "frozen source coordinate mismatch",
+      "mutated_tree_sha256": "0a50423bf3d2aad5de1b889651f3a4bc1577c864de183cb066e7d7c7af9d709f",
+      "observed_gate": "frozen source coordinate mismatch: OLAB-LISTEN-GLOSSARY-0001",
+      "status": "PASS_MUTATION_REJECTED_BY_EXPECTED_DOMAIN_GATE"
+    },
+    {
+      "case": "rebased-row-word-count",
+      "expected_gate": "rebased word count mismatch",
+      "mutated_tree_sha256": "8cf7cd71148bfbe8442ac424bf628572501726abf0af79960dd74be9fe6770f9",
+      "observed_gate": "rebased word count mismatch",
+      "status": "PASS_MUTATION_REJECTED_BY_EXPECTED_DOMAIN_GATE"
+    },
+    {
+      "case": "event-record-hash",
+      "expected_gate": "event hash mismatch",
+      "mutated_tree_sha256": "0e1b28f1dcb4b3609adbfbd77b7c09079734d068ae6356636f0af36b89c7f6d4",
+      "observed_gate": "event hash mismatch",
+      "status": "PASS_MUTATION_REJECTED_BY_EXPECTED_DOMAIN_GATE"
+    },
+    {
+      "case": "binding-coordinate",
+      "expected_gate": "binding coordinate translation mismatch",
+      "mutated_tree_sha256": "51aa5d0bf39121912971f503055b723dd0336a2385a35edb1ae228a0d53e0aa6",
+      "observed_gate": "binding coordinate translation mismatch: ordered_formula_bindings",
+      "status": "PASS_MUTATION_REJECTED_BY_EXPECTED_DOMAIN_GATE"
+    },
+    {
+      "case": "receipt-repair-count",
+      "expected_gate": "repair cardinality mismatch",
+      "mutated_tree_sha256": "1edc99383311e86b852ec1278221a77e22f82468214bbf8faac435613e75d43d",
+      "observed_gate": "repair cardinality mismatch",
+      "status": "PASS_MUTATION_REJECTED_BY_EXPECTED_DOMAIN_GATE"
+    },
+    {
+      "case": "undeclared-overlay-file",
+      "expected_gate": "sparse overlay file cardinality mismatch",
+      "mutated_tree_sha256": "c942ab9614116ce61778fd8e72c4381e38382a0aca9a67f7a1b6826b2f3b0bb1",
+      "observed_gate": "sparse overlay file cardinality mismatch",
+      "status": "PASS_MUTATION_REJECTED_BY_EXPECTED_DOMAIN_GATE"
+    }
+  ],
+  "schema": "openlogic-listener-glossary-overlay-mutation-receipt-v1",
+  "status": "PASS_ALL_TARGETED_MUTATIONS_REJECTED_BY_EXPECTED_DOMAIN_GATES",
+  "test_program_sha256": "26c629d08bf5ae0e04d39dade7bc1c5fb5f7f32561c3f1dc14d276a3b7fce24f"
+}

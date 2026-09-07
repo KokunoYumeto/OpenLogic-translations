@@ -1,0 +1,586 @@
+FILE: content/first-order-logic/models-theories/models-theories.tex
+   1: % Part: first-order-logic
+   2: % Chapter: models-theories
+   3: 
+   4: \documentclass[../../../include/open-logic-chapter]{subfiles}
+   5: 
+   6: \begin{document}
+   7: 
+   8: \olchapter{fol}{mat}{Theories and Their Models}
+   9: 
+  10: \olimport{introduction}
+  11: 
+  12: \olimport{expressing-props-of-structures}
+  13: 
+  14: \olimport{theories}
+  15: 
+  16: \olimport{expressing-relations}
+  17: 
+  18: \olimport{set-theory}
+  19: 
+  20: \olimport{size-of-structures}
+  21: 
+  22: \OLEndChapterHook
+  23: 
+  24: \end{document}
+
+FILE: content/first-order-logic/models-theories/introduction.tex
+   1: % Part: first-order-logic
+   2: % Chapter: models-theories
+   3: % Section: introduction
+   4: 
+   5: \documentclass[../../../include/open-logic-section]{subfiles}
+   6: 
+   7: \begin{document}
+   8: 
+   9: \olfileid{fol}{mat}{int}
+  10: \olsection{Introduction}
+  11: 
+  12: \begin{explain}
+  13: The development of the axiomatic method is a significant achievement
+  14: in the history of science, and is of special importance in the history
+  15: of mathematics.  An axiomatic development of a field involves the
+  16: clarification of many questions: What is the field about?  What are the
+  17: most fundamental concepts?  How are they related?  Can all the
+  18: concepts of the field be defined in terms of these fundamental
+  19: concepts?  What laws do, and must, these concepts obey?
+  20: 
+  21: The axiomatic method and logic were made for each other.  Formal logic
+  22: provides the tools for formulating axiomatic theories, for proving
+  23: theorems from the axioms of the theory in a precisely specified way,
+  24: for studying the properties of all systems satisfying the axioms in a
+  25: systematic way.
+  26: \end{explain}
+  27: 
+  28: \begin{defn}
+  29: A set of !!{sentence}s~⟦Gamma⟧ is \emph{closed} iff, whenever
+  30: ⟦Gamma semantically entails A⟧ then ⟦A belongs to Gamma⟧.  The \emph{closure} of a set
+  31: of !!{sentence}s~⟦Gamma⟧ is ⟦the set of all A such that Gamma semantically entails A⟧.
+  32: 
+  33: We say that~⟦Gamma⟧ is \emph{axiomatized by} a set of
+  34: sentences~⟦Delta⟧ if ⟦Gamma⟧ is the closure of~⟦Delta⟧.
+  35: \end{defn}
+  36: 
+  37: \begin{explain}
+  38: We can think of an axiomatic theory as the set of sentences that is
+  39: axiomatized by its set of axioms~⟦Delta⟧.  In other words, when we
+  40: have a first-order language which contains non-logical symbols for the
+  41: primitives of the axiomatically developed science we wish to study,
+  42: together with a set of !!{sentence}s that express the fundamental laws
+  43: of the science, we can think of the theory as represented by all the
+  44: !!{sentence}s in this language that are entailed by the axioms.  This
+  45: ranges from simple examples with only a single primitive and
+  46: simple axioms, such as the theory of partial orders, to complex
+  47: theories such as Newtonian mechanics.
+  48: 
+  49: The important logical facts that make this formal approach to the
+  50: axiomatic method so important are the following.  Suppose ⟦Gamma⟧ is
+  51: an axiom system for a theory, i.e., a set of sentences.
+  52: \begin{enumerate}
+  53: \item We can state precisely when an axiom system captures an intended
+  54:   class of !!{structure}s.  That is, if we are interested in a certain
+  55:   class of !!{structure}s, we will successfully capture that class by
+  56:   an axiom system~⟦Gamma⟧ iff the !!{structure}s are exactly
+  57:   those~⟦structure M⟧ such that ⟦structure M satisfies Gamma⟧.
+  58: \item We may fail in this respect because there are ⟦structure M⟧ such
+  59:   that ⟦structure M satisfies Gamma⟧, but ⟦structure M⟧ is not one of the
+  60:   !!{structure}s we intend.  This may lead us to add axioms which are
+  61:   not true in~⟦structure M⟧.
+  62: \item If we are successful at least in the respect that ⟦Gamma⟧ is
+  63:   true in all the intended !!{structure}s, then a sentence~⟦A⟧ is true in
+  64:   all intended !!{structure}s whenever ⟦Gamma semantically entails A⟧.  Thus we can
+  65:   use logical tools (such as !!{derivation} methods) to show that sentences are
+  66:   true in all intended !!{structure}s simply by showing that they are
+  67:   entailed by the axioms.
+  68: \item Sometimes we don't have intended !!{structure}s in mind, but instead
+  69:   start from the axioms themselves: we begin with some primitives that
+  70:   we want to satisfy certain laws which we codify in an axiom system.
+  71:   One thing that we would like to verify right away is that the axioms
+  72:   do not contradict each other: if they do, there can be no concepts
+  73:   that obey these laws, and we have tried to set up an incoherent
+  74:   theory.  We can verify that this doesn't happen by finding a model
+  75:   of~⟦Gamma⟧.  And if there are models of our theory, we can use
+  76:   logical methods to investigate them, and we can also use logical
+  77:   methods to construct models.
+  78: \item The independence of the axioms is likewise an important
+  79:   question.  It may happen that one of the axioms is actually a
+  80:   consequence of the others, and so is redundant.  We can prove that
+  81:   an axiom ⟦A⟧ in ⟦Gamma⟧ is redundant by proving ⟦Gamma without A semantically entails A⟧.  We can also prove that an axiom is not
+  82:   redundant by showing that ⟦Gamma without A together with not A⟧ is satisfiable.  For instance, this is how it was shown that the
+  83:   parallel postulate is independent of the other axioms of geometry.
+  84: \item Another important question is that of definability of concepts
+  85:   in a theory: The choice of the language determines what the models
+  86:   of a theory consist of.  But not every aspect of a theory must be
+  87:   represented separately in its models.  For instance, every ordering
+  88:   ⟦less than or equal to⟧ determines a corresponding strict ordering~⟦less than⟧---given one, we
+  89:   can define the other.  So it is not necessary that a model of a
+  90:   theory involving such an order must \emph{also} contain the
+  91:   corresponding strict ordering.  When is it the case, in general,
+  92:   that one relation can be defined in terms of others?  When is it
+  93:   impossible to define a relation in terms of others (and hence must
+  94:   add it to the primitives of the language)?
+  95: \end{enumerate}
+  96: \end{explain}
+  97: 
+  98: 
+  99: \end{document}
+
+FILE: content/first-order-logic/models-theories/expressing-props-of-structures.tex
+   1: % Part: first-order-logic
+   2: % Chapter: models-theories
+   3: % Section: expressing-props-of-structures
+   4: 
+   5: \documentclass[../../../include/open-logic-section]{subfiles}
+   6: 
+   7: \begin{document}
+   8: 
+   9: \olfileid{fol}{mat}{exs}
+  10: 
+  11: \olsection{Expressing Properties of \printtoken{P}{structure}}
+  12: 
+  13: \begin{explain}
+  14: It is often useful and important to express conditions on
+  15: functions and relations, or more generally, that the functions and
+  16: relations in a structure satisfy these conditions.  For instance, we
+  17: would like to have ways of distinguishing those !!{structure}s for a
+  18: language which ``capture'' what we want the !!{predicate}s to ``mean''
+  19: from those that do not.  Of course we're completely free to specify
+  20: which !!{structure}s we ``intend,'' e.g., we can specify that the
+  21: interpretation of the !!{predicate}~⟦less than or equal to⟧ must be an ordering, or that
+  22: we are only interested in interpretations of~⟦language L⟧ in which the
+  23: domain consists of sets and ⟦object language membership predicate⟧ is interpreted by the ``is
+  24: !!a{element} of'' relation.  But can we do this with !!{sentence}s of
+  25: the language?  In other words, which conditions on
+  26: !!a{structure}~⟦M⟧ can we express by !!a{sentence} (or perhaps
+  27: a set of !!{sentence}s) in the language of~⟦structure M⟧?  There are
+  28: some conditions that we will not be able to express.  For instance,
+  29: there is no sentence of~⟦the language of arithmetic⟧ which is only true in a
+  30: !!{structure}~⟦M⟧ if ⟦the domain of structure M equals the natural numbers⟧.  We cannot express
+  31: ``the domain contains only natural numbers.''  But there are
+  32: ``structural properties'' of !!{structure}s that we perhaps can
+  33: express.  Which properties of !!{structure}s can we express by
+  34: !!{sentence}s?  Or, to put it another way, which collections of
+  35: !!{structure}s can we describe as those making !!a{sentence} (or set
+  36: of !!{sentence}s) true?
+  37: \end{explain}
+  38: 
+  39: \begin{defn}[Model of a set]
+  40: Let ⟦Gamma⟧ be a set of !!{sentence}s in a language~⟦L⟧.  We
+  41: say that !!a{structure}~⟦M⟧ \emph{is a model of}~⟦Gamma⟧ if
+  42: ⟦structure M satisfies A⟧ for all ⟦A in Gamma⟧.
+  43: \end{defn}
+  44: 
+  45: \begin{ex}
+  46: The sentence ⟦for every x, x is less than or equal to itself⟧ is true in~⟦structure M⟧ iff
+  47: ⟦the interpretation of less than or equal to in structure M⟧ is a reflexive relation.  The sentence
+  48: ⟦for every x and y, if x is less than or equal to y and y is less than or equal to x, then x equals y⟧ is
+  49: true in~⟦structure M⟧ iff ⟦the interpretation of less than or equal to in structure M⟧ is anti-symmetric.  The
+  50: sentence ⟦for all x y and z, if x is less than or equal to y and y is less than or equal to z, then x is less than or equal to z⟧ is true in~⟦structure M⟧ iff ⟦the interpretation of less than or equal to in structure M⟧
+  51: is transitive.  Thus, the models of
+  52: ⟦the three axioms of reflexivity antisymmetry and transitivity for less than or equal to⟧
+  53: are exactly those structures in which~⟦the interpretation of less than or equal to in structure M⟧ is reflexive,
+  54: anti-symmetric, and transitive, i.e., a partial order.  Hence, we can take
+  55: them as axioms for the \emph{first-order theory of partial orders}.
+  56: \end{ex}
+  57: 
+  58: \end{document}
+
+FILE: content/first-order-logic/models-theories/theories.tex
+   1: % Part: first-order-logic
+   2: % Chapter: models-theories
+   3: % Section: theories
+   4: 
+   5: \documentclass[../../../include/open-logic-section]{subfiles}
+   6: 
+   7: \begin{document}
+   8: 
+   9: \olfileid{fol}{mat}{the}
+  10: 
+  11: \olsection{Examples of First-Order Theories}
+  12: 
+  13: \begin{ex}
+  14: The theory of strict linear orders in the language~⟦with less than⟧ is
+  15: axiomatized by the set
+  16: ⟦consisting of the following three axioms: less than is irreflexive, total on distinct objects, and transitive⟧
+  17: It completely captures the intended !!{structure}s: every strict
+  18: linear order is a model of this axiom system, and vice versa, if ⟦relation R⟧
+  19: is a linear order on a set ⟦X⟧, then the structure ⟦M⟧ with
+  20: ⟦underlying domain X⟧ and ⟦less than interpreted as R⟧ is a model of this theory.
+  21: \end{ex}
+  22: 
+  23: \begin{ex}
+  24: The theory of groups in the language ⟦object language constant one⟧ (!!{constant}), ⟦multiplication⟧
+  25: (two-place !!{function}) is axiomatized by
+  26: ⟦first, every x times one equals x; second, multiplication is associative; third, for every x there is a y such that x times y equals one⟧
+  27: \end{ex}
+  28: 
+  29: \begin{ex}
+  30: The theory of Peano arithmetic is axiomatized by the following
+  31: sentences in the language of arithmetic~⟦denoted L sub A⟧.
+  32: ⟦successor is injective and never zero; addition and multiplication obey their recursive equations; less than has a positive difference; and every formula has its induction instance⟧
+  33: Since there are infinitely many sentences of the latter form, this
+  34: axiom system is infinite.  The latter form is called the
+  35: \emph{induction schema}. (Actually, the induction schema is a bit more
+  36: complicated than we let on here.)
+  37: 
+  38: The last axiom is an \emph{explicit definition} of~⟦less than⟧.
+  39: \end{ex}
+  40: 
+  41: \begin{ex}
+  42: The theory of pure sets plays an important role in the foundations
+  43: (and in the philosophy) of mathematics.  A set is pure if all its
+  44: !!{element}s are also pure sets.  The empty set counts therefore as
+  45: pure, but a set that has something as !!a{element} that is not a set
+  46: would not be pure.  So the pure sets are those that are formed just
+  47: from the empty set and no ``urelements,'' i.e., objects that are not
+  48: themselves sets.
+  49: 
+  50: The following might be considered as an axiom system for a theory of
+  51: pure sets:
+  52: ⟦there is an empty set; sets with the same elements are equal; pair sets and unions exist; and every property has a comprehension set⟧
+  53: The first axiom says that there is a set with no !!{element}s (i.e.,
+  54: ⟦the empty set⟧ exists); the second says that sets are extensional; the
+  55: third that for any sets ⟦X⟧ and ⟦Y⟧, the set ⟦containing X and Y⟧ exists; the
+  56: fourth that for any set ⟦X⟧, the set ⟦denoted by union X⟧ exists, where ⟦the union of X⟧ is the 
+  57: union of all the elements of ⟦set X⟧.
+  58: 
+  59: The !!{sentence}s mentioned last are collectively called the
+  60: \emph{naive comprehension scheme}.  It essentially says that for every
+  61: ⟦formula A of x⟧, the set ⟦of all x for which A of x holds⟧ exists---so at first glance a
+  62: true, useful, and perhaps even necessary axiom.  It is called ``naive''
+  63: because, as it turns out, it makes this theory unsatisfiable: if you
+  64: take ⟦formula A of y⟧ to be ⟦y is not an element of itself⟧, you get the !!{sentence}
+  65: ⟦there exists a set x containing exactly the y that are not elements of themselves⟧
+  66: and this !!{sentence} is not satisfied in any !!{structure}.
+  67: \end{ex}
+  68: 
+  69: \begin{ex}
+  70: In the area of \emph{mereology}, the relation of \emph{parthood} is a
+  71: fundamental relation.  Just like theories of sets, there are theories
+  72: of parthood that axiomatize various conceptions (sometimes
+  73: conflicting) of this relation.
+  74: 
+  75: The language of mereology contains a single two-place predicate
+  76: symbol~⟦object language P⟧, and ⟦predicate P applied to x and y⟧ ``means'' that ⟦x⟧ is a
+  77: part of~⟦y⟧.  When we have this interpretation in mind, !!a{structure}
+  78: for this language is called a \emph{parthood structure}.  Of course,
+  79: not every structure for a single two-place predicate will really
+  80: deserve this name.  To have a chance of capturing ``parthood,''
+  81: ⟦the interpretation of predicate P in structure M⟧ must satisfy some conditions, which we can lay
+  82: down as axioms for a theory of parthood.  For instance, parthood is a
+  83: partial order on objects: every object is a part (albeit an
+  84: \emph{improper} part) of itself; no two different objects can be parts
+  85: of each other; a part of a part of an object is itself part of that
+  86: object.  Note that in this sense ``is a part of'' resembles ``is a
+  87: subset of,'' but does not resemble ``is an element of'' which is
+  88: neither reflexive nor transitive.
+  89: ⟦parthood is reflexive antisymmetric and transitive, and every two objects have a least common whole⟧
+  90: These are only some of the basic principles of parthood considered by
+  91: metaphysicians.  Further principles, however, quickly become hard to
+  92: formulate or write down without first introducing some defined
+  93: relations.  For instance, most metaphysicians interested in mereology
+  94: also view the following as a valid principle: whenever an
+  95: object~⟦x⟧ has a proper part~⟦y⟧, it also has a part~⟦z⟧ that has no
+  96: parts in common with~⟦y⟧, and so that the fusion of ⟦y⟧ and ⟦z⟧ is
+  97: ⟦x⟧.
+  98: \end{ex}
+  99: 
+ 100: \end{document}
+
+FILE: content/first-order-logic/models-theories/expressing-relations.tex
+   1: % Part: first-order-logic
+   2: % Chapter: models-theories
+   3: % Section: expressing-relations
+   4: 
+   5: \documentclass[../../../include/open-logic-section]{subfiles}
+   6: 
+   7: \begin{document}
+   8: 
+   9: \olfileid{fol}{mat}{exr}
+  10: 
+  11: \olsection{Expressing Relations in \article{structure}
+  12:   \printtoken{S}{structure}}
+  13: 
+  14: \begin{explain}
+  15: One main use !!{formula}s can be put to is to express properties and
+  16: relations in !!a{structure}~⟦M⟧ in terms of the primitives of
+  17: the language~⟦L⟧ of~⟦structure M⟧.  By this we mean the following:
+  18: the !!{domain} of ⟦structure M⟧ is a set of objects.  The !!{constant}s,
+  19: !!{function}s, and !!{predicate}s are interpreted in~⟦structure M⟧ by
+  20: some objects in~⟦the domain of structure M⟧, functions on~⟦the domain of structure M⟧, and relations
+  21: on~⟦the domain of structure M⟧.  For instance, if ⟦object language predicate A superscript two sub zero⟧ is in ⟦language L⟧, then
+  22: ⟦structure M⟧ assigns to it a relation~⟦R equals the interpretation of predicate A superscript two sub zero in structure M⟧. Then the formula ⟦A superscript two sub zero applied to object language v sub one and object language v sub two⟧
+  23: \emph{expresses} that very relation, in the following sense: if a
+  24: variable assignment~⟦s⟧ maps ⟦object language variable v sub one⟧ to ⟦a in the domain of structure M⟧ and
+  25: ⟦object language variable v sub two⟧ to ⟦b in the domain of structure M⟧, then
+  26: ⟦R holds of a and b if and only if structure M under assignment s satisfies predicate A superscript two sub zero of v sub one and v sub two⟧
+  27: Note that we have to involve variable assignments here: we can't just
+  28: say ``⟦R holds of a and b⟧ iff ⟦the deliberately invalid notation structure M satisfies predicate A superscript two sub zero applied to domain elements a and b⟧'' because ⟦a⟧ and
+  29:   ⟦b⟧ are not symbols of our language: they are !!{element}s
+  30:   of~⟦the domain of structure M⟧.
+  31: 
+  32: Since we don't just have atomic !!{formula}s, but can combine them
+  33: using the logical connectives and the quantifiers, more complex
+  34: !!{formula}s can define other relations which aren't directly built
+  35: into~⟦structure M⟧.  We're interested in how to do that, and
+  36: specifically, which relations we can define in !!a{structure}.
+  37: \end{explain}
+  38: 
+  39: \begin{defn}
+  40: Let ⟦formula A with free variables v sub one through v sub n⟧ be !!a{formula} of ⟦language L⟧ in
+  41: which only ⟦object language variable v sub one⟧,\dots, ⟦object language variable v sub n⟧ occur free, and let ⟦structure M⟧ be !!a{structure} for~⟦language L⟧. ⟦formula A with free variables v sub one through v sub n⟧
+  42: \emph{expresses the relation}~⟦R contained in the n fold Cartesian power of the domain of M⟧ iff
+  43: ⟦R holds of a sub one through a sub n if and only if structure M under assignment s satisfies A of v sub one through v sub n⟧
+  44: for any variable assignment~⟦s⟧ with ⟦s mapping object language v sub i to a sub i⟧ (⟦i ranges from one through n⟧).
+  45: \end{defn}
+  46: 
+  47: \begin{ex}
+  48: In the standard model of arithmetic~⟦structure N⟧, the !!{formula} ⟦object language v sub one is less than v sub two or equals v sub two⟧ expresses the ⟦less than or equal to⟧
+  49: relation on~⟦the natural numbers⟧. The !!{formula} ⟦object language v sub two equals the successor of object language v sub one⟧
+  50: expresses the successor relation, i.e., the relation ⟦R contained in the Cartesian square of the natural numbers⟧ where ⟦R of n comma m⟧ holds if ⟦m⟧ is the successor of~⟦n⟧. The formula
+  51: ⟦object language v sub one equals the successor of object language v sub two⟧ expresses the predecessor relation.  The
+  52: !!{formula}s ⟦there exists object language v sub three not equal to zero such that v sub two equals v sub one plus v sub three⟧ and ⟦there exists object language v sub three such that v sub one plus the successor of v sub three equals v sub two⟧ both express the ⟦object language less than⟧
+  53: relation.  This means that the predicate symbol~⟦less than⟧ is actually
+  54: superfluous in the language of arithmetic; it can be defined.
+  55: \end{ex}
+  56: 
+  57: \begin{explain}
+  58: This idea is not just interesting in specific !!{structure}s, but
+  59: generally whenever we use a language to describe an intended model or
+  60: models, i.e., when we consider theories.  These theories often only
+  61: contain a few !!{predicate}s as basic symbols, but in the domain they
+  62: are used to describe often many other relations play an important
+  63: role.  If these other relations can be systematically expressed by the
+  64: relations that interpret the basic !!{predicate}s of the language, we
+  65: say we can \emph{define} them in the language.
+  66: \end{explain}
+  67: 
+  68: \begin{prob}
+  69: Find !!{formula}s in ⟦the language of arithmetic⟧ which define the following relations:
+  70: \begin{enumerate}
+  71: \item ⟦n⟧ is between ⟦i⟧ and ⟦j⟧;
+  72: \item ⟦n⟧ evenly divides ⟦m⟧ (i.e., ⟦m⟧ is a multiple of ⟦n⟧);
+  73: \item ⟦n⟧ is a prime number (i.e., no number other than ⟦one⟧ and ⟦n⟧ evenly
+  74:   divides~⟦n⟧).
+  75: \end{enumerate}
+  76: \end{prob}
+  77: 
+  78: \begin{prob}
+  79: Suppose the formula ⟦A with free variables v sub one and v sub two⟧ expresses the relation ⟦R contained in the Cartesian square of the domain of M⟧ in !!a{structure}~⟦M⟧.  Find formulas
+  80: that express the following relations:
+  81: \begin{enumerate}
+  82: \item the inverse ⟦R superscript minus one⟧ of ⟦relation R⟧;
+  83: \item the relative product ⟦R composed with R⟧;
+  84: \end{enumerate}
+  85: Can you find a way to express ⟦R superscript plus⟧, the transitive closure of~⟦relation R⟧?
+  86: \end{prob}
+  87: 
+  88: \begin{prob}
+  89: Let ⟦language L⟧ be the language containing a 2-place predicate symbol
+  90: ⟦less than⟧ only (no other !!{constant}s, !!{function}s or !!{predicate}s---
+  91: except of course~⟦identity⟧). Let ⟦structure N⟧ be the structure such that
+  92: ⟦the domain of structure N equals the natural numbers⟧, and ⟦structure N interprets less than as the set of pairs n comma m for which n is less than m⟧. Prove the following:
+  93: \begin{enumerate}
+  94: \item ⟦the singleton containing zero⟧ is definable in ⟦structure N⟧;
+  95: \item ⟦the singleton containing one⟧ is definable in ⟦structure N⟧;
+  96: \item ⟦the singleton containing two⟧ is definable in ⟦structure N⟧;
+  97: \item for each ⟦n in the natural numbers⟧, the set ⟦containing only n⟧ is definable in
+  98:   ⟦structure N⟧;
+  99: \item every finite subset of ⟦the domain of structure N⟧ is definable in
+ 100:   ⟦structure N⟧;
+ 101: \item every co-finite subset of ⟦the domain of structure N⟧ is definable in
+ 102:   ⟦structure N⟧ (where ⟦X, a subset of the natural numbers,⟧ is co-finite iff
+ 103:   ⟦the natural numbers outside X⟧ is finite).
+ 104: \end{enumerate}
+ 105: \end{prob}
+ 106: 
+ 107: 
+ 108: \end{document}
+
+FILE: content/first-order-logic/models-theories/set-theory.tex
+   1: % Part: first-order-logic
+   2: % Chapter: models-theories
+   3: % Section: set-theory
+   4: 
+   5: \documentclass[../../../include/open-logic-section]{subfiles}
+   6: 
+   7: \begin{document}
+   8: 
+   9: \olfileid{fol}{mat}{set}
+  10: 
+  11: \olsection{The Theory of Sets}
+  12: 
+  13: Almost all of mathematics can be developed in the theory of sets.
+  14: Developing mathematics in this theory involves a number of things.
+  15: First, it requires a set of axioms for the relation~⟦membership⟧.  A number
+  16: of different axiom systems have been developed, sometimes with
+  17: conflicting properties of~⟦membership⟧.  The axiom system known as
+  18: ⟦Z F C⟧, Zermelo--Fraenkel set theory with the axiom of choice
+  19: stands out: it is by far the most widely used and studied, because it
+  20: turns out that its axioms suffice to prove almost all the things
+  21: mathematicians expect to be able to prove.  But before that can be
+  22: established, it first is necessary to make clear how we can even
+  23: \emph{express} all the things mathematicians would like to express.
+  24: For starters, the language contains no !!{constant}s or !!{function}s,
+  25: so it seems at first glance unclear that we can talk about particular
+  26: sets (such as ⟦the empty set⟧ or ⟦the natural numbers⟧), can talk about operations on
+  27: sets (such as ⟦the union of X and Y⟧ and ⟦the power set of X⟧), let alone other
+  28: constructions which involve things other than sets, such as relations
+  29: and functions.
+  30: 
+  31: To begin with, ``is an element of'' is not the only relation we are
+  32: interested in: ``is a subset of'' seems almost as important.  But we
+  33: can \emph{define} ``is a subset of'' in terms of ``is an element of.''
+  34: To do this, we have to find !!a{formula}~⟦A with free variables x and y⟧ in
+  35: the language of set theory which is satisfied by a pair of
+  36: sets~⟦X comma Y, in that order⟧ iff ⟦X is a subset of Y⟧.  But ⟦set X⟧ is a subset of ⟦set Y⟧
+  37: just in case all !!{element}s of~⟦set X⟧ are also !!{element}s of~⟦set Y⟧.  So
+  38: we can define ⟦the subset relation⟧ by the formula
+  39: ⟦for every z, if z is an element of x then z is an element of y⟧
+  40: Now, whenever we want to use the relation~⟦called subset inclusion⟧ in a formula, we
+  41: could instead use that formula (with ⟦x⟧ and ⟦y⟧ suitably replaced,
+  42: and the bound variable~⟦z⟧ renamed if necessary).  For instance,
+  43: extensionality of sets means that if any sets~⟦x⟧ and ⟦y⟧ are
+  44: contained in each other, then ⟦x⟧ and ⟦y⟧ must be the same set. This
+  45: can be expressed by ⟦for every x and y, if x is a subset of y and y is a subset of x, then x equals y⟧, or, if we replace ⟦the subset relation⟧ by the
+  46: above definition, by
+  47: ⟦for every x and y, if every element of x is in y and every element of y is in x, then x equals y⟧
+  48: This is in fact one of the axioms of ⟦Z F C⟧, the ``axiom of
+  49: extensionality.''
+  50: 
+  51: There is no !!{constant} for ⟦the empty set⟧, but we can express ``⟦x⟧ is
+  52: empty'' by ⟦there is no y that is an element of x⟧.  Then ``⟦the empty set⟧ exists''
+  53: becomes the !!{sentence}~⟦there exists an x with no elements⟧. This is another axiom of~⟦Z F C⟧.  (Note that the axiom
+  54: of extensionality implies that there is only one empty set.)  Whenever
+  55: we want to talk about ⟦the empty set⟧ in the language of set theory, we
+  56: would write this as ``there is a set that's empty and \dots'' As an
+  57: example, to express the fact that ⟦the empty set⟧ is a subset of every
+  58: set, we could write
+  59: ⟦there exists an empty x that is a subset of every z⟧
+  60: where, of course, ⟦x is a subset of z⟧ would in turn have to be replaced by
+  61: its definition.
+  62: 
+  63: To talk about operations on sets, such as ⟦the union of X and Y⟧ and ⟦the power set of X⟧, we
+  64: have to use a similar trick.  There are no function symbols in the
+  65: language of set theory, but we can express the functional relations ⟦the union of X and Y equals Z⟧ and ⟦the power set of X equals Y⟧ by
+  66: ⟦u belongs to z exactly when it belongs to x or y, and u belongs to y exactly when it is a subset of x⟧
+  67: since the !!{element}s of ⟦the union of X and Y⟧ are exactly the sets that are
+  68: either !!{element}s of~⟦set X⟧ or !!{element}s of~⟦set Y⟧, and the
+  69: !!{element}s of ⟦the power set of X⟧ are exactly the subsets of~⟦set X⟧.  However,
+  70: this doesn't allow us to use ⟦the union of x and y⟧ or ⟦the power set of x⟧ as if they were
+  71: terms: we can only use the entire !!{formula}s that define the
+  72: relations ⟦the union of X and Y equals Z⟧ and ⟦the power set of X equals Y⟧. In fact, we do not know
+  73: that these relations are ever satisfied, i.e., we do not know that
+  74: unions and power sets always exist. For instance, the !!{sentence}
+  75: ⟦for every x there exists a y equal to the power set of x⟧ is another axiom
+  76: of~⟦Z F C⟧ (the power set axiom).
+  77: 
+  78: Now what about talk of ordered pairs or functions?  Here we have to
+  79: explain how we can think of ordered pairs and functions as special
+  80: kinds of sets.  One way to define the ordered pair ⟦x comma y⟧ is
+  81: as the set ⟦containing the singleton of x and the pair set of x and y⟧.  But like before, we cannot
+  82: introduce !!a{function} that names this set; we can only define the
+  83: relation ⟦the ordered pair x comma y equals z⟧, i.e., ⟦the set containing the singleton of x and the pair set of x and y equals z⟧:
+  84: ⟦for every u, u belongs to z if and only if u is the singleton of x or the pair set of x and y⟧
+  85: This says that the !!{element}s~⟦u⟧ of~⟦z⟧ are exactly those sets which
+  86: either have ⟦x⟧ as its only !!{element} or have ⟦x⟧ and~⟦y⟧ as its
+  87: only !!{element}s (in other words, those sets that are either identical
+  88: to ⟦the singleton containing x⟧ or identical to ⟦the set containing x and y⟧).  Once we have this, we can say
+  89: further things, e.g., that ⟦the Cartesian product of X and Y equals Z⟧:
+  90: ⟦for every z, z belongs to Z exactly when it is an ordered pair of an x in X and a y in Y⟧
+  91: 
+  92: A function ⟦f from X to Y⟧ can be thought of as the relation ⟦f of x equals y⟧, i.e., as the set of pairs~⟦x comma y for which f of x equals y⟧. We
+  93: can then say that a set~⟦f⟧ is a function from ⟦set X⟧ to ⟦set Y⟧ if (a) it is
+  94: a relation ⟦contained in X cross Y⟧, (b) it is total, i.e., for all ⟦x in X⟧ there is some ⟦y in Y⟧ such that ⟦the ordered pair x comma y is an element of f⟧ and (c)
+  95: it is functional, i.e., whenever ⟦the pairs x comma y and x comma y prime belong to f⟧,
+  96: ⟦y equals y prime⟧ (because values of functions must be unique). So ``⟦f⟧ is a
+  97: function from ⟦set X⟧ to ⟦set Y⟧'' can be written as:
+  98: ⟦every member of f codes a pair from X and Y, every x in X has a mapped y in Y, and mapped values are unique⟧
+  99: where ⟦f maps x to y⟧ abbreviates ⟦there exists a v in f equal to the ordered pair x comma y⟧ (this !!{formula} expresses ``⟦f of x equals y⟧'').
+ 100: 
+ 101: It is now also not hard to express that ⟦f from X to Y⟧ is
+ 102: !!{injective}, for instance:
+ 103: ⟦f is a function from X to Y and any two members of X mapped to one y are equal⟧
+ 104: A function~⟦f from X to Y⟧ is !!{injective} iff, whenever ⟦f⟧ maps ⟦x and x prime in X⟧ to a single~⟦y⟧, ⟦x equals x prime⟧.  If we abbreviate this formula as
+ 105: ⟦f is an injection from X to Y⟧, we're already in a position to state in the
+ 106: language of set theory something as non-trivial as Cantor's theorem:
+ 107: there is no !!{injective} function from ⟦the power set of X⟧ to ⟦set X⟧:
+ 108: ⟦for every X and Y, if Y is the power set of X, then there is no injection from Y into X⟧
+ 109: 
+ 110: One might think that set theory requires another axiom that guarantees
+ 111: the existence of a set for every defining property. If ⟦formula A of x⟧ is a
+ 112: formula of set theory with the variable~⟦x⟧ free, we can consider the
+ 113: !!{sentence}
+ 114: ⟦there exists a set y containing exactly the x for which A of x holds⟧
+ 115: This !!{sentence} states that there is a set~⟦y⟧ whose !!{element}s
+ 116: are all and only those ⟦x⟧ that satisfy~⟦formula A of x⟧. This schema is called
+ 117: the ``comprehension principle.''  It looks very useful; unfortunately
+ 118: it is inconsistent.  Take ⟦formula A of x is defined as x is not an element of itself⟧, then the
+ 119: comprehension principle states
+ 120: ⟦there exists a set y containing exactly the x that are not elements of themselves⟧
+ 121: i.e., it states the existence of a set of all sets that are not
+ 122: !!{element}s of themselves. No such set can exist---this is Russell's
+ 123: Paradox.  ⟦Z F C⟧, in fact, contains a restricted---and
+ 124: consistent---version of this principle, the separation principle:
+ 125: ⟦for every z there exists a y containing exactly those x in z for which A of x holds⟧
+ 126: 
+ 127: \begin{prob}
+ 128: Show that the comprehension principle is inconsistent by giving
+ 129: !!a{derivation} that shows
+ 130: ⟦the Russell comprehension sentence derives contradiction⟧
+ 131: It may help to first show ⟦A implies not A and not A implies A together derive contradiction⟧.
+ 132: \end{prob}
+ 133: \end{document}
+
+FILE: content/first-order-logic/models-theories/size-of-structures.tex
+   1: % Part: first-order-logic
+   2: % Chapter: models-theories
+   3: % Section: size-of-structures
+   4: 
+   5: \documentclass[../../../include/open-logic-section]{subfiles}
+   6: 
+   7: \begin{document}
+   8: 
+   9: \olfileid{fol}{mat}{siz}
+  10: 
+  11: \olsection{Expressing the Size of \printtoken{P}{structure}}
+  12: 
+  13: \begin{explain}
+  14: There are some properties of structures we can express even without
+  15: using the non-logical symbols of a language.  For instance, there are
+  16: !!{sentence}s which are true in !!a{structure} iff the !!{domain} of
+  17: the !!{structure} has at least, at most, or exactly a certain
+  18: number~⟦n⟧ of !!{element}s.
+  19: \end{explain}
+  20: 
+  21: \begin{prop}
+  22: The !!{sentence}
+  23: ⟦A sub at least n says that there exist n pairwise distinct objects⟧
+  24: is true in !!a{structure}~⟦M⟧ iff ⟦the domain of structure M⟧ contains at
+  25: least ⟦n⟧ !!{element}s. Consequently, ⟦structure M satisfies the negation of A sub at least n plus one⟧ iff
+  26: ⟦the domain of structure M⟧ contains at most~⟦n⟧ !!{element}s.
+  27: 
+  28: \end{prop}
+  29: 
+  30: \begin{prop}
+  31: The !!{sentence}
+  32: ⟦A sub exactly n says that there exist n pairwise distinct objects and every object equals one of them⟧
+  33: is true in !!a{structure}~⟦M⟧ iff ⟦the domain of structure M⟧ contains
+  34: exactly ⟦n⟧ !!{element}s.
+  35: \end{prop}
+  36: 
+  37: \begin{prop}
+  38: A !!{structure} is infinite iff it is a model of
+  39: ⟦the set containing A sub at least one, A sub at least two, A sub at least three, and every continuation of that pattern⟧
+  40: \end{prop}
+  41: 
+  42: There is no single purely logical sentence which is true in~⟦structure M⟧ iff ⟦the domain of structure M⟧ is infinite.  However, one can give !!{sentence}s with
+  43: non-logical !!{predicate}s which only have infinite models (although
+  44: not every infinite !!{structure} is a model of them).  The property of
+  45: being a finite structure, and the property of being a
+  46: !!{nonenumerable} structure cannot even be expressed with an infinite
+  47: set of !!{sentence}s.  These facts follow from the compactness and
+  48: L\"owenheim--Skolem theorems.
+  49: 
+  50: \end{document}
+

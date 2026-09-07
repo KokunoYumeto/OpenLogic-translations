@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "spokenUnit": {
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "listen_text": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "read_html": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "read_html",
+        "listen_text"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "openlogic-accessible-chapter-package-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "chapter_key": {
+      "pattern": "^[a-z0-9-]+:[a-z0-9-]+$",
+      "type": "string"
+    },
+    "local_projection_notes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "part_key": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "projection_intervention_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema": {
+      "const": "openlogic-accessible-chapter-package-v1"
+    },
+    "sections": {
+      "minItems": 1,
+      "type": "array"
+    },
+    "source_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "sources": {
+      "minItems": 1,
+      "type": "array"
+    },
+    "title": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "tranche_id": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "tranche_id",
+    "part_key",
+    "chapter_key",
+    "title",
+    "source_commit",
+    "sources",
+    "sections",
+    "projection_intervention_ids",
+    "local_projection_notes"
+  ],
+  "title": "Open Logic accessible chapter package",
+  "type": "object"
+}

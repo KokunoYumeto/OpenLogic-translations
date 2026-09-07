@@ -1,0 +1,47 @@
+{
+  "schema": "openlogic-tr014-initial-self-audit-failures-v1",
+  "tranche_id": "OLAB-TR-014",
+  "checkpoint": "CLEAN_PREAUTHORING_BOUNDARY_BEFORE_SEMANTIC_REPAIR",
+  "result": "FAIL_EXPECTED_AUTHORING_LAYER_ABSENT",
+  "preserved": true,
+  "findings": [
+    {
+      "finding_id": "TR014-INITIAL-001",
+      "severity": "BLOCKER",
+      "detail": "No tranche-local semantic authority existed for the 112 frozen expression shapes."
+    },
+    {
+      "finding_id": "TR014-INITIAL-002",
+      "severity": "BLOCKER",
+      "detail": "No exact context-specific speech and meaning authority existed for the 335 frozen formula occurrences."
+    },
+    {
+      "finding_id": "TR014-INITIAL-003",
+      "severity": "BLOCKER",
+      "detail": "No unique full source-order continuous linearizations existed for the 21 frozen formal objects, including eight exercises that must remain unsolved."
+    },
+    {
+      "finding_id": "TR014-INITIAL-004",
+      "severity": "BLOCKER",
+      "detail": "The 69 source reference rows had no tranche-local semantic closure ledger."
+    },
+    {
+      "finding_id": "TR014-INITIAL-005",
+      "severity": "HIGH",
+      "detail": "Inherited SAR-002 and required TR014-SOURCE-PROSE-001 had review packets but were not yet bound into a producer semantic artifact."
+    }
+  ],
+  "counts_at_failure": {
+    "authored_expressions": 0,
+    "authored_occurrences": 0,
+    "authored_formal_objects": 0,
+    "closed_references": 0,
+    "closed_corrections": 0,
+    "required_expressions": 112,
+    "required_occurrences": 335,
+    "required_formal_objects": 21,
+    "required_references": 69,
+    "required_corrections": 2
+  },
+  "repair_rule": "Preserve this record verbatim; later PASS evidence must demonstrate closure without rewriting the initial failure snapshot."
+}

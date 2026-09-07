@@ -1,0 +1,768 @@
+\olchapter{pl}{axd}{Axiomatic \usetoken{P}{derivation}}
+
+\begin{editorial}
+  No effort has been made yet to ensure that the material in this
+  chapter respects various tags indicating which connectives and
+  quantifiers are primitive or defined: all are assumed to be
+  primitive, except $\liff$ which is assumed to be defined. If the FOL
+  tag is true, we produce a version with quantifiers, otherwise
+  without.
+\end{editorial}
+
+
+
+\olfileid{pl}{axd}{rul}
+
+\olsection{Rules and \usetoken{P}{derivation}}
+
+\begin{explain}
+  Axiomatic !!{derivation}s are perhaps the simplest !!{derivation} system for
+  logic. !!^a{derivation} is just a sequence of !!{formula}s.  To
+  count as !!a{derivation}, every !!{formula} in the sequence must
+  either be an instance of an axiom, or must follow from one or more
+  !!{formula}s that precede it in the sequence by a rule of inference.
+  !!^a{derivation} !!{derive}s its last !!{formula}.
+\end{explain}
+
+\begin{defn}[!!^{derivability}]
+If $\Gamma$ is a set of !!{formula}s of $\Lang L$ then a
+\emph{!!{derivation}} from~$\Gamma$ is a finite sequence $!A_1$,
+\dots,~$!A_n$ of !!{formula}s where for each $i \le n$ one of the
+following holds:
+\begin{enumerate}
+\item $!A_i \in \Gamma$; or
+\item $!A_i$ is an axiom; or
+\item $!A_i$ follows from some $!A_j$ (and $!A_k$) with $j < i$ (and
+  $k < i$) by a rule of inference.
+\end{enumerate}
+\end{defn}
+
+What counts as a correct !!{derivation} depends on which inference
+rules we allow (and of course what we take to be axioms).  And an
+inference rule is an if-then statement that tells us that, under
+certain conditions, a step~$A_i$ in !!a{derivation} is a correct
+inference step.
+
+\begin{defn}[Rule of inference]
+A \emph{rule of inference} gives a sufficient condition for what
+counts as a correct inference step in !!a{derivation} from~$\Gamma$.
+\end{defn}
+
+For instance, since any one-element sequence $!A$ with $!A \in \Gamma$
+trivially counts as !!a{derivation}, the following might be a very
+simple rule of inference:
+\begin{quote}
+  If $!A \in \Gamma$, then $!A$ is always a correct inference step in
+  any !!{derivation} from~$\Gamma$.
+\end{quote}
+Similarly, if $!A$ is one of the axioms, then $!A$ by itself is
+!!a{derivation}, and so this is also a rule of inference:
+\begin{quote}
+  If $!A$ is an axiom, then $!A$ is a correct inference step.
+\end{quote}
+It gets more interesting if the rule of inference appeals to
+!!{formula}s that appear before the step considered. The following
+rule is called \emph{modus ponens:}
+\begin{quote}
+  If $!B \lif !A$ and $!B$ occur higher up in the !!{derivation},
+  then~$!A$ is a correct inference step.
+\end{quote}
+If this is the only rule of inference, then our definition of
+!!{derivation} above amounts to this: $!A_1$, \dots,~$!A_n$ is
+!!a{derivation} iff for each $i \le n$ one of the following holds:
+\begin{enumerate}
+\item $!A_i \in \Gamma$; or
+\item $!A_i$ is an axiom; or
+\item for some $j < i$, $!A_j$ is $!B \lif !A_i$, and for some $k < i$,
+  $!A_k$ is~$!B$.
+\end{enumerate}
+The last clause says that $!A_i$ follows from~$!A_j$ ($!B \lif !A_i$) and $!A_k$
+($!B$) by modus ponens. If we can go from $1$ to~$n$, and
+each time we find !!a{formula}~$!A_i$ that is either in~$\Gamma$, an
+axiom, or which a rule of inference tells us that it is a correct
+inference step, then the entire sequence counts as a correct
+!!{derivation}.
+
+\begin{defn}[!!^{derivability}]
+A !!{formula}~$!A$ is \emph{!!{derivable}} from $\Gamma$, written
+$\Gamma \Proves !A$, if there is !!a{derivation} from $\Gamma$ ending
+in $!A$.
+\end{defn}
+
+\begin{defn}[Theorems]
+!!^a{formula}~$!A$ is a \emph{theorem} if there is !!a{derivation}
+of~$!A$ from the empty set.  We write $\Proves !A$ if $!A$ is a
+theorem and $\Proves/ !A$ if it is not.
+\end{defn}
+
+
+
+
+
+
+\olfileid{pl}{axd}{prp}
+
+\olsection{Axioms and Rules for the Propositional Connectives}
+
+\begin{defn}[Axioms]
+The set of $\PAx$ of \emph{axioms} for the propositional connectives comprises
+all !!{formula}s of the following forms:
+\begin{align}
+  & (!A \land !B) \lif !A \ollabel{ax:land1}\\
+  & (!A \land !B) \lif !B \ollabel{ax:land2}\\
+  & !A \lif (!B \lif (!A \land !B)) \ollabel{ax:land3}\\
+  & !A \lif (!A \lor !B) \ollabel{ax:lor1}\\
+  & !A \lif (!B \lor !A) \ollabel{ax:lor2}\\
+  & (!A \lif !C) \lif ((!B \lif !C) \lif ((!A \lor !B) \lif !C)) \ollabel{ax:lor3}\\
+  & !A \lif (!B \lif !A) \ollabel{ax:lif1}\\
+  & (!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C)) \ollabel{ax:lif2}\\
+  & (!A \lif !B) \lif ((!A \lif \lnot !B) \lif \lnot !A) \ollabel{ax:lnot1}\\
+  & \lnot !A \lif (!A \lif !B) \ollabel{ax:lnot2}\\
+  & \ltrue \ollabel{ax:ltrue}\\
+  & \lfalse \lif !A \ollabel{ax:lfalse1}\\
+  & (!A \lif \lfalse) \lif \lnot !A \ollabel{ax:lfalse2}\\
+  & \lnot\lnot !A \lif !A \ollabel{ax:dne}
+\end{align}
+\end{defn}
+
+\begin{defn}[Modus ponens]
+  If $!B$ and $!B \lif !A$ already occur in !!a{derivation}, then $!A$ is
+  a correct inference step.
+\end{defn}
+
+We'll abbreviate the rule modus ponens as ``\MP.''
+
+
+
+
+
+
+
+\olfileid{pl}{axd}{pro}
+
+\olsection{Examples of \usetoken{P}{derivation}}
+
+
+\begin{ex}
+Suppose we want to prove $(\lnot !D \lor !E) \lif (!D \lif
+!E)$. Clearly, this is not an instance of any of our axioms, so we
+have to use the \MP{} rule to !!{derive} it. Our only rule is~MP, which
+given $!A$ and $!A \lif !B$ allows us to justify~$!B$. One
+strategy would be to use \olref[prp]{ax:lor3} with $!A$ being $\lnot
+!D$, $!B$ being $!E$, and $!C$ being $!D \lif !E$, i.e., the instance
+\[
+(\lnot !D \lif (!D \lif !E)) \lif ((!E \lif (!D \lif !E)) \lif ((\lnot
+!D \lor !E) \lif (!D \lif !E))).
+\]
+Why? Two applications of MP yield the last part, which is what we
+want.  And we easily see that $\lnot !D \lif (!D \lif !E)$ is an
+instance of \olref[prp]{ax:lnot2}, and $!E \lif (!D \lif !E)$ is an
+instance of \olref[prp]{ax:lif1}. So our !!{derivation} is:
+\begin{derivation}
+  1. &  $\lnot !D \lif (!D \lif !E)$ & \olref[prp]{ax:lnot2} \\
+  2. & $(\lnot !D \lif (!D \lif !E)) \lif {}$\\
+  &\qquad $((!E \lif (!D \lif !E)) \lif ((\lnot !D \lor !E) \lif (!D \lif !E)))$ & \olref[prp]{ax:lor3}\\
+  3. & $(!E \lif (!D \lif !E)) \lif ((\lnot !D \lor !E) \lif (!D \lif !E))$ & 1, 2, \MP\\
+  4. & $!E \lif (!D \lif !E)$ & \olref[prp]{ax:lif1}\\
+  5. & $(\lnot !D \lor !E) \lif (!D \lif !E)$ & 3, 4, \MP
+\end{derivation}
+\end{ex}
+
+\begin{ex}\ollabel{ex:identity}
+Let's try to find !!a{derivation} of $!D \lif !D$.  It is not an
+instance of an axiom, so we have to use \MP{} to !!{derive} it.
+\olref[prp]{ax:lif1} is an axiom of the form~$!A \lif !B$ to which we
+could apply~\MP. To be useful, of course, the $!B$ which \MP{} would
+justify as a correct step in this case would have to be~$!D \lif !D$,
+since this is what we want to !!{derive}. That means $!A$ would also
+have to be $!D$, i.e., we might look at this instance of
+\olref[prp]{ax:lif1}:
+\[
+!D \lif (!D \lif !D)
+\]
+In order to apply \MP, we would also need to justify the corresponding
+second premise, namely~$!A$. But in our case, that would be~$!D$, and
+we won't be able to !!{derive}~$!D$ by itself. So we need a different
+strategy.
+
+The other axiom involving just~$\lif$ is \olref[prp]{ax:lif2}, i.e.,
+\[
+(!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C))
+\]
+We could get to the last nested conditional by applying \MP{}
+twice. Again, that would mean that we want an instance of
+\olref[prp]{ax:lif2} where $!A \lif !C$ is $!D \lif !D$, the !!{formula} we
+are aiming for. Then of course, $!A$ and $!C$ are both~$!D$. How
+should we pick~$!B$ so that both $!A \lif (!B \lif !C)$ and $!A \lif
+!B$, i.e., in our case $!D \lif (!B \lif !D)$ and $!D \lif !B$, are
+also !!{derivable}? Well, the first of these is already an instance of
+\olref[prp]{ax:lif1}, whatever we decide $!B$ to be. And $!D \lif !B$ would
+be another instance of \olref[prp]{ax:lif1} if $!B$ were $(!D \lif !D)$.
+So, our !!{derivation} is:
+\begin{derivation}
+  1. & $!D \lif ((!D \lif !D) \lif !D)$ & \olref[prp]{ax:lif1}\\
+  2. & $(!D \lif ((!D \lif !D) \lif !D)) \lif {}$\\
+  & \qquad $((!D \lif (!D \lif !D)) \lif (!D \lif !D))$ & \olref[prp]{ax:lif2}\\
+  3. & $(!D \lif (!D \lif !D)) \lif (!D \lif !D)$ & 1, 2, \MP\\
+  4. & $!D \lif (!D \lif !D)$ & \olref[prp]{ax:lif1}\\
+  5. & $!D \lif !D$ & 3, 4, \MP
+\end{derivation}
+\end{ex}
+
+\begin{ex}\ollabel{ex:chain}
+Sometimes we want to show that there is !!a{derivation} of some
+!!{formula} from some other !!{formula}s~$\Gamma$. For instance, let's
+show that we can !!{derive} $!A \lif !C$ from $\Gamma = \{!A \lif !B,
+!B \lif !C\}$.
+\begin{derivation}
+  1. & $!A \lif !B$ & \Hyp\\
+  2. & $!B \lif !C$ & \Hyp\\
+  3. & $(!B \lif !C) \lif (!A \lif (!B \lif !C))$ & \olref[prp]{ax:lif1} \\
+  4. & $!A \lif (!B \lif !C)$ & 2, 3, \MP\\
+  5. & $(!A \lif (!B \lif !C)) \lif {}$\\
+  & \qquad $((!A \lif !B) \lif (!A \lif !C))$ & \olref[prp]{ax:lif2}\\
+  6. & $((!A \lif !B) \lif (!A \lif !C))$ & 4, 5, \MP\\
+  7. & $!A \lif !C$ & 1, 6, \MP
+\end{derivation}
+The lines labelled ``\Hyp'' (for ``hypothesis'') indicate that the
+!!{formula} on that line is !!a{element} of~$\Gamma$.
+\end{ex}
+
+\begin{prop}
+  \ollabel{prop:chain} If $\Gamma \Proves !A \lif !B$ and $\Gamma
+  \Proves !B \lif !C$, then $\Gamma \Proves !A \lif !C$
+\end{prop}
+
+\begin{proof}
+  Suppose $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !B \lif
+  !C$. Then there is !!a{derivation} of $!A \lif !B$ from~$\Gamma$;
+  and !!a{derivation} of~$!B \lif !C$ from~$\Gamma$ as well. Combine
+  these into a single !!{derivation} by concatenating them. Now add
+  lines 3--7 of the !!{derivation} in the preceding example. This is
+  !!a{derivation} of $!A \lif !C$---which is the last line of the new
+  !!{derivation}---from~$\Gamma$. Note that the justifications of
+  lines 4 and~7 remain valid if the reference to line number~1 is
+  replaced by reference to the last line of the !!{derivation} of~$!A
+  \lif !B$, and reference to line number~2 by reference to the last
+  line of the !!{derivation} of~$!B \lif !C$.
+\end{proof}
+
+\begin{prob} 
+Show that the following hold by exhibiting !!{derivation}s from the
+axioms:
+\begin{enumerate} 
+\item $(!A \land !B) \lif (!B \land !A)$
+\item $((!A \land !B) \lif !C) \lif (!A \lif (!B \lif !C))$
+\item $\lnot(!A \lor !B) \lif \lnot !A$
+\end{enumerate} 
+\end{prob}
+
+
+
+
+
+
+
+
+
+\olfileid{pl}{axd}{ptn}
+
+\olsection{Proof-Theoretic Notions}
+
+\begin{explain}
+Just as we've defined a number of important semantic notions
+(tautology, entailment, satisfiability), we now
+define corresponding \emph{proof-theoretic notions}.  These are not
+defined by appeal to satisfaction of !!{sentence}s in !!{structure}s,
+but by appeal to the !!{derivability} or !!{nonderivability} of
+certain formulas.  It was an important discovery that these notions
+coincide.  That they do is the content of the \emph{soundness} and
+\emph{completeness theorems}.
+\end{explain}
+
+\begin{defn}[!!^{derivability}]
+!!^a{formula}~$!A$ is \emph{!!{derivable}} from $\Gamma$, written
+$\Gamma \Proves !A$, if there is !!a{derivation} from~$\Gamma$ ending
+in~$!A$.
+\end{defn}
+
+\begin{defn}[Theorems]
+!!^a{formula}~$!A$ is a \emph{theorem} if there is !!a{derivation} of
+$!A$ from the empty set.  We write $\Proves !A$ if $!A$ is a theorem
+and $\Proves/ !A$ if it is not.
+\end{defn}
+
+\begin{defn}[Consistency]
+A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if
+$\Gamma\Proves/ \lfalse$; it is \emph{inconsistent} otherwise.
+\end{defn}
+
+\begin{prop}[Reflexivity]
+\ollabel{prop:reflexivity}
+If $!A \in \Gamma$, then $\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+  The !!{formula}~$!A$ by itself is !!a{derivation} of~$!A$ from~$\Gamma$.
+\end{proof}
+
+\begin{prop}[Monotonicity]
+\ollabel{prop:monotonicity}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+Any !!{derivation} of $!A$ from $\Gamma$ is also !!a{derivation} of
+$!A$ from~$\Delta$.
+\end{proof}
+
+\begin{prop}[Transitivity]
+\ollabel{prop:transitivity}
+If $\Gamma \Proves !A$ and $\{!A\} \cup \Delta \Proves
+!B$, then $\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  Suppose $\{!A\} \cup \Delta \Proves !B$. Then there is
+  !!a{derivation} $!B_1$, \dots, $!B_l = !B$ from~$\{!A\} \cup
+  \Delta$. Some of the steps in that !!{derivation} will be correct
+  because of a rule which refers to a prior line~$!B_i = !A$. By
+  hypothesis, there is !!a{derivation} of~$!A$ from~$\Gamma$, i.e.,
+  !!a{derivation}~$!A_1$, \dots, $!A_k = !A$ where every $!A_i$ is an
+  axiom, !!a{element} of~$\Gamma$, or correct by a rule of
+  inference. Now consider the sequence
+  \[
+  !A_1, \dots, !A_k = !A, !B_1, \dots, !B_l = !B.
+  \]
+  This is a correct !!{derivation} of~$!B$ from $\Gamma \cup \Delta$
+  since every $B_i = !A$ is now justified by the same rule which
+  justifies~$!A_k = !A$.
+\end{proof}
+
+Note that this means that in particular if $\Gamma \Proves !A$ and $!A
+\Proves !B$, then $\Gamma \Proves !B$. It follows also that if $!A_1,
+\dots, !A_n \Proves !B$ and $\Gamma \Proves !A_i$ for each~$i$, then
+$\Gamma \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+$\Gamma$ is inconsistent iff $\Gamma \Proves !A$ for every~$!A$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+
+
+
+\begin{prob}
+Prove \olref[pl][axd][ptn]{prop:incons}.
+\end{prob}
+
+
+\begin{prop}[Compactness]
+\ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If every finite subset of~$\Gamma$ is
+    consistent, then $\Gamma$ is consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is a finite sequence of
+      !!{formula}s $!A_1$, \dots,~$!A_n$ so that $!A \ident !A_n$ and
+      each $!A_i$ is either a logical axiom, !!a{element} of~$\Gamma$
+      or follows from previous !!{formula}s by modus ponens.  Take
+      $\Gamma_0$ to be those $!A_i$ which are in~$\Gamma$.  Then the
+      !!{derivation} is likewise !!a{derivation} from~$\Gamma_0$, and
+      so $\Gamma_0 \Proves !A$.
+    \item This is the contrapositive of~(1) for the special case $!A
+      \ident \lfalse$.
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+\olfileid{pl}{axd}{ded}
+
+\olsection{The Deduction Theorem}
+
+As we've seen, giving !!{derivation}s in an axiomatic system is
+cumbersome, and !!{derivation}s may be hard to find. Rather than
+actually write out long lists of !!{formula}s, it is generally easier
+to argue that such !!{derivation}s exist, by making use of a few
+simple results. We've already established three such results:
+\olref[ptn]{prop:reflexivity} says we can always assert that $\Gamma
+\Proves !A$ when we know that $!A \in
+\Gamma$. \olref[ptn]{prop:monotonicity} says that if $\Gamma \Proves !A$
+then also $\Gamma \cup \{!B\} \Proves !A$. And
+\olref[ptn]{prop:transitivity} implies that if $\Gamma \Proves !A$ and
+$!A \Proves !B$, then $\Gamma \Proves !B$. Here's another simple
+result, a ``meta''-version of modus ponens:
+
+\begin{prop}
+  \ollabel{prop:mp} If $\Gamma \Proves !A$ and $\Gamma \Proves !A \lif
+  !B$, then $\Gamma \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  We have that $\{!A, !A \lif !B\} \Proves !B$:
+  \begin{derivation}
+    1. & $!A$ & Hyp.\\
+    2. & $!A \lif !B$ & Hyp.\\
+    3. & $!B$ & 1, 2, MP
+  \end{derivation}
+  By \olref[ptn]{prop:transitivity}, $\Gamma \Proves !B$.
+\end{proof}
+
+The most important result we'll use in this context is the deduction
+theorem:
+
+\begin{thm}[Deduction Theorem]
+\ollabel{thm:deduction-thm} $\Gamma \cup \{!A\} \Proves !B$ if and
+only if $\Gamma \Proves !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+The ``if'' direction is immediate.  If $\Gamma \Proves !A \lif !B$
+then also $\Gamma \cup \{!A\} \Proves !A \lif !B$ by
+\olref[ptn]{prop:monotonicity}.  Also, $\Gamma \cup \{!A\} \Proves !A$ by
+\olref[ptn]{prop:reflexivity}. So, by \olref{prop:mp}, $\Gamma \cup
+\{!A\} \Proves !B$.
+
+For the ``only if'' direction, we proceed by induction on the length
+of the !!{derivation} of $!B$ from $\Gamma \cup \{!A\}$.
+
+For the induction basis, we prove the claim for every !!{derivation}
+of length~$1$. !!^a{derivation} of~$!B$ from $\Gamma \cup \{!A\}$ of
+length~$1$ consists of $!B$ by itself; and if it is correct $!B$ is
+either $\in \Gamma \cup \{!A\}$ or is an axiom.  If $!B \in \Gamma$ or
+is an axiom, then $\Gamma \Proves !B$. We also have that $\Gamma
+\Proves !B \lif (!A \lif !B)$ by \olref[prp]{ax:lif1}, and
+\olref{prop:mp} gives $\Gamma \Proves !A \lif !B$. If $!B \in \{ !A\}$
+then $\Gamma \Proves !A \lif !B$ because the last !!{sentence}~$!A
+\lif !B$ is the same as $!A \lif !A$, and we have !!{derive}d that in
+\olref[pro]{ex:identity}.
+
+For the inductive step, suppose !!a{derivation} of~$!B$ from
+$\Gamma \cup \{!A\}$ ends with a step~$!B$ which is justified by modus
+ponens. (If it is not justified by modus ponens, $!B \in \Gamma$, $!B
+\ident !A$, or $!B$ is an axiom, and the same reasoning as in the
+induction basis applies.) Then some previous steps in the
+!!{derivation} are $!C \lif !B$ and $!C$, for some !!{formula}~$!C$,
+i.e., $\Gamma \cup \{!A\} \Proves !C \lif !B$ and $\Gamma \cup \{!A\}
+\Proves !C$, and the respective !!{derivation}s are shorter, so the
+inductive hypothesis applies to them. We thus have both:
+\begin{align*}
+  & \Gamma \Proves !A \lif (!C \lif !B); \\
+  & \Gamma \Proves !A \lif !C.
+\end{align*}
+But also
+\[
+\Gamma \Proves (!A \lif (!C \lif !B)) \lif
+((!A\lif !C)  \lif (!A \lif !B)),
+\]
+by \olref[prp]{ax:lif2}, and two applications of \olref{prop:mp} give
+$\Gamma \Proves !A \lif !B$, as required.
+\end{proof}
+
+Notice how \olref[prp]{ax:lif1} and \olref[prp]{ax:lif2} were chosen
+precisely so that the Deduction Theorem would hold.
+
+The following are some useful facts about !!{derivability}, which we
+leave as exercises.
+
+\begin{prop}
+  \ollabel{prop:derivfacts}
+\begin{enumerate}
+\item $\Proves (!A \lif !B) \lif ((!B \lif !C)
+  \lif (!A \lif !C)$; \ollabel{derivfacts:a}
+\item If $\Gamma \cup \{ \lnot !A\}
+  \Proves \lnot !B$ then $\Gamma \cup \{ !B\} \Proves
+  !A$ (Contraposition); \ollabel{derivfacts:b}
+\item  $\{ !A, \lnot!A\} \Proves
+    !B$ (Ex Falso Quodlibet, Explosion); \ollabel{derivfacts:c}
+\item  $\{ \lnot\lnot!A\} \Proves
+  !A$ (Double Negation Elimination);\ollabel{derivfacts:d}
+\item If $\Gamma \Proves \lnot\lnot!A$ then $\Gamma \Proves
+  !A$;\ollabel{derivfacts:e}
+\end{enumerate}
+\end{prop}
+
+
+
+
+\begin{prob}
+  Prove \olref[pl][axd][ded]{prop:derivfacts}
+\end{prob}
+
+
+
+
+
+
+
+
+\olfileid{pl}{axd}{prv}
+
+\olsection{\usetoken{S}{derivability} and Consistency}
+
+We will now establish a number of properties of the !!{derivability}
+relation.  They are independently interesting, but each will play a
+role in the proof of the completeness theorem.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  If $\Gamma \Proves !A$ and $\Gamma \cup \{!A\}$ is inconsistent,
+  then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+  If $\Gamma \cup \{!A\}$ is inconsistent, then $\Gamma \cup \{!A\}
+  \Proves \lfalse$. By \olref[ptn]{prop:reflexivity}, $\Gamma \Proves
+  !B$ for every $!B \in \Gamma$. Since also $\Gamma \Proves !A$ by
+  hypothesis, $\Gamma \Proves !B$ for every $!B \in \Gamma \cup
+  \{!A\}$. By \olref[ptn]{prop:transitivity}, $\Gamma \Proves
+  \lfalse$, i.e., $\Gamma$ is inconsistent.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+First suppose $\Gamma \Proves !A$. Then $\Gamma \cup \{\lnot !A\}
+\Proves !A$ by \olref[ptn]{prop:monotonicity}. $\Gamma \cup \{\lnot
+!A\} \Proves \lnot !A$ by \olref[ptn]{prop:reflexivity}.  We also have
+$\Proves \lnot !A \lif (!A \lif \lfalse)$ by \olref[prp]{ax:lnot2}. So
+by two applications of \olref[ded]{prop:mp}, we have $\Gamma \cup \{\lnot
+!A\} \Proves \lfalse$.
+
+Now assume $\Gamma \cup \{\lnot !A\}$ is inconsistent, i.e., $\Gamma
+\cup \{\lnot !A\} \Proves \lfalse$. By the deduction theorem, $\Gamma
+\Proves \lnot !A \lif \lfalse$. $\Gamma \Proves (\lnot !A \lif
+\lfalse) \lif \lnot\lnot !A$ by \olref[prp]{ax:lfalse2}, so $\Gamma
+\Proves \lnot\lnot !A$ by \olref[ded]{prop:mp}. Since $\Gamma \Proves
+\lnot\lnot !A \lif !A$ (\olref[prp]{ax:dne}), we have $\Gamma
+\Proves !A$ by \olref[ded]{prop:mp} again.
+\end{proof}
+
+\begin{prob}
+Prove that $\Gamma \Proves \lnot !A$ iff $\Gamma \cup \{!A\}$ is
+inconsistent.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  If $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$, then $\Gamma$ is
+  inconsistent.
+\end{prop}
+
+\begin{proof}
+  $\Gamma \Proves \lnot !A \lif (!A \lif \lfalse)$ by \olref[prp]{ax:lnot2}.
+  $\Gamma \Proves \lfalse$ by two applications of \olref[ded]{prop:mp}.
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  If $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
+  inconsistent, then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+
+
+
+\begin{prob}
+  Prove \olref[pl][axd][prv]{prop:provability-exhaustive}
+\end{prob}
+
+
+
+
+
+
+
+\olfileid{pl}{axd}{ppr}
+
+\olsection{\usetoken{S}{derivability} and the Propositional Connectives}
+
+\begin{explain}
+  We establish that the !!{derivability} relation~$\Proves$ of
+  axiomatic deduction is strong enough to establish some basic facts
+  involving the propositional connectives, such as that $!A \land !B
+  \Proves !A$ and $!A, !A \lif !B \Proves !B$ (modus ponens). These
+  facts are needed for the proof of the completeness theorem.
+\end{explain}
+
+\begin{prop}\ollabel{prop:provability-land}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-land-left} Both $!A \land !B \Proves
+    !A$ and $!A \land !B \Proves !B$
+  \item \ollabel{prop:provability-land-right} $!A, !B \Proves !A \land !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item From \olref[prp]{ax:land1} and \olref[prp]{ax:land1} by
+      modus ponens.
+  \item From \olref[prp]{ax:land3} by two applications of
+    modus ponens.
+  \end{enumerate}
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-lor}
+  \begin{enumerate}
+  \item $!A \lor !B, \lnot !A, \lnot !B$ is inconsistent.
+  \item Both $!A \Proves !A \lor !B$ and $!B \Proves !A \lor !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item From \olref[prp]{ax:lnot1} we get $\Proves \lnot !A \lif (!A
+    \lif \lfalse)$ and $\Proves \lnot !B \lif (!B \lif \lfalse)$. So
+    by the deduction theorem, we have $\{\lnot !A\} \Proves !A \lif
+    \lfalse$ and $\{\lnot !B\} \Proves !B \lif \lfalse$. From
+    \olref[prp]{ax:lor3} we get $\{\lnot !A, \lnot !B\} \Proves (!A
+    \lor !B) \lif \lfalse$. By the deduction theorem, $\{!A \lor !B,
+    \lnot !A, \lnot !B\} \Proves \lfalse$.
+  \item From \olref[prp]{ax:lor1} and \olref[prp]{ax:lor2} by modus
+    ponsens.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lif}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-lif-left}  $!A, !A \lif !B \Proves !B$.
+  \item \ollabel{prop:provability-lif-right}
+    Both $\lnot !A \Proves !A \lif !B$ and $!B \Proves !A \lif !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item We can !!{derive}:
+    \begin{derivation}
+      1. & $!A$ & \Hyp\\
+      2. & $!A \lif !B$ & \Hyp\\
+      3. & $!B$ & 1, 2, \MP
+    \end{derivation}
+    
+  \item By \olref[prp]{ax:lnot2} and \olref[prp]{ax:lif1} and the
+    deduction theorem, respectively.
+  \end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+\olfileid{pl}{axd}{sou}
+      
+\olsection{Soundness}
+
+\begin{explain}
+!!^a{derivation} system, such as axiomatic deduction, is \emph{sound}
+if it cannot !!{derive} things that do not actually hold.  Soundness is
+thus a kind of guaranteed safety property for !!{derivation} systems.
+Depending on which proof theoretic property is in question, we would
+like to know for instance, that
+\begin{enumerate}
+\item every !!{derivable}~$!A$ is valid;
+\item if $!A$ is !!{derivable} from some others~$\Gamma$, it is also a
+  consequence of them;
+\item if a set of !!{formula}s~$\Gamma$ is inconsistent, it is
+  unsatisfiable.
+\end{enumerate}
+These are important properties of !!a{derivation} system.  If any of them do
+not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
+Consequently, establishing the soundness of !!a{derivation} system is of the
+utmost importance.
+\end{explain}
+
+\begin{prop}
+  If $!A$ is an axiom, then
+  $\pSat{v}{!A}$ for each !!{valuation}~$\pAssign{v}$.
+\end{prop}
+
+\begin{proof}
+Do truth
+  tables for each axiom to verify that they are tautologies.
+\end{proof}
+
+\begin{thm}[Soundness]
+\ollabel{thm:soundness}
+If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+By induction on the length of the !!{derivation} of $!A$ from
+$\Gamma$. If there are no steps justified by inferences, then all
+!!{formula}s in the !!{derivation} are either instances of axioms or are
+in~$\Gamma$. By the previous proposition, all the axioms are
+tautologies, and hence if $!A$ is an axiom then
+$\Gamma \Entails !A$. If $!A \in \Gamma$, then trivially $\Gamma
+\Entails !A$.
+
+If the last step of the !!{derivation} of~$!A$ is justified by modus
+ponens, then there are !!{formula}s $!B$ and $!B \lif !A$ in the
+!!{derivation}, and the induction hypothesis applies to the part of
+the !!{derivation} ending in those !!{formula}s (since they contain at
+least one fewer step justified by an inference).  So, by induction
+hypothesis, $\Gamma \Entails !B$ and $\Gamma \Entails !B \lif
+!A$. Then $\Gamma \Entails !A$ by
+\olref[pl][syn][sem]{thm:sem-deduction}.
+
+
+\end{proof}
+
+
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+If $\Proves !A$, then $!A$ is a tautology.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+If $\Gamma$ is satisfiable, then it is consistent.
+\end{cor}
+
+\begin{proof}
+We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
+Then $\Gamma \Proves \lfalse$, i.e., there is !!a{derivation} of
+$\lfalse$ from~$\Gamma$. By \olref{thm:soundness}, any
+!!{valuation}~$\pAssign{v}$
+that satisfies $\Gamma$ must satisfy~$\lfalse$.  Since
+$\pSat/{v}{\lfalse}$ for every
+  !!{valuation}~$\pAssign{v}$, no
+$\pAssign{v}$ can satisfy $\Gamma$, i.e.,
+$\Gamma$ is not satisfiable.
+\end{proof}
+
+
+
+
+
+
+\OLEndChapterHook
+
+
+
+
+
+

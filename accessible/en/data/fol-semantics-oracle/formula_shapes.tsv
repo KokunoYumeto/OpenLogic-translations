@@ -1,0 +1,349 @@
+expression_id	physical_unique_source_occurrences	canonical_projected_occurrences	normalized_tex
+expr-004ea9765f347617	1	1	\Sat{M}{\lexists[y][R(x,y)]}[s_2]
+expr-0126e066ff40b8dd	1	1	\Assign{a}{M} = 1
+expr-017dde88b4e1167d	3	3	\Assign{<}{M}
+expr-02514b83521b17fd	1	1	R(a, a) \lif (R(b, x) \lor R(x, b))
+expr-028c70fa8ccb6a2e	1	1	\Sat{M}{R(x,y)}[\Subst{s_2}{3}{y}]
+expr-034a69bf5d96f8a8	7	7	i = 1
+expr-0392a7f58dc6f6ba	18	18	\Obj 0
+expr-043a718774c572bd	214	211	s
+expr-0578d679e4d8892d	1	1	\Subst{!A}{t'}{x}
+expr-057dd691c9540b0d	1	1	\Struct {M} \VDash !B
+expr-05bfe04f229e9def	1	1	\Sat{M}{\Gamma \cup \{ !A \}}
+expr-06a932faf8646c6e	1	1	c_2
+expr-06ee3bacc2386141	1	1	\Assign{\Obj \times}{M}
+expr-08a31aaffef905c3	13	12	x_n
+expr-09929e9000f85104	12	12	\Domain M
+expr-09c478b7974d8dbf	1	1	\tuple{1, 3} \in \Assign{<}{M}
+expr-0ab83730c263f0b7	13	14	\Entails !A
+expr-0b74e92062bc5e02	1	1	\lforall[x][(R(a,x) \lif \lexists[y][R(x,y)])].
+expr-0d8e4abed0bc0a00	1	1	\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{2}{x}]
+expr-0e0543a20abe0622	1	1	\Sat/{M}{R(b,x) \land R(x,b)}[\Subst{s}{m}{x}]
+expr-0f1d27266aa24ad3	1	1	\lforall[x][!A(x,f(x))]
+expr-0feeab53510b9b84	5	4	\Sat{M}{!A(t)}
+expr-11b40e60d6162542	1	1	\tuple{2,3} \in \Assign{R}{M}
+expr-12ab2a778a4eaa7a	1	1	!A(x,y)
+expr-13b82a2a3208845e	1	1	\Sat/{M}{R(a,x)}[\Subst{s}{4}{x}]
+expr-1426674c44e8876f	9	9	a_1
+expr-14ab5dcd1c0d49d0	1	1	\varAssign{s}{\Subst{s}{\Value{t'}{M}[s]}{x}}{x}
+expr-151169f9933258d1	7	7	m = 1
+expr-152fbba4140c673c	1	1	\Subst{s}{m}{x}(y) = \begin{cases} m & \text{if } y \ident x\\ s(y) & \text{otherwise}. \end{cases}
+expr-153ae4286591730f	4	4	\Lang L_Z
+expr-1606aabfad25327a	1	1	\Value{t}{M} = \Assign{f}{M}(\Value{t_1}{M}, \ldots, \Value{t_n}{M}).
+expr-163af66e54c0c6ec	4	1	\Sat{M}{!C}[s_1]
+expr-16646df2d0fbf4d5	2	2	\Sat{M}{\Gamma'}
+expr-17763264247de68f	4	2	\Sat{M}{!B}[s_2]
+expr-1878b18c58c70a49	1	1	\tuple{\Value{b}{M}, \Value{f(a,b)}{M}} = \tuple{2, 3} \in \Assign{R}{M}
+expr-1a00c122b8160ef7	2	2	\Gamma' \Entails !A
+expr-1a577616c9544530	1	1	s_1' = \Subst{s_1}{m}{x}
+expr-1a59d486dd0661a2	2	2	s(x) = 1
+expr-1a97e063166f2cca	8	8	\Struct{M_2}
+expr-1afd98cae3ea0de6	1	1	\Sat{M}{\eq[t_1][t_2]}[s_2]
+expr-1b16b1df538ba12d	467	478	n
+expr-1b2cb0fe0a7358a7	1	1	= 2
+expr-1b50ab81bf0add5e	9	11	\Gamma \Entails !A \lif !B
+expr-1b62825134bf3f49	1	1	\Value{c}{M} = \Assign{c}{M}
+expr-1b878d8e3828b506	1	1	\tuple{1, 3} \notin \Assign{R}{M}[s]
+expr-1c3b2daf07439976	1	1	\Value{t_1}{M}[s_1] = \Value{t_2}{M}[s_1]
+expr-1d5c7a4a8bd57efb	2	2	\Assign{\Obj \prime}{N}(n) = n + 1
+expr-1db594e3fcfc538f	1	1	\Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots, \Value{t_n}{M}[s]).
+expr-1e922d1c00a39b06	1	1	t = \Atom{f}{t_1, \dots, t_k}
+expr-1f0a4055f0e384f5	2	1	s(x) = \Value{t}{M}
+expr-1f7daf6b74106255	1	1	\Assign{\Obj \prime}{M} \colon \Domain{M} \to \Domain M
+expr-2134ab4e08afbb48	1	1	& \Sat{M}{R(a, a) \lif (R(b, x) \lor R(x, b))}[s] \text{ iff }\\ & \qquad \Sat/{M}{R(a,a)}[s] \text{ or } \Sat{M}{R(b, x) \lor R(x, b)}[s] \intertext{Since $\Sat{M}{R(a,a)}[s]$ (because $\tuple{1,1} \in \Assign{R}{M}$) we can't yet determine the answer and must first figure out if $\Sat{M}{R(b, x) \lor R(x, b)}[s]$:} & \Sat{M}{R(b, x) \lor R(x, b)}[s] \text{ iff }\\ & \qquad \Sat{M}{R(b,x)}[s] \text{ or } \Sat{M}{R(x, b)}[s] \intertext{And this is the case, since $\Sat{M}{R(x, b)}[s]$ (because $\tuple{1,2} \in \Assign{R}{M}$).}
+expr-2160509ff364e743	108	108	\Struct M
+expr-22e6bc023adf2d0e	1	1	\Atom{R}{t_1, \dots, t_k}
+expr-233c3669cce10c28	4	4	\Struct N
+expr-234c8bc4b6396f05	6	5	\Struct{M} \VDash \indfrm
+expr-24f14b44bc062d52	1	1	s_1(x_i)=s_2(x_i)
+expr-252f10c83610ebca	404	398	f
+expr-25b7db7647de9b55	2	2	\Domain{M_1} = \Domain{M_2}
+expr-25bc10e6566f5c1a	1	1	\Assign{c}{M} \in \Domain M
+expr-2657355be2d06c9e	4	5	\Gamma \cup \{!A\} \Entails !B
+expr-2770ed3e92e6744e	1	1	\Struct M \VDash !A
+expr-27e398de936af410	1	1	\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}
+expr-294a19dae13b6411	5	3	\Sat{M}{!C}[s]
+expr-295b3dc73fc914d7	1	1	\Assign{R}{M_1}=\Assign{R}{M_2}
+expr-2a1dc4189af4e832	2	2	\Assign{\Obj \times}{N}(n, m) = n\cdot m
+expr-2ca028f2057f7747	2	5	\Sat{M}{!A \lif !B}
+expr-2ceb4df5993cba2b	7	7	c_1
+expr-2d0ebb6365ef4b6f	1	1	m = 3
+expr-2d2b51f442bf96d9	19	19	\Sat{M}{!A}[s]
+expr-2d2c4080f13f9418	1	1	\Sat{M}{\Subst{!A}{t'}{x}}[s]
+expr-2d711642b726b044	501	497	x
+expr-2dc926554b10f1e5	4	4	a \in \Domain{M}
+expr-2e7d2c03a9507ae2	73	71	c
+expr-2fe3aed5035d2213	5	4	s_1(x_i) = s_2(x_i)
+expr-32cf7e9e2107a27e	1	1	\Struct M \VDash !C
+expr-33a9c96304bcc292	64	65	\Domain{M}
+expr-34282884af2671fa	3	2	\Sat{M}{!B(m)}
+expr-349ba76d907adfab	26	26	\times
+expr-36019e858b98d080	1	1	\Assign{\Obj{one}}{M} = 1
+expr-371bacbea5363456	4	14	\Sat{M}{!B}
+expr-391668f5f7cb367a	2	2	\Sat{M}{\Gamma \cup \{ !A \} }
+expr-39d959189f483de7	1	1	x+y \le 3
+expr-3b7c2afaa1d68dfd	1	1	\tuple{1,1} \in \Assign{R}{M}
+expr-3daad4ea6727738c	1	1	R(t_1, t_2)
+expr-3e23e8160039594a	52	52	b
+expr-3e380d3fe9245b1d	1	1	\Assign{f}{M} \colon \Domain{M}^n \to \Domain{M}
+expr-3f599d8dcdddfaa2	1	1	\Value{x}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}] = \Value{t'}{M}[s]
+expr-4004c953e26f835a	1	1	\lexists[x][(!A(x) \lor \lnot !A(x))]
+expr-419d82a372465cfb	1	1	\Sat/{M}{!A}[s_2]
+expr-4219ac8f3ccbd148	1	1	\Struct M[a/c]
+expr-42b8f19ae63d24a4	233	251	\Struct{M}
+expr-440458df9653baa9	4	1	\Sat{M}{!C}[s_2]
+expr-4453f0406071f2e4	1	1	\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{1}{x}]
+expr-448e55de1fcef23d	2	1	\Subst{s}{3}{x}
+expr-453d4ca47accac68	4	4	\Sat{M}{!A}[s_1]
+expr-4648e9f202f72c93	2	2	\Gamma \subseteq \Gamma'
+expr-46be70a748cf3105	1	1	\Sat/{M}{R(x,a)}[\Subst{s}{m}{x}]
+expr-47037721fbc2c00f	1	1	s_2(y) = 1
+expr-47e4bba264305b22	1	1	\Sat/{M}{\lforall[x][(R(a,x) \lif R(x,a))]}[s]
+expr-48d6489182829d59	1	1	\Gamma \Entails \bot
+expr-4911f29faa56ad07	3	3	\Sat{M}{!A}[s']
+expr-499da9fcbe6c0553	1	1	\Value{t}{M}[s_1] = \Value{t}{M}[s_2]
+expr-4b227777d4dd1fc6	22	22	4
+expr-4b7bf3c22769c40c	1	1	\Sat/{M}{!A}[s_1]
+expr-4b905b11611431f8	3	10	\Sat/{M}{!A}
+expr-4c1269307295c580	1	1	\Value{t_1}{M}[s_2] & = \Value{t_1}{M}[s_1] & \text{(by \olref{prop:valindep})} \\ & = \Value{t_2}{M}[s_1] & \text{(since $\Sat{M}{\eq[t_1][t_2]}[s_1]$)}\\ &= \Value{t_2}{M}[s_2] & \text{(by \olref{prop:valindep}),}
+expr-4c94485e0c21ae6c	42	41	v
+expr-4ce3efc77f8c3de8	2	2	\Sat{M}{!B}[\Subst{s}{m}{x}]
+expr-4e07408562bedb8b	54	56	3
+expr-4ee08447954b2c35	1	1	s_2 = \Subst{s}{2}{x}
+expr-4f8b31dac7122541	1	1	\Obj \times
+expr-5060af46eb8f3e5e	1	1	\Domain M = \{1, 2, 3, 4\}
+expr-5194807c180c4623	1	1	\Assign{f}{M}(1) = 2, \Assign{f}{M}(2) = 3, \Assign{f}{M}(3) = 2
+expr-5280c8f9e471df51	32	10	\ltrue
+expr-545c103fffdedda0	1	1	n \ge m
+expr-549ae8b0f114acc4	36	35	s_2
+expr-5588d726fbedd4c9	1	1	!B(m)
+expr-56ad83b002f56f9b	1	1	\Struct M[a_1/c_1,\dots,a_n/c_n] \VDash \Subst{\Subst{!A}{c_1}{x_1}\dots}{c_n}{x_n}
+expr-57321665882a29ba	2	2	\Struct M \VDash \indfrm
+expr-57885e4c75965b23	626	824	\Gamma
+expr-5803b55bfdb5016d	2	1	s_1'(x) = s_2'(x) = m
+expr-588070bfe0232f7b	1	1	\Obj{one}
+expr-58dee33864546166	2	2	s(x_i) = a_i
+expr-5938c06a9a60a7dd	1	1	t = c
+expr-598dee1b3f3f4668	2	1	\Sat{M}{R(b,x) \lor R(x, b)}[\Subst{s}{1}{x}]
+expr-59af7a997c2a5bf8	1	1	\Obj \prime
+expr-5a6475c26ffac03d	1	1	\Assign{\Obj <}{M} \subseteq \Domain{M}^2
+expr-5ae8d4b29d279c44	1	1	\Sat{M_1}{!A}
+expr-5afa20230f875253	42	42	n \in \Nat
+expr-5d08324acb961fcf	18	18	t_2
+expr-5da62ed404dd2d7c	1	1	\Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero}))}{M} =\\ \begin{aligned} & =\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{+(\Obj{three}, \Obj{zero})}{M})\\ & = \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M}, \Value{\Obj{zero}}{M})) \\ & = \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M}, \Assign{\Obj{zero}}{M})) \\ & = \Assign{\times}{M}(2, \Assign{+}{M}(3, 0)) \\ & = \Assign{\times}{M}(2, 3) \\ & = 6 \end{aligned}
+expr-5e769b89788d547a	14	12	s'
+expr-5f3896b9b6ac270a	1	1	\Value{t_1}{M}[s] = \Value{t_2}{M}[s]
+expr-607e495a98cb5559	25	25	\Int
+expr-612cd51903bd9cab	1	1	\Assign{R}{M} = \{\tuple{1, 1}, \tuple{1, 2}, \tuple{2, 3}, \tuple{2, 4}\}
+expr-618105ffed30855f	1	1	\langle \Value{t_1}{M}[s_1], \ldots, \Value{t_k}{M}[s_1] \rangle \in \Assign{R}{M}.
+expr-62c66a7a5dd70c31	105	105	m
+expr-63b5ef6af1afde4e	1	1	\Struct{M} \VDash!B
+expr-643964a599561beb	2	1	\Sat{M}{!B}[s_2']
+expr-669ae1f2d5c5b42a	1	1	\Value{c}{M}[s] = \Assign{c}{M} = \Value{c}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]
+expr-66c46c288c33cc93	1	1	\Subst{!B}{m}{x}
+expr-6828b2bc0960fb44	1	1	\Sat/{M}{R(x, f(a,b))}[s]
+expr-68a0237f0c73a77c	2	2	\Assign{\Obj +}{N}(n, m) = n + m
+expr-68a9d5a8339e4038	10	10	c_n
+expr-69db2efcf937c1ef	2	2	\Assign{\Obj 0}{N} = 0
+expr-6aebe2a108baf6f4	2	1	\Sat/{M}{R(a,x) \lif R(x,a)}[\Subst{s}{2}{x}]
+expr-6b2d76507c3d616f	1	1	s\colon \Var \to \Domain M
+expr-6b6f3586b256ed30	2	2	\Value{t}{M}[s]
+expr-6bad9db57bdac0c6	1	1	\Struct M_2
+expr-6cd7bc0f8126419e	1	1	\Sat/{M}{\Gamma}
+expr-6d8dfdf4f6b04245	1	1	\lexists[x][\eq[x][a]]
+expr-6d96ffa2cbee7291	3	3	\varAssign{s'}{s}{x}
+expr-6eac1b1ff6a76770	1	1	\Value{f(a,b)}{M}[s] & = \Assign{f}{M}(\Value{a}{M}[s], \Value{b}{M}[s]). \intertext{Since $a$ and $b$ are !!{constant}s, $\Value{a}{M}[s] = \Assign{a}{M} = 1$ and $\Value{b}{M}[s] = \Assign{b}{M} = 2$. So} \Value{f(a,b)}{M}[s] & = \Assign{f}{M}(1, 2) = 1+2 = 3. \intertext{To compute the value of $f(f(a,b),a)$ we have to consider} \Value{f(f(a,b),a)}{M}[s] & = \Assign{f}{M}(\Value{f(a, b)}{M}[s], \Value{a}{M}[s]) = \Assign{f}{M}(3, 1) = 3, \intertext{since $3+1 > 3$. Since $s(x) = 1$ and $\Value{x}{M}[s] = s(x)$, we also have} \Value{f(f(a,b),x)}{M}[s] & = \Assign{f}{M}(\Value{f(a, b)}{M}[s], \Value{x}{M}[s]) = \Assign{f}{M}(3, 1) = 3,
+expr-6ec886fe29e2dfce	1	1	\tuple{c_1, c_2} \in \Domain{M}^2
+expr-6f6f8e0bdb014d32	1	1	\Sat/{M}{R(x, a)}[\Subst{s}{2}{x}]
+expr-6fc6e6f64cfff833	1	1	\Assign{c}{M[a/c]} = a
+expr-700f2c28550ccfee	6	3	s_2'
+expr-70cef67fc30c0f61	1	1	\Sat{M}{\Gamma \cup \{ \lnot !A \}}
+expr-71983740200349d8	23	24	\lforall[x][!A(x)]
+expr-73734d8a319e851f	3	3	n \in \Domain M
+expr-738fd18736212fa6	1	1	\Sat{M}{\Gamma\cup \{ \lnot !A \}}
+expr-74b5a0d56cd6dc1a	1	1	\Subst{s}{\Value{t'}{M}[s]}{x}
+expr-74f4567a6896230a	41	41	\eq
+expr-74ff7b7ac2470720	2	2	\Assign{\Obj <}{N} = \Setabs{\tuple{n, m}}{n \in \Nat, m \in \Nat, n < m}
+expr-75115cf6319a83c9	1	1	s_2(y) = s(y) = 1
+expr-75894417c04da246	1	1	\Sat{M_1}{!A}[s]
+expr-77970456be0eda56	12	12	t'
+expr-77ceec1a9c3f6d4a	40	39	s_1
+expr-789f2eafb09ed59e	8	7	\Sat{M}{\lforall[x][!A(x)]}
+expr-78d9a65fa59e10bd	1	1	\Sat{M'}{\lforall[x][!A(x,f(x))]}
+expr-79854637f5a98a09	1	1	\Struct M_1
+expr-79d4c7f9c8579543	117	115	\Nat
+expr-7b12f782b01f6040	3	1	\Sat{M}{!B}[\Subst{s_2}{m}{x}]
+expr-7c2bfe3ece5e1b3d	1	1	\Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))]}[s]
+expr-7c3e1013ad8e00a5	1	1	s(y) = 1
+expr-7dd0ced9580ba5ab	1	1	\Gamma \cup \{!A\} \Entails \bot
+expr-7ddcd4df9aa9898c	2	2	\Sat/{M}{!B}[s]
+expr-7dfeb393019d052e	1	1	\times(\Obj{two}, +(\Obj{three},\Obj{zero}))
+expr-7f32303161284a82	2	2	\Struct{M[a/c]} \VDash \Subst{!B}{c}{x}
+expr-805f244282059e75	1	1	\Assign{f}{M_1} = \Assign{f}{M_2}
+expr-80e4167001f42f54	1	1	\Assign{\Obj{zero}}{M} = 0
+expr-81914af50c741bc2	1	1	\Value{t}{M}[s_1] = \Assign{c}{M} = \Value{t}{M}[s_2]
+expr-81aa5a490db29cc9	42	42	!A(x)
+expr-81cce9f6a23ef242	2	1	\Sat/{M}{R(a,x)}[\Subst{s}{m}{x}]
+expr-81f3a32f84649bf1	1	1	\Domain M = \{0, 1, 2, \ldots \}
+expr-8238c028f61fc0f7	1065	1252	!A
+expr-8254c329a92850f6	120	120	k
+expr-8283940e609b915d	1	1	\Assign{+}{M}(2,3)
+expr-82ab8783c3e34156	3	1	\Struct{M} \VDash {!B}
+expr-830c9c56b4f2bf21	3	3	t_k
+expr-8438fb51aa3e7ff3	1	1	\Obj{zero}
+expr-84d7c29eb5648796	6	6	\Struct{M_1}
+expr-89a3e31ad3ffe64c	1	1	\Sat/{M}{\indfrm}[s]
+expr-8a88506c08bcb76f	1	1	\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{m}{x}]
+expr-8c2574892063f995	201	196	R
+expr-8cab39dc469434a8	6	6	a \in \Domain M
+expr-8cc4da4685ccb6d6	6	4	\Sat{M}{!A(x)}[\Subst{s}{m}{x}]
+expr-8d2ceb84c6d544a9	10	5	\Sat{M}{\indfrm}[s_1]
+expr-8d6b16026ab97849	1	1	\Sat{M}{R(b,f(a,b))}[s]
+expr-8d83b1e5b5024ce9	1	1	t\ident c
+expr-8db18f5164079501	3	3	\Atom{f}{t_1, \ldots, t_n}
+expr-8e87e01af7056b5a	1	1	1 \in \Domain{M}
+expr-901b97f9011b6076	2	1	\Sat{M}{R(a,x)}[\Subst{s}{1}{x}]
+expr-93783a27567392e3	1	1	\Sat{M}{R(a,x)}[\Subst{s}{m}{x}]
+expr-93962e0ca5a85bc3	1	1	\Sat/{M}{R(a,x)}[\Subst{s}{3}{x}]
+expr-93a4cd7eba9e5f60	15	15	\Struct M'
+expr-95ba8e486def82f9	1	1	a_n \in \Domain M
+expr-95bf94c81b488aea	2	2	t \ident x
+expr-962efd8916600ec1	2	2	\Struct{M} \VDash !C
+expr-967bb2e1175285b4	1	1	\Assign{d_1}{M} = \Assign{d_2}{M}
+expr-9739d6e0c9f5971c	5	5	\lexists[x][!B(x)]
+expr-978aa1b56ca67944	1	1	\Domain{M} = \{1, 2, 3, 4\}
+expr-97bd6db406f673b6	2	1	s_1'(x_i) = s_2'(x_i)
+expr-9871f51210f1ba03	1	1	\Sat{M_2}{!A}[s]
+expr-98ec340caff6fbaa	1	1	\Assign{R}{M} \subseteq \Domain{M}^n
+expr-98fa800f6246ea5b	1	1	\Domain{{{HF}}} = \emptyset \cup \Pow{\emptyset} \cup \Pow{\Pow{\emptyset}} \cup \Pow{\Pow{\Pow{\emptyset}}} \cup \dots
+expr-9951bbe4bed71390	1	1	\Value{t}{M}
+expr-9965c75513c829a9	3	4	\Gamma \cup \{ \lnot !A \}
+expr-9994adab23d06ae7	1	1	n = 4
+expr-99c01d06165f3775	2	2	\Gamma \cup \{ !A \} \Entails !B
+expr-9a7f99fe46f51fc6	1	1	\lforall[x][!A(x)] \Entails !A(t)
+expr-9ac9f96a8283a0a1	6	6	\Subst{s}{m}{x}
+expr-9b22b7bf52646272	1	1	\Value{\Subst{t}{t'}{x}}{M}[s] = \Value{t}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]
+expr-9b64979c9e62b07e	1	1	\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in \Assign{R}{M}
+expr-9c46213e11c633e0	1	1	\Subst{\Subst{s}{1}{x}}{n}{y} = \Subst{s}{1}{y} = s
+expr-9cbf96789bd6fc66	19	36	\Gamma \cup \{\lnot !A\}
+expr-9e11875006c0205e	4	2	\Sat{M}{!B}[s_1]
+expr-9f688118dcff7c20	2	2	t \ident y
+expr-a1a204e47aa16a8c	1	1	\tuple{\Value{t_1}{M}[s], \Value{t_2}{M}[s]}
+expr-a1fce4363854ff88	196	196	y
+expr-a2684d7272dfa60a	1	1	\Lang{L} = \{a, b, f, R\}
+expr-a2e096fed482198e	1	1	\Sat/{M}{R(x,y)}[\Subst{\Subst{s}{m}{x}}{n}{y}]
+expr-a318c24216defe20	29	29	+
+expr-a5f43e56ddef00be	1	1	\Obj{two}
+expr-a6cc8fa73c540574	1	1	\Sat{M}{!A}[\Subst{s}{m}{x}]
+expr-a74616d706390abe	1	1	\Sat/{M}{!A}[s]
+expr-a78f8737637f7a67	1	1	\Sat{M}{R(a, x)}[\Subst{s}{2}{x}]
+expr-a909776303452d42	1	1	\Struct{M} \VDash !B
+expr-ab733e02bed54e75	73	89	\Gamma \Entails !A
+expr-abd1674fcdfe8e7e	2	1	\Sat{M}{R(x,a) \lif R(a,x)}[\Subst{s}{m}{x}]
+expr-ac2d098ac50316bb	2	1	\Sat{M}{\lforall[x][(R(x,a) \lif R(a,x))]}[s],
+expr-ad43fbb3ce9e87ba	2	2	\Obj \in
+expr-add56500c228e815	1	1	\Sat{M}{R(a,x) \land \lforall[y][R(x,y)]}[\Subst{s}{m}{x}]
+expr-afe4b2d5a2c81954	21	36	\Sat{M}{\Gamma}
+expr-b00f269320aa6b7a	1	1	\Assign{c}{M} = 3
+expr-b05f9f2795d69fb8	1	1	\Sat{M}{R(x,y)}[\Subst{\Subst{s}{1}{x}}{n}{y}]
+expr-b33cb829d661e367	1	1	\Value{y}{M}[s] = \Value{y}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]
+expr-b3d2b4cabdd4e0f4	1	1	\Assign{A}{M} = \{\tuple{1, 2}, \tuple{2, 3}, \tuple{3, 3}\}
+expr-b473f180893c5a30	1	1	m = \Value{t'}{M}[s]
+expr-b4a53db066b932c4	1	1	\Assign{c}{M_1} = \Assign{c}{M_2}
+expr-b504f949fb957901	1	1	\Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_1] \\ & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1]). \intertext{For $j = 1$, \dots,~$k$, the !!{variable}s of~$t_j$ are among $x_1$, \dots,~$x_n$. By the induction hypothesis, $\Value{t_j}{M}[s_1] = \Value{t_j}{M}[s_2]$. So,} \Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_1] \\ & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1]) \\ & = \Assign{f}{M}(\Value{t_1}{M}[s_2], \dots, \Value{t_k}{M}[s_2]) \\ & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_2] = \Value{t}{M}[s_2].
+expr-b50bb8940da5b931	64	65	\Lang{L}
+expr-b72990d32b4f2166	3	2	\Sat{M}{!A(t)}[s]
+expr-b7a6f691649904e4	3	3	\Assign{+}{M}
+expr-b87dfbb4955eebf7	15	13	\Sat{M}{\indfrm}[s]
+expr-b8c48e0aed79fa11	1	1	\Value{\indfrm}{M}[s] = s(\indcomplex)
+expr-b8dd5279814127b2	1	1	\Gamma \Entails \Subst{!A}{c}{x}
+expr-bacaf7b3b028b31f	1	1	s_1 = s
+expr-bc652c870bd1d355	1	1	\Value{t_i}{M}[s_1] = \Value{t_i}{M}[s_2]
+expr-bc9367794d2761fe	73	81	!A \in \Gamma
+expr-bce666413d5fdacd	1	1	\Subst{\Subst{s}{2}{x}}{3}{y} = \Subst{s_2}{3}{y}
+expr-be8dcefb61dddd9f	32	32	t_1
+expr-bf3d8d8cbd3fe05d	6	4	\Sat{M}{!B}[s]
+expr-bfcd004124b0529e	2	2	s_2' = \Subst{s_2}{m}{x}
+expr-c04c5d3858876dbd	3	1	\Sat/{M}{!B}[s_1]
+expr-c20c34cba274fe7a	1	1	\Sat{M}{\lexists[x][(A(f(z), c) \lif \lforall[y][(A(y, x) \lor A(f(y), x))])]}[s]
+expr-c289961a0b91db96	11	10	\Sat{M}{!A(x)}[s]
+expr-c3dd27f96970327c	2	2	s_2(x) = 2
+expr-c47cb8017fe81343	1	1	\Value{t}{M_1}[s] = \Value{t}{M_2}[s]
+expr-c688ceb078d567af	1	1	\Sat{M}{!A}[\Subst{s}{\Value{t'}{M}[s]}{x}]
+expr-c693f933e5411b13	1	1	\Obj +
+expr-c6dd3c0ace54edba	1	1	\Subst{t}{t'}{x} = c
+expr-c89cc99aa2294824	1	1	s(v) = 1
+expr-c8a4a749e33f42c9	1	1	\Obj{four}
+expr-c8cad3d51a2f450c	2	2	\Sat{M}{\lexists[x][!A(x)]}
+expr-ca04b08bed54ed23	3	2	\Struct{M} \VDash {\indfrm}
+expr-ca978112ca1bbdca	123	123	a
+expr-cb40773102c92888	2	2	\Gamma \Entails \lnot !A
+expr-cb527e5c9b8d1678	1	1	\Subst{t}{t'}{x}
+expr-cbc435daa35447bb	1	1	\Sat{M_2}{!A}
+expr-cc33d2479ec1d67c	8	8	\eq[t_1][t_2]
+expr-cc60c48e2d7a238f	1	1	\Subst{t}{t'}{x} = t'
+expr-cdc2ed7d3b3d72c2	130	171	\lfalse
+expr-cdde3e68c96b8c74	1	1	\Domain M^2 \to \Domain M
+expr-ce066565f3cf1e09	1	1	\Assign{\Obj +}{M}
+expr-cf3bee087b800eb5	2	1	\Sat{M}{!B}[\Subst{s_1}{m}{x}]
+expr-d0204427f4be5e93	1	1	\Assign{\Obj{two}}{M} = 2
+expr-d04ff80d9f6dc462	79	89	\lif
+expr-d055ee4dbcdd0c8b	392	469	!B
+expr-d0e7f2ffdc2c6af9	1	1	\Struct{{HF}}
+expr-d12d2db1d36c17ad	2	2	\Assign{\Obj 0}{M}
+expr-d252332300cf8bee	4	5	\Gamma \cup \{ !A \}
+expr-d2e494539a50d12e	1	1	\Gamma \Entails \lforall[x][!A]
+expr-d3177012dcf9ccb6	17	11	m \in \Domain{M}
+expr-d32679531f5af8ed	1	1	\Subst{\Subst{s}{2}{x}}{n}{y}
+expr-d4735e3a265e16ee	71	75	2
+expr-d475527c5abd77f4	21	21	\lexists[x][!A(x)]
+expr-d6e527002ded4d50	3	3	\Assign{R}{M}
+expr-d6f7e36999a71407	2	2	\Domain N = \Nat
+expr-d7a17ee1489cf9bc	23	23	\Lang L_A
+expr-d93043758ca96d97	5	4	m = 2
+expr-d97559adcef213ee	1	1	\Sat{M}{\lforall[x][(R(a,x) \lif \lexists[y][R(x,y)])]}[s].
+expr-d976694f75b5f951	1	1	\Subst{t}{t'}{x} = y
+expr-d97901282a92c129	1	1	\tuple{2, 2} \notin \Assign{<}{M}
+expr-d9b1567a52bb6c42	19	18	x_1
+expr-da514dfe053ab9ca	1	1	\Assign{b}{M} = 2
+expr-dabd3aff769f07eb	73	73	<
+expr-dac6f7a5260dcf66	1	1	\Gamma = \{ \ltrue \}
+expr-db9a6ac319db4b0e	1	1	\Value{t}{M}[s_1] = s_1(x_i) = s_2(x_i) = \Value{t}{M}[s_2]
+expr-dc9f90a502cae6ab	1	1	\Assign{\Obj \in}{{{HF}}} = \Setabs{\tuple{x, y}}{x, y \in \Domain{{{HF}}}, x \in y}
+expr-dd7d690b005e955c	30	51	\Sat{M}{!A}
+expr-de18896129ed2929	2	2	\Sat{M}{!A}[s_2]
+expr-def9261af216c3fb	7	7	R(x,y)
+expr-defa158f709798c0	3	5	\Sat{M}{\lnot !A}
+expr-df40e55c9b709a2d	3	1	\Sat/{M}{!B}[s_2]
+expr-e0b42b0f1416aa46	1	1	\langle \Value{t_i}{M}[s_2], \ldots, \Value{t_k}{M}[s_2] \rangle \in \Assign{R}{M}
+expr-e3b98a4da31a127d	187	185	t
+expr-e3dd7f65750b9bfc	1	1	\Obj{two} \times (\Obj{three} + \Obj{zero})
+expr-e4168f2e86c3a20c	1	1	s_1 & = \Subst{s}{1}{x}, & s_2 & = \Subst{s}{2}{x},\\ s_3 & = \Subst{s}{3}{x}, & s_4 & = \Subst{s}{4}{x}.
+expr-e492b02824f52f65	5	5	n, m \in \Nat
+expr-e49456f7e2b6f23b	9	4	\Sat{M}{\indfrm}[s_2]
+expr-e54c6513d9ceaf9c	24	25	!A(t)
+expr-e62ef3b059849649	1	1	\Assign{f}{M}(x, y) = x+y
+expr-e94f86552ce7b2ed	3	2	\lforall[x][!B(x)]
+expr-e9ada99c1c2eab42	1	1	\tuple{2,1}\notin \Assign{R}{M}
+expr-ec3f680334de2993	1	1	\lforall[x][\lexists[y][!A(x,y)]]
+expr-ef2a410c56701b10	1	1	\Lang L = \{c, f, A\}
+expr-ef2d127de37b942b	10	9	5
+expr-ef808fb9fda7e7db	1	1	= 3
+expr-efa51acdf0e7c3c4	74	77	\Lang L
+expr-f09f21def8336ded	2	2	\Obj <
+expr-f258060031302a03	1	1	\Sat{M}{\lexists[x][(R(b,x) \lor R(x,b))]}[s],
+expr-f2bca4e4c70abf35	1	1	t \ident \Atom{f}{t_1,\dots,t_n}
+expr-f307e2eaf1cce4d9	1	1	!A(t) \Entails \lexists[x][!A(x)]
+expr-f37d286820db58c2	1	1	\Value{\Subst{t}{t'}{x}}{M}[s] = \\ \begin{aligned}[b] & = \Value{\Atom{f}{\Subst{t_1}{t'}{x}, \dots, \Subst{t_n}{t'}{x}}}{M}[s]\\ & \qquad \text{ by definition of $\Subst{t}{t'}{x}$}\\ & = \Assign{f}{M}(\Value{\Subst{t_1}{t'}{x}}{M}[s], \dots, \Value{\Subst{t_n}{t'}{x}}{M}[s])\\ & \qquad \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s]$}\\ & = \Assign{f}{M}(\Value{t_1}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}], \dots, \Value{t_n}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}])\\ & \qquad \text{ by induction hypothesis}\\ & = \Value{t}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}] \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$} \end{aligned}
+expr-f5ef8fb63057ea06	14	14	!A(a)
+expr-f6c23b8d7b07f47d	1	1	\Sat/{M}{\lforall[y][R(x,y)]}[\Subst{s}{m}{x}]
+expr-f77c74bb4fa8ccdc	1	1	\Sat/{M}{\lexists[x][(R(a,x) \land \lforall[y][R(x,y)])]}[s].
+expr-f7aebdfb17191aea	1	1	\langle \Assign{d_1}{M}, \dots, \Assign{d_n}{M} \rangle \in \Assign{R}{M}
+expr-f8c3828a4c9b00c9	11	11	!B(x)
+expr-f913ea491afb61dc	1	1	\Domain M = \{1, 2, 3\}
+expr-f96630922dfc449a	3	3	n = 1
+expr-f9d2b85dd6e859b3	1	1	\Sat{M}{\lforall[x][\lexists[y][!A(x,y)]]}
+expr-fa890be07b47736d	6	3	s_1'
+expr-fdf06048cd7afb55	1	1	t = x_i
+expr-fe5dbe33b98e7c61	13	8	m \in \Domain M
+expr-ff9ba27416d63e9a	14	14	(!A \land !B)

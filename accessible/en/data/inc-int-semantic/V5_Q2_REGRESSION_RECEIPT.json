@@ -1,0 +1,50 @@
+{
+  "expression_variants_repaired": 4,
+  "full_speech_source_ids_preserved": true,
+  "independent_audit_claimed": false,
+  "occurrence_variants_repaired": 6,
+  "schema": "openlogic-tr034-v5-q2-regression-v1",
+  "source_evidence": {
+    "macro_definition": {
+      "file": "open-logic-config.sty",
+      "lines": [
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173
+      ],
+      "meaning": "With two optional operands, eq slash emits the first operand, inequality, then the second operand.",
+      "sha256": "ab19be71b50b415738603290317b504d9fa6b82850fe640d585c62db1540ced3"
+    },
+    "source_eq_slash_occurrences": 1,
+    "source_occurrences": [
+      {
+        "file": "content/incompleteness/introduction/definitions.tex",
+        "line": 108,
+        "occurrences": 1,
+        "source_text": "& \\lforall[x][\\eq/[\\Obj 0][x']] \\tag{$!Q_2$}\\\\"
+      }
+    ]
+  },
+  "status": "PASS_Q2_SOURCE_OPERANDS_AND_UNCHANGED_OTHER_AXIOMS",
+  "targeted_mutations_rejected": [
+    {
+      "reason": "Q2 inequality must have both operands",
+      "status": "REJECTED",
+      "test": "left_operand_deleted"
+    },
+    {
+      "reason": "Q2 inequality must have both operands",
+      "status": "REJECTED",
+      "test": "right_operand_deleted"
+    },
+    {
+      "reason": "Q2 left operand object-language zero style",
+      "status": "REJECTED",
+      "test": "operands_swapped"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "accepted_base": {
+    "bytes": 209390738,
+    "file_count": 2044,
+    "tree_sha256": "23b21f00758ba1326fd20e548899921e0980de4dcaafb89e94c888f53d776bdb"
+  },
+  "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "counts": {
+    "correction_disclosures": 22,
+    "formula_bindings": 1562,
+    "listener_rows": 23,
+    "listener_words": 31427,
+    "read_events": 3253,
+    "reference_bindings": 33,
+    "source_bytes": 109641,
+    "source_characters": 109641,
+    "source_files": 23,
+    "source_lines": 2540,
+    "tranches": 3
+  },
+  "counts_by_tranche": {
+    "OLAB-TR-025": {
+      "correction_disclosures": 8,
+      "formulas": 333,
+      "listener_words": 9112,
+      "references": 0,
+      "source_rows": 8
+    },
+    "OLAB-TR-026": {
+      "correction_disclosures": 3,
+      "formulas": 481,
+      "listener_words": 8191,
+      "references": 20,
+      "source_rows": 8
+    },
+    "OLAB-TR-027": {
+      "correction_disclosures": 11,
+      "formulas": 748,
+      "listener_words": 14124,
+      "references": 13,
+      "source_rows": 7
+    }
+  },
+  "execution_boundary": {
+    "audio_generated": false,
+    "browser_or_assistive_technology_launched": false,
+    "durable_controls_modified": false,
+    "network_used": false,
+    "offline_only": true,
+    "tr024_files_modified": false
+  },
+  "limitations": [
+    "Producer evidence only; separate independent listener acceptance is required.",
+    "No browser, screen reader, braille display, voice-control, audio, or device test was run.",
+    "No audible Edge Read Aloud test was run."
+  ],
+  "manifest_sha256": "e26f91c0a328766c95cc8d8f6cc3bfd4c5481fb14cd292c1a38d7a97c3726a34",
+  "paired_derivation": {
+    "listen_stream_sha256": "7699ec84e7938ab785f6ccb3cd1ff59b01b40df080aeff4cf3808102f18ab1b2",
+    "read_stream_sha256": "a34fef8bf421aa3470d383cd8877cd7b0805077c0f4895653cd2223cf9cbfe5b",
+    "status": "PASS_BYTE_IDENTICAL"
+  },
+  "producer_sha256": "d6112dac519bdaab85e27a5b64d25117c220059b5dd97602039202b477aa4f9b",
+  "schema": "openlogic.accessible.tr025-tr027.listener-batch-receipt.v1",
+  "self_tests": {
+    "mutation_count": 6,
+    "results": [
+      {
+        "mutation": "listen-text-raw-tex",
+        "reason": "listener event recomposition drift: olab-tr-025-source-replay-02",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "mutation": "shared-event-drift",
+        "reason": "Read/Listen event drift: olab-tr-025-source-replay-03",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "mutation": "partition-gap",
+        "reason": "event hash drift: olab-tr-025-source-replay-04",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "mutation": "forward-reference-activated",
+        "reason": "validation forward reference was activated",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "mutation": "formula-binding-loss",
+        "reason": "validation formula total drift",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "mutation": "event-hash-drift",
+        "reason": "event hash drift: olab-tr-025-source-replay-06",
+        "status": "PASS_REJECTED"
+      }
+    ],
+    "status": "PASS_ALL_MUTANTS_REJECTED"
+  },
+  "stable_id_closure": {
+    "formula_contiguous": true,
+    "formula_first": "projected-formula-0012037",
+    "formula_last": "projected-formula-0013598",
+    "forward_inert_references": [
+      "reference-000517",
+      "reference-000518"
+    ],
+    "reference_first": "reference-000491",
+    "reference_last": "reference-000523"
+  },
+  "status": "PASS_PRODUCER_SOURCE_ORDERED_WORDS_ONLY_BATCH_REQUIRES_SEPARATE_INDEPENDENT_ACCEPTANCE"
+}

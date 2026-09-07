@@ -1,0 +1,3 @@
+# Inequality operand restoration
+
+Eighteen inherited formulas omitted source-specified inequality operands in native MathML (twenty inequality signs). Five defects were found among initially unflagged controls because unrelated siblings masked empty operands. This successor overlay inserts only missing operand nodes. Source, speech, IDs, annotations, unrelated native nodes and all nonmath bytes remain unchanged. Six true controls, including FOL Syntax formula0006417, retain their operands and are unchanged. Prior theory/Sat normalizations are preserved in routes and current semantic overrides. Overlay is authored, not independently accepted.

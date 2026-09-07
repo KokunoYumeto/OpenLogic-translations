@@ -1,0 +1,83 @@
+/* TR-003 Relations additions; the frozen Sets stylesheet is not modified. */
+.chapter-section { margin-block: 3rem; }
+.chapter-section > h2 { border-block-end: .18rem solid var(--accent); padding-block-end: .35rem; }
+.formal-object, .explanation, .introduction, .proof { border: .12rem solid var(--border); border-inline-start-width: .45rem; border-radius: .45rem; margin-block: 1.4rem; padding: 1rem 1.2rem; }
+.formal-object.definition { border-inline-start-color: #536dfe; }
+.formal-object.example { border-inline-start-color: #00897b; }
+.formal-object.exercise { border-inline-start-color: #ef6c00; }
+.formal-object.proposition { border-inline-start-color: #8e24aa; }
+.formal-object.diagram { border-inline-start-color: #00695c; }
+.explanation, .introduction { background: color-mix(in srgb, var(--surface) 90%, #b3e5fc); }
+.proof { border-inline-start-color: #455a64; }
+.proof-end { font-style: italic; }
+.formula-occurrence { display: inline-block; max-inline-size: 100%; overflow-x: auto; overflow-y: hidden; position: relative; vertical-align: middle; }
+.formula-occurrence.display-math { display: block; overflow-x: auto; padding: .65rem .15rem; margin-block: .7rem; }
+.formula-core { display: inline; }
+.source-pin { font-size: .67em; font-weight: 650; margin-inline-start: .3em; vertical-align: super; white-space: nowrap; }
+.source-cite { font-size: .8rem; margin-block-end: 0; text-align: end; }
+.relation-diagram { display: block; inline-size: min(100%, 38rem); block-size: auto; margin: 1rem auto; }
+.relation-diagram text { fill: currentColor; font: 700 1.15rem system-ui, sans-serif; text-anchor: middle; }
+.graph-node, .tree-nodes circle { fill: var(--surface); stroke: currentColor; stroke-width: 3; }
+.graph-edge, .tree-edges line { fill: none; stroke: currentColor; stroke-width: 3; }
+.arrow-head { fill: currentColor; }
+.diagram-structure dl { display: grid; grid-template-columns: minmax(8rem, max-content) 1fr; gap: .4rem .8rem; }
+.diagram-structure dt { font-weight: 750; }
+.diagram-structure dd { margin: 0; }
+.tree-node-register { columns: 2 18rem; }
+.equation-grid { display: grid; gap: 1.2rem; }
+.equation-card { border: .12rem solid var(--border); border-radius: .5rem; padding: 1rem; min-inline-size: 0; }
+.equation-card .math-scroll { overflow-x: auto; }
+.occurrence-list { columns: 2 22rem; }
+.source-block { margin-block: 2.5rem; }
+.source-lines { overflow-x: auto; padding-inline-start: 4.3rem; }
+.source-lines li { padding-inline-start: .6rem; white-space: pre; }
+.source-lines li:target, :target { outline: .22rem solid #ffbf00; outline-offset: .22rem; }
+.active-chapter { border-inline-start: .35rem solid var(--accent); padding-inline-start: .75rem; }
+.profile-links { display: flex; flex-wrap: wrap; gap: .35rem .8rem; list-style: none; padding: 0; }
+.bibliography-entry { border-inline-start: .35rem solid var(--accent); padding-inline-start: 1rem; }
+@media (max-width: 38rem) {
+  .diagram-structure dl { grid-template-columns: 1fr; }
+  .tree-node-register, .occurrence-list { columns: 1; }
+  .source-lines { padding-inline-start: 3.2rem; }
+  .formal-object, .explanation, .introduction, .proof { padding: .8rem; }
+}
+@media (forced-colors: active) {
+  .formal-object, .explanation, .introduction, .proof, .equation-card { border-color: CanvasText; }
+  .graph-node, .tree-nodes circle, .graph-edge, .tree-edges line { stroke: CanvasText; }
+  .arrow-head { fill: CanvasText; }
+}
+/* Four-chapter cumulative additions. */
+.formal-object.theorem { border-inline-start-color: #7b1fa2; }
+.formal-object.corollary { border-inline-start-color: #5e35b1; }
+.editorial-note, .reader-correction { border: .12rem solid var(--border); border-inline-start: .45rem solid #ad6200; border-radius: .45rem; margin-block: 1.4rem; padding: 1rem 1.2rem; }
+.reader-note { font-style: italic; }
+.function-diagram { display: block; inline-size: min(100%, 46rem); block-size: auto; margin: 1rem auto; }
+.function-diagram ellipse, .function-diagram circle { fill: var(--surface); stroke: currentColor; stroke-width: 3; }
+.function-diagram line { stroke: currentColor; stroke-width: 2.5; }
+.function-diagram path { fill: currentColor; }
+.function-diagram text { fill: currentColor; font: 700 1rem system-ui, sans-serif; text-anchor: middle; }
+.function-diagram .composite-arrows line { stroke-dasharray: 8 6; }
+.diagram-steps { max-inline-size: 55rem; }
+.outbound-reference { border-block-end: .12em dotted currentColor; }
+@media (max-width: 38rem) {
+  .editorial-note, .reader-correction { padding: .8rem; }
+}
+@media (forced-colors: active) {
+  .editorial-note, .reader-correction { border-color: CanvasText; }
+  .function-diagram ellipse, .function-diagram circle, .function-diagram line { stroke: CanvasText; }
+  .function-diagram path { fill: CanvasText; }
+}
+/* About and Propositional Logic cumulative additions. */
+.truth-table table { border-collapse: collapse; inline-size: min(100%, 44rem); margin-block: 1rem; }
+.truth-table th, .truth-table td { border: .1rem solid var(--border); padding: .55rem .75rem; text-align: start; }
+.proof-object, .truth-table { border-inline-start-color: #315f8a; }
+.object-steps, .spoken-object-formulas, .object-formulas ol { max-inline-size: 65rem; }
+.source-view pre { max-inline-size: 100%; overflow: auto; white-space: pre; }
+.source-line { display: block; }
+@media (max-width: 20rem) {
+  .truth-table { overflow-wrap: anywhere; }
+  .truth-table th, .truth-table td { padding: .35rem; }
+}
+@media (forced-colors: active) {
+  .truth-table th, .truth-table td { border-color: CanvasText; }
+}

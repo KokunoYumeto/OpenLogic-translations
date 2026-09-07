@@ -1,0 +1,151 @@
+{
+  "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "authority_mutated": false,
+  "check_count": 21,
+  "checks": [
+    {
+      "check_id": "CURRENT-INPUT-FREEZE",
+      "detail": "current 256-record re-audit input freeze matches its exact aggregate",
+      "status": "PASS"
+    },
+    {
+      "check_id": "INITIAL-FAIL-PRESERVED",
+      "detail": "the exact initial five-semantic-plus-deterministic FAIL and its input snapshot remain byte-identical",
+      "status": "PASS"
+    },
+    {
+      "check_id": "REPAIRED-PINS",
+      "detail": "all three repaired producer pins equal the assigned values",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROJECTION-MANIFEST",
+      "detail": "all canonical projection manifest bindings replay",
+      "status": "PASS"
+    },
+    {
+      "check_id": "VALIDATION-MANIFEST",
+      "detail": "all producer validation manifest bindings replay",
+      "status": "PASS"
+    },
+    {
+      "check_id": "VALIDATION-BINDING",
+      "detail": "producer validation binds the repaired projection and nine adversarial rejections",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ADVERSARIAL-TESTS",
+      "detail": "all nine named adversarial mutations are recorded as rejected",
+      "status": "PASS"
+    },
+    {
+      "check_id": "UPSTREAM-BINDING",
+      "detail": "all eleven declared upstream/core/oracle hashes, byte counts, record counts, and builder pins match current files",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COLD-REPLAY",
+      "detail": "two fresh independent producer replays are byte-identical to each other, all nine canonical files, and the producer cold-replay receipt",
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTHORITY-HEAD",
+      "detail": "immutable authority HEAD remains the pinned commit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SOURCE-AUTHORITY",
+      "detail": "all six sources replay exactly at 21,672 bytes and 461 lines",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ORACLE-CLOSURE",
+      "detail": "oracle closes at 6 sources, 64 shapes, 137 contexts, 4 formal objects, 2 proof diagrams, and 7 proof commands",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROJECTION-HEADLINES",
+      "detail": "projection has 64 expressions (40 authored, 13 exact reuse, 11 repaired prior), 137 contexts, 15 exact overrides, 128 MathML variants, and 4 formal objects",
+      "status": "PASS"
+    },
+    {
+      "check_id": "UNCHANGED-SEMANTICS",
+      "detail": "all 41 previously passing expression semantics remain text-identical to the frozen exhaustive first review",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FROZEN-FINDING-CLOSURE",
+      "detail": "all five frozen semantic findings and the deterministic-binding finding resolve on their exact record/context counts",
+      "status": "PASS"
+    },
+    {
+      "check_id": "EXPRESSION-REPLAY",
+      "detail": "all 64 expression records and 128 unflattened MathML variants replay their source shapes, census counts, hashes, and semantics",
+      "status": "PASS"
+    },
+    {
+      "check_id": "CONTINUOUS-WORDS",
+      "detail": "all 64 expression speeches are non-symbolic continuous words with no bare digits",
+      "status": "PASS"
+    },
+    {
+      "check_id": "OCCURRENCE-REPLAY",
+      "detail": "all 137 contexts replay exact source coordinates, payloads, contextual semantics, MathML, and hash bindings",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FORMAL-NARRATIVES",
+      "detail": "both proof trees, the tableau, and the axiomatic derivation preserve complete ordered narratives and the source-label disclosure",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROOF-COMMANDS",
+      "detail": "both proof diagrams and all seven source commands replay in exact order",
+      "status": "PASS"
+    },
+    {
+      "check_id": "INPUT-STABILITY",
+      "detail": "all 256 frozen producer/oracle/upstream/authority inputs remained byte-identical during re-audit",
+      "status": "PASS"
+    }
+  ],
+  "counts_replayed": {
+    "adversarial_rejections": 9,
+    "derivations": 1,
+    "exact_contextual_overrides": 15,
+    "expression_records": 64,
+    "formal_objects": 4,
+    "formula_occurrences": 137,
+    "independent_cold_replays": 2,
+    "mathml_variants": 128,
+    "proof_commands": 7,
+    "proof_trees": 2,
+    "repaired_expression_records": 23,
+    "source_bytes": 21672,
+    "source_files": 6,
+    "source_lines": 461,
+    "tableaux": 1,
+    "unchanged_first_pass_semantics": 41,
+    "upstream_pins": 11
+  },
+  "git_used": false,
+  "independent_semantic_review": "COMPLETE_ALL_64_EXPRESSIONS_137_EXACT_CONTEXTS_128_MATHML_VARIANTS_4_FORMAL_OBJECTS",
+  "input_aggregate_sha256": "8b00aa63a4890fcb3c4e373bc67a82623b211cd0fe9926eb73c44593873c6332",
+  "input_stability": "PASS_BYTE_IDENTICAL",
+  "preserved_initial_finding_count": 6,
+  "producer_edited": false,
+  "publication": false,
+  "remote_mutation": false,
+  "repaired_pins": {
+    "producer_validation_manifest": "245a22eab1673e8751c20555a2e176af86b0d2971f0cd77e44218455e21e6088",
+    "producer_validation_receipt": "d7c1ece647c4bcef78e38325fdc3b4e708985f004f5d4292d505ce864190725d",
+    "projection_manifest": "d5548bdd3cef2a921c27648d3fdbf478931b2db1755eb3663d7d52633cdcf3d1"
+  },
+  "resolved_historical_findings": 6,
+  "result": "PASS",
+  "schema": "openlogic-independent-tr009-superseding-semantic-reaudit-v1",
+  "supersedes_initial_fail_sha256": "5b629fff5a6d7f35f3f06b602e7c01d493889aa8549b739318a8cc37e26a44d8",
+  "tranche_id": "OLAB-TR-009",
+  "unresolved_mechanical_findings": 0,
+  "unresolved_semantic_findings": 0
+}

@@ -1,0 +1,36 @@
+{
+  "families": {
+    "derivation": "numbered lines, formula semantics, justifications, cited dependencies, and a words-only traversal",
+    "diagram": "semantic SVG or equivalent structured representation, short alternative text, long description, object list, relations, and source asset hook",
+    "proof": "ordered proof steps with readable notation, words-only speech, labels, dependencies, and a long description",
+    "proof_tree": "tree or flattened reading-order steps plus explicit branch/dependency metadata and a long description",
+    "table": "caption, row/column headers, scoped cells, words-only row summaries, and a scroll container",
+    "tableau": "nodes in deterministic reading order, branch/closure metadata, and a complete spoken traversal"
+  },
+  "future_extension_rule": "unknown formal families fail closed until this versioned interface is extended and adversarially tested",
+  "native_math": "unflattened and unnamed-root MathML in Read and Explore; separately authored words-only text in Listen",
+  "profile_rules": {
+    "explore": "pair every notation object with its conventional reading, contextual meaning, and structural description",
+    "listen": "ordinary escaped prose only; no MathML, TeX, SVG, or symbolic operators",
+    "read": "preserve structured notation and navigation; reject aria-label, aria-labelledby, alttext, and role=img on the MathML root; provide expandable conventional speech outside the MathML tree",
+    "source": "expose line-addressable source excerpts and hash-bound provenance"
+  },
+  "required_common_fields": [
+    "id",
+    "kind=formal_object",
+    "formal_kind",
+    "caption",
+    "summary",
+    "long_description",
+    "listen_text",
+    "items",
+    "source_spans"
+  ],
+  "required_item_fields": [
+    "id",
+    "label",
+    "read_html",
+    "listen_text"
+  ],
+  "schema": "openlogic-formal-object-interfaces-v1"
+}

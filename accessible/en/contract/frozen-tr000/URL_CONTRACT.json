@@ -1,0 +1,26 @@
+{
+  "chapter_pattern": "parts/{part_key}/chapters/{chapter_local_key}/{profile}.html",
+  "fragment_policy": {
+    "generated_ids": "ol-{readable semantic tuple}--{first 12 hex digits of SHA-256 of the tuple}",
+    "profile_parity": "a semantic object keeps the same fragment ID in every chapter profile where it appears",
+    "source_labels": "preserve a unique literal source label; apply an adjudicated sidecar-derived literal ID when required"
+  },
+  "frontmatter_pattern": "frontmatter/{chapter_key}/{profile}.html",
+  "global_routes": {
+    "about_and_changes": "about-this-edition.html",
+    "bibliography": "bibliography/index.html",
+    "bookshelf": "index.html",
+    "editorial_interventions": "editorial-interventions.html",
+    "source_inventory": "sources/index.html"
+  },
+  "part_pattern": "parts/{part_key}/index.html",
+  "profiles": [
+    "read",
+    "listen",
+    "explore",
+    "source"
+  ],
+  "relative_link_policy": "all core navigation and assets use package-relative URLs with no base element",
+  "reserved_route_policy": "reserved chapter routes are data, not anchors, until their tranche is integrated; no broken links are emitted",
+  "schema": "openlogic-offline-url-contract-v1"
+}

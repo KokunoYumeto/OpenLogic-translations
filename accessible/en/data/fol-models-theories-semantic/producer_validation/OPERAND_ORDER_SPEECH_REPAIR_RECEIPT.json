@@ -1,0 +1,39 @@
+{
+  "column": 1,
+  "complete_replay": {
+    "continuous_speech_repairs_verified": 17,
+    "final_four_repairs_verified": 4,
+    "formula_occurrences_replayed": 310,
+    "operand_order_repairs_verified": 1,
+    "replay_sha256_by_source": {
+      "content/first-order-logic/models-theories/expressing-props-of-structures.tex": "29d8d89bb9a1dbd1f72636e7f74063592eaf008954a0a7aa6191bab83075cf8f",
+      "content/first-order-logic/models-theories/expressing-relations.tex": "9f5cd83a48eb7b1cb9466b52221601be17a51854728aca347ea43f45388a29cb",
+      "content/first-order-logic/models-theories/introduction.tex": "8770b951253be99a854b621d15ce7fc84dcfa79d2f8a706ca46c22b9be8e6e11",
+      "content/first-order-logic/models-theories/models-theories.tex": "c90d72234ad008e1fee9b29020f44943930004dcc48021de36c9725a2b6436ef",
+      "content/first-order-logic/models-theories/set-theory.tex": "52914201729b87e32aaaa9a0fac2a98ab6d34768864585571162ec7ad3ec4225",
+      "content/first-order-logic/models-theories/size-of-structures.tex": "f72c939d407648ca277589a40be942fc28281909c2518f8f3a748f6e3d5c6e79",
+      "content/first-order-logic/models-theories/theories.tex": "a49e1ddb7e16c30ec27db08162672a730ef2e76d909bf000742ce1579ee39d13"
+    },
+    "source_files_replayed": 7,
+    "status": "PASS_ALL_310_OCCURRENCES_REPLAYED_AND_SEVENTEEN_SOURCE_FRAMES_REPAIRED",
+    "superseding_repairs_verified": 12
+  },
+  "exact_repaired_clause": "for every x there is a y such that x times y equals one",
+  "expression_id": "expr-882195882cc0cc45",
+  "file": "content/first-order-logic/models-theories/theories.tex",
+  "finding_id": "TR018-IND-FRESH-SPEECH-001",
+  "formula_id": "projected-formula-0007820",
+  "formula_start_line": 32,
+  "independent_audit_status": "NOT_RUN_NOT_CLAIMED",
+  "meaning": "These three sentences axiomatize groups using an identity constant, associativity, and existence of inverses. In the group theory axioms, this occurrence is the complete bound-variable condition stated by this formula.",
+  "normalized_tex": "& \\lforall[x][\\eq[(x \\cdot \\Obj 1)][x]]\\\\ & \\lforall[x][\\lforall[y][\\lforall[z][\\eq[(x \\cdot (y \\cdot z))][((x \\cdot y) \\cdot z)]]]]\\\\ & \\lforall[x][\\lexists[y][\\eq[(x \\cdot y)][\\Obj 1]]]",
+  "repaired_source_clause_line": 36,
+  "repaired_speech": "first, every x times one equals x; second, multiplication is associative; third, for every x there is a y such that x times y equals one",
+  "schema": "openlogic-accessible-tr018-operand-order-speech-repair-receipt-v1",
+  "scoped_delta_status": "PASS_EXACT_ONE_OPERAND_ORDER_SPEECH_ROW_CHANGED_IN_EACH_OF_THREE_SEMANTIC_ARTIFACTS",
+  "semantic_scope": "ONE EXPRESSION SPEECH FIELD AND ITS ONE OCCURRENCE/REVIEW SPEECH FIELD; DEPENDENT RECORD HASHES ONLY; ALL OTHER SEMANTIC AND SOURCE FIELDS UNCHANGED",
+  "source_packet_sha256": "65908ad635dc802ba5dfe05170586bb6e2da2807e50202a4840986398f0c4768",
+  "status": "PASS_OPERAND_ORDER_PRODUCER_REPAIR_READY_FOR_FRESH_INDEPENDENT_AUDIT",
+  "superseded_speech": "first, every x times one equals x; second, multiplication is associative; third, every x has a right inverse whose product with x is one",
+  "tranche_id": "OLAB-TR-018"
+}

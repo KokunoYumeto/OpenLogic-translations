@@ -1,0 +1,175 @@
+{
+  "adversarial_replay": "PASS_ALL_REJECTED",
+  "assigned_pins": {
+    "equality_ledger": "a52e162a1b9e94fde99fd76ac94ed03e4d8cc9816b3b2b96820069ea9d2803e3",
+    "producer_validation_manifest": "872f73e7e5828c8b4024618d53fac624dbe7cd0d353b903db2099029ad621d91",
+    "producer_validation_receipt": "6bbd2e726ba751ebba4fa1f14e152e179a99abb7cad1e658aac9f4333fc58ce8",
+    "projection_manifest": "aa7eabfd154d60196294bcf12f3326eadcf29e995cc7ec282e71bfe3872dc020",
+    "repair_closure": "82d9a2764d9d34a1433115a596caa0c1bbafe67e00b0dcec8d983b512edd4cf6"
+  },
+  "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "authority_mutated": false,
+  "check_count": 21,
+  "checks": [
+    {
+      "check_id": "INITIAL-FAIL-PRESERVED-BEFORE",
+      "detail": "the complete initial FAIL manifest and assigned receipt/report pins replay",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ASSIGNED-PINS",
+      "detail": "all repaired producer pins and the unchanged 214-row ledger pin are exact",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROJECTION-MANIFEST",
+      "detail": "the repaired projection manifest replays",
+      "status": "PASS"
+    },
+    {
+      "check_id": "VALIDATION-MANIFEST",
+      "detail": "the repaired producer-validation manifest replays",
+      "status": "PASS"
+    },
+    {
+      "check_id": "VALIDATION-BINDING",
+      "detail": "producer validation binds the repaired projection manifest and reports 18 adversarial rejections",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SOURCE-CLOSURE",
+      "detail": "six authority files replay at 21,672 bytes and 461 lines",
+      "status": "PASS"
+    },
+    {
+      "check_id": "SOURCE-EQUALITY",
+      "detail": "64 shapes, 137 coordinate/context packets, and the 214-row ledger replay independently",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROFILE-GATES",
+      "detail": "all six entry differences remain profile identity gates only",
+      "status": "PASS"
+    },
+    {
+      "check_id": "EXPRESSION-SEMANTICS",
+      "detail": "exactly 62 expression payloads remain unchanged and exactly two contain reviewed FOL repairs",
+      "status": "PASS"
+    },
+    {
+      "check_id": "MATHML",
+      "detail": "all 128 MathML variants remain native, unflattened, and exact for double-struck T/F",
+      "status": "PASS"
+    },
+    {
+      "check_id": "OCCURRENCE-SEMANTICS",
+      "detail": "all 137 exact contexts close with exactly three reviewed FOL repairs and 134 unchanged semantic payloads",
+      "status": "PASS"
+    },
+    {
+      "check_id": "CONTEXT-OVERRIDES",
+      "detail": "all 15 context-specific overrides retain their reviewed local roles",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FORMAL-OBJECTS",
+      "detail": "two proof trees, one tableau, and one derivation retain complete ordered words-only narratives",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROOF-OBJECTS",
+      "detail": "two diagrams and seven proof commands replay at exact source coordinates",
+      "status": "PASS"
+    },
+    {
+      "check_id": "IMMUTABLE-BOUNDARY",
+      "detail": "exactly nine immutable inputs bind bytes and mutable controls remain hash-free operational context",
+      "status": "PASS"
+    },
+    {
+      "check_id": "COLD-REPLAY",
+      "detail": "canonical, pair A, and pair B are byte-identical",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ADVERSARIAL-GATES",
+      "detail": "all 18 repaired producer adversarial mutations are rejected",
+      "status": "PASS"
+    },
+    {
+      "check_id": "REPAIR-CLOSURE",
+      "detail": "repair closure binds and addresses the exact three frozen finding IDs",
+      "status": "PASS"
+    },
+    {
+      "check_id": "PROTECTED-INPUT-STABILITY",
+      "detail": "all protected semantic/audit inputs remained byte-identical during re-audit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "CONTROL-NONMUTATION",
+      "detail": "operational controls were not changed during re-audit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "INITIAL-FAIL-PRESERVED-AFTER",
+      "detail": "the complete initial FAIL remains byte-identical after re-audit",
+      "status": "PASS"
+    }
+  ],
+  "cold_replay": "PASS_BYTE_IDENTICAL",
+  "controls_edited": false,
+  "counts_replayed": {
+    "adversarial_rejections": 18,
+    "contextual_overrides": 15,
+    "derivations": 1,
+    "equality_ledger_records": 214,
+    "exact_tr009_expression_payloads": 62,
+    "exact_tr009_occurrence_payloads": 134,
+    "expression_records": 64,
+    "fol_profile_expression_repairs": 2,
+    "fol_profile_occurrence_repairs": 3,
+    "formal_objects": 4,
+    "formula_occurrences": 137,
+    "immutable_semantic_inputs": 9,
+    "mathml_variants": 128,
+    "profile_gates": 6,
+    "proof_commands": 7,
+    "proof_diagrams": 2,
+    "proof_trees": 2,
+    "references": 0,
+    "source_bytes": 21672,
+    "source_files": 6,
+    "source_lines": 461,
+    "tableaux": 1
+  },
+  "current_pins": {
+    "equality_ledger": "a52e162a1b9e94fde99fd76ac94ed03e4d8cc9816b3b2b96820069ea9d2803e3",
+    "producer_validation_manifest": "872f73e7e5828c8b4024618d53fac624dbe7cd0d353b903db2099029ad621d91",
+    "producer_validation_receipt": "6bbd2e726ba751ebba4fa1f14e152e179a99abb7cad1e658aac9f4333fc58ce8",
+    "projection_manifest": "aa7eabfd154d60196294bcf12f3326eadcf29e995cc7ec282e71bfe3872dc020",
+    "repair_closure": "82d9a2764d9d34a1433115a596caa0c1bbafe67e00b0dcec8d983b512edd4cf6"
+  },
+  "git_used": false,
+  "historical_findings": 3,
+  "initial_fail_pins": {
+    "manifest": "9390141d72faca61d00bd399211f10c479c7224573505858b843bbc9a55a8bd3",
+    "receipt": "ebf1814616fa2eef0bb4dd71b4afa2a66959705eac1aceca2d81062599fa2918",
+    "report": "e5de41aeaa5a49c6ce702476b3bb5c09b316af527224ee517d6fe7ad415da8fc"
+  },
+  "initial_fail_preserved": "PASS_BYTE_IDENTICAL",
+  "operational_control_stability": "PASS_BYTE_IDENTICAL",
+  "producer_edited": false,
+  "protected_input_aggregate_sha256": "3ddc1264e9feb5cc6aec03681643502f4c0821e38f4ac7b829e788cb16248f35",
+  "protected_input_stability": "PASS_BYTE_IDENTICAL",
+  "publication": false,
+  "remote_mutation": false,
+  "resolved_historical_findings": 3,
+  "result": "PASS",
+  "schema": "openlogic-independent-tr019-fol-derivation-systems-superseding-reaudit-v1",
+  "semantic_review": "PASS_ALL_64_EXPRESSIONS_137_CONTEXTS_15_OVERRIDES_128_MATHML_4_FORMALS",
+  "tranche_id": "OLAB-TR-019",
+  "unresolved_deterministic_findings": 0,
+  "unresolved_mechanical_findings": 0,
+  "unresolved_semantic_findings": 0
+}

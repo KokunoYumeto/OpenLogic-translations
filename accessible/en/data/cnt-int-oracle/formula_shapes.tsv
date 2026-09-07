@@ -1,0 +1,46 @@
+expression_id	physical_unique_source_occurrences	canonical_projected_occurrences	normalized_tex
+expr-00af0727b662b041	1	1	\Box \lnot !A & \Entails !A \strictif !B\\ \Box !B & \Entails !A \strictif !B\\ !A \strictif !B& \Entails \Box(!A \strictif !B)\\ \lnot(!A \strictif !B) & \Entails \Box\lnot(!A \strictif !B)
+expr-043b130790fae68b	8	11	\lnot !A \lor !B
+expr-06b50a0a3c67572f	1	1	p \Entails q
+expr-148de9c5a7a44d19	170	169	p
+expr-240381337f804e9f	68	104	!A \lif !B
+expr-4383919132a678ce	1	1	p \lif (p \lif q)
+expr-4b1b85797430946d	1	1	q \Entails/ \Box(p \lif q)
+expr-4d71c5573892d6ef	1	1	q \lif (p \lif q)
+expr-4f377505378a2af0	1	1	\Box(!A \lif !B) \Entails \Box(\lnot !B \lif \lnot !A)
+expr-58e0615bc97d9a4d	1	1	\text{If } \Gamma, !A \Entails !B \text{ then } \Gamma \Entails !A \lif !B
+expr-59cf7cd4fdb9ff5b	166	164	\True
+expr-5ef8e0446555d2d2	1	1	!A, \Box(!A \lif !B) \Entails !B
+expr-672eb44f56c4f5e1	3	3	!A \strictif !B
+expr-685c907cf7129ace	1	1	p \Entails/ q
+expr-6e2be378761c0112	1	1	\lnot(!A \strictif !B) \Entails \Box\lnot(!A \strictif !B)
+expr-745f84f9fc9a9708	1	1	!A \strictif !B \Entails \Box(!A \strictif !B)
+expr-74c262d70dd4b774	1	1	\Box(\lnot !B \lif \lnot !A) \Entails \Box(!A \lif !B)
+expr-8238c028f61fc0f7	1065	1252	!A
+expr-8de0b3c47f112c59	156	161	S
+expr-8e35c2cd3bf6641b	66	65	q
+expr-9203f9c813d3f68f	1	1	!A \strictif !B & \Entails \lnot !A \lor !B \text{ but:}\\ \lnot !A \lor !B & \Entails/ !A \strictif !B\\ !B & \Entails/ !A \strictif !B\\ \lnot !A & \Entails/ !A \strictif !B\\ \lnot(!A \lif !B) & \Entails/ !A \land \lnot !B \text{ but:}\\ !A \land \lnot !B & \Entails \lnot(!A \strictif !B) \intertext{However, the strict conditional still supports modus ponens:} !A, !A \strictif !B & \Entails !B \intertext{The strict conditional agglomerates:} !A \strictif !B, !A \strictif !C & \Entails !A \strictif (!B \land !C) \intertext{Antecedent strengthening holds for the strict conditional:} !A \strictif !B & \Entails (!A \land !C) \strictif !B \intertext{The strict conditional is also transitive:} !A \strictif !B, !B \strictif !C & \Entails !A \strictif !C \intertext{Finally, the strict conditional is equivalent to its contrapositive:} !A \strictif !B & \Entails \lnot !B \strictif \lnot !A\\ \lnot !B \strictif \lnot !A & \Entails !A \strictif !B
+expr-985ed720e1b91a04	4	4	\strictif
+expr-a49f9a63917c5a59	1	1	\lnot p \Entails/ \Box(p \lif q)
+expr-a7e0ebb9bbda1f55	1	1	\Box(!A \lif !B), \Box(!B \lif !C) \Entails \Box(!A \lif !C)
+expr-ad61a1016cc4192b	5	13	\pSat{v}{!B}
+expr-ad9293b54c2b636f	3	3	(!A \lif !B) \lor (!B \lif !A)
+expr-b2dc39f093dd2bea	1	1	\Box(!A \lif !B) \Entails \Box((!A \land !C) \lif !B)
+expr-b376ba81938b1751	1	4	\pSat{v}{!A \lif !B}
+expr-b7339d1bd119bb61	1	1	\Box(!A \lif !B) \Entails \lnot !A \lor !B
+expr-bdcb7192fe841cb0	6	6	\pAssign v
+expr-c96c7728a5ba3e4a	1	1	!A \lif !B & \Entails \lnot !A \lor !B\\ \lnot !A \lor !B & \Entails !A \lif !B \intertext{A material conditional is entailed by its consequent and by the negation of its antecedent:} !B & \Entails !A \lif !B\\ \lnot !A & \Entails !A \lif !B \intertext{A false material conditional is equivalent to the conjunction of its antecedent and the negation of its consequent: if $!A \lif !B$ is false, $!A \land \lnot !B$ is true, and vice versa:} \lnot(!A \lif !B) & \Entails !A \land \lnot !B\\ !A \land \lnot !B & \Entails \lnot(!A \lif !B) \intertext{The material conditional supports modus ponens:} !A, !A \lif !B & \Entails !B \intertext{The material conditional agglomerates:} !A \lif !B, !A \lif !C & \Entails !A \lif (!B \land !C) \intertext{We can always strengthen the antecedent, i.e., the conditional is \emph{monotonic}:} !A \lif !B & \Entails (!A \land !C) \lif !B \intertext{The material conditional is transitive, i.e., the chain rule is valid:} !A \lif !B, !B \lif !C & \Entails !A \lif !C \intertext{The material conditional is equivalent to its contrapositive:} !A \lif !B & \Entails \lnot !B \lif \lnot !A\\ \lnot !B \lif \lnot !A & \Entails !A \lif !B
+expr-ccb87154d21d3d96	4	4	2+2=4
+expr-d04ff80d9f6dc462	79	89	\lif
+expr-d055ee4dbcdd0c8b	392	469	!B
+expr-d094fd9bd1c9f12d	1	1	\Box \lnot !A \Entails !A \strictif !B
+expr-d9992ac8b50ce917	1	1	\Entails/ \Box(p \lif q) \lor \Box(q \lif p)
+expr-dbaee93a8c7c5677	1	1	!A \land \lnot !B \Entails \lnot\Box(!A \lif !B)
+expr-e1a81bc531d3e71c	1	1	\lnot\Box(p \lif q) \Entails/ p \land \lnot q
+expr-e632b7095b0bf32c	40	40	T
+expr-e64d3df81ed8cfb3	1	1	(!A \strictif !B) \lor (!B \strictif !A)
+expr-ea151b1ce772ba33	1	1	\Box(!A \lif !B)
+expr-ed371311a33fe53c	1	1	\Box(!A \lif !B), \Box(!A \lif !C) \Entails \Box(!A \lif (!B \land !C))
+expr-ed7a029f72f172a6	1	1	2+2 = 4
+expr-f9baaf9f77711629	138	137	\False
+expr-febc2d0a7ade256c	3	10	\pSat/{v}{!A}

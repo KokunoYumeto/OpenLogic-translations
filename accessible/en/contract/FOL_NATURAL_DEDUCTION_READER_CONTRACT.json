@@ -1,0 +1,153 @@
+{
+  "accepted_projected_sha256": "aeb0985c36e99f18eccc0e957d3c039e8d590f9c9f390c9d061b34b014dbb75f",
+  "chapter_key": "fol:ntd",
+  "listener_repair": {
+    "contextual_overrides": 47,
+    "continuous_replay_words": 19053,
+    "continuous_source_replays": 14,
+    "current_listener_defects": 0,
+    "derived_closure_total": 300,
+    "formula_bindings": 963,
+    "heading_repairs": 7,
+    "proof_boundary_separators": 283,
+    "receipt_sha256": "1096055d608cbe92ce01a7f8499105ba3c66b578612812c6585a1872d900be0e",
+    "reference_targets_replayed": 10,
+    "repair_classes": {
+      "TR021-INDEPENDENT-001": {
+        "frozen_instances": 7,
+        "remaining_raw_placeholders": 0,
+        "treatment": "Each heading formula is rendered once through its stable occurrence binding."
+      },
+      "TR021-INDEPENDENT-002": {
+        "frozen_affected_groups": 80,
+        "frozen_boundaries": 283,
+        "remaining_unseparated_boundaries": 0,
+        "repaired_groups": 86,
+        "spoken_separators": 283,
+        "treatment": "The first proof formula follows the source-order marker; every later formula has deterministic next-formula ordinal speech."
+      },
+      "TR021-INDEPENDENT-003": {
+        "frozen_missing_targets": 10,
+        "listener_targets_replayed": 10,
+        "remaining_missing_targets": 0,
+        "treatment": "Each generic legacy reference phrase is replaced by its stable target description at an exact file, line, column, block, and word-span anchor."
+      }
+    },
+    "source_correction_bindings": 2
+  },
+  "read_html_conformance": {
+    "after": {
+      "affected_raw_paragraphs": 0,
+      "direct_block_roots_inside_p": 0,
+      "direct_root_tags": {},
+      "lexical_block_descendants_inside_p": 0,
+      "lexical_descendant_tags": {}
+    },
+    "before": {
+      "affected_raw_paragraphs": 51,
+      "direct_block_roots_inside_p": 80,
+      "direct_root_tags": {
+        "div": 4,
+        "section": 76
+      },
+      "lexical_block_descendants_inside_p": 454,
+      "lexical_descendant_tags": {
+        "div": 5,
+        "h3": 84,
+        "h4": 6,
+        "ol": 89,
+        "p": 180,
+        "section": 90
+      }
+    },
+    "display_formula_div_to_span_conversions": 1,
+    "figure_caption_anchor_reorders": 0,
+    "formula_help": null,
+    "formula_identity_and_order_preserved": true,
+    "mathml_payload_and_order_preserved": true,
+    "paragraph_block_splits": 80,
+    "path": "parts/fol/chapters/ntd/read.html",
+    "visible_data_sequence_preserved": true
+  },
+  "reader_independent_acceptance": "NOT_CLAIMED_REQUIRES_SEPARATE_AUDIT",
+  "runtime_actions_performed": [],
+  "schema": "openlogic-fol-natural-deduction-reader-contract-v1",
+  "scope": {
+    "exercises": 10,
+    "expressions": 279,
+    "formal_objects": 140,
+    "formula_occurrences": 963,
+    "global_end": 757735,
+    "global_start": 694887,
+    "native_mathml_variants": 558,
+    "ordered_formal_steps": 738,
+    "proof_commands": 545,
+    "proof_trees": 86,
+    "references": 10,
+    "source_bytes": 68680,
+    "source_lines": 1984,
+    "sources": 14,
+    "tables": 3,
+    "unsolved_exercises": 10
+  },
+  "semantic_independent_evidence": {
+    "finding_count": 0,
+    "reader_integration": "NOT_CLAIMED",
+    "receipt_sha256": "e25f1f2b4f29880fc6f0a0efd33fc1be4f63d9ef78200649d2e46fec1a31b625",
+    "status": "PASS_ZERO_CURRENT_FINDINGS"
+  },
+  "semantic_records_and_mathml_mutated": false,
+  "source_and_projection_mutated": false,
+  "source_policy": {
+    "disclosures": [
+      {
+        "correction_policy": "SOURCE_PRESERVED_EXPLICIT_READER_CORRECTION",
+        "file": "content/first-order-logic/natural-deduction/rules-and-proofs.tex",
+        "finding_id": "TR021-SOURCE-PROSE-001",
+        "issue": "The coordinated clause omits 'is called' before 'the conclusion of the inference'.",
+        "lines": [
+          35,
+          36
+        ],
+        "reader_replay_anchor": "fol-paragraph-rules-and-proofs-tex-0031-01",
+        "reader_treatment": "Read 'the sentence below is called the conclusion of the inference', followed by an explicit reader-correction note.",
+        "silent_correction": false,
+        "source_lines": [
+          "of the inference are called the \\emph{premises} and the !!{sentence}",
+          "below the \\emph{conclusion} of the inference.  The rules come in"
+        ],
+        "source_lines_hash_convention": "UTF-8 exact logical source lines joined by LF plus one terminal LF",
+        "source_lines_sha256": "f9c508e328347400ca33a719b5d61817c0f1159f4ad5a948c4e2f5200ed5befe",
+        "source_text": "The sentences at the top of the inference are called the premises and the sentence below the conclusion of the inference.",
+        "status": "CONFIRMED_AGAINST_FROZEN_SOURCE_BYTES"
+      },
+      {
+        "correction_policy": "SOURCE_PRESERVED_EXPLICIT_READER_CORRECTION",
+        "file": "content/first-order-logic/natural-deduction/proof-theoretic-notions.tex",
+        "finding_id": "TR021-SOURCE-PROSE-002",
+        "issue": "The editorial sentence omits 'of' between 'definitions' and 'the provability relation'.",
+        "lines": [
+          16,
+          17
+        ],
+        "location_reconciliation": "The requested checkpoint called this a provability-consistency correction; exact source replay locates it in proof-theoretic-notions.tex. No matching missing-'of' phrase occurs in provability-consistency.tex.",
+        "reader_replay_anchor": "fol-paragraph-proof-theoretic-notions-tex-0016-01",
+        "reader_treatment": "Read 'the definitions of the provability relation', followed by an explicit reader-correction note.",
+        "silent_correction": false,
+        "source_lines": [
+          "This section collects the definitions the provability relation",
+          "and consistency for natural deduction."
+        ],
+        "source_lines_hash_convention": "UTF-8 exact logical source lines joined by LF plus one terminal LF",
+        "source_lines_sha256": "3e771265d4842e92f8037a04526d146e8504b3d8176e0053e79cd747ac676f08",
+        "source_text": "This section collects the definitions the provability relation and consistency for natural deduction.",
+        "status": "CONFIRMED_AGAINST_FROZEN_SOURCE_BYTES"
+      }
+    ],
+    "printed_prose_defects_preserved": 2,
+    "silent_corrections": 0,
+    "source_correction_anchors": 4,
+    "source_corrections": 2
+  },
+  "tranche_id": "OLAB-TR-021"
+}

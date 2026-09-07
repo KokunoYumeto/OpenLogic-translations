@@ -1,0 +1,78 @@
+{
+  "frozen_ledger_counts": {
+    "by_kind": {
+      "citation": 197,
+      "cross_reference": 1633,
+      "duplicate_label": 1,
+      "external_uri": 12
+    },
+    "by_status": {
+      "ERROR": 1,
+      "external": 12,
+      "resolved": 1829,
+      "unresolved_or_external": 1
+    },
+    "records": 1843
+  },
+  "prohibited": [
+    "last-definition-wins label resolution",
+    "silent citation retargeting",
+    "links to missing local files",
+    "duplicate DOM IDs"
+  ],
+  "projection_reference_rules": [
+    {
+      "action": "suppress_with_unselected_parent",
+      "id": "REFRULE-001",
+      "original_key": "pl:syn:ass:prop:sat-quant",
+      "prohibited_rewrite": "Do not rewrite the citation to an explicit fol: target in the PL instance. Its entire FOL parent block is unselected after SAR-002.",
+      "source": {
+        "column": 32,
+        "file": "content/first-order-logic/completeness/construction-of-model.tex",
+        "file_sha256": "e8f3c25a2b378ac1996cc9cebb1192b2bdc2527df547e922008dad3822d29969",
+        "fragment_sha256": "5ab40e2be52902daa3dc14c950f74a6b436ea854de0138e3083c744381f0ebc2",
+        "instance_id": "inst-00111",
+        "line": 130
+      },
+      "target": null
+    },
+    {
+      "action": "resolve_to_primary_id",
+      "id": "REFRULE-002",
+      "original_key": "sfr:siz:red:prob:nat-nat",
+      "prohibited_rewrite": "Do not use last-definition-wins resolution to bind the unqualified source label to the alternate copy.",
+      "source": {
+        "column": 21,
+        "file": "content/turing-machines/undecidability/enumerating-tms.tex",
+        "file_sha256": "a921bb03bf1688c6c0ee1bb3297dbb8a1a7473a9c1572426c461bafd98b083cb",
+        "fragment_sha256": "61e287746e32bc9d6d1ec11fd399a9c6c0f05cd0502df720439c653c362e6bd9",
+        "instance_id": "inst-00318",
+        "line": 138
+      },
+      "target": {
+        "file": "content/sets-functions-relations/size-of-sets/reduction.tex",
+        "file_sha256": "33f0cbb35c8c1fa3ff0e4f44fa626fdc298d1c4612aeaafb41bcb920e5d18ac8",
+        "id": "sfr:siz:red:prob:nat-nat",
+        "instance_id": "inst-00034",
+        "line": 108
+      }
+    }
+  ],
+  "resolution_order": [
+    "verify authority and projection-sidecar locks",
+    "apply matching derived-only sidecar operations in memory",
+    "select profile branches",
+    "allocate unique literal or generated output IDs",
+    "resolve internal labels and bibliography citations",
+    "calculate package-relative links for the current profile",
+    "validate every emitted local target"
+  ],
+  "schema": "openlogic-accessible-reference-resolution-contract-v1",
+  "states": {
+    "deferred": "render identifying text but no broken anchor while a reserved target tranche is absent",
+    "external": "emit a visibly external URI; the core edition must remain usable without it",
+    "resolved_bibliography": "emit a relative link to bibliography/index.html and its bib-key anchor",
+    "resolved_internal": "emit a relative link to the target profile and fragment",
+    "suppressed_by_unselected_parent": "emit neither content nor link, as required by projection selection"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "openlogic-tr020-adversarial-test-receipt-v1",
+  "status": "PASS_ALL_TARGETED_MUTATIONS_REJECTED",
+  "test_count": 16,
+  "tests": [
+    {
+      "mutation": "remove one expression record",
+      "rejection": "expression closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "missing_expression"
+    },
+    {
+      "mutation": "alter one exact source-context line",
+      "rejection": "context packet drift: projected-formula-0008205",
+      "status": "PASS_REJECTED",
+      "test_id": "context_coordinate_drift"
+    },
+    {
+      "mutation": "add root-level aria speech to MathML",
+      "rejection": "root-level speech flattening: expr-01208e159d2aec8c",
+      "status": "PASS_REJECTED",
+      "test_id": "root_speech_flattening"
+    },
+    {
+      "mutation": "replace a structural body with an empty row",
+      "rejection": "empty MathML node mrow: expr-01208e159d2aec8c",
+      "status": "PASS_REJECTED",
+      "test_id": "empty_mathml"
+    },
+    {
+      "mutation": "replace one contextual meaning",
+      "rejection": "occurrence semantic drift: projected-formula-0008205",
+      "status": "PASS_REJECTED",
+      "test_id": "occurrence_semantic_swap"
+    },
+    {
+      "mutation": "remove one formal object",
+      "rejection": "formal-object closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "missing_formal"
+    },
+    {
+      "mutation": "remove one exact oracle proof-command binding",
+      "rejection": "proof-command semantic binding closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "missing_proof_command_binding"
+    },
+    {
+      "mutation": "mark a source-unsolved exercise as solved",
+      "rejection": "exercise solution invented: projected-env-001289",
+      "status": "PASS_REJECTED",
+      "test_id": "invented_exercise_solution"
+    },
+    {
+      "mutation": "remove one continuous formula anchor",
+      "rejection": "continuous source replay is not the deterministic source projection",
+      "status": "PASS_REJECTED",
+      "test_id": "replay_binding_loss"
+    },
+    {
+      "mutation": "reintroduce an authoritative glued-word defect",
+      "rejection": "continuous source replay is not the deterministic source projection",
+      "status": "PASS_REJECTED",
+      "test_id": "glued_listener_token"
+    },
+    {
+      "mutation": "reintroduce an authoritative formal context-composition defect",
+      "rejection": "formal listener defect regression: [{'stream_kind': 'formal_object_listen_text', 'stream_id': 'projected-env-001366', 'file': 'content/first-order-logic/sequent-calculus/soundness.tex', 'defect_class': 'CONTEXT_COMPOSITION_DUPLICATION', 'token_or_phrase': 'structure structure', 'word_index_zero_based': 59, 'excerpt': 'if every structure M satisfies it. structure structure'}]",
+      "status": "PASS_REJECTED",
+      "test_id": "duplicated_formal_context"
+    },
+    {
+      "mutation": "remove one exact listener disclosure anchor",
+      "rejection": "listener disclosure anchor closure failure",
+      "status": "PASS_REJECTED",
+      "test_id": "listener_disclosure_crosswalk_loss"
+    },
+    {
+      "mutation": "remove a disclosure binding from its proof component",
+      "rejection": "listener disclosure is not material in component speech: tr020-listener-disclosure-004-01 ('projected-env-001265', 14)",
+      "status": "PASS_REJECTED",
+      "test_id": "formal_disclosure_materiality_loss"
+    },
+    {
+      "mutation": "replace a listener reference target",
+      "rejection": "reference listener target drift: reference-000303",
+      "status": "PASS_REJECTED",
+      "test_id": "reference_target_swap"
+    },
+    {
+      "mutation": "remove one source correction disclosure",
+      "rejection": "source correction/disclosure ledger drift",
+      "status": "PASS_REJECTED",
+      "test_id": "disclosure_loss"
+    },
+    {
+      "mutation": "alter a protected source digest",
+      "rejection": "source identity receipt drift",
+      "status": "PASS_REJECTED",
+      "test_id": "source_identity_drift"
+    }
+  ]
+}

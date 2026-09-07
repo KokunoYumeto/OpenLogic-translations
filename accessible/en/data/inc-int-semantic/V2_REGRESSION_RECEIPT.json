@@ -1,0 +1,116 @@
+{
+  "adversarial_tests": [
+    {
+      "reason": "actual-listener defect retained: textsc",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "raw_textsc"
+    },
+    {
+      "reason": "actual-listener defect retained: !!",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "raw_glossary_capitalization"
+    },
+    {
+      "reason": "numeric date range/era connector missing",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "date_connector_missing"
+    },
+    {
+      "reason": "end scope count: list",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "unclosed_list"
+    },
+    {
+      "reason": "end scope count: explanation",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "unclosed_explanation"
+    },
+    {
+      "reason": "end scope count: aside",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "unclosed_aside"
+    },
+    {
+      "reason": "end scope count: definition",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "unclosed_definition"
+    },
+    {
+      "reason": "end scope count: example",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "unclosed_example"
+    },
+    {
+      "reason": "chapter ends before final imported section",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "wrong_document_scope"
+    },
+    {
+      "reason": "parenthesis scope mismatch",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "parenthesis_scope_lost"
+    },
+    {
+      "reason": "actual-listener defect retained: satisify",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "source_typo_audible"
+    },
+    {
+      "reason": "missing n in diagonal membership test",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "missing_n_regression"
+    },
+    {
+      "reason": "exact prose replacement count drift",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "disclosure_without_enactment"
+    },
+    {
+      "reason": "named theory not bold",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "theory_macro_wrong_expansion"
+    },
+    {
+      "reason": "macro expansion defect retained: expr-12d9b1e9f8e5096a:['TR034-MML-SAT-OPTIONAL-ASSIGNMENT']",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "satisfaction_assignment_in_wrong_position"
+    },
+    {
+      "reason": "macro expansion defect retained: expr-e9e3fcec583a9837:['TR034-MML-PROV-ROMAN']",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "provability_roman_style_lost"
+    },
+    {
+      "reason": "macro expansion defect retained: expr-4a5f9b28c7dae2c7:['TR034-MML-OPROV-SANS-UPRIGHT']",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "object_provability_upright_style_lost"
+    },
+    {
+      "reason": "macro expansion defect retained: expr-f396f29509427e56:['TR034-MML-LANG-FIRST-TOKEN']",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "language_first_token_style_lost"
+    },
+    {
+      "reason": "macro expansion defect retained: expr-63077942e4d90ef5:['TR034-MML-SETABS-COLON']",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "set_builder_separator_wrong"
+    }
+  ],
+  "independent_audit_claimed": false,
+  "mutations_rejected": 19,
+  "positive_checks": {
+    "actual_listener_defects_absent": true,
+    "balanced_environment_pairs": 29,
+    "chapter_ends": 1,
+    "contextual_note_only_corrections": 2,
+    "enacted_prose_corrections": 17,
+    "exact_application_source_slices": 24,
+    "exact_prose_source_slices": 17,
+    "missing_subscript_reader_repair": true,
+    "section_ends": 4,
+    "source_formula_preserved": true,
+    "source_order_chapter_end_after_final_import": true
+  },
+  "schema": "openlogic-tr034-v2-actual-content-regressions-v1",
+  "status": "PASS_ACTUAL_DEFECT_REGRESSIONS_REJECTED"
+}

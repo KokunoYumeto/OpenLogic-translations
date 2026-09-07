@@ -1,0 +1,33 @@
+{
+  "adversarial_tests": [
+    {
+      "reason": "provenance metadata audible",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "metadata_speech_restored"
+    },
+    {
+      "reason": "source provenance correction lost",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "metadata_source_provenance_deleted"
+    },
+    {
+      "reason": "metadata exclusion policy absent",
+      "result": "REJECTED_ACTUAL_DEFECT",
+      "test": "metadata_audience_policy_restored"
+    }
+  ],
+  "checks": {
+    "audible_disclosures": 24,
+    "exact_metadata_source_preserved": true,
+    "listener_words": 9961,
+    "mathematical_section_streams_unchanged": true,
+    "only_SAR001_speech_removed": true,
+    "source_correction_records": 25,
+    "source_provenance_only_corrections": 1,
+    "source_provenance_policy_explicit": true
+  },
+  "independent_audit_claimed": false,
+  "mutations_rejected": 3,
+  "schema": "openlogic-tr034-v4-provenance-only-regressions-v1",
+  "status": "PASS_EXACT_METADATA_EXCLUSION_AND_SOURCE_PRESERVATION"
+}

@@ -1,0 +1,777 @@
+\olchapter{pl}{com}{The Completeness Theorem}
+
+
+
+\olfileid{pl}{com}{int}
+
+\olsection{Introduction}
+
+The completeness theorem is one of the most fundamental results about
+logic.  It comes in two formulations, the equivalence of which we'll
+prove.  In its first formulation it says something fundamental about
+the relationship between semantic consequence and our !!{derivation}
+system: if !!a{sentence}~$!A$ follows from some !!{sentence}s
+$\Gamma$, then there is also !!a{derivation} that establishes $\Gamma
+\Proves !A$. Thus, the !!{derivation} system is as strong as it can
+possibly be without proving things that don't actually follow.
+
+In its second formulation, it can be stated as a model existence
+result: every consistent set of !!{sentence}s is satisfiable.
+Consistency is a proof-theoretic notion: it says that our
+!!{derivation} system is unable to produce certain !!{derivation}s.
+But who's to say that just because there are no !!{derivation}s of a
+certain sort from~$\Gamma$, it's guaranteed that there is
+!!{valuation}{~$\pAssign{v}$}
+with $\pSat{v}{\Gamma}$? Before the
+completeness theorem was first proved---in fact before we had the
+!!{derivation} systems we now do---the great German mathematician
+David Hilbert held the view that consistency of mathematical theories
+guarantees the existence of the objects they are about. He put it as
+follows in a letter to Gottlob Frege:
+\begin{quote}
+  If the arbitrarily given axioms do not contradict one another with
+  all their consequences, then they are true and the things defined by
+  the axioms exist. This is for me the criterion of truth and
+  existence. 
+\end{quote}
+Frege vehemently disagreed. The second formulation of the completeness
+theorem shows that Hilbert was right in at least the sense that if the
+axioms are consistent, then \emph{some}
+!!{valuation} exists that makes them all
+true.
+
+These aren't the only reasons the completeness theorem---or rather,
+its proof---is important.  It has a number of important consequences,
+some of which we'll discuss separately.  For instance, since any
+!!{derivation} that shows $\Gamma \Proves !A$ is finite and so can
+only use finitely many of the !!{sentence}s in~$\Gamma$, it follows by
+the completeness theorem that if $!A$ is a consequence of~$\Gamma$, it
+is already a consequence of a finite subset of~$\Gamma$.  This is
+called \emph{compactness}.  Equivalently, if every finite subset of
+$\Gamma$ is consistent, then $\Gamma$ itself must be consistent.
+
+Although the compactness theorem follows from the completeness theorem
+via the detour through !!{derivation}s, it is also possible to use the
+\emph{the proof of} the completeness theorem to establish it
+directly. For what the proof does is take a set of !!{sentence}s with
+a certain property---consistency---and constructs !!a{structure} out
+of this set that has certain properties (in this case, that it
+satisfies the set). Almost the very same construction can be used to
+directly establish compactness, by starting from ``finitely
+satisfiable'' sets of !!{sentence}s instead of consistent ones.
+
+
+
+
+
+
+\olfileid{pl}{com}{out}
+
+\olsection{Outline of the Proof}
+
+The proof of the completeness theorem is a bit complex, and upon first
+reading it, it is easy to get lost.  So let us outline the proof.  The
+first step is a shift of perspective, that allows us to see a route to
+a proof.  When completeness is thought of as ``whenever $\Gamma
+\Entails !A$ then $\Gamma \Proves !A$,'' it may be hard to even come
+up with an idea: for to show that $\Gamma \Proves !A$ we have to find
+!!a{derivation}, and it does not look like the hypothesis that
+$\Gamma \Entails !A$ helps us for this in any way.  For some proof
+systems it is possible to directly construct !!a{derivation}, but we
+will take a slightly different approach.  The shift in perspective
+required is this: completeness can also be formulated as: ``if
+$\Gamma$ is consistent, it is satisfiable.''  Perhaps we can use the
+information in~$\Gamma$ together with the hypothesis that it is
+consistent to construct !!a{valuation}
+that satisfies every !!{formula}
+in~$\Gamma$.  After all, we know
+what kind of !!{valuation} we are looking
+for: one that is as $\Gamma$ describes it!{}
+
+If $\Gamma$ contains only !!{propositional variable}s, it is easy to construct
+a model for it. All we have to do is come up with
+
+  !!a{valuation}~$\pAssign{v}$ such that $\pSat{v}{p}$ for all $p \in
+  \Gamma$. Well, let $\pAssign{v}(p) = \True$ iff $p \in \Gamma$.
+
+Now suppose $\Gamma$ contains some !!{formula}~$\lnot !B$, with $!B$
+atomic.  We might worry that the construction of
+$\pAssign{v}$ interferes with the possibility
+of making $\lnot !B$ true.  But here's where the consistency
+of~$\Gamma$ comes in: if $\lnot !B \in \Gamma$, then $!B \notin
+\Gamma$, or else $\Gamma$ would be inconsistent.  And if $!B \notin
+\Gamma$, then according to our construction
+of~$\pAssign{v}$,
+$\pSat/{v}{!B}$, so
+$\pSat{v}{\lnot !B}$.  So far so good.
+
+What if $\Gamma$ contains complex, non-atomic formulas? Say it
+contains $!A \land !B$. To make that true, we should proceed as if
+both $!A$ and $!B$ were in~$\Gamma$.  And if $!A \lor !B \in \Gamma$,
+then we will have to make at least one of them true, i.e., proceed as
+if one of them was in~$\Gamma$.
+
+This suggests the following idea: we add additional !!{formula}s
+to~$\Gamma$ so as to (a)~keep the resulting set consistent and
+(b)~make sure that for every possible atomic !!{sentence}~$!A$, either
+$!A$ is in the resulting set, or $\lnot !A$ is, and (c)~such that,
+whenever $!A \land !B$ is in the set, so are both $!A$ and $!B$, if
+$!A \lor !B$ is in the set, at least one of $!A$ or $!B$ is also, etc.
+We keep doing this (potentially forever).  Call the set of all
+!!{formula}s so added~$\Gamma^*$.  Then our construction above would
+provide us with !!a{valuation}~$\pAssign{v}$
+for which we could prove, by induction, that it satisfies all sentences
+in~$\Gamma^*$, and hence also all sentence in~$\Gamma$
+since $\Gamma \subseteq \Gamma^*$.  It turns out that guaranteeing (a)
+and~(b) is enough. A set of sentences for which (b) holds is called
+\emph{complete}. So our task will be to extend the consistent
+set~$\Gamma$ to a consistent and complete set~$\Gamma^*$.
+
+
+
+So here's what we'll do. First we investigate the properties of
+!!{complete} consistent sets, in particular we prove that
+!!a{complete} consistent set contains $!A \land !B$ iff it contains
+both $!A$ and~$!B$, $!A \lor !B$ iff it contains at least one of them,
+etc. (\olref[ccs]{prop:ccs}).
+We'll then take the consistent
+set~$\Gamma$ and show that it can be extended
+to a consistent and
+!!{complete} set~$\Gamma^*$ (\olref[lin]{lem:lindenbaum}). This set
+$\Gamma^*$ is what we'll use to define our !!{valuation}~$\pAssign v(\Gamma^*)$.
+The valuation is determined by the !!{propositional
+    variable}s in~$\Gamma^*$ (\olref[mod]{defn:termmodel}).  We'll
+use the properties of complete consistent
+sets to show that indeed
+$\pSat{v(\Gamma^*)}{!A}$ iff $!A \in
+\Gamma^*$ (\olref[mod]{lem:truth}), and thus in particular,
+$\pSat{v(\Gamma^*)}{\Gamma}$.
+
+
+
+
+
+
+\olfileid{pl}{com}{ccs}
+      
+\olsection{Complete Consistent Sets of \usetoken{P}{sentence}}
+
+\begin{defn}[Complete set]
+\ollabel{def:complete-set} A set~$\Gamma$ of !!{sentence}s is
+\emph{!!{complete}} iff for any !!{sentence}~$!A$, either $!A \in
+\Gamma$ or $\lnot !A \in \Gamma$.
+\end{defn}
+
+\begin{explain}
+!!^{complete} sets of sentences leave no questions unanswered. For
+any !!{sentence}~$!A$, $\Gamma$ ``says'' if $!A$ is true or false.  The
+importance of !!{complete} sets extends beyond the proof of the
+completeness theorem. A theory which is !!{complete} and
+axiomatizable, for instance, is always decidable.
+\end{explain}
+
+\begin{explain}
+!!^{complete} consistent sets are important in the completeness proof
+since we can guarantee that every consistent set of
+!!{sentence}s~$\Gamma$ is contained in !!a{complete} consistent
+set~$\Gamma^*$.  !!^a{complete} consistent set contains, for each
+!!{sentence}~$!A$, either $!A$ or its negation $\lnot !A$, but not
+both. This is true in particular for propositional variables, so from !!a{complete}
+consistent set, we can construct
+!!a{valuation} where the
+truth value assigned to
+propositional variables is defined according to which
+!!{propositional variable}s are
+in~$\Gamma^*$. This !!{valuation} can then
+be shown to make all !!{sentence}s in~$\Gamma^*$ (and hence also all
+those in~$\Gamma$) true. The proof of this latter fact requires that
+$\lnot !A \in \Gamma^*$ iff $!A \notin \Gamma^*$, $(!A \lor !B) \in
+\Gamma^*$ iff $!A \in \Gamma^*$ or $!B \in \Gamma^*$, etc.
+\end{explain}
+
+In what follows, we will often tacitly use the properties of
+reflexivity, monotonicity, and transitivity of $\Proves$ (see
+
+  \tagrefs{prfSC/{pl:seq:ptn:sec},prfND/{pl:ntd:ptn:sec},prfAX/{pl:axd:ptn:sec},prfTab/{pl:tab:ptn:sec}}).
+
+\begin{prop}
+\ollabel{prop:ccs}
+Suppose $\Gamma$ is !!{complete} and consistent. Then:
+\begin{enumerate}
+\item \ollabel{prop:ccs-prov-in} If $\Gamma \Proves !A$, then $!A \in
+  \Gamma$.
+
+\ollabel{prop:ccs-and} $!A \land !B \in \Gamma$
+  iff both $!A \in \Gamma$ and $!B \in \Gamma$.
+
+\ollabel{prop:ccs-or} $!A \lor !B \in \Gamma$ iff
+  either $!A \in \Gamma$ or $!B \in \Gamma$.
+
+\ollabel{prop:ccs-if} $!A \lif !B \in \Gamma$ iff
+  either $!A \notin \Gamma$ or $!B \in \Gamma$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Let us suppose for all of the following that $\Gamma$ is !!{complete} and
+consistent.
+\begin{enumerate}
+\item If $\Gamma \Proves !A$, then $!A \in \Gamma$.
+
+Suppose that $\Gamma \Proves !A$. Suppose to the contrary that $!A
+\notin \Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in \Gamma$.
+By
+
+  \tagrefs{prfSC/{pl:seq:prv:prop:explicit-inc},
+    prfND/{pl:ntd:prv:prop:explicit-inc},
+    prfAX/{pl:axd:prv:prop:explicit-inc},
+    prfTab/{pl:tab:prv:prop:explicit-inc}},
+$\Gamma$ is inconsistent. This contradicts the assumption that
+$\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin
+\Gamma$, so $!A \in \Gamma$.
+
+
+Exercise.
+
+
+
+First we show that if $!A \lor !B \in \Gamma$, then either $!A \in
+\Gamma$ or $!B \in \Gamma$. Suppose $!A \lor !B \in \Gamma$ but $!A
+\notin \Gamma$ and $!B \notin \Gamma$.  Since $\Gamma$ is
+!!{complete}, $\lnot !A \in \Gamma$ and $\lnot !B \in \Gamma$. By
+
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-lor},
+    prfND/{pl:ntd:ppr:prop:provability-lor},
+    prfAX/{pl:axd:ppr:prop:provability-lor},
+    prfTab/{pl:tab:ppr:prop:provability-lor}},
+item (1), $\Gamma$ is inconsistent, a contradiction. Hence, either $!A
+\in \Gamma$ or $!B \in \Gamma$.
+
+For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
+\Gamma$. By
+
+  \tagrefs{prfSC/{pl:seq:ppr:prop:provability-lor},
+    prfND/{pl:ntd:ppr:prop:provability-lor},
+    prfAX/{pl:axd:ppr:prop:provability-lor},
+    prfTab/{pl:tab:ppr:prop:provability-lor}}, item (2),
+$\Gamma \Proves !A \lor !B$. By \olref{prop:ccs-prov-in}, $!A \lor
+!B \in \Gamma$, as required.
+
+
+Exercise.
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{prob}
+Complete the proof of \olref[pl][com][ccs]{prop:ccs}.
+\end{prob}
+
+
+
+
+
+
+
+
+\olfileid{pl}{com}{lin}
+
+\olsection{Lindenbaum's Lemma}
+
+\begin{explain}
+We now prove a lemma that shows that any consistent set of
+!!{sentence}s is contained in some set of sentences which is not just
+consistent, but also !!{complete}. The proof works by adding one
+!!{sentence} at a time, guaranteeing at each step that the set remains
+consistent. We do this so that for every $!A$, either $!A$ or $\lnot
+!A$ gets added at some stage. The union of all stages in that
+construction then contains either $!A$ or its negation~$\lnot !A$ and
+is thus complete. It is also consistent, since we make sure at each
+stage not to introduce an inconsistency.
+\end{explain}
+
+\begin{lem}[Lindenbaum's Lemma]
+\ollabel{lem:lindenbaum} Every consistent
+set~$\Gamma$ in a language~$\Lang{L}$ can be
+extended to !!a{complete} and consistent set~$\Gamma^*$.
+\end{lem}
+
+\begin{proof}
+Let $\Gamma$ be consistent.  Let $!A_0$, $!A_1$,
+\dots{} be an enumeration of all the !!{sentence}s of~$\Lang L$.
+Define $\Gamma_0 = \Gamma$, and
+\[
+\Gamma_{n+1} =
+\begin{cases}
+\Gamma_n \cup \{ !A_n \} & \textrm{if $\Gamma_n \cup \{!A_n\}$ is
+  consistent;} \\
+\Gamma_n \cup \{ \lnot !A_n \} & \textrm{otherwise.}
+\end{cases}
+\]
+Let $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$.
+
+Each $\Gamma_n$ is consistent: $\Gamma_0$ is consistent by definition.
+If $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$, this is because the latter
+is consistent.  If it isn't, $\Gamma_{n+1} = \Gamma_n \cup \{\lnot
+!A_n\}$. We have to verify that $\Gamma_n \cup \{\lnot !A_n\}$ is
+consistent. Suppose it's not. Then \emph{both} $\Gamma_n \cup
+\{!A_n\}$ and $\Gamma_n \cup \{\lnot !A_n\}$ are inconsistent.  This
+means that $\Gamma_n$ would be inconsistent by
+
+  \tagrefs{prfAX/{pl:axd:prv:prop:provability-exhaustive},
+    prfSC/{pl:seq:prv:prop:provability-exhaustive},
+    prfND/{pl:ntd:prv:prop:provability-exhaustive},
+    prfTab/{pl:tab:prv:prop:provability-exhaustive}},
+contrary to the induction hypothesis.
+
+For every~$n$ and every $i < n$, $\Gamma_i \subseteq \Gamma_n$. This
+follows by a simple induction on~$n$. For $n=0$, there are no $i < 0$,
+so the claim holds automatically.  For the inductive step, suppose it
+is true for~$n$. We show that if $i < n+1$ then $\Gamma_i \subseteq
+\Gamma_{n+1}$. We have $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$ or $=
+\Gamma_n \cup \{\lnot !A_n\}$ by construction. So $\Gamma_n \subseteq
+\Gamma_{n+1}$. If $i < n+1$, then $\Gamma_i \subseteq \Gamma_n$ by
+inductive hypothesis (if $i < n$) or the trivial fact that $\Gamma_n
+\subseteq \Gamma_n$ (if $i = n$). We get that $\Gamma_i \subseteq
+\Gamma_{n+1}$ by transitivity of~$\subseteq$.
+
+From this it follows that $\Gamma^*$ is consistent. Here's why: Let
+$\Gamma' \subseteq \Gamma^*$ be finite. Each $!B \in \Gamma'$ is also
+in~$\Gamma_i$ for some~$i$. Let $n$ be the largest of these. Since
+$\Gamma_i \subseteq \Gamma_n$ if $i \le n$, every $!B \in \Gamma'$ is
+also $\in \Gamma_n$, i.e., $\Gamma' \subseteq \Gamma_n$, and
+$\Gamma_n$~is consistent. So, every finite subset $\Gamma' \subseteq
+\Gamma^*$ is consistent. By 
+  \tagrefs{prfAX/{pl:axd:ptn:prop:proves-compact},
+    prfSC/{pl:seq:ptn:prop:proves-compact},
+    prfND/{pl:ntd:ptn:prop:proves-compact},
+    prfTab/{pl:tab:ptn:prop:proves-compact}}, $\Gamma^*$ is
+  consistent.
+
+Every !!{sentence} of $\Frm[L]$ appears on the list used to
+define~$\Gamma^*$. If $!A_n \notin \Gamma^*$, then that is because
+$\Gamma_n \cup \{!A_n\}$ was inconsistent.  But then $\lnot !A_n
+\in \Gamma^*$, so $\Gamma^*$ is !!{complete}.
+\end{proof}
+
+
+
+
+
+\olfileid{pl}{com}{mod}
+
+\olsection{Construction of a Model}
+
+\begin{explain}
+We are now ready to define !!a{valuation}
+  that makes all $!A \in \Gamma$ true. To do this, we first apply
+  Lindenbaum's Lemma: we get a complete consistent $\Gamma^* \supseteq
+  \Gamma$. We let the !!{propositional variable}s in~$\Gamma^*$
+  determine~$\pAssign v(\Gamma^*)$.
+\end{explain}
+
+
+\begin{defn}
+\ollabel{defn:termmodel}
+Suppose $\Gamma^*$ is a complete consistent set of !!{formula}s. Then we let
+\[
+\pAssign v(\Gamma^*)(p) = \begin{cases}
+  \True & \text{if $p \in \Gamma^*$}\\
+  \False & \text{if $p \notin \Gamma^*$}
+  \end{cases}
+\]
+\end{defn}
+
+
+\iftag{FOL}{
+\begin{explain}
+  !!^a{structure}~$\Struct{M}$ may make an existentially
+    quantified !!{sentence}~$\lexists[x][!A(x)]$ true without there
+    being an instance~$!A(t)$ that it makes true.
+  !!^a{structure}~$\Struct{M}$ may make all
+    instances~$!A(t)$ of a universally quantified
+    !!{sentence}~$\lforall[x][!A(x)]$ true, without
+    making~$\lforall[x][!A(x)]$ true. This is because in general
+  not every !!{element} of~$\Domain{M}$ is the value of a closed term
+  ($\Struct{M}$ may not be covered).  This is the reason the
+  satisfaction relation is defined via variable assignments. However,
+  for our term model~$\Struct{M(\Gamma^*)}$ this wouldn't be
+  necessary---because it is covered. This is the content of the next
+  result.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:quant-termmodel}
+Let $\Struct M(\Gamma^*)$ be the term model of \olref{defn:termmodel}.
+\begin{tagenumerate}{prvEx,prvAll}
+$\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ iff
+  $\Sat{M(\Gamma^*)}{!A(t)}$ for at least one closed term~$t$.
+$\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ iff
+  $\Sat{M(\Gamma^*)}{!A(t)}$ for all closed terms~$t$.
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+
+  By \olref[syn][ass]{prop:sat-quant},
+    $\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ iff for at least one
+    variable assignment~$s$, $\Sat{M(\Gamma^*)}{!A(x)}[s]$. As
+    $\Domain{M(\Gamma^*)}$ consists of the closed terms of~$\Lang{L}$,
+    this is the case iff there is at least one closed term~$t$ such
+    that $s(x) = t$ and $\Sat{M(\Gamma^*)}{!A(x)}[s]$.  By
+    \olref[fol][syn][ext]{prop:ext-formulas},
+    $\Sat{M(\Gamma^*)}{!A(x)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}[s]$,
+    where $s(x) = t$.  By \olref[fol][syn][ass]{prop:sentence-sat-true},
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}$,
+    since $!A(t)$ is a sentence.
+
+  Exercise.
+\end{tagenumerate}
+\end{proof}
+}{}
+
+
+
+\begin{lem}[Truth Lemma]
+\ollabel{lem:truth} 
+$\pSat{v(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$.
+\end{lem}
+
+\begin{proof}
+We prove both directions simultaneously, and by induction on $!A$.
+\begin{enumerate}
+\indcase{!A}{\lfalse}
+  {$\pSat/{v(\Gamma^*)}{\lfalse}$
+    by definition of satisfaction. On the other hand, $\lfalse \notin
+    \Gamma^*$ since $\Gamma^*$ is consistent.}
+
+
+
+\indcase{!A}{p}{$\pSat{v(\Gamma^*)}{p}$ iff
+    $\pAssign v(\Gamma^*)(p) = \True$ (by the definition of
+    satisfaction) iff $p \in \Gamma^*$ (by the construction of
+    $\pAssign v(\Gamma^*)$).}
+
+
+  \indcase{!A}{\lnot !B}
+    {$\pSat{v(\Gamma^*)}{\indfrm}$ iff
+    $\pSat/{v(\Gamma^*)}{!B}$ (by
+    definition of satisfaction). By induction hypothesis,
+    $\pSat/{v(\Gamma^*)}{!B}$ iff
+    $!B \notin \Gamma^*$. Since $\Gamma^*$ is consistent and
+    !!{complete}, $!B
+    \notin \Gamma^*$ iff $\lnot !B \in \Gamma^*$.}
+
+
+
+  \indcase!{!A}{!B \land !C}{}
+
+
+
+  \indcase{!A}{!B \lor !C}
+    {$\pSat{v(\Gamma^*)}{\indfrm}$
+    iff $\pSat{v(\Gamma^*)}{!B}$ or
+    $\pSat{v(\Gamma^*)}{!C}$ (by
+    definition of satisfaction) iff $!B \in \Gamma^*$ or $!C \in
+    \Gamma^*$ (by induction hypothesis). This is the case iff $(!B
+    \lor !C) \in \Gamma^*$ (by
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-or}).}
+  
+
+
+  \indcase!{!A}{!B \lif !C}{}
+
+
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+\begin{prob}
+Complete the proof of \olref[pl][com][mod]{lem:truth}.
+\end{prob}
+
+
+
+
+
+
+
+
+
+\olfileid{pl}{com}{cth}
+
+\olsection{The Completeness Theorem}
+
+\begin{explain}
+Let's combine our results: we arrive at the completeness theorem.
+\end{explain}
+
+\begin{thm}[Completeness Theorem]
+\ollabel{thm:completeness}
+Let $\Gamma$ be a set of !!{sentence}s.  If $\Gamma$ is consistent, it
+is satisfiable.
+\end{thm}
+
+\begin{proof}
+Suppose $\Gamma$ is consistent. By \olref[lin]{lem:lindenbaum}, there
+is a $\Gamma^* \supseteq \Gamma$ which is
+consistent and !!{complete}.
+By
+\olref[mod]{lem:truth},
+$\pSat{v(\Gamma^*)}{!A}$ iff $!A \in
+\Gamma^*$.  From this it follows in particular that for all $!A \in
+\Gamma$, $\pSat{v(\Gamma^*)}{!A}$, so
+$\Gamma$ is satisfiable.
+\end{proof}
+
+\begin{cor}[Completeness Theorem, Second Version]
+\ollabel{cor:completeness}
+For all $\Gamma$ and !!{sentence}s~$!A$: if $\Gamma \Entails !A$ then
+$\Gamma \Proves !A$.
+\end{cor}
+
+\begin{proof}
+Note that the $\Gamma$'s in \olref{cor:completeness} and
+\olref{thm:completeness} are universally quantified.  To make sure we
+do not confuse ourselves, let us restate \olref{thm:completeness}
+using a different variable: for any set of !!{sentence}s~$\Delta$, if
+$\Delta$ is consistent, it is satisfiable.  By contraposition, if
+$\Delta$ is not satisfiable, then $\Delta$ is inconsistent.  We will
+use this to prove the corollary.
+
+Suppose that $\Gamma \Entails !A$.  Then $\Gamma \cup \{\lnot !A\}$ is
+unsatisfiable by \olref[syn][sem]{prop:entails-unsat}.  Taking $\Gamma
+\cup \{\lnot !A\}$ as our $\Delta$, the previous version of
+\olref{thm:completeness} gives us that $\Gamma \cup \{\lnot !A\}$ is
+inconsistent.  By
+
+  \tagrefs{prfAX/{pl:axd:prv:prop:prov-incons},
+    prfSC/{pl:seq:prv:prop:prov-incons},
+    prfND/{pl:ntd:prv:prop:prov-incons},
+    prfTab/{pl:tab:prv:prop:prov-incons}},
+$\Gamma \Proves !A$.
+\end{proof}
+
+
+
+
+\begin{prob}
+Use \olref[pl][com][cth]{cor:completeness} to prove
+\olref[pl][com][cth]{thm:completeness}, thus showing that the two
+formulations of the completeness theorem are equivalent.
+\end{prob}
+
+
+
+
+
+\begin{prob}
+In order for !!a{derivation} system to be complete, its rules must be
+strong enough to prove every unsatisfiable set inconsistent.  Which of
+the rules of !!{derivation} were necessary to prove completeness?  Are any
+of these rules not used anywhere in the proof?  In order to answer
+these questions, make a list or diagram that shows which of the rules
+of !!{derivation} were used in which results that lead up to the proof of
+\olref[pl][com][cth]{thm:completeness}.  Be sure to note any tacit
+uses of rules in these proofs.
+\end{prob}
+
+
+
+
+
+
+\olfileid{pl}{com}{com}
+
+\olsection{The Compactness Theorem}
+
+One important consequence of the completeness theorem is the
+compactness theorem.  The compactness theorem states that if each
+\emph{finite} subset of a set of !!{sentence}s is satisfiable, the
+entire set is satisfiable---even if the set itself is infinite. This
+is far from obvious. There is nothing that seems to rule out, at first
+glance at least, the possibility of there being infinite sets of
+!!{sentence}s which are contradictory, but the contradiction only
+arises, so to speak, from the infinite number.  The compactness
+theorem says that such a scenario can be ruled out: there are no
+unsatisfiable infinite sets of !!{sentence}s each finite subset of
+which is satisfiable. Like the completeness theorem, it has a version
+related to entailment: if an infinite set of !!{sentence}s entails
+something, already a finite subset does.
+
+\begin{defn}
+  A set $\Gamma$ of !!{formula}s is \emph{finitely satisfiable} iff every finite $\Gamma_0 \subseteq \Gamma$ is satisfiable.
+\end{defn}
+
+\begin{thm}[Compactness Theorem]
+\ollabel{thm:compactness}
+The following hold for any sentences $\Gamma$ and $!A$:
+\begin{enumerate}
+  \item $\Gamma \Entails !A$ iff there is a finite $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Entails !A$.
+  \item $\Gamma$ is satisfiable iff it is finitely
+    satisfiable.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+We prove (2).  If $\Gamma$ is satisfiable, then there is
+!!a{valuation}~$\pAssign{v}$
+such that $\pSat{v}{!A}$ for all $!A \in
+\Gamma$.  Of course, this $\pAssign{v}$ also
+satisfies every finite subset of~$\Gamma$, so $\Gamma$ is finitely
+satisfiable.
+
+Now suppose that $\Gamma$ is finitely satisfiable.  Then every finite
+subset~$\Gamma_0 \subseteq \Gamma$ is satisfiable.  By soundness
+(
+  \tagrefs{prfAX/{pl:axd:sou:cor:consistency-soundness},
+    prfSC/{pl:seq:sou:cor:consistency-soundness},
+    prfND/{pl:ntd:sou:cor:consistency-soundness},
+    prfTab/{pl:tab:sou:cor:consistency-soundness}}),
+every finite subset is consistent.  Then $\Gamma$ itself must be
+consistent by
+
+  \tagrefs{prfAX/{pl:axd:ptn:prop:proves-compact},
+    prfSC/{pl:seq:ptn:prop:proves-compact},
+    prfND/{pl:ntd:ptn:prop:proves-compact},
+    prfTab/{pl:tab:ptn:prop:proves-compact}}.
+By completeness (\olref[cth]{thm:completeness}), since $\Gamma$~is
+consistent, it is satisfiable.
+\end{proof}
+
+
+
+
+\begin{prob}
+Prove (1) of \olref[pl][com][com]{thm:compactness}.
+\end{prob}
+
+
+
+
+
+
+
+
+
+
+
+
+\olfileid{pl}{com}{cpd}
+
+\olsection{A Direct Proof of the Compactness Theorem}
+
+We can prove the Compactness Theorem directly, without appealing to
+the Completeness Theorem, using the same ideas as in the proof of the
+completeness theorem.  In the proof of the Completeness Theorem we
+started with a consistent set~$\Gamma$ of !!{sentence}s, expanded it
+to a consistent and !!{complete}
+set~$\Gamma^*$ of !!{sentence}s, and then showed that in the
+!!{valuation}~$\pAssign{v(\Gamma^*)}$
+constructed from $\Gamma^*$, all !!{sentence}s of~$\Gamma$ are true,
+so $\Gamma$ is satisfiable.
+
+We can use the same method to show that a finitely satisfiable set of
+sentences is satisfiable. We just have to prove the corresponding
+versions of the results leading to the truth lemma where we replace
+``consistent'' with ``finitely satisfiable.''
+
+\begin{prop}
+\ollabel{prop:fsat-ccs}
+Suppose $\Gamma$ is !!{complete} and finitely satisfiable. Then:
+\begin{enumerate}
+$(!A \land !B) \in \Gamma$
+  iff both $!A \in \Gamma$ and $!B \in \Gamma$.
+
+$(!A \lor !B) \in \Gamma$ iff
+  either $!A \in \Gamma$ or $!B \in \Gamma$.
+
+$(!A \lif !B) \in \Gamma$ iff
+  either $!A \notin \Gamma$ or $!B \in \Gamma$.
+\end{enumerate}
+\end{prop}
+
+
+
+
+\begin{prob}
+Prove \olref[pl][com][cpd]{prop:fsat-ccs}. Avoid the use of $\Proves$.
+\end{prob}
+
+
+
+
+
+
+
+
+
+
+\begin{lem}
+\ollabel{lem:fsat-lindenbaum} Every finitely satisfiable set~$\Gamma$
+can be extended to !!a{complete} and finitely satisfiable
+set~$\Gamma^*$.
+\end{lem}
+
+
+
+
+\begin{prob}
+Prove \olref[pl][com][cpd]{lem:fsat-lindenbaum}.  (Hint: the crucial
+step is to show that if $\Gamma_n$ is finitely satisfiable, then
+either $\Gamma_n \cup \{!A_n\}$ or $\Gamma_n \cup \{\lnot !A_n\}$ is
+finitely satisfiable.)
+\end{prob}
+
+
+\begin{thm}[Compactness]
+\ollabel{thm:compactness-direct} $\Gamma$ is satisfiable if and only
+if it is finitely satisfiable.
+\end{thm}
+
+\begin{proof}
+If $\Gamma$ is satisfiable, then there is
+!!a{valuation}~$\pAssign{v}$
+such that $\pSat{v}{!A}$ for all $!A \in \Gamma$.
+Of course, this $\pAssign{v}$ also
+satisfies every finite subset of~$\Gamma$, so $\Gamma$ is finitely
+satisfiable.
+
+Now suppose that $\Gamma$ is finitely satisfiable. By \olref{lem:fsat-lindenbaum},
+$\Gamma$ can be extended to !!a{complete} and
+finitely satisfiable set~$\Gamma^*$. Construct the !!{valuation}~$\pAssign{v(\Gamma^*)}$
+as in \olref[mod]{defn:termmodel}.
+The proof of the Truth Lemma (\olref[mod]{lem:truth}) goes through if
+we replace references to \olref[ccs]{prop:ccs}.
+\end{proof}
+
+
+
+
+\begin{prob}
+Write out the complete proof of the Truth Lemma
+(\olref[pl][com][mod]{lem:truth}) in the version required for the
+proof of \olref[pl][com][cpd]{thm:compactness-direct}.
+\end{prob}
+
+
+
+
+
+
+\OLEndChapterHook
+
+
+
+
+
+\OLEndPartHook
+

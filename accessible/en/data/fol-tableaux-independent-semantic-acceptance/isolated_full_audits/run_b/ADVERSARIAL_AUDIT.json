@@ -1,0 +1,175 @@
+{
+  "fresh_mutant_count": 21,
+  "schema": "openlogic-tr022-independent-adversarial-audit-v1",
+  "status": "PASS_ALL_FRESH_MUTANTS_REJECTED",
+  "tests": [
+    {
+      "mutant_bytes": 269,
+      "mutant_sha256": "cff74c595adf58400f7a1a32cd9ae929edcde4ae4f67abcc5b9cff1971aa59b9",
+      "mutation": "add root aria-label",
+      "rejection": "root flattening attribute",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "occurrence_root_aria"
+    },
+    {
+      "mutant_bytes": 257,
+      "mutant_sha256": "0a158efc82ed44e814b9c693039f455fb376a0cb8bc86722550865ba5d85fd3e",
+      "mutation": "add root role=img",
+      "rejection": "root flattening attribute",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "occurrence_root_role"
+    },
+    {
+      "mutant_bytes": 130,
+      "mutant_sha256": "3986b4307ba33ddf9bd1f2d26ac544934cfb93f8c88f819f7e79a5ce19ab3ba7",
+      "mutation": "replace structural MathML with root text",
+      "rejection": "flattened MathML",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "flatten_occurrence_mathml"
+    },
+    {
+      "mutant_bytes": 244,
+      "mutant_sha256": "732430c488da1b95404ca722ac3bb1f0c03fb2a4f4be208f71999d1e4d95bea3",
+      "mutation": "alter root stable formula ID",
+      "rejection": "stable formula ID drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "formula_id_root_drift"
+    },
+    {
+      "mutant_bytes": 3556,
+      "mutant_sha256": "b35d733af21cee7d347f5d927bb7c24d5c234b5d50c94353bf72a594bcae090b",
+      "mutation": "duplicate a stable formula ID",
+      "rejection": "duplicate stable ID",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "duplicate_formula_id"
+    },
+    {
+      "mutant_bytes": 19,
+      "mutant_sha256": "28f1c43d6ad6f67b011fe97af44d42071b5b5de857436e0e33155bc6750ccff2",
+      "mutation": "append !! glossary marker to speech",
+      "rejection": "listener residue",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "glossary_marker_leak"
+    },
+    {
+      "mutant_bytes": 14,
+      "mutant_sha256": "3b7515bba88b3523d2305cf7011cc261716e62ab2f355e08827cda5e8cf4ff83",
+      "mutation": "append raw TeX command to speech",
+      "rejection": "listener residue",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "raw_tex_leak"
+    },
+    {
+      "mutant_bytes": 4335,
+      "mutant_sha256": "a46e6d79cc2a4d3130bbcc24363dce91b643c788740e74f52cbc26740a0c1113",
+      "mutation": "drop spoken negation",
+      "rejection": "semantic speech token loss",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "drop_negation_semantics"
+    },
+    {
+      "mutant_bytes": 2492,
+      "mutant_sha256": "6ab06858bf6722cf00e42cdb428cadd8eced1c5db9820e2cd07111f6f8264714",
+      "mutation": "change record without digest update",
+      "rejection": "record hash drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "stale_record_hash"
+    },
+    {
+      "mutant_bytes": 2652,
+      "mutant_sha256": "5226bf7bfa0e8e6cc8dc65e6c7ad14416ce7c1d238c1d636b4cf9d0e5abc89bb",
+      "mutation": "decrement closed terminal count",
+      "rejection": "tableau count drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "tableau_count_drift"
+    },
+    {
+      "mutant_bytes": 2648,
+      "mutant_sha256": "d98df1e8263cceb64f32171c3e9cdd50b59dae53bac5ca07819f35d9cb474a33",
+      "mutation": "replace a closing formula with unrelated true-signed Z",
+      "rejection": "false closure marker",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "false_tableau_closure"
+    },
+    {
+      "mutant_bytes": 9797,
+      "mutant_sha256": "40c5aac08fdf35277361a9a59a18086a75b6c7e6b9c69e5e2c4e265406f84b7d",
+      "mutation": "duplicate formal source order",
+      "rejection": "formal order drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "duplicate_formal_order"
+    },
+    {
+      "mutant_bytes": 11860,
+      "mutant_sha256": "10e40c22bc4e655088f050f63f8f73e2e75a192a25f28bc97bf9461299d2f62f",
+      "mutation": "mark a source exercise solved",
+      "rejection": "exercise solution drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "solve_exercise"
+    },
+    {
+      "mutant_bytes": 66267,
+      "mutant_sha256": "9ffbeb93ea96ba9bdd9e1f5816359b5d518fb7ba899a5a0114cf3876379513cf",
+      "mutation": "drop one proof command",
+      "rejection": "command closure drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "drop_proof_command"
+    },
+    {
+      "mutant_bytes": 1143,
+      "mutant_sha256": "d98b144d267f44697667b6b90b580a81bc4b13746aec2543b7495be456f0cbe3",
+      "mutation": "move exact target line",
+      "rejection": "reference target drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "retarget_reference"
+    },
+    {
+      "mutant_bytes": 4352,
+      "mutant_sha256": "8d525b8a937897b71aeb0e05663fd4a98c598e1c1357a5cdca9d77250b20d721",
+      "mutation": "drop one audible correction disclosure",
+      "rejection": "disclosure closure drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "drop_disclosure"
+    },
+    {
+      "mutant_bytes": 14725,
+      "mutant_sha256": "06f4cda020c0722f96cea24a659f2b161a93fa785d0de71993c244bdf74d9b32",
+      "mutation": "extend one formula word span",
+      "rejection": "listener span drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "shift_listener_span"
+    },
+    {
+      "mutant_bytes": 758,
+      "mutant_sha256": "f0bd317cb822951be8b9435f0aa9a80778eb8047bf161b953d4b57a9816e0d9f",
+      "mutation": "alter exact source-line replay",
+      "rejection": "source line drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "alter_source_line"
+    },
+    {
+      "mutant_bytes": 3224,
+      "mutant_sha256": "f08b49de1f47845ebd6de0065020868050df386193615707e93fcf8849f3e890",
+      "mutation": "replace artifact manifest digest",
+      "rejection": "manifest digest drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "alter_manifest_hash"
+    },
+    {
+      "mutant_bytes": 17675,
+      "mutant_sha256": "0ae3d24ba55a7fea0cfa4bbbd6ebbed684dcd12cb221fab959f29810b9a0c935",
+      "mutation": "promote the second simultaneous signed assumption to a nonexistent third source item",
+      "rejection": "identity exercise source item count drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "split_identity_source_item_two"
+    },
+    {
+      "mutant_bytes": 16185,
+      "mutant_sha256": "3d65645fd1ef5728a3e718fef2a20ecf269e6da3d98d334115d0c9f8598d5a54",
+      "mutation": "announce the formulas inside source item two as separate listener items",
+      "rejection": "identity exercise grouped listener steps drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "test_id": "misannounce_identity_listener_items"
+    }
+  ]
+}

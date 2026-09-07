@@ -1,0 +1,139 @@
+{
+  "risk_families": 22,
+  "schema": "openlogic-tr021-adversarial-test-receipt-v1",
+  "status": "PASS_ALL_MUTATIONS_REJECTED",
+  "tests": [
+    {
+      "mutation": "blank one expression speech and recompute its record hash",
+      "rejection": "expression speech invalid: expr-011df05c0ddce663",
+      "status": "PASS_REJECTED",
+      "test_id": "expression_speech_blank"
+    },
+    {
+      "mutation": "replace native MathML with a flattened text node and recompute its record hash",
+      "rejection": "flattened MathML: expr-011df05c0ddce663",
+      "status": "PASS_REJECTED",
+      "test_id": "flatten_mathml"
+    },
+    {
+      "mutation": "shift one immutable formula line",
+      "rejection": "occurrence oracle drift projected-formula-0009178: line",
+      "status": "PASS_REJECTED",
+      "test_id": "coordinate_shift"
+    },
+    {
+      "mutation": "erase one of the 47 contextual override decisions",
+      "rejection": "47 contextual override gate drift",
+      "status": "PASS_REJECTED",
+      "test_id": "override_loss"
+    },
+    {
+      "mutation": "reverse one proof's reviewed step order and recompute its record hash",
+      "rejection": "proof step/order drift: projected-proof-diagram-000225",
+      "status": "PASS_REJECTED",
+      "test_id": "proof_step_swap"
+    },
+    {
+      "mutation": "mark a source-unsolved exercise as solved and recompute its record hash",
+      "rejection": "exercise solution invented: projected-env-001440",
+      "status": "PASS_REJECTED",
+      "test_id": "invent_exercise_solution"
+    },
+    {
+      "mutation": "remove one oracle proof command",
+      "rejection": "proof command census/closure drift",
+      "status": "PASS_REJECTED",
+      "test_id": "command_loss"
+    },
+    {
+      "mutation": "blank one command's listener speech and recompute its record hash",
+      "rejection": "proof command lacks listener speech: projected-proof-command-0000844",
+      "status": "PASS_REJECTED",
+      "test_id": "command_speech_blank"
+    },
+    {
+      "mutation": "crosswire one proof command to a formula on another line",
+      "rejection": "proof command/formula coordinate drift: projected-proof-command-0000844",
+      "status": "PASS_REJECTED",
+      "test_id": "command_formula_swap"
+    },
+    {
+      "mutation": "replace a listener reference target",
+      "rejection": "reference listener target drift: reference-000317",
+      "status": "PASS_REJECTED",
+      "test_id": "reference_target_swap"
+    },
+    {
+      "mutation": "restore generic reference language in one formal listener rendering",
+      "rejection": "formal listener target absent: projected-env-001481/reference-000317",
+      "status": "PASS_REJECTED",
+      "test_id": "formal_reference_target_loss"
+    },
+    {
+      "mutation": "remove one explicit source correction",
+      "rejection": "source correction/disclosure ledger drift",
+      "status": "PASS_REJECTED",
+      "test_id": "correction_loss"
+    },
+    {
+      "mutation": "remove one continuous replay formula anchor",
+      "rejection": "continuous replay formula count drift: content/first-order-logic/natural-deduction/rules-and-proofs.tex",
+      "status": "PASS_REJECTED",
+      "test_id": "replay_binding_loss"
+    },
+    {
+      "mutation": "append a raw occurrence placeholder to a words-only replay while keeping its word count coherent",
+      "rejection": "raw listener placeholder survived repair",
+      "status": "PASS_REJECTED",
+      "test_id": "raw_heading_placeholder_resurrection"
+    },
+    {
+      "mutation": "remove one deterministic proof-formula separator record",
+      "rejection": "proof anchor separator count drift: projected-proof-diagram-000225",
+      "status": "PASS_REJECTED",
+      "test_id": "proof_separator_loss"
+    },
+    {
+      "mutation": "reverse one repaired proof-anchor formula-ID order",
+      "rejection": "proof formula anchor span drift: projected-proof-diagram-000225/projected-formula-0009187",
+      "status": "PASS_REJECTED",
+      "test_id": "proof_anchor_formula_order_swap"
+    },
+    {
+      "mutation": "remove one exact listener reference word-span binding",
+      "rejection": "continuous replay reference count drift: content/first-order-logic/natural-deduction/proof-theoretic-notions.tex",
+      "status": "PASS_REJECTED",
+      "test_id": "reference_replay_binding_loss"
+    },
+    {
+      "mutation": "shift one listener reference replay away from its frozen source line",
+      "rejection": "replay reference source/target anchor drift: reference-000317",
+      "status": "PASS_REJECTED",
+      "test_id": "reference_source_anchor_shift"
+    },
+    {
+      "mutation": "remove one frozen source line from replay",
+      "rejection": "source line replay census drift",
+      "status": "PASS_REJECTED",
+      "test_id": "line_replay_loss"
+    },
+    {
+      "mutation": "alter a protected source digest in the receipt",
+      "rejection": "protected source identity receipt drift",
+      "status": "PASS_REJECTED",
+      "test_id": "source_identity_drift"
+    },
+    {
+      "mutation": "alter a protected upstream input digest",
+      "rejection": "protected upstream input drift: TR-021 oracle manifest",
+      "status": "PASS_REJECTED",
+      "test_id": "input_pin_drift"
+    },
+    {
+      "mutation": "erase producer self-audit FAIL history",
+      "rejection": "producer FAIL history lost",
+      "status": "PASS_REJECTED",
+      "test_id": "fail_history_loss"
+    }
+  ]
+}

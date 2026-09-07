@@ -1,0 +1,85 @@
+{
+  "application_stage": "after authority verification and before tag selection, reference resolution, and HTML ID allocation",
+  "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "authority_mutated": false,
+  "operations": [
+    {
+      "file": "content/first-order-logic/syntax-and-semantics/main-operator.tex",
+      "id": "SAR-001",
+      "instances": [
+        "inst-00131"
+      ],
+      "kind": "insert_text",
+      "visible_global_ledger": true,
+      "visible_local_note": true,
+      "visible_text": "Editorial projection note: the source omits an empty alternative argument at this point. This edition restores that empty argument so the following table remains a table; the canonical source is unchanged."
+    },
+    {
+      "file": "content/first-order-logic/completeness/construction-of-model.tex",
+      "id": "SAR-002",
+      "instances": [
+        "inst-00111",
+        "inst-00220"
+      ],
+      "kind": "insert_text",
+      "visible_global_ledger": true,
+      "visible_local_note": true,
+      "visible_text": "Editorial projection note: the source omits an empty non-first-order alternative at this conditional boundary. This edition restores the boundary, so first-order-only material appears only in the first-order chapter; the canonical source is unchanged."
+    },
+    {
+      "file": "content/sets-functions-relations/size-of-sets/reduction-alt.tex",
+      "id": "SAR-003",
+      "instances": [
+        "inst-00040"
+      ],
+      "kind": "replace_text",
+      "visible_global_ledger": true,
+      "visible_local_note": true,
+      "visible_text": "Editorial projection note: the source gives this alternate exercise the same link label as the corresponding exercise in the earlier Reduction section. This edition assigns the alternate copy its own link target; unqualified references lead to the earlier copy. The canonical source is unchanged."
+    }
+  ],
+  "reference_rules": [
+    {
+      "action": "suppress_with_unselected_parent",
+      "id": "REFRULE-001",
+      "original_key": "pl:syn:ass:prop:sat-quant",
+      "prohibited_rewrite": "Do not rewrite the citation to an explicit fol: target in the PL instance. Its entire FOL parent block is unselected after SAR-002.",
+      "source": {
+        "column": 32,
+        "file": "content/first-order-logic/completeness/construction-of-model.tex",
+        "file_sha256": "e8f3c25a2b378ac1996cc9cebb1192b2bdc2527df547e922008dad3822d29969",
+        "fragment_sha256": "5ab40e2be52902daa3dc14c950f74a6b436ea854de0138e3083c744381f0ebc2",
+        "instance_id": "inst-00111",
+        "line": 130
+      },
+      "target": null
+    },
+    {
+      "action": "resolve_to_primary_id",
+      "id": "REFRULE-002",
+      "original_key": "sfr:siz:red:prob:nat-nat",
+      "prohibited_rewrite": "Do not use last-definition-wins resolution to bind the unqualified source label to the alternate copy.",
+      "source": {
+        "column": 21,
+        "file": "content/turing-machines/undecidability/enumerating-tms.tex",
+        "file_sha256": "a921bb03bf1688c6c0ee1bb3297dbb8a1a7473a9c1572426c461bafd98b083cb",
+        "fragment_sha256": "61e287746e32bc9d6d1ec11fd399a9c6c0f05cd0502df720439c653c362e6bd9",
+        "instance_id": "inst-00318",
+        "line": 138
+      },
+      "target": {
+        "file": "content/sets-functions-relations/size-of-sets/reduction.tex",
+        "file_sha256": "33f0cbb35c8c1fa3ff0e4f44fa626fdc298d1c4612aeaafb41bcb920e5d18ac8",
+        "id": "sfr:siz:red:prob:nat-nat",
+        "instance_id": "inst-00034",
+        "line": 108
+      }
+    }
+  ],
+  "schema": "openlogic-projection-input-lock-v1",
+  "sidecar_sha256": "cea56b20572a47ed2880c143fd5817a202e3f55b2e9aa117c7259255f03ae857",
+  "sidecar_validation_receipt_sha256": "72c4939658d11ad3b7eb8061e3f3ef94c3574a431fba6e48f0c7ac355fe7d4f1",
+  "validation_check_count": 68,
+  "validation_negative_test_count": 8,
+  "validation_result": "PASS"
+}

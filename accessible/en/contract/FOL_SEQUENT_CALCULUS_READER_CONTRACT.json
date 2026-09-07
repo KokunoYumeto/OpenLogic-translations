@@ -1,0 +1,140 @@
+{
+  "accepted_projected_sha256": "f339a160535ba9a2f38803b95e4365b6c61e3d889b3392cb9307528e16b61de0",
+  "chapter_key": "fol:seq",
+  "listener_repair": {
+    "authoritative_defects_closed": 77,
+    "continuous_replay_words": 19415,
+    "continuous_source_replays": 15,
+    "current_listener_defects": 0,
+    "defect_classes_closed": {
+      "CONTEXT_COMPOSITION_DUPLICATION": 58,
+      "GLUED_WORD_BOUNDARY": 19
+    },
+    "formula_bindings": 973,
+    "listener_disclosure_bindings": 7,
+    "receipt_sha256": "607a04fef5668c6e4b578ecb3d715af67ed42795f804f374cde6124ab1320092"
+  },
+  "read_html_conformance": {
+    "after": {
+      "affected_raw_paragraphs": 0,
+      "direct_block_roots_inside_p": 0,
+      "direct_root_tags": {},
+      "lexical_block_descendants_inside_p": 0,
+      "lexical_descendant_tags": {}
+    },
+    "before": {
+      "affected_raw_paragraphs": 48,
+      "direct_block_roots_inside_p": 81,
+      "direct_root_tags": {
+        "div": 9,
+        "section": 72
+      },
+      "lexical_block_descendants_inside_p": 622,
+      "lexical_descendant_tags": {
+        "aside": 5,
+        "details": 79,
+        "div": 10,
+        "h3": 86,
+        "h4": 9,
+        "ol": 169,
+        "p": 169,
+        "section": 90,
+        "ul": 5
+      }
+    },
+    "display_formula_div_to_span_conversions": 3,
+    "figure_caption_anchor_reorders": 0,
+    "formula_help": null,
+    "formula_identity_and_order_preserved": true,
+    "mathml_payload_and_order_preserved": true,
+    "paragraph_block_splits": 79,
+    "path": "parts/fol/chapters/seq/read.html",
+    "visible_data_sequence_preserved": true
+  },
+  "reader_independent_acceptance": "NOT_CLAIMED_REQUIRES_SEPARATE_AUDIT",
+  "runtime_actions_performed": [],
+  "schema": "openlogic-fol-sequent-calculus-reader-contract-v1",
+  "scope": {
+    "exercises": 9,
+    "expressions": 394,
+    "formal_objects": 144,
+    "formula_occurrences": 973,
+    "global_end": 694887,
+    "global_start": 628293,
+    "native_mathml_variants": 788,
+    "ordered_proof_components": 896,
+    "proof_commands": 238,
+    "references": 14,
+    "source_bytes": 73046,
+    "source_lines": 1974,
+    "sources": 15,
+    "unsolved_exercises": 9
+  },
+  "semantic_independent_evidence": {
+    "finding_count": 0,
+    "reader_integration": "NOT_CLAIMED",
+    "receipt_sha256": "f712d6e1bf00240d299ecf34f35193128b38ead18d2279062f950e3fc90ebe74",
+    "status": "PASS_ZERO_CURRENT_FINDINGS"
+  },
+  "semantic_records_and_mathml_mutated": false,
+  "source_and_projection_mutated": false,
+  "source_policy": {
+    "disclosure_anchors": 7,
+    "disclosures": [
+      {
+        "correction_policy": "SOURCE_PRESERVED_READER_DISCLOSURE",
+        "file": "content/first-order-logic/sequent-calculus/proving-things.tex",
+        "finding_id": "TR020-SOURCE-NOTE-001",
+        "issue": "Each cited inference reorders formulas in the antecedent, but the printed rule label names right exchange.",
+        "lines": [
+          86,
+          104,
+          125,
+          147
+        ],
+        "reader_treatment": "Preserve and speak the printed right-exchange label, then disclose that the changed side is the antecedent and that left exchange appears intended.",
+        "silent_correction": false,
+        "source_text": "\\RightLabel{\\RightR{\\Exchange}}"
+      },
+      {
+        "correction_policy": "SOURCE_PRESERVED_READER_DISCLOSURE",
+        "file": "content/first-order-logic/sequent-calculus/soundness.tex",
+        "finding_id": "TR020-SOURCE-NOTE-002",
+        "issue": "The immediately preceding argument establishes validity of the conclusion with the conjunction on the left; this sentence instead names the premise sequent.",
+        "lines": [
+          157
+        ],
+        "reader_treatment": "Preserve the printed claim and disclose that the preceding argument appears to establish the conclusion sequent with A and B conjoined on the left.",
+        "silent_correction": false,
+        "source_text": "$\\Gamma \\Sequent \\Delta$ is valid"
+      },
+      {
+        "correction_policy": "SOURCE_PRESERVED_READER_DISCLOSURE",
+        "file": "content/first-order-logic/sequent-calculus/soundness.tex",
+        "finding_id": "TR020-SOURCE-NOTE-003",
+        "issue": "The proof discusses satisfaction of the right premise, but the printed expression is set difference rather than a sequent.",
+        "lines": [
+          288
+        ],
+        "reader_treatment": "Preserve and read the printed expression as capital Pi set difference capital Lambda, then disclose that capital Pi sequent arrow capital Lambda appears intended.",
+        "silent_correction": false,
+        "source_text": "$\\Pi \\setminus \\Lambda$"
+      },
+      {
+        "correction_policy": "SOURCE_PRESERVED_READER_DISCLOSURE",
+        "file": "content/first-order-logic/sequent-calculus/derivations.tex",
+        "finding_id": "TR020-SOURCE-NOTE-004",
+        "issue": "The printed conclusion ends with a comma after capital Delta but supplies no following succedent formula.",
+        "lines": [
+          70
+        ],
+        "reader_treatment": "Preserve and speak the printed trailing comma as having no following formula, then disclose that it appears to be stray punctuation.",
+        "silent_correction": false,
+        "source_text": "\\Gamma, !B, !A, \\Pi \\fCenter \\Delta,"
+      }
+    ],
+    "printed_anomalies_preserved": 4,
+    "silent_corrections": 0
+  },
+  "tranche_id": "OLAB-TR-020"
+}

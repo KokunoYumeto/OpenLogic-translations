@@ -1,0 +1,663 @@
+\olchapter{fol}{mat}{Theories and Their Models}
+
+
+
+\olfileid{fol}{mat}{int}
+\olsection{Introduction}
+
+\begin{explain}
+The development of the axiomatic method is a significant achievement
+in the history of science, and is of special importance in the history
+of mathematics.  An axiomatic development of a field involves the
+clarification of many questions: What is the field about?  What are the
+most fundamental concepts?  How are they related?  Can all the
+concepts of the field be defined in terms of these fundamental
+concepts?  What laws do, and must, these concepts obey?
+
+The axiomatic method and logic were made for each other.  Formal logic
+provides the tools for formulating axiomatic theories, for proving
+theorems from the axioms of the theory in a precisely specified way,
+for studying the properties of all systems satisfying the axioms in a
+systematic way.
+\end{explain}
+
+\begin{defn}
+A set of !!{sentence}s~$\Gamma$ is \emph{closed} iff, whenever
+$\Gamma \Entails !A$ then $!A \in \Gamma$.  The \emph{closure} of a set
+of !!{sentence}s~$\Gamma$ is $\Setabs{!A}{\Gamma \Entails !A}$.
+
+We say that~$\Gamma$ is \emph{axiomatized by} a set of
+sentences~$\Delta$ if $\Gamma$ is the closure of~$\Delta$.
+\end{defn}
+
+\begin{explain}
+We can think of an axiomatic theory as the set of sentences that is
+axiomatized by its set of axioms~$\Delta$.  In other words, when we
+have a first-order language which contains non-logical symbols for the
+primitives of the axiomatically developed science we wish to study,
+together with a set of !!{sentence}s that express the fundamental laws
+of the science, we can think of the theory as represented by all the
+!!{sentence}s in this language that are entailed by the axioms.  This
+ranges from simple examples with only a single primitive and
+simple axioms, such as the theory of partial orders, to complex
+theories such as Newtonian mechanics.
+
+The important logical facts that make this formal approach to the
+axiomatic method so important are the following.  Suppose $\Gamma$ is
+an axiom system for a theory, i.e., a set of sentences.
+\begin{enumerate}
+\item We can state precisely when an axiom system captures an intended
+  class of !!{structure}s.  That is, if we are interested in a certain
+  class of !!{structure}s, we will successfully capture that class by
+  an axiom system~$\Gamma$ iff the !!{structure}s are exactly
+  those~$\Struct M$ such that $\Sat{M}{\Gamma}$.
+\item We may fail in this respect because there are $\Struct M$ such
+  that $\Sat{M}{\Gamma}$, but $\Struct M$ is not one of the
+  !!{structure}s we intend.  This may lead us to add axioms which are
+  not true in~$\Struct M$.
+\item If we are successful at least in the respect that $\Gamma$ is
+  true in all the intended !!{structure}s, then a sentence~$!A$ is true in
+  all intended !!{structure}s whenever $\Gamma \Entails !A$.  Thus we can
+  use logical tools (such as !!{derivation} methods) to show that sentences are
+  true in all intended !!{structure}s simply by showing that they are
+  entailed by the axioms.
+\item Sometimes we don't have intended !!{structure}s in mind, but instead
+  start from the axioms themselves: we begin with some primitives that
+  we want to satisfy certain laws which we codify in an axiom system.
+  One thing that we would like to verify right away is that the axioms
+  do not contradict each other: if they do, there can be no concepts
+  that obey these laws, and we have tried to set up an incoherent
+  theory.  We can verify that this doesn't happen by finding a model
+  of~$\Gamma$.  And if there are models of our theory, we can use
+  logical methods to investigate them, and we can also use logical
+  methods to construct models.
+\item The independence of the axioms is likewise an important
+  question.  It may happen that one of the axioms is actually a
+  consequence of the others, and so is redundant.  We can prove that
+  an axiom $!A$ in $\Gamma$ is redundant by proving $\Gamma \setminus
+  \{!A\} \Entails !A$.  We can also prove that an axiom is not
+  redundant by showing that $(\Gamma \setminus \{!A\}) \cup \{\lnot
+  !A\}$ is satisfiable.  For instance, this is how it was shown that the
+  parallel postulate is independent of the other axioms of geometry.
+\item Another important question is that of definability of concepts
+  in a theory: The choice of the language determines what the models
+  of a theory consist of.  But not every aspect of a theory must be
+  represented separately in its models.  For instance, every ordering
+  $\le$ determines a corresponding strict ordering~$<$---given one, we
+  can define the other.  So it is not necessary that a model of a
+  theory involving such an order must \emph{also} contain the
+  corresponding strict ordering.  When is it the case, in general,
+  that one relation can be defined in terms of others?  When is it
+  impossible to define a relation in terms of others (and hence must
+  add it to the primitives of the language)?
+\end{enumerate}
+\end{explain}
+
+
+
+
+
+
+\olfileid{fol}{mat}{exs}
+
+\olsection{Expressing Properties of \printtoken{P}{structure}}
+
+\begin{explain}
+It is often useful and important to express conditions on
+functions and relations, or more generally, that the functions and
+relations in a structure satisfy these conditions.  For instance, we
+would like to have ways of distinguishing those !!{structure}s for a
+language which ``capture'' what we want the !!{predicate}s to ``mean''
+from those that do not.  Of course we're completely free to specify
+which !!{structure}s we ``intend,'' e.g., we can specify that the
+interpretation of the !!{predicate}~$\le$ must be an ordering, or that
+we are only interested in interpretations of~$\Lang L$ in which the
+domain consists of sets and $\Obj \in$ is interpreted by the ``is
+!!a{element} of'' relation.  But can we do this with !!{sentence}s of
+the language?  In other words, which conditions on
+!!a{structure}~$\Struct M$ can we express by !!a{sentence} (or perhaps
+a set of !!{sentence}s) in the language of~$\Struct M$?  There are
+some conditions that we will not be able to express.  For instance,
+there is no sentence of~$\Lang L_A$ which is only true in a
+!!{structure}~$\Struct M$ if $\Domain M = \Nat$.  We cannot express
+``the domain contains only natural numbers.''  But there are
+``structural properties'' of !!{structure}s that we perhaps can
+express.  Which properties of !!{structure}s can we express by
+!!{sentence}s?  Or, to put it another way, which collections of
+!!{structure}s can we describe as those making !!a{sentence} (or set
+of !!{sentence}s) true?
+\end{explain}
+
+\begin{defn}[Model of a set]
+Let $\Gamma$ be a set of !!{sentence}s in a language~$\Lang L$.  We
+say that !!a{structure}~$\Struct M$ \emph{is a model of}~$\Gamma$ if
+$\Sat{M}{!A}$ for all $!A \in \Gamma$.
+\end{defn}
+
+\begin{ex}
+The sentence $\lforall[x][x \le x]$ is true in~$\Struct M$ iff
+$\Assign{\le}{M}$ is a reflexive relation.  The sentence
+$\lforall[x][\lforall[y][((x \le y \land y \le x) \lif x = y)]]$ is
+true in~$\Struct M$ iff $\Assign{\le}{M}$ is anti-symmetric.  The
+sentence $\lforall[x][\lforall[y][\lforall[z][((x \le y \land y \le z)
+      \lif x \le z)]]]$ is true in~$\Struct M$ iff $\Assign{\le}{M}$
+is transitive.  Thus, the models of
+\begin{align*}
+\{\quad &\lforall[x][x \le x], \\
+   & \lforall[x][\lforall[y][((x \le y \land y \le
+    x) \lif x = y)]], \\
+   &\lforall[x][\lforall[y][\lforall[z][((x \le y
+      \land y \le z) \lif x \le z)]]] \quad \}
+\end{align*}
+are exactly those structures in which~$\Assign{\le}{M}$ is reflexive,
+anti-symmetric, and transitive, i.e., a partial order.  Hence, we can take
+them as axioms for the \emph{first-order theory of partial orders}.
+\end{ex}
+
+
+
+
+
+\olfileid{fol}{mat}{the}
+
+\olsection{Examples of First-Order Theories}
+
+\begin{ex}
+The theory of strict linear orders in the language~$\Lang L_<$ is
+axiomatized by the set
+\begin{align*}
+\{\quad & \lforall[x][\lnot x < x], \\
+& \lforall[x][\lforall[y][((x < y \lor y <
+    x) \lor x = y)]], \\
+& \lforall[x][\lforall[y][\lforall[z][((x < y
+      \land y < z) \lif x < z)]]] \quad \}
+\end{align*}
+It completely captures the intended !!{structure}s: every strict
+linear order is a model of this axiom system, and vice versa, if $R$
+is a linear order on a set $X$, then the structure $\Struct M$ with
+$\Domain M = X$ and $\Assign{<}{M} = R$ is a model of this theory.
+\end{ex}
+
+\begin{ex}
+The theory of groups in the language $\Obj 1$ (!!{constant}), $\cdot$
+(two-place !!{function}) is axiomatized by
+\begin{align*}
+& \lforall[x][\eq[(x \cdot \Obj 1)][x]]\\
+& \lforall[x][\lforall[y][\lforall[z][\eq[(x \cdot (y \cdot z))][((x
+          \cdot y) \cdot z)]]]]\\
+& \lforall[x][\lexists[y][\eq[(x \cdot y)][\Obj 1]]]
+\end{align*}
+\end{ex}
+
+\begin{ex}
+The theory of Peano arithmetic is axiomatized by the following
+sentences in the language of arithmetic~$\Lang L_A$.
+\begin{align*}
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
+& \lforall[x][\eq/[\Obj 0][x']]\\
+& \lforall[x][\eq[(x + \Obj 0)][x]]\\
+& \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
+& \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y])]]]\\
+\intertext{plus all sentences of the form}
+& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
+\end{align*}
+Since there are infinitely many sentences of the latter form, this
+axiom system is infinite.  The latter form is called the
+\emph{induction schema}. (Actually, the induction schema is a bit more
+complicated than we let on here.)
+
+The last axiom is an \emph{explicit definition} of~$<$.
+\end{ex}
+
+\begin{ex}
+The theory of pure sets plays an important role in the foundations
+(and in the philosophy) of mathematics.  A set is pure if all its
+!!{element}s are also pure sets.  The empty set counts therefore as
+pure, but a set that has something as !!a{element} that is not a set
+would not be pure.  So the pure sets are those that are formed just
+from the empty set and no ``urelements,'' i.e., objects that are not
+themselves sets.
+
+The following might be considered as an axiom system for a theory of
+pure sets:
+\begin{align*}
+& \lexists[x][\lnot \lexists[y][y \in x]]\\
+& \lforall[x][\lforall[y][(\lforall[z](z \in x \liff z \in y) \lif 
+\eq[x][y])]]\\
+& \lforall[x][\lforall[y][\lexists[z][\lforall[u][(u \in z \liff
+(\eq[u][x] \lor \eq[u][y]))]]]]\\
+& \lforall[x][\lexists[y][\lforall[z][(z \in y \liff \lexists[u][(z \in
+        u \land u \in x)])]]]\\
+\intertext{plus all sentences of the form} &
+\lexists[x][\lforall[y][(y \in x \liff !A(y))]]
+\end{align*}
+The first axiom says that there is a set with no !!{element}s (i.e.,
+$\emptyset$ exists); the second says that sets are extensional; the
+third that for any sets $X$ and $Y$, the set $\{X, Y\}$ exists; the
+fourth that for any set $X$, the set $\cup X$ exists, where $\cup X$ is the 
+union of all the elements of $X$.
+
+The !!{sentence}s mentioned last are collectively called the
+\emph{naive comprehension scheme}.  It essentially says that for every
+$!A(x)$, the set $\Setabs{x}{!A(x)}$ exists---so at first glance a
+true, useful, and perhaps even necessary axiom.  It is called ``naive''
+because, as it turns out, it makes this theory unsatisfiable: if you
+take $!A(y)$ to be $\lnot y \in y$, you get the !!{sentence}
+\[
+\lexists[x][\lforall[y][(y \in x \liff \lnot y \in y)]]
+\]
+and this !!{sentence} is not satisfied in any !!{structure}.
+\end{ex}
+
+\begin{ex}
+In the area of \emph{mereology}, the relation of \emph{parthood} is a
+fundamental relation.  Just like theories of sets, there are theories
+of parthood that axiomatize various conceptions (sometimes
+conflicting) of this relation.
+
+The language of mereology contains a single two-place predicate
+symbol~$\Obj P$, and $\Atom{\Obj P}{x, y}$ ``means'' that $x$ is a
+part of~$y$.  When we have this interpretation in mind, !!a{structure}
+for this language is called a \emph{parthood structure}.  Of course,
+not every structure for a single two-place predicate will really
+deserve this name.  To have a chance of capturing ``parthood,''
+$\Assign{\Obj P}{M}$ must satisfy some conditions, which we can lay
+down as axioms for a theory of parthood.  For instance, parthood is a
+partial order on objects: every object is a part (albeit an
+\emph{improper} part) of itself; no two different objects can be parts
+of each other; a part of a part of an object is itself part of that
+object.  Note that in this sense ``is a part of'' resembles ``is a
+subset of,'' but does not resemble ``is an element of'' which is
+neither reflexive nor transitive.
+\begin{align*}
+& \lforall[x][\Atom{\Obj P}{x,x}] \\
+& \lforall[x][\lforall[y][((\Part{x}{y} \land \Part{y}{x})
+      \lif \eq[x][y])]] \\
+& \lforall[x][\lforall[y][\lforall[z][((\Part{x}{y} \land
+        \Part{y}{z}) \lif \Part{x}{z})]]]\\
+\intertext{Moreover, any two objects have a mereological sum (an object that has
+  these two objects as parts, and is minimal in this respect).}  &
+\lforall[x][\lforall[y][\lexists[z][\lforall[u][(\Part{z}{u} \liff
+        (\Part{x}{u} \land \Part{y}{u}))]]]]
+\end{align*}
+These are only some of the basic principles of parthood considered by
+metaphysicians.  Further principles, however, quickly become hard to
+formulate or write down without first introducing some defined
+relations.  For instance, most metaphysicians interested in mereology
+also view the following as a valid principle: whenever an
+object~$x$ has a proper part~$y$, it also has a part~$z$ that has no
+parts in common with~$y$, and so that the fusion of $y$ and $z$ is
+$x$.
+\end{ex}
+
+
+
+
+
+\olfileid{fol}{mat}{exr}
+
+\olsection{Expressing Relations in \article{structure}
+  \printtoken{S}{structure}}
+
+\begin{explain}
+One main use !!{formula}s can be put to is to express properties and
+relations in !!a{structure}~$\Struct M$ in terms of the primitives of
+the language~$\Lang L$ of~$\Struct M$.  By this we mean the following:
+the !!{domain} of $\Struct M$ is a set of objects.  The !!{constant}s,
+!!{function}s, and !!{predicate}s are interpreted in~$\Struct M$ by
+some objects in~$\Domain M$, functions on~$\Domain M$, and relations
+on~$\Domain M$.  For instance, if $\Obj A^2_0$ is in $\Lang L$, then
+$\Struct M$ assigns to it a relation~$R = \Assign{{\Obj
+  A^2_0}}{M}$. Then the formula $\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}$
+\emph{expresses} that very relation, in the following sense: if a
+variable assignment~$s$ maps $\Obj v_1$ to $a \in \Domain{M}$ and
+$\Obj v_2$ to $b \in \Domain M$, then
+\[
+Rab \text{\quad iff\quad} \Sat{M}{\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}}[s].
+\]
+Note that we have to involve variable assignments here: we can't just
+say ``$Rab$ iff $\Sat{M}{\Atom{\Obj A^2_0}{a, b}}$'' because $a$ and
+  $b$ are not symbols of our language: they are !!{element}s
+  of~$\Domain{M}$.
+
+Since we don't just have atomic !!{formula}s, but can combine them
+using the logical connectives and the quantifiers, more complex
+!!{formula}s can define other relations which aren't directly built
+into~$\Struct M$.  We're interested in how to do that, and
+specifically, which relations we can define in !!a{structure}.
+\end{explain}
+
+\begin{defn}
+Let $!A(\Obj v_1,\dots, \Obj v_n)$ be !!a{formula} of $\Lang L$ in
+which only $\Obj v_1$,\dots, $\Obj v_n$ occur free, and let $\Struct
+M$ be !!a{structure} for~$\Lang L$. $!A(\Obj v_1,\dots, \Obj v_n)$
+\emph{expresses the relation}~$R \subseteq \Domain M^n$ iff
+\[
+Ra_1\dots a_n \text{\quad iff\quad} \Sat{M}{\Atom{!A}{\Obj
+    v_1,\dots, \Obj v_n}}[s]
+\]
+for any variable assignment~$s$ with $s(\Obj v_i) = a_i$ ($i = 1,
+\dots, n$).
+\end{defn}
+
+\begin{ex}
+In the standard model of arithmetic~$\Struct N$, the !!{formula} $\Obj
+v_1 < \Obj v_2 \lor \eq[\Obj v_1][\Obj v_2]$ expresses the $\le$
+relation on~$\Nat$. The !!{formula} $\eq[\Obj v_2][\Obj v_1']$
+expresses the successor relation, i.e., the relation $R \subseteq
+\Nat^2$ where $Rnm$ holds if $m$ is the successor of~$n$. The formula
+$\eq[\Obj v_1][\Obj v_2']$ expresses the predecessor relation.  The
+!!{formula}s $\lexists[\Obj v_3][(\eq/[\Obj v_3][\Obj 0] \land
+  \eq[\Obj v_2][(\Obj v_1 + \Obj v_3)])]$ and $\lexists[\Obj
+  v_3][\eq[(\Obj v_1 + {\Obj v_3}')][v_2]]$ both express the $\Obj <$
+relation.  This means that the predicate symbol~$<$ is actually
+superfluous in the language of arithmetic; it can be defined.
+\end{ex}
+
+\begin{explain}
+This idea is not just interesting in specific !!{structure}s, but
+generally whenever we use a language to describe an intended model or
+models, i.e., when we consider theories.  These theories often only
+contain a few !!{predicate}s as basic symbols, but in the domain they
+are used to describe often many other relations play an important
+role.  If these other relations can be systematically expressed by the
+relations that interpret the basic !!{predicate}s of the language, we
+say we can \emph{define} them in the language.
+\end{explain}
+
+\begin{prob}
+Find !!{formula}s in $\Lang L_A$ which define the following relations:
+\begin{enumerate}
+\item $n$ is between $i$ and $j$;
+\item $n$ evenly divides $m$ (i.e., $m$ is a multiple of $n$);
+\item $n$ is a prime number (i.e., no number other than $1$ and $n$ evenly
+  divides~$n$).
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Suppose the formula $!A(\Obj v_1, \Obj v_2)$ expresses the relation $R
+\subseteq \Domain M^2$ in !!a{structure}~$\Struct M$.  Find formulas
+that express the following relations:
+\begin{enumerate}
+\item the inverse $R^{-1}$ of $R$;
+\item the relative product $R \mid R$;
+\end{enumerate}
+Can you find a way to express $R^+$, the transitive closure of~$R$?
+\end{prob}
+
+\begin{prob}
+Let $\Lang{L}$ be the language containing a 2-place predicate symbol
+$<$ only (no other !!{constant}s, !!{function}s or !!{predicate}s---
+except of course~$\eq$). Let $\Struct{N}$ be the structure such that
+$\Domain{N} = \Nat$, and $\Assign{<}{N} = \Setabs{\tuple{n,m}}{n <
+  m}$. Prove the following:
+\begin{enumerate}
+\item $\{ 0 \}$ is definable in $\Struct{N}$;
+\item $\{ 1 \}$ is definable in $\Struct{N}$;
+\item $\{ 2 \}$ is definable in $\Struct{N}$;
+\item for each $n \in \Nat$, the set $\{ n \}$ is definable in
+  $\Struct{N}$;
+\item every finite subset of $\Domain{N}$ is definable in
+  $\Struct{N}$;
+\item every co-finite subset of $\Domain{N}$ is definable in
+  $\Struct{N}$ (where $X \subseteq \Nat$ is co-finite iff
+  $\Nat \setminus X$ is finite).
+\end{enumerate}
+\end{prob}
+
+
+
+
+
+
+\olfileid{fol}{mat}{set}
+
+\olsection{The Theory of Sets}
+
+Almost all of mathematics can be developed in the theory of sets.
+Developing mathematics in this theory involves a number of things.
+First, it requires a set of axioms for the relation~$\in$.  A number
+of different axiom systems have been developed, sometimes with
+conflicting properties of~$\in$.  The axiom system known as
+$\Log{ZFC}$, Zermelo--Fraenkel set theory with the axiom of choice
+stands out: it is by far the most widely used and studied, because it
+turns out that its axioms suffice to prove almost all the things
+mathematicians expect to be able to prove.  But before that can be
+established, it first is necessary to make clear how we can even
+\emph{express} all the things mathematicians would like to express.
+For starters, the language contains no !!{constant}s or !!{function}s,
+so it seems at first glance unclear that we can talk about particular
+sets (such as $\emptyset$ or $\Nat$), can talk about operations on
+sets (such as $X \cup Y$ and $\Pow{X}$), let alone other
+constructions which involve things other than sets, such as relations
+and functions.
+
+To begin with, ``is an element of'' is not the only relation we are
+interested in: ``is a subset of'' seems almost as important.  But we
+can \emph{define} ``is a subset of'' in terms of ``is an element of.''
+To do this, we have to find !!a{formula}~$!A(x, y)$ in
+the language of set theory which is satisfied by a pair of
+sets~$\tuple{X, Y}$ iff $X \subseteq Y$.  But $X$ is a subset of $Y$
+just in case all !!{element}s of~$X$ are also !!{element}s of~$Y$.  So
+we can define $\subseteq$ by the formula
+\[
+\lforall[z][(z \in x \lif z \in y)]
+\]
+Now, whenever we want to use the relation~$\subseteq$ in a formula, we
+could instead use that formula (with $x$ and $y$ suitably replaced,
+and the bound variable~$z$ renamed if necessary).  For instance,
+extensionality of sets means that if any sets~$x$ and $y$ are
+contained in each other, then $x$ and $y$ must be the same set. This
+can be expressed by $\lforall[x][\lforall[y][((x \subseteq y \land y
+    \subseteq x) \lif x = y)]]$, or, if we replace $\subseteq$ by the
+above definition, by
+\[
+\lforall[x][\lforall[y][((\lforall[z][(z \in x \lif z \in y)] \land
+    \lforall[z][(z \in y \lif z \in x)]) \lif x = y)]].
+\]
+This is in fact one of the axioms of $\Log{ZFC}$, the ``axiom of
+extensionality.''
+
+There is no !!{constant} for $\emptyset$, but we can express ``$x$ is
+empty'' by $\lnot \lexists[y][y \in x]$.  Then ``$\emptyset$ exists''
+becomes the !!{sentence}~$\lexists[x][\lnot \lexists[y][y \in
+    x]]$. This is another axiom of~$\Log{ZFC}$.  (Note that the axiom
+of extensionality implies that there is only one empty set.)  Whenever
+we want to talk about $\emptyset$ in the language of set theory, we
+would write this as ``there is a set that's empty and \dots'' As an
+example, to express the fact that $\emptyset$ is a subset of every
+set, we could write
+\[
+\lexists[x][(\lnot\lexists[y][y \in x] \land \lforall[z][x \subseteq
+    z])]
+\]
+where, of course, $x \subseteq z$ would in turn have to be replaced by
+its definition.
+
+To talk about operations on sets, such as $X \cup Y$ and $\Pow{X}$, we
+have to use a similar trick.  There are no function symbols in the
+language of set theory, but we can express the functional relations $X
+\cup Y = Z$ and $\Pow{X} = Y$ by
+\begin{align*}
+& \lforall[u][((u \in x \lor u \in y) \liff u \in z)]\\
+& \lforall[u][(u \subseteq x \liff u \in y )]
+\end{align*}
+since the !!{element}s of $X \cup Y$ are exactly the sets that are
+either !!{element}s of~$X$ or !!{element}s of~$Y$, and the
+!!{element}s of $\Pow{X}$ are exactly the subsets of~$X$.  However,
+this doesn't allow us to use $x \cup y$ or $\Pow{x}$ as if they were
+terms: we can only use the entire !!{formula}s that define the
+relations $X \cup Y = Z$ and $\Pow{X} = Y$. In fact, we do not know
+that these relations are ever satisfied, i.e., we do not know that
+unions and power sets always exist. For instance, the !!{sentence}
+$\lforall[x][\lexists[y][\Pow{x} = y]]$ is another axiom
+of~$\Log{ZFC}$ (the power set axiom).
+
+Now what about talk of ordered pairs or functions?  Here we have to
+explain how we can think of ordered pairs and functions as special
+kinds of sets.  One way to define the ordered pair $\tuple{x, y}$ is
+as the set $\{\{x\}, \{x, y\}\}$.  But like before, we cannot
+introduce !!a{function} that names this set; we can only define the
+relation $\tuple{x, y} = z$, i.e., $\{\{x\}, \{x, y\}\} = z$:
+\[
+\lforall[u][(u \in z \liff (\lforall[v][(v \in u \liff v = x)] \lor
+  \lforall[v][(v \in u \liff (v = x \lor v = y))]))]
+\]
+This says that the !!{element}s~$u$ of~$z$ are exactly those sets which
+either have $x$ as its only !!{element} or have $x$ and~$y$ as its
+only !!{element}s (in other words, those sets that are either identical
+to $\{x\}$ or identical to $\{x, y\}$).  Once we have this, we can say
+further things, e.g., that $X \times Y = Z$:
+\[
+\lforall[z][(z \in Z \liff \lexists[x][\lexists[y][(x \in
+        X \land y \in Y \land \tuple{x, y} = z)]])]
+\]
+
+A function $f \colon X \to Y$ can be thought of as the relation $f(x)
+= y$, i.e., as the set of pairs~$\Setabs{\tuple{x,y}}{f(x) = y}$. We
+can then say that a set~$f$ is a function from $X$ to $Y$ if (a) it is
+a relation $\subseteq X \times Y$, (b) it is total, i.e., for all $x
+\in X$ there is some $y \in Y$ such that $\tuple{x, y} \in f$ and (c)
+it is functional, i.e., whenever $\tuple{x, y}, \tuple{x, y'} \in f$,
+$y = y'$ (because values of functions must be unique). So ``$f$ is a
+function from $X$ to $Y$'' can be written as:
+\begin{align*}
+ \lforall[u][(u \in f \lif {}] & \lexists[x][\lexists[y][(x \in X \land y \in
+      Y \land \tuple{x, y} = u)]]) \land {}\\
+ \lforall[x][(x \in X \lif {}] &
+      (\lexists[y][(y \in Y \land \mathrm{maps}(f, x, y))] \land {}\\
+& (\lforall[y][\lforall[y'][((\mathrm{maps}(f, x, y) \land
+    \mathrm{maps}(f, x, y')) \lif y = y')]]))
+\end{align*}
+where $\mathrm{maps}(f, x, y)$ abbreviates $\lexists[v][(v \in f \land
+  \tuple{x, y} = v)]$ (this !!{formula} expresses ``$f(x) = y$'').
+
+It is now also not hard to express that $f\colon X \to Y$ is
+!!{injective}, for instance:
+\begin{multline*}
+ f \colon X \to Y \land \lforall[x][\lforall[x'][((x \in X \land x' \in
+     X \land {}]] \\
+ \lexists[y][(\mathrm{maps}(f, x, y) \land \mathrm{maps}(f,
+        x', y))]) \lif x = x')
+\end{multline*}
+A function~$f\colon X \to Y$ is !!{injective} iff, whenever $f$ maps $x, x'
+\in X$ to a single~$y$, $x = x'$.  If we abbreviate this formula as
+$\mathrm{inj}(f, X, Y)$, we're already in a position to state in the
+language of set theory something as non-trivial as Cantor's theorem:
+there is no !!{injective} function from $\Pow{X}$ to $X$:
+\[
+\lforall[X][\lforall[Y][(\Pow{X} = Y \lif
+    \lnot\lexists[f][\mathrm{inj}(f, Y, X)])]]
+\]
+
+One might think that set theory requires another axiom that guarantees
+the existence of a set for every defining property. If $!A(x)$ is a
+formula of set theory with the variable~$x$ free, we can consider the
+!!{sentence}
+\[
+\lexists[y][\lforall[x][(x \in y \liff !A(x))]].
+\]
+This !!{sentence} states that there is a set~$y$ whose !!{element}s
+are all and only those $x$ that satisfy~$!A(x)$. This schema is called
+the ``comprehension principle.''  It looks very useful; unfortunately
+it is inconsistent.  Take $!A(x) \ident \lnot x \in x$, then the
+comprehension principle states
+\[
+\lexists[y][\lforall[x][(x \in y \liff x \notin x)]],
+\]
+i.e., it states the existence of a set of all sets that are not
+!!{element}s of themselves. No such set can exist---this is Russell's
+Paradox.  $\Log{ZFC}$, in fact, contains a restricted---and
+consistent---version of this principle, the separation principle:
+\[
+\lforall[z][\lexists[y][\lforall[x][(x \in y \liff (x \in z \land
+      !A(x))]]].
+\]
+
+\begin{prob}
+Show that the comprehension principle is inconsistent by giving
+!!a{derivation} that shows
+\[
+\lexists[y][\lforall[x][(x \in y \liff x \notin x)]] \Proves \lfalse.
+\]
+It may help to first show $(A \lif \lnot A) \land (\lnot A \lif A)
+\Proves \lfalse$.
+\end{prob}
+
+
+
+
+\olfileid{fol}{mat}{siz}
+
+\olsection{Expressing the Size of \printtoken{P}{structure}}
+
+\begin{explain}
+There are some properties of structures we can express even without
+using the non-logical symbols of a language.  For instance, there are
+!!{sentence}s which are true in !!a{structure} iff the !!{domain} of
+the !!{structure} has at least, at most, or exactly a certain
+number~$n$ of !!{element}s.
+\end{explain}
+
+\begin{prop}
+The !!{sentence}
+\begin{multline*}
+  !A_{\ge n} \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]]\\
+  \begin{aligned}
+  (\eq/[x_1][x_2] \land {}
+  \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
+\eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+\vdots\\
+\eq/[x_{n-1}][x_n])
+\end{aligned}
+\end{multline*}
+is true in !!a{structure}~$\Struct M$ iff $\Domain M$ contains at
+least $n$ !!{element}s. Consequently, $\Sat{M}{\lnot !A_{\ge n+1}}$ iff
+$\Domain M$ contains at most~$n$ !!{element}s.
+
+\end{prop}
+
+\begin{prop}
+The !!{sentence}
+\begin{multline*}
+!A_{= n} \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]] \\
+\begin{aligned}
+  (\eq/[x_1][x_2] \land {}
+  \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
+\eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+\vdots\\
+\eq/[x_{n-1}][x_n] \land {} \\
+\lforall[y][(\eq[y][x_1] \lor \dots \lor \eq[y][x_n]]))
+\end{aligned}
+\end{multline*}
+is true in !!a{structure}~$\Struct M$ iff $\Domain M$ contains
+exactly $n$ !!{element}s.
+\end{prop}
+
+\begin{prop}
+A !!{structure} is infinite iff it is a model of
+\[
+\{!A_{\ge 1}, !A_{\ge 2}, !A_{\ge 3}, \dots \}.
+\]
+\end{prop}
+
+There is no single purely logical sentence which is true in~$\Struct
+M$ iff $\Domain M$ is infinite.  However, one can give !!{sentence}s with
+non-logical !!{predicate}s which only have infinite models (although
+not every infinite !!{structure} is a model of them).  The property of
+being a finite structure, and the property of being a
+!!{nonenumerable} structure cannot even be expressed with an infinite
+set of !!{sentence}s.  These facts follow from the compactness and
+L\"owenheim--Skolem theorems.
+
+
+
+\OLEndChapterHook
+
+
+
+
+

@@ -1,0 +1,189 @@
+{
+  "fresh_mutant_count": 20,
+  "schema": "openlogic-tr022-adversarial-test-receipt-v1",
+  "status": "PASS_ALL_FRESH_ADVERSARIAL_MUTANTS_REJECTED",
+  "temporary_mutants_removed": true,
+  "tests": [
+    {
+      "mutant_bytes": 2468,
+      "mutant_sha256": "3c77d8f43d23d21659fa0f4f8112324855d85c723b052453468d32d35e2ed6f5",
+      "mutation": "replace native MathML children by flattened root text",
+      "rejection": "native MathML structural body absent",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "flatten_mathml.json",
+      "test_id": "flatten_mathml"
+    },
+    {
+      "mutant_bytes": 1753,
+      "mutant_sha256": "e368e0b7630d5d9b213666ca79db24f95d44fdefa2a503adfa32b9b7273b21e9",
+      "mutation": "add a root aria-label that overrides native MathML navigation",
+      "rejection": "native MathML navigation flattened by root aria-label",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "flatten_mathml_with_root_aria.json",
+      "test_id": "flatten_mathml_with_root_aria"
+    },
+    {
+      "mutant_bytes": 2511,
+      "mutant_sha256": "1709bc8df8d9aeab36993a68750870379562b27063db54d1a1b22b5aefa8a0b6",
+      "mutation": "append internal source glossary markup to listener speech",
+      "rejection": "raw TeX, glossary, marker, or opaque symbol residue: mutated expression speech",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "leak_glossary_marker.json",
+      "test_id": "leak_glossary_marker"
+    },
+    {
+      "mutant_bytes": 5336,
+      "mutant_sha256": "efc236efc27235e2bb4e217dddb40d9177a1868193656765e7e11b343bc3ed04",
+      "mutation": "erase an exact-source MathML variant",
+      "rejection": "source MathML authority mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "erase_source_mathml.json",
+      "test_id": "erase_source_mathml"
+    },
+    {
+      "mutant_bytes": 3556,
+      "mutant_sha256": "b35d733af21cee7d347f5d927bb7c24d5c234b5d50c94353bf72a594bcae090b",
+      "mutation": "duplicate one stable formula ID",
+      "rejection": "stable formula IDs not unique",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "duplicate_formula_id.json",
+      "test_id": "duplicate_formula_id"
+    },
+    {
+      "mutant_bytes": 1721,
+      "mutant_sha256": "769e55c8bea32da325beb856f0ab45b4fe1d2bee8df47d2915fcf294e53dd14e",
+      "mutation": "alter context-authored occurrence speech",
+      "rejection": "occurrence speech authority mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "alter_occurrence_speech.json",
+      "test_id": "alter_occurrence_speech"
+    },
+    {
+      "mutant_bytes": 9797,
+      "mutant_sha256": "40c5aac08fdf35277361a9a59a18086a75b6c7e6b9c69e5e2c4e265406f84b7d",
+      "mutation": "duplicate a formal source-order ordinal",
+      "rejection": "formal source order is not continuous",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "duplicate_formal_order.json",
+      "test_id": "duplicate_formal_order"
+    },
+    {
+      "mutant_bytes": 66267,
+      "mutant_sha256": "9ffbeb93ea96ba9bdd9e1f5816359b5d518fb7ba899a5a0114cf3876379513cf",
+      "mutation": "drop the final proof command binding",
+      "rejection": "proof command closure mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "drop_proof_command.json",
+      "test_id": "drop_proof_command"
+    },
+    {
+      "mutant_bytes": 8276,
+      "mutant_sha256": "cdb797a34a95276a335a27d1bce963a059e59aaa71debef318de0919f3447152",
+      "mutation": "decrement a tableau closed-terminal-path count",
+      "rejection": "tableau closure count mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "alter_tableau_closure.json",
+      "test_id": "alter_tableau_closure"
+    },
+    {
+      "mutant_bytes": 9048,
+      "mutant_sha256": "b8b5c806e39010d3582e441a90477dbbdec0190de678a0fe16029d699188ada9",
+      "mutation": "drop one spoken tableau branch-split step",
+      "rejection": "tableau linearized-step count mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "drop_tableau_branch_announcement.json",
+      "test_id": "drop_tableau_branch_announcement"
+    },
+    {
+      "mutant_bytes": 11860,
+      "mutant_sha256": "10e40c22bc4e655088f050f63f8f73e2e75a192a25f28bc97bf9461299d2f62f",
+      "mutation": "mark a source exercise as solved",
+      "rejection": "exercise no longer preserved unsolved",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "solve_exercise.json",
+      "test_id": "solve_exercise"
+    },
+    {
+      "mutant_bytes": 16634,
+      "mutant_sha256": "96244806c01001ff08695286048e58274481ee98222ec61204da22fa83deda42",
+      "mutation": "promote the second simultaneous signed assumption to a nonexistent third source item",
+      "rejection": "identity exercise source item count drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "split_identity_source_item_two.json",
+      "test_id": "split_identity_source_item_two"
+    },
+    {
+      "mutant_bytes": 16294,
+      "mutant_sha256": "705479b73fda8482dde01370d0e2aa2d7dc3455a9d5e6563d787729b6bf88d7e",
+      "mutation": "announce the formulas inside source item two as separate listener items",
+      "rejection": "identity exercise grouped listener steps drift",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "misannounce_identity_listener_items.json",
+      "test_id": "misannounce_identity_listener_items"
+    },
+    {
+      "mutant_bytes": 1143,
+      "mutant_sha256": "d98b144d267f44697667b6b90b580a81bc4b13746aec2543b7495be456f0cbe3",
+      "mutation": "move a reference target by one source line",
+      "rejection": "reference target coordinate mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "retarget_reference.json",
+      "test_id": "retarget_reference"
+    },
+    {
+      "mutant_bytes": 4352,
+      "mutant_sha256": "8d525b8a937897b71aeb0e05663fd4a98c598e1c1357a5cdca9d77250b20d721",
+      "mutation": "drop one audible source-correction disclosure",
+      "rejection": "listener disclosure closure mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "drop_disclosure.json",
+      "test_id": "drop_disclosure"
+    },
+    {
+      "mutant_bytes": 14725,
+      "mutant_sha256": "06f4cda020c0722f96cea24a659f2b161a93fa785d0de71993c244bdf74d9b32",
+      "mutation": "extend one listener formula word span",
+      "rejection": "listener transcript/source span mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "shift_listener_span.json",
+      "test_id": "shift_listener_span"
+    },
+    {
+      "mutant_bytes": 758,
+      "mutant_sha256": "bc39020078580973730ff4700a7bf425bb68d887af1cdd7ff96e959d82227e40",
+      "mutation": "alter one exact source-line replay",
+      "rejection": "exact source-line replay mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "alter_source_line.json",
+      "test_id": "alter_source_line"
+    },
+    {
+      "mutant_bytes": 2493,
+      "mutant_sha256": "ec869268076b21634cbeb54dc19d7559e3acc0b5a4f517a6e510ec254d84450e",
+      "mutation": "mutate a record without recomputing its digest",
+      "rejection": "record hash drift: mutated-expression",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "stale_record_hash.json",
+      "test_id": "stale_record_hash"
+    },
+    {
+      "mutant_bytes": 3224,
+      "mutant_sha256": "f08b49de1f47845ebd6de0065020868050df386193615707e93fcf8849f3e890",
+      "mutation": "replace one artifact-manifest digest",
+      "rejection": "artifact manifest digest mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "alter_manifest_hash.json",
+      "test_id": "alter_manifest_hash"
+    },
+    {
+      "mutant_bytes": 13234,
+      "mutant_sha256": "e7464fffbe3f939f8a8f8be6343555e77816de7bbadb550d48ce1181f6f31415",
+      "mutation": "replace one protected-input digest",
+      "rejection": "protected input identity mismatch",
+      "status": "PASS_FRESH_MUTANT_REJECTED",
+      "temporary_mutant_path": "protected_input_drift.json",
+      "test_id": "protected_input_drift"
+    }
+  ],
+  "tranche_id": "OLAB-TR-022"
+}

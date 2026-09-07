@@ -1,0 +1,173 @@
+{
+  "actual_pins": {
+    "projection/EVIDENCE_MANIFEST.json": "acbe5552955f79a8e9dee4c15af0ef73d75c9d3534dda40c3c9bd94c1bf49449",
+    "projection/VALIDATION_RECEIPT.json": "3e359ddfe4f5633cb05338215b10f18ef40ee2a8e7999ce6c9a7174e1ea977a8",
+    "projection/expression_semantics.jsonl": "7eaf142fca31f37ae16689a51f57b4f37f808deb27ab10611fcfa94b163e2432",
+    "work/build_syntax_semantics_projection.py": "73534dfcf62dc3329aa54ec434d1735957a7d8f9ed742fea33154ae5c8e08137",
+    "work/pl_syntax_semantics.py": "ac7baaa9cf5fe376f15c9ce1e46be16fb4417d4e6b0af6d85e9eab03acd33bdb",
+    "work/test_syntax_semantics_projection.py": "90d2c8332dfd55ca4637f0de9cd8c69120d5dca23b72b1138c812cca325111ba",
+    "work/validate_syntax_semantics_projection.py": "7fae84c1a64201ab3fe9a5ed12c9e437442c9b7b1db9ae0fb8330d1f14613b9c"
+  },
+  "assigned_pins": {
+    "projection/EVIDENCE_MANIFEST.json": "acbe5552955f79a8e9dee4c15af0ef73d75c9d3534dda40c3c9bd94c1bf49449",
+    "projection/VALIDATION_RECEIPT.json": "3e359ddfe4f5633cb05338215b10f18ef40ee2a8e7999ce6c9a7174e1ea977a8",
+    "projection/expression_semantics.jsonl": "7eaf142fca31f37ae16689a51f57b4f37f808deb27ab10611fcfa94b163e2432",
+    "work/build_syntax_semantics_projection.py": "73534dfcf62dc3329aa54ec434d1735957a7d8f9ed742fea33154ae5c8e08137",
+    "work/pl_syntax_semantics.py": "ac7baaa9cf5fe376f15c9ce1e46be16fb4417d4e6b0af6d85e9eab03acd33bdb",
+    "work/test_syntax_semantics_projection.py": "90d2c8332dfd55ca4637f0de9cd8c69120d5dca23b72b1138c812cca325111ba",
+    "work/validate_syntax_semantics_projection.py": "7fae84c1a64201ab3fe9a5ed12c9e437442c9b7b1db9ae0fb8330d1f14613b9c"
+  },
+  "audio_used": false,
+  "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "authority_mutated": false,
+  "browser_used": false,
+  "check_count": 20,
+  "checks": [
+    {
+      "check_id": "PIN-001",
+      "detail": "all seven assigned repaired-producer pins are exact",
+      "result": "PASS"
+    },
+    {
+      "check_id": "PIN-002",
+      "detail": "the frozen TR-008 oracle manifest and validation pins are exact",
+      "result": "PASS"
+    },
+    {
+      "check_id": "MANIFEST-001",
+      "detail": "projection manifest closes all 12 producer artifacts",
+      "result": "PASS"
+    },
+    {
+      "check_id": "VALIDATION-001",
+      "detail": "pinned producer validation reports 11,544 passing checks and exact repair counts",
+      "result": "PASS"
+    },
+    {
+      "check_id": "SOURCE-001",
+      "detail": "all seven immutable source files close at 30,989 bytes and 858 lines",
+      "result": "PASS"
+    },
+    {
+      "check_id": "CLOSURE-001",
+      "detail": "exact scope is 154 expressions, 374 occurrences, 38 formals, 4 tables, 10 exercises, 9 references, and 7 sources/858 lines",
+      "result": "PASS"
+    },
+    {
+      "check_id": "LEDGER-001",
+      "detail": "all producer ledgers close one-to-one over the oracle",
+      "result": "PASS"
+    },
+    {
+      "check_id": "SEMANTICS-001",
+      "detail": "all 154 exact pinned expression speeches and meanings pass direct source-context review with no residue",
+      "result": "PASS"
+    },
+    {
+      "check_id": "MATHML-REPAIR-001",
+      "detail": "all exact 17 repaired expressions / 34 variants have fixed immediate-token script binding",
+      "result": "PASS"
+    },
+    {
+      "check_id": "MATHML-REPAIR-002",
+      "detail": "both formerly whitespace-only mtext variants now contain only nonempty tokens",
+      "result": "PASS"
+    },
+    {
+      "check_id": "OCCURRENCE-001",
+      "detail": "all 374 occurrences replay exact immutable source coordinates, contexts, semantic propagation, containment, and bound MathML hashes",
+      "result": "PASS"
+    },
+    {
+      "check_id": "MATHML-001",
+      "detail": "all 320 native MathML variants parse and pass namespace, root, arity, token, glyph, annotation, and unflattened-tree checks",
+      "result": "PASS"
+    },
+    {
+      "check_id": "SEMANTICS-002",
+      "detail": "high-risk semantic distinctions and all six contextual induction cases are exact",
+      "result": "PASS"
+    },
+    {
+      "check_id": "FORMAL-001",
+      "detail": "all 38 formal objects preserve exact spans, formula ownership/order, reviewed speech, and source-specific navigation semantics",
+      "result": "PASS"
+    },
+    {
+      "check_id": "TABLE-001",
+      "detail": "all four truth tables preserve exact truth functions, source row order, scoped headers, captions, and spoken rows",
+      "result": "PASS"
+    },
+    {
+      "check_id": "REFERENCE-001",
+      "detail": "all nine reference coordinates and targets resolve inside the exact source boundary",
+      "result": "PASS"
+    },
+    {
+      "check_id": "PRIOR-001",
+      "detail": "the prior independent PASS is preserved but superseded because its producer manifest/validation pins differ from current repaired bytes",
+      "result": "PASS"
+    },
+    {
+      "check_id": "ADVERSARIAL-001",
+      "detail": "all seven independent malformed-MathML mutants fail closed",
+      "result": "PASS"
+    },
+    {
+      "check_id": "COLD-001",
+      "detail": "two isolated cold builds plus both 31-case producer adversarial runs are byte-identical to each other and the current canonical producer artifacts",
+      "result": "PASS"
+    },
+    {
+      "check_id": "STABILITY-001",
+      "detail": "producer, oracle, dependencies, immutable authority, and all prior independent evidence remained byte-identical during this audit",
+      "result": "PASS"
+    }
+  ],
+  "counts_replayed": {
+    "all_mathml_variants": 320,
+    "contextual_mathml_variants": 12,
+    "exercises": 10,
+    "expression_mathml_variants": 308,
+    "expression_records": 154,
+    "formal_objects": 38,
+    "occurrence_records": 374,
+    "references": 9,
+    "repaired_script_expressions": 17,
+    "repaired_script_variants": 34,
+    "repaired_whitespace_token_variants": 2,
+    "source_bytes": 30989,
+    "source_files": 7,
+    "source_lines": 858,
+    "truth_tables": 4
+  },
+  "git_used": false,
+  "independent_adversarial_result": "PASS",
+  "input_aggregate_sha256": "0a62dfafa2497d12577f34a51f430db81be1f437bb016fab1bad033ecdfbe627",
+  "input_record_count": 115,
+  "input_stability": "PASS_BYTE_IDENTICAL",
+  "mathml_review": "COMPLETE_ALL_320_MATERIALIZED_VARIANTS",
+  "paired_cold_replay_result": "PASS",
+  "prior_audit_edited": false,
+  "prior_independent_pass": {
+    "current_projection_manifest": "acbe5552955f79a8e9dee4c15af0ef73d75c9d3534dda40c3c9bd94c1bf49449",
+    "current_projection_validation": "3e359ddfe4f5633cb05338215b10f18ef40ee2a8e7999ce6c9a7174e1ea977a8",
+    "expected_sha256": "d1d3bb4ffba31b9cb735d4f828923e0191d067beeee2cfd0c6f2a89eb94d87d0",
+    "path": "evidence/independent_tranche_008_syntax_semantics_semantic_audit/superseding_reaudit/SUPERSEDING_AUDIT_RECEIPT.json",
+    "prior_evidence_mutated": false,
+    "prior_projection_manifest": "212937aea52c630e8086218bcedb0e1e1436849873f9af13161bfc89ba8fc3b9",
+    "prior_projection_validation": "3a748fb185c18d51b71b0f3b42a89157fd6b1f76ca3be662a84206468ecba808",
+    "result": "PASS",
+    "sha256": "d1d3bb4ffba31b9cb735d4f828923e0191d067beeee2cfd0c6f2a89eb94d87d0",
+    "status": "SUPERSEDED_BY_PRODUCER_MUTATION_REAUDIT_REQUIRED"
+  },
+  "producer_edited": false,
+  "promotion_readiness": "PASS_CURRENT_REPAIRED_BYTES_READY_FOR_CUMULATIVE_REBUILD",
+  "publication": false,
+  "remote_mutation": false,
+  "result": "PASS",
+  "schema": "openlogic-independent-tr008-repaired-mathml-semantic-audit-v1",
+  "semantic_review": "COMPLETE_154_EXPRESSIONS_PLUS_374_CONTEXT_RECONCILIATION_AND_6_DIRECT_CONTEXTUAL_OVERRIDES",
+  "tranche_id": "OLAB-TR-008",
+  "unresolved_findings": 0
+}

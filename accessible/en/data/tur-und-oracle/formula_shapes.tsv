@@ -1,0 +1,265 @@
+expression_id	physical_unique_source_occurrences	canonical_projected_occurrences	normalized_tex
+expr-0022ffa6a3f66313	2	2	m < k
+expr-002bf3eb1573e012	10	10	k+1
+expr-01208e159d2aec8c	58	66	\land
+expr-0392a7f58dc6f6ba	18	18	\Obj 0
+expr-043a718774c572bd	214	211	s
+expr-0485a455fa1f1209	1	1	\Sigma' = \{\TMendtape,\TMblank,A\}
+expr-04ce27fdf5d2c493	1	1	\Obj S_\sigma(\num{m}, \num{n})
+expr-05598a684835245e	1	1	\Assign{<}{M''} = \{\tuple{0,1}, \tuple{1,1}, \tuple{2,2}\}
+expr-089c421a1eee90aa	1	1	\Obj S_{\sigma_i}(\num{i}, \num{n})
+expr-08f271887ce94707	240	240	M
+expr-0a1283c811f79f60	1	1	m=k
+expr-0ac6f2ec0fc75966	2	2	\num{k}
+expr-0b7e104051728a9a	2	2	!T'(M,w) \Entails !C(M, w, n) \land !B(\num{n})
+expr-0e05800e5244c124	1	1	\Obj S_\TMendtape(\num{0}, \num{0}) \land \Obj S_{\sigma_{i_1}}(\num{1}, \num{0}) \land \dots \land \Obj S_{\sigma_{i_k}}(\num{k}, \num{0})
+expr-0ed845e79c8d8e41	1	1	\sigma_i
+expr-104da7f0527793ce	1	1	\Assign{\prime}{M'}(x) = \begin{cases} x + 1 &\text{if $x < n$}\\ n &\text{otherwise,} \end{cases}
+expr-10d5524dfcfac13f	5	5	\delta(q, \sigma)
+expr-139c7c04318de35e	13	14	n = 0
+expr-155ee6a457533b5a	1	1	x = y = n
+expr-156f5402c1d0baa8	7	7	x+1
+expr-15fd307d7f46f8c3	4	4	\num{2}
+expr-18ac3e7343f01689	43	43	d
+expr-18d6e1cac2a8adaf	1	1	1/0
+expr-1b16b1df538ba12d	467	478	n
+expr-1ca7be4fe71cdda8	6	6	!E(M, w)
+expr-1d9411a61065e25b	1	1	\Assign{\Obj S_{\TMblank}}{M''}
+expr-1ed442ade7da8f5f	1	1	\Obj Q_q(x, y)
+expr-1f97d653b7ed2d2b	18	19	n+1
+expr-1fe07613f8be2bf9	2	2	E \concat D
+expr-20c0d70009cd33dd	1	1	!T(M,w) \Proves \num{k} < \num{k}'
+expr-2160509ff364e743	108	108	\Struct M
+expr-21a3189658821b30	2	2	\TMright
+expr-241d1cd21689b8a9	1	1	y'
+expr-2438c1075acdf774	1	1	\num{0} & = \Obj 0 \\ \num{n+1} &= \num{n}'
+expr-266ae6e58d62d965	3	3	!T(M, w) \Entails !E(M, w)
+expr-284c47be48fb0c66	63	71	\lnot
+expr-285974d271093f47	1	1	& \lforall[x][\lforall[y][((\Obj Q_{q}(x, y) \land \Obj S_\sigma(x, y)) \lif {}]]\\ & \qquad (\Obj Q_{q'}(x', y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y))) \intertext{is a conjunct of $!T(M,w)$. This entails the following !!{sentence} (universal instantiation, $\num{m}$ for~$x$ and $\num{n}$ for~$y$):} & (\Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n})) \lif {}\\ & \qquad (\Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land !A(\num{m}, \num{n})). \intertext{By induction hypothesis, $!T(M, w) \Entails !C(M, w, n)$, i.e.,} & \Obj Q_q(\num{m}, \num{n}) \land \Obj S_{\sigma_0}(\num{0}, \num{n}) \land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land \\ & \qquad\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]\\ \intertext{Since after $n$ steps, tape square~$m$ contains~$\sigma$, the corresponding conjunct is~$\Obj S_\sigma(\num{m}, \num{n})$, so this entails:} & \Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n}) \intertext{We now get} & \Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land {}\\ & \qquad\Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}') \land {}\\ & \qquad \lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}'))]
+expr-28e8ca6f819f726b	4	4	k < n
+expr-2adc9a0232f82eb1	2	2	w = \sigma_{i_1}\dots\sigma_{i_k}
+expr-2b88573dfa91deef	1	1	h(e,n) = \begin{cases} \text{0} & \text{if machine~$M_e$ does not halt for input $n$} \\ \text{1} & \text{if machine~$M_e$ halts for input $n$} \end{cases}
+expr-2d711642b726b044	501	497	x
+expr-2f9465b95c9e8e33	1	1	!E(M,\emptyseq)
+expr-2fdfdde7570c43b1	2	2	q_i
+expr-3072e8ef9af4e2b1	1	1	\num{k} < \num{k}'
+expr-307ff218fecd14ae	3	3	\TMstay
+expr-3188150e34a0f671	1	1	!T(M,w) \Proves \num{m} < \num {k}
+expr-31cef529d16bee5f	1	1	\Obj S_\sigma(x, y)
+expr-3377aa50e30c85c9	1	1	\Obj S_{\sigma}(\num{m}, \num{n})
+expr-33a9c96304bcc292	64	65	\Domain{M}
+expr-34fd6d8fbebb6d5a	1	1	& \lforall[x][\lforall[y][ ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\ & \qquad (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land !A(x, y))) \land {}\\ & \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0}, y)) \lif {}]\\ & \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0}, y') \land !A(\num{0}, y)))
+expr-35d3c1188d25a8a2	1	1	!A(m, n)
+expr-371bacbea5363456	4	14	\Sat{M}{!B}
+expr-380172cff57049ab	1	1	w = \emptyseq
+expr-39c0c06bf0f96fc1	1	1	\Obj Q_q(\num{m}, \num{k})
+expr-3c0042c07a5ab1bc	1	1	\Sat{M'}{!T(M,w)}
+expr-3c96c67cffcd3a70	2	2	\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}'))]
+expr-3d49f0278c584cab	2	2	\delta(q_i, \sigma) = \tuple{q_j, \sigma', \TMstay}
+expr-3e3cb3d5dc7f2dc5	82	82	\TMstroke
+expr-3f1b6dc519af96a7	16	16	\prime
+expr-3f39d5c348e5b79d	37	37	D
+expr-3f79bb7b435b0532	85	85	e
+expr-3fbd6815ef509046	2	2	!B(y')
+expr-3ffc6ab441a537ac	3	3	\lforall[x][x < x']
+expr-406f80d6fe2a10d6	2	2	S \concat J
+expr-418dd978c2c5d730	1	1	Q \times \Sigma
+expr-4259230107adbba5	1	1	\Entails !T(M, w) \lif !E(M,w)
+expr-42b8f19ae63d24a4	233	251	\Struct{M}
+expr-42e769a18fac6caa	1	1	\tuple{x,y} \in \Assign{<}{M'}
+expr-440a949d16174f45	1	1	!T(M,w) \Entails !C(M, w, n)
+expr-44bd7ae60f478fae	23	23	H
+expr-45943e4f62da7355	1	1	s'(e) = \begin{cases} \text{1} & \text{if machine~$M_e$ halts for input $e$}\\ \text{undefined} & \text{if machine~$M_e$ does not halt for input $e$} \end{cases}
+expr-46461bd80ef280f6	1	1	\{s,h\}
+expr-4657d6b3478ad20c	1	1	E\concat D
+expr-47ff73410fefc50c	1	1	f(e,n) = m
+expr-4ad279bf4e4a8c22	6	6	f(n)
+expr-4ae81572f06e1b88	44	44	Q
+expr-4b68ab3847feda7d	108	108	X
+expr-4ba54a6a818f6522	3	3	y+1
+expr-4bcc8b4ac4501fa9	1	1	i < m
+expr-4d5e2d82e9b73555	1	1	S_{\sigma_m}(\num{m},\num{n}')
+expr-4e07408562bedb8b	54	56	3
+expr-4e3ed9256de1b698	4	4	\Entails !T(M, w) \lif !E(M, w)
+expr-5048c4b9123eb530	1	1	\sigma_1
+expr-50e721e49c013f00	185	183	w
+expr-5114954d49b039d0	4	4	!T(M_e, w) \lif !E(M_e, w)
+expr-515233b84981c9db	1	1	m<k
+expr-522d6ce4b07bfab0	1	1	\Assign{\Obj Q_{q_0}}{M''}
+expr-5279731c117b6bc7	3	3	!T(M,w) \land !E(M,w)
+expr-52c0b2d7d72a6fe8	1	1	\num{l} \ident \num{0}
+expr-5351bd0dfb10e404	1	1	\lforall[z][ (((z < x \lor x < z) \land \Obj S_\sigma(z, y)) \lif \Obj S_\sigma(z, y'))]
+expr-5499510e641b214f	1	1	0 \le i \le k
+expr-559aead08264d579	478	477	A
+expr-56552e66460416dc	1	1	\Sat{M}{\Obj Q_q(\num{m}, \num{n})}
+expr-5a1eb28f9326ed82	1	1	\Obj S_{\sigma_i}(\num{i}, \num{n}')
+expr-5afa20230f875253	42	42	n \in \Nat
+expr-5b81b8dff6f867f7	2	2	i \neq m
+expr-5b85a600f1f160cd	1	1	s(e) = 0
+expr-5cc45fd085fa0e67	1	1	\lexists[x][\lexists[y][\Obj Q_h(x, y)]]
+expr-5e769b89788d547a	14	12	s'
+expr-5eecf8115f7c0078	1	1	!C(M, w, n) \Entails !E(M,w)
+expr-5fc7567dc5f941ee	1	1	!B(\num{n}) \Entails \num{k} < \num{n} \lif \eq/[\num{k}][\num{n}]
+expr-5feceb66ffc86f38	220	219	0
+expr-608b49002ed2f8f4	3	3	\lforall[x][(\num{k} < x \lif \num{m} < x)]
+expr-61a45982430145d0	1	1	f\colon \Nat \times \Nat \pto \Nat
+expr-62c66a7a5dd70c31	105	105	m
+expr-638a8052d17cbaf3	3	3	\Obj 0'
+expr-66c370af1c7f93e0	1	1	\Domain{M''} = \{0, 1, 2\}
+expr-66ff1e757c3aa9b2	1	1	\Obj S_\sigma(\num{m}, \num{k})
+expr-6779c64ab17f04c5	8	8	!T(M, w) \lif !E(M, w)
+expr-67abbd486aaad55c	3	3	\lforall[x][(\num{k}' < x \lif \Obj S_\TMblank(x, \num{n}'))]
+expr-688eed70a27e98ff	10	10	q_1
+expr-697c25e2e7186d2e	1	1	\Assign{\prime}{M''}(2) = 2
+expr-6b86b273ff34fce1	238	241	1
+expr-6ba563d20e8fdc92	1	1	!T(M,\emptyseq) \land !E(M,\emptyseq)
+expr-6d11835243989d93	1	1	\sigma \in \Sigma
+expr-6da43b944e494e88	9	9	J
+expr-6f4a718317df8bd5	1	1	h(e,w)
+expr-724a316edcd71912	1	1	& \lforall[x][\lforall[y][ ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\ & \qquad (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land !A(x, y))) \land {}\\ & \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0}, y)) \lif {}]\\ & \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0}, y') \land !A(\num{0}, y) \land !B(y')))
+expr-72d3c432570c02f5	1	1	!T'(M,w) \land !E(M, w)
+expr-74728437b7963d0d	1	1	\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{0}))]
+expr-74c09e8f4b051811	1	1	\Sat{M'}{!T'(M,w) \land E(M,w)}
+expr-74ea488bf3852965	3	3	\Sat{M}{!E(M, w)}
+expr-75dcf9c6552708e7	1	1	s_M \in (\PosInt)^*
+expr-76956fb84940d91a	1	1	e \neq n
+expr-76a8c8c02bf83b7a	28	28	M'
+expr-780ad37cc2a9c734	1	1	e = n
+expr-7871e01579318cd3	1	1	\tuple{e,n}
+expr-79c5e01e1ef895a2	1	1	f(e,n)
+expr-79d4c7f9c8579543	117	115	\Nat
+expr-7a6a9b174f4c80df	1	1	\Sat{M}{\eq/[\num{k}][\num{n}]}
+expr-7b5324c551330f48	1	1	\Assign{\Obj S_{\TMendtape}}{M''}
+expr-7c79a30577a3ee7b	1	1	\Obj Q_{q'}(\num{m}, \num{n}) \land S_{\sigma'}(\num{m}, \num{n}) \Entails \bigvee_{\tuple{q, \sigma} \in X} (\Obj Q_q(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n}))
+expr-7c7f989fbf767be7	1	1	!T(M, w) \Entails !C(M, w, n+1)
+expr-7d342f063525a48d	1	1	\Assign{\Obj Q_q}{M} & = \Setabs{\tuple{m, n}}{\begin{array}{ll}\text{started on~$w$, after~$n$ steps,}\\ \text{$M$ is in state $q$ scanning square~$m$}\end{array}} \\ \Assign{\Obj S_\sigma}{M} & = \Setabs{\tuple{m, n}}{\begin{array}{ll} \text{started on~$w$, after $n$ steps,}\\ \text{square~$m$ of $M$ contains symbol~$\sigma$}\end{array}}
+expr-7dc44bba6fae9127	1	1	m < i
+expr-7f024b2d7f1db4d4	19	19	\num{n}
+expr-80812ec34d267e18	1	1	!C(M, w, k) \Entails !E(M, w)
+expr-80c3541a77d62a0a	3	3	!C(M, w, n) \Entails !E(M, w)
+expr-8188210924596030	1	1	& \lforall[x][\lforall[y][( (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\ &\qquad (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y) \land !B(y')))
+expr-81a36f1ac809b83f	2	2	\Struct{M''}
+expr-8209a7659542ec35	1	1	!T'(M,w) \Entails \num{k} < \num{n}
+expr-8238c028f61fc0f7	1065	1252	!A
+expr-8254c329a92850f6	120	120	k
+expr-82ec871b4d33c4af	1	1	k-m
+expr-840e7fd7cd9f5514	4	4	M = \tuple{Q, \Sigma, q_0, \delta}
+expr-8a5757e26e4e8c4a	5	5	!T(M, w) \Entails !C(M, w, n)
+expr-8b72c6bfaa480399	1	1	\Obj Q_q(\num{m}, \num{n}) \land \Obj S_{\sigma_0}(\num{0}, \num{n}) \land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land \lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]
+expr-8c5a7a352285148d	3	3	\Obj S_\sigma
+expr-8cc1fa30cfe84c12	1	1	\delta(q_0,\TMblank) = \tuple{q_0,\TMblank,\TMstay}
+expr-8dcd00493487a032	1	1	\num{l}' \ident \num{l+1} \ident \num{m}
+expr-8de0b3c47f112c59	156	161	S
+expr-8e35c2cd3bf6641b	66	65	q
+expr-8eaa2441549873ae	1	1	n = \max(k,\len{w})
+expr-8eac02e600ecb98f	3	3	(\PosInt)^*
+expr-8ec6eaaccf7ca5db	6	6	!T(M,w)
+expr-925866ac94568d29	1	1	\delta(q, \sigma) = \tuple{q', \sigma', \TMleft}
+expr-935dcc6e0812f3ef	1	1	& \lforall[x][\lforall[y][((\Obj Q_{q}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\ & \qquad (\Obj Q_{q'}(x, y') \land \Obj S_{\sigma'}(x', y') \land !A(x, y))) \land {}\\ & \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0}, y)) \lif {}]\\ & \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0}, y') \land !A(\num{0}, y))) \intertext{is a conjunct of $!T(M,w)$. If $m>0$, then let $l = m - 1$ (i.e., $m = l+1$). The first conjunct of the above !!{sentence} entails the following:} & (\Obj Q_{q}(\num{l}', \num{n}) \land \Obj S_{\sigma}(\num{l}', \num{n})) \lif {} \\ & \qquad (\Obj Q_{q'}(\num{l}, \num{n}') \land \Obj S_{\sigma'}(\num{l}', \num{n}') \land !A(\num{l}, \num{n})) \intertext{Otherwise, let $l = m = 0$ and consider the following !!{sentence} entailed by the second conjunct:} & ((\Obj Q_{q_i}(\num{0}, \num{n}) \land \Obj S_{\sigma}(\num{0}, \num{n})) \lif {}\\ & \qquad (\Obj Q_{q_j}(\num{0}, \num{n}') \land \Obj S_{\sigma'}(\num{0}, \num{n}') \land !A(\num{0}, \num{n}))) \intertext{Either sentence implies} & \Obj Q_{q'}(\num{l}, \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land {}\\ &\qquad \Obj S_{\sigma_0}(\num{0}, \num{n}')\land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}') \land {} \\ & \qquad \lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}'))]
+expr-93a4cd7eba9e5f60	15	15	\Struct M'
+expr-944399459793c1e1	1	1	!T(M, w) \Entails !C(M, w, k)
+expr-9444f16c5f869824	1	1	!T'(M,w) \Entails !B(\num{n})
+expr-9489f1db06cfd09a	1	1	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm, semithick] \tikzstyle{every state}=[fill=none,draw=black,text=black] \node[initial,state] (A) {$1$}; \node[state] (B) [right of=A] {$2$}; \path (A) edge [bend left] node {\TMtrans{3}{3}{\TMright}} (B) (B) edge [loop above] node {\TMtrans{2}{2}{\TMright}} (B) edge [bend left] node {\TMtrans{3}{3}{\TMright}} (A); \end{tikzpicture}
+expr-95ce48adb5325c33	1	1	& \lforall[x][\lforall[y][( (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\ &\qquad (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y)))
+expr-966d35c33339efcc	10	10	!C(M, w, n)
+expr-979799be0c71fb64	3	3	\Obj Q_q
+expr-9829f2e34e8f0b11	5	5	\num{1}
+expr-9c3245dfb4ac54c1	79	78	\sigma
+expr-9c5f8343c4fbdf71	3	3	!C(M, w, n+1)
+expr-9ce8caa80a7a08e7	1	1	\fn{isprime}(n) = \begin{cases} 1 & \text{if $n$ is prime}\\ 0 & \text{otherwise.} \end{cases}
+expr-9d7103ac3526e8f6	3	3	m \in \Nat
+expr-9f239d9ffb93e040	1	1	!C(M, w, k)
+expr-a1fce4363854ff88	196	196	y
+expr-a25513c7e0f6eaa8	28	28	U
+expr-a319dec864e138a4	1	1	!E(M,w)
+expr-a38ee6a67de22a3d	35	35	\TMblank
+expr-a4131995fca6d942	1	1	!C(M, w, 0)
+expr-a5183e47a3207b2d	17	17	\TMendtape
+expr-a603e6b6eedcb75f	33	33	M_e
+expr-a66a0125fa15d041	1	1	\sigma_{i_1}
+expr-a6a377206f1cbcda	1	1	\sigma\in \Sigma
+expr-a7d5ad94a88ead6f	1	1	!T(M,\emptyseq)
+expr-a899c3d06d4c0108	1	1	m = k
+expr-a9799a71a6e8dcf7	1	1	\{0, \dots, n\}
+expr-a98ad2620c44dff1	1	1	Q \times \Sigma \times \{\TMleft, \TMright, \TMstay\}
+expr-a9f51566bd6705f7	23	23	E
+expr-aa00709c3156cb92	2	2	\lforall[x][\lforall[y][\lforall[z][ ((x < y \land y < z) \lif x < z)]]]
+expr-aaa9402664f1a41f	127	127	h
+expr-aabd5928c1d46b56	1	1	\tuple{q, \sigma, q', \sigma', d}
+expr-aafda2cc5bdbea48	3	3	\Domain{M} = \Nat
+expr-ad586e655c22273c	1	1	\Obj Q_{q_0}(\num{1}, \num{0})
+expr-ae144eabc9f6e0b9	1	1	& \lforall[x][\lforall[y][( (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\ &\qquad (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y) \land !B(y')))
+expr-b149f5c3c1e66912	1	1	!T(M,w) \land !E(M, w)
+expr-b25388f04f22fb42	1	1	!B(y) \ident \lforall[x][(x < y \lif \eq/[x][y])].
+expr-b289b630c4ba9cc1	1	1	\Obj Q_{q}(\num{m}, \num{n})
+expr-b2f2f3e1a76b3f91	1	1	\Sat{M'}{!E(M,w)}
+expr-b478ee213c6e39e6	1	1	n \in \Domain{M} = \Nat
+expr-b488c0a338905f78	1	1	\delta(q,\sigma)
+expr-b5a2f52020d7aa61	8	8	!T(M, w)
+expr-b620f7fd0a05aeb7	9	9	\num{0}
+expr-b659571f18ce34b0	1	1	\Domain{M'} & = \{0, \dots, n\},\\ \Assign{\prime}{M'}(x) & = \begin{cases} x + 1 &\text{if $x < n$}\\ n &\text{otherwise,} \end{cases} \\ \tuple{x,y} \in \Assign{<}{M'} &\text{iff $x < y$ or $x = y = n$,}
+expr-b6992d9da8d7da0a	1	1	\delta(q, \sigma) = \tuple{q', \sigma', \TMright}
+expr-b85c44ecbea9a6b2	2	2	\tuple{q, \sigma}
+expr-b8a1bf1bab77ec11	11	9	\sigma'
+expr-b8b3491680dfd11b	1	1	!A(\num{m},\num{n})
+expr-b8bbb3a7ebd17a45	16	16	q_0
+expr-ba728bc2b688ea05	1	1	!T(M, w) \Entails \num{m} < \num{k}
+expr-bf62a4e0cf8ea080	1	1	!T'(M, w)
+expr-bf9d04b95cd9408e	2	2	\delta(q_i, \sigma) = \tuple{q_j, \sigma', \TMleft}
+expr-c3c3a8fe03c53fac	1	1	\Sat{M}{\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]}.
+expr-c4e3858981cba4b9	2	2	\Sat{M}{!T(M, w)}
+expr-c6173ad7add4e2cd	2	2	\tuple{q,\sigma}
+expr-c63c8e0f289a448b	2	2	n > 0
+expr-c87721b01028b385	5	5	\Proves !B
+expr-c8cffb66d974193d	2	2	\delta(q_i, \sigma) = \tuple{q_j, \sigma', \TMright}
+expr-cc097011c9aac4f0	4	4	q \in Q
+expr-cc35f5d773d01eaa	1	1	\Sat{M}{\Obj Q_q(\num{m}, \num{n}) \land \Obj S_\sigma(\num{m}, \num{n})}
+expr-ce1dea246c115488	4	4	!A(x, y)
+expr-cef3e6639fe132be	21	21	\Struct{M'}
+expr-d0331456e52105eb	1	1	\sigma_0
+expr-d04ff80d9f6dc462	79	89	\lif
+expr-d055ee4dbcdd0c8b	392	469	!B
+expr-d203ba01eef4198c	74	89	\delta
+expr-d255dc2863f32834	4	4	!T'(M,w) \land !E(M,w)
+expr-d438a18a7da07bf0	7	7	x < y
+expr-d44275070c17fe89	1	1	\Domain{M'}
+expr-d4735e3a265e16ee	71	75	2
+expr-d56a2b36a6f91eac	1	1	\delta(q, \sigma) = \tuple{q', \sigma', \TMstay}
+expr-d65d75b1e6562713	165	149	\Sigma
+expr-d69bb21f4e049d45	1	1	\Sigma = \{\TMendtape,\TMblank,\TMstroke\}
+expr-d8bd60c450507199	1	1	\{0, 1\}
+expr-da29c2da3a1713b4	1	1	2, \underbrace{1, 2}_Q, 3, \overbrace{1, 2, 3}^\Sigma, 1, \underbrace{1, 3, 2, 3, 2}_{\delta(1,3) = \tuple{2,3,R}}, \overbrace{2, 2, 2, 2, 2}^{\delta(2,2) = \tuple{2,2,R}}, \underbrace{2, 3, 1, 3, 2}_{\delta(2,3) = \tuple{1,3,R}}.
+expr-dabd3aff769f07eb	73	73	<
+expr-dac6ae08516007c6	1	1	s(e) = \begin{cases} \text{0} & \text{if machine~$M_e$ does not halt for input $e$} \\ \text{1} & \text{if machine~$M_e$ halts for input $e$} \end{cases}
+expr-dc65a11ec486d432	1	1	\sigma_{i_k}
+expr-dcdf5d4364f5256f	1	1	& \lforall[x][\lforall[y][( (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\ &\qquad (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y)))
+expr-de7d1b721a1e0632	56	61	i
+expr-de8d9dcecaa89d17	2	2	\Obj S_\TMblank(\num{k}',\num{n}')
+expr-df701b27f24bbe71	6	6	M_1
+expr-df7e70e5021544f4	186	184	B
+expr-e3212229d200318d	21	25	\lnot !B
+expr-e632b7095b0bf32c	40	40	T
+expr-e6397ea8ead57cc7	1	1	\Obj 0''
+expr-e650efe94b9a644f	1	1	\delta(q_0, \TMendtape)
+expr-e7069b2e65a14ee6	1	1	\Obj Q_q(\num{m}, \num{n})
+expr-e91d1317545e8c52	1	1	\delta(q,\sigma) = \tuple{q', \sigma', D}
+expr-e945b5ddcecdc573	5	5	M_2
+expr-e97689f41bba7a42	1	1	\num{k} < \num{k}' \lif \Obj S_\TMblank(\num{k}', \num{n}')
+expr-eaa0e5d621cfcafd	1	1	\tuple{q',\sigma'} \in X
+expr-ecfc6d63a3b68fb8	2	2	q_j
+expr-ecfd3d94a98fb3e6	1	1	\Assign{\prime}{M''}(0) = \Assign{\prime}{M'}(1) = 1
+expr-ef2d127de37b942b	10	9	5
+expr-ef8e079789f4bc01	2	2	\Entails !B
+expr-f0f1f1a55365abbb	3	3	\Lang L_M
+expr-f28fb26c476b73cd	1	1	T(M, w) \Entails !E(M, w)
+expr-f39a4e236961a8b8	1	1	\Sat{M'}{!T(M,w) \land E(M,w)}
+expr-f3e9982f3f4752a1	1	1	!T(M,w) \lif !E(M,w)
+expr-f54dd73a92f0a948	1	1	\{q_0,q_1\}
+expr-f5e609de0e757cd3	1	1	\delta(q_0,\TMblank) = \tuple{q,\TMblank,\TMstay}
+expr-f67ab10ad4e4c531	54	54	F
+expr-f83a7cd34f377dcc	1	1	& \Obj Q_{q_0}(\num{1}, \num{n}) \land \Obj S_{\TMendtape}(\num{0}, \num{n}) \land \lforall[x][(\num{0} < x \lif \Obj S_\TMblank(x, \num{n}))] \text{\quad for all $n \in \Nat$}\\ & \lexists[y][(\Obj Q_{q_0}(\num{0}, y) \land \Obj S_{\TMendtape}(\num{0}, y))]
+expr-f99ac7f5770eacfd	2	2	\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]
+expr-f9a46065d2825cb5	1	1	s(e) = 1
+expr-f9d5192eee9a80ca	2	2	\TMleft
+expr-fa02e26ac15b5f1d	1	1	M_3
+expr-ff72e4f9ab549d6a	2	2	!A(\num{m}, \num{n})

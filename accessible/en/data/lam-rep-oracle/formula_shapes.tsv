@@ -1,0 +1,201 @@
+expression_id	physical_unique_source_occurrences	canonical_projected_occurrences	normalized_tex
+expr-0215b1ee4c46326d	1	1	(Y \, \fn{Search}) F \num{n_1} \dots\num{n_k}\, \num{m} & \red \num{m} \intertext{if $f(n_1, \dots, n_k, m) = 0$, or} & \red (Y \, \fn{Search}) F\, \num{n_1} \dots\num{n_k}\, \num{m+1} \intertext{otherwise. Since $f$ is regular, $f(n_1, \dots, n_k, y) = 0$ for some $y$, and so} (Y \, \fn{Search}) F \num{n_1} \dots\num{n_k}\,\num{0} & \red \num{h(n_1, \dots, n_k)}.
+expr-026426f5b7589465	1	1	\lambd[fx][\num{n}(\num{m}\, f)x]
+expr-03709ab133617afc	1	1	\fn{normalize}(\Gn{F\num{n_1}\dots\num{n_k}})
+expr-03a9b09b35d993ff	7	8	n=0
+expr-059b2d69503206fd	1	1	\num{nm}
+expr-07abbb6e48508206	1	1	\fn{Mult} \ident \lambd[ab][\lambd[fx][a (b f) x]]
+expr-08c6aa8d5824f2de	25	25	\Succ
+expr-08dacf0f9d78188a	20	20	\lambd
+expr-08f271887ce94707	240	240	M
+expr-0a566b1db5acde7f	13	13	g_0
+expr-0bfdd7135668149c	2	2	F\, \num n \red \num m
+expr-0db78f5df32e0b90	1	1	g(Y_Cg)
+expr-0e66d86741d7890d	1	1	\fn{Fac}\,\num 3 &\red Y\, \fn{Fac}' \, \num 3 \\ &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 3 \\ &\ident (\lambd[x][\lambd[n][\fn{IsZero} \, n\, \num 1\, (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 3\\ & \red \fn{IsZero} \, \num 3\, \num 1\, (\fn{Mult}\, \num 3\, (\fn{Fac} (\fn{Pred}\, \num 3))) \\ &\red \fn{Mult}\, \num 3 \, (\fn{Fac} \, \num 2). \intertext{Similarly,} \fn{Fac}\,\num 2 &\red \fn{Mult}\, \num 2 \, (\fn{Fac} \, \num 1) \\ \fn{Fac}\,\num 1 &\red \fn{Mult}\, \num 1 \, (\fn{Fac} \, \num 0) \intertext{but} \fn{Fac}\,\num 0 &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 0 \\ &\ident (\lambd[x][\lambd[n][\fn{IsZero} \, n\, \num 1\, (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 0\\ & \red \fn{IsZero} \, \num 0\, \num 1\, (\fn{Mult}\, \num 0\, (\fn{Fac} (\fn{Pred}\, \num 0))).\\ &\red \num 1. \intertext{So together} \fn{Fac}\,\num 3 &\red \fn{Mult}\, \num 3 \, (\fn{Mult} \, \num 2\, (\fn{Mult} \, \num 1\, \num 1)).
+expr-0f05083b80c3d7e0	1	1	\num{n} (\num{m} f) x
+expr-0f1e7ab45dedbe30	1	1	f^{n}(x)
+expr-0fa108e5fbe8f278	1	1	\tuple{\num{n-1}, \num n}
+expr-103f7de3482048f3	1	1	G_k
+expr-12afc54f79271fad	1	1	\fn{Fac}'\,f
+expr-139c7c04318de35e	13	14	n = 0
+expr-13e197624394a30a	2	2	\fn{Mult}
+expr-148de9c5a7a44d19	170	169	p
+expr-155536ea6d332f78	1	1	H\num{n_0}\dots\num{n_{n-1}} \red \num{h(n_0, \dots, n_{n-1})}
+expr-15a9b40b9daf2ace	1	1	\fn{Search} & \ident \lambd[g][\lambd[f\,\vec{x}\,y][ \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, \vec{x} (\fn{Succ}\, y)]]\\ H & \ident \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}],
+expr-162c50fcdef2d170	1	1	D_n^{m+1} \tuple{\num{0}, F\, \num{n}} \red \tuple{\num{m+1}, \num{h(n, m+1)}}
+expr-164a18c4e98fdae5	1	1	D_n^{m+1} \tuple{\num{0}, F\, \num{n}} & \ident D_n(D_n^{m} \tuple{\num{0}, F\, \num{n}})\\ & \red D_n\,\tuple{\num{m}, \num{h(n, m)}} \text{\qquad (by IH)}\\ & \ident (\lambd[p][ \tuple{ \fn{Succ} (\fn{Fst}\, p), (G \, \num{n} (\fn{Fst}\, p) (\fn{Snd}\, p)) }]) \tuple{\num{m}, \num{h(n,m)}}\\ & \redone \tuple{\fn{Succ} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}),\\ & \qquad (G \, \num{n} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}) (\fn{Snd}\, \tuple{\num{m}, \num{h(n,m)}}))}\\ & \red \tuple{\fn{Succ}\, \num{m}, (G \, \num{n} \,\num{m} \, \num{h(n,m)})}\\ & \red \tuple{\num{m+1}, \num{g(n, m, h(n, m))}}
+expr-181eb8788541fd73	1	1	Y g &\red g (Y g) \\ &\red g (g (Y g)) \\ &\red g(g (g (Y g)))\\ &\ldots
+expr-18f5384d58bcb1bb	31	31	Y
+expr-19d058036fc48554	1	1	\fn{toChurch}
+expr-1b16b1df538ba12d	467	478	n
+expr-1b8340cbc4763167	4	4	f\colon \Nat^k \to \Nat
+expr-1be95b047631a3d6	3	3	\fn{And}
+expr-1cda3dcefc1d3319	1	1	F \, \num{n_0} \, \num{n_1} \dots \num{n_{k-1}} \red \num{f(n_0, n_1, \dots, n_{k-1})}
+expr-1fe9736f2c37f7c1	1	1	\tuple{\num{0}, \num{f(n)}}
+expr-20c23d922e552a64	1	1	g(x_1, \dots, x_k) = \umin{y}{f(x_1,\dots,x_k, y) = 0}
+expr-23146883045d970e	3	3	\num m
+expr-252f10c83610ebca	404	398	f
+expr-26e91de6b43af143	1	1	\fn{normalize}
+expr-27456b6742a25d6e	1	1	\fn{Mult}' \ident \lambd[ab][a (\fn{Add}\, a) \num{0}].
+expr-286f997f317dc96d	1	1	\fn{Pred} \ident \lambd[n][\fn{Fst}(n (\lambd[p][\tuple{\fn{Snd}\, {p}, \fn{Succ}(\fn{Snd}\, {p})}]) \tuple{\num 0, \num 0})]
+expr-289244ef9e61a1d7	1	1	(Yg)N
+expr-2d291fa7d9d39b0e	3	3	\fn{Add}
+expr-2d711642b726b044	501	497	x
+expr-32381516983cb54a	1	1	(Y \, \fn{Search}) F \num{n_1}\dots\num{n_k}\,\num{0}
+expr-33269765b8421f29	1	1	f(x_1, \dots, x_k, y)
+expr-333e0a1e27815d0c	32	32	G
+expr-348c95b48a520fd5	1	1	Y_Cg
+expr-34f8e8c2065a124d	1	1	\fn{IsZero} = \{0\}
+expr-36c47edad7da5b52	1	1	Yg \equal[\beta] g(Yg)
+expr-37f059acdabdba58	1	1	\fn{Succ}' & \ident \lambd[{n}][\lambd[fx][{n} f (f x)]]
+expr-387ecd4f9f07b479	1	1	\fn{Snd}
+expr-3a92e2a77861c0ec	1	1	\fn{Fac} & \ident \lambd[n][\fn{IsZero}\, n\, \num{1}] \\ & \qquad (\fn{Mult}\, n ((\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult}\, n\, (\fn{Fac} (\fn{Pred}\, n)))]) (\fn{Pred}\, n)))
+expr-3cf13e5a10558a53	1	1	\fn{Not}
+expr-3e23e8160039594a	52	52	b
+expr-3f79bb7b435b0532	85	85	e
+expr-3fcca9f4a6175738	1	1	R\, \num{n_1} \dots \num{n_k} & \bred \fn{true} \intertext{whenever $R(n_1, \dots, n_k)$ and} R\, \num{n_1} \dots \num{n_k} & \bred \fn{false}
+expr-420acba5c6453ea4	4	4	\fn{Fac}'
+expr-4219f3c92eb4e243	2	2	m=0
+expr-42253cfb46807387	1	1	c(n) = k
+expr-42b6dd4c5bca1d62	1	1	\num{m} f
+expr-430c6a52fc3a4cf9	2	2	\fn{Fac'}
+expr-449dbada7186d092	1	1	H \ident & \lambd[x][\lambd[y][\fn{Snd} (y D \tuple{\num{0}, F x})]] \intertext{where } D \ident & \lambd[p][\tuple{\fn{Succ} (\fn{Fst}\, p), (G x (\fn{Fst}\, p) (\fn{Snd}\, p))}]
+expr-44bd7ae60f478fae	23	23	H
+expr-4533627b60db3935	1	1	Yg \red g(Yg)
+expr-45db310895af4af0	1	1	g(n, m, h(n, m)) = h(n, m+1)
+expr-47031b2080b536b6	2	2	f(n_0, \dots, n_{k-1})
+expr-489c746df378ca97	1	1	f(n) = h(n, 0)
+expr-4940ad5fa499a571	2	2	f^n(x)
+expr-4d8861c598775b72	1	1	\fn{Succ} & \ident \lambd[a][\lambd[fx][f ({a} f x)]]. \intertext{Given our conventions, this is short for} \fn{Succ} & \ident \lambd[a][\lambd[f][\lambd[x][(f (({a} f) x))]]]. \intertext{$\fn{Succ}$ is a function that accepts as argument a number~$a$, and evaluates to another function, $\lambd[fx][f ({a} f x)]$. That function is not itself a Church numeral. However, if the argument $a$ is a Church numeral, it reduces to one. Consider:} (\lambd[a][\lambd[fx][f ({a} f x)]])\,\num{n} & \redone \lambd[fx][f ({\num{n}} f x)]. \intertext{The embedded term $\num{n}fx$ is a redex, since $\num{n}$ is $\lambd[fx][f^nx]$. So $\num{n}fx \redone f^nx$ and so, for the entire term we have} \fn{Succ}\, \num n & \red \lambd[fx][f(f^n(x))],
+expr-4dc4e01def696af8	14	14	\Proj{n}{i}
+expr-5038d55159bf6364	1	1	\fn{Mult} \, \num{n} \, \num{m}
+expr-5081cbc657fe24bd	3	3	\num{m}
+expr-50fe35055a91ceed	2	2	\fn{Succ}
+expr-51aeea8ffa05d262	4	4	n-1
+expr-526c8fec0deb09e9	1	1	e f
+expr-53bef11c8a572fb4	1	1	\fn{Fac}' \ident \lambd[g][\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult} \, n\, (g (\fn{Pred} n)))]]
+expr-540280aaf3c57a0d	1	1	g\,x_1\dots x_n & \equal[\beta] N \intertext{where $N$ may contain~$g$ and $x_1$, \dots,~$x_n$. Then there is always a term~$G \ident (Y \lambd[g][\lambd[x_1\dots x_n][N]])$ such that} G\,x_1 \dots x_n & \equal[\beta] \Subst{N}{G}{g}. \intertext{For by the fixpoint theorem,} G \ident (Y \lambd[g][\lambd[x_1\dots x_n][N]]) & \red \lambd[g][\lambd[x_1\dots x_n][N]](Y \lambd[g][\lambd[x_1\dots x_n][N]])\\ & \ident (\lambd[g][\lambd[x_1\dots x_n][N]])\,G \intertext{and consequently} G\,x_1 \dots x_n & \red (\lambd[g][\lambd[x_1\dots x_n][N]])\,G\,x_1\dots x_n\\ & \red (\lambd[x_1\dots x_n][\Subst{N}{G}{g}])\,x_1\dots x_n\\ & \red \Subst{N}{G}{g}.
+expr-545988f122ef6e4d	1	1	\fn{Fac'}\, f
+expr-5684a211c68076b6	1	1	C_k \ident \lambd[x][\num{k}]
+expr-56cb2ce615a8eaca	2	2	F (G x)
+expr-575d86b85365c7b4	3	3	G_0
+expr-583cf6290785d72c	11	11	\lambda
+expr-59a94416a2a319ca	15	15	\eta
+expr-5afa20230f875253	42	42	n \in \Nat
+expr-5b93a9b0461acefd	13	13	Yg
+expr-5c51a8649f399bee	1	1	Y_Cg \equal[\beta] g(Y_Cg)
+expr-5c5b8c4423165d39	1	1	H \ident \lambd[x_0 \dots x_{n-1}][F\, (G_0 x_0 \dots x_{n-1}) \dots (G_{k-1} x_0 \dots x_{n-1})]
+expr-5e948d069c545f38	1	1	f(n_1, \dots, n_k, m) = 0
+expr-5fc0166478cd48dd	8	8	\fn{Fac}
+expr-5fc0ad6ce11af400	2	2	D_n^m \tuple{\num{0}, F\, \num{n}} \red \tuple{\num{m}, \num{h(n, m)}}
+expr-5fc9cece534f0f27	5	5	\lambd[y][y]
+expr-5fe6dc6b2281b3d2	19	19	\Zero
+expr-5feceb66ffc86f38	220	219	0
+expr-60a4c2f46b84de07	1	1	\fn{Add} & \ident \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]] \intertext{or, alternatively,} \fn{Add}' & \ident \lambd[{a}{b}][{a}\, \fn{Succ} \, {b}]. \intertext{The first addition works as follows: $\fn{Add}$ first accept two numbers ${a}$ and ${b}$. The result is a function that accepts $f$ and $x$ and returns $af(bfx)$. If $a$ and $b$ are Church numerals $\num{n}$ and $\num{m}$, this reduces to $f^{n+m}(x)$, which is identical to $f^{n}(f^{m}(x))$. Or, slowly:} (\lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]])\num n\,\num m & \redone \lambd[fx][\num{n}\, f (\num {m}\, f x)] \\ & \redone \lambd[fx][\num{n}\, f (f^m x)] \\ & \redone \lambd[fx][f^n (f^m x)] \ident \num {n+m}. \intertext{The second representation of addition $\fn{Add'}$ works differently: Applied to two Church numerals $\num{n}$ and $\num{m}$,} \fn{Add}' \num n \,\num m & \redone \num{n}\, \fn{Succ}\, \num{m}. \intertext{But $\num{n} f x$ always reduces to $f^n(x)$. So,} \num{n}\, \fn{Succ}\, \num{m} & \red \fn{Succ}^n(\num{m}).
+expr-611c1d36da398626	1	1	\num{n} \ident \lambd[fx][f^n(x)]
+expr-62c66a7a5dd70c31	105	105	m
+expr-62d0789e727d78d6	1	1	g(Yg) \equal[\beta] Yg
+expr-69b50c1b3bbe6f2b	1	1	\fn{Fac}' \, f \equal[\beta] f
+expr-6a766438d1de2cc9	4	4	n+m
+expr-6b86b273ff34fce1	238	241	1
+expr-6dce451ebd9bcf6c	1	1	Y \ident (\lambd[ux][x(uux)])(\lambd[ux][x(uux)]).
+expr-6e951179169137ff	7	7	\fn{false}
+expr-7038021faba64787	1	1	c_k\colon \Nat \to \Nat
+expr-70e2a490fe78b799	1	1	\fn{IsZero} \ident \lambd[n][n (\lambd[x][\fn{false}])\, \fn{true}].
+expr-71a0363bfb077add	1	1	\Gn{F}
+expr-727971ccd449d21b	1	1	VV & \ident (\lambd[x][g(xx)])V \red g(VV) \text{ and thus}\\ Y_C g & \ident (\lambd[g][VV])g \red VV \red g(VV), \text{ but also}\\ g(Y_C g) & \ident g((\lambd[g][VV])g) \red g(VV).
+expr-72fcd7dafa1f7007	3	3	\num{n+1}
+expr-76611dd34d50f93b	3	3	f(n) = m
+expr-77c1144d54fcb017	1	1	\fn{Succ}\, \num{0} & \ident (\lambd[a][\lambd[f][\lambd[x][(f (({a} f) x))]]])(\lambd[f][\lambd[x][x]])\\ & \redone \lambd[f][\lambd[x][(f (({(\lambd[f][\lambd[x][x]])} f) x))]] \\ & \redone \lambd[f][\lambd[x][(f ({(\lambd[x][x])} x))]] \\ & \redone \lambd[f][\lambd[x][(f x)]] \ident \num{1}\\
+expr-7ed5ff618d7df81c	1	1	\tuple{M,N} \ident \lambd[f][fMN].
+expr-7f024b2d7f1db4d4	19	19	\num{n}
+expr-81351b457e719b1d	1	1	\fn{Or}
+expr-8254c329a92850f6	120	120	k
+expr-837e308e5130032f	1	1	\num{3}
+expr-83f81a2d3a3b24e0	1	1	F \, \num n
+expr-8441f669e31640d0	1	1	Y_C \ident \lambd[g][(\lambd[x][g(xx)])(\lambd[x][g(xx)])].
+expr-898913c4326a0b49	2	2	\fn{fromChurch}
+expr-8ad397891c5ed5a1	2	2	\num n
+expr-8c2574892063f995	201	196	R
+expr-8ce86a6ae65d3692	56	56	N
+expr-8d733118b0ae3ff8	1	1	\fn{Add}'
+expr-8f6170b68c913e60	1	1	D_n^0 \tuple{\num{0}, F\, \num{n}} \red \tuple{\num{0}, \num{h(n, 0)}}
+expr-9155d40a7b7a127a	1	1	F\, \num n
+expr-919d287f88a6b2ff	1	1	R \subseteq \Nat^n
+expr-927d37f267dcac72	2	2	\lambd[fx][x]
+expr-93f09ee73e9abe97	1	1	(g(g(Yg)))N
+expr-9661bf75db6a2bcf	1	1	\tuple{\num{0}, \num{h(n,0)}}
+expr-973c8320b3dd6fc4	1	1	C_k \, \num n \ident (\lambd[x][\num{k}])\num n \redone \num{k}
+expr-982d20d1e491c9e1	9	9	f\colon \Nat \to \Nat
+expr-98f0455530b5b3d8	11	11	g_{k-1}
+expr-99688af5fa62bf90	2	2	\lambd[x][\lambd[y][y]]
+expr-9c8b4c6fe53274f4	1	1	\fn{normalize}(t)
+expr-9ddfa415125373dc	3	3	f(n_1, \dots, n_k)
+expr-9f27f22c5eb4b279	1	1	\fn{true} & \ident \lambd[x][\lambd[y][x]]\\ \fn{false} & \ident \lambd[x][\lambd[y][y]]
+expr-a0ce237c6e3eed67	1	1	Y_C
+expr-a1fce4363854ff88	196	196	y
+expr-a2277e0b98ac28a5	12	12	g(x)
+expr-a25513c7e0f6eaa8	28	28	U
+expr-a2bf86292ef9d747	1	1	Yg \bred g(Yg)
+expr-a3790cd28ac3b155	2	2	f(\vec x, y)
+expr-a53a3d7051fc3402	1	1	\fn{toChurch}(n_i)
+expr-a8a24ca5755eaa27	1	1	f(x_1, \dots, x_n)
+expr-aa0f669ef6e981d2	1	1	\num n\, f x
+expr-aa956277254bce94	1	1	g_0, \dots, g_{k-1}
+expr-aaa9402664f1a41f	127	127	h
+expr-aac9cfa1e2337865	1	1	\tuple{M,N}
+expr-af401dbee4afc95b	1	1	D_n^0 \tuple{\num{0}, F\, \num{n}}
+expr-af5b5886d350bce5	1	1	\lambd[fx][f(f(f\,x))]
+expr-b0d6e31a1159a2cb	1	1	g(VV)
+expr-b0fd41899402dde6	1	1	h(x_1, \dots, x_n, 0) &= f(x_1, \dots, x_n)\\ h(x_1, \dots, x_n, y+1) & = h(x_1, \dots, x_n, y, h(x_1, \dots, x_n, y)).
+expr-b3f6ba5bad3f6071	6	6	n_0
+expr-b48f66241d74a302	1	1	\fn{Succ}\, y
+expr-b5fd30809feccf8e	1	1	D_n \ident \Subst{D}{\num{n}}{x}
+expr-b620f7fd0a05aeb7	9	9	\num{0}
+expr-b8e2b244c77b7c22	3	3	\lambd[x][g(xx)]
+expr-b9711ee2915de9c0	15	15	\Add
+expr-bb547d3afeec7211	1	1	\fn{Sub} \ident \lambd[ab][b \fn{Pred}\, a].
+expr-bb69021ab191ecba	1	1	Y g &\ident (\lambd[ux][x(uux)])U\,g \\ &\red (\lambd[x][x(UUx)])g\\ & \red g(UUg) \ident g(Yg).
+expr-be4beea42f462725	2	2	\fn{Pred}
+expr-c2c5eeeab86b1b20	6	6	g(Yg)
+expr-c511a3b8638ce823	1	1	F \, \num{n_0} \, \num{n_1} \dots \num{n_{k-1}}
+expr-c677c0cf951a25ee	1	1	\fn{true}\, M N
+expr-c67c51696170f090	1	1	\fn{Pair} \ident \lambd[mn][\lambd[f][fmn]]
+expr-c802c05458a6a818	1	1	\fn{Exp}' \ident \lambd[be][e (\fn{Mult}\, b) \num{1}].
+expr-c972eac8cc96ee71	2	2	F \num{n_1}\dots\num{n_k}
+expr-c99c9b4e359a1216	1	1	G x
+expr-c9ab1bcbdc746fc5	1	1	\fn{Mult} \ident \lambd[ab][a (\fn{Add}\, a) 0]
+expr-c9d0558c7e3f86f4	1	1	\fn{Fst}
+expr-ca978112ca1bbdca	123	123	a
+expr-cd0aa9856147b6c5	176	172	g
+expr-cd82e83b1115adc2	1	1	Y \ident UU
+expr-cfa522140d47a072	1	1	(g(Yg))N
+expr-d09cf35692bbb2b4	1	1	\fn{Not} & \ident \lambd[x][x\, \fn{false}\, \fn{true}]\\ \fn{And} & \ident \lambd[x][\lambd[y][xy \,\fn{false}]]
+expr-d25d2f2c6168e7eb	1	1	\fn{Mult} \ident \lambd[ab][\lambd[f][a (b f)]].
+expr-d3482b3a268726b8	4	4	\num{n+m}
+expr-d35f51c70f9cbfbe	1	1	\fn{Search}
+expr-d3a14e4b9aa5d562	1	1	\fn{Exp} \ident \lambd[be][e b].
+expr-d429d8bf14e16a51	1	1	Y\, \fn{Fac}'
+expr-dbbc007a11153411	1	1	\tuple{\num{0}, F\, \num{n}}
+expr-dc9b0b3b2175345a	1	1	\fn{false}\, M N
+expr-de5a6f78116eca62	40	40	V
+expr-dee4e23ed8ed88a4	1	1	\fn{Fst} & \ident \lambd[p][p(\lambd[mn][m])]\\ \fn{Snd} & \ident \lambd[p][p(\lambd[mn][n])]
+expr-df9e0b7f67e3f3ee	1	1	\fn{Zero} & \ident \lambd[a][\lambd[fx][x]]\\ \fn{Succ} & \ident \lambd[a][\lambd[fx][f (a f x)]] \\ \fn{Proj}^n_i & \ident \lambd[x_0\dots x_{n-1}][x_i]
+expr-e0d406650afce565	1	1	\fn{Fac} \ident \lambd[n][\fn{IsZero}\, n\, \num 1 (\fn{Mult}\, n (\fn{Fac}(\fn{Pred} \, n)))]
+expr-e3b98a4da31a127d	187	185	t
+expr-e4639072bcb2aaeb	2	2	n_{k-1}
+expr-e51d5dc07716fb99	1	1	f\, \vec x\, y
+expr-e677449e14a68e98	1	1	H\,\num{n}\,\num{m} \red \num{h(n,m)}
+expr-e9cfd958aef9dcf9	1	1	\lambd[x][F (G x)]
+expr-ea4e4dd4a814275c	1	1	H\,\num n\,\num m &\ident \lambd[x][\lambd[y][\fn{Snd} (y (\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G\, x\, (\fn{Fst}\, p)\, (\fn{Snd}\, p))}) \tuple{\num{0}, F x})]]\\ & \qquad\,\num n\, \num m\\ & \red \fn{Snd} (\num m \, \underbrace{(\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G \,\num n\, (\fn{Fst}\, p) (\fn{Snd}\, p))})}_{D_n} \tuple{\num{0}, F \num n})\\ & \ident \fn{Snd} (\num m \, D_n\, \tuple{\num{0}, F \num n})\\ & \red \fn{Snd} \,(D_n^m \tuple{\num{0}, F \num n})\\ & \red \fn{Snd} \,\tuple{\num{m}, \num{h(n, m)}} \\ & \red \num{h(n,m)}.
+expr-ebd225f165c0ba97	6	6	\lambd[x][x]
+expr-ecb6f9a9e83f3652	1	1	\fn{Xor}
+expr-f23ca6dac7289a4f	9	9	\fn{true}
+expr-f38618c24799a1c3	5	5	\tuple{0,0}
+expr-f3f3804480e8551a	99	99	\beta
+expr-f67ab10ad4e4c531	54	54	F
+expr-f7a8152d221b3f10	1	1	Y_C \ident \lambd[g][VV]
+expr-f7f902bb1aa5eac7	1	1	(\lambd[ux][x(uux)])
+expr-fc314b71d7a909f5	1	1	n+2
+expr-fd5a7ff1d00de312	4	4	n\cdot m
+expr-fe7ef25f6b14a2f9	1	1	f^e

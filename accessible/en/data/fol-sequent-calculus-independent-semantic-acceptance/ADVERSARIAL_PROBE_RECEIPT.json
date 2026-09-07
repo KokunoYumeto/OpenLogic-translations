@@ -1,0 +1,139 @@
+{
+  "base_predicate_mutants": {
+    "schema": "openlogic-tr020-independent-adversarial-probes-v1",
+    "status": "PASS_ALL_FRESH_MUTATIONS_REJECTED",
+    "test_count": 15,
+    "tests": [
+      {
+        "mutation": "delete one expression",
+        "rejection": "expression closure failure",
+        "status": "PASS_REJECTED",
+        "test_id": "missing_expression"
+      },
+      {
+        "mutation": "rebind one occurrence to a different expression",
+        "rejection": "occurrence oracle binding drift",
+        "status": "PASS_REJECTED",
+        "test_id": "occurrence_expression_swap"
+      },
+      {
+        "mutation": "alter one three-line context packet",
+        "rejection": "exact context packet drift",
+        "status": "PASS_REJECTED",
+        "test_id": "context_packet_drift"
+      },
+      {
+        "mutation": "add root-level aria speech to MathML",
+        "rejection": "flattened root speech: expr-01208e159d2aec8c",
+        "status": "PASS_REJECTED",
+        "test_id": "root_speech_flattening"
+      },
+      {
+        "mutation": "alter expression speech without refreshing record hash",
+        "rejection": "expression record hash drift",
+        "status": "PASS_REJECTED",
+        "test_id": "stale_record_hash"
+      },
+      {
+        "mutation": "delete one formal object",
+        "rejection": "formal closure failure",
+        "status": "PASS_REJECTED",
+        "test_id": "missing_formal"
+      },
+      {
+        "mutation": "delete one ordered formal component",
+        "rejection": "formal component ordinal drift",
+        "status": "PASS_REJECTED",
+        "test_id": "component_deletion"
+      },
+      {
+        "mutation": "mark a source-unsolved exercise solved",
+        "rejection": "exercise solution invented",
+        "status": "PASS_REJECTED",
+        "test_id": "invented_exercise_solution"
+      },
+      {
+        "mutation": "delete one exact proof-command binding",
+        "rejection": "proof-command closure failure",
+        "status": "PASS_REJECTED",
+        "test_id": "missing_proof_command"
+      },
+      {
+        "mutation": "replace one listener reference target binding",
+        "rejection": "reference target drift",
+        "status": "PASS_REJECTED",
+        "test_id": "reference_target_swap"
+      },
+      {
+        "mutation": "delete one source disclosure",
+        "rejection": "source disclosure closure failure",
+        "status": "PASS_REJECTED",
+        "test_id": "disclosure_deletion"
+      },
+      {
+        "mutation": "remove one continuous formula anchor",
+        "rejection": "continuous replay formula closure failure",
+        "status": "PASS_REJECTED",
+        "test_id": "replay_binding_loss"
+      },
+      {
+        "mutation": "alter one protected source digest",
+        "rejection": "protected source digest drift",
+        "status": "PASS_REJECTED",
+        "test_id": "source_digest_drift"
+      },
+      {
+        "mutation": "alter one artifact manifest digest",
+        "rejection": "artifact manifest digest drift",
+        "status": "PASS_REJECTED",
+        "test_id": "manifest_digest_drift"
+      },
+      {
+        "mutation": "inject raw TeX into listener replay",
+        "rejection": "listener TeX residue",
+        "status": "PASS_REJECTED",
+        "test_id": "listener_tex_residue"
+      }
+    ]
+  },
+  "repair_specific_mutants": {
+    "schema": "openlogic-tr020-superseding-independent-repair-mutants-v1",
+    "status": "PASS_ALL_REPAIR_SPECIFIC_MUTANTS_REJECTED",
+    "test_count": 5,
+    "tests": [
+      {
+        "mutation": "delete one of seven exact source-anchor bindings",
+        "rejection": "listener disclosure-anchor closure failure",
+        "status": "PASS_REJECTED",
+        "test_id": "delete_listener_disclosure_anchor"
+      },
+      {
+        "mutation": "inject a historical glued-word token into continuous Listen",
+        "rejection": "historical listener predicate failure",
+        "status": "PASS_REJECTED",
+        "test_id": "reintroduce_historical_glued_boundary"
+      },
+      {
+        "mutation": "remove one audible formal-component disclosure binding",
+        "rejection": "formal-component disclosure closure failure",
+        "status": "PASS_REJECTED",
+        "test_id": "delete_formal_component_disclosure"
+      },
+      {
+        "mutation": "remove material disclosure speech from one proof-command stream",
+        "rejection": "proof-command disclosure is not material",
+        "status": "PASS_REJECTED",
+        "test_id": "mute_proof_command_disclosure"
+      },
+      {
+        "mutation": "shift one source disclosure off its immutable byte/character anchor",
+        "rejection": "listener disclosure source anchor drift: tr020-listener-disclosure-004-01",
+        "status": "PASS_REJECTED",
+        "test_id": "move_disclosure_source_anchor"
+      }
+    ]
+  },
+  "schema": "openlogic-tr020-superseding-independent-adversarial-probes-v1",
+  "status": "PASS_ALL_FRESH_MUTATIONS_REJECTED",
+  "total_test_count": 20
+}

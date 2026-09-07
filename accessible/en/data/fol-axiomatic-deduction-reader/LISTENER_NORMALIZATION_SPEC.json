@@ -1,0 +1,1400 @@
+{
+  "adversarial_invariants": {
+    "cold_rebuild_requirement": "Two isolated rebuilds from the pinned inputs must emit byte-identical normalized replay rows, normalization ledgers, and manifests.",
+    "cue_balance": {
+      "chapter_end": 14,
+      "derivation_begin": 5,
+      "derivation_end": 5,
+      "editorial_begin": 1,
+      "editorial_end": 1,
+      "explain_begin": 5,
+      "explain_end": 5,
+      "list_begin": 16,
+      "list_end": 16,
+      "list_item": 39,
+      "quote_begin": 3,
+      "quote_end": 3
+    },
+    "exercise_invariants": {
+      "actual_exercise_cue_count": 8,
+      "formal_exercise_ids": [
+        "projected-env-001744",
+        "projected-env-001759",
+        "projected-env-001772",
+        "projected-env-001776",
+        "projected-env-001781",
+        "projected-env-001786",
+        "projected-env-001814",
+        "projected-env-001822"
+      ],
+      "proof_body_exercise_ambiguity_count_after": 0,
+      "solution_status": "PRESERVED_UNSOLVED"
+    },
+    "mutation_classes_that_must_be_rejected": [
+      "drop_or_duplicate_any_normalization_application",
+      "change_any_old_text_without_changing_the_pinned_input",
+      "overlap_two_atomic_edits",
+      "change_or_reorder_any_formula_id_or_reference_id",
+      "change_any_formula_speech_other_than_the_two_explicitly_authorized_formula_bindings",
+      "change_reference_000398_back_to_the_frozen_source_target_land1",
+      "drop_duplicate_or_reorder_any_of_the_five_correction_ids",
+      "restore_modus_ponsens_outside_the_exact_004_disclosure_quote",
+      "drop_duplicate_or_cross_any_source_environment_end_cue",
+      "split_merge_drop_or_reorder_any_derivation_line_or_printed_formula_segment",
+      "treat_a_proof_omission_as_an_additional_formal_exercise",
+      "mark_any_exercise_solved",
+      "mutate_any_frozen_source_or_pinned_semantic_evidence"
+    ],
+    "residue_rules": {
+      "exact_quoted_exception": "The source spelling 'modus ponsens' remains once inside the TR023-SOURCE-PROSE-004 disclosure only.",
+      "must_be_zero_in_normalized_listen_text": [
+        "\\biff\\b",
+        "\\bi\\.e\\.",
+        "\\bFOL\\b",
+        "\\bMP\\b",
+        "\\bHyp\\b",
+        "\\ba element\\b",
+        "source transition:",
+        "Begin tagenumerate.",
+        "Proof. Exercise. End proof. Exercise.",
+        "the deduction theorem Theorem.",
+        "Contraposition Next item.",
+        "Ex Falso Quodlibet Explosion Next item.",
+        "Double Negation Elimination Next item.",
+        "is valid Next item.",
+        "consequence of them Next item."
+      ]
+    },
+    "validation_order": [
+      "rehash_every_pinned_input",
+      "recount_the_exact_before_census",
+      "locate_every_application_exactly_once_against_the_unmodified_upstream_row",
+      "reject_overlapping_atomic_edits",
+      "apply_each_replay_edit_in_descending_character_offset_order",
+      "recompute_all_word_spans_and_record_hashes",
+      "prove_formula_reference_and_correction_sequence_closure",
+      "prove_cue_stack_balance_from_the_source_environment_oracle",
+      "run_residue_and_sentence_seam_scans",
+      "run_adversarial_mutations",
+      "run_two_isolated_deterministic_rebuilds"
+    ]
+  },
+  "binding_policy": {
+    "correction_bindings": {
+      "count": 5,
+      "ids_in_source_order": [
+        "TR023-SOURCE-FORMULA-001",
+        "TR023-SOURCE-FORMULA-002",
+        "TR023-SOURCE-FORMULA-005",
+        "TR023-SOURCE-REFERENCE-003",
+        "TR023-SOURCE-PROSE-004"
+      ],
+      "rule": "Emit each disclosure exactly once. Reader-only relocation may finish the containing sentence but may not reorder source-bearing formula, reference, or formal-object content."
+    },
+    "formula_bindings": {
+      "authorized_speech_changes": {
+        "projected-formula-0010885": "Seven exact presentation edits remove six internal source-transition scaffolds and restore the source conjunction between printed rows four and five.",
+        "projected-formula-0011028": "Six exact presentation edits remove six internal source-transition scaffolds while preserving the disclosed final closing parenthesis."
+      },
+      "byte_identical_speech_count": 473,
+      "count": 475,
+      "derivation_formula_bindings_preserved_byte_identically": 26,
+      "id_order_rule": "The ordered list of all 475 formula IDs must equal the pinned input exactly.",
+      "mathml_rule": "Do not mutate semantic_occurrences.jsonl, native MathML, normalized TeX, source-fidelity MathML, or frozen source. Apply these changes only in the accepted-reader Listen copy."
+    },
+    "reference_bindings": {
+      "authorized_speech_change": {
+        "reference_id": "reference-000398",
+        "target_speech": "Reference. Reference to the second conjunction axiom scheme. End reference."
+      },
+      "byte_identical_speech_count": 83,
+      "count": 84,
+      "derivation_reference_bindings_preserved_byte_identically": 8,
+      "id_order_rule": "The ordered list of all 84 reference IDs must equal the pinned input exactly.",
+      "reference_000398_target_full_key": "fol:axd:prp:ax:land2"
+    },
+    "span_recomputation": "After every replay is normalized, recompute every formula, reference, and disclosure word_start and word_end against the final whitespace-token sequence. Never carry predecessor word spans into the new row."
+  },
+  "correction_placement": [
+    {
+      "action": "Move the unchanged disclosure from immediately after projected-formula-0010985 to immediately after the unbound continuation 'or is an axiom.' and before projected-formula-0010986.",
+      "affected_formula_ids": [
+        "projected-formula-0010985"
+      ],
+      "atomic_edits": 2,
+      "correction_id": "TR023-SOURCE-FORMULA-001",
+      "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem.tex",
+      "source_lines": [
+        67
+      ]
+    },
+    {
+      "action": "Keep the unchanged disclosure after projected-formula-0011008 and before the next list item; this is already a complete item boundary.",
+      "affected_formula_ids": [
+        "projected-formula-0011008"
+      ],
+      "atomic_edits": 0,
+      "correction_id": "TR023-SOURCE-FORMULA-002",
+      "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem.tex",
+      "source_lines": [
+        106,
+        107
+      ]
+    },
+    {
+      "action": "Move the unchanged disclosure from immediately after projected-formula-0011028 to immediately after the normalized 'that is' continuation and projected-formula-0011029, before 'We leave the case'.",
+      "affected_formula_ids": [
+        "projected-formula-0011028"
+      ],
+      "atomic_edits": 2,
+      "correction_id": "TR023-SOURCE-FORMULA-005",
+      "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem-quantifiers.tex",
+      "source_lines": [
+        44
+      ]
+    },
+    {
+      "action": "Shorten the reference-000398 binding to its accessible name only, then move the unchanged separate disclosure from between 'by' and 'modus ponens.' to after 'modus ponens.' and before the next list item.",
+      "affected_reference_ids": [
+        "reference-000398"
+      ],
+      "atomic_edits": 3,
+      "correction_id": "TR023-SOURCE-REFERENCE-003",
+      "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+      "source_lines": [
+        33
+      ]
+    },
+    {
+      "action": "Replace only the visible source-prose occurrence 'modus ponsens' with 'modus ponens'. Keep the unchanged disclosure after that complete sentence; its exact quoted source spelling remains.",
+      "atomic_edits": 1,
+      "correction_id": "TR023-SOURCE-PROSE-004",
+      "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+      "source_lines": [
+        58
+      ]
+    }
+  ],
+  "cue_sources": {
+    "atomic_boundary_rules": {
+      "common_locator": "Bind each operation to the listed environment ID in the pinned source-environment oracle, then to that environment's exact source end boundary in the pinned semantic occurrence order. A repeated listener substring is never sufficient as an anchor. Exactly one boundary must resolve for every listed environment or the build fails.",
+      "environment_close": "For editorial, explain, quote, and explicit-list environments, insert the named End cue in the single unprotected gap immediately after the final listener token sourced inside the environment and immediately before the first listener token sourced after the matching source end command. Existing Begin and Next item cues are not rewritten.",
+      "implicit_rule_list": "For projected-env-001734, insert Begin list. in the gap immediately before the already-existing first Next item. sourced by the bare item on line 24; insert End list. after the second item's final listener token and before the first listener token sourced after line 30.",
+      "tagged_list": "For each tagged list, atom one replaces its one Begin tagenumerate. gap with Begin list. Next item.; atom two inserts Next item. immediately before item two; atom three inserts End list. immediately after item two and before the first token sourced after the matching source end command. Thus each application is exactly three atomic edits."
+    },
+    "editorial": [
+      {
+        "environment_id": "projected-env-001718",
+        "file": "content/first-order-logic/axiomatic-deduction/axiomatic-deduction.tex",
+        "source_begin_line": 12,
+        "source_end_line": 19
+      }
+    ],
+    "explain": [
+      {
+        "environment_id": "projected-env-001719",
+        "file": "content/first-order-logic/axiomatic-deduction/rules-and-proofs.tex",
+        "source_begin_line": 15,
+        "source_end_line": 22
+      },
+      {
+        "environment_id": "projected-env-001747",
+        "file": "content/first-order-logic/axiomatic-deduction/proof-theoretic-notions.tex",
+        "source_begin_line": 15,
+        "source_end_line": 24
+      },
+      {
+        "environment_id": "projected-env-001787",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "source_begin_line": 15,
+        "source_end_line": 21
+      },
+      {
+        "environment_id": "projected-env-001801",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-quantifiers.tex",
+        "source_begin_line": 16,
+        "source_end_line": 19
+      },
+      {
+        "environment_id": "projected-env-001809",
+        "file": "content/first-order-logic/axiomatic-deduction/soundness.tex",
+        "source_begin_line": 15,
+        "source_end_line": 32
+      }
+    ],
+    "explicit_lists": [
+      {
+        "environment_id": "projected-env-001720",
+        "file": "content/first-order-logic/axiomatic-deduction/rules-and-proofs.tex",
+        "source_begin_line": 29,
+        "source_end_line": 34
+      },
+      {
+        "environment_id": "projected-env-001726",
+        "file": "content/first-order-logic/axiomatic-deduction/rules-and-proofs.tex",
+        "source_begin_line": 70,
+        "source_end_line": 75
+      },
+      {
+        "environment_id": "projected-env-001743",
+        "file": "content/first-order-logic/axiomatic-deduction/proving-things.tex",
+        "source_begin_line": 123,
+        "source_end_line": 127
+      },
+      {
+        "environment_id": "projected-env-001760",
+        "file": "content/first-order-logic/axiomatic-deduction/proof-theoretic-notions.tex",
+        "source_begin_line": 114,
+        "source_end_line": 119
+      },
+      {
+        "environment_id": "projected-env-001762",
+        "file": "content/first-order-logic/axiomatic-deduction/proof-theoretic-notions.tex",
+        "source_begin_line": 123,
+        "source_end_line": 133
+      },
+      {
+        "environment_id": "projected-env-001770",
+        "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem.tex",
+        "source_begin_line": 105,
+        "source_end_line": 117
+      },
+      {
+        "environment_id": "projected-env-001788",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "source_begin_line": 24,
+        "source_end_line": 28
+      },
+      {
+        "environment_id": "projected-env-001790",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "source_begin_line": 32,
+        "source_end_line": 37
+      },
+      {
+        "environment_id": "projected-env-001792",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "source_begin_line": 42,
+        "source_end_line": 45
+      },
+      {
+        "environment_id": "projected-env-001794",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "source_begin_line": 49,
+        "source_end_line": 59
+      },
+      {
+        "environment_id": "projected-env-001796",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "source_begin_line": 63,
+        "source_end_line": 67
+      },
+      {
+        "environment_id": "projected-env-001799",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "source_begin_line": 71,
+        "source_end_line": 81
+      },
+      {
+        "environment_id": "projected-env-001808",
+        "file": "content/first-order-logic/axiomatic-deduction/soundness.tex",
+        "source_begin_line": 21,
+        "source_end_line": 27
+      }
+    ],
+    "implicit_rule_list": {
+      "file": "content/first-order-logic/axiomatic-deduction/axioms-rules-quantifiers.tex",
+      "formal_object_id": "projected-env-001734",
+      "rule_item_lines": [
+        24,
+        27
+      ],
+      "source_begin_line": 23,
+      "source_end_line": 30
+    },
+    "quotes": [
+      {
+        "environment_id": "projected-env-001723",
+        "file": "content/first-order-logic/axiomatic-deduction/rules-and-proofs.tex",
+        "source_begin_line": 51,
+        "source_end_line": 54
+      },
+      {
+        "environment_id": "projected-env-001724",
+        "file": "content/first-order-logic/axiomatic-deduction/rules-and-proofs.tex",
+        "source_begin_line": 57,
+        "source_end_line": 59
+      },
+      {
+        "environment_id": "projected-env-001725",
+        "file": "content/first-order-logic/axiomatic-deduction/rules-and-proofs.tex",
+        "source_begin_line": 63,
+        "source_end_line": 66
+      }
+    ],
+    "tagged_lists": [
+      {
+        "environment_id": "projected-env-001804",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-quantifiers.tex",
+        "source_begin_line": 36,
+        "source_end_line": 40,
+        "tag_item_lines": [
+          37,
+          39
+        ]
+      },
+      {
+        "environment_id": "projected-env-001806",
+        "file": "content/first-order-logic/axiomatic-deduction/provability-quantifiers.tex",
+        "source_begin_line": 44,
+        "source_end_line": 47,
+        "tag_item_lines": [
+          45,
+          46
+        ]
+      }
+    ]
+  },
+  "decision_catalog": [
+    {
+      "application_count": 5,
+      "atomic_edit_count": 5,
+      "decision_id": "TR023-LISTEN-IFF-001",
+      "normalization_class": "listen_words_only_abbreviation_expansion",
+      "old_text": "iff",
+      "replays": [
+        "tr023-source-replay-02",
+        "tr023-source-replay-07",
+        "tr023-source-replay-10",
+        "tr023-source-replay-13"
+      ],
+      "target_text": "if and only if",
+      "word_delta": 15
+    },
+    {
+      "application_count": 11,
+      "atomic_edit_count": 11,
+      "decision_id": "TR023-LISTEN-IE-001",
+      "normalization_class": "listen_words_only_abbreviation_expansion",
+      "old_text": "i.e.",
+      "replays": [
+        "tr023-source-replay-05",
+        "tr023-source-replay-07",
+        "tr023-source-replay-08",
+        "tr023-source-replay-09",
+        "tr023-source-replay-10",
+        "tr023-source-replay-13"
+      ],
+      "target_text": "that is",
+      "word_delta": 11
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 1,
+      "decision_id": "TR023-LISTEN-FOL-001",
+      "normalization_class": "listen_words_only_abbreviation_expansion",
+      "old_text": "FOL",
+      "replays": [
+        "tr023-source-replay-01"
+      ],
+      "target_text": "first-order logic",
+      "word_delta": 1
+    },
+    {
+      "application_count": 2,
+      "atomic_edit_count": 2,
+      "decision_id": "TR023-LISTEN-MP-PROSE-001",
+      "normalization_class": "listen_words_only_rule_name_expansion",
+      "note": "The third raw MP occurrence and both raw Hyp occurrences are inside projected-env-001765 and are removed by its protected-gap derivation recomposition.",
+      "old_text": "MP",
+      "replays": [
+        "tr023-source-replay-05"
+      ],
+      "target_text": "modus ponens",
+      "word_delta": 2
+    },
+    {
+      "application_count": 3,
+      "atomic_edit_count": 3,
+      "decision_id": "TR023-LISTEN-ARTICLE-ELEMENT-001",
+      "normalization_class": "listen_grammar_repair",
+      "old_text": "a element",
+      "replays": [
+        "tr023-source-replay-05",
+        "tr023-source-replay-07"
+      ],
+      "target_text": "an element",
+      "word_delta": 0
+    },
+    {
+      "application_count": 2,
+      "atomic_edit_count": 13,
+      "decision_id": "TR023-LISTEN-FORMULA-TRANSITION-001",
+      "normalization_class": "listen_bound_formula_transition_recomposition",
+      "note": "Two formula-binding applications contain twelve exact source-transition scaffold replacements plus one source-and row seam. See formula_recomposition.",
+      "replays": [
+        "tr023-source-replay-06",
+        "tr023-source-replay-09"
+      ],
+      "word_delta": -12
+    },
+    {
+      "application_count": 5,
+      "atomic_edit_count": 39,
+      "decision_id": "TR023-LISTEN-DERIVATION-LINES-001",
+      "normalization_class": "listen_derivation_line_recomposition",
+      "note": "Replace only the gaps around 26 protected formula spans and eight protected reference spans. See derivation_recomposition.",
+      "replays": [
+        "tr023-source-replay-05",
+        "tr023-source-replay-08",
+        "tr023-source-replay-11"
+      ],
+      "word_delta": 65
+    },
+    {
+      "application_count": 2,
+      "atomic_edit_count": 6,
+      "decision_id": "TR023-LISTEN-TAGENUMERATE-001",
+      "normalization_class": "listen_internal_environment_to_list_cues",
+      "note": "For each two-item tagged list: replace Begin tagenumerate with Begin list plus the first Next item cue; insert the second Next item cue; insert End list.",
+      "replays": [
+        "tr023-source-replay-12"
+      ],
+      "word_delta": 12
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 2,
+      "decision_id": "TR023-LISTEN-IMPLICIT-RULE-LIST-001",
+      "normalization_class": "listen_source_item_block_boundary_recovery",
+      "note": "The source definition at lines 23-30 has two bare item calls without an enumerate environment. Insert Begin list before its first existing Next item and End list after its second item.",
+      "replays": [
+        "tr023-source-replay-04"
+      ],
+      "word_delta": 4
+    },
+    {
+      "application_count": 13,
+      "atomic_edit_count": 13,
+      "decision_id": "TR023-LISTEN-LIST-CLOSE-001",
+      "normalization_class": "listen_environment_end_cue_recovery",
+      "note": "Insert End list at each exact explicit enumerate source end in cue_sources.explicit_lists.",
+      "replays": [
+        "tr023-source-replay-02",
+        "tr023-source-replay-05",
+        "tr023-source-replay-07",
+        "tr023-source-replay-08",
+        "tr023-source-replay-11",
+        "tr023-source-replay-13"
+      ],
+      "word_delta": 26
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 1,
+      "decision_id": "TR023-LISTEN-EDITORIAL-CLOSE-001",
+      "normalization_class": "listen_environment_end_cue_recovery",
+      "replays": [
+        "tr023-source-replay-01"
+      ],
+      "target_text": "End editorial.",
+      "word_delta": 2
+    },
+    {
+      "application_count": 5,
+      "atomic_edit_count": 5,
+      "decision_id": "TR023-LISTEN-EXPLAIN-CLOSE-001",
+      "normalization_class": "listen_environment_end_cue_recovery",
+      "replays": [
+        "tr023-source-replay-02",
+        "tr023-source-replay-07",
+        "tr023-source-replay-11",
+        "tr023-source-replay-12",
+        "tr023-source-replay-13"
+      ],
+      "target_text": "End explain.",
+      "word_delta": 10
+    },
+    {
+      "application_count": 3,
+      "atomic_edit_count": 3,
+      "decision_id": "TR023-LISTEN-QUOTE-CLOSE-001",
+      "normalization_class": "listen_environment_end_cue_recovery",
+      "replays": [
+        "tr023-source-replay-02"
+      ],
+      "target_text": "End quote.",
+      "word_delta": 6
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 1,
+      "decision_id": "TR023-LISTEN-THEOREM-COLON-001",
+      "normalization_class": "listen_source_punctuation_recovery",
+      "old_text": "the deduction theorem Theorem.",
+      "replays": [
+        "tr023-source-replay-08"
+      ],
+      "source_line": 47,
+      "target_text": "the deduction theorem: Theorem.",
+      "word_delta": 0
+    },
+    {
+      "application_count": 3,
+      "atomic_edit_count": 3,
+      "decision_id": "TR023-LISTEN-ITEM-LABEL-SEAM-001",
+      "normalization_class": "listen_source_parenthetical_label_boundary_recovery",
+      "replays": [
+        "tr023-source-replay-08"
+      ],
+      "replacements": [
+        {
+          "old_text": "Contraposition Next item.",
+          "source_line": 110,
+          "target_text": "Contraposition. Next item."
+        },
+        {
+          "old_text": "Ex Falso Quodlibet Explosion Next item.",
+          "source_line": 112,
+          "target_text": "Ex Falso Quodlibet, Explosion. Next item."
+        },
+        {
+          "old_text": "Double Negation Elimination Next item.",
+          "source_line": 114,
+          "target_text": "Double Negation Elimination. Next item."
+        }
+      ],
+      "word_delta": 0
+    },
+    {
+      "application_count": 2,
+      "atomic_edit_count": 2,
+      "decision_id": "TR023-LISTEN-SOUNDNESS-ITEM-SEAM-001",
+      "normalization_class": "listen_source_semicolon_recovery",
+      "replays": [
+        "tr023-source-replay-13"
+      ],
+      "replacements": [
+        {
+          "old_text": "is valid Next item.",
+          "source_line": 22,
+          "target_text": "is valid; Next item."
+        },
+        {
+          "old_text": "consequence of them Next item.",
+          "source_line": 24,
+          "target_text": "consequence of them; Next item."
+        }
+      ],
+      "word_delta": 0
+    },
+    {
+      "application_count": 3,
+      "atomic_edit_count": 3,
+      "decision_id": "TR023-LISTEN-PROOF-EXERCISE-001",
+      "normalization_class": "listen_proof_omission_disambiguation",
+      "old_text": "Proof. Exercise. End proof.",
+      "replays": [
+        "tr023-source-replay-07",
+        "tr023-source-replay-10",
+        "tr023-source-replay-14"
+      ],
+      "source_coordinates": [
+        "proof-theoretic-notions.tex:96-98",
+        "provability-consistency.tex:76-78",
+        "identity.tex:30-32"
+      ],
+      "target_text": "Proof omitted and left as an exercise. End proof.",
+      "word_delta": 15
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 1,
+      "decision_id": "TR023-LISTEN-REFERENCE-003-DEDUP-001",
+      "normalization_class": "listen_corrected_reference_disclosure_deduplication",
+      "old_binding_word_count": 42,
+      "reference_id": "reference-000398",
+      "replays": [
+        "tr023-source-replay-11"
+      ],
+      "target_binding_speech": "Reference. Reference to the second conjunction axiom scheme. End reference.",
+      "target_binding_word_count": 10,
+      "word_delta": -32
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 2,
+      "decision_id": "TR023-LISTEN-REFERENCE-003-DISCLOSURE-001",
+      "normalization_class": "listen_disclosure_sentence_boundary_relocation",
+      "correction_id": "TR023-SOURCE-REFERENCE-003",
+      "replays": [
+        "tr023-source-replay-11"
+      ],
+      "word_delta": 0
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 1,
+      "decision_id": "TR023-LISTEN-PROSE-004-TYPO-001",
+      "normalization_class": "listen_disclosed_source_prose_correction",
+      "old_text": "modus ponsens",
+      "replays": [
+        "tr023-source-replay-11"
+      ],
+      "source_line": 58,
+      "target_text": "modus ponens",
+      "word_delta": 0
+    },
+    {
+      "application_count": 2,
+      "atomic_edit_count": 4,
+      "decision_id": "TR023-LISTEN-FORMULA-DISCLOSURE-001",
+      "normalization_class": "listen_disclosure_sentence_boundary_relocation",
+      "correction_ids": [
+        "TR023-SOURCE-FORMULA-001",
+        "TR023-SOURCE-FORMULA-005"
+      ],
+      "replays": [
+        "tr023-source-replay-08",
+        "tr023-source-replay-09"
+      ],
+      "word_delta": 0
+    }
+  ],
+  "derivation_recomposition": {
+    "algorithm": [
+      "Read each derivation formal object and its derivation_lines from the pinned formal-object ledger.",
+      "Within the exact Begin derivation to next-anchor span, sort its formula and reference bindings by predecessor word_start and preserve each complete binding speech byte-for-byte.",
+      "Start the target with 'Begin derivation.'. For a one-formula line, emit 'Line {number-word}: ' then that protected formula binding. For a two-segment line, emit 'Line {number-word} is printed in two formula segments. Segment one: ', the first protected formula binding, ' Segment two: ', and the second protected formula binding.",
+      "Emit ' Justification: '. If derivation_lines.reference_ids contains one ID, emit that protected reference binding. Otherwise emit derivation_lines.justification with exactly one terminal period.",
+      "After the last line emit ' End derivation.'. Replace only the gaps before, between, and after the protected spans."
+    ],
+    "applications": [
+      {
+        "atomic_gap_edits": 10,
+        "file": "content/first-order-logic/axiomatic-deduction/proving-things.tex",
+        "formal_object_id": "projected-env-001735",
+        "formula_bindings": 6,
+        "next_anchor": "Example. Let's try",
+        "old_word_count": 214,
+        "reference_bindings": 3,
+        "source_begin_line": 31,
+        "source_end_line": 38,
+        "target_word_count": 231,
+        "word_delta": 17
+      },
+      {
+        "atomic_gap_edits": 10,
+        "file": "content/first-order-logic/axiomatic-deduction/proving-things.tex",
+        "formal_object_id": "projected-env-001737",
+        "formula_bindings": 6,
+        "next_anchor": "Example. Sometimes",
+        "old_word_count": 185,
+        "reference_bindings": 3,
+        "source_begin_line": 72,
+        "source_end_line": 79,
+        "target_word_count": 202,
+        "word_delta": 17
+      },
+      {
+        "atomic_gap_edits": 11,
+        "file": "content/first-order-logic/axiomatic-deduction/proving-things.tex",
+        "formal_object_id": "projected-env-001739",
+        "formula_bindings": 8,
+        "next_anchor": "The lines labelled",
+        "old_word_count": 195,
+        "reference_bindings": 2,
+        "source_begin_line": 87,
+        "source_end_line": 96,
+        "target_word_count": 215,
+        "word_delta": 20
+      },
+      {
+        "absorbed_raw_tokens": {
+          "Hyp": 2,
+          "MP": 1
+        },
+        "atomic_gap_edits": 4,
+        "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem.tex",
+        "formal_object_id": "projected-env-001765",
+        "formula_bindings": 3,
+        "next_anchor": "By Reference.",
+        "old_word_count": 36,
+        "reference_bindings": 0,
+        "source_begin_line": 38,
+        "source_end_line": 42,
+        "target_word_count": 42,
+        "word_delta": 6
+      },
+      {
+        "atomic_gap_edits": 4,
+        "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+        "formal_object_id": "projected-env-001798",
+        "formula_bindings": 3,
+        "next_anchor": "Next item.",
+        "old_word_count": 37,
+        "reference_bindings": 0,
+        "source_begin_line": 73,
+        "source_end_line": 77,
+        "target_word_count": 42,
+        "word_delta": 5
+      }
+    ],
+    "atomic_gap_edit_count": 39,
+    "formula_bindings_preserved": 26,
+    "reference_bindings_preserved": 8,
+    "word_delta": 65
+  },
+  "formula_recomposition": [
+    {
+      "atomic_edits": [
+        {
+          "old_text": " source transition: is an instance of the first conjunction axiom, and formula row two:",
+          "target_text": ". This is an instance of the first conjunction axiom. Formula row two:"
+        },
+        {
+          "old_text": " source transition: of the universal-instantiation axiom.",
+          "target_text": ". This is an instance of the universal-instantiation axiom."
+        },
+        {
+          "old_text": " source transition: is derivable. Likewise,",
+          "target_text": ". This formula is derivable. Likewise,"
+        },
+        {
+          "old_text": "for every variable y, formula B with argument variable y formula row five:",
+          "target_text": "for every variable y, formula B with argument variable y. And formula row five:"
+        },
+        {
+          "old_text": " source transition: are instances of the second conjunction axiom and the universal-instantiation axiom, respectively formula row six:",
+          "target_text": ". These two formulas are instances of the second conjunction axiom and the universal-instantiation axiom, respectively. Formula row six:"
+        },
+        {
+          "old_text": " source transition: is derivable by the chain proposition.",
+          "target_text": ". This formula is derivable by the chain proposition."
+        },
+        {
+          "old_text": " source transition: is derivable. We can now",
+          "target_text": ". This formula is derivable. We can now"
+        }
+      ],
+      "file": "content/first-order-logic/axiomatic-deduction/proving-things-quant.tex",
+      "formula_id": "projected-formula-0010885",
+      "old_word_count": 457,
+      "replay_id": "tr023-source-replay-06",
+      "source_intertext_lines": [
+        20,
+        22,
+        24,
+        27,
+        29,
+        31
+      ],
+      "source_row_connector_line": 25,
+      "target_word_count": 459,
+      "word_delta": 2
+    },
+    {
+      "atomic_edits": [
+        {
+          "old_text": " source transition: and the induction hypothesis applies, that is, we have that formula row two:",
+          "target_text": ". The induction hypothesis therefore gives formula row two:"
+        },
+        {
+          "old_text": " source transition: By formula row three:",
+          "target_text": ". Next, formula row three:"
+        },
+        {
+          "old_text": " source transition: and modus ponens we get formula row four:",
+          "target_text": ". By this formula and modus ponens, we get formula row four:"
+        },
+        {
+          "old_text": " source transition: Since the eigenvariable",
+          "target_text": ". Since the eigenvariable"
+        },
+        {
+          "old_text": " source transition: We also have",
+          "target_text": ". We also have"
+        },
+        {
+          "old_text": " source transition: so by modus ponens formula row seven:",
+          "target_text": ". So, by modus ponens, formula row seven:"
+        }
+      ],
+      "correction_id_preserved": "TR023-SOURCE-FORMULA-005",
+      "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem-quantifiers.tex",
+      "formula_id": "projected-formula-0011028",
+      "old_word_count": 414,
+      "replay_id": "tr023-source-replay-09",
+      "source_intertext_lines": [
+        35,
+        37,
+        39,
+        41,
+        43,
+        45
+      ],
+      "target_word_count": 400,
+      "word_delta": -14
+    }
+  ],
+  "input": {
+    "authority_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+    "files": [
+      {
+        "bytes": 325730,
+        "path": "evidence/retroactive_listener_integration_tr020_tr021_tr022_tr023_tr024_v2_producer_20260822/tr023/continuous_listen_stream.jsonl",
+        "sha256": "7b520476b88c2c493dacac2a429553a48ef93f7fb9d6d532aa06b9993daca401"
+      },
+      {
+        "bytes": 809946,
+        "path": "evidence/tranche_023_fol_axiomatic_deduction_projection/semantic_occurrences.jsonl",
+        "sha256": "7fbb6fc996ae1b228b4f20f0923b945d4d3100493b67733e89aca7c6fa349e41"
+      },
+      {
+        "bytes": 238873,
+        "path": "evidence/tranche_023_fol_axiomatic_deduction_projection/formal_object_semantic_bindings.jsonl",
+        "sha256": "31631c7c2a1bebc0ddc11b8f90db04f01315a3ca22a735dc95aa4eae5ab535c0"
+      },
+      {
+        "bytes": 281450,
+        "path": "evidence/tranche_023_fol_axiomatic_deduction_projection/REFERENCE_LEDGER.jsonl",
+        "sha256": "b53bc74671c18b2fd21e1f30f1579ebf6628596bcb8b8e7c62a7edd419d35e57"
+      },
+      {
+        "bytes": 7377,
+        "path": "evidence/tranche_023_fol_axiomatic_deduction_projection/SOURCE_CORRECTIONS.jsonl",
+        "sha256": "97f525ca36055811cec83a0dda622de0bd3dfd363c6b798a0e4d301be566cb63"
+      },
+      {
+        "bytes": 2758,
+        "path": "evidence/tranche_023_fol_axiomatic_deduction_projection/LISTENER_DISCLOSURE_BINDINGS.jsonl",
+        "sha256": "be3cf54665980ae8db1d3b94985209287e72937854ef1ea312910319f30fe4f7"
+      },
+      {
+        "bytes": 40078,
+        "path": "evidence/tranche_023_fol_axiomatic_deduction_oracle/environments.jsonl",
+        "sha256": "f0bab4692d8a72ea199d288fb33d2b1eaabfb5c89a5809cc138b49a7c5a7c018"
+      }
+    ],
+    "formula_bindings": 475,
+    "reference_bindings": 84,
+    "replay_count": 14,
+    "source_correction_bindings": 5,
+    "word_count": 11485
+  },
+  "output_accounting": {
+    "application_count": 68,
+    "atomic_edit_count": 121,
+    "decision_count": 21,
+    "target_formula_bindings": 475,
+    "target_reference_bindings": 84,
+    "target_replay_count": 14,
+    "target_source_correction_bindings": 5,
+    "target_word_count": 11610,
+    "word_accounting_formula": "11485 + 15 + 11 + 1 + 2 + 0 - 12 + 65 + 12 + 4 + 26 + 2 + 10 + 6 + 0 + 0 + 0 + 15 - 32 + 0 + 0 + 0 = 11610",
+    "word_delta": 125
+  },
+  "per_replay_operation_allocation": [
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-FOL-001",
+          "word_delta": 1
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-EDITORIAL-CLOSE-001",
+          "word_delta": 2
+        }
+      ],
+      "replay_id": "tr023-source-replay-01"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-IFF-001",
+          "word_delta": 3
+        },
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-LIST-CLOSE-001",
+          "word_delta": 4
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-EXPLAIN-CLOSE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 3,
+          "atomic_edit_count": 3,
+          "decision_id": "TR023-LISTEN-QUOTE-CLOSE-001",
+          "word_delta": 6
+        }
+      ],
+      "replay_id": "tr023-source-replay-02"
+    },
+    {
+      "operations": [],
+      "replay_id": "tr023-source-replay-03"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-IMPLICIT-RULE-LIST-001",
+          "word_delta": 4
+        }
+      ],
+      "replay_id": "tr023-source-replay-04"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 4,
+          "atomic_edit_count": 4,
+          "decision_id": "TR023-LISTEN-IE-001",
+          "word_delta": 4
+        },
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-MP-PROSE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-ARTICLE-ELEMENT-001",
+          "word_delta": 0
+        },
+        {
+          "application_count": 3,
+          "atomic_edit_count": 31,
+          "decision_id": "TR023-LISTEN-DERIVATION-LINES-001",
+          "word_delta": 54
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-LIST-CLOSE-001",
+          "word_delta": 2
+        }
+      ],
+      "replay_id": "tr023-source-replay-05"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 7,
+          "decision_id": "TR023-LISTEN-FORMULA-TRANSITION-001",
+          "word_delta": 2
+        }
+      ],
+      "replay_id": "tr023-source-replay-06"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-IFF-001",
+          "word_delta": 3
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-IE-001",
+          "word_delta": 1
+        },
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-ARTICLE-ELEMENT-001",
+          "word_delta": 0
+        },
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-LIST-CLOSE-001",
+          "word_delta": 4
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-EXPLAIN-CLOSE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-PROOF-EXERCISE-001",
+          "word_delta": 5
+        }
+      ],
+      "replay_id": "tr023-source-replay-07"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-IE-001",
+          "word_delta": 1
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 4,
+          "decision_id": "TR023-LISTEN-DERIVATION-LINES-001",
+          "word_delta": 6
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-LIST-CLOSE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-THEOREM-COLON-001",
+          "word_delta": 0
+        },
+        {
+          "application_count": 3,
+          "atomic_edit_count": 3,
+          "decision_id": "TR023-LISTEN-ITEM-LABEL-SEAM-001",
+          "word_delta": 0
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-FORMULA-DISCLOSURE-001",
+          "word_delta": 0
+        }
+      ],
+      "replay_id": "tr023-source-replay-08"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-IE-001",
+          "word_delta": 1
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 6,
+          "decision_id": "TR023-LISTEN-FORMULA-TRANSITION-001",
+          "word_delta": -14
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-FORMULA-DISCLOSURE-001",
+          "word_delta": 0
+        }
+      ],
+      "replay_id": "tr023-source-replay-09"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-IFF-001",
+          "word_delta": 6
+        },
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-IE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-PROOF-EXERCISE-001",
+          "word_delta": 5
+        }
+      ],
+      "replay_id": "tr023-source-replay-10"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 4,
+          "decision_id": "TR023-LISTEN-DERIVATION-LINES-001",
+          "word_delta": 5
+        },
+        {
+          "application_count": 6,
+          "atomic_edit_count": 6,
+          "decision_id": "TR023-LISTEN-LIST-CLOSE-001",
+          "word_delta": 12
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-EXPLAIN-CLOSE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-REFERENCE-003-DEDUP-001",
+          "word_delta": -32
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-REFERENCE-003-DISCLOSURE-001",
+          "word_delta": 0
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-PROSE-004-TYPO-001",
+          "word_delta": 0
+        }
+      ],
+      "replay_id": "tr023-source-replay-11"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 2,
+          "atomic_edit_count": 6,
+          "decision_id": "TR023-LISTEN-TAGENUMERATE-001",
+          "word_delta": 12
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-EXPLAIN-CLOSE-001",
+          "word_delta": 2
+        }
+      ],
+      "replay_id": "tr023-source-replay-12"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-IFF-001",
+          "word_delta": 3
+        },
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-IE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-LIST-CLOSE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-EXPLAIN-CLOSE-001",
+          "word_delta": 2
+        },
+        {
+          "application_count": 2,
+          "atomic_edit_count": 2,
+          "decision_id": "TR023-LISTEN-SOUNDNESS-ITEM-SEAM-001",
+          "word_delta": 0
+        }
+      ],
+      "replay_id": "tr023-source-replay-13"
+    },
+    {
+      "operations": [
+        {
+          "application_count": 1,
+          "atomic_edit_count": 1,
+          "decision_id": "TR023-LISTEN-PROOF-EXERCISE-001",
+          "word_delta": 5
+        }
+      ],
+      "replay_id": "tr023-source-replay-14"
+    }
+  ],
+  "per_replay_accounting": [
+    {
+      "application_count": 2,
+      "atomic_edit_count": 2,
+      "file": "content/first-order-logic/axiomatic-deduction/axiomatic-deduction.tex",
+      "input_words": 67,
+      "operation_summary": "one FOL expansion; one editorial end cue",
+      "replay_id": "tr023-source-replay-01",
+      "target_words": 70,
+      "word_delta": 3
+    },
+    {
+      "application_count": 7,
+      "atomic_edit_count": 7,
+      "file": "content/first-order-logic/axiomatic-deduction/rules-and-proofs.tex",
+      "input_words": 916,
+      "operation_summary": "one iff expansion; one explain end; three quote ends; two list ends",
+      "replay_id": "tr023-source-replay-02",
+      "target_words": 931,
+      "word_delta": 15
+    },
+    {
+      "application_count": 0,
+      "atomic_edit_count": 0,
+      "file": "content/first-order-logic/axiomatic-deduction/axioms-rules-propositional.tex",
+      "input_words": 315,
+      "operation_summary": "byte-identical replay",
+      "replay_id": "tr023-source-replay-03",
+      "target_words": 315,
+      "word_delta": 0
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 2,
+      "file": "content/first-order-logic/axiomatic-deduction/axioms-rules-quantifiers.tex",
+      "input_words": 278,
+      "operation_summary": "one inferred two-item rule-list boundary application",
+      "replay_id": "tr023-source-replay-04",
+      "target_words": 282,
+      "word_delta": 4
+    },
+    {
+      "application_count": 11,
+      "atomic_edit_count": 39,
+      "file": "content/first-order-logic/axiomatic-deduction/proving-things.tex",
+      "input_words": 1823,
+      "operation_summary": "four i.e. expansions; two MP expansions; one article repair; three derivation applications with 31 protected-gap edits; one list end",
+      "replay_id": "tr023-source-replay-05",
+      "target_words": 1885,
+      "word_delta": 62
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 7,
+      "file": "content/first-order-logic/axiomatic-deduction/proving-things-quant.tex",
+      "input_words": 614,
+      "operation_summary": "formula 0010885 transition and row-seam recomposition",
+      "replay_id": "tr023-source-replay-06",
+      "target_words": 616,
+      "word_delta": 2
+    },
+    {
+      "application_count": 8,
+      "atomic_edit_count": 8,
+      "file": "content/first-order-logic/axiomatic-deduction/proof-theoretic-notions.tex",
+      "input_words": 1175,
+      "operation_summary": "one iff expansion; one i.e. expansion; two article repairs; one proof-omission disambiguation; one explain end; two list ends",
+      "replay_id": "tr023-source-replay-07",
+      "target_words": 1190,
+      "word_delta": 15
+    },
+    {
+      "application_count": 8,
+      "atomic_edit_count": 12,
+      "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem.tex",
+      "input_words": 1500,
+      "operation_summary": "one i.e. expansion; one four-gap derivation; one list end; one theorem colon; three item-label seams; one two-edit formula-disclosure move",
+      "replay_id": "tr023-source-replay-08",
+      "target_words": 1509,
+      "word_delta": 9
+    },
+    {
+      "application_count": 3,
+      "atomic_edit_count": 9,
+      "file": "content/first-order-logic/axiomatic-deduction/deduction-theorem-quantifiers.tex",
+      "input_words": 822,
+      "operation_summary": "one i.e. expansion; six formula 0011028 transition edits; one two-edit formula-disclosure move",
+      "replay_id": "tr023-source-replay-09",
+      "target_words": 809,
+      "word_delta": -13
+    },
+    {
+      "application_count": 5,
+      "atomic_edit_count": 5,
+      "file": "content/first-order-logic/axiomatic-deduction/provability-consistency.tex",
+      "input_words": 835,
+      "operation_summary": "two iff expansions; two i.e. expansions; one proof-omission disambiguation",
+      "replay_id": "tr023-source-replay-10",
+      "target_words": 848,
+      "word_delta": 13
+    },
+    {
+      "application_count": 11,
+      "atomic_edit_count": 15,
+      "file": "content/first-order-logic/axiomatic-deduction/provability-propositional.tex",
+      "input_words": 711,
+      "operation_summary": "one explain end; six list ends; one four-gap derivation; one corrected-reference deduplication; one two-edit disclosure move; one visible source-typo repair",
+      "replay_id": "tr023-source-replay-11",
+      "target_words": 698,
+      "word_delta": -13
+    },
+    {
+      "application_count": 3,
+      "atomic_edit_count": 7,
+      "file": "content/first-order-logic/axiomatic-deduction/provability-quantifiers.tex",
+      "input_words": 299,
+      "operation_summary": "one explain end; two three-edit tagged-list applications",
+      "replay_id": "tr023-source-replay-12",
+      "target_words": 313,
+      "word_delta": 14
+    },
+    {
+      "application_count": 7,
+      "atomic_edit_count": 7,
+      "file": "content/first-order-logic/axiomatic-deduction/soundness.tex",
+      "input_words": 1754,
+      "operation_summary": "one iff expansion; two i.e. expansions; two list-item semicolons; one explain end; one list end",
+      "replay_id": "tr023-source-replay-13",
+      "target_words": 1763,
+      "word_delta": 9
+    },
+    {
+      "application_count": 1,
+      "atomic_edit_count": 1,
+      "file": "content/first-order-logic/axiomatic-deduction/identity.tex",
+      "input_words": 376,
+      "operation_summary": "one proof-omission disambiguation",
+      "replay_id": "tr023-source-replay-14",
+      "target_words": 381,
+      "word_delta": 5
+    }
+  ],
+  "schema": "openlogic-tr023-reader-listener-normalization-spec-v1",
+  "scope": "A bounded accepted-reader Listen normalization design for TR023 only. It derives from the pinned final producer overlay and semantic ledgers, never mutates them, and does not alter Read or Explore MathML.",
+  "status": "DESIGN_EVIDENCE_ONLY_NOT_BUILT_NOT_AUDITED_NOT_ACCEPTED",
+  "terminology_census": {
+    "a_element": 3,
+    "begin_derivation_without_end": 5,
+    "begin_editorial_without_end": 1,
+    "begin_explain_without_end": 5,
+    "begin_list_without_end": 13,
+    "begin_quote_without_end": 3,
+    "begin_tagenumerate": 2,
+    "FOL": 1,
+    "Hyp": 2,
+    "i.e.": 11,
+    "iff": 5,
+    "MP": 3,
+    "next_item": 35,
+    "proof_exercise_ambiguities": 3,
+    "source_transition_scaffolds": 12
+  }
+}

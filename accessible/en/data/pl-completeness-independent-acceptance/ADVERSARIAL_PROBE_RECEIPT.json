@@ -1,0 +1,207 @@
+{
+  "probe_count": 18,
+  "probes": [
+    {
+      "case": "sar002_occurrence_reader_reenabled",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "semantic_occurrences.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 181, in validate\n    require(row[\"reader_projection_status\"] == expected_projection_status, f\"SAR-002 occurrence profile failure: {formula_id}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: SAR-002 occurrence profile failure: projected-formula-0005815\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "sar002_expression_reader_reenabled",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "expression_semantics.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "2026-08-13\\task-workspace\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 128, in validate\n    require(row.get(field) == value, f\"authored expression field drift ({field}): {expression_id}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: authored expression field drift (reader_projection_status): expr-043a718774c572bd\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "continuous_speech_collision_reintroduced",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "semantic_occurrences.jsonl",
+        "EXPRESSION_CONTEXT_REVIEW.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "penlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 187, in validate\n    require(row[\"speech\"] == repair.CONTEXT_SPEECH_REPAIRS[formula_id], f\"continuous-prose speech repair failure: {formula_id}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: continuous-prose speech repair failure: projected-formula-0005635\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "piecewise_condition_flattened_to_mtext",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "expression_semantics.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "ent call last):\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 124, in validate\n    validate_repair_mathml(expression_id, row[\"mathml_inline\"])\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 78, in validate_repair_mathml\n    raise ValidationError(str(error)) from error\nValidationError: piecewise embedded math flattened into mtext: expr-437f5dd050d65408\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "gamma_prime_flattened_to_siblings",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "expression_semantics.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "ost recent call last):\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 124, in validate\n    validate_repair_mathml(expression_id, row[\"mathml_inline\"])\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 78, in validate_repair_mathml\n    raise ValidationError(str(error)) from error\nValidationError: Gamma-prime structural MathML missing: expr-5757d5082cda4415\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "proof_system_reference_conflated",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "REFERENCE_LEDGER.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "omplete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 258, in validate\n    require(expected_name is not None and row[\"spoken_target\"] == expected_name, f\"spoken-reference distinction failure: {row['reference_id']}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: spoken-reference distinction failure: reference-001756\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "theorem_corollary_reference_conflated",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "REFERENCE_LEDGER.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "omplete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 258, in validate\n    require(expected_name is not None and row[\"spoken_target\"] == expected_name, f\"spoken-reference distinction failure: {row['reference_id']}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: spoken-reference distinction failure: reference-000240\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "occurrence_source_coordinate_drift",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "semantic_occurrences.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "[local-user-profile]\\Documents\\Codex\\2026-08-13\\task-workspace\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 192, in validate\n    require(row[field] == value, f\"authored occurrence field drift ({field}): {formula_id}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: authored occurrence field drift (line): projected-formula-0005611\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "mathml_root_aria_flattening",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "expression_semantics.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "t-for-task\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 122, in validate\n    parse_mathml(row, row[\"mathml_inline\"], \"inline\")\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 66, in parse_mathml\n    require(\"aria-label\" not in root.attrib, f\"MathML root aria flattening: {row['expression_id']}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: MathML root aria flattening: expr-8238c028f61fc0f7\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "mathml_tex_annotation_drift",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "expression_semantics.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "eness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 122, in validate\n    parse_mathml(row, row[\"mathml_inline\"], \"inline\")\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 70, in parse_mathml\n    require(annotation is not None and annotation.text == row[\"normalized_tex\"], f\"MathML TeX annotation failure: {row['expression_id']}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: MathML TeX annotation failure: expr-8238c028f61fc0f7\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "formal_formula_source_order_swapped",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "formal_object_semantic_bindings.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "cuments\\Codex\\2026-08-13\\task-workspace\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 231, in validate\n    require(row == authored_formals[environment_id], f\"authored formal authority drift: {environment_id}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: authored formal authority drift: projected-env-000939\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "exercise_solution_injected",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "formal_object_semantic_bindings.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "cuments\\Codex\\2026-08-13\\task-workspace\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 231, in validate\n    require(row == authored_formals[environment_id], f\"authored formal authority drift: {environment_id}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: authored formal authority drift: projected-env-000977\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "source_reference_row_omitted",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "REFERENCE_LEDGER.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "Traceback (most recent call last):\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 114, in validate\n    require(len(references) == len(oracle_references) == 69, \"reference count failure\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: reference count failure\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "correction_visible_disclosure_removed",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "SOURCE_CORRECTIONS.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": " File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 285, in validate\n    require(correction_by_id == authored_corrections, \"authored source-correction authority drift\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: authored source-correction authority drift\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "preserved_prior_fail_pin_rewritten",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "INDEPENDENT_FAIL_REPAIR_CLOSURE.json"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "t-for-task\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 310, in validate\n    require(repair_closure[\"preserved_independent_fail_pins\"] == repair.INDEPENDENT_FAIL_PINS, \"preserved independent FAIL pin drift\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: preserved independent FAIL pin drift\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "derived_reference_promoted_to_source",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "DERIVED_REFERENCE_LEDGER.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "r-task\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 280, in validate\n    require(derived == list(authored_references[\"derived_reader_references\"].values()), \"authored derived-reference authority drift\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: authored derived-reference authority drift\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "expression_meaning_generic_fallback",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "expression_semantics.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "\\Documents\\Codex\\2026-08-13\\task-workspace\\work\\openlogic-accessible-complete-book\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 397, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 128, in validate\n    require(row.get(field) == value, f\"authored expression field drift ({field}): {expression_id}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: authored expression field drift (meaning): expr-8238c028f61fc0f7\n",
+      "validator_returncode": 1
+    },
+    {
+      "case": "occurrence_mathml_bound_to_wrong_expression",
+      "independent_predicate_rejected": true,
+      "mutated_artifacts": [
+        "semantic_occurrences.jsonl"
+      ],
+      "producer_validator_rejected": true,
+      "result": "PASS_MUTATION_REJECTED",
+      "validator_error_tail": "\", line 389, in main\n    receipt = validate(args.evidence.resolve())\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 203, in validate\n    parse_mathml(expression_by_id[row[\"expression_id\"]], row[\"mathml\"], row[\"mathml_display\"])\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 65, in parse_mathml\n    require(root.attrib.get(\"data-expression-id\") == row[\"expression_id\"], f\"MathML ID failure: {row['expression_id']}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"[project-root]\\work\\tranche_014_pl_completeness_projection\\validate_tr014.py\", line 33, in require\n    raise ValidationError(detail)\nValidationError: MathML ID failure: expr-8238c028f61fc0f7\n",
+      "validator_returncode": 1
+    }
+  ],
+  "result": "PASS_ALL_FRESH_ADVERSARIAL_MUTATIONS_REJECTED",
+  "schema": "openlogic-tr014-independent-reaudit-adversarial-probes-v1",
+  "tranche_id": "OLAB-TR-014"
+}

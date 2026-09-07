@@ -36,7 +36,9 @@ for (const needle of [
   '<noscript>'
 ]) check(html.includes(needle), `missing HTML requirement: ${needle}`);
 
-check(script.includes('fetch("catalogue/editions.json"'), "site must read the canonical catalogue");
+check(script.includes('new URL("catalogue/editions.json"'), "site must read the canonical catalogue");
+check(script.includes('cache: "no-store"'), "catalogue reads must bypass stale browser caches");
+check(script.includes('window.addEventListener("focus"'), "a returning tab must refresh the catalogue");
 check(script.includes("textContent"), "rendering must use textContent for catalogue values");
 check(!script.includes("innerHTML"), "catalogue renderer must not inject innerHTML");
 check(css.includes(":focus-visible"), "focus-visible styling is required");

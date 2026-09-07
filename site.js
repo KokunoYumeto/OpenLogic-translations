@@ -37,6 +37,10 @@ const filterButtons = [...document.querySelectorAll(".filter")];
 
 let editions = [];
 let activeFilter = "all";
+let catalogueSignature = "";
+let catalogueRefreshPromise = null;
+let lastCatalogueRequest = 0;
+const CATALOGUE_REFRESH_COOLDOWN_MS = 30_000;
 
 function safeLink(value) {
   if (!value) return null;
@@ -212,6 +216,60 @@ function render() {
   emptyState.hidden = visible !== 0;
 }
 
+function replaceCatalogue(nextEditions) {
+  const selectedId = select.value;
+  const hashId = location.hash ? decodeURIComponent(location.hash.slice(1)) : "";
+  const retainedId = selectedId || hashId;
+  const placeholder = select.querySelector('option[value=""]');
+
+  editions = nextEditions;
+  grid.replaceChildren();
+  select.replaceChildren(placeholder);
+
+  editions.forEach(edition => {
+    grid.append(cardFor(edition));
+    const option = document.createElement("option");
+    option.value = edition.id;
+    const native = nativeNames[edition.language_tag];
+    option.textContent = native && native !== edition.name ? `${edition.name} — ${native}` : edition.name;
+    select.append(option);
+  });
+
+  if (retainedId && editions.some(edition => edition.id === retainedId)) {
+    select.value = retainedId;
+    document.getElementById(retainedId)?.classList.add("focused");
+  }
+  grid.setAttribute("aria-busy", "false");
+  render();
+}
+
+async function refreshCatalogue({ initial = false } = {}) {
+  const now = Date.now();
+  if (!initial && now - lastCatalogueRequest < CATALOGUE_REFRESH_COOLDOWN_MS) return;
+  if (catalogueRefreshPromise) return catalogueRefreshPromise;
+
+  lastCatalogueRequest = now;
+  catalogueRefreshPromise = (async () => {
+    const catalogueUrl = new URL("catalogue/editions.json", window.location.href);
+    catalogueUrl.searchParams.set("refresh", String(now));
+    const response = await fetch(catalogueUrl, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Catalogue request failed: ${response.status}`);
+    const data = await response.json();
+    if (!Array.isArray(data.editions)) throw new Error("Catalogue has no editions array");
+
+    const nextSignature = JSON.stringify(data.editions);
+    if (nextSignature === catalogueSignature) return;
+    catalogueSignature = nextSignature;
+    replaceCatalogue(data.editions);
+  })();
+
+  try {
+    await catalogueRefreshPromise;
+  } finally {
+    catalogueRefreshPromise = null;
+  }
+}
+
 function selectEdition(id) {
   if (!id) return;
   activeFilter = "all";
@@ -233,21 +291,7 @@ function selectEdition(id) {
 
 async function start() {
   try {
-    const response = await fetch("catalogue/editions.json", { cache: "no-cache" });
-    if (!response.ok) throw new Error(`Catalogue request failed: ${response.status}`);
-    const data = await response.json();
-    if (!Array.isArray(data.editions)) throw new Error("Catalogue has no editions array");
-    editions = data.editions;
-    editions.forEach(edition => {
-      grid.append(cardFor(edition));
-      const option = document.createElement("option");
-      option.value = edition.id;
-      const native = nativeNames[edition.language_tag];
-      option.textContent = native && native !== edition.name ? `${edition.name} — ${native}` : edition.name;
-      select.append(option);
-    });
-    grid.setAttribute("aria-busy", "false");
-    render();
+    await refreshCatalogue({ initial: true });
     if (location.hash) {
       const id = decodeURIComponent(location.hash.slice(1));
       if (editions.some(edition => edition.id === id)) {
@@ -292,6 +336,16 @@ clearFilters.addEventListener("click", () => {
   activeFilter = "all";
   filterButtons[0].click();
   search.focus();
+});
+
+window.addEventListener("pageshow", event => {
+  if (event.persisted) refreshCatalogue().catch(error => console.error(error));
+});
+window.addEventListener("focus", () => {
+  refreshCatalogue().catch(error => console.error(error));
+});
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) refreshCatalogue().catch(error => console.error(error));
 });
 
 start();

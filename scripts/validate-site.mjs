@@ -32,6 +32,17 @@ if (french?.release_tag === "v0.2.0-ensembles-relations") {
   check(french.evidence?.documented_editorial_choices === 50, "French v0.2.0 bundles 50 editorial choices, not the later private audit");
 }
 check(script.includes('"fr": "Français"'), "French native-language selector label missing");
+for (const [id, pages] of [["openlogic-es", 992], ["openlogic-pt-br", 972]]) {
+  const edition = catalogue.editions.find(item => item.id === id);
+  check(edition?.source_units_translated === 722, `${id}: target-tree count must be 722`);
+  check(edition?.current_local_configured_reader?.pages === pages, `${id}: wrong local configured PDF identity`);
+  check(edition?.current_local_configured_reader?.source_units_rendered === 642 && edition.current_local_configured_reader.alternate_units_outside_reader === 80, `${id}: preserve configured 642+80 distinction`);
+  check(edition?.current_local_configured_reader?.integrates_all_722_units === false && edition.standalone_reader_units !== 722, `${id}: configured reader must not become an integrated 722 reader`);
+}
+const romance = catalogue.editions.find(item => item.id === "openlogic-romance-interlanguage");
+check(romance?.canon_admitted_units === 53 && romance.canon_pending_units === 669, "Romance admission snapshot must remain 53+669");
+check(romance?.canon_admission_snapshot?.event_id === "RSC-EVT-000388", "Romance counts need their exact admission snapshot");
+check(script.includes("Configured reader (local)") && script.includes("Canon-admitted units"), "Reader and canon-admission distinctions must be visible");
 check(catalogue.editions.every(item => !item.repository || /^https:\/\//.test(item.repository)), "repository links must use HTTPS");
 check(catalogue.editions.every(item => !item.release || /^https:\/\//.test(item.release)), "release links must use HTTPS");
 check(catalogue.editions.every(item => item.source_units_translated == null || (item.source_units_translated >= 0 && item.source_units_translated <= 722)), "source counts must stay within 0..722");

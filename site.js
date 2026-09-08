@@ -115,7 +115,7 @@ function link(label, href, primary = false) {
 
 function localEvidenceLink(edition) {
   const evidence = edition.evidence || {};
-  const relative = evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback || evidence.commission_scope;
+  const relative = edition.normalization_evidence || evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback || evidence.commission_scope;
   if (!relative || /^(?:[a-z]+:|\/)/i.test(relative) || relative.includes("..")) return null;
   const anchor = document.createElement("a");
   anchor.href = relative;
@@ -168,9 +168,14 @@ function cardFor(edition) {
     ? edition.source_units_translated
     : edition.source_units_preserved;
   coverage.append(
-    coverageRow(edition.source_coverage_label || "Translated source files", units(sourceUnits)),
-    coverageRow("Standalone reader", units(edition.standalone_reader_units))
+    coverageRow(edition.source_coverage_label || (Number.isFinite(edition.provisional_files) ? "Provisional baseline files" : "Translated source files"), units(sourceUnits ?? edition.provisional_files)),
+    edition.current_local_configured_reader
+      ? coverageRow("Configured reader (local)", units(edition.current_local_configured_reader.source_units_rendered))
+      : coverageRow("Standalone reader", units(edition.standalone_reader_units))
   );
+  if (Number.isFinite(edition.canon_admitted_units)) {
+    coverage.append(coverageRow("Canon-admitted units", edition.canon_admitted_units));
+  }
 
   const actions = document.createElement("div");
   actions.className = "actions";

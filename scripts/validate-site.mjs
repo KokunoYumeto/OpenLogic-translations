@@ -32,6 +32,13 @@ if (french?.release_tag === "v0.2.0-ensembles-relations") {
   check(french.evidence?.documented_editorial_choices === 50, "French v0.2.0 bundles 50 editorial choices, not the later private audit");
 }
 check(script.includes('"fr": "Français"'), "French native-language selector label missing");
+if (french?.release_tag === "v0.3.0-ensembles-relations-fonctions") {
+  check(french.source_units_translated === 23 && french.standalone_reader_units === 23, "French v0.3.0 contains exactly 23/722 released units");
+  check(french.status?.includes("partial") && french.readers?.[0]?.pages === 31, "French v0.3.0 is a 31-page partial edition");
+  check(french.evidence?.documented_editorial_choices === 249, "French v0.3.0 bundles 249 editorial choices");
+  check(french.readers?.[0]?.sha256 === "b4dd8366ea46b69e7e05183bfba40c968609a799ba7e992eeee8247e814602f7", "French v0.3.0 reader identity mismatch");
+  check(french.limitations?.some(text => text.includes("uniqueness")), "French inherited cross-reference finding must remain disclosed");
+}
 for (const [id, pages] of [["openlogic-es", 992], ["openlogic-pt-br", 972]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition?.source_units_translated === 722, `${id}: target-tree count must be 722`);

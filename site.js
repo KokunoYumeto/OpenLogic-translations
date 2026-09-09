@@ -54,6 +54,7 @@ function safeLink(value) {
 }
 
 function editionClass(edition) {
+  if (edition.status?.includes("complete-canonical-projection-80/80")) return "complete";
   const statuses = (edition.status || []).join(" ");
   if (edition.standalone_reader_units === TOTAL_UNITS || statuses.includes("published-constructed-722")) {
     return "complete";
@@ -67,6 +68,7 @@ function editionClass(edition) {
 }
 
 function classLabel(edition, state) {
+  if (edition.kind === "accessibility-infrastructure") return "Complete main book";
   if ((edition.status || []).join(" ").includes("published-constructed-722")) return "Complete interlanguage";
   return {
     "complete": "Complete reader",
@@ -130,6 +132,7 @@ function cardFor(edition) {
   card.id = edition.id;
   card.tabIndex = -1;
   card.dataset.state = state;
+  card.dataset.accessible = String(edition.kind === "accessibility-infrastructure");
   card.dataset.script = (edition.scripts || []).join(" · ") || "—";
   card.dataset.search = [
     edition.name,
@@ -167,7 +170,12 @@ function cardFor(edition) {
   const sourceUnits = Number.isFinite(edition.source_units_translated)
     ? edition.source_units_translated
     : edition.source_units_preserved;
-  coverage.append(
+  if (edition.kind === "accessibility-infrastructure") {
+    const scope = document.createElement("p");
+    scope.className = "coverage-note";
+    scope.textContent = "78 mathematical chapters, with introductory and reference material. Main-book scope; the separate 722-file preservation reader also includes optional and alternative units.";
+    coverage.append(scope);
+  } else coverage.append(
     coverageRow(edition.source_coverage_label || (Number.isFinite(edition.provisional_files) ? "Provisional baseline files" : "Translated source files"), units(sourceUnits ?? edition.provisional_files)),
     edition.current_local_configured_reader
       ? coverageRow("Configured reader (local)", units(edition.current_local_configured_reader.source_units_rendered))
@@ -185,6 +193,17 @@ function cardFor(edition) {
   const doi = link("DOI", edition.version_doi ? `https://doi.org/${edition.version_doi}` : edition.concept_doi ? `https://doi.org/${edition.concept_doi}` : null);
   const evidence = localEvidenceLink(edition);
   [primary, repository, doi, evidence].filter(Boolean).forEach(item => actions.append(item));
+  const epubs = (edition.readers || []).filter(item => /epub/i.test(item.format || "") || /\.epub(?:\?|$)/i.test(item.url || ""));
+  for (const epub of epubs) {
+    const download = link(epubs.length === 1 ? "Download EPUB" : `EPUB — ${epub.profile}`, epub.url);
+    if (download) actions.append(download);
+  }
+  if (!epubs.length) {
+    const pending = document.createElement("p");
+    pending.className = "format-note";
+    pending.textContent = "EPUB link not yet available in this catalogue.";
+    actions.append(pending);
+  }
 
   const details = document.createElement("details");
   const detailsSummary = document.createElement("summary");
@@ -263,10 +282,12 @@ async function refreshCatalogue({ initial = false } = {}) {
     const data = await response.json();
     if (!Array.isArray(data.editions)) throw new Error("Catalogue has no editions array");
 
-    const nextSignature = JSON.stringify(data.editions);
+    const accessible = (data.infrastructure || []).filter(item => item.kind === "accessibility-infrastructure" && item.readers?.length);
+    const displayedEditions = [...accessible, ...data.editions];
+    const nextSignature = JSON.stringify(displayedEditions);
     if (nextSignature === catalogueSignature) return;
     catalogueSignature = nextSignature;
-    replaceCatalogue(data.editions);
+    replaceCatalogue(displayedEditions);
   })();
 
   try {

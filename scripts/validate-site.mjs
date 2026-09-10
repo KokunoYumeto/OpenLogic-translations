@@ -24,7 +24,14 @@ check(accessible?.language_tag === "en" && accessible.readers.some(item => item.
 check(script.includes("[...accessible, ...data.editions]"), "accessible editions must be first-class selector/card entries");
 check(html.includes('href="#openlogic-accessible-book"') && html.includes('class="featured-reader"'), "accessible edition needs prominent top navigation and reading links");
 check(script.includes('"Download EPUB"'), "EPUB downloads must be exposed on edition cards");
-check(accessible.currentness_checked?.speech_repair_successor_published === false, "unpublished speech repairs must not be claimed released");
+if (accessible.currentness_checked?.speech_repair_successor_published === true) {
+  const delivery = JSON.parse(await read(accessible.evidence.public_readback));
+  check(delivery.status === "PASS_PUBLIC_DELIVERY" && delivery.github_downloads.files.length === 9, "published repair claim needs its verified public delivery receipt");
+  check(delivery.html.commit === accessible.currentness_checked.html_commit, "online repair claim must match its published reader commit");
+  for (const format of accessible.readers.filter(item => item.format === "EPUB" || /\.zip(?:\?|$)/.test(item.url))) {
+    check(delivery.github_downloads.files.some(file => file.url === format.url && file.bytes === format.bytes && file.sha256 === format.sha256 && file.matches), "each download must match its public byte receipt");
+  }
+} else check(accessible.currentness_checked?.speech_repair_successor_published === false, "repair publication status must be explicit");
 check(catalogue.editions.every(item => item.id && item.name && item.language_tag), "every edition needs id, name, and language tag");
 const french = catalogue.editions.find(item => item.id === "openlogic-fr");
 check(french?.language_tag === "fr", "French catalogue entry missing");

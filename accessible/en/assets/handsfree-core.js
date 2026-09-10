@@ -11,8 +11,8 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
 
-  const STATE_VERSION = 1;
-  const DEFAULT_STORAGE_KEY = "openlogic-handsfree-listen-state-v1";
+  const STATE_VERSION = 2;
+  const DEFAULT_STORAGE_KEY = "openlogic-handsfree-listen-state-v2";
   const DEFAULT_RATE = 1;
   const DEFAULT_MAX_CHUNK = 280;
 
@@ -22,7 +22,12 @@
   }
 
   function normalizeLanguage(value) {
-    return String(value || "").trim().replace(/_/g, "-").toLowerCase();
+    const tag = String(value || "").trim().replace(/_/g, "-");
+    try {
+      return Intl.getCanonicalLocales(tag)[0].toLowerCase();
+    } catch (_error) {
+      return tag.toLowerCase();
+    }
   }
 
   function languageMatches(candidate, wanted) {
@@ -30,6 +35,15 @@
     const right = normalizeLanguage(wanted);
     if (!left || !right) return false;
     return left === right || left.split("-")[0] === right.split("-")[0];
+  }
+
+  function editionId(manifest) {
+    return String(manifest.edition_id || manifest.corpus_id);
+  }
+
+  function storageKeyFor(manifest, prefix) {
+    return (prefix || DEFAULT_STORAGE_KEY) + ":" + encodeURIComponent(editionId(manifest))
+      + ":" + encodeURIComponent(normalizeLanguage(manifest.language));
   }
 
   function voiceDescriptor(voice) {
@@ -60,7 +74,8 @@
     return Array.from(voices || []).sort(function (a, b) {
       const score = function (voice) {
         let result = 0;
-        if (languageMatches(voice.lang, wanted)) result += 8;
+        if (normalizeLanguage(voice.lang) === wanted) result += 16;
+        else if (languageMatches(voice.lang, wanted)) result += 8;
         if (voice.default) result += 4;
         if (voice.localService) result += 2;
         return result;
@@ -71,58 +86,94 @@
     });
   }
 
-  function resolveVoice(voices, preferred) {
-    const list = Array.from(voices || []);
-    if (!preferred) return { voice: null, matched: true, strategy: "browser-default" };
-    let match = list.find(function (voice) { return voiceKey(voice) === voiceKey(preferred); });
+  function resolveVoice(voices, preferred, language) {
+    const wanted = normalizeLanguage(language || (preferred && preferred.lang) || "en");
+    const list = sortVoices(voices, wanted).filter(function (voice) {
+      return languageMatches(voice.lang, wanted);
+    });
+    if (!list.length) return { voice: null, matched: false, strategy: "no-compatible-voice" };
+    const compatiblePreference = preferred && languageMatches(preferred.lang, wanted) ? preferred : null;
+    let match = compatiblePreference && list.find(function (voice) { return voiceKey(voice) === voiceKey(compatiblePreference); });
     if (match) return { voice: match, matched: true, strategy: "exact" };
-    if (preferred.voiceURI) {
-      match = list.find(function (voice) { return String(voice.voiceURI || "") === preferred.voiceURI; });
+    if (compatiblePreference && compatiblePreference.voiceURI) {
+      match = list.find(function (voice) { return String(voice.voiceURI || "") === compatiblePreference.voiceURI; });
       if (match) return { voice: match, matched: true, strategy: "voice-uri" };
     }
-    match = list.find(function (voice) {
-      return String(voice.name || "") === String(preferred.name || "")
-        && normalizeLanguage(voice.lang) === normalizeLanguage(preferred.lang);
+    match = compatiblePreference && list.find(function (voice) {
+      return String(voice.name || "") === String(compatiblePreference.name || "")
+        && normalizeLanguage(voice.lang) === normalizeLanguage(compatiblePreference.lang);
     });
     if (match) return { voice: match, matched: true, strategy: "name-language" };
-    return { voice: null, matched: false, strategy: "browser-default-fallback" };
+    return {
+      voice: list[0],
+      matched: !preferred,
+      strategy: normalizeLanguage(list[0].lang) === wanted ? "exact-language-fallback" : "same-language-fallback",
+    };
   }
 
-  function nextChunk(value, rawOffset, maximumLength) {
-    const text = String(value || "");
-    const limit = Math.max(80, Math.floor(maximumLength || DEFAULT_MAX_CHUNK));
-    let start = clamp(rawOffset, 0, text.length);
-    while (start < text.length && /\s/.test(text[start])) start += 1;
-    if (start >= text.length) return null;
+  // Cache only the current block, not the book. All offsets remain UTF-16 offsets
+  // for speech boundary events, but every emitted endpoint is a grapheme boundary.
+  let segmentationCache = null;
 
-    const hardEnd = Math.min(text.length, start + limit);
-    let end = hardEnd;
-    if (hardEnd < text.length) {
-      const minimumUseful = Math.floor(limit * 0.55);
-      const candidate = text.slice(start, hardEnd + 1);
-      const sentence = /[.!?;:](?:["'”’\)\]])?\s+/g;
-      let sentenceMatch;
-      let sentenceEnd = -1;
-      while ((sentenceMatch = sentence.exec(candidate)) !== null) {
-        const possible = sentenceMatch.index + sentenceMatch[0].search(/\s/);
-        if (possible >= minimumUseful) sentenceEnd = possible;
-      }
-      if (sentenceEnd > 0) {
-        end = start + sentenceEnd;
-      } else {
-        const whitespace = candidate.slice(0, hardEnd - start + 1).lastIndexOf(" ");
-        if (whitespace >= minimumUseful) end = start + whitespace;
+  function boundariesFor(text, language) {
+    const locale = normalizeLanguage(language || "en");
+    if (segmentationCache && segmentationCache.text === text && segmentationCache.locale === locale) {
+      return segmentationCache;
+    }
+    if (typeof Intl === "undefined" || typeof Intl.Segmenter !== "function") {
+      throw new Error("grapheme-segmentation-unavailable");
+    }
+    const result = { text: text, locale: locale };
+    for (const granularity of ["grapheme", "word", "sentence"]) {
+      const boundaries = [0];
+      const segmenter = new Intl.Segmenter(locale, { granularity: granularity });
+      for (const segment of segmenter.segment(text)) boundaries.push(segment.index + segment.segment.length);
+      result[granularity] = boundaries;
+    }
+    segmentationCache = result;
+    return result;
+  }
+
+  function floorBoundary(boundaries, offset) {
+    let low = 0;
+    let high = boundaries.length;
+    while (low < high) {
+      const middle = Math.floor((low + high) / 2);
+      if (boundaries[middle] <= offset) low = middle + 1;
+      else high = middle;
+    }
+    return Math.max(0, low - 1);
+  }
+
+  function safeOffset(text, offset, language) {
+    const boundaries = boundariesFor(text, language).grapheme;
+    return boundaries[floorBoundary(boundaries, clamp(offset, 0, text.length))];
+  }
+
+  function nextChunk(value, rawOffset, maximumLength, language) {
+    const text = String(value || "");
+    if (!text || rawOffset >= text.length) return null;
+    const numericLimit = Number(maximumLength);
+    const limit = Number.isFinite(numericLimit) && numericLimit > 0
+      ? Math.max(80, Math.floor(numericLimit)) : DEFAULT_MAX_CHUNK;
+    const boundaries = boundariesFor(text, language);
+    const startIndex = floorBoundary(boundaries.grapheme, clamp(rawOffset, 0, text.length));
+    const start = boundaries.grapheme[startIndex];
+    let end = boundaries.grapheme[floorBoundary(boundaries.grapheme, Math.min(text.length, start + limit))];
+    // A single oversized cluster is indivisible: prefer fidelity to a soft length cap.
+    if (end <= start) end = boundaries.grapheme[startIndex + 1];
+    if (end < text.length && end - start <= limit) {
+      const minimumUseful = start + Math.floor(limit * 0.55);
+      for (const kind of ["sentence", "word"]) {
+        const candidate = boundaries[kind][floorBoundary(boundaries[kind], end)];
+        if (candidate >= minimumUseful && candidate > start) {
+          end = candidate;
+          break;
+        }
       }
     }
-    if (end <= start) end = Math.min(text.length, start + limit);
-    let nextOffset = end;
-    while (nextOffset < text.length && /\s/.test(text[nextOffset])) nextOffset += 1;
-    return {
-      start: start,
-      spokenEnd: end,
-      nextOffset: nextOffset,
-      text: text.slice(start, end),
-    };
+    return { start: start, spokenEnd: end, nextOffset: end, text: text.slice(start, end),
+      oversizedGrapheme: end - start > limit };
   }
 
   function validateManifest(manifest) {
@@ -139,7 +190,7 @@
       const blocks = chapter.blocks.filter(function (block) {
         return block && block.block_id && String(block.text || "").trim();
       }).map(function (block) {
-        return Object.assign({}, block, { text: String(block.text).trim() });
+        return Object.assign({}, block, { text: String(block.text) });
       });
       if (!blocks.length) throw new TypeError("Chapter " + chapter.chapter_key + " has no speakable blocks.");
       return Object.assign({}, chapter, { blocks: blocks });
@@ -153,17 +204,21 @@
     catch (_error) { return null; }
   }
 
-  function normalizedSettings(saved) {
+  function normalizedSettings(saved, language) {
     const settings = saved && saved.settings ? saved.settings : {};
     return {
       rate: clamp(settings.rate || DEFAULT_RATE, 0.1, 10),
-      voice: settings.voice && typeof settings.voice === "object" ? settings.voice : null,
+      voice: settings.voice && typeof settings.voice === "object" && languageMatches(settings.voice.lang, language)
+        ? voiceDescriptor(settings.voice) : null,
     };
   }
 
   function initialState(manifest, saved) {
-    const reusablePosition = saved
+    const reusableSettings = saved
       && saved.version === STATE_VERSION
+      && saved.editionId === editionId(manifest)
+      && normalizeLanguage(saved.language) === normalizeLanguage(manifest.language);
+    const reusablePosition = reusableSettings
       && saved.corpusId === manifest.corpus_id
       && saved.position;
     const position = reusablePosition ? {
@@ -173,9 +228,11 @@
     } : { chapterIndex: 0, blockIndex: 0, charOffset: 0 };
     return {
       version: STATE_VERSION,
+      editionId: editionId(manifest),
+      language: normalizeLanguage(manifest.language),
       corpusId: manifest.corpus_id,
       position: position,
-      settings: normalizedSettings(saved),
+      settings: normalizedSettings(reusableSettings ? saved : null, manifest.language),
     };
   }
 
@@ -190,7 +247,7 @@
       this.persistenceWriteAvailable = Boolean(this.storage);
       this.persistenceAvailable = Boolean(this.storage);
       this.persistenceError = this.storage ? null : "storage-unavailable";
-      this.storageKey = config.storageKey || DEFAULT_STORAGE_KEY;
+      this.storageKey = storageKeyFor(this.manifest, config.storageKey);
       this.maxChunkLength = config.maxChunkLength || DEFAULT_MAX_CHUNK;
       this.persistenceStride = config.persistenceStride || 40;
       this.onStateChange = typeof config.onStateChange === "function" ? config.onStateChange : function () {};
@@ -307,6 +364,9 @@
     }
 
     setVoice(value) {
+      if (value && !languageMatches(value.lang, this.manifest.language)) {
+        throw new RangeError("The selected voice does not match this edition's language.");
+      }
       this.state.settings.voice = value ? voiceDescriptor(value) : null;
       this.persist();
       this._emit("settings");
@@ -396,7 +456,13 @@
         this._emit("book-ended");
         return;
       }
-      const chunk = nextChunk(current.block.text, this.state.position.charOffset, this.maxChunkLength);
+      let chunk;
+      try {
+        chunk = nextChunk(current.block.text, this.state.position.charOffset, this.maxChunkLength, this.manifest.language);
+      } catch (_error) {
+        this._failSynthesis("grapheme-segmentation-unavailable", "utterance-error");
+        return;
+      }
       if (!chunk) {
         this.state.position.blockIndex += 1;
         this.state.position.charOffset = 0;
@@ -414,7 +480,11 @@
         this._failSynthesis("synthesis-setup-failed", "utterance-error");
         return;
       }
-      const selection = resolveVoice(voices, this.state.settings.voice);
+      const selection = resolveVoice(voices, this.state.settings.voice, this.manifest.language);
+      if (!selection.voice) {
+        this._failSynthesis("no-compatible-voice", "voice-unavailable");
+        return;
+      }
       utterance.lang = this.manifest.language;
       utterance.rate = this.state.settings.rate;
       if (selection.voice) utterance.voice = selection.voice;
@@ -430,7 +500,7 @@
       utterance.onboundary = (event) => {
         if (generation !== this.generation || utterance !== this.activeUtterance) return;
         const relative = clamp(event && event.charIndex, 0, chunk.text.length);
-        this.state.position.charOffset = chunk.start + relative;
+        this.state.position.charOffset = safeOffset(current.block.text, chunk.start + relative, this.manifest.language);
         if (Math.abs(this.state.position.charOffset - this.lastPersistedOffset) >= this.persistenceStride) {
           this.persist();
           this.lastPersistedOffset = this.state.position.charOffset;
@@ -476,6 +546,7 @@
     nextChunk: nextChunk,
     resolveVoice: resolveVoice,
     sortVoices: sortVoices,
+    storageKeyFor: storageKeyFor,
     validateManifest: validateManifest,
     voiceDescriptor: voiceDescriptor,
     voiceKey: voiceKey,

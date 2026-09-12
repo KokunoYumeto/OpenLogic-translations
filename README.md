@@ -4,7 +4,9 @@ This is the catalogue and production standard for independent translations and a
 
 **[Choose a language in the visual edition hub](https://kokunoyumeto.github.io/OpenLogic-translations/)** · [Open mathematics programme (Indonesian / English)](https://kokunoyumeto.github.io/program-matematika-indonesia/)
 
-**Accessible English:** [read, listen and explore online](https://kokunoyumeto.github.io/OpenLogic-translations/accessible/en/) · [download EPUB](https://github.com/KokunoYumeto/OpenLogic-translations/releases/download/accessible-en-20260910/OpenLogic-Accessible-Complete-English-20260910.epub). The accessible main-book edition is a first-class choice in the selector and first card in the hub. Its mathematical content is not reduced to provide accessibility.
+**Accessible English — screen-reader / compatibility edition:** [read, listen and explore online](https://kokunoyumeto.github.io/OpenLogic-translations/accessible/en/) · [download EPUB](https://github.com/KokunoYumeto/OpenLogic-translations/releases/download/accessible-en-20260910/OpenLogic-Accessible-Complete-English-20260910.epub). The accessible main-book edition is a first-class choice in the selector and first card in the hub. Its mathematical content is not reduced to provide accessibility.
+
+The linked accessible HTML and EPUB are the September 10 edition; the EPUB download was checked again on September 12. Further source corrections are being integrated and are not yet included in those public files. Gujarati and Telugu also have direct EPUB downloads in the catalogue. EPUB delivery remains required for every other edition, including the separate 722-file English preservation reader; an EPUB of the main book does not substitute for that different scope.
 
 The [frozen English source snapshot](https://github.com/OpenLogicProject/OpenLogic/tree/9620cc73f9c8e0ad003c514a5d3748f29611c4c0) contains 722 tracked content `.tex` files. Technical revision identities are recorded in the catalogue. Coverage of those files and coverage of a reading PDF are reported separately. In particular, “722 translated sources” does **not** mean that all 722 are present in one reader.
 

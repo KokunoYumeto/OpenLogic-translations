@@ -1325,26 +1325,28 @@
       ],
       "license": "CC-BY-4.0; inherited component/font exceptions retained",
       "limitations": [
-        "Complete722-unit edition unfinished.",
-        "Relations and Functions drafts are not included in the accepted Sets reader.",
-        "Same-agent semantic review, not independent native-scholar certification; the semantic HTML is complete only for the seven-unit Sets reader."
+        "The full 722-unit edition remains unfinished.",
+        "The EPUB and semantic HTML contain 23 units; the retained PDF contains seven units.",
+        "Machine/agent QA; no independent native-scholar certification is claimed.",
+        "The successor Zenodo record named in the release manifest returned HTTP 404 during the manager check. The previous published DOI remains linked."
       ],
-      "previous_public_release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.1.0-sets",
+      "previous_public_release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.2.0-sets-html",
       "repository": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN",
-      "release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.2.0-sets-html",
-      "release_tag": "v0.2.0-sets-html",
-      "public_reader": "https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/sets/",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.3.0-sfr-epub",
+      "release_tag": "v0.3.0-sfr-epub",
+      "public_reader": "https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/sfr/",
       "source_units_translated": 23,
-      "standalone_reader_units": 7,
-      "coverage_basis": "Published source checkpoint contains23 aligned translations, OLP-0004..OLP-0026; semantic HTML and inherited PDF contain the seven Sets units OLP-0004..OLP-0010.",
+      "standalone_reader_units": 23,
+      "coverage_basis": "Released source checkpoint, semantic HTML and EPUB cover OLP-0004..OLP-0026: the complete Sets, Relations and Functions chapters (23/722 units). The inherited PDF covers only the seven Sets units. The release also reports later repository drafts; those are not counted as part of this bounded download.",
       "status": [
         "partial-23/722"
       ],
       "profiles": [
-        "Sets semantic HTML/PDF reader; Relations and Functions source checkpoint"
+        "Sets, Relations and Functions — semantic HTML and reflowable EPUB",
+        "Sets only — retained PDF"
       ],
       "concept_doi": "10.5281/zenodo.22307937",
-      "version_doi": "10.5281/zenodo.22309234",
+      "version_doi": null,
       "readers": [
         {
           "profile": "Sets PDF reader (inherited immutable v0.1 asset)",
@@ -1353,18 +1355,31 @@
           "bytes": 160275,
           "sha256": "4272102d0e7ef34f819d582304a19442ece75ed9b34a07fd677461f37cbaf719",
           "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.2.0-sets-html/openlogic-te-Telu-IN-sets-v0.1.0.pdf"
+        },
+        {
+          "profile": "Sets, Relations and Functions — reflowable EPUB (23/722 units)",
+          "format": "EPUB",
+          "name": "openlogic-te-Telu-IN-sfr-v0.3.0.epub",
+          "bytes": 354646,
+          "sha256": "14558fd925098e97e4657c6df39639364af25b51d4c0c5e2736817156d1732ed",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.3.0-sfr-epub/openlogic-te-Telu-IN-sfr-v0.3.0.epub",
+          "source_units": 23
         }
       ],
       "evidence": {
-        "public_readback": "evidence/TELUGU_V020_PUBLIC_READBACK_20260904.json",
-        "manager_anonymous_release_assets_verified": 6,
-        "manager_anonymous_pages_files_verified": 9,
+        "public_readback": "evidence/TELUGU_EPUB_DELIVERY_MANAGER_READBACK_20260912.json",
+        "manager_anonymous_release_assets_verified": 8,
+        "manager_anonymous_pages_files_verified": 1,
         "manager_segment_records_replayed": 396,
         "manager_canon_passages_actually_cited_and_resolved": 14,
         "tagged_readme_hub_backlink_verified": true,
         "manager_full_semantic_rereview": false,
-        "zenodo_record": "https://zenodo.org/records/22309234"
-      }
+        "zenodo_record": "https://zenodo.org/records/22309234",
+        "previous_public_readback": "evidence/TELUGU_V020_PUBLIC_READBACK_20260904.json",
+        "manager_readback_scope": "Eight release assets and current HTML verified; four exact release QA reports checked. Prior semantic review metrics remain historical, not expanded by this delivery check."
+      },
+      "previous_version_doi": "10.5281/zenodo.22309234",
+      "zenodo_status": "Current GitHub EPUB verified; manifest-listed successor 22726674 returned HTTP 404 on 2026-09-12. Previous version 22309234 is retained."
     }
   ],
   "infrastructure": [

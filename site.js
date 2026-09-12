@@ -187,7 +187,7 @@ function cardFor(edition) {
 
   const actions = document.createElement("div");
   actions.className = "actions";
-  const readerUrl = (edition.readers || []).find(item => item.url)?.url;
+  const readerUrl = (edition.readers || []).find(item => item.url && !["chapter", "sample"].includes(item.scope_kind))?.url;
   const primary = link(readerUrl ? "Read / download" : "Open release", readerUrl || edition.release, true);
   const repository = link("Repository", edition.repository, !primary);
   const doi = link("DOI", edition.version_doi ? `https://doi.org/${edition.version_doi}` : edition.concept_doi ? `https://doi.org/${edition.concept_doi}` : null);
@@ -195,13 +195,13 @@ function cardFor(edition) {
   [primary, repository, doi, evidence].filter(Boolean).forEach(item => actions.append(item));
   const epubs = (edition.readers || []).filter(item => /epub/i.test(item.format || "") || /\.epub(?:\?|$)/i.test(item.url || ""));
   for (const epub of epubs) {
-    const download = link(epubs.length === 1 ? "Download EPUB" : `EPUB — ${epub.profile}`, epub.url);
+    const download = link(epub.download_label || (epubs.length === 1 ? "Download EPUB" : `EPUB — ${epub.profile}`), epub.url);
     if (download) actions.append(download);
   }
-  if (!epubs.length) {
+  if (!epubs.length || edition.epub_coverage_note) {
     const pending = document.createElement("p");
     pending.className = "format-note";
-    pending.textContent = "EPUB link not yet available in this catalogue.";
+    pending.textContent = edition.epub_coverage_note || "EPUB link not yet available in this catalogue.";
     actions.append(pending);
   }
 

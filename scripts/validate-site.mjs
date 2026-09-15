@@ -34,6 +34,17 @@ if (accessible.currentness_checked?.speech_repair_successor_published === true) 
 } else check(accessible.currentness_checked?.speech_repair_successor_published === false, "repair publication status must be explicit");
 check(catalogue.editions.every(item => item.id && item.name && item.language_tag), "every edition needs id, name, and language tag");
 const french = catalogue.editions.find(item => item.id === "openlogic-fr");
+const punjabi = catalogue.editions.find(item => item.id === "openlogic-pnb-arab-pk");
+if (punjabi?.release_tag === "v0.2.0") {
+  check(punjabi.standalone_reader_units === 7 && punjabi.source_units_translated === 26, "Punjabi reader7/source26 scope must remain distinct");
+  check(punjabi.ordered_downloads?.[0]?.format === "PDF" && punjabi.ordered_downloads?.[1]?.format === "ZIP", "Punjabi needs PDF first and full cumulative source ZIP second");
+  check(punjabi.ordered_downloads?.[1]?.sha256 === "64bec0f191b943279e6bfa728c65104c11b871911afa79e941c6a92d92de6a9f", "Punjabi must link the corrected cumulative-source ZIP");
+  check(punjabi.readers?.some(item => item.format === "EPUB" && item.source_units === 7 && item.sha256 === "fd8a878c1d6159cd5917444449a6fb56c7551f61719182d010448ad6893fa0ba"), "Punjabi needs its verified seven-unit EPUB");
+  const intake = JSON.parse(await read(punjabi.evidence.public_readback));
+  check(intake.files.length === 9 && intake.files.every(file => file.matches), "Punjabi intake needs nine actual public byte matches");
+  for (const item of punjabi.ordered_downloads) check(intake.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes), "Punjabi download not in public receipt");
+  check(script.includes("orderedDownloads.forEach"), "Renderer must preserve edition download order");
+}
 check(french?.language_tag === "fr", "French catalogue entry missing");
 if (french?.release_tag === "v0.1.0-ensembles") {
   check(french.source_units_translated === 7 && french.standalone_reader_units === 7, "French v0.1.0 contains exactly 7/722 units");
@@ -85,6 +96,7 @@ check(script.includes('window.addEventListener("focus"'), "a returning tab must 
 check(script.includes("textContent"), "rendering must use textContent for catalogue values");
 check(!script.includes("innerHTML"), "catalogue renderer must not inject innerHTML");
 check(css.includes(":focus-visible"), "focus-visible styling is required");
+check(css.includes(".edition-card[hidden] { display: none; }"), "card display must respect search/filter hidden state");
 check(css.includes("prefers-reduced-motion"), "reduced-motion support is required");
 check(hostingConfig.static?.directory === "dist", "Sites static directory must be dist");
 check(/^appgprj_/.test(hostingConfig.project_id || ""), "Sites project_id is missing");

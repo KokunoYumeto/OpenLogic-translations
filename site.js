@@ -200,6 +200,10 @@ function cardFor(edition) {
     });
   } else if (primary) actions.append(primary);
   [repository, doi, evidence].filter(Boolean).forEach(item => actions.append(item));
+  for (const related of edition.related_editions || []) {
+    const relatedLink = link(related.label, related.url);
+    if (relatedLink) actions.append(relatedLink);
+  }
   const epubs = (edition.readers || []).filter(item => /epub/i.test(item.format || "") || /\.epub(?:\?|$)/i.test(item.url || ""));
   for (const epub of orderedDownloads.length ? [] : epubs) {
     const download = link(epub.download_label || (epubs.length === 1 ? "Download EPUB" : `EPUB — ${epub.profile}`), epub.url);

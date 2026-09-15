@@ -21,6 +21,12 @@ check(catalogue.editions.length >= 20, "expected at least 20 edition records");
 check(new Set(catalogue.editions.map(item => item.id)).size === catalogue.editions.length, "edition IDs must be unique");
 const accessible = catalogue.infrastructure.find(item => item.id === "openlogic-accessible-book");
 check(accessible?.language_tag === "en" && accessible.readers.some(item => item.format === "EPUB"), "accessible English needs a selectable language label and explicit EPUB download");
+check(accessible.name === "English — accessible / compatibility edition", "compatibility must be explicit in the edition name");
+check(catalogue.editions.find(item => item.id === "openlogic-en-frozen-722")?.related_editions?.some(item => item.url === "#openlogic-accessible-book"), "English preservation card must point directly to the compatibility edition");
+for (const [id, count] of [["openlogic-fa-ir", 2], ["openlogic-interfarsi", 4]]) {
+  const samples = catalogue.editions.find(item => item.id === id)?.readers?.filter(item => item.format === "EPUB") || [];
+  check(samples.length === count && samples.every(item => item.scope_kind === "sample" && item.source_units === 1 && item.source_unit_ids?.[0] === "OLP-0005"), `${id}: sample EPUBs must not be presented as complete readers`);
+}
 check(script.includes("[...accessible, ...data.editions]"), "accessible editions must be first-class selector/card entries");
 check(html.includes('href="#openlogic-accessible-book"') && html.includes('class="featured-reader"'), "accessible edition needs prominent top navigation and reading links");
 check(script.includes('"Download EPUB"'), "EPUB downloads must be exposed on edition cards");

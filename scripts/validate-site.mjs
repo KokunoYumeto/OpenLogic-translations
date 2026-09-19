@@ -124,7 +124,11 @@ for (const [id, sourceUnits, readerUnits] of [["openlogic-te-telu-in",270,23],["
   check(edition.source_progress.targets_verified === sourceUnits && edition.source_progress.failures === 0, `${id}: public target identity evidence required`);
 }
 const bengaliRepair = JSON.parse(await read("evidence/BENGALI_SOURCE_REPAIR_20260919.json"));
-for (const [id, sources, units] of [["openlogic-ps-arab-pk",197,82],["openlogic-bn-beng-in",299,299]]) {
+const psSource = JSON.parse(await read("evidence/PASHTO_SOURCE247_MANAGER_READBACK_20260920.json"));
+const psEdition = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
+check(psSource.source_files_verified === 722 && psSource.target_files_verified === 247 && psSource.failures === 0 && psSource.new_batch_exact_block_checks === 376, "Pashto source checkpoint requires frozen-source, target and actual new-batch block checks");
+check(psEdition.source_progress.archive_sha256 === psSource.archive.sha256 && psEdition.source_progress.commit === psSource.commit && psSource.reader_units === 82 && psSource.reader_files_changed === false, "Pashto source identity must not inflate or replace its reader");
+for (const [id, sources, units] of [["openlogic-ps-arab-pk",247,82],["openlogic-bn-beng-in",299,299]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);

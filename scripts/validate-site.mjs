@@ -85,13 +85,15 @@ const frGuDelivery = JSON.parse(await read("evidence/FRENCH_GUJARATI_PUBLIC_DELI
 const frGuSources = JSON.parse(await read("evidence/FRENCH_GUJARATI_SOURCE_PACKAGE_CHECKS_20260919.json"));
 const guFulltextDelivery = JSON.parse(await read("evidence/GUJARATI_FULLTEXT_PUBLIC_READBACK_20260919.json"));
 const guFulltextChecks = JSON.parse(await read("evidence/GUJARATI_FULLTEXT_SOURCE_CHECKS_20260919.json"));
+const guModelsDelivery = JSON.parse(await read("evidence/GUJARATI_MODELS_THEORIES_PUBLIC_READBACK_20260920.json"));
+const guModelsChecks = JSON.parse(await read("evidence/GUJARATI_MODELS_THEORIES_PACKAGE_CHECKS_20260920.json"));
 check(frGuDelivery.files.length === 22 && frGuDelivery.files.every(file => file.matches), "French/Gujarati need all22 anonymous release-file checks");
-for (const [id, units] of [["openlogic-fr",51],["openlogic-gu-gujr-in",163]]) {
+for (const [id, units] of [["openlogic-fr",51],["openlogic-gu-gujr-in",170]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === units && edition.standalone_reader_units === units, `${id}: released scope must match the verified package`);
   check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", `${id}: retain PDF/TeX/source-ZIP link order`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
-  const delivery = id === "openlogic-gu-gujr-in" ? guFulltextDelivery : frGuDelivery;
+  const delivery = id === "openlogic-gu-gujr-in" ? guModelsDelivery : frGuDelivery;
   for (const item of edition.ordered_downloads) check(delivery.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: download lacks matching byte evidence`);
 }
 check(frGuSources.french.direct_tex_unique_embedded_sources === 51 && frGuSources.french.external_content_imports === 0, "French cumulative LaTeX must contain the51-unit body");
@@ -100,8 +102,11 @@ const gujaratiCurrent = catalogue.editions.find(item => item.id === "openlogic-g
 check(frGuSources.gujarati.native_content_files === 163 && frGuSources.gujarati.verified_exact_source_target_spans === 3630 && frGuSources.gujarati.ledger_binding_failures.length === 0, "Gujarati package needs163 sources and3630 exact source/target span checks");
 check(guFulltextDelivery.files.length === 16 && guFulltextDelivery.files.every(file => file.matches), "Gujarati full-text repair needs all16 public file readbacks");
 check(guFulltextChecks.full_text_reconstruction_byte_identical && guFulltextChecks.complete_direct_text_packaging_defect_closed && guFulltextChecks.unresolved_cumulative_body_imports.length === 0, "Gujarati full-text assembly must be verified");
-check(gujaratiCurrent.direct_latex.sha256 === guFulltextChecks.full_text.sha256 && gujaratiCurrent.direct_latex.role === "complete-cumulative-full-text", "Gujarati direct source must be the complete text, not the thin master");
-check(gujaratiCurrent.build_master.role === "build-master-not-cumulative-full-text" && gujaratiCurrent.version_doi === "10.5281/zenodo.22849693", "Retain labelled historical build master and correct repair DOI");
+check(guModelsDelivery.complete && guModelsDelivery.files.length === 16 && guModelsDelivery.files.every(file => file.matches), "Gujarati Models and Theories needs all16 public file matches");
+check(guModelsChecks.failures.length === 0 && guModelsChecks.source.inventory_entries_verified === 1252 && guModelsChecks.source.frozen_english_sources === 722 && guModelsChecks.source.native_target_files === 170 && guModelsChecks.source.source_target_span_checks === 3738, "Gujarati current package needs complete inventory/source/target bindings");
+check(guModelsChecks.source.complete_fulltext_reconstruction && guModelsChecks.source.unresolved_body_imports.length === 0 && gujaratiCurrent.direct_latex.sha256 === guModelsChecks.source.direct_fulltext_sha256 && gujaratiCurrent.direct_latex.role === "complete-cumulative-full-text", "Gujarati direct source must be the exact complete text, not the thin master");
+check(guModelsChecks.epub.mathml_nodes === 9653 && guModelsChecks.epub.mathml_structures_match_html && guModelsChecks.epub.tex_annotations_exact === 9653 && guModelsChecks.epub.broken_internal_links.length === 0, "Gujarati EPUB math and links must match");
+check(gujaratiCurrent.build_master.role === "build-master-not-cumulative-full-text" && gujaratiCurrent.version_doi === "10.5281/zenodo.22850543" && gujaratiCurrent.readers[0].pages === 219, "Retain labelled build master, correct DOI and219-page current reader");
 for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlogic-jv-latn-id",24,true]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.standalone_reader_units === units, `${id}: release reader scope mismatch`);

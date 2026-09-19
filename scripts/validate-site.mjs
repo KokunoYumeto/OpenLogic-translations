@@ -43,11 +43,12 @@ const french = catalogue.editions.find(item => item.id === "openlogic-fr");
 const punjabi = catalogue.editions.find(item => item.id === "openlogic-pnb-arab-pk");
 if (punjabi?.release_tag === "v0.2.0") {
   check(punjabi.standalone_reader_units === 7 && punjabi.source_units_translated === 26, "Punjabi reader7/source26 scope must remain distinct");
-  check(punjabi.ordered_downloads?.[0]?.format === "PDF" && punjabi.ordered_downloads?.[1]?.format === "ZIP", "Punjabi needs PDF first and full cumulative source ZIP second");
-  check(punjabi.ordered_downloads?.[1]?.sha256 === "64bec0f191b943279e6bfa728c65104c11b871911afa79e941c6a92d92de6a9f", "Punjabi must link the corrected cumulative-source ZIP");
+  check(punjabi.ordered_downloads?.[0]?.format === "PDF" && punjabi.ordered_downloads?.[1]?.format === "TEX" && punjabi.ordered_downloads?.[2]?.format === "ZIP", "Punjabi needs PDF, direct cumulative LaTeX, then full source ZIP");
+  check(punjabi.ordered_downloads?.[2]?.sha256 === "64bec0f191b943279e6bfa728c65104c11b871911afa79e941c6a92d92de6a9f", "Punjabi must link the corrected cumulative-source ZIP");
   check(punjabi.readers?.some(item => item.format === "EPUB" && item.source_units === 7 && item.sha256 === "fd8a878c1d6159cd5917444449a6fb56c7551f61719182d010448ad6893fa0ba"), "Punjabi needs its verified seven-unit EPUB");
   const intake = JSON.parse(await read(punjabi.evidence.public_readback));
-  check(intake.files.length === 9 && intake.files.every(file => file.matches), "Punjabi intake needs nine actual public byte matches");
+  const punjabiFiles = intake.files.filter(file => file.lane === "pnb-Arab-PK");
+  check(punjabiFiles.length === 13 && punjabiFiles.every(file => file.matches), "Punjabi intake needs eleven Zenodo files and two GitHub masters verified");
   for (const item of punjabi.ordered_downloads) check(intake.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes), "Punjabi download not in public receipt");
   check(script.includes("orderedDownloads.forEach"), "Renderer must preserve edition download order");
 }
@@ -77,8 +78,17 @@ for (const [id, pages] of [["openlogic-es", 992], ["openlogic-pt-br", 972]]) {
   check(edition?.current_local_configured_reader?.integrates_all_722_units === false && edition.standalone_reader_units !== 722, `${id}: configured reader must not become an integrated 722 reader`);
 }
 const romance = catalogue.editions.find(item => item.id === "openlogic-romance-interlanguage");
-check(romance?.canon_admitted_units === 53 && romance.canon_pending_units === 669, "Romance admission snapshot must remain 53+669");
-check(romance?.canon_admission_snapshot?.event_id === "RSC-EVT-000388", "Romance counts need their exact admission snapshot");
+check(romance?.canon_admitted_units === 54 && romance.canon_pending_units === 668, "Romance admission snapshot must remain 54+668");
+check(romance?.canon_admission_snapshot?.event_id === "RSC-EVT-000465", "Romance counts need their exact admission snapshot");
+check(romance?.current_local_configured_reader?.source_units_rendered === 722 && romance.current_local_configured_reader.public === false && romance.standalone_reader_units !== 722, "Romance local provisional reader must not be promoted to a public/canon-complete reader");
+for (const [id, units, hasEpub] of [["openlogic-fr",37,true],["openlogic-ta-taml-in",203,false],["openlogic-jv-latn-id",24,true]]) {
+  const edition = catalogue.editions.find(item => item.id === id);
+  check(edition.standalone_reader_units === units, `${id}: release reader scope mismatch`);
+  check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", `${id}: PDF/direct-LaTeX/source-ZIP order required`);
+  check(edition.readers.some(item => item.format === "EPUB") === hasEpub, `${id}: EPUB availability misrepresented`);
+  const receipt = JSON.parse(await read("evidence/PUBLIC_READER_DELIVERIES_20260919.json"));
+  for (const item of edition.ordered_downloads) check(receipt.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
+}
 check(script.includes("Configured reader (local)") && script.includes("Canon-admitted units"), "Reader and canon-admission distinctions must be visible");
 check(catalogue.editions.every(item => !item.repository || /^https:\/\//.test(item.repository)), "repository links must use HTTPS");
 check(catalogue.editions.every(item => !item.release || /^https:\/\//.test(item.release)), "release links must use HTTPS");

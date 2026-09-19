@@ -81,7 +81,23 @@ const romance = catalogue.editions.find(item => item.id === "openlogic-romance-i
 check(romance?.canon_admitted_units === 54 && romance.canon_pending_units === 668, "Romance admission snapshot must remain 54+668");
 check(romance?.canon_admission_snapshot?.event_id === "RSC-EVT-000465", "Romance counts need their exact admission snapshot");
 check(romance?.current_local_configured_reader?.source_units_rendered === 722 && romance.current_local_configured_reader.public === false && romance.standalone_reader_units !== 722, "Romance local provisional reader must not be promoted to a public/canon-complete reader");
-for (const [id, units, hasEpub] of [["openlogic-fr",37,true],["openlogic-ta-taml-in",203,false],["openlogic-jv-latn-id",24,true]]) {
+const frGuDelivery = JSON.parse(await read("evidence/FRENCH_GUJARATI_PUBLIC_DELIVERY_20260919.json"));
+const frGuSources = JSON.parse(await read("evidence/FRENCH_GUJARATI_SOURCE_PACKAGE_CHECKS_20260919.json"));
+check(frGuDelivery.files.length === 22 && frGuDelivery.files.every(file => file.matches), "French/Gujarati need all22 anonymous release-file checks");
+for (const [id, units] of [["openlogic-fr",51],["openlogic-gu-gujr-in",163]]) {
+  const edition = catalogue.editions.find(item => item.id === id);
+  check(edition.source_units_translated === units && edition.standalone_reader_units === units, `${id}: released scope must match the verified package`);
+  check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", `${id}: retain PDF/TeX/source-ZIP link order`);
+  check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
+  for (const item of edition.ordered_downloads) check(frGuDelivery.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: download lacks matching byte evidence`);
+}
+check(frGuSources.french.direct_tex_unique_embedded_sources === 51 && frGuSources.french.external_content_imports === 0, "French cumulative LaTeX must contain the51-unit body");
+check(french.direct_cumulative_source.sha256 === french.ordered_downloads[1].sha256, "French direct-source metadata must describe the current release");
+const gujaratiCurrent = catalogue.editions.find(item => item.id === "openlogic-gu-gujr-in");
+check(frGuSources.gujarati.native_content_files === 163 && frGuSources.gujarati.verified_exact_source_target_spans === 3630 && frGuSources.gujarati.ledger_binding_failures.length === 0, "Gujarati package needs163 sources and3630 exact source/target span checks");
+check(gujaratiCurrent.direct_latex.role === "build-master-not-cumulative-full-text" && gujaratiCurrent.source_packaging_status === "full-modular-ZIP-verified-direct-full-text-LaTeX-pending", "Gujarati thin master must not be advertised as complete cumulative text");
+check(gujaratiCurrent.limitations.some(text => text.includes("build master")), "Gujarati source-packaging limitation must be visible");
+for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlogic-jv-latn-id",24,true]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.standalone_reader_units === units, `${id}: release reader scope mismatch`);
   check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", `${id}: PDF/direct-LaTeX/source-ZIP order required`);

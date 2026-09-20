@@ -24,10 +24,19 @@ check(accessible?.language_tag === "en" && accessible.readers.some(item => item.
 check(accessible.name === "English — accessible / compatibility edition", "compatibility must be explicit in the edition name");
 check(catalogue.editions.find(item => item.id === "openlogic-en-frozen-722")?.related_editions?.some(item => item.url === "#openlogic-accessible-book"), "English preservation card must point directly to the compatibility edition");
 for (const [id, count] of [["openlogic-fa-ir", 2], ["openlogic-interfarsi", 4]]) {
-  const samples = catalogue.editions.find(item => item.id === id)?.readers?.filter(item => item.format === "EPUB") || [];
+  const samples = catalogue.editions.find(item => item.id === id)?.readers?.filter(item => item.format === "EPUB" && item.scope_kind === "sample") || [];
   check(samples.length === count && samples.every(item => item.scope_kind === "sample" && item.source_units === 1 && item.source_unit_ids?.[0] === "OLP-0005"), `${id}: sample EPUBs must not be presented as complete readers`);
 }
 check(script.includes("[...accessible, ...data.editions]"), "accessible editions must be first-class selector/card entries");
+const persian = catalogue.editions.find(item => item.id === "openlogic-fa-ir");
+const persianAudit = JSON.parse(await read(persian.evidence.manager_public_readback));
+check(persian.release_tag === persianAudit.release_tag, "Persian release and evidence must agree");
+check(persianAudit.public_readback.all_assets_matched && persianAudit.public_readback.files.length === 19, "Persian full release requires nineteen verified public files");
+check(persianAudit.package_checks.passed && persianAudit.package_checks.epub.distinct_units === 722 && persianAudit.package_checks.html.units === 722, "Persian EPUB and HTML need actual 722-unit structural evidence");
+check(persian.ordered_downloads.slice(0,5).map(x => x.format).join(',') === 'PDF,TEX,ZIP,EPUB,HTML', "Persian needs PDF, direct LaTeX, source ZIP, EPUB, HTML in order");
+for (const download of persian.ordered_downloads) check(persianAudit.public_readback.files.some(f => f.url === download.url && f.bytes === download.bytes && f.sha256 === download.sha256 && f.matches), "Persian download must match anonymous readback");
+check(persian.readers.some(x => x.format === 'EPUB' && x.scope_kind === 'complete' && x.source_units === 722), "Persian needs a separately labelled full EPUB");
+check(persianAudit.full_linguistic_certification === false && persian.evidence.complete_linguistic_certification === false, "Persian structural coverage must not imply complete canon review");
 check(html.includes('href="#openlogic-accessible-book"') && html.includes('class="featured-reader"'), "accessible edition needs prominent top navigation and reading links");
 check(script.includes('"Download EPUB"'), "EPUB downloads must be exposed on edition cards");
 if (accessible.currentness_checked?.speech_repair_successor_published === true) {

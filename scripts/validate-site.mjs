@@ -174,7 +174,7 @@ check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.p
 const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));
 const teluguPrevious = JSON.parse(await read(telugu276.evidence.previous_276_intake));
-check(telugu276.source_units_translated === 326 && telugu276.standalone_reader_units === 276, "Telugu public source326 must remain distinct from reader276");
+check(telugu276.source_units_translated === 332 && telugu276.standalone_reader_units === 276, "Telugu public source332 must remain distinct from reader276");
 check(telugu276.readers.find(item => item.format === "EPUB")?.source_units === 276 && telugu276.source_progress.html_reader_units === 23, "Telugu EPUB276 must not inflate HTML23");
 check(telugu276Evidence.epub.units === 276 && telugu276Evidence.integrity_failures.length === 0 && telugu276Evidence.files.length === 15 && telugu276Evidence.all_public_assets_match, "Telugu repaired assets require actual package and byte evidence");
 check(teluguPrevious.new_source_batch.missing_passage_mapping.length === 3 && telugu276.source_progress.canon_mapping_gaps === 3, "Keep frozen Telugu canon-mapping gaps explicit");
@@ -208,13 +208,24 @@ for (const [id, sources, units] of [["openlogic-ps-arab-pk",288,255],["openlogic
   }
 }
 check(newDelivery.files.length === 30 && newDelivery.files.every(item => item.matches), "Pashto/Bengali intake must preserve the thirty matched readbacks");
-const currentSources = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN377_TA554_TE326_PS288_20260921.json"));
+const currentSources = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN377_TA554_TE332_PS288_20260921.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   const source = currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && source.reader_units === edition.standalone_reader_units && source.full_semantic_reaudit === false, `${id}: source checkpoint must not inflate reader coverage or semantic assurance`);
 }
+const tamilChapter = catalogue.editions.find(item => item.id === "openlogic-ta-taml-in").supplementary_downloads[0];
+const tamilChapterEvidence = JSON.parse(await read("evidence/TAMIL_ORDINALS_SOURCE_COMPANION_20260921.json"));
+check(tamilChapter.source_units === 11 && tamilChapter.scope_kind === "chapter", "Tamil Ordinals is a separate eleven-unit chapter");
+check(tamilChapter.downloads.map(item => item.format).join(",") === "PDF,TEX,ZIP", "Separate chapter must keep PDF/direct-LaTeX/source-ZIP order");
+check(tamilChapterEvidence.failures.length === 0 && tamilChapterEvidence.reader_units.length === 11 && tamilChapterEvidence.support.length === 14 && tamilChapterEvidence.reachable_units === 11 && tamilChapterEvidence.master_inverse_reconstruction_exact, "Tamil chapter requires actual payload, dependency and master checks");
+check(tamilChapterEvidence.reader_units.every(item => item.exact_blob_match) && tamilChapterEvidence.support.every(item => item.source_and_declared_rewrite_match), "All Tamil embedded source payloads must match their declared originals");
+for (const [index, evidenceKey] of [[0,"pdf"],[1,"direct_tex"],[2,"archive"]]) {
+  const actual = tamilChapter.downloads[index], expected = tamilChapterEvidence[evidenceKey];
+  check(actual.url === expected.url && actual.bytes === expected.bytes && actual.sha256 === expected.sha256, "Tamil chapter download must match anonymous readback");
+}
+check(script.includes("edition.supplementary_downloads") && script.includes('chapter.className = "download-supplement"'), "Additional chapter downloads must use a collapsed native disclosure");
 check(script.includes("Configured reader (local)") && script.includes("Canon-admitted units"), "Reader and canon-admission distinctions must be visible");
 check(catalogue.editions.every(item => !item.repository || /^https:\/\//.test(item.repository)), "repository links must use HTTPS");
 check(catalogue.editions.every(item => !item.release || /^https:\/\//.test(item.release)), "release links must use HTTPS");

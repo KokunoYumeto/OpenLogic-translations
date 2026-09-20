@@ -226,6 +226,27 @@ function cardFor(edition) {
     });
   } else if (primary) actions.append(primary);
   if (samples) actions.append(samples);
+  for (const group of edition.supplementary_downloads || []) {
+    const chapter = document.createElement("details");
+    chapter.className = "download-supplement";
+    const summary = document.createElement("summary");
+    summary.textContent = group.title;
+    chapter.append(summary);
+    if (group.note) {
+      const note = document.createElement("p");
+      note.className = "format-note";
+      note.textContent = group.note;
+      chapter.append(note);
+    }
+    const downloads = document.createElement("nav");
+    downloads.setAttribute("aria-label", group.title + " downloads");
+    for (const item of group.downloads || []) {
+      const download = link(item.download_label || item.format, item.url);
+      if (download) downloads.append(download);
+    }
+    chapter.append(downloads);
+    actions.append(chapter);
+  }
   const metadata = compactDownloads ? document.createElement("nav") : actions;
   if (compactDownloads) {
     metadata.className = "edition-metadata";

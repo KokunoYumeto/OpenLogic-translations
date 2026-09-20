@@ -92,18 +92,21 @@ const guFulltextDelivery = JSON.parse(await read("evidence/GUJARATI_FULLTEXT_PUB
 const guFulltextChecks = JSON.parse(await read("evidence/GUJARATI_FULLTEXT_SOURCE_CHECKS_20260919.json"));
 const guModelsDelivery = JSON.parse(await read("evidence/GUJARATI_MODELS_THEORIES_PUBLIC_READBACK_20260920.json"));
 const guModelsChecks = JSON.parse(await read("evidence/GUJARATI_MODELS_THEORIES_PACKAGE_CHECKS_20260920.json"));
+const guBeyondDelivery = JSON.parse(await read("evidence/GUJARATI_BEYOND_PUBLIC_READBACK_20260920.json"));
+const guBeyondChecks = JSON.parse(await read("evidence/GUJARATI_BEYOND_PACKAGE_CHECKS_20260920.json"));
+const guBeyondSample = JSON.parse(await read("evidence/GUJARATI_BEYOND_CANON_SOURCE_SAMPLE_20260920.json"));
 const french74 = JSON.parse(await read("evidence/FRENCH_READER74_MANAGER_INTAKE_20260920.json"));
 check(french74.files.length === 8 && french74.files.every(file => file.matches), "French74 needs all eight anonymous mirror matches");
 check(french74.source_package.static_assembly_matches_direct_tex && french74.source_package.complete_embedded_body_count === 74 && french74.source_package.external_body_imports === 0, "French74 needs complete matching cumulative source");
 check(french74.source_package.frozen_english_files_matched === 722 && french74.qa.failures === 0, "French74 needs frozen source and structural checks");
 check(french.source_units_translated === 80 && french.reader_excluded_drafts.length === 6, "French source drafts must remain distinct from loaded reader units");
 check(frGuDelivery.files.length === 22 && frGuDelivery.files.every(file => file.matches), "French/Gujarati need all22 anonymous release-file checks");
-for (const [id, units] of [["openlogic-fr",74],["openlogic-gu-gujr-in",170]]) {
+for (const [id, units] of [["openlogic-fr",74],["openlogic-gu-gujr-in",178]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === (id === "openlogic-fr" ? 80 : units) && edition.standalone_reader_units === units, `${id}: source/reader scopes must match the verified package`);
   check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", `${id}: retain PDF/TeX/source-ZIP link order`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
-  const delivery = id === "openlogic-gu-gujr-in" ? guModelsDelivery : french74;
+  const delivery = id === "openlogic-gu-gujr-in" ? guBeyondDelivery : french74;
   for (const item of edition.ordered_downloads) check(delivery.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: download lacks matching byte evidence`);
 }
 check(frGuSources.french.direct_tex_unique_embedded_sources === 51 && frGuSources.french.external_content_imports === 0, "French cumulative LaTeX must contain the51-unit body");
@@ -114,9 +117,14 @@ check(guFulltextDelivery.files.length === 16 && guFulltextDelivery.files.every(f
 check(guFulltextChecks.full_text_reconstruction_byte_identical && guFulltextChecks.complete_direct_text_packaging_defect_closed && guFulltextChecks.unresolved_cumulative_body_imports.length === 0, "Gujarati full-text assembly must be verified");
 check(guModelsDelivery.complete && guModelsDelivery.files.length === 16 && guModelsDelivery.files.every(file => file.matches), "Gujarati Models and Theories needs all16 public file matches");
 check(guModelsChecks.failures.length === 0 && guModelsChecks.source.inventory_entries_verified === 1252 && guModelsChecks.source.frozen_english_sources === 722 && guModelsChecks.source.native_target_files === 170 && guModelsChecks.source.source_target_span_checks === 3738, "Gujarati current package needs complete inventory/source/target bindings");
-check(guModelsChecks.source.complete_fulltext_reconstruction && guModelsChecks.source.unresolved_body_imports.length === 0 && gujaratiCurrent.direct_latex.sha256 === guModelsChecks.source.direct_fulltext_sha256 && gujaratiCurrent.direct_latex.role === "complete-cumulative-full-text", "Gujarati direct source must be the exact complete text, not the thin master");
+check(guModelsChecks.source.complete_fulltext_reconstruction && guModelsChecks.source.unresolved_body_imports.length === 0, "Gujarati direct source must be the exact complete text, not the thin master");
 check(guModelsChecks.epub.mathml_nodes === 9653 && guModelsChecks.epub.mathml_structures_match_html && guModelsChecks.epub.tex_annotations_exact === 9653 && guModelsChecks.epub.broken_internal_links.length === 0, "Gujarati EPUB math and links must match");
-check(gujaratiCurrent.build_master.role === "build-master-not-cumulative-full-text" && gujaratiCurrent.version_doi === "10.5281/zenodo.22850543" && gujaratiCurrent.readers[0].pages === 219, "Retain labelled build master, correct DOI and219-page current reader");
+check(guBeyondDelivery.complete && guBeyondDelivery.files.length === 16 && guBeyondDelivery.files.every(file => file.matches), "Gujarati Beyond needs all16 public file matches");
+check(guBeyondChecks.failures.length === 0 && guBeyondChecks.source.inventory_entries_verified === 1285 && guBeyondChecks.source.native_target_files === 178 && guBeyondChecks.source.frozen_english_sources === 722 && guBeyondChecks.source.source_target_span_checks === 3882, "Gujarati Beyond needs exact inventory and source-target bindings");
+check(guBeyondChecks.source.complete_fulltext_reconstruction && guBeyondChecks.source.unresolved_body_imports.length === 0 && gujaratiCurrent.direct_latex.sha256 === guBeyondChecks.source.direct_fulltext_sha256 && gujaratiCurrent.direct_latex.role === "complete-cumulative-full-text", "Current Gujarati direct cumulative source must match reconstructed text");
+check(guBeyondChecks.epub.mathml_nodes === 10000 && guBeyondChecks.epub.mathml_structures_match_html && guBeyondChecks.epub.tex_annotations_exact === 10000 && guBeyondChecks.epub.broken_internal_links.length === 0, "Gujarati Beyond EPUB mathematics and internal links must match");
+check(guBeyondSample.checks.length === 48 && guBeyondSample.checks.every(item => item.pass) && guBeyondSample.segments.length === 7 && guBeyondSample.terminology_decision.status === "provisional_contextual", "Gujarati bounded canon/source sample must retain uncertainty");
+check(gujaratiCurrent.build_master.role === "build-master-not-cumulative-full-text" && gujaratiCurrent.version_doi === "10.5281/zenodo.22851169" && gujaratiCurrent.readers[0].pages === 231, "Retain labelled build master, correct DOI and231-page current reader");
 for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlogic-jv-latn-id",24,true]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.standalone_reader_units === units, `${id}: release reader scope mismatch`);

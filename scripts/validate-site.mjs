@@ -29,6 +29,8 @@ for (const [id, count] of [["openlogic-fa-ir", 2], ["openlogic-interfarsi", 4]])
 }
 check(script.includes("[...accessible, ...data.editions]"), "accessible editions must be first-class selector/card entries");
 const persian = catalogue.editions.find(item => item.id === "openlogic-fa-ir");
+check(persian.download_layout === "compact-grouped" && persian.download_summary.includes("review is ongoing"), "Persian compact downloads must retain the review caveat");
+check(script.includes('item.scope_kind === "sample"') && script.includes('"download-samples"') && script.includes('download.setAttribute("aria-label", fullLabel)'), "Compact downloads need separate samples and full accessible labels");
 const persianAudit = JSON.parse(await read(persian.evidence.manager_public_readback));
 check(persian.release_tag === persianAudit.release_tag, "Persian release and evidence must agree");
 check(persianAudit.public_readback.all_assets_matched && persianAudit.public_readback.files.length === 19, "Persian full release requires nineteen verified public files");
@@ -154,14 +156,17 @@ const bengaliRepair = JSON.parse(await read("evidence/BENGALI_SOURCE_REPAIR_2026
 const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));
 const teluguPrevious = JSON.parse(await read(telugu276.evidence.previous_276_intake));
-check(telugu276.source_units_translated === 276 && telugu276.standalone_reader_units === 276, "Telugu source/PDF scope must stay276");
+check(telugu276.source_units_translated === 297 && telugu276.standalone_reader_units === 276, "Telugu public source297 must remain distinct from reader276");
 check(telugu276.readers.find(item => item.format === "EPUB")?.source_units === 276 && telugu276.source_progress.html_reader_units === 23, "Telugu EPUB276 must not inflate HTML23");
 check(telugu276Evidence.epub.units === 276 && telugu276Evidence.integrity_failures.length === 0 && telugu276Evidence.files.length === 15 && telugu276Evidence.all_public_assets_match, "Telugu repaired assets require actual package and byte evidence");
 check(teluguPrevious.new_source_batch.missing_passage_mapping.length === 3 && telugu276.source_progress.canon_mapping_gaps === 3, "Keep frozen Telugu canon-mapping gaps explicit");
 check(telugu276Evidence.source_companion.hashes_verified === 54 && telugu276Evidence.source_companion.unique_units === 276, "Telugu direct TeX and PDF dependencies must be checked");
-check(telugu276Evidence.bibliography_defects.length === 4 && telugu276.source_packaging_status === "pdf-direct-LaTeX-verified-cumulative-EPUB-rebuild-source-incomplete", "Known citation/source defects must remain explicit");
+const teluguRepair = JSON.parse(await read(telugu276.evidence.bounded_repair_readback));
+check(telugu276Evidence.bibliography_defects.length === 4, "Preserve the historical bibliography-defect evidence");
+check(teluguRepair.all_public_assets_match && teluguRepair.files.length === 16 && teluguRepair.source_entries === 1386, "Telugu repair needs actual public-byte and source-package evidence");
+check(telugu276.source_packaging_status === "pdf-epub-direct-LaTeX-and-complete-source-companion-verified" && teluguRepair.new_linguistic_certification === false, "Bounded source repair must not imply new linguistic certification");
 check(telugu276.ordered_downloads.slice(0,4).map(x=>x.format).join(",") === "PDF,TEX,ZIP,EPUB", "Telugu download order");
-for (const file of telugu276.ordered_downloads) check(telugu276Evidence.files.some(item => item.url === file.url && item.bytes === file.bytes && item.sha256 === file.sha256 && item.matches), "Telugu download must match anonymous readback");
+for (const file of telugu276.ordered_downloads) check(teluguRepair.files.some(item => item.url === file.url && item.bytes === file.bytes && item.sha256 === file.sha256 && item.matches), "Telugu download must match current anonymous readback");
 const psSource = JSON.parse(await read("evidence/PASHTO_SOURCE247_MANAGER_READBACK_20260920.json"));
 const psEdition = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
 check(psSource.source_files_verified === 722 && psSource.target_files_verified === 247 && psSource.failures === 0 && psSource.new_batch_exact_block_checks === 376, "Pashto source checkpoint requires frozen-source, target and actual new-batch block checks");
@@ -172,7 +177,7 @@ check(psCurrent.static_package.frozen_sources_checked === 722 && psCurrent.stati
 check(psEdition.source_progress.commit === psCurrent.commit && psEdition.source_archive.sha256 === psEdition.source_progress.archive_sha256 && psEdition.readers[0].pages === 326, "Pashto255 release identity and page count must agree");
 check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurrent.bounded_language_sample.canon_pages_actually_inspected.length === 2 && psCurrent.visual_sample.whole_pdf_visual_certification === false, "Keep the Pashto sample audit bounded");
 check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
-for (const [id, sources, units] of [["openlogic-ps-arab-pk",255,255],["openlogic-bn-beng-in",299,299]]) {
+for (const [id, sources, units] of [["openlogic-ps-arab-pk",273,255],["openlogic-bn-beng-in",362,299]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
@@ -185,6 +190,13 @@ for (const [id, sources, units] of [["openlogic-ps-arab-pk",255,255],["openlogic
   }
 }
 check(newDelivery.files.length === 30 && newDelivery.files.every(item => item.matches), "Pashto/Bengali intake must preserve the thirty matched readbacks");
+const currentSources = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN362_TA525_TE297_PS273_20260920.json"));
+for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
+  const edition = catalogue.editions.find(item => item.id === id);
+  const source = currentSources.checkpoints.find(item => item.lane === lane);
+  check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
+  check(source.commit === edition.public_source_checkpoint.commit && source.reader_units === edition.standalone_reader_units && source.full_semantic_reaudit === false, `${id}: source checkpoint must not inflate reader coverage or semantic assurance`);
+}
 check(script.includes("Configured reader (local)") && script.includes("Canon-admitted units"), "Reader and canon-admission distinctions must be visible");
 check(catalogue.editions.every(item => !item.repository || /^https:\/\//.test(item.repository)), "repository links must use HTTPS");
 check(catalogue.editions.every(item => !item.release || /^https:\/\//.test(item.release)), "release links must use HTTPS");

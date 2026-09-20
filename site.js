@@ -188,6 +188,15 @@ function cardFor(edition) {
   const actions = document.createElement("div");
   actions.className = "actions";
   const orderedDownloads = edition.ordered_downloads || [];
+  const compactDownloads = edition.download_layout === "compact-grouped";
+  let samples;
+  if (compactDownloads) {
+    actions.classList.add("actions-grouped");
+    const heading = document.createElement("p");
+    heading.className = "download-heading";
+    heading.textContent = `Complete edition · ${edition.standalone_reader_units} units`;
+    actions.append(heading);
+  }
   const readerUrl = (edition.readers || []).find(item => item.url && !["chapter", "sample"].includes(item.scope_kind))?.url;
   const primary = link(readerUrl ? "Read / download" : "Open release", readerUrl || edition.release, true);
   const repository = link("Repository", edition.repository, !primary);
@@ -195,11 +204,35 @@ function cardFor(edition) {
   const evidence = localEvidenceLink(edition);
   if (orderedDownloads.length) {
     orderedDownloads.forEach((item, index) => {
-      const download = link(item.download_label || item.profile || item.format, item.url, index === 0);
-      if (download) actions.append(download);
+      const fullLabel = item.download_label || item.profile || item.format;
+      const sample = item.scope_kind === "sample";
+      const shortLabel = { TEX: "LaTeX", ZIP: "Source ZIP" }[item.format] || item.format;
+      const download = link(compactDownloads && !sample ? shortLabel : fullLabel, item.url, index === 0);
+      if (!download) return;
+      if (compactDownloads) {
+        download.setAttribute("aria-label", fullLabel);
+        download.title = fullLabel;
+      }
+      if (compactDownloads && sample) {
+        if (!samples) {
+          samples = document.createElement("details");
+          samples.className = "download-samples";
+          const summary = document.createElement("summary");
+          summary.textContent = "Script samples · 1 unit each";
+          samples.append(summary);
+        }
+        samples.append(download);
+      } else actions.append(download);
     });
   } else if (primary) actions.append(primary);
-  [repository, doi, evidence].filter(Boolean).forEach(item => actions.append(item));
+  if (samples) actions.append(samples);
+  const metadata = compactDownloads ? document.createElement("nav") : actions;
+  if (compactDownloads) {
+    metadata.className = "edition-metadata";
+    metadata.setAttribute("aria-label", `${edition.name} publication and evidence`);
+    actions.append(metadata);
+  }
+  [repository, doi, evidence].filter(Boolean).forEach(item => metadata.append(item));
   for (const related of edition.related_editions || []) {
     const relatedLink = link(related.label, related.url);
     if (relatedLink) actions.append(relatedLink);
@@ -212,7 +245,7 @@ function cardFor(edition) {
   if (!epubs.length || edition.epub_coverage_note) {
     const pending = document.createElement("p");
     pending.className = "format-note";
-    pending.textContent = edition.epub_coverage_note || "EPUB link not yet available in this catalogue.";
+    pending.textContent = (compactDownloads && edition.download_summary) || edition.epub_coverage_note || "EPUB link not yet available in this catalogue.";
     actions.append(pending);
   }
 
@@ -220,6 +253,11 @@ function cardFor(edition) {
   const detailsSummary = document.createElement("summary");
   detailsSummary.textContent = "Profiles and known limits";
   details.append(detailsSummary);
+  if (compactDownloads && edition.epub_coverage_note) {
+    const scope = document.createElement("p");
+    scope.textContent = edition.epub_coverage_note;
+    details.append(scope);
+  }
   const items = [...(edition.profiles || []), ...(edition.limitations || [])];
   if (items.length) {
     const list = document.createElement("ul");

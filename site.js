@@ -178,7 +178,7 @@ function cardFor(edition) {
   } else coverage.append(
     coverageRow(edition.source_coverage_label || (Number.isFinite(edition.provisional_files) ? "Provisional baseline files" : "Translated source files"), units(sourceUnits ?? edition.provisional_files)),
     edition.current_local_configured_reader
-      ? coverageRow("Configured reader (local)", units(edition.current_local_configured_reader.source_units_rendered))
+      ? coverageRow(edition.local_reader_label || "Configured reader (local)", units(edition.current_local_configured_reader.source_units_rendered))
       : coverageRow("Standalone reader", units(edition.standalone_reader_units))
   );
   if (Number.isFinite(edition.canon_admitted_units)) {

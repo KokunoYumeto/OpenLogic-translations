@@ -78,9 +78,14 @@ for (const [id, pages] of [["openlogic-es", 992], ["openlogic-pt-br", 972]]) {
   check(edition?.current_local_configured_reader?.integrates_all_722_units === false && edition.standalone_reader_units !== 722, `${id}: configured reader must not become an integrated 722 reader`);
 }
 const romance = catalogue.editions.find(item => item.id === "openlogic-romance-interlanguage");
-check(romance?.canon_admitted_units === 54 && romance.canon_pending_units === 668, "Romance admission snapshot must remain 54+668");
-check(romance?.canon_admission_snapshot?.event_id === "RSC-EVT-000465", "Romance counts need their exact admission snapshot");
+check(romance?.canon_admitted_units === 55 && romance.canon_pending_units === 667, "Romance admission snapshot must remain 55+667");
+check(romance?.canon_admission_snapshot?.event_id === "RSC-EVT-000486", "Romance counts need their exact admission snapshot");
 check(romance?.current_local_configured_reader?.source_units_rendered === 722 && romance.current_local_configured_reader.public === false && romance.standalone_reader_units !== 722, "Romance local provisional reader must not be promoted to a public/canon-complete reader");
+const romanceIntake = JSON.parse(await read(romance.evidence.local_reader_intake));
+check(romanceIntake.checks.length === 15 && romanceIntake.checks.every(item => item.pass) && romanceIntake.deterministic_failures.length === 0, "Romance local reader needs its replayed identity/coverage checks");
+check(romanceIntake.structural_coverage.loaded_targets === 722 && romanceIntake.translation_ledger_states.SOURCE_CRITICAL_COMPLETE === 55, "Romance loaded targets and admitted ledger rows must remain separate");
+check(romance.current_local_configured_reader.sha256 === romanceIntake.reader.sha256.toLowerCase() && romance.current_local_configured_reader.bytes === romanceIntake.reader.bytes, "Romance catalogue must match current R2 bytes");
+check(romance.local_reader_label === "Provisional standalone reader (local)" && script.includes("edition.local_reader_label"), "Romance local standalone-reader status must be visible");
 const frGuDelivery = JSON.parse(await read("evidence/FRENCH_GUJARATI_PUBLIC_DELIVERY_20260919.json"));
 const frGuSources = JSON.parse(await read("evidence/FRENCH_GUJARATI_SOURCE_PACKAGE_CHECKS_20260919.json"));
 const guFulltextDelivery = JSON.parse(await read("evidence/GUJARATI_FULLTEXT_PUBLIC_READBACK_20260919.json"));

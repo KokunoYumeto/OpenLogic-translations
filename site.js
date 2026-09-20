@@ -117,7 +117,7 @@ function link(label, href, primary = false) {
 
 function localEvidenceLink(edition) {
   const evidence = edition.evidence || {};
-  const relative = edition.normalization_evidence || evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback || evidence.commission_scope;
+  const relative = evidence.local_reader_closure || edition.normalization_evidence || evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback || evidence.commission_scope;
   if (!relative || /^(?:[a-z]+:|\/)/i.test(relative) || relative.includes("..")) return null;
   const anchor = document.createElement("a");
   anchor.href = relative;

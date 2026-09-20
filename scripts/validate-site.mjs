@@ -81,12 +81,21 @@ if (french?.release_tag === "v0.3.0-ensembles-relations-fonctions") {
   check(french.readers?.[0]?.sha256 === "b4dd8366ea46b69e7e05183bfba40c968609a799ba7e992eeee8247e814602f7", "French v0.3.0 reader identity mismatch");
   check(french.limitations?.some(text => text.includes("uniqueness")), "French inherited cross-reference finding must remain disclosed");
 }
-for (const [id, pages] of [["openlogic-es", 992], ["openlogic-pt-br", 972]]) {
+const romanceReaderIntake = JSON.parse(await read("evidence/ROMANCE_READERS_722_LOCAL_INTAKE_20260920.json"));
+for (const [id, pages, bytes, sha256] of [
+  ["openlogic-es", 1140, 6173137, "7c58463f0e74ebcbb2a17dfd8696a09aae56b29bc8502347a5bd1c2504ae3a46"],
+  ["openlogic-pt-br", 1124, 6134799, "1ea7bb4707f6e348336354f2d3444ade6c6829643230db70f2e88d0ea599e534"]
+]) {
   const edition = catalogue.editions.find(item => item.id === id);
+  const intake = romanceReaderIntake.editions.find(item => item.id === id);
   check(edition?.source_units_translated === 722, `${id}: target-tree count must be 722`);
-  check(edition?.current_local_configured_reader?.pages === pages, `${id}: wrong local configured PDF identity`);
-  check(edition?.current_local_configured_reader?.source_units_rendered === 642 && edition.current_local_configured_reader.alternate_units_outside_reader === 80, `${id}: preserve configured 642+80 distinction`);
-  check(edition?.current_local_configured_reader?.integrates_all_722_units === false && edition.standalone_reader_units !== 722, `${id}: configured reader must not become an integrated 722 reader`);
+  check(edition?.standalone_reader_units === 722 && edition.retained_units_outside_reader === 0, `${id}: complete local reader must be listed as 722+0`);
+  check(edition?.current_local_configured_reader?.complete_for_configuration === true && edition.current_local_configured_reader.source_units_rendered === 722 && edition.current_local_configured_reader.alternate_units_outside_reader === 0 && edition.current_local_configured_reader.integrates_all_722_units === true, `${id}: local reader must integrate all 722 translated units`);
+  check(edition?.current_local_configured_reader?.pages === pages && edition.current_local_configured_reader.bytes === bytes && edition.current_local_configured_reader.sha256 === sha256, `${id}: wrong local complete-reader PDF identity`);
+  check(edition?.current_local_reader_recorded_paths === 722 && edition.current_local_reader_missing_paths === 0, `${id}: reader recorder closure must be 722/722`);
+  check(edition?.current_local_configured_reader?.public_release_sync_verified === false, `${id}: local closure must remain distinct from public-byte synchronization`);
+  check(intake?.loaded_target_files === 722 && intake.unloaded_target_paths === 0 && intake.missing_target_files === 0 && intake.ledger_hash_mismatches === 0 && intake.locale_skipped_files === 0, `${id}: exact local closure evidence failed`);
+  check(intake?.reader_pages === pages && intake.reader_bytes === bytes && intake.reader_sha256 === sha256 && intake.visual_result.startsWith("PASS"), `${id}: catalogue identity must match the visually checked intake`);
 }
 const romance = catalogue.editions.find(item => item.id === "openlogic-romance-interlanguage");
 check(romance?.canon_admitted_units === 55 && romance.canon_pending_units === 667, "Romance admission snapshot must remain 55+667");
@@ -147,12 +156,19 @@ for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlog
 const newDelivery = JSON.parse(await read("evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json"));
 const sourceProgress = JSON.parse(await read("evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json"));
 check(sourceProgress.source_readbacks.length === 26 && sourceProgress.source_readbacks.every(file => file.match), "Telugu/Marathi source readbacks must all match");
-for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",187,108]]) {
+for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",194,194]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sourceUnits && edition.standalone_reader_units === readerUnits, `${id}: cumulative sources must not inflate released reader coverage`);
   check(edition.source_progress.targets_verified === sourceUnits && edition.source_progress.failures === 0, `${id}: public target identity evidence required`);
 }
 const bengaliRepair = JSON.parse(await read("evidence/BENGALI_SOURCE_REPAIR_20260919.json"));
+const marathi194 = catalogue.editions.find(item => item.id === "openlogic-mr-deva-in");
+const marathi194Evidence = JSON.parse(await read(marathi194.evidence.public_readback));
+check(marathi194Evidence.files.length === 8 && marathi194Evidence.files.every(item => item.github_matches && item.zenodo_matches), "Marathi194 needs eight byte-matched assets on both public mirrors");
+check(marathi194Evidence.source_archive.manifest_entries_replayed === 2177 && marathi194Evidence.source_archive.translated_target_files_replayed === 194 && marathi194Evidence.source_archive.frozen_source_files_replayed === 722 && marathi194Evidence.source_archive.identity_failures.length === 0, "Marathi194 needs source-package identity replay");
+check(marathi194.ordered_downloads.slice(0,4).map(item => item.format).join(",") === "PDF,TEX,ZIP,EPUB" && marathi194.readers[0].pages === 264, "Marathi194 reader identity and editable-source download order");
+for (const item of marathi194.ordered_downloads) check(marathi194Evidence.files.some(file => file.url === item.url && file.bytes === item.bytes && file.sha256 === item.sha256), "Marathi194 download must match readback");
+check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.packaging_observations.length === 2, "Marathi194 bounded evidence must retain its limitations");
 const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));
 const teluguPrevious = JSON.parse(await read(telugu276.evidence.previous_276_intake));

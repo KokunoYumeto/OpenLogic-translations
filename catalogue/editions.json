@@ -2410,7 +2410,22 @@
     },
     {
       "id": "openlogic-te-telu-in",
-      "source_progress": {"language":"Telugu","commit":"b073fe031f93025ede072c2612461b0984c15b7b","url":"https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/tree/b073fe031f93025ede072c2612461b0984c15b7b","source_units_translated":270,"first_unit":"OLP-0004","last_unit":"OLP-0273","frozen_sources_verified":722,"targets_verified":270,"aligned_ledger_records":4265,"new_batch_units":10,"new_batch_source_target_span_checks":374,"failures":0,"html_epub_reader_units":23,"pdf_reader_units":7},
+      "source_progress": {
+        "commit": "2892803b925b0330bca6200df21ce27b68208cdd",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/tree/2892803b925b0330bca6200df21ce27b68208cdd",
+        "source_units_translated": 276,
+        "first_unit": "OLP-0004",
+        "last_unit": "OLP-0279",
+        "frozen_sources_verified": 722,
+        "targets_verified": 276,
+        "aligned_ledger_records": 4381,
+        "new_batch_units": 6,
+        "new_batch_language_bearing_blocks": 77,
+        "hash_alignment_failures": 0,
+        "canon_mapping_gaps": 3,
+        "pdf_reader_units": 276,
+        "html_epub_reader_units": 23
+      },
       "owner_task_id": "01a06ccd-9f2e-7632-884d-4adb1ff55268",
       "name": "Telugu",
       "language_tag": "te-Telu-IN",
@@ -2420,29 +2435,84 @@
       ],
       "license": "CC-BY-4.0; inherited component/font exceptions retained",
       "limitations": [
-        "The full 722-unit edition remains unfinished.",
-        "The EPUB and semantic HTML contain 23 units; the retained PDF contains seven units.",
-        "Machine/agent QA; no independent native-scholar certification is claimed.",
-        "The successor Zenodo record named in the release manifest returned HTTP 404 during the manager check. The previous published DOI remains linked."
+        "The full722-unit edition remains unfinished;446 source units are outside this release.",
+        "PDF276 units; HTML/EPUB23 units. EPUB catch-up253 units remains required.",
+        "Direct cumulative LaTeX is still missing from the release; the complete editable source ZIP is available.",
+        "The published PDF retains English generated labels and a cover source hash. It also predates the verified local OLP0245 exercise restoration.",
+        "Three new language-bearing ledger rows lack explicit canon passage mappings; a bounded retrospective check was requested. No whole-lane semantic certification is claimed.",
+        "This276-unit GitHub reader is not verified in Zenodo. The September20 API check of prior reported record22726674 returned403; this does not establish whether its public page is available."
       ],
-      "previous_public_release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.2.0-sets-html",
+      "previous_public_release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.3.0-sfr-epub",
       "repository": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN",
-      "release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.3.0-sfr-epub",
-      "release_tag": "v0.3.0-sfr-epub",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.4.0-cumulative-olp0279",
+      "release_tag": "v0.4.0-cumulative-olp0279",
       "public_reader": "https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/sfr/",
-      "source_units_translated": 270,
-      "standalone_reader_units": 23,
-      "coverage_basis": "Public editable source at the verified checkpoint covers OLP-0004–OLP-0273 (270/722 units), through Undecidability. The downloadable HTML/EPUB remain the23-unit Sets, Relations and Functions edition; the inherited PDF remains7 units. All722 frozen sources and270 target file hashes matched the public archive;374 source/target span checks replayed for the new10-unit batch. This does not extend whole-lane linguistic certification.",
+      "source_units_translated": 276,
+      "standalone_reader_units": 276,
+      "coverage_basis": "276 editable source units and a 515-page partial cumulative PDF, OLP-0004–OLP-0279. All276 recorded render paths load and match the release's frozen/target hashes. HTML/EPUB remain23 units. Structural coverage is not whole-lane linguistic certification; three new language-bearing rows lack passage mappings.",
       "status": [
-        "partial-source270/722-reader23/722-pdf7/722"
+        "partial-source276/722-pdf276/722-epub23/722",
+        "source-packaging-repair-needed"
       ],
       "profiles": [
-        "Sets, Relations and Functions — semantic HTML and reflowable EPUB",
-        "Sets only — retained PDF"
+        "Partial cumulative PDF —276 source units,515 pages",
+        "Sets, Relations and Functions —23-unit HTML/EPUB"
       ],
       "concept_doi": "10.5281/zenodo.22307937",
       "version_doi": null,
       "readers": [
+        {
+          "profile": "Partial cumulative Telugu PDF (276/722 source units)",
+          "format": "PDF",
+          "name": "openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
+          "bytes": 3297226,
+          "sha256": "9ef53813446e024aa86f308da6348f6f79832d22935b0aee104343f25611ff83",
+          "pages": 515,
+          "source_units": 276
+        },
+        {
+          "profile": "Sets, Relations and Functions EPUB (23/722 source units)",
+          "format": "EPUB",
+          "name": "openlogic-te-Telu-IN-sfr-v0.3.0.epub",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-sfr-v0.3.0.epub",
+          "bytes": 354646,
+          "sha256": "14558fd925098e97e4657c6df39639364af25b51d4c0c5e2736817156d1732ed",
+          "source_units": 23
+        }
+      ],
+      "evidence": {
+        "public_readback": "evidence/TELUGU_READER276_MANAGER_INTAKE_20260920.json",
+        "source_checkpoint_readback": "evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json",
+        "manager_anonymous_release_assets_verified": 8,
+        "manager_anonymous_pages_files_verified": 1,
+        "manager_segment_records_replayed": 396,
+        "manager_canon_passages_actually_cited_and_resolved": 14,
+        "tagged_readme_hub_backlink_verified": true,
+        "manager_full_semantic_rereview": false,
+        "zenodo_record": "https://zenodo.org/records/22309234",
+        "previous_public_readback": "evidence/TELUGU_EPUB_DELIVERY_MANAGER_READBACK_20260912.json",
+        "manager_readback_scope": "Eight public release assets; retained bytes rehashed;276 actual render inputs and one local exercise repair replayed. Four PDF pages and two original canon pages inspected. Three new missing passage mappings found."
+      },
+      "previous_version_doi": "10.5281/zenodo.22309234",
+      "zenodo_status": "GitHub276-unit reader verified; no matching276-unit Zenodo edition verified. Earlier record22726674 API returned403 on2026-09-20, not proof of absent public access. Inherited concept/previous-version links preserved.",
+      "previous_source_progress": {
+        "language": "Telugu",
+        "commit": "b073fe031f93025ede072c2612461b0984c15b7b",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/tree/b073fe031f93025ede072c2612461b0984c15b7b",
+        "source_units_translated": 270,
+        "first_unit": "OLP-0004",
+        "last_unit": "OLP-0273",
+        "frozen_sources_verified": 722,
+        "targets_verified": 270,
+        "aligned_ledger_records": 4265,
+        "new_batch_units": 10,
+        "new_batch_source_target_span_checks": 374,
+        "failures": 0,
+        "html_epub_reader_units": 23,
+        "pdf_reader_units": 7
+      },
+      "previous_readers": [
         {
           "profile": "Sets PDF reader (inherited immutable v0.1 asset)",
           "pages": 12,
@@ -2461,21 +2531,33 @@
           "source_units": 23
         }
       ],
-      "evidence": {
-        "public_readback": "evidence/TELUGU_EPUB_DELIVERY_MANAGER_READBACK_20260912.json",
-        "source_checkpoint_readback": "evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json",
-        "manager_anonymous_release_assets_verified": 8,
-        "manager_anonymous_pages_files_verified": 1,
-        "manager_segment_records_replayed": 396,
-        "manager_canon_passages_actually_cited_and_resolved": 14,
-        "tagged_readme_hub_backlink_verified": true,
-        "manager_full_semantic_rereview": false,
-        "zenodo_record": "https://zenodo.org/records/22309234",
-        "previous_public_readback": "evidence/TELUGU_V020_PUBLIC_READBACK_20260904.json",
-        "manager_readback_scope": "Eight release assets and current HTML verified; four exact release QA reports checked. Prior semantic review metrics remain historical, not expanded by this delivery check."
-      },
-      "previous_version_doi": "10.5281/zenodo.22309234",
-      "zenodo_status": "Current GitHub EPUB verified; manifest-listed successor 22726674 returned HTTP 404 on 2026-09-12. Previous version 22309234 is retained."
+      "ordered_downloads": [
+        {
+          "format": "PDF",
+          "label": "Read 276-unit PDF",
+          "name": "openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
+          "bytes": 3297226,
+          "sha256": "9ef53813446e024aa86f308da6348f6f79832d22935b0aee104343f25611ff83"
+        },
+        {
+          "format": "ZIP",
+          "label": "Complete editable source ZIP (direct LaTeX pending)",
+          "name": "openlogic-te-Telu-IN-full-source-v0.4.0.zip",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-full-source-v0.4.0.zip",
+          "bytes": 6043339,
+          "sha256": "9387e975413c1d75d77e2d2d35b8210359ef2fe6f07135b111add5631cc5efcd"
+        },
+        {
+          "format": "EPUB",
+          "label": "Download 23-unit EPUB",
+          "name": "openlogic-te-Telu-IN-sfr-v0.3.0.epub",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-sfr-v0.3.0.epub",
+          "bytes": 354646,
+          "sha256": "14558fd925098e97e4657c6df39639364af25b51d4c0c5e2736817156d1732ed"
+        }
+      ],
+      "source_packaging_status": "incomplete-direct-cumulative-tex-missing"
     }
   ],
   "infrastructure": [

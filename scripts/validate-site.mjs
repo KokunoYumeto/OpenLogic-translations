@@ -128,12 +128,20 @@ for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlog
 const newDelivery = JSON.parse(await read("evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json"));
 const sourceProgress = JSON.parse(await read("evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json"));
 check(sourceProgress.source_readbacks.length === 26 && sourceProgress.source_readbacks.every(file => file.match), "Telugu/Marathi source readbacks must all match");
-for (const [id, sourceUnits, readerUnits] of [["openlogic-te-telu-in",270,23],["openlogic-mr-deva-in",163,108]]) {
+for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",163,108]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sourceUnits && edition.standalone_reader_units === readerUnits, `${id}: cumulative sources must not inflate released reader coverage`);
   check(edition.source_progress.targets_verified === sourceUnits && edition.source_progress.failures === 0, `${id}: public target identity evidence required`);
 }
 const bengaliRepair = JSON.parse(await read("evidence/BENGALI_SOURCE_REPAIR_20260919.json"));
+const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");
+const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));
+check(telugu276.source_units_translated === 276 && telugu276.standalone_reader_units === 276, "Telugu cumulative PDF/source coverage must be276");
+check(telugu276.readers.find(item => item.format === "EPUB")?.source_units === 23, "Telugu PDF coverage must not inflate its23-unit EPUB");
+check(telugu276Evidence.render_scope.reader_units === 276 && telugu276Evidence.render_scope.failures === 0 && telugu276Evidence.files.length === 8 && telugu276Evidence.all_public_assets_match, "Telugu276 requires render/hash evidence and all eight public assets");
+check(telugu276Evidence.new_source_batch.missing_passage_mapping.length === 3 && telugu276.source_progress.canon_mapping_gaps === 3, "Keep Telugu canon-mapping gaps explicit");
+check(telugu276.source_packaging_status === "incomplete-direct-cumulative-tex-missing" && !telugu276Evidence.source_packaging.direct_cumulative_tex_available, "Do not claim Telugu direct LaTeX before it exists");
+for (const file of telugu276.ordered_downloads) check(telugu276Evidence.files.some(item => item.url === file.url && item.bytes === file.bytes && item.sha256 === file.sha256 && item.matches), "Telugu download must match anonymous readback");
 const psSource = JSON.parse(await read("evidence/PASHTO_SOURCE247_MANAGER_READBACK_20260920.json"));
 const psEdition = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
 check(psSource.source_files_verified === 722 && psSource.target_files_verified === 247 && psSource.failures === 0 && psSource.new_batch_exact_block_checks === 376, "Pashto source checkpoint requires frozen-source, target and actual new-batch block checks");

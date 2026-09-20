@@ -2670,7 +2670,8 @@
         "hash_alignment_failures": 0,
         "canon_mapping_gaps": 3,
         "pdf_reader_units": 276,
-        "html_epub_reader_units": 23
+        "html_reader_units": 23,
+        "epub_reader_units": 276
       },
       "owner_task_id": "01a06ccd-9f2e-7632-884d-4adb1ff55268",
       "name": "Telugu",
@@ -2681,12 +2682,13 @@
       ],
       "license": "CC-BY-4.0; inherited component/font exceptions retained",
       "limitations": [
-        "The full722-unit edition remains unfinished;446 source units are outside this release.",
-        "PDF276 units; HTML/EPUB23 units. EPUB catch-up253 units remains required.",
-        "Direct cumulative LaTeX is still missing from the release; the complete editable source ZIP is available.",
-        "The published PDF retains English generated labels and a cover source hash. It also predates the verified local OLP0245 exercise restoration.",
-        "Three new language-bearing ledger rows lack explicit canon passage mappings; a bounded retrospective check was requested. No whole-lane semantic certification is claimed.",
-        "This276-unit GitHub reader is not verified in Zenodo. The September20 API check of prior reported record22726674 returned403; this does not establish whether its public page is available."
+        "The 722-unit edition remains unfinished; 446 source units are outside this release.",
+        "PDF and cumulative EPUB contain 276 units; public HTML still covers 23 units.",
+        "The cumulative EPUB bibliography truncates several titles and an author list. A grouped repair is in progress; resolving links and EPUBCheck do not establish faithful citations.",
+        "Direct cumulative LaTeX and PDF build-source ZIP are available. The full-source ZIP still contains the old 23-unit EPUB builder, not the exact cumulative EPUB rebuilding source.",
+        "The frozen PDF and EPUB predate the verified local OLP-0245 exercise repair. English generated PDF labels and reader-facing technical hashes remain to be corrected.",
+        "Three frozen language-bearing ledger rows lack explicit canon passage mappings. Whole-lane linguistic certification is not claimed.",
+        "No matching 276-unit Zenodo mirror is independently verified; inherited DOI links are retained."
       ],
       "previous_public_release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.3.0-sfr-epub",
       "repository": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN",
@@ -2695,27 +2697,39 @@
       "public_reader": "https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/sfr/",
       "source_units_translated": 276,
       "standalone_reader_units": 276,
-      "coverage_basis": "276 editable source units and a 515-page partial cumulative PDF, OLP-0004–OLP-0279. All276 recorded render paths load and match the release's frozen/target hashes. HTML/EPUB remain23 units. Structural coverage is not whole-lane linguistic certification; three new language-bearing rows lack passage mappings.",
+      "coverage_basis": "276 distinct frozen source units occur in the 515-page PDF and cumulative EPUB. EPUB source identities match; 1,690 internal links resolve. Bibliography content is truncated. Structural coverage is not full canon or semantic acceptance.",
       "status": [
-        "partial-source276/722-pdf276/722-epub23/722",
-        "source-packaging-repair-needed"
+        "partial-source276/722-pdf276/722-epub276/722",
+        "citation-and-epub-source-repair-needed"
       ],
       "profiles": [
-        "Partial cumulative PDF —276 source units,515 pages",
-        "Sets, Relations and Functions —23-unit HTML/EPUB"
+        "Partial cumulative PDF and EPUB — 276 source units",
+        "Sets, Relations and Functions — 23-unit HTML"
       ],
       "concept_doi": "10.5281/zenodo.22307937",
       "version_doi": null,
       "readers": [
         {
-          "profile": "Partial cumulative Telugu PDF (276/722 source units)",
           "format": "PDF",
+          "download_label": "Read 276-unit PDF",
           "name": "openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
           "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
           "bytes": 3297226,
           "sha256": "9ef53813446e024aa86f308da6348f6f79832d22935b0aee104343f25611ff83",
+          "profile": "Read 276-unit PDF",
           "pages": 515,
           "source_units": 276
+        },
+        {
+          "format": "EPUB",
+          "download_label": "276-unit EPUB — bibliography repair pending",
+          "name": "openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.epub",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.epub",
+          "bytes": 1844059,
+          "sha256": "fce845469d300ce4a86a4f7b909387976582c735ee0b881215537ab5ccc64b3e",
+          "profile": "276-unit EPUB — bibliography repair pending",
+          "source_units": 276,
+          "scope_kind": "partial"
         },
         {
           "profile": "Sets, Relations and Functions EPUB (23/722 source units)",
@@ -2728,9 +2742,9 @@
         }
       ],
       "evidence": {
-        "public_readback": "evidence/TELUGU_READER276_MANAGER_INTAKE_20260920.json",
+        "public_readback": "evidence/TELUGU_SOURCE_EPUB_REPAIR_MANAGER_20260920.json",
         "source_checkpoint_readback": "evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json",
-        "manager_anonymous_release_assets_verified": 8,
+        "manager_anonymous_release_assets_verified": 15,
         "manager_anonymous_pages_files_verified": 1,
         "manager_segment_records_replayed": 396,
         "manager_canon_passages_actually_cited_and_resolved": 14,
@@ -2738,7 +2752,8 @@
         "manager_full_semantic_rereview": false,
         "zenodo_record": "https://zenodo.org/records/22309234",
         "previous_public_readback": "evidence/TELUGU_EPUB_DELIVERY_MANAGER_READBACK_20260912.json",
-        "manager_readback_scope": "Eight public release assets; retained bytes rehashed;276 actual render inputs and one local exercise repair replayed. Four PDF pages and two original canon pages inspected. Three new missing passage mappings found."
+        "manager_readback_scope": "Seven new anonymous downloads and eight retained downloads match the release inventory; 396 independent package checks pass. Four bibliography fixtures demonstrate citation truncation. No new TeX or visual render.",
+        "previous_276_intake": "evidence/TELUGU_READER276_MANAGER_INTAKE_20260920.json"
       },
       "previous_version_doi": "10.5281/zenodo.22309234",
       "zenodo_status": "GitHub276-unit reader verified; no matching276-unit Zenodo edition verified. Earlier record22726674 API returned403 on2026-09-20, not proof of absent public access. Inherited concept/previous-version links preserved.",
@@ -2780,30 +2795,56 @@
       "ordered_downloads": [
         {
           "format": "PDF",
-          "label": "Read 276-unit PDF",
+          "download_label": "Read 276-unit PDF",
           "name": "openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
           "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.pdf",
           "bytes": 3297226,
           "sha256": "9ef53813446e024aa86f308da6348f6f79832d22935b0aee104343f25611ff83"
         },
         {
+          "format": "TEX",
+          "download_label": "Download 276-unit LaTeX",
+          "name": "openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.tex",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.tex",
+          "bytes": 4156367,
+          "sha256": "a3f996cf1f963cf4283cb82cc433cce7c11bad6a37c5bd7284666b12526f07bf"
+        },
+        {
           "format": "ZIP",
-          "label": "Complete editable source ZIP (direct LaTeX pending)",
+          "download_label": "PDF build source ZIP",
+          "name": "openlogic-te-Telu-IN-cumulative-OLP0279-build-source-v0.4.0.zip",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-build-source-v0.4.0.zip",
+          "bytes": 1311983,
+          "sha256": "7d22f70e1deb6ba6f23473ef1ecaad4817a096662611ff95660f4e45df79e65d"
+        },
+        {
+          "format": "EPUB",
+          "download_label": "276-unit EPUB — bibliography repair pending",
+          "name": "openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.epub",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-cumulative-OLP0279-v0.4.0.epub",
+          "bytes": 1844059,
+          "sha256": "fce845469d300ce4a86a4f7b909387976582c735ee0b881215537ab5ccc64b3e"
+        },
+        {
+          "format": "ZIP",
+          "download_label": "Modular source and evidence ZIP",
           "name": "openlogic-te-Telu-IN-full-source-v0.4.0.zip",
           "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-full-source-v0.4.0.zip",
           "bytes": 6043339,
           "sha256": "9387e975413c1d75d77e2d2d35b8210359ef2fe6f07135b111add5631cc5efcd"
         },
         {
+          "profile": "Sets, Relations and Functions EPUB (23/722 source units)",
           "format": "EPUB",
-          "label": "Download 23-unit EPUB",
           "name": "openlogic-te-Telu-IN-sfr-v0.3.0.epub",
           "url": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/download/v0.4.0-cumulative-olp0279/openlogic-te-Telu-IN-sfr-v0.3.0.epub",
           "bytes": 354646,
-          "sha256": "14558fd925098e97e4657c6df39639364af25b51d4c0c5e2736817156d1732ed"
+          "sha256": "14558fd925098e97e4657c6df39639364af25b51d4c0c5e2736817156d1732ed",
+          "source_units": 23,
+          "download_label": "Legacy 23-unit EPUB"
         }
       ],
-      "source_packaging_status": "incomplete-direct-cumulative-tex-missing"
+      "source_packaging_status": "pdf-direct-LaTeX-verified-cumulative-EPUB-rebuild-source-incomplete"
     }
   ],
   "infrastructure": [

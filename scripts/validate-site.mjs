@@ -153,12 +153,18 @@ for (const file of telugu276.ordered_downloads) check(telugu276Evidence.files.so
 const psSource = JSON.parse(await read("evidence/PASHTO_SOURCE247_MANAGER_READBACK_20260920.json"));
 const psEdition = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
 check(psSource.source_files_verified === 722 && psSource.target_files_verified === 247 && psSource.failures === 0 && psSource.new_batch_exact_block_checks === 376, "Pashto source checkpoint requires frozen-source, target and actual new-batch block checks");
-check(psEdition.source_progress.archive_sha256 === psSource.archive.sha256 && psEdition.source_progress.commit === psSource.commit && psSource.reader_units === 82 && psSource.reader_files_changed === false, "Pashto source identity must not inflate or replace its reader");
-for (const [id, sources, units] of [["openlogic-ps-arab-pk",247,82],["openlogic-bn-beng-in",299,299]]) {
+check(psEdition.previous_v051_release_snapshot.source_progress.archive_sha256 === psSource.archive.sha256 && psEdition.previous_v051_release_snapshot.source_progress.commit === psSource.commit && psSource.reader_units === 82 && psSource.reader_files_changed === false, "Retain the historical Pashto source247/reader82 distinction");
+const psCurrent = JSON.parse(await read("evidence/PASHTO_V060_MANAGER_AUDIT_20260920.json"));
+check(psCurrent.files.length === 6 && psCurrent.files.every(item => item.matches) && psCurrent.github_assets_independently_matched === 6, "Pashto v0.6.0 needs six matched GitHub assets");
+check(psCurrent.static_package.frozen_sources_checked === 722 && psCurrent.static_package.translated_units === 255 && psCurrent.static_package.aligned_blocks === 4010 && psCurrent.static_package.canon_bound_language_segments === 2549 && psCurrent.static_package.failures.length === 0, "Pashto255 exact source/alignment/canon-reference package check required");
+check(psEdition.source_progress.commit === psCurrent.commit && psEdition.source_archive.sha256 === psEdition.source_progress.archive_sha256 && psEdition.readers[0].pages === 326, "Pashto255 release identity and page count must agree");
+check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurrent.bounded_language_sample.canon_pages_actually_inspected.length === 2 && psCurrent.visual_sample.whole_pdf_visual_certification === false, "Keep the Pashto sample audit bounded");
+check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
+for (const [id, sources, units] of [["openlogic-ps-arab-pk",255,255],["openlogic-bn-beng-in",299,299]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
-  for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
+  for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files,...psCurrent.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
   if (id === "openlogic-ps-arab-pk") check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", "Pashto needs PDF/direct cumulative LaTeX/source ZIP order");
   else {
     check(edition.source_packaging_status === "direct-cumulative-LaTeX-and-full-source-ZIP-verified" && edition.pertinent_pdf_exists === false && edition.online_reading_preview, "Bengali needs full cumulative source and its no-PDF online preview");

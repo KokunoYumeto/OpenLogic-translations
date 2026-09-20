@@ -136,7 +136,7 @@ for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlog
 const newDelivery = JSON.parse(await read("evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json"));
 const sourceProgress = JSON.parse(await read("evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json"));
 check(sourceProgress.source_readbacks.length === 26 && sourceProgress.source_readbacks.every(file => file.match), "Telugu/Marathi source readbacks must all match");
-for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",163,108]]) {
+for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",187,108]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sourceUnits && edition.standalone_reader_units === readerUnits, `${id}: cumulative sources must not inflate released reader coverage`);
   check(edition.source_progress.targets_verified === sourceUnits && edition.source_progress.failures === 0, `${id}: public target identity evidence required`);

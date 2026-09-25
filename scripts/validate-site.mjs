@@ -82,6 +82,7 @@ if (french?.release_tag === "v0.3.0-ensembles-relations-fonctions") {
   check(french.limitations?.some(text => text.includes("uniqueness")), "French inherited cross-reference finding must remain disclosed");
 }
 const romanceReaderIntake = JSON.parse(await read("evidence/ROMANCE_READERS_722_LOCAL_INTAKE_20260920.json"));
+const romancePublic = JSON.parse(await read("evidence/ROMANCE_READERS_PUBLIC_20260925.json"));
 for (const [id, pages, bytes, sha256] of [
   ["openlogic-es", 1140, 6173137, "7c58463f0e74ebcbb2a17dfd8696a09aae56b29bc8502347a5bd1c2504ae3a46"],
   ["openlogic-pt-br", 1124, 6134799, "1ea7bb4707f6e348336354f2d3444ade6c6829643230db70f2e88d0ea599e534"]
@@ -93,7 +94,13 @@ for (const [id, pages, bytes, sha256] of [
   check(edition?.current_local_configured_reader?.complete_for_configuration === true && edition.current_local_configured_reader.source_units_rendered === 722 && edition.current_local_configured_reader.alternate_units_outside_reader === 0 && edition.current_local_configured_reader.integrates_all_722_units === true, `${id}: local reader must integrate all 722 translated units`);
   check(edition?.current_local_configured_reader?.pages === pages && edition.current_local_configured_reader.bytes === bytes && edition.current_local_configured_reader.sha256 === sha256, `${id}: wrong local complete-reader PDF identity`);
   check(edition?.current_local_reader_recorded_paths === 722 && edition.current_local_reader_missing_paths === 0, `${id}: reader recorder closure must be 722/722`);
-  check(edition?.current_local_configured_reader?.public_release_sync_verified === false, `${id}: local closure must remain distinct from public-byte synchronization`);
+  check(edition?.current_local_configured_reader?.public_release_sync_verified === true, `${id}: public722 delivery required`);
+  const delivery = romancePublic.editions[id];
+  check(delivery.github.complete && delivery.zenodo.complete && delivery.source_units === 722, `${id}: both mirrors verified`);
+  check(edition.ordered_downloads.slice(0,3).map(x=>x.format).join(",") === "PDF,TEX,ZIP", `${id}: download order`);
+  for (const asset of edition.ordered_downloads) check(delivery.github.public_readback.some(f=>f.url===asset.url && f.bytes===asset.bytes && f.sha256===asset.sha256 && f.matches), `${id}: unmatched download`);
+  check(delivery.zenodo.anonymous_public_readback.some(f=>f.sha256===sha256 && f.bytes===bytes && f.matches), `${id}: Zenodo PDF identity`);
+  check(delivery.direct_tex_target_files === 722 && edition.public_reader_verification.source_archive_complete, `${id}: complete editable sources required`);
   check(intake?.loaded_target_files === 722 && intake.unloaded_target_paths === 0 && intake.missing_target_files === 0 && intake.ledger_hash_mismatches === 0 && intake.locale_skipped_files === 0, `${id}: exact local closure evidence failed`);
   check(intake?.reader_pages === pages && intake.reader_bytes === bytes && intake.reader_sha256 === sha256 && intake.visual_result.startsWith("PASS"), `${id}: catalogue identity must match the visually checked intake`);
 }

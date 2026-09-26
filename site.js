@@ -243,7 +243,7 @@ function cardFor(edition) {
       chapter.append(note);
     }
     const downloads = document.createElement("nav");
-    downloads.setAttribute("aria-label", group.title + " downloads");
+    downloads.setAttribute("aria-label", group.title + " — " + (edition.ui_labels?.downloads || "downloads"));
     for (const item of group.downloads || []) {
       const download = link(item.download_label || item.format, item.url);
       if (download) downloads.append(download);

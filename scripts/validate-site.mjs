@@ -32,7 +32,7 @@ check(script.includes("[...accessible, ...data.editions]"), "accessible editions
 const persian = catalogue.editions.find(item => item.id === "openlogic-fa-ir");
 check(persian.download_layout === "compact-grouped" && persian.download_summary.includes("هنوز ادامه دارد"), "Persian compact downloads must retain the localized review caveat");
 check(persian.metadata_language === "fa-IR" && persian.metadata_direction === "rtl", "Persian metadata needs language and direction");
-check(html.includes('site.js?v=20260926-persian-mirror') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Persian compact-navigation localization must reach browsers with a fresh script URL");
+check(html.includes('site.js?v=20260926-arabic-complete') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Localized compact navigation must reach browsers with a fresh script URL");
 check(persian.search_aliases?.includes("Persian") && persian.search_aliases?.includes("Farsi"), "Localized Persian must remain searchable by its English aliases");
 check(persian.ui_labels?.script_samples?.includes("یک واحد") && persian.ui_labels?.publication_and_evidence, "Persian sample and metadata navigation must be localized");
 const persianMirror = JSON.parse(await read(persian.evidence.mirror_public_readback));
@@ -296,6 +296,7 @@ const arPublic = JSON.parse(await read(arabic.evidence.manager_public_readback))
 check(createHash('sha256').update(await read(arabic.evidence.manager_public_readback)).digest('hex') === arabic.evidence.manager_public_readback_sha256, 'Arabic public evidence hash must identify the exact published JSON bytes');
 const arPackages = JSON.parse(await read(arabic.evidence.package_checks));
 check(arabic.metadata_language === 'ar' && arabic.metadata_direction === 'rtl' && arabic.search_aliases.includes('Arabic'), 'Arabic native metadata must remain discoverable');
+check(arabic.ui_labels.downloads === 'التنزيلات' && script.includes('edition.ui_labels?.downloads'), 'Arabic download-group accessibility names must be localized');
 check(arabic.version_doi === '10.5281/zenodo.22951266' && arabic.release_tag === arPublic.release_tag, 'Arabic complete EPUB lineage mismatch');
 check(arPublic.anonymous && arPublic.files.length === 20 && arPublic.files.every(f => f.matches), 'Arabic full EPUB release needs ten exact assets on both mirrors');
 const arFull = arabic.readers.filter(r => r.format === 'EPUB' && r.scope_kind === 'complete');

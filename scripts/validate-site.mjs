@@ -293,7 +293,7 @@ check(gu199Delivery.files.length === 16 && gu199Delivery.files.every(x => x.matc
 check(gu199Checks.frozen_sources_verified === 722 && gu199Checks.native_targets === 199 && gu199Checks.failures.length === 0, "Gujarati199 source inventory must match its scope");
 check(gu199Checks.direct_fulltext_matches_download && gu199Checks.fulltext_unresolved_body_imports.length === 0 && gujaratiCurrent.direct_latex.sha256 === gu199Checks.direct_fulltext_sha256, "Gujarati199 needs exact direct full-text source identity");
 
-const dutchPublication = JSON.parse(await read('evidence/DUTCH_PAIRED144_SOURCE_PUBLIC_20260926.json'));
+const dutchPublication = JSON.parse(await read('evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json'));
 const arabic = catalogue.editions.find(item => item.id === 'openlogic-ar');
 const arPublic = JSON.parse(await read(arabic.evidence.manager_public_readback));
 check(createHash('sha256').update(await read(arabic.evidence.manager_public_readback)).digest('hex') === arabic.evidence.manager_public_readback_sha256, 'Arabic public evidence hash must identify the exact published JSON bytes');
@@ -315,7 +315,7 @@ check(arabic.supplementary_downloads.length === 3 && arabic.supplementary_downlo
 check(arabic.readers.filter(r => r.scope_kind === 'chapter').length === 2 && arabic.readers.filter(r => r.scope_kind === 'historical' && r.format === 'PDF').length === 2, 'Preserve both old PDF identities and chapter samples');
 for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   const edition = catalogue.editions.find(item => item.id === id);
-  check(edition.source_units_translated === 144 && edition.standalone_reader_units === 0, `${id}: published source144 is not a compiled reader`);
+  check(edition.source_units_translated === 160 && edition.standalone_reader_units === 0, `${id}: published source160 is not a compiled reader`);
   check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP', `${id}: source-only edition needs direct cumulative TEX and full source ZIP`);
   check(edition.version_doi === dutchPublication.zenodo.doi && edition.release === dutchPublication.github.release, `${id}: public lineage mismatch`);
   for (const asset of edition.ordered_downloads) check(dutchPublication.github.assets.some(item => item.name === asset.name && item.sha256 === asset.sha256 && item.bytes === asset.bytes), `${id}: asset readback identity missing`);
@@ -324,7 +324,7 @@ for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   check(edition.search_aliases?.includes('Dutch') && edition.search_aliases?.includes('Nederlands'), `${id}: both English and Dutch language names must find the edition`);
   check(edition.metadata_language === 'nl-NL', `${id}: Dutch card metadata must declare its language`);
 }
-check(dutchPublication.github.anonymous_repository_files_verified === 851 && dutchPublication.zenodo.files.length === 6 && dutchPublication.zenodo.inherited_files_metadata_verified === 6, 'Dutch source publication needs exact repository and mirror readback');
+check(dutchPublication.github.anonymous_repository_files_verified === 933 && dutchPublication.zenodo.files.length === 6 && dutchPublication.zenodo.inherited_files_metadata_verified === 12, 'Dutch source publication needs exact repository and mirror readback');
 
 const result = {
   status: failures.length ? "FAIL" : "PASS",

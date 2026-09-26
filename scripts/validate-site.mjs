@@ -181,7 +181,7 @@ check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.p
 const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));
 const teluguPrevious = JSON.parse(await read(telugu276.evidence.previous_276_intake));
-check(telugu276.source_units_translated === 344 && telugu276.standalone_reader_units === 276, "Telugu public source344 must remain distinct from reader276");
+check(telugu276.source_units_translated === 394 && telugu276.standalone_reader_units === 276, "Telugu public source394 must remain distinct from reader276");
 check(telugu276.readers.find(item => item.format === "EPUB")?.source_units === 276 && telugu276.source_progress.html_reader_units === 23, "Telugu EPUB276 must not inflate HTML23");
 check(telugu276Evidence.epub.units === 276 && telugu276Evidence.integrity_failures.length === 0 && telugu276Evidence.files.length === 15 && telugu276Evidence.all_public_assets_match, "Telugu repaired assets require actual package and byte evidence");
 check(teluguPrevious.new_source_batch.missing_passage_mapping.length === 3 && telugu276.source_progress.canon_mapping_gaps === 3, "Keep frozen Telugu canon-mapping gaps explicit");
@@ -202,7 +202,7 @@ check(psCurrent.static_package.frozen_sources_checked === 722 && psCurrent.stati
 check(psEdition.source_progress.commit === psCurrent.commit && psEdition.source_archive.sha256 === psEdition.source_progress.archive_sha256 && psEdition.readers[0].pages === 326, "Pashto255 release identity and page count must agree");
 check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurrent.bounded_language_sample.canon_pages_actually_inspected.length === 2 && psCurrent.visual_sample.whole_pdf_visual_certification === false, "Keep the Pashto sample audit bounded");
 check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
-for (const [id, sources, units] of [["openlogic-ps-arab-pk",300,255],["openlogic-bn-beng-in",390,299]]) {
+for (const [id, sources, units] of [["openlogic-ps-arab-pk",300,255],["openlogic-bn-beng-in",496,299]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
@@ -216,9 +216,15 @@ for (const [id, sources, units] of [["openlogic-ps-arab-pk",300,255],["openlogic
 }
 check(newDelivery.files.length === 30 && newDelivery.files.every(item => item.matches), "Pashto/Bengali intake must preserve the thirty matched readbacks");
 const currentSources = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN390_TA561_TE344_PS300_20260921.json"));
+const updatedBnTe = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN496_TE394_20260926.json"));
+const bnTeSegments = JSON.parse(await read("evidence/BN_TE_CHANGED_SEGMENTS_20260926.json"));
+for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
+  const replay=bnTeSegments.lanes.find(row=>row.lane===lane);
+  check(replay.changed_units===units && replay.segments_checked===segments && replay.failures.length===0, `${lane}: all changed units need a segment and canon-ID replay`);
+}
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = catalogue.editions.find(item => item.id === id);
-  const source = currentSources.checkpoints.find(item => item.lane === lane);
+  const source = (['bn','te'].includes(lane) ? updatedBnTe : currentSources).checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && source.reader_units === edition.standalone_reader_units && source.full_semantic_reaudit === false, `${id}: source checkpoint must not inflate reader coverage or semantic assurance`);
 }

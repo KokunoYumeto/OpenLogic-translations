@@ -190,7 +190,7 @@ check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.p
 const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));
 const teluguPrevious = JSON.parse(await read(telugu276.evidence.previous_276_intake));
-check(telugu276.source_units_translated === 394 && telugu276.standalone_reader_units === 276, "Telugu public source394 must remain distinct from reader276");
+check(telugu276.source_units_translated === 410 && telugu276.standalone_reader_units === 276, "Telugu public source410 must remain distinct from reader276");
 check(telugu276.readers.find(item => item.format === "EPUB")?.source_units === 276 && telugu276.source_progress.html_reader_units === 23, "Telugu EPUB276 must not inflate HTML23");
 check(telugu276Evidence.epub.units === 276 && telugu276Evidence.integrity_failures.length === 0 && telugu276Evidence.files.length === 15 && telugu276Evidence.all_public_assets_match, "Telugu repaired assets require actual package and byte evidence");
 check(teluguPrevious.new_source_batch.missing_passage_mapping.length === 3 && telugu276.source_progress.canon_mapping_gaps === 3, "Keep frozen Telugu canon-mapping gaps explicit");
@@ -226,6 +226,9 @@ for (const [id, sources, units] of [["openlogic-ps-arab-pk",300,255],["openlogic
 check(newDelivery.files.length === 30 && newDelivery.files.every(item => item.matches), "Pashto/Bengali intake must preserve the thirty matched readbacks");
 const currentSources = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN390_TA561_TE344_PS300_20260921.json"));
 const updatedBnTe = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN496_TE394_20260926.json"));
+const telugu410 = JSON.parse(await read("evidence/TE410_PUBLIC_SOURCE_MIRROR_20260926.json"));
+check(telugu410.changed_units === 16 && telugu410.changed_segments === 247 && telugu410.changed_linguistic_segments === 141 && telugu410.failures.length === 0, "Telugu410 requires actual changed-segment replay");
+check(telugu410.zenodo.latest_record === 22309234 && telugu410.zenodo.reader276_mirror === false && telugu276.version_doi === null, "Do not present the old Telugu Zenodo record as the276-unit mirror");
 const bnTeSegments = JSON.parse(await read("evidence/BN_TE_CHANGED_SEGMENTS_20260926.json"));
 for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
   const replay=bnTeSegments.lanes.find(row=>row.lane===lane);
@@ -233,7 +236,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 }
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = catalogue.editions.find(item => item.id === id);
-  const source = (['bn','te'].includes(lane) ? updatedBnTe : currentSources).checkpoints.find(item => item.lane === lane);
+  const source = lane === 'te' ? telugu410 : (lane === 'bn' ? updatedBnTe : currentSources).checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && source.reader_units === edition.standalone_reader_units && source.full_semantic_reaudit === false, `${id}: source checkpoint must not inflate reader coverage or semantic assurance`);
 }

@@ -1,4 +1,5 @@
 import { readFile, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
@@ -290,6 +291,24 @@ check(gu199Checks.frozen_sources_verified === 722 && gu199Checks.native_targets 
 check(gu199Checks.direct_fulltext_matches_download && gu199Checks.fulltext_unresolved_body_imports.length === 0 && gujaratiCurrent.direct_latex.sha256 === gu199Checks.direct_fulltext_sha256, "Gujarati199 needs exact direct full-text source identity");
 
 const dutchPublication = JSON.parse(await read('evidence/DUTCH_PAIRED144_SOURCE_PUBLIC_20260926.json'));
+const arabic = catalogue.editions.find(item => item.id === 'openlogic-ar');
+const arPublic = JSON.parse(await read(arabic.evidence.manager_public_readback));
+check(createHash('sha256').update(await read(arabic.evidence.manager_public_readback)).digest('hex') === arabic.evidence.manager_public_readback_sha256, 'Arabic public evidence hash must identify the exact published JSON bytes');
+const arPackages = JSON.parse(await read(arabic.evidence.package_checks));
+check(arabic.metadata_language === 'ar' && arabic.metadata_direction === 'rtl' && arabic.search_aliases.includes('Arabic'), 'Arabic native metadata must remain discoverable');
+check(arabic.version_doi === '10.5281/zenodo.22951266' && arabic.release_tag === arPublic.release_tag, 'Arabic complete EPUB lineage mismatch');
+check(arPublic.anonymous && arPublic.files.length === 20 && arPublic.files.every(f => f.matches), 'Arabic full EPUB release needs ten exact assets on both mirrors');
+const arFull = arabic.readers.filter(r => r.format === 'EPUB' && r.scope_kind === 'complete');
+check(arFull.length === 3 && arFull.every(r => r.source_units === 722), 'Arabic requires three explicitly complete EPUB profiles');
+check(arPackages.status === 'PASS' && arPackages.failures.length === 0 && Object.keys(arPackages.profiles).length === 3, 'Arabic independent package checks failed');
+for (const r of arFull) {
+  const q = arPackages.profiles[r.profile];
+  check(q.source_units === 722 && q.cumulative_bodies_replayed === 722 && q.cold_replay_matches && q.cold_replay_sha256 === r.sha256 && q.broken_internal_links.length === 0, `Arabic ${r.profile}: incomplete package proof`);
+  check(arPublic.files.filter(f => f.name === r.name && f.sha256 === r.sha256 && f.bytes === r.bytes).length === 2, `Arabic ${r.profile}: mirror identity mismatch`);
+}
+check(arabic.ordered_downloads.map(r => r.format).join(',') === 'TEX,ZIP,EPUB', 'Current Arabic EPUB downloads need direct TEX and full-source ZIP, with no mispaired historical PDF');
+check(arabic.supplementary_downloads.length === 3 && arabic.supplementary_downloads[2].downloads.some(d => d.url.endsWith('ar-olp-0722-complete-dual-notation-r2-20260903')), 'Historical Arabic reader access must be retained');
+check(arabic.readers.filter(r => r.scope_kind === 'chapter').length === 2 && arabic.readers.filter(r => r.scope_kind === 'historical' && r.format === 'PDF').length === 2, 'Preserve both old PDF identities and chapter samples');
 for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === 144 && edition.standalone_reader_units === 0, `${id}: published source144 is not a compiled reader`);

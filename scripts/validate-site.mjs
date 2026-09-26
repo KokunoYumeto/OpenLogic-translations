@@ -296,7 +296,10 @@ for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP', `${id}: source-only edition needs direct cumulative TEX and full source ZIP`);
   check(edition.version_doi === dutchPublication.zenodo.doi && edition.release === dutchPublication.github.release, `${id}: public lineage mismatch`);
   for (const asset of edition.ordered_downloads) check(dutchPublication.github.assets.some(item => item.name === asset.name && item.sha256 === asset.sha256 && item.bytes === asset.bytes), `${id}: asset readback identity missing`);
-  check(edition.epub_coverage_note.startsWith('Nog geen PDF of EPUB'), `${id}: absent readers must remain explicit`);
+  check(edition.epub_coverage_note.includes('nog geen gecontroleerde PDF of EPUB gepubliceerd'), `${id}: absent readers must remain explicit`);
+  check(edition.epub_coverage_note.includes('voor een EPUB is die vergrendeling niet vereist'), `${id}: EPUB availability must not be tied to the TeX mutex`);
+  check(edition.search_aliases?.includes('Dutch') && edition.search_aliases?.includes('Nederlands'), `${id}: both English and Dutch language names must find the edition`);
+  check(edition.metadata_language === 'nl-NL', `${id}: Dutch card metadata must declare its language`);
 }
 check(dutchPublication.github.anonymous_repository_files_verified === 851 && dutchPublication.zenodo.files.length === 6 && dutchPublication.zenodo.inherited_files_metadata_verified === 6, 'Dutch source publication needs exact repository and mirror readback');
 

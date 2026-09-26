@@ -228,7 +228,10 @@ const currentSources = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN390_TA5
 const updatedBnTe = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN496_TE394_20260926.json"));
 const telugu410 = JSON.parse(await read("evidence/TE410_PUBLIC_SOURCE_MIRROR_20260926.json"));
 check(telugu410.changed_units === 16 && telugu410.changed_segments === 247 && telugu410.changed_linguistic_segments === 141 && telugu410.failures.length === 0, "Telugu410 requires actual changed-segment replay");
-check(telugu410.zenodo.latest_record === 22309234 && telugu410.zenodo.reader276_mirror === false && telugu276.version_doi === null, "Do not present the old Telugu Zenodo record as the276-unit mirror");
+check(telugu410.zenodo.latest_record === 22309234 && telugu410.zenodo.reader276_mirror === false, "Preserve the historical Telugu mirror-gap finding");
+const teluguZenodoMirror = JSON.parse(await read(telugu276.evidence.zenodo_mirror_readback));
+check(telugu276.version_doi === '10.5281/zenodo.22726674' && teluguZenodoMirror.record_id === 22726674 && teluguZenodoMirror.anonymous && teluguZenodoMirror.files.length === 20 && teluguZenodoMirror.files.every(f => f.matches), 'Telugu276 Zenodo mirror requires all twenty exact public matches');
+for (const asset of telugu276.ordered_downloads) check(teluguZenodoMirror.files.some(f => f.name === asset.name && f.bytes === asset.bytes && f.sha256 === asset.sha256), 'Telugu mirror must retain the exact reader/source download identities');
 const bnTeSegments = JSON.parse(await read("evidence/BN_TE_CHANGED_SEGMENTS_20260926.json"));
 for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
   const replay=bnTeSegments.lanes.find(row=>row.lane===lane);

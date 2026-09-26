@@ -68,6 +68,7 @@ function editionClass(edition) {
 }
 
 function classLabel(edition, state) {
+  if (edition.status_label) return edition.status_label;
   if (edition.kind === "accessibility-infrastructure") return "Complete main book";
   if ((edition.status || []).join(" ").includes("published-constructed-722")) return "Complete interlanguage";
   return {
@@ -121,7 +122,7 @@ function localEvidenceLink(edition) {
   if (!relative || /^(?:[a-z]+:|\/)/i.test(relative) || relative.includes("..")) return null;
   const anchor = document.createElement("a");
   anchor.href = relative;
-  anchor.textContent = "Evidence";
+  anchor.textContent = edition.ui_labels?.evidence || "Evidence";
   return anchor;
 }
 
@@ -179,7 +180,7 @@ function cardFor(edition) {
     coverageRow(edition.source_coverage_label || (Number.isFinite(edition.provisional_files) ? "Provisional baseline files" : "Translated source files"), units(sourceUnits ?? edition.provisional_files)),
     edition.current_local_configured_reader
       ? coverageRow(edition.local_reader_label || "Configured reader (local)", units(edition.current_local_configured_reader.source_units_rendered))
-      : coverageRow("Standalone reader", units(edition.standalone_reader_units))
+      : coverageRow(edition.ui_labels?.standalone_reader || "Standalone reader", units(edition.standalone_reader_units))
   );
   if (Number.isFinite(edition.canon_admitted_units)) {
     coverage.append(coverageRow("Canon-admitted units", edition.canon_admitted_units));
@@ -199,7 +200,7 @@ function cardFor(edition) {
   }
   const readerUrl = (edition.readers || []).find(item => item.url && !["chapter", "sample"].includes(item.scope_kind))?.url;
   const primary = link(readerUrl ? "Read / download" : "Open release", readerUrl || edition.release, true);
-  const repository = link("Repository", edition.repository, !primary);
+  const repository = link(edition.ui_labels?.repository || "Repository", edition.repository, !primary);
   const doi = link("DOI", edition.version_doi ? `https://doi.org/${edition.version_doi}` : edition.concept_doi ? `https://doi.org/${edition.concept_doi}` : null);
   const evidence = localEvidenceLink(edition);
   if (orderedDownloads.length) {
@@ -272,7 +273,7 @@ function cardFor(edition) {
 
   const details = document.createElement("details");
   const detailsSummary = document.createElement("summary");
-  detailsSummary.textContent = "Profiles and known limits";
+  detailsSummary.textContent = edition.ui_labels?.details || "Profiles and known limits";
   details.append(detailsSummary);
   if (compactDownloads && edition.epub_coverage_note) {
     const scope = document.createElement("p");

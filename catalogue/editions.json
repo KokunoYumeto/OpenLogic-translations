@@ -90,67 +90,205 @@
     },
     {
       "id": "openlogic-nl-standard",
-      "name": "Dutch — standard scholarly register",
+      "name": "Nederlands — wetenschappelijk register",
       "language_tag": "nl",
-      "semantic_layer": "Standard Dutch scholarly translation",
+      "semantic_layer": "Wetenschappelijk Nederlands; gedeeltelijke bronuitgave",
       "scripts": [
         "Latn"
       ],
       "profiles": [
-        "paired segment-for-segment with the gewone-mensentaal Dutch register edition"
+        "128 corresponderende broneenheden in twee registers",
+        "Beide registers gebruiken dezelfde Engelse bron; geen samenvatting of kinderversie."
       ],
       "source_revision": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
-      "repository": null,
-      "release": null,
-      "license": "CC-BY-4.0 planned; inherited upstream exceptions must be recorded",
-      "source_units_translated": 0,
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-nl",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.1.0-paired-128-of-722-source",
+      "license": "CC BY 4.0; oorspronkelijke componentvermeldingen blijven behouden.",
+      "source_units_translated": 128,
       "standalone_reader_units": 0,
       "pair_id": "openlogic-nl-dual-register",
       "paired_edition_id": "openlogic-nl-gewone-mensentaal",
       "status": [
-        "scaffold",
-        "owner-commissioned-setup-pending"
+        "partial",
+        "public-source-128/722",
+        "reader-build-pending"
       ],
       "evidence": {
-        "commission_scope": "evidence/DUTCH_DUAL_REGISTER_COMMISSION_20260906.json"
+        "manager_public_readback": "evidence/DUTCH_PAIRED_SOURCE_PUBLIC_20260926.json",
+        "latest_zenodo_record": "https://zenodo.org/records/22969984",
+        "public_source_commit": "cfbb0e7c7a958fb0462c13851f89dc8239b72aca",
+        "source_and_target_files_checked": 384,
+        "segment_spans_checked": 4287,
+        "cited_canon_passages": 184,
+        "full_linguistic_certification": false
       },
       "limitations": [
-        "Dedicated owner task commissioned; worktree setup is pending a stable task identifier.",
-        "Zero translated units, standalone-reader units, repository, release or DOI are claimed."
-      ]
+        "128 van 722 eenheden; de laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
+        "Samengestelde LaTeX gecontroleerd op tekstidentiteit; nog geen geslaagde compilatie of visuele boekcontrole.",
+        "De online pagina toont LaTeX-brontekst, geen afgewerkte boekweergave.",
+        "Volledige Nederlandstalige deskundigenverantwoording nog niet publiek beschikbaar; segmentkoppelingen zijn gepubliceerd.",
+        "Verpakking en publicatiecontrole: OpenAI Codex — GPT-6 Astra, Ultra effort. Historische modelinstellingen voor alle vertaalbytes niet volledig vastgesteld; geen menselijke beoordeling geclaimd."
+      ],
+      "owner_task_id": "01a073b1-f464-7510-9d99-8f1e58a64d51",
+      "release_tag": "v0.1.0-paired-128-of-722-source",
+      "version_doi": "10.5281/zenodo.22969984",
+      "concept_doi": "10.5281/zenodo.22969983",
+      "source_coverage_label": "Gepubliceerde broneenheden",
+      "status_label": "Bronuitgave · 128/722",
+      "ui_labels": {
+        "standalone_reader": "Gecontroleerde PDF/EPUB",
+        "repository": "Project",
+        "evidence": "Controlebewijs",
+        "details": "Reikwijdte en beperkingen"
+      },
+      "ordered_downloads": [
+        {
+          "register": "nl-standard",
+          "name": "00-openlogic-nl-standaard-128.tex",
+          "format": "TEX",
+          "bytes": 632766,
+          "sha256": "5965d7e4b685e82c05e5940907392fca740de16230a5613c2c14c89d249bfd45",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/00-openlogic-nl-standaard-128.tex",
+          "download_label": "LaTeX — 128 eenheden"
+        },
+        {
+          "register": "nl-standard",
+          "name": "01-openlogic-nl-standaard-128-bronnen.zip",
+          "format": "ZIP",
+          "bytes": 1145693,
+          "sha256": "8a08cadbe29d5459aefef635bbbc4ef93d2a77b86119a6cdb8b38e1bbe20c5e9",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/01-openlogic-nl-standaard-128-bronnen.zip",
+          "download_label": "Volledige bronboom (ZIP)"
+        }
+      ],
+      "direct_cumulative_source": {
+        "register": "nl-standard",
+        "name": "00-openlogic-nl-standaard-128.tex",
+        "format": "TEX",
+        "bytes": 632766,
+        "sha256": "5965d7e4b685e82c05e5940907392fca740de16230a5613c2c14c89d249bfd45",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/00-openlogic-nl-standaard-128.tex"
+      },
+      "source_archive": {
+        "register": "nl-standard",
+        "name": "01-openlogic-nl-standaard-128-bronnen.zip",
+        "format": "ZIP",
+        "bytes": 1145693,
+        "sha256": "8a08cadbe29d5459aefef635bbbc4ef93d2a77b86119a6cdb8b38e1bbe20c5e9",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/01-openlogic-nl-standaard-128-bronnen.zip"
+      },
+      "related_editions": [
+        {
+          "label": "Bronteksten online vergelijken",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-nl/"
+        },
+        {
+          "label": "Naar gewone mensentaal",
+          "url": "#openlogic-nl-gewone-mensentaal"
+        }
+      ],
+      "epub_coverage_note": "Nog geen PDF of EPUB: de eerste bouwpoging kon de gedeelde TeX-vergrendeling niet verkrijgen. De bronbestanden zijn wel gepubliceerd."
     },
     {
       "id": "openlogic-nl-gewone-mensentaal",
-      "name": "Dutch — gewone mensentaal",
+      "name": "Nederlands — gewone mensentaal",
       "language_tag": "nl-x-gewoon",
-      "semantic_layer": "Adult non-academic Dutch register translation at unchanged mathematical rigor",
+      "semantic_layer": "Gewone mensentaal voor volwassenen, met behoud van de wiskundige inhoud",
       "scripts": [
         "Latn"
       ],
       "profiles": [
-        "paired segment-for-segment with the standard scholarly Dutch edition",
-        "adult ordinary register; not abridged, remedial or child-directed"
+        "128 corresponderende broneenheden in twee registers",
+        "Beide registers gebruiken dezelfde Engelse bron; geen samenvatting of kinderversie."
       ],
       "source_revision": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
-      "repository": null,
-      "release": null,
-      "license": "CC-BY-4.0 planned; inherited upstream exceptions must be recorded",
-      "source_units_translated": 0,
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-nl",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.1.0-paired-128-of-722-source",
+      "license": "CC BY 4.0; oorspronkelijke componentvermeldingen blijven behouden.",
+      "source_units_translated": 128,
       "standalone_reader_units": 0,
       "pair_id": "openlogic-nl-dual-register",
       "paired_edition_id": "openlogic-nl-standard",
       "status": [
-        "scaffold",
-        "owner-commissioned-setup-pending"
+        "partial",
+        "public-source-128/722",
+        "reader-build-pending"
       ],
       "evidence": {
-        "commission_scope": "evidence/DUTCH_DUAL_REGISTER_COMMISSION_20260906.json"
+        "manager_public_readback": "evidence/DUTCH_PAIRED_SOURCE_PUBLIC_20260926.json",
+        "latest_zenodo_record": "https://zenodo.org/records/22969984",
+        "public_source_commit": "cfbb0e7c7a958fb0462c13851f89dc8239b72aca",
+        "source_and_target_files_checked": 384,
+        "segment_spans_checked": 4287,
+        "cited_canon_passages": 184,
+        "full_linguistic_certification": false
       },
       "limitations": [
-        "Dedicated owner task commissioned; worktree setup is pending a stable task identifier.",
-        "The target register still requires canon-first research and a representative calibration batch.",
-        "Zero translated units, standalone-reader units, repository, release or DOI are claimed."
-      ]
+        "128 van 722 eenheden; de laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
+        "Samengestelde LaTeX gecontroleerd op tekstidentiteit; nog geen geslaagde compilatie of visuele boekcontrole.",
+        "De online pagina toont LaTeX-brontekst, geen afgewerkte boekweergave.",
+        "Volledige Nederlandstalige deskundigenverantwoording nog niet publiek beschikbaar; segmentkoppelingen zijn gepubliceerd.",
+        "Verpakking en publicatiecontrole: OpenAI Codex — GPT-6 Astra, Ultra effort. Historische modelinstellingen voor alle vertaalbytes niet volledig vastgesteld; geen menselijke beoordeling geclaimd."
+      ],
+      "owner_task_id": "01a073b1-f464-7510-9d99-8f1e58a64d51",
+      "release_tag": "v0.1.0-paired-128-of-722-source",
+      "version_doi": "10.5281/zenodo.22969984",
+      "concept_doi": "10.5281/zenodo.22969983",
+      "source_coverage_label": "Gepubliceerde broneenheden",
+      "status_label": "Bronuitgave · 128/722",
+      "ui_labels": {
+        "standalone_reader": "Gecontroleerde PDF/EPUB",
+        "repository": "Project",
+        "evidence": "Controlebewijs",
+        "details": "Reikwijdte en beperkingen"
+      },
+      "ordered_downloads": [
+        {
+          "register": "nl-gewoon",
+          "name": "02-openlogic-nl-gewone-mensentaal-128.tex",
+          "format": "TEX",
+          "bytes": 638323,
+          "sha256": "214f05eb17d14a23e65fe0af29bbb6c4f4b81ec3c9c672994d6dba58dd322a67",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/02-openlogic-nl-gewone-mensentaal-128.tex",
+          "download_label": "LaTeX — 128 eenheden"
+        },
+        {
+          "register": "nl-gewoon",
+          "name": "03-openlogic-nl-gewone-mensentaal-128-bronnen.zip",
+          "format": "ZIP",
+          "bytes": 1152333,
+          "sha256": "65612085defc9e8c74c9f2c168ac163927ad46abc2f2fcb8542a61d2a8b5cb1a",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/03-openlogic-nl-gewone-mensentaal-128-bronnen.zip",
+          "download_label": "Volledige bronboom (ZIP)"
+        }
+      ],
+      "direct_cumulative_source": {
+        "register": "nl-gewoon",
+        "name": "02-openlogic-nl-gewone-mensentaal-128.tex",
+        "format": "TEX",
+        "bytes": 638323,
+        "sha256": "214f05eb17d14a23e65fe0af29bbb6c4f4b81ec3c9c672994d6dba58dd322a67",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/02-openlogic-nl-gewone-mensentaal-128.tex"
+      },
+      "source_archive": {
+        "register": "nl-gewoon",
+        "name": "03-openlogic-nl-gewone-mensentaal-128-bronnen.zip",
+        "format": "ZIP",
+        "bytes": 1152333,
+        "sha256": "65612085defc9e8c74c9f2c168ac163927ad46abc2f2fcb8542a61d2a8b5cb1a",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.1.0-paired-128-of-722-source/03-openlogic-nl-gewone-mensentaal-128-bronnen.zip"
+      },
+      "related_editions": [
+        {
+          "label": "Bronteksten online vergelijken",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-nl/"
+        },
+        {
+          "label": "Naar wetenschappelijk Nederlands",
+          "url": "#openlogic-nl-standard"
+        }
+      ],
+      "epub_coverage_note": "Nog geen PDF of EPUB: de eerste bouwpoging kon de gedeelde TeX-vergrendeling niet verkrijgen. De bronbestanden zijn wel gepubliceerd."
     },
     {
       "id": "openlogic-fr",

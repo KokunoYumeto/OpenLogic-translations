@@ -29,7 +29,13 @@ for (const [id, count] of [["openlogic-fa-ir", 2], ["openlogic-interfarsi", 4]])
 }
 check(script.includes("[...accessible, ...data.editions]"), "accessible editions must be first-class selector/card entries");
 const persian = catalogue.editions.find(item => item.id === "openlogic-fa-ir");
-check(persian.download_layout === "compact-grouped" && persian.download_summary.includes("review is ongoing"), "Persian compact downloads must retain the review caveat");
+check(persian.download_layout === "compact-grouped" && persian.download_summary.includes("هنوز ادامه دارد"), "Persian compact downloads must retain the localized review caveat");
+check(persian.metadata_language === "fa-IR" && persian.metadata_direction === "rtl", "Persian metadata needs language and direction");
+check(persian.search_aliases?.includes("Persian") && persian.search_aliases?.includes("Farsi"), "Localized Persian must remain searchable by its English aliases");
+check(persian.ui_labels?.script_samples?.includes("یک واحد") && persian.ui_labels?.publication_and_evidence, "Persian sample and metadata navigation must be localized");
+const persianMirror = JSON.parse(await read(persian.evidence.mirror_public_readback));
+check(persian.version_doi === persianMirror.version_doi && persianMirror.record_id === 22950341, "Persian version DOI needs exact mirror evidence");
+check(persianMirror.anonymous && persianMirror.all_assets_matched && persianMirror.files.length === 19 && persianMirror.files.every(f => f.matches && /^[0-9a-f]{64}$/.test(f.sha256)), "Persian mirror needs nineteen anonymous exact-byte matches");
 check(script.includes('item.scope_kind === "sample"') && script.includes('"download-samples"') && script.includes('download.setAttribute("aria-label", fullLabel)'), "Compact downloads need separate samples and full accessible labels");
 const persianAudit = JSON.parse(await read(persian.evidence.manager_public_readback));
 check(persian.release_tag === persianAudit.release_tag, "Persian release and evidence must agree");
@@ -37,6 +43,7 @@ check(persianAudit.public_readback.all_assets_matched && persianAudit.public_rea
 check(persianAudit.package_checks.passed && persianAudit.package_checks.epub.distinct_units === 722 && persianAudit.package_checks.html.units === 722, "Persian EPUB and HTML need actual 722-unit structural evidence");
 check(persian.ordered_downloads.slice(0,5).map(x => x.format).join(',') === 'PDF,TEX,ZIP,EPUB,HTML', "Persian needs PDF, direct LaTeX, source ZIP, EPUB, HTML in order");
 for (const download of persian.ordered_downloads) check(persianAudit.public_readback.files.some(f => f.url === download.url && f.bytes === download.bytes && f.sha256 === download.sha256 && f.matches), "Persian download must match anonymous readback");
+for (const download of persian.ordered_downloads) check(persianMirror.files.some(f => f.github_name === download.name && f.bytes === download.bytes && f.sha256 === download.sha256 && f.matches), "Persian download must have a matching Zenodo artifact");
 check(persian.readers.some(x => x.format === 'EPUB' && x.scope_kind === 'complete' && x.source_units === 722), "Persian needs a separately labelled full EPUB");
 check(persianAudit.full_linguistic_certification === false && persian.evidence.complete_linguistic_certification === false, "Persian structural coverage must not imply complete canon review");
 check(html.includes('href="#openlogic-accessible-book"') && html.includes('class="featured-reader"'), "accessible edition needs prominent top navigation and reading links");

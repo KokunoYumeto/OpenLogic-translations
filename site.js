@@ -118,7 +118,7 @@ function link(label, href, primary = false) {
 
 function localEvidenceLink(edition) {
   const evidence = edition.evidence || {};
-  const relative = evidence.local_reader_closure || edition.normalization_evidence || evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback || evidence.commission_scope;
+  const relative = evidence.mirror_public_readback || evidence.local_reader_closure || edition.normalization_evidence || evidence.manager_public_readback || evidence.public_readback || evidence.source_checkpoint_readback || evidence.commission_scope;
   if (!relative || /^(?:[a-z]+:|\/)/i.test(relative) || relative.includes("..")) return null;
   const anchor = document.createElement("a");
   anchor.href = relative;
@@ -131,6 +131,8 @@ function cardFor(edition) {
   const card = document.createElement("article");
   card.className = "edition-card";
   card.id = edition.id;
+  if (edition.metadata_language) card.lang = edition.metadata_language;
+  if (edition.metadata_direction) card.dir = edition.metadata_direction;
   card.tabIndex = -1;
   card.dataset.state = state;
   card.dataset.accessible = String(edition.kind === "accessibility-infrastructure");
@@ -139,6 +141,7 @@ function cardFor(edition) {
     edition.name,
     edition.language_tag,
     nativeNames[edition.language_tag],
+    ...(edition.search_aliases || []),
     ...(edition.scripts || []),
     ...(edition.profiles || []),
     edition.semantic_layer
@@ -195,19 +198,19 @@ function cardFor(edition) {
     actions.classList.add("actions-grouped");
     const heading = document.createElement("p");
     heading.className = "download-heading";
-    heading.textContent = `Complete edition · ${edition.standalone_reader_units} units`;
+    heading.textContent = edition.ui_labels?.complete_edition || `Complete edition · ${edition.standalone_reader_units} units`;
     actions.append(heading);
   }
   const readerUrl = (edition.readers || []).find(item => item.url && !["chapter", "sample"].includes(item.scope_kind))?.url;
   const primary = link(readerUrl ? "Read / download" : "Open release", readerUrl || edition.release, true);
   const repository = link(edition.ui_labels?.repository || "Repository", edition.repository, !primary);
-  const doi = link("DOI", edition.version_doi ? `https://doi.org/${edition.version_doi}` : edition.concept_doi ? `https://doi.org/${edition.concept_doi}` : null);
+  const doi = link(edition.ui_labels?.doi || "DOI", edition.version_doi ? `https://doi.org/${edition.version_doi}` : edition.concept_doi ? `https://doi.org/${edition.concept_doi}` : null);
   const evidence = localEvidenceLink(edition);
   if (orderedDownloads.length) {
     orderedDownloads.forEach((item, index) => {
       const fullLabel = item.download_label || item.profile || item.format;
       const sample = item.scope_kind === "sample";
-      const shortLabel = { TEX: "LaTeX", ZIP: "Source ZIP" }[item.format] || item.format;
+      const shortLabel = { TEX: "LaTeX", ZIP: edition.ui_labels?.source_zip || "Source ZIP" }[item.format] || item.format;
       const download = link(compactDownloads && !sample ? shortLabel : fullLabel, item.url, index === 0);
       if (!download) return;
       if (compactDownloads) {
@@ -219,7 +222,7 @@ function cardFor(edition) {
           samples = document.createElement("details");
           samples.className = "download-samples";
           const summary = document.createElement("summary");
-          summary.textContent = "Script samples · 1 unit each";
+          summary.textContent = edition.ui_labels?.script_samples || "Script samples · 1 unit each";
           samples.append(summary);
         }
         samples.append(download);
@@ -251,7 +254,7 @@ function cardFor(edition) {
   const metadata = compactDownloads ? document.createElement("nav") : actions;
   if (compactDownloads) {
     metadata.className = "edition-metadata";
-    metadata.setAttribute("aria-label", `${edition.name} publication and evidence`);
+    metadata.setAttribute("aria-label", edition.ui_labels?.publication_and_evidence || `${edition.name} publication and evidence`);
     actions.append(metadata);
   }
   [repository, doi, evidence].filter(Boolean).forEach(item => metadata.append(item));

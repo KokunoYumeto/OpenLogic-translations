@@ -98,7 +98,7 @@
         "Netherlands Dutch",
         "Nederlands"
       ],
-      "semantic_layer": "Wetenschappelijk Nederlands; gedeeltelijke bronuitgave",
+      "semantic_layer": "Wetenschappelijk Nederlands; gedeeltelijke leesuitgave",
       "scripts": [
         "Latn"
       ],
@@ -108,41 +108,43 @@
       ],
       "source_revision": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
       "repository": "https://github.com/KokunoYumeto/OpenLogic-nl",
-      "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.3.0-paired-160-of-722-source",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.4.0-paired-160-of-722-readers",
       "license": "CC BY 4.0; oorspronkelijke componentvermeldingen blijven behouden.",
       "source_units_translated": 160,
-      "standalone_reader_units": 0,
+      "standalone_reader_units": 160,
       "pair_id": "openlogic-nl-dual-register",
       "paired_edition_id": "openlogic-nl-gewone-mensentaal",
       "status": [
         "partial",
-        "public-source-160/722",
-        "reader-build-pending"
+        "public-reader-160/722",
+        "audit-needed"
       ],
       "evidence": {
-        "manager_public_readback": "evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json",
-        "latest_zenodo_record": "https://zenodo.org/records/22982738",
+        "manager_public_readback": "evidence/DUTCH_READERS160_PUBLIC_20260927.json",
+        "latest_zenodo_record": "https://zenodo.org/records/22985726",
         "public_source_commit": "5a7e37ddb9fea5e8a49927e5651d675430644a50",
         "source_and_target_files_checked": 480,
         "segment_spans_checked": 5637,
         "cited_canon_passages": 225,
-        "full_linguistic_certification": false
+        "full_linguistic_certification": false,
+        "previous_source_public_readback": "evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json",
+        "public_reader_commit": "dc272becebc944d8bb8f389c26edfc5903c66dbe"
       },
       "limitations": [
-        "160 van 722 eenheden; de laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
-        "Samengestelde LaTeX gecontroleerd op tekstidentiteit; nog geen geslaagde compilatie of visuele boekcontrole.",
-        "De online pagina toont LaTeX-brontekst, geen afgewerkte boekweergave.",
-        "Volledige Nederlandstalige deskundigenverantwoording nog niet publiek beschikbaar; segmentkoppelingen zijn gepubliceerd.",
-        "Verpakking en publicatiecontrole: OpenAI Codex — GPT-6 Astra, Ultra effort. Historische modelinstellingen voor alle vertaalbytes niet volledig vastgesteld; geen menselijke beoordeling geclaimd."
+        "160 van 722 eenheden; 562 eenheden ontbreken nog. De laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
+        "EPUB en online lezer zijn gepubliceerd en bytegewijs geverifieerd. Er is geen PDF; de afzonderlijke PDF-bouw mislukte.",
+        "Brede formules kunnen binnen hun eigen regel horizontaal worden verschoven.",
+        "Volledige Nederlandstalige deskundigenverantwoording nog niet als één logboek gepubliceerd; bestaande segmentkoppelingen blijven beschikbaar.",
+      "EPUB-conversie, correcties en bouwcontroles: OpenAI Codex — GPT-5.6 Sol, Ultra-inspanning. De exacte modelinstelling van iedere oudere vertaalpassage is niet afzonderlijk vastgesteld. Verpakking, publicatie en downloadcontrole: OpenAI Codex — GPT-6 Astra, Ultra-inspanning. Geen menselijke redactie of goedkeuring wordt geclaimd."
       ],
       "owner_task_id": "01a073b1-f464-7510-9d99-8f1e58a64d51",
-      "release_tag": "v0.3.0-paired-160-of-722-source",
-      "version_doi": "10.5281/zenodo.22982738",
+      "release_tag": "v0.4.0-paired-160-of-722-readers",
+      "version_doi": "10.5281/zenodo.22985726",
       "concept_doi": "10.5281/zenodo.22969983",
       "source_coverage_label": "Gepubliceerde broneenheden",
-      "status_label": "Bronuitgave · 160/722",
+      "status_label": "Leesuitgave · 160/722",
       "ui_labels": {
-        "standalone_reader": "Gecontroleerde PDF/EPUB",
+        "standalone_reader": "Gepubliceerde EPUB/webreader",
         "repository": "Project",
         "evidence": "Controlebewijs",
         "details": "Reikwijdte en beperkingen"
@@ -150,38 +152,58 @@
       "ordered_downloads": [
         {
           "register": "nl-standard",
-          "name": "00-openlogic-nl-standaard-160.tex",
+          "name": "00-00-openlogic-nl-standaard-160-r5.tex",
           "format": "TEX",
-          "bytes": 803777,
-          "sha256": "4eaf4d66204feddb4db0691541330badb6908812ee6d23332c3c02d8dc19d936",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/00-openlogic-nl-standaard-160.tex",
+          "bytes": 803431,
+          "sha256": "ebc27d2b175081577ce5292a876e1a466f73530013a6919349fd754ce200820b",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-00-openlogic-nl-standaard-160-r5.tex",
           "download_label": "LaTeX — 160 eenheden"
         },
         {
           "register": "nl-standard",
-          "name": "01-openlogic-nl-standaard-160-bronnen.zip",
+          "name": "00-01-openlogic-nl-standaard-160-r5-bronnen.zip",
           "format": "ZIP",
-          "bytes": 1261998,
-          "sha256": "b1bdf438353e5539cdf4a98f7944938cc6c5dba04e06ed74b8aa9b7cc07e16b3",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/01-openlogic-nl-standaard-160-bronnen.zip",
+          "bytes": 1299879,
+          "sha256": "3297abb5ac8a348f8336cdc137d6368c13f8a64518d8d83ef628f207af8e055a",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-01-openlogic-nl-standaard-160-r5-bronnen.zip",
           "download_label": "Volledige bronboom (ZIP)"
+        },
+        {
+          "format": "HTML",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-nl/readers/160-r5/nl-standard/OEBPS/generated/book.xhtml",
+          "download_label": "Online lezen — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
+        },
+        {
+          "register": "nl-standard",
+          "name": "00-02-openlogic-nl-standaard-160-r5.epub",
+          "format": "EPUB",
+          "bytes": 289049,
+          "sha256": "7ab9f724a393f929442d98265a3cff5a90ef64f2d3a50579c144ea73305a3603",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-02-openlogic-nl-standaard-160-r5.epub",
+          "download_label": "EPUB — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
         }
       ],
       "direct_cumulative_source": {
         "register": "nl-standard",
-        "name": "00-openlogic-nl-standaard-160.tex",
+        "name": "00-00-openlogic-nl-standaard-160-r5.tex",
         "format": "TEX",
-        "bytes": 803777,
-        "sha256": "4eaf4d66204feddb4db0691541330badb6908812ee6d23332c3c02d8dc19d936",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/00-openlogic-nl-standaard-160.tex"
+        "bytes": 803431,
+        "sha256": "ebc27d2b175081577ce5292a876e1a466f73530013a6919349fd754ce200820b",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-00-openlogic-nl-standaard-160-r5.tex",
+        "download_label": "LaTeX — 160 eenheden"
       },
       "source_archive": {
         "register": "nl-standard",
-        "name": "01-openlogic-nl-standaard-160-bronnen.zip",
+        "name": "00-01-openlogic-nl-standaard-160-r5-bronnen.zip",
         "format": "ZIP",
-        "bytes": 1261998,
-        "sha256": "b1bdf438353e5539cdf4a98f7944938cc6c5dba04e06ed74b8aa9b7cc07e16b3",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/01-openlogic-nl-standaard-160-bronnen.zip"
+        "bytes": 1299879,
+        "sha256": "3297abb5ac8a348f8336cdc137d6368c13f8a64518d8d83ef628f207af8e055a",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-01-openlogic-nl-standaard-160-r5-bronnen.zip",
+        "download_label": "Volledige bronboom (ZIP)"
       },
       "related_editions": [
         {
@@ -193,7 +215,27 @@
           "url": "#openlogic-nl-gewone-mensentaal"
         }
       ],
-      "epub_coverage_note": "De LaTeX en volledige bronboom zijn gepubliceerd voor 160 van 722 eenheden. Er is nog geen gecontroleerde PDF of EPUB gepubliceerd. Eerdere PDF-bouwpogingen kregen de gedeelde TeX-vergrendeling niet; voor een EPUB is die vergrendeling niet vereist."
+      "epub_coverage_note": "EPUB en online lezer bevatten 160 van 722 eenheden. Volledige LaTeX en bijbehorende bron-ZIP zijn gepubliceerd. Er is geen PDF in deze uitgave.",
+      "readers": [
+        {
+          "register": "nl-standard",
+          "name": "00-02-openlogic-nl-standaard-160-r5.epub",
+          "format": "EPUB",
+          "bytes": 289049,
+          "sha256": "7ab9f724a393f929442d98265a3cff5a90ef64f2d3a50579c144ea73305a3603",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-02-openlogic-nl-standaard-160-r5.epub",
+          "download_label": "EPUB — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
+        },
+        {
+          "format": "HTML",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-nl/readers/160-r5/nl-standard/OEBPS/generated/book.xhtml",
+          "download_label": "Online lezen — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
+        }
+      ]
     },
     {
       "id": "openlogic-nl-gewone-mensentaal",
@@ -217,41 +259,43 @@
       ],
       "source_revision": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
       "repository": "https://github.com/KokunoYumeto/OpenLogic-nl",
-      "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.3.0-paired-160-of-722-source",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.4.0-paired-160-of-722-readers",
       "license": "CC BY 4.0; oorspronkelijke componentvermeldingen blijven behouden.",
       "source_units_translated": 160,
-      "standalone_reader_units": 0,
+      "standalone_reader_units": 160,
       "pair_id": "openlogic-nl-dual-register",
       "paired_edition_id": "openlogic-nl-standard",
       "status": [
         "partial",
-        "public-source-160/722",
-        "reader-build-pending"
+        "public-reader-160/722",
+        "audit-needed"
       ],
       "evidence": {
-        "manager_public_readback": "evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json",
-        "latest_zenodo_record": "https://zenodo.org/records/22982738",
+        "manager_public_readback": "evidence/DUTCH_READERS160_PUBLIC_20260927.json",
+        "latest_zenodo_record": "https://zenodo.org/records/22985726",
         "public_source_commit": "5a7e37ddb9fea5e8a49927e5651d675430644a50",
         "source_and_target_files_checked": 480,
         "segment_spans_checked": 5637,
         "cited_canon_passages": 225,
-        "full_linguistic_certification": false
+        "full_linguistic_certification": false,
+        "previous_source_public_readback": "evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json",
+        "public_reader_commit": "dc272becebc944d8bb8f389c26edfc5903c66dbe"
       },
       "limitations": [
-        "160 van 722 eenheden; de laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
-        "Samengestelde LaTeX gecontroleerd op tekstidentiteit; nog geen geslaagde compilatie of visuele boekcontrole.",
-        "De online pagina toont LaTeX-brontekst, geen afgewerkte boekweergave.",
-        "Volledige Nederlandstalige deskundigenverantwoording nog niet publiek beschikbaar; segmentkoppelingen zijn gepubliceerd.",
-        "Verpakking en publicatiecontrole: OpenAI Codex — GPT-6 Astra, Ultra effort. Historische modelinstellingen voor alle vertaalbytes niet volledig vastgesteld; geen menselijke beoordeling geclaimd."
+        "160 van 722 eenheden; 562 eenheden ontbreken nog. De laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
+        "EPUB en online lezer zijn gepubliceerd en bytegewijs geverifieerd. Er is geen PDF; de afzonderlijke PDF-bouw mislukte.",
+        "Brede formules kunnen binnen hun eigen regel horizontaal worden verschoven.",
+        "Volledige Nederlandstalige deskundigenverantwoording nog niet als één logboek gepubliceerd; bestaande segmentkoppelingen blijven beschikbaar.",
+      "EPUB-conversie, correcties en bouwcontroles: OpenAI Codex — GPT-5.6 Sol, Ultra-inspanning. De exacte modelinstelling van iedere oudere vertaalpassage is niet afzonderlijk vastgesteld. Verpakking, publicatie en downloadcontrole: OpenAI Codex — GPT-6 Astra, Ultra-inspanning. Geen menselijke redactie of goedkeuring wordt geclaimd."
       ],
       "owner_task_id": "01a073b1-f464-7510-9d99-8f1e58a64d51",
-      "release_tag": "v0.3.0-paired-160-of-722-source",
-      "version_doi": "10.5281/zenodo.22982738",
+      "release_tag": "v0.4.0-paired-160-of-722-readers",
+      "version_doi": "10.5281/zenodo.22985726",
       "concept_doi": "10.5281/zenodo.22969983",
       "source_coverage_label": "Gepubliceerde broneenheden",
-      "status_label": "Bronuitgave · 160/722",
+      "status_label": "Leesuitgave · 160/722",
       "ui_labels": {
-        "standalone_reader": "Gecontroleerde PDF/EPUB",
+        "standalone_reader": "Gepubliceerde EPUB/webreader",
         "repository": "Project",
         "evidence": "Controlebewijs",
         "details": "Reikwijdte en beperkingen"
@@ -259,38 +303,58 @@
       "ordered_downloads": [
         {
           "register": "nl-gewoon",
-          "name": "02-openlogic-nl-gewone-mensentaal-160.tex",
+          "name": "00-03-openlogic-nl-gewone-mensentaal-160-r5.tex",
           "format": "TEX",
-          "bytes": 808348,
-          "sha256": "2ec1f51a10d1dd04da42942dfc6922481af6508f544d87f8616919fa81806116",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/02-openlogic-nl-gewone-mensentaal-160.tex",
+          "bytes": 808000,
+          "sha256": "4c63076e0622d1bdd401af60640934641c72ad11ef3daf5d1db58682ae052d49",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-03-openlogic-nl-gewone-mensentaal-160-r5.tex",
           "download_label": "LaTeX — 160 eenheden"
         },
         {
           "register": "nl-gewoon",
-          "name": "03-openlogic-nl-gewone-mensentaal-160-bronnen.zip",
+          "name": "00-04-openlogic-nl-gewone-mensentaal-160-r5-bronnen.zip",
           "format": "ZIP",
-          "bytes": 1268874,
-          "sha256": "be9503ab612b789a4d7050d4a7c37d55755e45a5fdb4fdca9acfdd4d3b6242e0",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/03-openlogic-nl-gewone-mensentaal-160-bronnen.zip",
+          "bytes": 1306716,
+          "sha256": "e80528870c5ff984ae5f534f923c7bdeb4998a81b769b6a0349f6a8044b661b8",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-04-openlogic-nl-gewone-mensentaal-160-r5-bronnen.zip",
           "download_label": "Volledige bronboom (ZIP)"
+        },
+        {
+          "format": "HTML",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-nl/readers/160-r5/nl-gewoon/OEBPS/generated/book.xhtml",
+          "download_label": "Online lezen — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
+        },
+        {
+          "register": "nl-gewoon",
+          "name": "00-05-openlogic-nl-gewone-mensentaal-160-r5.epub",
+          "format": "EPUB",
+          "bytes": 294402,
+          "sha256": "2124741160cd11aba84aee3d61b57dfd317a808965de173a2a7952fbcf78859b",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-05-openlogic-nl-gewone-mensentaal-160-r5.epub",
+          "download_label": "EPUB — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
         }
       ],
       "direct_cumulative_source": {
         "register": "nl-gewoon",
-        "name": "02-openlogic-nl-gewone-mensentaal-160.tex",
+        "name": "00-03-openlogic-nl-gewone-mensentaal-160-r5.tex",
         "format": "TEX",
-        "bytes": 808348,
-        "sha256": "2ec1f51a10d1dd04da42942dfc6922481af6508f544d87f8616919fa81806116",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/02-openlogic-nl-gewone-mensentaal-160.tex"
+        "bytes": 808000,
+        "sha256": "4c63076e0622d1bdd401af60640934641c72ad11ef3daf5d1db58682ae052d49",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-03-openlogic-nl-gewone-mensentaal-160-r5.tex",
+        "download_label": "LaTeX — 160 eenheden"
       },
       "source_archive": {
         "register": "nl-gewoon",
-        "name": "03-openlogic-nl-gewone-mensentaal-160-bronnen.zip",
+        "name": "00-04-openlogic-nl-gewone-mensentaal-160-r5-bronnen.zip",
         "format": "ZIP",
-        "bytes": 1268874,
-        "sha256": "be9503ab612b789a4d7050d4a7c37d55755e45a5fdb4fdca9acfdd4d3b6242e0",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.3.0-paired-160-of-722-source/03-openlogic-nl-gewone-mensentaal-160-bronnen.zip"
+        "bytes": 1306716,
+        "sha256": "e80528870c5ff984ae5f534f923c7bdeb4998a81b769b6a0349f6a8044b661b8",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-04-openlogic-nl-gewone-mensentaal-160-r5-bronnen.zip",
+        "download_label": "Volledige bronboom (ZIP)"
       },
       "related_editions": [
         {
@@ -302,7 +366,27 @@
           "url": "#openlogic-nl-standard"
         }
       ],
-      "epub_coverage_note": "De LaTeX en volledige bronboom zijn gepubliceerd voor 160 van 722 eenheden. Er is nog geen gecontroleerde PDF of EPUB gepubliceerd. Eerdere PDF-bouwpogingen kregen de gedeelde TeX-vergrendeling niet; voor een EPUB is die vergrendeling niet vereist."
+      "epub_coverage_note": "EPUB en online lezer bevatten 160 van 722 eenheden. Volledige LaTeX en bijbehorende bron-ZIP zijn gepubliceerd. Er is geen PDF in deze uitgave.",
+      "readers": [
+        {
+          "register": "nl-gewoon",
+          "name": "00-05-openlogic-nl-gewone-mensentaal-160-r5.epub",
+          "format": "EPUB",
+          "bytes": 294402,
+          "sha256": "2124741160cd11aba84aee3d61b57dfd317a808965de173a2a7952fbcf78859b",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/download/v0.4.0-paired-160-of-722-readers/00-05-openlogic-nl-gewone-mensentaal-160-r5.epub",
+          "download_label": "EPUB — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
+        },
+        {
+          "format": "HTML",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-nl/readers/160-r5/nl-gewoon/OEBPS/generated/book.xhtml",
+          "download_label": "Online lezen — 160 eenheden",
+          "scope_kind": "partial",
+          "source_units": 160
+        }
+      ]
     },
     {
       "id": "openlogic-fr",

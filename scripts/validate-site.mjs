@@ -299,7 +299,8 @@ check(gu199Delivery.files.length === 16 && gu199Delivery.files.every(x => x.matc
 check(gu199Checks.frozen_sources_verified === 722 && gu199Checks.native_targets === 199 && gu199Checks.failures.length === 0, "Gujarati199 source inventory must match its scope");
 check(gu199Checks.direct_fulltext_matches_download && gu199Checks.fulltext_unresolved_body_imports.length === 0 && gujaratiCurrent.direct_latex.sha256 === gu199Checks.direct_fulltext_sha256, "Gujarati199 needs exact direct full-text source identity");
 
-const dutchPublication = JSON.parse(await read('evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json'));
+const dutchSourcePublication = JSON.parse(await read('evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json'));
+const dutchPublication = JSON.parse(await read('evidence/DUTCH_READERS160_PUBLIC_20260927.json'));
 const arabic = catalogue.editions.find(item => item.id === 'openlogic-ar');
 const arPublic = JSON.parse(await read(arabic.evidence.manager_public_readback));
 check(createHash('sha256').update(await read(arabic.evidence.manager_public_readback)).digest('hex') === arabic.evidence.manager_public_readback_sha256, 'Arabic public evidence hash must identify the exact published JSON bytes');
@@ -321,16 +322,22 @@ check(arabic.supplementary_downloads.length === 3 && arabic.supplementary_downlo
 check(arabic.readers.filter(r => r.scope_kind === 'chapter').length === 2 && arabic.readers.filter(r => r.scope_kind === 'historical' && r.format === 'PDF').length === 2, 'Preserve both old PDF identities and chapter samples');
 for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   const edition = catalogue.editions.find(item => item.id === id);
-  check(edition.source_units_translated === 160 && edition.standalone_reader_units === 0, `${id}: published source160 is not a compiled reader`);
-  check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP', `${id}: source-only edition needs direct cumulative TEX and full source ZIP`);
+  check(edition.source_units_translated === 160 && edition.standalone_reader_units === 160, `${id}: published reader scope must remain 160/722`);
+  check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP,HTML,EPUB', `${id}: no-PDF reader needs direct cumulative TEX, full source ZIP, online reader and EPUB`);
   check(edition.version_doi === dutchPublication.zenodo.doi && edition.release === dutchPublication.github.release, `${id}: public lineage mismatch`);
-  for (const asset of edition.ordered_downloads) check(dutchPublication.github.assets.some(item => item.name === asset.name && item.sha256 === asset.sha256 && item.bytes === asset.bytes), `${id}: asset readback identity missing`);
-  check(edition.epub_coverage_note.includes('nog geen gecontroleerde PDF of EPUB gepubliceerd'), `${id}: absent readers must remain explicit`);
-  check(edition.epub_coverage_note.includes('voor een EPUB is die vergrendeling niet vereist'), `${id}: EPUB availability must not be tied to the TeX mutex`);
+  for (const asset of edition.ordered_downloads) {
+    if (asset.format === 'HTML') check(dutchPublication.pages.public_readback.some(item => item.url === asset.url && item.anonymous && item.matches), `${id}: online-reader readback missing`);
+    else check(dutchPublication.github.assets.some(item => item.name === asset.name && item.sha256 === asset.sha256 && item.bytes === asset.bytes), `${id}: asset readback identity missing`);
+  }
+  check(edition.epub_coverage_note.includes('160 van 722') && edition.epub_coverage_note.includes('Er is geen PDF'), `${id}: partial scope and absent PDF must remain explicit`);
+  check(edition.readers.length === 2 && edition.readers.every(item => item.source_units === 160 && item.scope_kind === 'partial'), `${id}: no complete-reader claim permitted`);
   check(edition.search_aliases?.includes('Dutch') && edition.search_aliases?.includes('Nederlands'), `${id}: both English and Dutch language names must find the edition`);
   check(edition.metadata_language === 'nl-NL', `${id}: Dutch card metadata must declare its language`);
 }
-check(dutchPublication.github.anonymous_repository_files_verified === 933 && dutchPublication.zenodo.files.length === 6 && dutchPublication.zenodo.inherited_files_metadata_verified === 12, 'Dutch source publication needs exact repository and mirror readback');
+check(dutchSourcePublication.github.anonymous_repository_files_verified === 933 && dutchSourcePublication.zenodo.files.length === 6 && dutchSourcePublication.zenodo.inherited_files_metadata_verified === 12, 'Historical Dutch source-publication receipt must remain intact');
+check(dutchPublication.github.repository_files_verified === 44 && dutchPublication.github.assets.length === 8 && dutchPublication.zenodo.inherited_files_verified === 18, 'Dutch reader source and preservation evidence missing');
+check(dutchPublication.github.public_readback.length === 8 && dutchPublication.zenodo.public_readback.length === 8 && dutchPublication.pages.public_readback.length === 42, 'Dutch reader release needs both mirrors and all deployed web files');
+check([...dutchPublication.github.public_readback, ...dutchPublication.zenodo.public_readback, ...dutchPublication.pages.public_readback].every(item => item.anonymous && item.matches), 'Dutch public-byte check failed');
 
 const result = {
   status: failures.length ? "FAIL" : "PASS",

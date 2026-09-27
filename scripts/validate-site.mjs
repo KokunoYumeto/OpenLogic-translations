@@ -181,7 +181,7 @@ for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlog
 const newDelivery = JSON.parse(await read("evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json"));
 const sourceProgress = JSON.parse(await read("evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json"));
 check(sourceProgress.source_readbacks.length === 26 && sourceProgress.source_readbacks.every(file => file.match), "Telugu/Marathi source readbacks must all match");
-for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",194,194]]) {
+for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",270,194]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sourceUnits && edition.standalone_reader_units === readerUnits, `${id}: cumulative sources must not inflate released reader coverage`);
   check(edition.source_progress.targets_verified === sourceUnits && edition.source_progress.failures === 0, `${id}: public target identity evidence required`);
@@ -218,7 +218,7 @@ check(psCurrent.static_package.frozen_sources_checked === 722 && psCurrent.stati
 check(psEdition.source_progress.commit === psCurrent.commit && psEdition.source_archive.sha256 === psEdition.source_progress.archive_sha256 && psEdition.readers[0].pages === 326, "Pashto255 release identity and page count must agree");
 check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurrent.bounded_language_sample.canon_pages_actually_inspected.length === 2 && psCurrent.visual_sample.whole_pdf_visual_certification === false, "Keep the Pashto sample audit bounded");
 check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
-for (const [id, sources, units] of [["openlogic-ps-arab-pk",300,255],["openlogic-bn-beng-in",514,299]]) {
+for (const [id, sources, units] of [["openlogic-ps-arab-pk",300,255],["openlogic-bn-beng-in",599,299]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
@@ -236,6 +236,13 @@ const updatedBnTe = JSON.parse(await read("evidence/SOURCE_PROGRESS_BN496_TE394_
 const bengali514 = JSON.parse(await read("evidence/BN514_PUBLIC_SOURCE_20260926.json"));
 check(bengali514.changed_units === 18 && bengali514.changed_segments === 167 && bengali514.changed_language_segments === 145 && bengali514.failures.length === 0, "Bengali514 requires exact changed-segment replay, not an owner count alone");
 check(bengali514.bounded_semantic_check.source_correction_id === 'BN-SRC-411' && bengali514.canon_sample.original_visually_inspected && !bengali514.full_semantic_reaudit, "Keep Bengali source/canon sampling bounded and source-grounded");
+const bnMrCurrent = JSON.parse(await read("evidence/BN599_MR270_SOURCE_CHECK_20260927.json"));
+check(bnMrCurrent.bn.changed_units === 85 && bnMrCurrent.bn.changed_segments === 844 && bnMrCurrent.bn.changed_language_segments === 798, 'Bengali599 requires actual85-unit /844-segment replay');
+check(bnMrCurrent.mr.targets_verified === 270 && bnMrCurrent.mr.reader_units === 194 && bnMrCurrent.mr.changed_segments === 634 && bnMrCurrent.mr.changed_language_segments === null, 'Marathi270 source coverage must not inflate readers or assert an unmeasured linguistic delta');
+check(bnMrCurrent.mr_public_tree.selected_local_git_objects_matching_public_blob_ids === 999 && bnMrCurrent.mr_public_tree.anonymous_raw_byte_checks.length === 4, 'Marathi270 needs public Git object identities and bounded raw byte evidence');
+check(bnMrCurrent.bn.canon_sample.original_page_visually_inspected && bnMrCurrent.mr.canon_sample.original_page_visually_inspected && !bnMrCurrent.full_semantic_reaudit && !bnMrCurrent.new_reader_release, 'Source/canon samples must retain their bounded scope');
+check(bnMrCurrent.mr.pending_reader_defect.released194_contains_sample === false, 'Pending Marathi reader defect must not be attributed to the released194 reader');
+for(const lane of ['bn','mr'])check(bnMrCurrent[lane].failures.length===0 && bnMrCurrent[lane].frozen_sources_verified===722, 'Each source checkpoint needs complete frozen-source identity replay');
 const telugu410 = JSON.parse(await read("evidence/TE410_PUBLIC_SOURCE_MIRROR_20260926.json"));
 check(telugu410.changed_units === 16 && telugu410.changed_segments === 247 && telugu410.changed_linguistic_segments === 141 && telugu410.failures.length === 0, "Telugu410 requires actual changed-segment replay");
 check(telugu410.zenodo.latest_record === 22309234 && telugu410.zenodo.reader276_mirror === false, "Preserve the historical Telugu mirror-gap finding");
@@ -249,7 +256,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 }
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = catalogue.editions.find(item => item.id === id);
-  const source = lane === 'te' ? telugu410 : lane === 'bn' ? bengali514 : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'te' ? telugu410 : lane === 'bn' ? bnMrCurrent.bn : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && source.reader_units === edition.standalone_reader_units && source.full_semantic_reaudit === false, `${id}: source checkpoint must not inflate reader coverage or semantic assurance`);
 }

@@ -336,19 +336,25 @@ for (const r of arFull) {
 check(arabic.ordered_downloads.map(r => r.format).join(',') === 'TEX,ZIP,EPUB', 'Current Arabic EPUB downloads need direct TEX and full-source ZIP, with no mispaired historical PDF');
 check(arabic.supplementary_downloads.length === 3 && arabic.supplementary_downloads[2].downloads.some(d => d.url.endsWith('ar-olp-0722-complete-dual-notation-r2-20260903')), 'Historical Arabic reader access must be retained');
 check(arabic.readers.filter(r => r.scope_kind === 'chapter').length === 2 && arabic.readers.filter(r => r.scope_kind === 'historical' && r.format === 'PDF').length === 2, 'Preserve both old PDF identities and chapter samples');
+const dutchCurrent = JSON.parse(await read('evidence/DUTCH_READERS192_PUBLIC_20260927.json'));
+check(dutchCurrent.package_checks.failures.length === 0 && dutchCurrent.package_checks.assets.length === 10, 'Dutch192 requires all ten exact package assets');
+check(dutchCurrent.github.files.length === 10 && dutchCurrent.zenodo.files.length === 10 && [...dutchCurrent.github.files, ...dutchCurrent.zenodo.files].every(x => x.matches), 'Dutch192 needs ten anonymous matches on both mirrors');
+check(dutchCurrent.html.length === 2 && dutchCurrent.html.every(x => x.matches && x.ordered_anchors === 192), 'Dutch192 needs two ordered 192-unit online readers');
+check(dutchCurrent.package_checks.assets.filter(x => x.aligned_target_units_verified === 192 && x.direct_tex_identical).length === 2, 'Dutch192 direct LaTeX and paired source archives must match');
+check(dutchCurrent.full_linguistic_certification === false && dutchCurrent.review_log.entries === 643, 'Dutch192 review ledger is not linguistic certification');
 for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   const edition = catalogue.editions.find(item => item.id === id);
-  check(edition.source_units_translated === 160 && edition.standalone_reader_units === 160, `${id}: published reader scope must remain 160/722`);
-  check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP,HTML,EPUB', `${id}: no-PDF reader needs direct cumulative TEX, full source ZIP, online reader and EPUB`);
-  check(edition.version_doi === dutchPublication.zenodo.doi && edition.release === dutchPublication.github.release, `${id}: public lineage mismatch`);
+  check(edition.source_units_translated === 192 && edition.standalone_reader_units === 192, `${id}: published reader scope must remain 192/722`);
+  check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP,HTML,EPUB', `${id}: direct LaTeX, full source ZIP, online reader and EPUB required`);
+  check(edition.version_doi === dutchCurrent.zenodo.doi && edition.release === dutchCurrent.github.release, `${id}: public lineage mismatch`);
   for (const asset of edition.ordered_downloads) {
-    if (asset.format === 'HTML') check(dutchPublication.html_compatibility.public_readback.some(item => item.url === asset.url && item.anonymous && item.matches), `${id}: online-reader readback missing`);
-    else check(dutchPublication.github.assets.some(item => item.name === asset.name && item.sha256 === asset.sha256 && item.bytes === asset.bytes), `${id}: asset readback identity missing`);
+    if (asset.format === 'HTML') check(dutchCurrent.html.some(item => item.url === asset.url && item.matches), `${id}: online-reader readback missing`);
+    else for (const mirror of [dutchCurrent.github, dutchCurrent.zenodo]) check(mirror.files.some(item => item.name === asset.name && item.sha256 === asset.sha256 && item.bytes === asset.bytes && item.matches), `${id}: asset mirror identity missing`);
   }
-  check(edition.epub_coverage_note.includes('160 van 722') && edition.epub_coverage_note.includes('Er is geen PDF'), `${id}: partial scope and absent PDF must remain explicit`);
-  check(edition.readers.length === 2 && edition.readers.every(item => item.source_units === 160 && item.scope_kind === 'partial'), `${id}: no complete-reader claim permitted`);
-  check(edition.search_aliases?.includes('Dutch') && edition.search_aliases?.includes('Nederlands'), `${id}: both English and Dutch language names must find the edition`);
-  check(edition.metadata_language === 'nl-NL', `${id}: Dutch card metadata must declare its language`);
+  check(edition.epub_coverage_note.includes('192 van 722') && edition.epub_coverage_note.includes('Er is geen PDF'), `${id}: partial scope and absent PDF must remain explicit`);
+  check(edition.readers.length === 2 && edition.readers.every(item => item.source_units === 192 && item.scope_kind === 'partial'), `${id}: no complete-reader claim permitted`);
+  check(edition.search_aliases?.includes('Dutch') && edition.search_aliases?.includes('Nederlands'), `${id}: native and English names required`);
+  check(edition.metadata_language === 'nl-NL', `${id}: Dutch metadata language required`);
 }
 check(dutchSourcePublication.github.anonymous_repository_files_verified === 933 && dutchSourcePublication.zenodo.files.length === 6 && dutchSourcePublication.zenodo.inherited_files_metadata_verified === 12, 'Historical Dutch source-publication receipt must remain intact');
 check(dutchPublication.github.repository_files_verified === 44 && dutchPublication.github.assets.length === 8 && dutchPublication.zenodo.inherited_files_verified === 18, 'Dutch reader source and preservation evidence missing');

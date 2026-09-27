@@ -345,6 +345,7 @@ check(dutchCurrent.full_linguistic_certification === false && dutchCurrent.revie
 for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === 192 && edition.standalone_reader_units === 192, `${id}: published reader scope must remain 192/722`);
+  check(edition.profiles[0] === `${edition.standalone_reader_units} corresponderende broneenheden in twee registers`, `${id}: profile description must match published reader coverage`);
   check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP,HTML,EPUB', `${id}: direct LaTeX, full source ZIP, online reader and EPUB required`);
   check(edition.version_doi === dutchCurrent.zenodo.doi && edition.release === dutchCurrent.github.release, `${id}: public lineage mismatch`);
   for (const asset of edition.ordered_downloads) {

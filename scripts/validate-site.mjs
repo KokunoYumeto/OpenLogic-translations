@@ -35,17 +35,27 @@ check(persian.metadata_language === "fa-IR" && persian.metadata_direction === "r
 check(html.includes('site.js?v=20260927-romance-public-evidence') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Localized navigation and current publication evidence must reach browsers with a fresh script URL");
 check(persian.search_aliases?.includes("Persian") && persian.search_aliases?.includes("Farsi"), "Localized Persian must remain searchable by its English aliases");
 check(persian.ui_labels?.script_samples?.includes("یک واحد") && persian.ui_labels?.publication_and_evidence, "Persian sample and metadata navigation must be localized");
-const persianMirror = JSON.parse(await read(persian.evidence.mirror_public_readback));
-check(persian.version_doi === persianMirror.version_doi && persianMirror.record_id === 22950341, "Persian version DOI needs exact mirror evidence");
-check(persianMirror.anonymous && persianMirror.all_assets_matched && persianMirror.files.length === 19 && persianMirror.files.every(f => f.matches && /^[0-9a-f]{64}$/.test(f.sha256)), "Persian mirror needs nineteen anonymous exact-byte matches");
+const persianMirror = JSON.parse(await read(persian.evidence.mirror_public_readback)).public_readback;
+check(persian.version_doi === persianMirror.version_doi && persianMirror.record_id === 23001846, "Persian version DOI needs exact R9 mirror evidence");
+check(persianMirror.anonymous && persianMirror.all_assets_matched && persianMirror.files.length === 7 && persianMirror.files.every(f => f.github_matches && f.zenodo_matches && /^[0-9a-f]{64}$/.test(f.sha256)), "Persian R9 needs seven files verified anonymously on both mirrors");
 check(script.includes('item.scope_kind === "sample"') && script.includes('"download-samples"') && script.includes('download.setAttribute("aria-label", fullLabel)'), "Compact downloads need separate samples and full accessible labels");
 const persianAudit = JSON.parse(await read(persian.evidence.manager_public_readback));
 check(persian.release_tag === persianAudit.release_tag, "Persian release and evidence must agree");
-check(persianAudit.public_readback.all_assets_matched && persianAudit.public_readback.files.length === 19, "Persian full release requires nineteen verified public files");
+check(persianAudit.public_readback.all_assets_matched && persianAudit.public_readback.files.length === 7, "Persian R9 release requires seven verified headline files");
 check(persianAudit.package_checks.passed && persianAudit.package_checks.epub.distinct_units === 722 && persianAudit.package_checks.html.units === 722, "Persian EPUB and HTML need actual 722-unit structural evidence");
-check(persian.ordered_downloads.slice(0,5).map(x => x.format).join(',') === 'PDF,TEX,ZIP,EPUB,HTML', "Persian needs PDF, direct LaTeX, source ZIP, EPUB, HTML in order");
-for (const download of persian.ordered_downloads) check(persianAudit.public_readback.files.some(f => f.url === download.url && f.bytes === download.bytes && f.sha256 === download.sha256 && f.matches), "Persian download must match anonymous readback");
-for (const download of persian.ordered_downloads) check(persianMirror.files.some(f => f.github_name === download.name && f.bytes === download.bytes && f.sha256 === download.sha256 && f.matches), "Persian download must have a matching Zenodo artifact");
+check(persian.ordered_downloads.slice(0,3).map(x => x.format).join(',') === 'PDF,TEX,ZIP', "Persian primary PDF needs its matching direct LaTeX and source ZIP");
+const persianReflowable = persian.supplementary_downloads?.[0]?.downloads || [];
+check(persianReflowable.map(x => x.format).join(',') === 'EPUB,TEX,ZIP,HTML', "Persian reflowable disclosure needs EPUB, matching direct LaTeX, source ZIP, HTML");
+const persianCurrentDownloads = [...persian.ordered_downloads.filter(x => x.scope_kind !== 'sample'), ...persianReflowable];
+check(persianCurrentDownloads.length === 7, "Persian R9 must expose exactly seven new headline downloads");
+for (const download of persianCurrentDownloads) check(persianMirror.files.some(f => f.name === download.name && f.url === download.url && f.bytes === download.bytes && f.sha256 === download.sha256 && f.github_matches && f.zenodo_matches), "Persian R9 download must match both public mirrors");
+check(persianAudit.package_checks.source_packages.length === 2 && persianAudit.package_checks.source_packages.every(p => p.crc_passed && p.direct_source_matches.length > 0), "Both Persian source ZIPs must contain their matching cumulative LaTeX");
+const persianSampleAudit = JSON.parse(await read(persian.evidence.retained_sample_readback));
+const persianSampleMirror = JSON.parse(await read(persian.evidence.retained_sample_mirror));
+for (const download of persian.ordered_downloads.filter(x => x.scope_kind === 'sample')) {
+  check(persianSampleAudit.public_readback.files.some(f => f.url === download.url && f.bytes === download.bytes && f.sha256 === download.sha256 && f.matches), "Retained Persian sample must retain its original GitHub proof");
+  check(persianSampleMirror.files.some(f => f.github_name === download.name && f.bytes === download.bytes && f.sha256 === download.sha256 && f.matches), "Retained Persian sample must retain its original Zenodo proof");
+}
 check(persian.readers.some(x => x.format === 'EPUB' && x.scope_kind === 'complete' && x.source_units === 722), "Persian needs a separately labelled full EPUB");
 check(persianAudit.full_linguistic_certification === false && persian.evidence.complete_linguistic_certification === false, "Persian structural coverage must not imply complete canon review");
 check(html.includes('href="#openlogic-accessible-book"') && html.includes('class="featured-reader"'), "accessible edition needs prominent top navigation and reading links");

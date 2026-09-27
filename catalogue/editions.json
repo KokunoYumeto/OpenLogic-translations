@@ -760,7 +760,7 @@
     {
       "id": "openlogic-ar",
       "owner_task_id": "01a06749-ba43-7f83-8546-af3f8cb46dec",
-      "name": "العربية — نسخ EPUB كاملة",
+      "name": "العربية — ثلاث طبعات كاملة",
       "language_tag": "ar",
       "semantic_layer": "الفصحى المعاصرة بترميزين، وصياغة عربية تراثية مستقلة",
       "scripts": [
@@ -772,18 +772,56 @@
         "تضم كل نسخة EPUB الوحدات المصدرية الـ٧٢٢ في كتاب واحد."
       ],
       "repository": "https://github.com/KokunoYumeto/OpenLogic-ar",
-      "release": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-olp-0722-complete-epubs-20260925",
-      "release_tag": "ar-olp-0722-complete-epubs-20260925",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-openlogic-translation-review-complete-20260927",
+      "release_tag": "ar-openlogic-translation-review-complete-20260927",
       "concept_doi": "10.5281/zenodo.21921850",
-      "version_doi": "10.5281/zenodo.22951266",
+      "version_doi": "10.5281/zenodo.22992798",
       "license": "CC BY 4.0؛ تُحفظ إشعارات المكونات الأصلية.",
       "source_units_translated": 722,
       "standalone_reader_units": 722,
       "retained_units_outside_reader": 0,
       "status": [
-        "verified-standalone-722"
+        "verified-standalone-722",
+        "classical-pdf-rendering-correction-required"
       ],
       "readers": [
+        {
+          "name": "00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf",
+          "format": "PDF",
+          "bytes": 10623654,
+          "sha256": "683bef802b135ed6600964e708409a6aec4104cf48652243ae23ea7c28085dfb",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf",
+          "download_label": "PDF كامل — الفصحى المعاصرة — الترميز الدولي",
+          "profile": "international",
+          "pages": 1164,
+          "source_units": 722,
+          "scope_kind": "complete"
+        },
+        {
+          "name": "03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf",
+          "format": "PDF",
+          "bytes": 10626262,
+          "sha256": "2785c0fd802b4428a910c235483fbf1f10114c103ec9ab42e15fd33ead657cde",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf",
+          "download_label": "PDF كامل — الفصحى المعاصرة — ترميز المشرق",
+          "profile": "machrek",
+          "pages": 1165,
+          "source_units": 722,
+          "scope_kind": "complete"
+        },
+        {
+          "name": "00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf",
+          "format": "PDF",
+          "bytes": 10601535,
+          "sha256": "5ac974eb190038fb948ae180e4d76fd36e7d7926423cefa1fbb3d689968bfd99",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf",
+          "download_label": "PDF كامل — الصياغة التراثية — مع تنبيه إلى خلل اتجاه len",
+          "profile": "classical",
+          "pages": 1145,
+          "source_units": 722,
+          "scope_kind": "complete",
+          "known_rendering_issue": "OLI-AR-CLASSICAL-LEN-RTL-20260927"
+        },
         {
           "name": "22_OpenLogic-Arabic-Complete-722-international.epub",
           "format": "EPUB",
@@ -881,28 +919,32 @@
           "mirror_doi": "10.5281/zenodo.22730261"
         }
       ],
-      "epub_coverage_note": "أُعيد بناء ملفات EPUB الثلاثة من المصادر المنشورة فطابقت الملفات الأصلية بايتًا ببايت. يضم كل كتاب ٨١٢ مستند XHTML و٧٢٢ وحدة مصدرية؛ لم تُكتشف روابط داخلية مكسورة في هذا الفحص. ملفات PDF السابقة محفوظة في مجموعة منفصلة وليست نسخًا من هذه المزامنة.",
+      "epub_coverage_note": "ثلاثة كتب PDF وثلاثة كتب EPUB كاملة من حيث التغطية، ٧٢٢ وحدة لكل كتاب، مع مصادر كل بناء. دليل المراجعة يضم ١٠٩٥ اختيارًا؛ يوجد تنبيه محدد إلى انعكاس len في PDF التراثي.",
       "epub_delivery_evidence": "evidence/ARABIC_BENGALI_CHAPTER_EPUB_READBACK_20260913.json",
       "evidence": {
         "qa_sha256": "88073781f39253101b483c8490ebd0f5ce01d69522fbbb0c2d0542189a645099",
         "public_manifest_sha256": "3e1bd7b76e69992ecbf386364261c1aa279f9e8dae377612b6131389660902a3",
         "public_manifest_github_zenodo_byte_equal": true,
-        "manager_public_readback": "evidence/ARABIC_COMPLETE_EPUB_PUBLIC_20260926.json",
-        "manager_public_readback_sha256": "b807a7e6ffc5d97188a0d032c83f6d62699d00b966a5ebaf2bf96f9f6ea50b10",
-        "latest_zenodo_record": "https://zenodo.org/records/22951266",
+        "manager_public_readback": "evidence/ARABIC_READERS_REVIEW_PUBLIC_20260927.json",
+        "manager_public_readback_sha256": "1eba1df154a328cfe8f819b6005ba8e8ffe242b07ac830d028e5eb539fa8550a",
+        "latest_zenodo_record": "https://zenodo.org/records/22992798",
         "legacy_pdf_public_readback": "evidence/ARABIC_DUAL_R2_PUBLIC_READBACK_20260905.json",
         "legacy_pdf_public_readback_sha256": "d62f01ab708c0ad489429768e2df51149145d0f3970730bad1dbedd941d437da",
-      "package_checks": "evidence/ARABIC_COMPLETE_EPUB_PACKAGE_CHECKS_20260926.json",
-      "metadata_choices": "evidence/ARABIC_HUB_METADATA_CHOICES_20260926.jsonl",
+        "package_checks": "evidence/ARABIC_COMPLETE_EPUB_PACKAGE_CHECKS_20260926.json",
+        "metadata_choices": "evidence/ARABIC_HUB_METADATA_CHOICES_20260926.jsonl",
         "independent_epub_source_units_each": 722,
-        "full_linguistic_certification": false
+        "full_linguistic_certification": false,
+        "current_readers_and_review": "evidence/ARABIC_READERS_REVIEW_PUBLIC_20260927.json"
       },
       "limitations": [
+        "تنبيه في PDF التراثي: يظهر اسم الدالة اللاتيني len بترتيب حروف معكوس في صفحة PDF ٣٣ (المطبوعة ٣٢). الخلل مؤكد ومحال للإصلاح، ولم يُصلح بعد في هذا الملف.",
         "هذه فحوص تغطية ومصادر وروابط وإعادة بناء؛ لا تثبت صحة كل اختيار لغوي.",
         "إيصالات الناشر تسجل EPUBCheck 5.3.0 وAce 1.4.6؛ لم يُعَد تشغيل الأداتين في فحص الفهرس هذا.",
         "الترجمة والتصحيح: OpenAI Codex — GPT-5.6 Sol، بمستوى جهد Ultra؛ لا تُدَّعى مراجعة بشرية شاملة.",
-        "ملفات PDF السابقة غير موسومة؛ لا يُدَّعى امتثالها لمعيار PDF/UA.",
-        "تحديث الفهرس والتحقق من الحزم: OpenAI Codex — GPT-6 Astra، بمستوى جهد Ultra."
+        "تحديث الفهرس والتحقق من الحزم: OpenAI Codex — GPT-6 Astra، بمستوى جهد Ultra.",
+        "ملفات PDF غير موسومة؛ لا يُدَّعى امتثالها لمعيار PDF/UA. تختلف تواريخ بناء PDF وEPUB، وتبقى المصادر المطابقة لكل بناء متاحة.",
+        "دليل المراجعة مكتمل: ١٠٩٥ سجلًا مميزًا مع بطاقات مرتبطة، لا ١٠٩٥ موافقة بشرية. التعليلات اللاحقة لا تُنسب بأثر رجعي إلى المترجم الأول.",
+        "الفهرس العربي والتعليلات اللاحقة والتدقيق المعجمي: OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra، وفق بيان ناشر الطبعة."
       ],
       "metadata_language": "ar",
       "metadata_direction": "rtl",
@@ -928,55 +970,117 @@
       },
       "ordered_downloads": [
         {
-          "name": "20_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
-          "format": "TEX",
-          "bytes": 4025078,
-          "sha256": "051de03c66a60b204c65ea69a045f5e5894e3d704ac345dd49d384298ec7adbb",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/20_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
-          "download_label": "LaTeX كامل — الترميز الدولي"
-        },
-        {
-          "name": "29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip",
-          "format": "ZIP",
-          "bytes": 297333390,
-          "sha256": "9b247f33daf75b849df4711ff3b14f30d5f446e251dc66952e9930c38c404351",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip",
-          "download_label": "المصادر الكاملة للنسخ الثلاث وإعادة بناء EPUB — ٢٩٧ ميغابايت"
-        },
-        {
-          "name": "22_OpenLogic-Arabic-Complete-722-international.epub",
-          "format": "EPUB",
-          "bytes": 4595753,
-          "sha256": "a4c5333d974a0d8ecdb0e70304756dadca9b596c3aad7374e02ae63c8b567568",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/22_OpenLogic-Arabic-Complete-722-international.epub",
-          "download_label": "EPUB كامل — الفصحى المعاصرة — الترميز الدولي",
+          "name": "00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf",
+          "format": "PDF",
+          "bytes": 10623654,
+          "sha256": "683bef802b135ed6600964e708409a6aec4104cf48652243ae23ea7c28085dfb",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/00_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.pdf",
+          "download_label": "PDF كامل — الفصحى المعاصرة — الترميز الدولي",
           "profile": "international",
+          "pages": 1164,
           "source_units": 722,
-          "scope_kind": "complete",
-          "mirror_doi": "10.5281/zenodo.22951266"
+          "scope_kind": "complete"
+        },
+        {
+          "name": "01_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
+          "format": "TEX",
+          "bytes": 4025044,
+          "sha256": "a19327ea009c95ca38224557196e052cb667a91627281ad07696066d04b525d7",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/01_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
+          "download_label": "LaTeX الكامل المطابق لملف PDF"
+        },
+        {
+          "name": "02_OPENLOGIC_ar_R3_MSA_INTERNATIONAL_SOURCES.zip",
+          "format": "ZIP",
+          "bytes": 14572156,
+          "sha256": "0778bae69648a38d41d72ba5fa0799c2b181bdf1732889ab888ff359018c10b5",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/02_OPENLOGIC_ar_R3_MSA_INTERNATIONAL_SOURCES.zip",
+          "download_label": "مصادر PDF كاملة وإرشادات البناء"
         }
       ],
       "direct_cumulative_source": {
-        "name": "20_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
+        "name": "01_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
         "format": "TEX",
-        "bytes": 4025078,
-        "sha256": "051de03c66a60b204c65ea69a045f5e5894e3d704ac345dd49d384298ec7adbb",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/20_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
-        "download_label": "LaTeX كامل — الترميز الدولي"
+        "bytes": 4025044,
+        "sha256": "a19327ea009c95ca38224557196e052cb667a91627281ad07696066d04b525d7",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/01_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
+        "download_label": "LaTeX الكامل المطابق لملف PDF"
       },
       "source_archive": {
-        "name": "29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip",
+        "name": "02_OPENLOGIC_ar_R3_MSA_INTERNATIONAL_SOURCES.zip",
         "format": "ZIP",
-        "bytes": 297333390,
-        "sha256": "9b247f33daf75b849df4711ff3b14f30d5f446e251dc66952e9930c38c404351",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip",
-        "download_label": "المصادر الكاملة للنسخ الثلاث وإعادة بناء EPUB — ٢٩٧ ميغابايت"
+        "bytes": 14572156,
+        "sha256": "0778bae69648a38d41d72ba5fa0799c2b181bdf1732889ab888ff359018c10b5",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/02_OPENLOGIC_ar_R3_MSA_INTERNATIONAL_SOURCES.zip",
+        "download_label": "مصادر PDF كاملة وإرشادات البناء"
       },
       "supplementary_downloads": [
         {
-          "title": "الفصحى المعاصرة — ترميز المشرق",
-          "note": "نفس النص بالفصحى المعاصرة مع الأرقام العربية الشرقية؛ الصيغ مرتبة من اليسار إلى اليمين.",
+          "title": "EPUB — الفصحى المعاصرة بالترميز الدولي",
+          "note": "مصادر EPUB مستقلة عن حزمة PDF؛ تُحفظ ملفات كل بناء على حدة.",
           "downloads": [
+            {
+              "name": "20_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
+              "format": "TEX",
+              "bytes": 4025078,
+              "sha256": "051de03c66a60b204c65ea69a045f5e5894e3d704ac345dd49d384298ec7adbb",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/20_OPENLOGIC_ar_R3_MSA_INTERNATIONAL.tex",
+              "download_label": "LaTeX كامل — الترميز الدولي"
+            },
+            {
+              "name": "29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip",
+              "format": "ZIP",
+              "bytes": 297333390,
+              "sha256": "9b247f33daf75b849df4711ff3b14f30d5f446e251dc66952e9930c38c404351",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/29_OPENLOGIC_ar_R3_COMPLETE_EPUB_SOURCE_AND_QA.zip",
+              "download_label": "المصادر الكاملة للنسخ الثلاث وإعادة بناء EPUB — ٢٩٧ ميغابايت"
+            },
+            {
+              "name": "22_OpenLogic-Arabic-Complete-722-international.epub",
+              "format": "EPUB",
+              "bytes": 4595753,
+              "sha256": "a4c5333d974a0d8ecdb0e70304756dadca9b596c3aad7374e02ae63c8b567568",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-complete-epubs-20260925/22_OpenLogic-Arabic-Complete-722-international.epub",
+              "download_label": "EPUB كامل — الفصحى المعاصرة — الترميز الدولي",
+              "profile": "international",
+              "source_units": 722,
+              "scope_kind": "complete",
+              "mirror_doi": "10.5281/zenodo.22951266"
+            }
+          ]
+        },
+        {
+          "title": "الفصحى المعاصرة — ترميز المشرق",
+          "note": "نفس النص بالفصحى المعاصرة مع الأرقام العربية الشرقية؛ الصيغ مرتبة من اليسار إلى اليمين. يأتي PDF ومصدراه أولًا، ثم مصادر EPUB وكتابه.",
+          "downloads": [
+            {
+              "name": "03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf",
+              "format": "PDF",
+              "bytes": 10626262,
+              "sha256": "2785c0fd802b4428a910c235483fbf1f10114c103ec9ab42e15fd33ead657cde",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/03_OPENLOGIC_ar_R3_MSA_MACHREK.pdf",
+              "download_label": "PDF كامل — الفصحى المعاصرة — ترميز المشرق",
+              "profile": "machrek",
+              "pages": 1165,
+              "source_units": 722,
+              "scope_kind": "complete"
+            },
+            {
+              "name": "04_OPENLOGIC_ar_R3_MSA_MACHREK.tex",
+              "format": "TEX",
+              "bytes": 4024909,
+              "sha256": "d30ad7947f2a4966959dbf15114d4ac6e30a3031dbe464420bed444566489289",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/04_OPENLOGIC_ar_R3_MSA_MACHREK.tex",
+              "download_label": "LaTeX الكامل المطابق لملف PDF"
+            },
+            {
+              "name": "05_OPENLOGIC_ar_R3_MSA_MACHREK_SOURCES.zip",
+              "format": "ZIP",
+              "bytes": 14562915,
+              "sha256": "e40a389fc615325c982c04b5e976071caa436a6c6d4a80f8927973b4bf79a973",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-current-msa-pdf-sync-20260924/05_OPENLOGIC_ar_R3_MSA_MACHREK_SOURCES.zip",
+              "download_label": "مصادر PDF كاملة وإرشادات البناء"
+            },
             {
               "name": "23_OPENLOGIC_ar_R3_MSA_MACHREK.tex",
               "format": "TEX",
@@ -1009,8 +1113,37 @@
         },
         {
           "title": "الصياغة العربية التراثية — الترميز الشرقي",
-          "note": "صياغة لغوية مستقلة مع صيغ من اليمين إلى اليسار؛ تظل أمثلة الترميز الدولي معلّمة صراحةً.",
+          "note": "ملف PDF كامل من حيث الوحدات، لكن اسم الدالة اللاتيني len يظهر معكوسًا بصريًا (nel) في صفحة PDF ٣٣، المطبوعة ٣٢. أُحيل الخلل إلى مالك الطبعة لإصلاح اتجاه أسماء الدوال اللاتينية؛ لا يُدَّعى إصلاحه بعد. لكل من PDF وEPUB مصدره المطابق.",
           "downloads": [
+            {
+              "name": "00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf",
+              "format": "PDF",
+              "bytes": 10601535,
+              "sha256": "5ac974eb190038fb948ae180e4d76fd36e7d7926423cefa1fbb3d689968bfd99",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-01_OPENLOGIC_ar_R3_READER.pdf",
+              "download_label": "PDF كامل — الصياغة التراثية — مع تنبيه إلى خلل اتجاه len",
+              "profile": "classical",
+              "pages": 1145,
+              "source_units": 722,
+              "scope_kind": "complete",
+              "known_rendering_issue": "OLI-AR-CLASSICAL-LEN-RTL-20260927"
+            },
+            {
+              "name": "00-CLASSICAL-02_OPENLOGIC_ar_R3_CUMULATIVE.tex",
+              "format": "TEX",
+              "bytes": 5437160,
+              "sha256": "ef0af1ddd471b58a4ccab3338e2595df48cd43e369d738b10ddaa410d53bc6f5",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-02_OPENLOGIC_ar_R3_CUMULATIVE.tex",
+              "download_label": "LaTeX الكامل المطابق لملف PDF"
+            },
+            {
+              "name": "00-CLASSICAL-03_OPENLOGIC_ar_R3_SOURCES.zip",
+              "format": "ZIP",
+              "bytes": 105037915,
+              "sha256": "d8543857f089e2ace6ae6b59fb8e5dcd0b1ff324189dd59a65fa88f613f3f4eb",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-olp-0722-classical-eastern-rtl-complete-20260926/00-CLASSICAL-03_OPENLOGIC_ar_R3_SOURCES.zip",
+              "download_label": "مصادر PDF كاملة وإرشادات البناء"
+            },
             {
               "name": "26_OPENLOGIC_ar_R3_CLASSICAL_EASTERN_RTL.tex",
               "format": "TEX",
@@ -1038,6 +1171,36 @@
               "source_units": 722,
               "scope_kind": "complete",
               "mirror_doi": "10.5281/zenodo.22951266"
+            }
+          ]
+        },
+        {
+          "title": "دليل المراجعة العربية — ١٠٩٥ اختيارًا",
+          "note": "يشمل قرارات المؤشر المعلّمة للمراجعة، مع المعنى والتعليل والشواهد وحدودها والبدائل. اكتمال الفهرس لا يعني موافقة مراجع بشري أو صحة كل اختيار.",
+          "downloads": [
+            {
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/blob/e0a7f7358f144bf894185ecd979794606901dc17/expert-review/2026-09-26-final-page-review/INDEX_AR.md",
+              "download_label": "ابدأ المراجعة هنا"
+            },
+            {
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/blob/e0a7f7358f144bf894185ecd979794606901dc17/expert-review/2026-09-26-final-page-review/DIRECTORY_AR.md",
+              "download_label": "الدليل الكامل — ١٠٩٥ اختيارًا"
+            },
+            {
+              "name": "DECISION_RECORD_AR.jsonl.gz",
+              "format": "JSONL.GZ",
+              "bytes": 4428627,
+              "sha256": "557e0cb7617444c6d96b25734143898377a433d5e2a7d2224f674de2545f72c6",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-translation-review-complete-20260927/DECISION_RECORD_AR.jsonl.gz",
+              "download_label": "البيانات الكاملة للمراجعة"
+            },
+            {
+              "name": "90-ARABIC-REVIEW-COMPLETE-SOURCE.zip",
+              "format": "ZIP",
+              "bytes": 41074993,
+              "sha256": "0d9f4e4ffea4ec0f4deb18f3677a409e35118706a71a4210b5c9003501f6609e",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/download/ar-openlogic-translation-review-complete-20260927/90-ARABIC-REVIEW-COMPLETE-SOURCE.zip",
+              "download_label": "مصادر دليل المراجعة وبطاقاته كاملة"
             }
           ]
         },
@@ -1098,7 +1261,11 @@
           ]
         }
       ],
-      "download_summary": "كل EPUB يضم ٧٢٢ وحدة. ملف ZIP المشترك يحفظ المصادر القابلة للتحرير للنسخ الثلاث، ومنها XHTML وMathML وبرنامج إعادة البناء."
+      "download_summary": "اختر الترميز والسجل اللغوي؛ PDF ثم LaTeX المطابق ثم مصادره الكاملة. تتاح ملفات EPUB ومصادرها ودليل المراجعة في الأقسام القابلة للفتح.",
+      "epub_release_tag": "ar-olp-0722-complete-epubs-20260925",
+      "reviewable_decisions": 1095,
+      "review_index_complete": true,
+      "human_review_complete": false
     },
     {
       "id": "openlogic-fa-ir",

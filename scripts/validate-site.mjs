@@ -192,6 +192,7 @@ const marathi194Evidence = JSON.parse(await read(marathi194.evidence.public_read
 check(marathi194Evidence.files.length === 8 && marathi194Evidence.files.every(item => item.github_matches && item.zenodo_matches), "Marathi194 needs eight byte-matched assets on both public mirrors");
 check(marathi194Evidence.source_archive.manifest_entries_replayed === 2177 && marathi194Evidence.source_archive.translated_target_files_replayed === 194 && marathi194Evidence.source_archive.frozen_source_files_replayed === 722 && marathi194Evidence.source_archive.identity_failures.length === 0, "Marathi194 needs source-package identity replay");
 check(marathi194.ordered_downloads.slice(0,4).map(item => item.format).join(",") === "PDF,TEX,ZIP,EPUB" && marathi194.readers[0].pages === 264, "Marathi194 reader identity and editable-source download order");
+check(marathi194.ordered_downloads.every(item => /[\u0900-\u097f]/.test(item.download_label || '')), "Every Marathi download label, including HTML-ZIP, must be localized");
 for (const item of marathi194.ordered_downloads) check(marathi194Evidence.files.some(file => file.url === item.url && file.bytes === item.bytes && file.sha256 === item.sha256), "Marathi194 download must match readback");
 check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.packaging_observations.length === 2, "Marathi194 bounded evidence must retain its limitations");
 const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");

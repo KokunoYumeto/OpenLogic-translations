@@ -326,7 +326,7 @@ for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP,HTML,EPUB', `${id}: no-PDF reader needs direct cumulative TEX, full source ZIP, online reader and EPUB`);
   check(edition.version_doi === dutchPublication.zenodo.doi && edition.release === dutchPublication.github.release, `${id}: public lineage mismatch`);
   for (const asset of edition.ordered_downloads) {
-    if (asset.format === 'HTML') check(dutchPublication.pages.public_readback.some(item => item.url === asset.url && item.anonymous && item.matches), `${id}: online-reader readback missing`);
+    if (asset.format === 'HTML') check(dutchPublication.html_compatibility.public_readback.some(item => item.url === asset.url && item.anonymous && item.matches), `${id}: online-reader readback missing`);
     else check(dutchPublication.github.assets.some(item => item.name === asset.name && item.sha256 === asset.sha256 && item.bytes === asset.bytes), `${id}: asset readback identity missing`);
   }
   check(edition.epub_coverage_note.includes('160 van 722') && edition.epub_coverage_note.includes('Er is geen PDF'), `${id}: partial scope and absent PDF must remain explicit`);
@@ -336,6 +336,7 @@ for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
 }
 check(dutchSourcePublication.github.anonymous_repository_files_verified === 933 && dutchSourcePublication.zenodo.files.length === 6 && dutchSourcePublication.zenodo.inherited_files_metadata_verified === 12, 'Historical Dutch source-publication receipt must remain intact');
 check(dutchPublication.github.repository_files_verified === 44 && dutchPublication.github.assets.length === 8 && dutchPublication.zenodo.inherited_files_verified === 18, 'Dutch reader source and preservation evidence missing');
+check(dutchPublication.html_compatibility.public_readback.length === 45 && dutchPublication.html_compatibility.qa.files.length === 4 && dutchPublication.html_compatibility.qa.files.every(item => item.text_identical && item.anchors_identical), 'Dutch HTML compatibility must preserve text, anchors and deployed bytes');
 check(dutchPublication.github.public_readback.length === 8 && dutchPublication.zenodo.public_readback.length === 8 && dutchPublication.pages.public_readback.length === 42, 'Dutch reader release needs both mirrors and all deployed web files');
 check([...dutchPublication.github.public_readback, ...dutchPublication.zenodo.public_readback, ...dutchPublication.pages.public_readback].every(item => item.anonymous && item.matches), 'Dutch public-byte check failed');
 

@@ -360,6 +360,7 @@ check(psV070.files.length === 12 && psV070.files.every(f => f.matches), "Pashto 
 check(psV070.package_checks.snapshots.source393.target_units_verified === 393 && psV070.package_checks.snapshots.release.target_units_verified === 362, "Pashto source scopes distinct");
 check(psV070.package_checks.direct_tex.unit_ids === 321 && psV070.package_checks.epub.unit_ids === 321 && psV070.package_checks.epub.broken_internal_links.length === 0, "Pashto TEX and EPUB321 evidence");
 check(psEdition.status.includes("formula-correction-required") && psEdition.limitations[0].includes("!A") && psEdition.metadata_direction === "rtl", "Pashto confirmed defect must stay localized and visible");
+check(/\.coverage-row strong\s*\{[^}]*direction:\s*ltr;[^}]*unicode-bidi:\s*isolate;/.test(css), "Coverage fractions must not reverse numerator and denominator in RTL cards");
 check(psV070.formula_defect.visually_inspected_pdf_pages.join(",") === "413,414" && psV070.formula_defect.epub_presentation_candidates.length > 0, "Pashto warning needs rendered evidence");
 const result = {
   status: failures.length ? "FAIL" : "PASS",

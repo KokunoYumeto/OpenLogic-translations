@@ -213,17 +213,18 @@ const psSource = JSON.parse(await read("evidence/PASHTO_SOURCE247_MANAGER_READBA
 const psEdition = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
 check(psSource.source_files_verified === 722 && psSource.target_files_verified === 247 && psSource.failures === 0 && psSource.new_batch_exact_block_checks === 376, "Pashto source checkpoint requires frozen-source, target and actual new-batch block checks");
 check(psEdition.previous_v051_release_snapshot.source_progress.archive_sha256 === psSource.archive.sha256 && psEdition.previous_v051_release_snapshot.source_progress.commit === psSource.commit && psSource.reader_units === 82 && psSource.reader_files_changed === false, "Retain the historical Pashto source247/reader82 distinction");
+const psV070 = JSON.parse(await read("evidence/PASHTO_V070_MANAGER_AUDIT_20260927.json"));
 const psCurrent = JSON.parse(await read("evidence/PASHTO_V060_MANAGER_AUDIT_20260920.json"));
 check(psCurrent.files.length === 6 && psCurrent.files.every(item => item.matches) && psCurrent.github_assets_independently_matched === 6, "Pashto v0.6.0 needs six matched GitHub assets");
 check(psCurrent.static_package.frozen_sources_checked === 722 && psCurrent.static_package.translated_units === 255 && psCurrent.static_package.aligned_blocks === 4010 && psCurrent.static_package.canon_bound_language_segments === 2549 && psCurrent.static_package.failures.length === 0, "Pashto255 exact source/alignment/canon-reference package check required");
-check(psEdition.source_progress.commit === psCurrent.commit && psEdition.source_archive.sha256 === psEdition.source_progress.archive_sha256 && psEdition.readers[0].pages === 326, "Pashto255 release identity and page count must agree");
+check(psEdition.previous_v060_release_snapshot.source_progress.commit === psCurrent.commit && psEdition.previous_v060_release_snapshot.source_archive.sha256 === psEdition.previous_v060_release_snapshot.source_progress.archive_sha256 && psEdition.previous_v060_release_snapshot.readers[0].pages === 326, "Pashto255 release identity and page count must agree");
 check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurrent.bounded_language_sample.canon_pages_actually_inspected.length === 2 && psCurrent.visual_sample.whole_pdf_visual_certification === false, "Keep the Pashto sample audit bounded");
 check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
-for (const [id, sources, units] of [["openlogic-ps-arab-pk",300,255],["openlogic-bn-beng-in",599,299]]) {
+for (const [id, sources, units] of [["openlogic-ps-arab-pk",393,321],["openlogic-bn-beng-in",599,299]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
-  for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files,...psCurrent.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
+  for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files,...psCurrent.files,...psV070.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
   if (id === "openlogic-ps-arab-pk") check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", "Pashto needs PDF/direct cumulative LaTeX/source ZIP order");
   else {
     check(edition.source_packaging_status === "direct-cumulative-LaTeX-and-full-source-ZIP-verified" && edition.pertinent_pdf_exists === false && edition.online_reading_preview, "Bengali needs full cumulative source and its no-PDF online preview");
@@ -257,7 +258,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 }
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = catalogue.editions.find(item => item.id === id);
-  const source = lane === 'te' ? telugu410 : lane === 'bn' ? bnMrCurrent.bn : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'ps' ? psV070.source_checkpoint : lane === 'te' ? telugu410 : lane === 'bn' ? bnMrCurrent.bn : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && source.reader_units === edition.standalone_reader_units && source.full_semantic_reaudit === false, `${id}: source checkpoint must not inflate reader coverage or semantic assurance`);
 }
@@ -355,6 +356,11 @@ check(dutchPublication.html_compatibility.public_readback.length === 45 && dutch
 check(dutchPublication.github.public_readback.length === 8 && dutchPublication.zenodo.public_readback.length === 8 && dutchPublication.pages.public_readback.length === 42, 'Dutch reader release needs both mirrors and all deployed web files');
 check([...dutchPublication.github.public_readback, ...dutchPublication.zenodo.public_readback, ...dutchPublication.pages.public_readback].every(item => item.anonymous && item.matches), 'Dutch public-byte check failed');
 
+check(psV070.files.length === 12 && psV070.files.every(f => f.matches), "Pashto six assets must match on both mirrors");
+check(psV070.package_checks.snapshots.source393.target_units_verified === 393 && psV070.package_checks.snapshots.release.target_units_verified === 362, "Pashto source scopes distinct");
+check(psV070.package_checks.direct_tex.unit_ids === 321 && psV070.package_checks.epub.unit_ids === 321 && psV070.package_checks.epub.broken_internal_links.length === 0, "Pashto TEX and EPUB321 evidence");
+check(psEdition.status.includes("formula-correction-required") && psEdition.limitations[0].includes("!A") && psEdition.metadata_direction === "rtl", "Pashto confirmed defect must stay localized and visible");
+check(psV070.formula_defect.visually_inspected_pdf_pages.join(",") === "413,414" && psV070.formula_defect.epub_presentation_candidates.length > 0, "Pashto warning needs rendered evidence");
 const result = {
   status: failures.length ? "FAIL" : "PASS",
   failures,

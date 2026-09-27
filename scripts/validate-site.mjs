@@ -32,7 +32,7 @@ check(script.includes("[...accessible, ...data.editions]"), "accessible editions
 const persian = catalogue.editions.find(item => item.id === "openlogic-fa-ir");
 check(persian.download_layout === "compact-grouped" && persian.download_summary.includes("هنوز ادامه دارد"), "Persian compact downloads must retain the localized review caveat");
 check(persian.metadata_language === "fa-IR" && persian.metadata_direction === "rtl", "Persian metadata needs language and direction");
-check(html.includes('site.js?v=20260926-arabic-complete') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Localized compact navigation must reach browsers with a fresh script URL");
+check(html.includes('site.js?v=20260927-romance-public-evidence') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Localized navigation and current publication evidence must reach browsers with a fresh script URL");
 check(persian.search_aliases?.includes("Persian") && persian.search_aliases?.includes("Farsi"), "Localized Persian must remain searchable by its English aliases");
 check(persian.ui_labels?.script_samples?.includes("یک واحد") && persian.ui_labels?.publication_and_evidence, "Persian sample and metadata navigation must be localized");
 const persianMirror = JSON.parse(await read(persian.evidence.mirror_public_readback));
@@ -362,6 +362,13 @@ check(psV070.package_checks.direct_tex.unit_ids === 321 && psV070.package_checks
 check(psEdition.status.includes("formula-correction-required") && psEdition.limitations[0].includes("!A") && psEdition.metadata_direction === "rtl", "Pashto confirmed defect must stay localized and visible");
 check(/\.coverage-row strong\s*\{[^}]*direction:\s*ltr;[^}]*unicode-bidi:\s*isolate;/.test(css), "Coverage fractions must not reverse numerator and denominator in RTL cards");
 check(psV070.formula_defect.visually_inspected_pdf_pages.join(",") === "413,414" && psV070.formula_defect.epub_presentation_candidates.length > 0, "Pashto warning needs rendered evidence");
+for (const [id, tag, label] of [["openlogic-es", "es", "Lector completo"], ["openlogic-pt-br", "pt-BR", "Leitor completo"]]) {
+  const edition = catalogue.editions.find(item => item.id === id);
+  check(edition.metadata_language === tag && edition.status_label === `${label} · 722/722`, `${id}: localized complete-reader badge required`);
+  check(edition.ui_labels?.evidence && edition.source_coverage_label && edition.epub_coverage_note?.includes("722/722"), `${id}: publication, coverage and format labels must remain explicit`);
+  check(edition.status.includes("audit-needed") && edition.limitations.some(text => /canon|cânone/.test(text)), `${id}: reader inclusion must not erase review limitations`);
+}
+check(script.includes("evidence.public_reader_delivery || evidence.local_reader_closure"), "Current public-reader delivery must precede historical local-only evidence");
 const result = {
   status: failures.length ? "FAIL" : "PASS",
   failures,

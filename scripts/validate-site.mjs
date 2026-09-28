@@ -199,6 +199,7 @@ check(jv671Audit.targets_verified === 671 && jv671Audit.frozen_files_verified ==
 check(jv671Audit.withdrawn_term_bundles === 444 && jv671Audit.withdrawn_segment_bundles === 4143 && !jv671Audit.canon_revalidation_complete && !jv671Audit.whole_corpus_semantics_certified, "Javanese unsupported canon evidence must remain explicit");
 check(jv671Audit.manager_corrections_present && jv671Audit.OLP0671_all10_source_target_hash_pairs_match, "Javanese0671 proof repairs must be present in public bytes");
 check(jv671.metadata_language === "jv-Latn-ID" && jv671.ui_labels.details === "Ragam lan watesan" && jv671.evidence.manager_public_readback.endsWith(".html"), "Javanese access and limitations must have a localized entry point");
+check(jv671.supplementary_downloads?.[0]?.downloads?.[0]?.url === jv671Audit.archive.url, "Javanese671 source link must use the renderer's supplementary_downloads contract");
 const tamil722 = catalogue.editions.find(item => item.id === "openlogic-ta-taml-in");
 const tamil722Audit = JSON.parse(await read("evidence/TAMIL722_MANAGER_AUDIT_20260928.json"));
 check(tamil722.source_units_translated === 722 && tamil722.standalone_reader_units === 695 && tamil722.companion_units === 27 && tamil722.combined_reader_units === 722, "Tamil source722 must distinguish main695 and companion27");

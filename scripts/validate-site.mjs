@@ -230,7 +230,7 @@ check(psCurrent.static_package.frozen_sources_checked === 722 && psCurrent.stati
 check(psEdition.previous_v060_release_snapshot.source_progress.commit === psCurrent.commit && psEdition.previous_v060_release_snapshot.source_archive.sha256 === psEdition.previous_v060_release_snapshot.source_progress.archive_sha256 && psEdition.previous_v060_release_snapshot.readers[0].pages === 326, "Pashto255 release identity and page count must agree");
 check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurrent.bounded_language_sample.canon_pages_actually_inspected.length === 2 && psCurrent.visual_sample.whole_pdf_visual_certification === false, "Keep the Pashto sample audit bounded");
 check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
-for (const [id, sources, units] of [["openlogic-ps-arab-pk",393,321],["openlogic-bn-beng-in",599,299]]) {
+for (const [id, sources, units] of [["openlogic-ps-arab-pk",393,321],["openlogic-bn-beng-in",722,299]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
@@ -249,6 +249,10 @@ const bengali514 = JSON.parse(await read("evidence/BN514_PUBLIC_SOURCE_20260926.
 check(bengali514.changed_units === 18 && bengali514.changed_segments === 167 && bengali514.changed_language_segments === 145 && bengali514.failures.length === 0, "Bengali514 requires exact changed-segment replay, not an owner count alone");
 check(bengali514.bounded_semantic_check.source_correction_id === 'BN-SRC-411' && bengali514.canon_sample.original_visually_inspected && !bengali514.full_semantic_reaudit, "Keep Bengali source/canon sampling bounded and source-grounded");
 const bnMrCurrent = JSON.parse(await read("evidence/BN599_MR270_SOURCE_CHECK_20260927.json"));
+const bn722 = JSON.parse(await read("evidence/BN722_PUBLIC_SOURCE_20260928.json"));
+const bn722Edition = catalogue.editions.find(item => item.id === "openlogic-bn-beng-in");
+check(bn722.inventory_objects === 1444 && bn722.unit_ids === 722 && bn722.failures.length === 0, "Bengali722 needs all frozen and target source objects, not an owner count alone");
+check(bn722Edition.public_source_checkpoint_commit === bn722.commit && bn722.reader_units === 299 && !bn722.new_reader_release && !bn722.linguistic_certification, "Bengali722 source completion must not inflate reader coverage or linguistic assurance");
 check(bnMrCurrent.bn.changed_units === 85 && bnMrCurrent.bn.changed_segments === 844 && bnMrCurrent.bn.changed_language_segments === 798, 'Bengali599 requires actual85-unit /844-segment replay');
 check(bnMrCurrent.mr.targets_verified === 270 && bnMrCurrent.mr.reader_units === 194 && bnMrCurrent.mr.changed_segments === 634 && bnMrCurrent.mr.changed_language_segments === null, 'Marathi270 source coverage must not inflate readers or assert an unmeasured linguistic delta');
 check(bnMrCurrent.mr_public_tree.selected_local_git_objects_matching_public_blob_ids === 999 && bnMrCurrent.mr_public_tree.anonymous_raw_byte_checks.length === 4, 'Marathi270 needs public Git object identities and bounded raw byte evidence');
@@ -268,7 +272,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 }
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = catalogue.editions.find(item => item.id === id);
-  const source = lane === 'ps' ? psV070.source_checkpoint : lane === 'te' ? telugu410 : lane === 'bn' ? bnMrCurrent.bn : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'ps' ? psV070.source_checkpoint : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && source.reader_units === edition.standalone_reader_units && source.full_semantic_reaudit === false, `${id}: source checkpoint must not inflate reader coverage or semantic assurance`);
 }

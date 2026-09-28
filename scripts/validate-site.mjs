@@ -408,6 +408,11 @@ check(arabic.evidence.manager_public_readback === arabic.evidence.classical_repa
 check(arabic.readers.filter(r => r.scope_kind === 'chapter').length === 2 && arabic.readers.filter(r => r.scope_kind === 'historical' && r.format === 'PDF').length === 3, 'Preserve previous PDF identities and chapter samples');
 check(arabic.readers.some(r => r.scope_kind === 'historical' && r.profile === 'classical' && r.known_rendering_issue === 'OLI-AR-CLASSICAL-LEN-RTL-20260927') && arabic.supplementary_downloads[4].downloads.some(d => d.url.endsWith('ar-olp-0722-classical-eastern-rtl-complete-20260926')), 'Historical defective classical release must remain accessible and identified');
 const dutchCurrent = JSON.parse(await read('evidence/DUTCH_READERS192_PUBLIC_20260927.json'));
+const ownership = JSON.parse(await read('catalogue/ownership.json'));
+const dutchOwnership = ownership.commissioned_register_pairs?.find(item => item.pair_id === 'openlogic-nl-dual-register');
+check(dutchOwnership?.owner_setup_state === 'established' && dutchOwnership.owner_task_id && dutchOwnership.state === 'partial-readers-published-full-edition-incomplete', 'Dutch ownership must not revert to unassigned or zero-coverage commission state');
+check(dutchOwnership?.metadata_language === 'nl-NL' && dutchOwnership.status_label?.includes('192 van 722') && dutchOwnership.completion_verified === false, 'Dutch ownership must retain localized, explicitly partial published scope');
+check(dutchOwnership?.evidence === 'evidence/DUTCH_READERS192_PUBLIC_20260927.json' && dutchOwnership.commission_evidence === 'evidence/DUTCH_DUAL_REGISTER_COMMISSION_20260906.json', 'Dutch ownership needs current publication evidence while retaining its historical commission');
 check(dutchCurrent.package_checks.failures.length === 0 && dutchCurrent.package_checks.assets.length === 10, 'Dutch192 requires all ten exact package assets');
 check(dutchCurrent.github.files.length === 10 && dutchCurrent.zenodo.files.length === 10 && [...dutchCurrent.github.files, ...dutchCurrent.zenodo.files].every(x => x.matches), 'Dutch192 needs ten anonymous matches on both mirrors');
 check(dutchCurrent.html.length === 2 && dutchCurrent.html.every(x => x.matches && x.ordered_anchors === 192), 'Dutch192 needs two ordered 192-unit online readers');
@@ -416,6 +421,8 @@ check(dutchCurrent.full_linguistic_certification === false && dutchCurrent.revie
 for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === 192 && edition.standalone_reader_units === 192, `${id}: published reader scope must remain 192/722`);
+  check(dutchOwnership?.owner_task_id === edition.owner_task_id && dutchOwnership.repository === edition.repository && dutchOwnership.release === edition.release && dutchOwnership.version_doi === edition.version_doi, `${id}: ownership routing and public lineage must match the edition catalogue`);
+  check(dutchOwnership?.published_source_units_each === edition.source_units_translated && dutchOwnership.source_units_translated_each === edition.source_units_translated && dutchOwnership.public_reader_units_each === edition.standalone_reader_units && dutchOwnership.total_source_units === 722, `${id}: ownership published coverage must agree with the actual reader`);
   check(edition.profiles[0] === `${edition.standalone_reader_units} corresponderende broneenheden in twee registers`, `${id}: profile description must match published reader coverage`);
   check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP,HTML,EPUB', `${id}: direct LaTeX, full source ZIP, online reader and EPUB required`);
   check(edition.version_doi === dutchCurrent.zenodo.doi && edition.release === dutchCurrent.github.release, `${id}: public lineage mismatch`);

@@ -30,6 +30,10 @@ for (const [id, count] of [["openlogic-fa-ir", 2], ["openlogic-interfarsi", 4]])
 }
 check(script.includes("[...accessible, ...data.editions]"), "accessible editions must be first-class selector/card entries");
 const persian = catalogue.editions.find(item => item.id === "openlogic-fa-ir");
+const priorities = await read("PRIORITIES.md");
+const persianPriority = priorities.split("\n").find(line => line.startsWith("1. **")) || "";
+check(persianPriority.includes(persian.release) && persianPriority.includes(persian.version_doi) && persianPriority.includes("PERSIAN_R9_PUBLIC_MANAGER_AUDIT_20260927.json"), "Persian priority must link its current published reader and evidence");
+check(persianPriority.includes("all 722 source units") && persianPriority.includes("۷۲۲") && persianPriority.includes("does not establish full linguistic or human review") && !persianPriority.includes("turn the current 642-unit"), "Persian priority must retain bilingual complete-reader status without overstating linguistic review");
 check(persian.download_layout === "compact-grouped" && persian.download_summary.includes("هنوز ادامه دارد"), "Persian compact downloads must retain the localized review caveat");
 check(persian.metadata_language === "fa-IR" && persian.metadata_direction === "rtl", "Persian metadata needs language and direction");
 check(html.includes('site.js?v=20260927-romance-public-evidence') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Localized navigation and current publication evidence must reach browsers with a fresh script URL");

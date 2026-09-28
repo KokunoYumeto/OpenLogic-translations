@@ -1,0 +1,440 @@
+{
+  "schema": "openlogic-b145-source-adjudication/1",
+  "source_commit": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+  "sources": [
+    {
+      "name": "completeness.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex",
+      "sha256": "ee4e86d1549731cdbe7088d4d682c304f04a9c007a93a525c99b25959a2c2d90",
+      "bytes": 10148,
+      "same_as_frozen": true
+    },
+    {
+      "name": "countermodels.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/countermodels.tex",
+      "sha256": "c47ac240cc48f6e82093505895045e59de1a1f034b7e377086c5b53944d744bd",
+      "bytes": 12874,
+      "same_as_frozen": true
+    },
+    {
+      "name": "rules-for-K.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/rules-for-K.tex",
+      "sha256": "781f917de40a4b8e0c38ade5e7cd1d9eab39a629563df7f6d07e0434ab5dffe3",
+      "bytes": 9559,
+      "same_as_frozen": true
+    }
+  ],
+  "corrections": [
+    {
+      "id": "OLI-NML-COMPLETE-CONJUNCTION-PREFIX",
+      "aliases": [
+        "TA-NML-047",
+        "OLNML-042"
+      ],
+      "file": "completeness.tex",
+      "before": "\\sFmla{\\True}{!B\n  \\land !C}$",
+      "after": "\\sFmla{\\True}{!B\n  \\land !C}[\\sigma]$",
+      "reason": "The same world prefix is required on the conjunctive premise and both conclusions by rules-for-K.tex.",
+      "kind": "correction",
+      "source_lines": [
+        50
+      ],
+      "occurrences": 1,
+      "source_before": "\\sFmla{\\True}{!B\n  \\land !C}$",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex#L50",
+      "confidence": {
+        "level": "high",
+        "reason": "The same world prefix is required on the conjunctive premise and both conclusions by rules-for-K.tex.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-COMPLETE-TRUE-DISJUNCTION",
+      "aliases": [
+        "TA-NML-048",
+        "OLNML-042"
+      ],
+      "file": "completeness.tex",
+      "before": "contains at least one of $\\sFmla{\\False}{!B}[\\sigma]$ and",
+      "after": "contains at least one of $\\sFmla{\\True}{!B}[\\sigma]$ and",
+      "reason": "True disjunction branches to true B or true C, not false B. B=true,C=false refutes the original claimed alternatives.",
+      "kind": "correction",
+      "source_lines": [
+        52
+      ],
+      "occurrences": 1,
+      "source_before": "contains at least one of $\\sFmla{\\False}{!B}[\\sigma]$ and",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex#L52",
+      "confidence": {
+        "level": "high",
+        "reason": "True disjunction branches to true B or true C, not false B. B=true,C=false refutes the original claimed alternatives.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-COMPLETE-MODAL-OPERANDS",
+      "aliases": [
+        "TA-NML-049",
+        "OLNML-043"
+      ],
+      "file": "completeness.tex",
+      "before": "{$\\sFmla{\\False}{\\Box}[\\sigma]$} {$\\sFmla{\\True}{\\Diamond}[\\sigma]$}\nit also contains \\iftag{prvBox} {$\\sFmla{\\False}{\\Box}[\\sigma.n]$}\n{$\\sFmla{\\True}{\\Diamond}[\\sigma.n]$} for at least one~$n$.  And\nwhenever it contains \\iftag{prvBox} {$\\sFmla{\\True}{\\Box}[\\sigma]$}\n{$\\sFmla{\\False}{\\Diamond}[\\sigma]$} it also contains \\iftag{prvBox}\n{$\\sFmla{\\True}{\\Box}[\\sigma.n]$}\n{$\\sFmla{\\False}{\\Diamond}[\\sigma.n]$} for every~$n$ such that",
+      "after": "{$\\sFmla{\\False}{\\Box !B}[\\sigma]$} {$\\sFmla{\\True}{\\Diamond !B}[\\sigma]$}\nit also contains \\iftag{prvBox} {$\\sFmla{\\False}{!B}[\\sigma.n]$}\n{$\\sFmla{\\True}{!B}[\\sigma.n]$} for at least one~$n$.  And\nwhenever it contains \\iftag{prvBox} {$\\sFmla{\\True}{\\Box !B}[\\sigma]$}\n{$\\sFmla{\\False}{\\Diamond !B}[\\sigma]$} it also contains \\iftag{prvBox}\n{$\\sFmla{\\True}{!B}[\\sigma.n]$}\n{$\\sFmla{\\False}{!B}[\\sigma.n]$} for every~$n$ such that",
+      "reason": "All four modal premises need operands. Their conclusions are signed unmodalized B at the permitted successor; keeping Box or Diamond in those conclusions is not the displayed K rule.",
+      "kind": "correction",
+      "source_lines": [
+        54
+      ],
+      "occurrences": 1,
+      "source_before": "{$\\sFmla{\\False}{\\Box}[\\sigma]$} {$\\sFmla{\\True}{\\Diamond}[\\sigma]$}\nit also contains \\iftag{prvBox} {$\\sFmla{\\False}{\\Box}[\\sigma.n]$}\n{$\\sFmla{\\True}{\\Diamond}[\\sigma.n]$} for at least one~$n$.  And\nwhenever it contains \\iftag{prvBox} {$\\sFmla{\\True}{\\Box}[\\sigma]$}\n{$\\sFmla{\\False}{\\Diamond}[\\sigma]$} it also contains \\iftag{prvBox}\n{$\\sFmla{\\True}{\\Box}[\\sigma.n]$}\n{$\\sFmla{\\False}{\\Diamond}[\\sigma.n]$} for every~$n$ such that",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex#L54",
+      "confidence": {
+        "level": "high",
+        "reason": "All four modal premises need operands. Their conclusions are signed unmodalized B at the permitted successor; keeping Box or Diamond in those conclusions is not the displayed K rule.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-SATURATION-NOT-CLOSURE",
+      "aliases": [
+        "TA-NML-050",
+        "OLNML-044"
+      ],
+      "file": "completeness.tex",
+      "before": "repeat. But by construction, every branch is closed.",
+      "after": "repeat. But by construction, every branch is complete.",
+      "reason": "The proposition claims saturation, not a proof that every finite set is inconsistent. A one-formula true-p branch is complete and open. This minimal correction restores the proposition's stated conclusion; it does not claim a full new proof of termination.",
+      "kind": "correction",
+      "source_lines": [
+        80
+      ],
+      "occurrences": 1,
+      "source_before": "repeat. But by construction, every branch is closed.",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex#L80",
+      "confidence": {
+        "level": "high",
+        "reason": "The proposition claims saturation, not a proof that every finite set is inconsistent. A one-formula true-p branch is complete and open. This minimal correction restores the proposition's stated conclusion; it does not claim a full new proof of termination.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-FALSE-CONJUNCTION-IH",
+      "aliases": [
+        "TA-NML-051",
+        "OLNML-045"
+      ],
+      "file": "completeness.tex",
+      "before": "$\\mSat/{M(\\Delta)}{!B}[\\sigma]$ or\n      $\\mSat/{M(\\Delta)}{!B}[\\sigma]$. Thus",
+      "after": "$\\mSat/{M(\\Delta)}{!B}[\\sigma]$ or\n      $\\mSat/{M(\\Delta)}{!C}[\\sigma]$. Thus",
+      "reason": "F(B and C) gives F B or F C. The second induction hypothesis concerns C.",
+      "kind": "correction",
+      "source_lines": [
+        145
+      ],
+      "occurrences": 1,
+      "source_before": "$\\mSat/{M(\\Delta)}{!B}[\\sigma]$ or\n      $\\mSat/{M(\\Delta)}{!B}[\\sigma]$. Thus",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex#L145",
+      "confidence": {
+        "level": "high",
+        "reason": "F(B and C) gives F B or F C. The second induction hypothesis concerns C.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-FALSE-DISJUNCTION-IH",
+      "aliases": [
+        "TA-NML-052",
+        "OLNML-045"
+      ],
+      "file": "completeness.tex",
+      "before": "$\\mSat/{M(\\Delta)}{!B}[\\sigma]$ and\n      $\\mSat/{M(\\Delta)}{!B}[\\sigma]$. Thus",
+      "after": "$\\mSat/{M(\\Delta)}{!B}[\\sigma]$ and\n      $\\mSat/{M(\\Delta)}{!C}[\\sigma]$. Thus",
+      "reason": "F(B or C) requires F B and F C. Repeating B loses the information about C.",
+      "kind": "correction",
+      "source_lines": [
+        161
+      ],
+      "occurrences": 1,
+      "source_before": "$\\mSat/{M(\\Delta)}{!B}[\\sigma]$ and\n      $\\mSat/{M(\\Delta)}{!B}[\\sigma]$. Thus",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex#L161",
+      "confidence": {
+        "level": "high",
+        "reason": "F(B or C) requires F B and F C. Repeating B loses the information about C.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-FALSE-CONDITIONAL-IH",
+      "aliases": [
+        "TA-NML-053",
+        "OLNML-045"
+      ],
+      "file": "completeness.tex",
+      "before": "$\\mSat{M(\\Delta)}{!B}[\\sigma]$ and\n      $\\mSat/{M(\\Delta)}{!B}[\\sigma]$. Thus",
+      "after": "$\\mSat{M(\\Delta)}{!B}[\\sigma]$ and\n      $\\mSat/{M(\\Delta)}{!C}[\\sigma]$. Thus",
+      "reason": "F(B implies C) means true B and false C, not true B and false B.",
+      "kind": "correction",
+      "source_lines": [
+        177
+      ],
+      "occurrences": 1,
+      "source_before": "$\\mSat{M(\\Delta)}{!B}[\\sigma]$ and\n      $\\mSat/{M(\\Delta)}{!B}[\\sigma]$. Thus",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/completeness.tex#L177",
+      "confidence": {
+        "level": "high",
+        "reason": "F(B implies C) means true B and false C, not true B and false B.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-COUNTERMODEL-FORMULA-TOKEN",
+      "aliases": [
+        "TA-NML-054",
+        "OLNML-046"
+      ],
+      "file": "countermodels.tex",
+      "before": "constructing countermodels to~$!A$ if $\\Entails/ A$.",
+      "after": "constructing countermodels to~$!A$ if $\\Entails/ !A$.",
+      "reason": "The sentence and surrounding project syntax use !A as the formula token. Restore the dropped exclamation mark; this is a token/typesetting consistency fix, not a different mathematical theorem.",
+      "kind": "correction",
+      "source_lines": [
+        16
+      ],
+      "occurrences": 1,
+      "source_before": "constructing countermodels to~$!A$ if $\\Entails/ A$.",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/countermodels.tex#L16",
+      "confidence": {
+        "level": "high",
+        "reason": "The sentence and surrounding project syntax use !A as the formula token. Restore the dropped exclamation mark; this is a token/typesetting consistency fix, not a different mathematical theorem.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-COUNTERMODEL-COMPLETE-SEARCH",
+      "aliases": [
+        "TA-NML-058",
+        "OLNML-047"
+      ],
+      "file": "countermodels.tex",
+      "before": "the closed tableau says to apply",
+      "after": "the complete tableau says to apply",
+      "reason": "Both worked examples intentionally finish with an open complete branch. The systematic construction aims at completeness; closure is not its guaranteed outcome.",
+      "kind": "correction",
+      "source_lines": [
+        76,
+        206
+      ],
+      "occurrences": 2,
+      "source_before": "the closed tableau says to apply",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/countermodels.tex#L76",
+      "confidence": {
+        "level": "high",
+        "reason": "Both worked examples intentionally finish with an open complete branch. The systematic construction aims at completeness; closure is not its guaranteed outcome.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-DIAMOND-LINE3-SIGN",
+      "aliases": [
+        "TA-NML-055",
+        "OLNML-048"
+      ],
+      "file": "countermodels.tex",
+      "before": "$\\sFmla{\\True}{\\Diamond(p \\land q)}[1]$ on line~$3$. The construction of\n  the complete tableau says to apply the $\\TRule{\\True}{\\Diamond}$ rule for",
+      "after": "$\\sFmla{\\False}{\\Diamond(p \\land q)}[1]$ on line~$3$. The construction of\n  the complete tableau says to apply the $\\TRule{\\False}{\\Diamond}$ rule for",
+      "reason": "Every displayed line 3 is false Diamond(p and q). The used-prefix rule must be false-Diamond, producing false(p and q) at 1.1 and 1.2; true-Diamond instead requires a new witness.",
+      "kind": "correction",
+      "source_lines": [
+        205
+      ],
+      "occurrences": 1,
+      "source_before": "$\\sFmla{\\True}{\\Diamond(p \\land q)}[1]$ on line~$3$. The construction of\n  the closed tableau says to apply the $\\TRule{\\True}{\\Diamond}$ rule for",
+      "before_is_ordered_patch_step": true,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/countermodels.tex#L205",
+      "confidence": {
+        "level": "high",
+        "reason": "Every displayed line 3 is false Diamond(p and q). The used-prefix rule must be false-Diamond, producing false(p and q) at 1.1 and 1.2; true-Diamond instead requires a new witness.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-DIAMOND-ROOT-DIRECTION",
+      "aliases": [
+        "TA-NML-056",
+        "OLNML-049"
+      ],
+      "file": "countermodels.tex",
+      "before": "[\\pFmla{\\False}{\\Diamond(p \\land q) \\lif (\\Diamond p \\land \\Diamond q)}{1},",
+      "after": "[\\pFmla{\\False}{(\\Diamond p \\land \\Diamond q) \\lif \\Diamond(p \\land q)}{1},",
+      "reason": "The middle tree is a later stage of the same countermodel search. Its descendants and the first/final trees retain the opposite direction. The reversed implication is valid in every K frame, so the shown open branch cannot be a countermodel to it.",
+      "kind": "correction",
+      "source_lines": [
+        209
+      ],
+      "occurrences": 1,
+      "source_before": "[\\pFmla{\\False}{\\Diamond(p \\land q) \\lif (\\Diamond p \\land \\Diamond q)}{1},",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/countermodels.tex#L209",
+      "confidence": {
+        "level": "high",
+        "reason": "The middle tree is a later stage of the same countermodel search. Its descendants and the first/final trees retain the opposite direction. The reversed implication is valid in every K frame, so the shown open branch cannot be a countermodel to it.",
+        "calibrated_probability": false
+      }
+    },
+    {
+      "id": "OLI-NML-DIAMOND-Q-WITNESS",
+      "aliases": [
+        "TA-NML-057",
+        "OLNML-050"
+      ],
+      "file": "countermodels.tex",
+      "before": "$V(q) = \\{1.2\\}$ (because line~7 contains\n  $\\sFmla{\\True}{q}[1.1]$).",
+      "after": "$V(q) = \\{1.2\\}$ (because line~7 contains\n  $\\sFmla{\\True}{q}[1.2]$).",
+      "reason": "Line 7 and the picture put true q at 1.2. Change only the explanatory prefix, not V(q), the tableau or the diagram.",
+      "kind": "correction",
+      "source_lines": [
+        284
+      ],
+      "occurrences": 1,
+      "source_before": "$V(q) = \\{1.2\\}$ (because line~7 contains\n  $\\sFmla{\\True}{q}[1.1]$).",
+      "before_is_ordered_patch_step": false,
+      "upstream_source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/countermodels.tex#L284",
+      "confidence": {
+        "level": "high",
+        "reason": "Line 7 and the picture put true q at 1.2. Change only the explanatory prefix, not V(q), the tableau or the diagram.",
+        "calibrated_probability": false
+      }
+    }
+  ],
+  "clarifications": [
+    {
+      "id": "OLI-NML-USED-SUCCESSOR-SCOPE",
+      "aliases": [
+        "OLNML-041"
+      ],
+      "file": "completeness.tex",
+      "source_lines": [
+        43,
+        44,
+        45
+      ],
+      "status": "supported clarification, not counted as a definite source error",
+      "current": "the corresponding conclusion for every prefix occurring on the branch",
+      "proposed": "the corresponding conclusion for every used successor prefix $\\sigma.n$ to which the rule applies",
+      "reason": "Rules-for-K.tex already restricts applicability to a used immediate successor. The word 'corresponding' may carry that restriction implicitly; making it explicit is useful, but a claim of a new unsound rule in the source would be too strong.",
+      "included_in_errata_patch": false
+    }
+  ],
+  "deduplication": {
+    "pashto_report_ids": 10,
+    "tamil_aliases": 12,
+    "strict_correction_groups": 12,
+    "unmatched_clarifications": 1,
+    "new_unique_confirmed_relative_to_tamil_intake": 0,
+    "global_exhaustiveness": false
+  },
+  "limits": [
+    "This is a bounded review of reported corrections, not a certification of every word in either chapter or either translation.",
+    "The closure-to-completeness edit restores the proposition's stated conclusion. A procedure that stops on closed branches should instead phrase its invariant as 'every open branch is complete'; that broader exposition choice is not silently incorporated in this minimal patch.",
+    "No new target translation or reader build is claimed."
+  ],
+  "audit": {
+    "model": "gpt-6-astra",
+    "effort": "ultra",
+    "human_review_claimed": false
+  },
+  "validation": {
+    "patch_apply_check": true,
+    "semantic_test": {
+      "status": "PASS",
+      "checks": 393263,
+      "truthRows": [
+        {
+          "b": false,
+          "c": false,
+          "true_disjunction": false,
+          "false_conjunction": true,
+          "false_disjunction": true,
+          "false_implication": false
+        },
+        {
+          "b": false,
+          "c": true,
+          "true_disjunction": true,
+          "false_conjunction": true,
+          "false_disjunction": false,
+          "false_implication": false
+        },
+        {
+          "b": true,
+          "c": false,
+          "true_disjunction": true,
+          "false_conjunction": true,
+          "false_disjunction": false,
+          "false_implication": true
+        },
+        {
+          "b": true,
+          "c": true,
+          "true_disjunction": true,
+          "false_conjunction": false,
+          "false_disjunction": false,
+          "false_implication": false
+        }
+      ],
+      "finite_models": 32768,
+      "world_cases": 98304,
+      "reverse_diamond_violations": 0,
+      "intended_diamond_counterexamples": 6912,
+      "exact_worked_countermodels": 2,
+      "target_trees_preserved": 6,
+      "target_pictures_preserved": 2,
+      "target_sha256": "b4158e52e3572184c6ea77a6dc138fb7fede247999a5f7f5e087e5e7de6c640e",
+      "limit": "Finite tests support the local substitutions; the general argument that one joint witness supplies each separate witness proves the reverse implication. No whole-chapter or whole-translation certification."
+    },
+    "scope": "Target preservation checked in countermodels only; no new whole-lane or linguistic acceptance.",
+    "duplicate_check": {
+      "queries": [
+        {
+          "query": "repo:OpenLogicProject/OpenLogic is:issue \"tableaux/completeness.tex\"",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "query": "repo:OpenLogicProject/OpenLogic is:pull-request \"tableaux/completeness.tex\"",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "query": "repo:OpenLogicProject/OpenLogic is:issue \"countermodels.tex\"",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        },
+        {
+          "query": "repo:OpenLogicProject/OpenLogic is:pull-request \"countermodels.tex\"",
+          "total_count": 0,
+          "incomplete_results": false,
+          "items": []
+        }
+      ],
+      "local_snapshot_hashes": [
+        "d8ba3ac78719fdcd445cc4c75a11541e482b922fd3c82fa06b9269c0334004e3",
+        "46296fdfeee3906b9c50fc35af69f90e0dbaf84d4c86bc66d6271351b425794c"
+      ],
+      "scope": "Exact two filenames in issue/PR search plus existing Tamil intake. No exhaustive external duplicate claim; no new upstream issue/comment."
+    }
+  },
+  "next_upstream_notification": "None sent. Retain in shared source-correction ledger for any separately authorized consolidated report."
+}

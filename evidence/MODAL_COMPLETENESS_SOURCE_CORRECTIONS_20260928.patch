@@ -1,0 +1,112 @@
+diff --git a/content/normal-modal-logic/tableaux/completeness.tex b/content/normal-modal-logic/tableaux/completeness.tex
+index 5c46f35..e68481d 100644
+--- a/content/normal-modal-logic/tableaux/completeness.tex
++++ b/content/normal-modal-logic/tableaux/completeness.tex
+@@ -48,16 +48,16 @@
+ \begin{explain}
+ For instance, a complete branch contains $\sFmla{\True}{!B}[\sigma]$
+ and $\sFmla{\True}{!C}[\sigma]$ whenever it contains $\sFmla{\True}{!B
+-  \land !C}$. If it contains $\sFmla{\True}{!B \lor !C}[\sigma]$ it
+-contains at least one of $\sFmla{\False}{!B}[\sigma]$ and
++  \land !C}[\sigma]$. If it contains $\sFmla{\True}{!B \lor !C}[\sigma]$ it
++contains at least one of $\sFmla{\True}{!B}[\sigma]$ and
+ $\sFmla{\True}{!C}[\sigma]$. If it contains \iftag{prvBox}
+-{$\sFmla{\False}{\Box}[\sigma]$} {$\sFmla{\True}{\Diamond}[\sigma]$}
+-it also contains \iftag{prvBox} {$\sFmla{\False}{\Box}[\sigma.n]$}
+-{$\sFmla{\True}{\Diamond}[\sigma.n]$} for at least one~$n$.  And
+-whenever it contains \iftag{prvBox} {$\sFmla{\True}{\Box}[\sigma]$}
+-{$\sFmla{\False}{\Diamond}[\sigma]$} it also contains \iftag{prvBox}
+-{$\sFmla{\True}{\Box}[\sigma.n]$}
+-{$\sFmla{\False}{\Diamond}[\sigma.n]$} for every~$n$ such that
++{$\sFmla{\False}{\Box !B}[\sigma]$} {$\sFmla{\True}{\Diamond !B}[\sigma]$}
++it also contains \iftag{prvBox} {$\sFmla{\False}{!B}[\sigma.n]$}
++{$\sFmla{\True}{!B}[\sigma.n]$} for at least one~$n$.  And
++whenever it contains \iftag{prvBox} {$\sFmla{\True}{\Box !B}[\sigma]$}
++{$\sFmla{\False}{\Diamond !B}[\sigma]$} it also contains \iftag{prvBox}
++{$\sFmla{\True}{!B}[\sigma.n]$}
++{$\sFmla{\False}{!B}[\sigma.n]$} for every~$n$ such that
+ $\sigma.n$ is used on the branch.
+ \end{explain}
+ 
+@@ -77,7 +77,7 @@ $\sigma.n$ is used on the branch.
+   finite, and the number of used prefixes on the branch is finite,
+   this procedure eventually results in (possibly many) branches
+   extending the original branch. Apply the procedure to each, and
+-  repeat. But by construction, every branch is closed.
++  repeat. But by construction, every branch is complete.
+ \end{proof}
+ 
+ \begin{thm}[Completeness]
+@@ -143,7 +143,7 @@ $\mSat/{M(\Delta)}{!A}[\sigma]$.
+       $\sFmla{\False}{!C}[\sigma] \in \Delta$ since the branch is
+       complete. By induction hypothesis, either
+       $\mSat/{M(\Delta)}{!B}[\sigma]$ or
+-      $\mSat/{M(\Delta)}{!B}[\sigma]$. Thus
++      $\mSat/{M(\Delta)}{!C}[\sigma]$. Thus
+       $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+   \item \indcase{!A}{!B \lor !C}{\iftag{probOr}{Exercise.}{If
+       $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then either
+@@ -159,7 +159,7 @@ $\mSat/{M(\Delta)}{!A}[\sigma]$.
+       $\sFmla{\False}{!C}[\sigma] \in \Delta$ since the branch is
+       complete. By induction hypothesis, both
+       $\mSat/{M(\Delta)}{!B}[\sigma]$ and
+-      $\mSat/{M(\Delta)}{!B}[\sigma]$. Thus
++      $\mSat/{M(\Delta)}{!C}[\sigma]$. Thus
+       $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+   \item \indcase{!A}{!B \lif !C}{\iftag{probIf}{Exercise.}{If
+       $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then either
+@@ -175,7 +175,7 @@ $\mSat/{M(\Delta)}{!A}[\sigma]$.
+       $\sFmla{\False}{!C}[\sigma] \in \Delta$ since the branch is
+       complete. By induction hypothesis, both
+       $\mSat{M(\Delta)}{!B}[\sigma]$ and
+-      $\mSat/{M(\Delta)}{!B}[\sigma]$. Thus
++      $\mSat/{M(\Delta)}{!C}[\sigma]$. Thus
+       $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+   \item \indcase{!A}{\Box !B}{\iftag{probBox}{Exercise.}{If
+       $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then, since the
+diff --git a/content/normal-modal-logic/tableaux/countermodels.tex b/content/normal-modal-logic/tableaux/countermodels.tex
+index cd9e721..3f89d57 100644
+--- a/content/normal-modal-logic/tableaux/countermodels.tex
++++ b/content/normal-modal-logic/tableaux/countermodels.tex
+@@ -13,7 +13,7 @@
+ \begin{explain}
+   The proof of the completeness theorem doesn't just show that if
+   $\Entails !A$ then $\Proves !A$, it also gives us a method for
+-  constructing countermodels to~$!A$ if $\Entails/ A$. In the case
++  constructing countermodels to~$!A$ if $\Entails/ !A$. In the case
+   of~$\Log{K}$, this method constitutes a \emph{decision
+     procedure}. For suppose $\Entails/ !A$. Then the proof of
+   \olref[cpl]{prop:complete-tableau} gives a method for constructing a
+@@ -73,7 +73,7 @@
+   The !!{tableau} is of course not finished yet. In the next step, we
+   consider the only line without a checkmark: the prefixed !!{formula}
+   $\sFmla{\True}{\Box(p \lor q)}[1]$ on line~$2$. The construction of
+-  the closed tableau says to apply the $\TRule{\True}{\Box}$ rule for
++  the complete tableau says to apply the $\TRule{\True}{\Box}$ rule for
+   every prefix used on the branch, i.e., for both $1.1$ and $1.2$:
+   \begin{oltableau}
+     [\pFmla{\False}{\Box(p \lor q) \lif (\Box p \lor \Box q)}{1},
+@@ -202,11 +202,11 @@
+   \end{oltableau}
+   The !!{tableau} is of course not finished yet. In the next step, we
+   consider the only line without a checkmark: the prefixed !!{formula}
+-  $\sFmla{\True}{\Diamond(p \land q)}[1]$ on line~$3$. The construction of
+-  the closed tableau says to apply the $\TRule{\True}{\Diamond}$ rule for
++  $\sFmla{\False}{\Diamond(p \land q)}[1]$ on line~$3$. The construction of
++  the complete tableau says to apply the $\TRule{\False}{\Diamond}$ rule for
+   every prefix used on the branch, i.e., for both $1.1$ and $1.2$:
+   \begin{oltableau}
+-    [\pFmla{\False}{\Diamond(p \land q) \lif (\Diamond p \land \Diamond q)}{1},
++    [\pFmla{\False}{(\Diamond p \land \Diamond q) \lif \Diamond(p \land q)}{1},
+       just = \TAss, checked
+       [\pFmla{\True}{\Diamond p \land \Diamond q}{1},
+         just = {\TRule{\False}{\lif}[1]}, checked
+@@ -282,7 +282,7 @@
+   $R = \{\tuple{1, 1.1}, \tuple{1, 1.2}\}$, and the assignment $V(p) =
+   \{1.1\}$ (because line~6 contains $\sFmla{\True}{p}[1.1]$) and
+   $V(q) = \{1.2\}$ (because line~7 contains
+-  $\sFmla{\True}{q}[1.1]$). The model is pictured in
++  $\sFmla{\True}{q}[1.2]$). The model is pictured in
+   \olref{fig:counter-Diamond}, and you can verify that it is a
+   countermodel to $(\Diamond p \land \Diamond q) \lif \Diamond (p \land q)$.
+   \begin{figure}

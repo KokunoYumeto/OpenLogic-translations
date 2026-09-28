@@ -231,11 +231,12 @@ check(psEdition.previous_v060_release_snapshot.source_progress.commit === psCurr
 check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurrent.bounded_language_sample.canon_pages_actually_inspected.length === 2 && psCurrent.visual_sample.whole_pdf_visual_certification === false, "Keep the Pashto sample audit bounded");
 check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
 const bnFullReader = JSON.parse(await read("evidence/BN722_HTML_READER_PUBLIC_20260928.json"));
-for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",393,321,321],["openlogic-bn-beng-in",722,722,299]]) {
+const bnFullEpub = JSON.parse(await read("evidence/BN722_EPUB_READER_PUBLIC_20260928.json"));
+for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",393,321,321],["openlogic-bn-beng-in",722,722,722]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
-  for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files,...psCurrent.files,...psV070.files,...bnFullReader.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
+  for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files,...psCurrent.files,...psV070.files,...bnFullReader.files,...bnFullEpub.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
   if (id === "openlogic-ps-arab-pk") check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", "Pashto needs PDF/direct cumulative LaTeX/source ZIP order");
   else {
     check(edition.source_packaging_status === "direct-cumulative-LaTeX-and-full-source-ZIP-verified" && edition.pertinent_pdf_exists === false && edition.online_reading_preview, "Bengali needs full cumulative source and its no-PDF online preview");
@@ -243,7 +244,10 @@ for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",393,321,3
     check(bnFullReader.files.length === 12 && bnFullReader.files.every(f=>f.matches) && bnFullReader.failures.length === 0, "Bengali complete HTML needs twelve matched anonymous public files");
     check(bnFullReader.source_archive.members === 1510 && bnFullReader.source_archive.frozen_source_hash_matches === 722 && bnFullReader.source_archive.target_hash_matches === 722 && bnFullReader.source_archive.direct_tex_matches_archived, "Bengali full source archive must bind all 722 original and translated files and direct LaTeX");
     check(bnFullReader.reader_structure.tex_unique_units === 722 && bnFullReader.reader_structure.tex_properly_nested && bnFullReader.reader_structure.html_unique_units === 722 && bnFullReader.reader_structure.html_order_matches && bnFullReader.reader_structure.broken_internal_links === 0, "Bengali complete reader requires exact unit membership, nested TeX, ordered HTML and working internal links");
-    check(edition.html_reader_units === 722 && edition.epub_reader_units === 299 && edition.full_pdf_published === false && edition.full_epub_published === false && edition.zenodo_reader_units === 299, "Bengali HTML722 must not inflate old EPUB/Zenodo299 or pending full PDF");
+    check(edition.html_reader_units === 722 && edition.epub_reader_units === 722 && edition.full_pdf_published === false && edition.full_epub_published === true && edition.zenodo_reader_units === 299, "Bengali HTML/EPUB722 must preserve old Zenodo299 and pending full PDF");
+    check(bnFullEpub.files.length === 12 && bnFullEpub.files.every(f=>f.matches) && bnFullEpub.failures.length === 0, "Bengali full EPUB needs anonymous exact public assets and clean bounded checks");
+    check(bnFullEpub.epub.source_units === 722 && bnFullEpub.epub.mathml === 43514 && bnFullEpub.epub.epubcheck_messages === 0 && bnFullEpub.reader_structure.tex_properly_nested, "Bengali EPUB must bind all 722 units, MathML, exact EPUBCheck report and properly nested direct LaTeX");
+    check(bnFullEpub.source_archive.members === 1514 && bnFullEpub.source_archive.frozen_source_hash_matches === 722 && bnFullEpub.source_archive.nonempty_targets === 722 && bnFullEpub.source_archive.direct_tex_matches_archived, "Bengali current source ZIP must bind the exact direct LaTeX and all sources/targets");
     check(bengaliRepair.github_files_matched === 6 && bengaliRepair.static_source_inspection.unique_units === 299, "Preserve historical Bengali299 source-repair evidence");
   }
 }

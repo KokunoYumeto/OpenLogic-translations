@@ -192,14 +192,16 @@ for (const [id, units, hasEpub] of [["openlogic-jv-latn-id",24,true]]) {
   const receipt = JSON.parse(await read("evidence/PUBLIC_READER_DELIVERIES_20260919.json"));
   for (const item of edition.ordered_downloads) check(receipt.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
 }
-const jv671 = catalogue.editions.find(item => item.id === "openlogic-jv-latn-id");
-const jv671Audit = JSON.parse(await read("evidence/JAVANESE671_MANAGER_AUDIT_20260928.json"));
-check(jv671.source_units_translated === 671 && jv671.standalone_reader_units === 24 && jv671.source_archive.sha256 === "4ec915dcf2d31e00c91f6c0eda6cc2850689c6df7c221e6efd7a7562fa9f5dc9", "Javanese671 source snapshot must not inflate or replace the24-unit reader release");
-check(jv671Audit.targets_verified === 671 && jv671Audit.frozen_files_verified === 722 && jv671Audit.archive_crc_pass && jv671.source_progress.archive_sha256 === jv671Audit.archive.sha256, "Javanese source bytes must be verified");
-check(jv671Audit.withdrawn_term_bundles === 444 && jv671Audit.withdrawn_segment_bundles === 4143 && !jv671Audit.canon_revalidation_complete && !jv671Audit.whole_corpus_semantics_certified, "Javanese unsupported canon evidence must remain explicit");
-check(jv671Audit.manager_corrections_present && jv671Audit.OLP0671_all10_source_target_hash_pairs_match, "Javanese0671 proof repairs must be present in public bytes");
-check(jv671.metadata_language === "jv-Latn-ID" && jv671.ui_labels.details === "Ragam lan watesan" && jv671.evidence.manager_public_readback.endsWith(".html"), "Javanese access and limitations must have a localized entry point");
-check(jv671.supplementary_downloads?.[0]?.downloads?.[0]?.url === jv671Audit.archive.url, "Javanese671 source link must use the renderer's supplementary_downloads contract");
+const jv = catalogue.editions.find(item => item.id === "openlogic-jv-latn-id");
+const jvAudit = JSON.parse(await read(jv.evidence.source_checkpoint_readback));
+check(jv.source_units_translated === 697 && jv.standalone_reader_units === 24 && jv.source_archive.sha256 === "4ec915dcf2d31e00c91f6c0eda6cc2850689c6df7c221e6efd7a7562fa9f5dc9", "Javanese source progress must preserve the24-unit reader");
+check(jvAudit.targets_verified === 697 && jvAudit.frozen_files_verified === 722 && jvAudit.public_files_verified === 1893 && jvAudit.archive_crc_pass && jv.source_progress.archive_sha256 === jvAudit.archive.sha256, "Javanese697 public source identity missing");
+check(jvAudit.withdrawn_term_bundles === 444 && jvAudit.withdrawn_segment_bundles === 4143 && !jvAudit.canon_revalidation_complete && !jvAudit.whole_corpus_semantics_certified, "Javanese canon limitations must remain explicit");
+check(jvAudit.sample_segment_pairs === 17 && jvAudit.sample_all_source_target_hashes_match && jvAudit.canon_pages.length === 3, "Javanese697 source/canon sample must be replayed");
+check(jv.metadata_language === "jv-Latn-ID" && jv.ui_labels.details === "Ragam lan watesan" && jv.evidence.manager_public_readback.endsWith(".html"), "Javanese needs a localized evidence entry point");
+check(jv.supplementary_downloads?.[0]?.downloads?.[0]?.url === jvAudit.archive.url, "Javanese source link must use supplementary_downloads");
+const jvPrior = JSON.parse(await read("evidence/JAVANESE671_MANAGER_AUDIT_20260928.json"));
+check(jvPrior.manager_corrections_present && jvPrior.OLP0671_all10_source_target_hash_pairs_match && jvAudit.prior_targets_changed.length === 0, "Previously verified Javanese proof repairs must be preserved");
 const tamil722 = JSON.parse(await read("evidence/TAMIL_BEFORE_UNIFIED_20260929.json"));
 const tamil722Audit = JSON.parse(await read("evidence/TAMIL722_MANAGER_AUDIT_20260928.json"));
 check(tamil722.source_units_translated === 722 && tamil722.standalone_reader_units === 695 && tamil722.companion_units === 27 && tamil722.combined_reader_units === 722, "Tamil source722 must distinguish main695 and companion27");

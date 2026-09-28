@@ -236,8 +236,19 @@ check(psCurrent.bounded_language_sample.segment_id === "OLP-0254-B005" && psCurr
 check(psCurrent.zenodo.manager_anonymous_byte_check.includes("not independently verified") && psEdition.evidence.manager_full_semantic_rereview === false, "Do not promote owner or bounded evidence to independent full certification");
 const bnFullReader = JSON.parse(await read("evidence/BN722_HTML_READER_PUBLIC_20260928.json"));
 const bnFullEpub = JSON.parse(await read("evidence/BN722_V051_READER_PUBLIC_20260928.json"));
+const bnBeforeComplete = JSON.parse(await read("evidence/BN722_BEFORE_COMPLETE_20260928.json"));
+const bnComplete = catalogue.editions.find(item => item.id === "openlogic-bn-beng-in");
+const bnCompleteEvidence = JSON.parse(await read("evidence/BN722_COMPLETE_MANAGER_20260928.json"));
+check(bnComplete.release_tag === "v1.0.0-complete-edition" && bnComplete.version_doi === "10.5281/zenodo.23018795", "Bengali current release identity");
+check(bnComplete.source_units_translated === 722 && bnComplete.standalone_reader_units === 722 && bnComplete.pdf_reader_units === 722 && bnComplete.html_reader_units === 722 && bnComplete.epub_reader_units === 722 && bnComplete.zenodo_reader_units === 722, "Bengali complete format scopes");
+check(bnComplete.full_pdf_published && bnComplete.pertinent_pdf_exists && bnComplete.ordered_downloads.slice(0,3).map(x=>x.format).join(",") === "PDF,TEX,ZIP", "Bengali PDF/direct-LaTeX/source-ZIP order");
+check(bnCompleteEvidence.files.length === 14 && bnCompleteEvidence.files.every(x=>x.matches) && bnCompleteEvidence.public_inventory_unchanged, "Bengali complete assets require fourteen anonymous matches and unchanged current inventory");
+for (const asset of bnComplete.ordered_downloads) check(bnCompleteEvidence.files.some(x=>x.host === "github" && x.url === asset.url && x.bytes === asset.bytes && x.sha256 === asset.sha256 && x.matches), "Bengali current download must match exact public bytes");
+check(bnCompleteEvidence.source_package.frozen_exact_local_matches === 722 && bnCompleteEvidence.source_package.target_exact_local_matches === 722 && bnCompleteEvidence.source_package.failures.length === 0 && bnCompleteEvidence.source_recheck.source_members === 1528, "Bengali final source package scope");
+check(bnCompleteEvidence.source_recheck.unit_ids === 722 && bnCompleteEvidence.source_recheck.direct_tex_matches_archive && bnCompleteEvidence.source_recheck.epub_unique_unit_anchors === 722 && bnCompleteEvidence.source_recheck.crc_failure === null, "Bengali exact cumulative source and EPUB unit containers");
+check(bnCompleteEvidence.source_recheck.metadata.revision === 6 && bnCompleteEvidence.source_recheck.metadata.description_sha256 === "db69b4ec91f5988a215f6046961ba283363657f775fc077ba3c8c6c6270488d5" && bnCompleteEvidence.full_linguistic_certification === false, "Bengali localized metadata identity and review limits");
 for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",393,321,321],["openlogic-bn-beng-in",722,722,722]]) {
-  const edition = catalogue.editions.find(item => item.id === id);
+  const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
   for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files,...psCurrent.files,...psV070.files,...bnFullReader.files,...bnFullEpub.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
@@ -264,7 +275,7 @@ check(bengali514.changed_units === 18 && bengali514.changed_segments === 167 && 
 check(bengali514.bounded_semantic_check.source_correction_id === 'BN-SRC-411' && bengali514.canon_sample.original_visually_inspected && !bengali514.full_semantic_reaudit, "Keep Bengali source/canon sampling bounded and source-grounded");
 const bnMrCurrent = JSON.parse(await read("evidence/BN599_MR270_SOURCE_CHECK_20260927.json"));
 const bn722 = JSON.parse(await read("evidence/BN722_PUBLIC_SOURCE_20260928.json"));
-const bn722Edition = catalogue.editions.find(item => item.id === "openlogic-bn-beng-in");
+const bn722Edition = bnBeforeComplete; // Historical source-only checkpoint, not the current reader.
 check(bn722.inventory_objects === 1444 && bn722.unit_ids === 722 && bn722.failures.length === 0, "Bengali722 needs all frozen and target source objects, not an owner count alone");
 check(bn722Edition.public_source_checkpoint_commit === bn722.commit && bn722.reader_units === 299 && !bn722.new_reader_release && !bn722.linguistic_certification, "Bengali722 source completion must not inflate reader coverage or linguistic assurance");
 check(bnMrCurrent.bn.changed_units === 85 && bnMrCurrent.bn.changed_segments === 844 && bnMrCurrent.bn.changed_language_segments === 798, 'Bengali599 requires actual85-unit /844-segment replay');
@@ -285,7 +296,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
   check(replay.changed_units===units && replay.segments_checked===segments && replay.failures.length===0, `${lane}: all changed units need a segment and canon-ID replay`);
 }
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
-  const edition = catalogue.editions.find(item => item.id === id);
+  const edition = lane === "bn" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
   const source = lane === 'ps' ? psV070.source_checkpoint : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);

@@ -184,7 +184,7 @@ check(gujaratiCurrent.metadata_language === 'gu-IN' && gujaratiCurrent.ui_labels
 check(gu270Delivery.files.length === 16 && gu270Delivery.files.every(x => x.matches), 'Gujarati270 needs all sixteen anonymous public matches');
 check(gu270Checks.status === 'PASS' && gu270Checks.inventory_entries === 1612 && gu270Checks.frozen_english_files === 722 && gu270Checks.native_target_files === 270 && gu270Checks.direct_fulltext_matches && gu270Checks.direct_fulltext_sha256 === gujaratiCurrent.direct_latex.sha256, 'Gujarati270 needs exact package and cumulative-source evidence');
 check(gu270Canon.segment_id === 'OLP-0273-B023' && gu270Canon.canon.length === 3 && gu270Canon.canon.every(x => x.passage_matches_original_html), 'Gujarati bounded canon replay must match the actual scholarly originals');
-for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlogic-jv-latn-id",24,true]]) {
+for (const [id, units, hasEpub] of [["openlogic-jv-latn-id",24,true]]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.standalone_reader_units === units, `${id}: release reader scope mismatch`);
   check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", `${id}: PDF/direct-LaTeX/source-ZIP order required`);
@@ -192,6 +192,15 @@ for (const [id, units, hasEpub] of [["openlogic-ta-taml-in",203,false],["openlog
   const receipt = JSON.parse(await read("evidence/PUBLIC_READER_DELIVERIES_20260919.json"));
   for (const item of edition.ordered_downloads) check(receipt.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
 }
+const tamil722 = catalogue.editions.find(item => item.id === "openlogic-ta-taml-in");
+const tamil722Audit = JSON.parse(await read("evidence/TAMIL722_MANAGER_AUDIT_20260928.json"));
+check(tamil722.source_units_translated === 722 && tamil722.standalone_reader_units === 695 && tamil722.companion_units === 27 && tamil722.combined_reader_units === 722, "Tamil source722 must distinguish main695 and companion27");
+check(tamil722Audit.scope.single_standalone_722_reader === false && tamil722Audit.scope.frozen_source_files_verified === 722 && tamil722Audit.scope.target_files_verified === 722 && tamil722Audit.scope.packaged_file_hashes_verified === 1559 && tamil722Audit.scope.direct_tex_exact_archive_matches === 2, "Tamil released source/package identity must be independently replayed");
+check(tamil722Audit.files.length === 10 && tamil722.ordered_downloads.map(item => item.format).join(",") === "PDF,TEX,ZIP,PDF,TEX", "Tamil requires ten public matches and paired editable sources");
+for (const item of tamil722.ordered_downloads) check(tamil722Audit.files.filter(file => file.name === item.name && file.sha256 === item.sha256 && file.bytes === item.bytes && file.anonymous).length === 2, "Every Tamil download must match on both mirrors");
+check(!tamil722.readers.some(item => item.format === "EPUB") && tamil722.epub_status === "in-progress-not-published", "Tamil unpublished EPUB must not be advertised as available");
+check(tamil722.metadata_language === "ta-IN" && tamil722.ordered_downloads.every(item => /[\u0B80-\u0BFF]/.test(item.download_label)), "Tamil entry and download labels must be localized");
+check(tamil722.limitations.some(item => item.includes("tamil-complete.pdf") && item.includes("tamil-source-companion.pdf")), "Tamil offline PDF filename workaround must remain visible until repaired");
 const newDelivery = JSON.parse(await read("evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json"));
 const sourceProgress = JSON.parse(await read("evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json"));
 check(sourceProgress.source_readbacks.length === 26 && sourceProgress.source_readbacks.every(file => file.match), "Telugu/Marathi source readbacks must all match");
@@ -297,8 +306,9 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
   const replay=bnTeSegments.lanes.find(row=>row.lane===lane);
   check(replay.changed_units===units && replay.segments_checked===segments && replay.failures.length===0, `${lane}: all changed units need a segment and canon-ID replay`);
 }
+const taBeforeComplete = JSON.parse(await read("evidence/TAMIL_BEFORE_COMPLETE_20260928.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
-  const edition = lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
+  const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
   const source = lane === 'ps' ? psV071.public_source_identity : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);

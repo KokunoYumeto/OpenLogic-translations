@@ -30,6 +30,10 @@ The explicit function restriction in `functions-relations.tex`, lines 78–90, i
 
 For `A={0}`, `B={1}`, `f(0)=1`, and `C={0}`, the function-restriction graph is `{(0,1)}`, whereas `R_f intersect C^2` is empty. Preserve the correct function definition and qualify the analogy in prose or an adjacent note.
 
-## Evidence limits
+## Modal tableaux — 28 September 2026
+
+The [three modal-tableau correction groups](evidence/MODAL_TABLEAUX_SOURCE_CORRECTIONS_20260928.md) merge the matching Tamil and Pashto reports. They repair a wrong signed modal conclusion, two misplaced prefix parentheses and a worked example incorrectly called axiom 5. The report includes permanent source links, a semantic justification and an apply-checked patch against current upstream. These groups have not been sent in a new upstream issue or comment. Audit: OpenAI Codex — GPT-6 Astra, Ultra effort; no independent human review is claimed.
+
+## Scope of the earlier Functions audit
 
 This was a bounded source audit, not whole-corpus source certification. It does not independently certify any complete target-language edition. The source archive and all seven named files matched the frozen manifest byte-for-byte; details are in the linked JSON evidence.

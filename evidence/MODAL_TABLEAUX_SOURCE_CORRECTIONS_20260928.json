@@ -1,0 +1,202 @@
+{
+  "schema": "openlogic-source-corrections/1",
+  "checked_at": "2026-09-28T16:20:38.127Z",
+  "model": "gpt-6-astra",
+  "effort": "ultra",
+  "scope": "Three modal-tableau correction groups, independently checked against current upstream and deduplicated across Tamil/Pashto reports. Not whole-corpus certification.",
+  "source_head": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+  "frozen_source": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "source_files": [
+    {
+      "path": "content/normal-modal-logic/tableaux/more-soundness.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/more-soundness.tex",
+      "bytes": 9384,
+      "sha256": "8c68f92959ba86967753495c186b9f49a3da00247457511f5527e72e5a9eb936",
+      "saved_current_matches": true,
+      "frozen_matches": true
+    },
+    {
+      "path": "content/normal-modal-logic/tableaux/more-rules.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/more-rules.tex",
+      "bytes": 6040,
+      "sha256": "1763d19e944f908c2890c6918b0197280a38ce9932867b28f563a7140b6d9c48",
+      "saved_current_matches": true,
+      "frozen_matches": true
+    },
+    {
+      "path": "content/normal-modal-logic/syntax-and-semantics/schemas.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/syntax-and-semantics/schemas.tex",
+      "bytes": 6462,
+      "sha256": "2644661ac31c8a11b18826df77ecd26332c0b3452f584d08260c01ee4fe727dc",
+      "saved_current_matches": null,
+      "frozen_matches": null
+    }
+  ],
+  "definition_source": {
+    "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/soundness.tex",
+    "bytes": 12701,
+    "sha256": "337485e1de3eaba7bdffdc6dddd9e9b4e0fe569bc9eaed470f7af27088492100",
+    "line": 48
+  },
+  "groups": [
+    {
+      "id": "OLI-NML-4R-DIAMOND-CONCLUSION",
+      "aliases": [
+        "TA-NML-046",
+        "OLNML-038"
+      ],
+      "path": "content/normal-modal-logic/tableaux/more-soundness.tex",
+      "lines": [
+        204
+      ],
+      "source_literal": "\\sFmla{\\True}{\\Box!B}[\\sigma]",
+      "replacement": "\\sFmla{\\False}{\\Diamond!B}[\\sigma]",
+      "classification": "wrong sign and modal operator in the proof's description",
+      "confidence": "high",
+      "reason": "Matches the displayed rule and proof conclusion. A reflexive one-world model with B false satisfies F Diamond B but not T Box B, refuting the printed conclusion.",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/more-soundness.tex#L204",
+      "present_in_current_upstream": true,
+      "confidence_is_calibrated_probability": false
+    },
+    {
+      "id": "OLI-NML-4R-PREFIX-INTERPRETATION",
+      "aliases": [
+        "TA-NML-045",
+        "OLNML-039"
+      ],
+      "path": "content/normal-modal-logic/tableaux/more-soundness.tex",
+      "lines": [
+        198,
+        210
+      ],
+      "source_literal": "[f(\\sigma).n]",
+      "replacement": "[f(\\sigma.n)]",
+      "classification": "two occurrences of an ill-typed prefix interpretation",
+      "confidence": "high",
+      "reason": "The source defines f:P->W on entire prefixes. The successor prefix is sigma.n; worlds in W have no specified dot-n operation.",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/more-soundness.tex#L198",
+      "present_in_current_upstream": true,
+      "confidence_is_calibrated_probability": false
+    },
+    {
+      "id": "OLI-NML-S5-EXAMPLE-AXIOM-LABEL",
+      "aliases": [
+        "TA-NML-044",
+        "OLNML-040"
+      ],
+      "path": "content/normal-modal-logic/tableaux/more-rules.tex",
+      "lines": [
+        161,
+        162
+      ],
+      "source_literal": "\\Log{S5} \\Proves \\Ax{5}",
+      "replacement": "\\Log{S5} \\Proves \\Box!A \\lif \\Box\\Diamond!A",
+      "classification": "worked theorem incorrectly identified as axiom 5",
+      "confidence": "high",
+      "reason": "The tableau root and proof establish Box A -> Box Diamond A. schemas.tex:126-127 defines axiom 5 as Diamond A -> Box Diamond A. Preserve the valid displayed theorem and proof; remove only the wrong axiom identification.",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/normal-modal-logic/tableaux/more-rules.tex#L161",
+      "present_in_current_upstream": true,
+      "confidence_is_calibrated_probability": false
+    }
+  ],
+  "deduplication": {
+    "groups": 3,
+    "owner_reports": 6,
+    "new_unique_findings_relative_to_existing_local_intake": 0,
+    "new_current_source_adjudications": 3,
+    "tamil_intake_sha256s": [
+      "46296fdfeee3906b9c50fc35af69f90e0dbaf84d4c86bc66d6271351b425794c",
+      "d8ba3ac78719fdcd445cc4c75a11541e482b922fd3c82fa06b9269c0334004e3"
+    ],
+    "external_issue_queries": [
+      {
+        "query": "is:issue repo:OpenLogicProject/OpenLogic \"more-soundness\"",
+        "total_count": 1,
+        "incomplete_results": false,
+        "items": [
+          {
+            "number": 61,
+            "title": "Need more explanation of proof systems",
+            "url": "https://github.com/OpenLogicProject/OpenLogic/issues/61",
+            "state": "closed"
+          }
+        ]
+      },
+      {
+        "query": "is:issue repo:OpenLogicProject/OpenLogic \"more-rules\"",
+        "total_count": 0,
+        "incomplete_results": false,
+        "items": []
+      },
+      {
+        "query": "is:pull-request repo:OpenLogicProject/OpenLogic \"more-soundness\"",
+        "total_count": 1,
+        "incomplete_results": false,
+        "items": [
+          {
+            "number": 143,
+            "title": "completeness via complete sets and clearer more detailed proofs; standard sequent calculus w/ sequences; better soundness proof for LK; standard natural deduction rules (fixes issues #38, #74, #144, #145, #147)",
+            "url": "https://github.com/OpenLogicProject/OpenLogic/pull/143",
+            "state": "closed"
+          }
+        ]
+      },
+      {
+        "query": "is:pull-request repo:OpenLogicProject/OpenLogic \"more-rules\"",
+        "total_count": 0,
+        "incomplete_results": false,
+        "items": []
+      }
+    ],
+    "prior_reports_inspected": [
+      432,
+      433,
+      435,
+      436
+    ],
+    "linked_indonesian_report": {
+      "url": "https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-id/main/evidence/UPSTREAM_FINDINGS.md",
+      "bytes": 5316,
+      "sha256": "9a5b93bea17dffe3f3f6977764514782b36221982ce2a7e1107b37624e1d6778",
+      "matched_lines": []
+    },
+    "matching_current_report_found": false,
+    "global_exhaustive_deduplication_claimed": false
+  },
+  "finite_regression": {
+    "euclidean_frames_through_three_worlds": 48,
+    "valuations": 344,
+    "rule_instances_checked": 2260,
+    "all_rules_sound_in_sample": true,
+    "wrong_TBox_conclusion_counterexample": {
+      "worlds": 1,
+      "edges": [
+        [
+          0,
+          0
+        ]
+      ],
+      "true_B_worlds": [],
+      "sigma": 0,
+      "sigma_n": 0
+    },
+    "proof_scope": "general argument uses Rx y and Rx z => Ry z; finite checks are supporting regression only"
+  },
+  "patch": {
+    "file": "MODAL_TABLEAUX_SOURCE_CORRECTIONS_20260928.patch",
+    "apply_check_passed": true,
+    "applies_to_head": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+    "source_files_changed": 2,
+    "live_upstream_modified": false
+  },
+  "upstream_delivery": {
+    "existing_consolidated_report": "https://github.com/OpenLogicProject/OpenLogic/issues/436",
+    "new_issue_or_comment": false,
+    "these_three_groups_sent": false
+  },
+  "limits": [
+    "General semantic argument accompanies finite regression; enumeration through three worlds is not a universal proof.",
+    "Exact Tamil/Pashto aliases do not create six independent defects.",
+    "This source audit does not certify target-language fluency, canon completeness, a new reader or a release build."
+  ]
+}

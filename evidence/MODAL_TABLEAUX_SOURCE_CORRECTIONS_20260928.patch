@@ -1,0 +1,38 @@
+--- a/content/normal-modal-logic/tableaux/more-soundness.tex
++++ b/content/normal-modal-logic/tableaux/more-soundness.tex
+@@ -195,19 +195,19 @@
+     the branch into~$\mModel{M}$, we know that
+     $Rf(\sigma)f(\sigma.n)$. Now let $w$ be any world such that
+     $Rf(\sigma)w$.  Since $R$ is euclidean, $Rf(\sigma.n)w$.  Since
+-    $\mSat{M}{\Box !B}[f(\sigma).n]$, $\mSat{M}{!B}[w]$. Hence,
++    $\mSat{M}{\Box !B}[f(\sigma.n)]$, $\mSat{M}{!B}[w]$. Hence,
+     $\mSat{M}{\Box !B}[f(\sigma)]$, and $\mModel{M}, f$ satisfies
+     $\sFmla{\True}{\Box !B}[\sigma]$.}}{}
+ \tagitem{prvDiamond}{The branch is expanded by applying 4r$\Diamond$ to
+   $\sFmla{\False}{\Diamond !B}[\sigma.n] \in \Gamma$:
+   \iftag{probDiamond}{Exercise.}{This results in a new !!{signed
+-      formula}~$\sFmla{\True}{\Box!B}[\sigma]$ on the branch. Suppose
++      formula}~$\sFmla{\False}{\Diamond!B}[\sigma]$ on the branch. Suppose
+     $\mSat{M}{\Gamma}[f]$, in particular, $\mSat/{M}{\Diamond
+       !B}[f(\sigma.n)]$. Since $f$ is an interpretation of prefixes on
+     the branch into~$\mModel{M}$, we know that
+     $Rf(\sigma)f(\sigma.n)$. Now let $w$ be any world such that
+     $Rf(\sigma)w$.  Since $R$ is euclidean, $Rf(\sigma.n)w$.  Since
+-    $\mSat/{M}{\Diamond !B}[f(\sigma).n]$, $\mSat/{M}{!B}[w]$. Hence,
++    $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$, $\mSat/{M}{!B}[w]$. Hence,
+     $\mSat/{M}{\Diamond !B}[f(\sigma)]$, and $\mModel{M}, f$ satisfies
+     $\sFmla{\False}{\Diamond !B}[\sigma]$.}}{}
+ \end{tagenumerate}
+--- a/content/normal-modal-logic/tableaux/more-rules.tex
++++ b/content/normal-modal-logic/tableaux/more-rules.tex
+@@ -158,8 +158,8 @@
+ 
+ 
+ \begin{ex}
+-  We give a closed tableau that shows $\Log{S5} \Proves \Ax{5}$, i.e.,
+-  $\Box!A \lif \Box\Diamond!A$.
++  We give a closed tableau that shows
++  $\Log{S5} \Proves \Box!A \lif \Box\Diamond!A$.
+   \begin{oltableau}
+     [\pFmla{\False}{\Box\formula{A} \lif \Box\Diamond \formula{A}}{1},
+       just = \TAss

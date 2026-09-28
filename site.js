@@ -174,6 +174,10 @@ function cardFor(edition) {
   const sourceUnits = Number.isFinite(edition.source_units_translated)
     ? edition.source_units_translated
     : edition.source_units_preserved;
+  const verifiedPublicCompleteReader = edition.standalone_reader_units === TOTAL_UNITS
+    && edition.current_local_configured_reader?.public_release_sync_verified === true
+    && (edition.readers || []).some(reader => reader.scope_kind === "standalone"
+      && reader.source_units === TOTAL_UNITS && safeLink(reader.url));
   if (edition.kind === "accessibility-infrastructure") {
     const scope = document.createElement("p");
     scope.className = "coverage-note";
@@ -181,7 +185,7 @@ function cardFor(edition) {
     coverage.append(scope);
   } else coverage.append(
     coverageRow(edition.source_coverage_label || (Number.isFinite(edition.provisional_files) ? "Provisional baseline files" : "Translated source files"), units(sourceUnits ?? edition.provisional_files)),
-    edition.current_local_configured_reader
+    edition.current_local_configured_reader && !verifiedPublicCompleteReader
       ? coverageRow(edition.local_reader_label || "Configured reader (local)", units(edition.current_local_configured_reader.source_units_rendered))
       : coverageRow(edition.ui_labels?.standalone_reader || "Standalone reader", units(edition.standalone_reader_units))
   );

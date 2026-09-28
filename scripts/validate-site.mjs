@@ -209,7 +209,8 @@ check(marathi194.ordered_downloads.slice(0,4).map(item => item.format).join(",")
 check(marathi194.ordered_downloads.every(item => /[\u0900-\u097f]/.test(item.download_label || '')), "Every Marathi download label, including HTML-ZIP, must be localized");
 for (const item of marathi194.ordered_downloads) check(marathi194Evidence.files.some(file => file.url === item.url && file.bytes === item.bytes && file.sha256 === item.sha256), "Marathi194 download must match readback");
 check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.packaging_observations.length === 2, "Marathi194 bounded evidence must retain its limitations");
-const telugu276 = catalogue.editions.find(item => item.id === "openlogic-te-telu-in");
+const teBeforeComplete = JSON.parse(await read("evidence/TE_BEFORE_COMPLETE_20260928.json"));
+const telugu276 = teBeforeComplete; // Historical276-unit scope, not the current release.
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));
 const teluguPrevious = JSON.parse(await read(telugu276.evidence.previous_276_intake));
 check(telugu276.source_units_translated === 410 && telugu276.standalone_reader_units === 276, "Telugu public source410 must remain distinct from reader276");
@@ -296,11 +297,22 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
   check(replay.changed_units===units && replay.segments_checked===segments && replay.failures.length===0, `${lane}: all changed units need a segment and canon-ID replay`);
 }
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
-  const edition = lane === "bn" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
+  const edition = lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
   const source = lane === 'ps' ? psV070.source_checkpoint : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);
 }
+const teComplete = catalogue.editions.find(item=>item.id === "openlogic-te-telu-in");
+const teCompleteEvidence = JSON.parse(await read("evidence/TE722_COMPLETE_SOURCE_MANAGER_20260928.json"));
+check(teComplete.release_tag === "v1.0.1-full-olp0722" && teComplete.version_doi === "10.5281/zenodo.23019353", "Telugu complete release/source-addendum identity");
+check(["source_units_translated","standalone_reader_units","pdf_reader_units","html_reader_units","epub_reader_units","zenodo_reader_units"].every(k=>teComplete[k]===722), "Telugu full722 source and reader scopes");
+check(teComplete.online_html_reader_units === 23 && teComplete.html_delivery_kind === "offline-ZIP" && teComplete.public_reader === teComplete.readers[0].url && teComplete.readers[0].format === "PDF", "Keep old23-unit online Telugu sample distinct");
+check(teComplete.ordered_downloads.slice(0,3).map(x=>x.format).join(",")==="PDF,TEX,ZIP", "Telugu complete reader/source order");
+check(teCompleteEvidence.files.length===4 && teCompleteEvidence.files.every(x=>x.matches) && teCompleteEvidence.retained_reader_readbacks.length===16 && teCompleteEvidence.retained_reader_readbacks.every(x=>x.matches) && teCompleteEvidence.inherited_zenodo_files_unchanged===28 && teCompleteEvidence.zenodo_files===30, "Telugu public source bytes and inherited preservation");
+for(const asset of teComplete.ordered_downloads) check([...teCompleteEvidence.files,...teCompleteEvidence.retained_reader_readbacks].some(x=>x.host==="github" && x.url===asset.url && x.bytes===asset.bytes && x.sha256===asset.sha256 && x.matches), "Telugu exact proven download");
+check(["source_files","target_files","body_spans"].every(k=>teCompleteEvidence.source_replay[k]===722) && teCompleteEvidence.source_replay.members===3328 && teCompleteEvidence.source_replay.figure_files===105 && teCompleteEvidence.source_replay.bad_crc_member===null && Object.values(teCompleteEvidence.source_replay.required_dependencies).every(Boolean) && teCompleteEvidence.failures.length===0, "Telugu complete editable source/dependencies");
+check(teCompleteEvidence.source_replay.direct_tex_is_pdf_build_driver===false && teCompleteEvidence.full_linguistic_certification===false && teComplete.evidence.review_localization_status==="pending", "Preserve Telugu build-route and review limits");
+check(!/[\u0980-\u09ff]/u.test(teComplete.limitations.join(" ")), "No accidental Bengali script in Telugu limitations");
 const tamilChapter = catalogue.editions.find(item => item.id === "openlogic-ta-taml-in").supplementary_downloads[0];
 const tamilChapterEvidence = JSON.parse(await read("evidence/TAMIL_ORDINALS_SOURCE_COMPANION_20260921.json"));
 check(tamilChapter.source_units === 11 && tamilChapter.scope_kind === "chapter", "Tamil Ordinals is a separate eleven-unit chapter");

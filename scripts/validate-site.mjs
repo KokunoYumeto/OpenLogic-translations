@@ -200,7 +200,7 @@ check(jv671Audit.withdrawn_term_bundles === 444 && jv671Audit.withdrawn_segment_
 check(jv671Audit.manager_corrections_present && jv671Audit.OLP0671_all10_source_target_hash_pairs_match, "Javanese0671 proof repairs must be present in public bytes");
 check(jv671.metadata_language === "jv-Latn-ID" && jv671.ui_labels.details === "Ragam lan watesan" && jv671.evidence.manager_public_readback.endsWith(".html"), "Javanese access and limitations must have a localized entry point");
 check(jv671.supplementary_downloads?.[0]?.downloads?.[0]?.url === jv671Audit.archive.url, "Javanese671 source link must use the renderer's supplementary_downloads contract");
-const tamil722 = catalogue.editions.find(item => item.id === "openlogic-ta-taml-in");
+const tamil722 = JSON.parse(await read("evidence/TAMIL_BEFORE_UNIFIED_20260929.json"));
 const tamil722Audit = JSON.parse(await read("evidence/TAMIL722_MANAGER_AUDIT_20260928.json"));
 check(tamil722.source_units_translated === 722 && tamil722.standalone_reader_units === 695 && tamil722.companion_units === 27 && tamil722.combined_reader_units === 722, "Tamil source722 must distinguish main695 and companion27");
 check(tamil722Audit.scope.single_standalone_722_reader === false && tamil722Audit.scope.frozen_source_files_verified === 722 && tamil722Audit.scope.target_files_verified === 722 && tamil722Audit.scope.packaged_file_hashes_verified === 1559 && tamil722Audit.scope.direct_tex_exact_archive_matches === 2, "Tamil released source/package identity must be independently replayed");
@@ -209,6 +209,16 @@ for (const item of tamil722.ordered_downloads) check(tamil722Audit.files.filter(
 check(!tamil722.readers.some(item => item.format === "EPUB") && tamil722.epub_status === "in-progress-not-published", "Tamil unpublished EPUB must not be advertised as available");
 check(tamil722.metadata_language === "ta-IN" && tamil722.ordered_downloads.every(item => /[\u0B80-\u0BFF]/.test(item.download_label)), "Tamil entry and download labels must be localized");
 check(tamil722.limitations.some(item => item.includes("tamil-complete.pdf") && item.includes("tamil-source-companion.pdf")), "Tamil offline PDF filename workaround must remain visible until repaired");
+const taUnified = catalogue.editions.find(item => item.id === "openlogic-ta-taml-in");
+const taUnifiedAudit = JSON.parse(await read("evidence/TAMIL722_UNIFIED_AUDIT_20260929.json"));
+check(["source_units_translated","standalone_reader_units","pdf_reader_units","epub_reader_units","zenodo_reader_units"].every(k=>taUnified[k]===722), "Tamil standalone PDF/EPUB722 scope");
+check(taUnified.ordered_downloads.map(x=>x.format).join(",")==="PDF,TEX,ZIP,EPUB", "Tamil direct cumulative source ordering");
+check(taUnifiedAudit.files.length===20 && taUnifiedAudit.files.every(x=>x.matches && x.anonymous), "Tamil needs20 exact anonymous matches");
+for (const item of taUnified.ordered_downloads) check(taUnifiedAudit.files.filter(x=>x.name===item.name && x.sha256===item.sha256 && x.bytes===item.bytes).length===2, "Tamil current downloads must match both mirrors");
+check(taUnifiedAudit.pdf.failures.length===0 && taUnifiedAudit.pdf.annotation_actions_compared===2823 && taUnifiedAudit.pdf.outline_entries_compared===718 && taUnifiedAudit.pdf.pages_compared===1227, "Tamil navigation and page identities need full replay");
+check(taUnifiedAudit.source_archive.manifest_hashes_verified===1574 && taUnifiedAudit.source_archive.frozen_hashes_verified===722 && taUnifiedAudit.source_archive.target_hashes_verified===722 && taUnifiedAudit.cumulative_tex.exact_component_unit_blocks===722, "Tamil complete editable source identity");
+check(taUnifiedAudit.source_replay.new_component_tex_rebuild.status==="not-run-slot-unavailable" && taUnifiedAudit.manager_whole_language_certification===false, "Tamil audit limits must remain honest");
+check(taUnified.metadata_language==="ta-IN" && taUnified.ordered_downloads.every(x=>/[\u0B80-\u0BFF]/.test(x.download_label)) && taUnified.version_doi==="10.5281/zenodo.23025099", "Tamil local-language access and exact DOI");
 const newDelivery = JSON.parse(await read("evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json"));
 const sourceProgress = JSON.parse(await read("evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json"));
 check(sourceProgress.source_readbacks.length === 26 && sourceProgress.source_readbacks.every(file => file.match), "Telugu/Marathi source readbacks must all match");

@@ -41,3 +41,7 @@ The [consolidated completeness/countermodel report](evidence/MODAL_COMPLETENESS_
 ## Scope of the earlier Functions audit
 
 This was a bounded source audit, not whole-corpus source certification. It does not independently certify any complete target-language edition. The source archive and all seven named files matched the frozen manifest byte-for-byte; details are in the linked JSON evidence.
+
+## Intuitionistic tableaux — 29 September 2026
+
+The [bounded source review](evidence/INTUITIONISTIC_TABLEAUX_SOURCE_FINDINGS_20260929.md) confirms eleven owner-reported treatments and one additional two-occurrence rule-label inconsistency. A four-file mechanical patch is included. The separately verified arbitrary-prefix-domain counterexample does not refute ordinary common-root entailment, and the patch is not a complete repair of that general scope gap. No new upstream issue/comment. Audit: OpenAI Codex — GPT-6 Astra, Ultra effort; no human review claimed.

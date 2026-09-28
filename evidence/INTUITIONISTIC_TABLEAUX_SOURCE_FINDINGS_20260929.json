@@ -1,0 +1,244 @@
+{
+  "checked_utc": "2026-09-28T23:17:06.809932+00:00",
+  "current_upstream_commit": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+  "frozen_commit": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "current_public_bytes": [
+    {
+      "path": "content/intuitionistic-logic/tableaux/introduction.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/intuitionistic-logic/tableaux/introduction.tex",
+      "bytes": 2939,
+      "sha256": "d247348c60332898ef0ee789cf200c83633ab364190dd8a68e7c3a767b5fcdb0",
+      "same_as_frozen": true
+    },
+    {
+      "path": "content/intuitionistic-logic/tableaux/rules.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/intuitionistic-logic/tableaux/rules.tex",
+      "bytes": 5140,
+      "sha256": "ac874fab0a48018f53cbe714eebbee31221cecb86fe6981fda012dfbd17fabcd",
+      "same_as_frozen": true
+    },
+    {
+      "path": "content/intuitionistic-logic/tableaux/proofs.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/intuitionistic-logic/tableaux/proofs.tex",
+      "bytes": 1833,
+      "sha256": "9745506f871e091339606542e34049c03d2baffd71bd7de389c0d69468846e73",
+      "same_as_frozen": true
+    },
+    {
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/intuitionistic-logic/tableaux/soundness.tex",
+      "bytes": 9818,
+      "sha256": "3852095c3c8edfdf76e294936602d8a0d640622642fcb0c27cf55420ef99e46c",
+      "same_as_frozen": true
+    }
+  ],
+  "math_checks": [
+    {
+      "unit_id": "OLP-0511",
+      "dollar_math_spans": 0,
+      "changes_match_disclosed_substitutions": true,
+      "source_only": [],
+      "target_only": []
+    },
+    {
+      "unit_id": "OLP-0512",
+      "dollar_math_spans": 31,
+      "changes_match_disclosed_substitutions": true,
+      "source_only": [],
+      "target_only": []
+    },
+    {
+      "unit_id": "OLP-0513",
+      "dollar_math_spans": 49,
+      "changes_match_disclosed_substitutions": true,
+      "source_only": [
+        "$\\sFmla{\\True}{!A}[\\sigma.{*}]$",
+        "$\\sFmla{\\False}{!B}[\\sigma.{*}]$",
+        "$\\sFmla{\\True}{!A}[\\sigma]$",
+        "$\\sFmla{\\False}{!B}[\\sigma]$"
+      ],
+      "target_only": [
+        "$\\sFmla{\\False}{!A}[\\sigma.{*}]$",
+        "$\\sFmla{\\True}{!B}[\\sigma.{*}]$",
+        "$\\sFmla{\\False}{!A}[\\sigma]$",
+        "$\\sFmla{\\True}{!B}[\\sigma]$"
+      ]
+    },
+    {
+      "unit_id": "OLP-0514",
+      "dollar_math_spans": 5,
+      "changes_match_disclosed_substitutions": true,
+      "source_only": [],
+      "target_only": []
+    },
+    {
+      "unit_id": "OLP-0515",
+      "dollar_math_spans": 174,
+      "changes_match_disclosed_substitutions": true,
+      "source_only": [
+        "$\\mSat{M}{!A}[w]$",
+        "$\\mSat{M}{!A}[f(\\sigma)]$",
+        "$Rf(\\sigma)(\\sigma.{*})$",
+        "$\\sFmla{\\False}{!B\\lor!C}\\in\\Gamma$",
+        "$\\Gamma\\cup\\{\\sFmla{\\False}{!B\\lif!C}[\\sigma.n]\\}$",
+        "$\\Gamma\\cup\\{\\sFmla{\\False}{!B\\lif!C}[\\sigma.n]\\}$",
+        "$\\Gamma\\Proves!A$"
+      ],
+      "target_only": [
+        "$\\mSat/{M}{!A}[w]$",
+        "$Rf(\\sigma)f(\\sigma.{*})$",
+        "$\\mSat{M}{!A}[f(\\sigma.{*})]$",
+        "$\\sFmla{\\False}{!B\\lor!C}[\\sigma]\\in\\Gamma$",
+        "$\\Gamma\\cup\\{\\sFmla{\\True}{!B}[\\sigma.n],\\sFmla{\\False}{!C}[\\sigma.n]\\}$",
+        "$\\Gamma\\cup\\{\\sFmla{\\True}{!B}[\\sigma.n],\\sFmla{\\False}{!C}[\\sigma.n]\\}$",
+        "$\\Gamma\\Entails!A$"
+      ]
+    }
+  ],
+  "dollar_math_spans_checked": 259,
+  "disclosed_math_substitutions": 11,
+  "proof_tree_references_checked": true,
+  "existing_owner_findings": 11,
+  "additional_rule_name_argument_order_occurrences": 2,
+  "editorial_patch_substitutions": [
+    {
+      "id": "PS-OLINT-012",
+      "path": "content/intuitionistic-logic/tableaux/introduction.tex",
+      "before": "!!{formula}s in modal\n!!{tableau}s",
+      "after": "!!{formula}s in intuitionistic\n!!{tableau}s",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "OLI-INT-TAB-RULE-ARGUMENT-ORDER-TRUE",
+      "path": "content/intuitionistic-logic/tableaux/rules.tex",
+      "before": "\\TRule{\\lif}{\\True}",
+      "after": "\\TRule{\\True}{\\lif}",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "OLI-INT-TAB-RULE-ARGUMENT-ORDER-FALSE",
+      "path": "content/intuitionistic-logic/tableaux/rules.tex",
+      "before": "\\TRule{\\lif}{\\False}",
+      "after": "\\TRule{\\False}{\\lif}",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-013",
+      "path": "content/intuitionistic-logic/tableaux/rules.tex",
+      "before": "$\\sFmla{\\True}{!A}[\\sigma.{*}]$",
+      "after": "$\\sFmla{\\False}{!A}[\\sigma.{*}]$",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-013",
+      "path": "content/intuitionistic-logic/tableaux/rules.tex",
+      "before": "$\\sFmla{\\False}{!B}[\\sigma.{*}]$",
+      "after": "$\\sFmla{\\True}{!B}[\\sigma.{*}]$",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-013",
+      "path": "content/intuitionistic-logic/tableaux/rules.tex",
+      "before": "$\\sFmla{\\True}{!A}[\\sigma]$",
+      "after": "$\\sFmla{\\False}{!A}[\\sigma]$",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-013",
+      "path": "content/intuitionistic-logic/tableaux/rules.tex",
+      "before": "$\\sFmla{\\False}{!B}[\\sigma]$",
+      "after": "$\\sFmla{\\True}{!B}[\\sigma]$",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-014",
+      "path": "content/intuitionistic-logic/tableaux/proofs.tex",
+      "before": "\\TRule{\\False}{\\land}[4]",
+      "after": "\\TRule{\\False}{\\land}[7]",
+      "occurrences": 2,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-015",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "but\n  $\\mSat{M}{!A}[w]$",
+      "after": "but\n  $\\mSat/{M}{!A}[w]$",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-016",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "in the modal case",
+      "after": "in the intuitionistic case",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-018-GRAMMAR",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "such that both If",
+      "after": "such that both prefixed formulas are satisfied. If",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-018",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "$Rf(\\sigma)(\\sigma.{*})$, $\\mSat{M}{!A}[f(\\sigma)]$",
+      "after": "$Rf(\\sigma)f(\\sigma.{*})$, $\\mSat{M}{!A}[f(\\sigma.{*})]$",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-019",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "$\\sFmla{\\False}{!B \\lor !C} \\in \\Gamma$",
+      "after": "$\\sFmla{\\False}{!B \\lor !C}[\\sigma] \\in \\Gamma$",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-020",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "$\\Gamma \\cup \\{\\sFmla{\\False}{!B \\lif !C}[\\sigma.n]\\}$",
+      "after": "$\\Gamma \\cup \\{\\sFmla{\\True}{!B}[\\sigma.n], \\sFmla{\\False}{!C}[\\sigma.n]\\}$",
+      "occurrences": 2,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-021",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "the possible inferences with two premises",
+      "after": "the possible inferences with two branches",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    },
+    {
+      "id": "PS-OLINT-022",
+      "path": "content/intuitionistic-logic/tableaux/soundness.tex",
+      "before": "So we must have $\\Gamma \\Proves !A$ after all.",
+      "after": "So we must have $\\Gamma \\Entails !A$ after all.",
+      "occurrences": 1,
+      "reason": "Independently read against neighbouring definitions, formal rule table and proof context; not a complete repair of OLINT-017."
+    }
+  ],
+  "patch_sha256": "ed9904cc339ce2b5848418a2c18909c75b2e4007d54da451011af04619736ba3",
+  "gap_repair_included": false,
+  "current_external_issue_deduplication_complete": false,
+  "upstream_posts": 0,
+  "patch_apply_check": "git apply --check passed against four exact anonymously downloaded current-source files; no upstream mutation",
+  "deduplication": {
+    "manager_collection_search": "No prior tableau-source correction packet located; only frozen manifest paths matched. IDs are owner-namespaced.",
+    "global_external_issues_or_prs_complete": false,
+    "previous_issue": "https://github.com/OpenLogicProject/OpenLogic/issues/436",
+    "new_upstream_posts": 0
+  }
+}

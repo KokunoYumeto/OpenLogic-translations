@@ -1,0 +1,121 @@
+--- a/content/intuitionistic-logic/tableaux/introduction.tex
++++ b/content/intuitionistic-logic/tableaux/introduction.tex
+@@ -37,7 +37,7 @@
+ 
+ For intuitionistic logic, we have to both extend the notion of
+ !!{signed formula} and adjust the rules for the connectives. In
+-addition to a sign($\True$ or $\False$), !!{formula}s in modal
++addition to a sign($\True$ or $\False$), !!{formula}s in intuitionistic
+ !!{tableau}s also have \emph{prefixes}~$\sigma$. The prefixes are
+ non-empty sequences of positive integers, i.e., $\sigma \in
+ (\PosInt)^* \setminus \{\emptyseq\}$. When we write such prefixes
+--- a/content/intuitionistic-logic/tableaux/rules.tex
++++ b/content/intuitionistic-logic/tableaux/rules.tex
+@@ -87,17 +87,17 @@
+ \]
+ 
+ For the conditional~$\lif$, the rules differ from the classical and
+-modal cases. The $\TRule{\lif}{\True}$ rule extends a branch
++modal cases. The $\TRule{\True}{\lif}$ rule extends a branch
+ containing $\sFmla{\True}{!A \lif !B}[\sigma]$ by
+-$\sFmla{\True}{!A}[\sigma.{*}]$ and $\sFmla{\False}{!B}[\sigma.{*}]$ on two
++$\sFmla{\False}{!A}[\sigma.{*}]$ and $\sFmla{\True}{!B}[\sigma.{*}]$ on two
+ different branches. It can only be applied for a prefix~$\sigma.{*}$
+ which \emph{already} occurs on the branch in which it is applied.
+ Let's call such a prefix ``used'' (on the branch). (Since $\sigma.{*}$
+ includes $\sigma$ itself, the rule can always be applied by adding the
+-prefixed signed formulas $\sFmla{\True}{!A}[\sigma]$ and
+-$\sFmla{\False}{!B}[\sigma]$ on separate branches.)
++prefixed signed formulas $\sFmla{\False}{!A}[\sigma]$ and
++$\sFmla{\True}{!B}[\sigma]$ on separate branches.)
+ 
+-The $\TRule{\lif}{\False}$ rule extends a branch containing
++The $\TRule{\False}{\lif}$ rule extends a branch containing
+ $\sFmla{\False}{!A \lif !B}[\sigma]$ by both
+ $\sFmla{\True}{!A}[\sigma.n]$ and $\sFmla{\False}{!B}[\sigma.n]$ on
+ the same branch, with $\sigma.n$ a prefix new to the branch. 
+--- a/content/intuitionistic-logic/tableaux/proofs.tex
++++ b/content/intuitionistic-logic/tableaux/proofs.tex
+@@ -29,9 +29,9 @@
+                 [\pFmla{\False}{\formula{A} \land \formula{B}}{1.1.1},
+                   just = {\TRule{\True}{\lif}[1]}
+                   [\pFmla{\False}{\formula{A}}{1.1.1},
+-                    just= {\TRule{\False}{\land}[4]}, close]
++                    just= {\TRule{\False}{\land}[7]}, close]
+                   [\pFmla{\False}{\formula{B}}{1.1.1},
+-                    just= {\TRule{\False}{\land}[4]}, close]]
++                    just= {\TRule{\False}{\land}[7]}, close]]
+                 [\pFmla{\True}{\formula{C}}{1.1.1},
+                   just = {\TRule{\True}{\lif}[1]}, close]]
+             ]
+--- a/content/intuitionistic-logic/tableaux/soundness.tex
++++ b/content/intuitionistic-logic/tableaux/soundness.tex
+@@ -19,7 +19,7 @@
+   has a closed !!{tableau} then $!B_1, \dots, !B_n \Entails !A$. It is
+   easier to prove the contrapositive: if for some $\mModel{M}$ and
+   world~$w$, $\mSat{M}{!B_i}[w]$ for all $i=1$, \dots,~$n$ but
+-  $\mSat{M}{!A}[w]$, then no !!{tableau} can close. Such a
++  $\mSat/{M}{!A}[w]$, then no !!{tableau} can close. Such a
+   countermodel shows that the initial assumptions of the !!{tableau}
+   are satisfiable. The strategy of the proof is to show that whenever
+   all the prefixed !!{formula}s on !!a{tableau} branch are
+@@ -28,7 +28,7 @@
+   unsatisfiable, any !!{tableau} for a satisfiable set of prefixed
+   !!{formula}s must have at least one open branch.
+ 
+-  In order to apply this strategy in the modal case, we have to extend
++  In order to apply this strategy in the intuitionistic case, we have to extend
+   our definition of ``satisfiable'' to relational and prefixes. With
+   that in hand, however, the proof is straightforward.
+ \end{explain}
+@@ -75,9 +75,9 @@
+   contains $\sFmla{\True}{\lfalse}$ is unsatisfiable.
+ 
+   There also cannot be a model~$\mModel{M}$ and interpretation~$f$ of
+-  $P(\Gamma)$ such that both If $\mSat{M}{!A}[f(\sigma)]$, then by
++  $P(\Gamma)$ such that both prefixed formulas are satisfied. If $\mSat{M}{!A}[f(\sigma)]$, then by
+   \olref[sem][rel]{prop:true-monotonic}, since
+-  $Rf(\sigma)(\sigma.{*})$, $\mSat{M}{!A}[f(\sigma)]$. So we cannot
++  $Rf(\sigma)f(\sigma.{*})$, $\mSat{M}{!A}[f(\sigma.{*})]$. So we cannot
+   have both $\mSat{M}{!A}[f(\sigma)]$ and
+   $\mSat/{M}{!A}[f(\sigma.{*})]$.
+ \end{proof}
+@@ -138,7 +138,7 @@
+   both $\sFmla{\True}{!B}[\sigma]$ and $\sFmla{\True}{!C}[\sigma]$
+   with respect to~$f$.
+ \item The branch is expanded by applying $\TRule{\False}{\lor}$ to
+-  $\sFmla{\False}{!B \lor !C} \in \Gamma$: Exercise.
++  $\sFmla{\False}{!B \lor !C}[\sigma] \in \Gamma$: Exercise.
+ \item The branch is expanded by applying $\TRule{\False}{\lif}$ to
+   $\sFmla{\False}{!B \lif !C}[\sigma] \in \Gamma$: This results in two
+   new !!{signed formula}s on the branch: $\sFmla{\True}{!B}[\sigma.n]$ and
+@@ -148,7 +148,7 @@
+   Since $\Gamma$ is satisfiable, there is a $\mModel{M}$ and
+   interpretation~$f$ of $P(\Gamma)$ such that $\mSat{M}{\Gamma}[f]$, in
+   particular $\mSat/{M}{!B \lif !C}[f(\sigma)]$. We have to show that
+-  $\Gamma \cup \{\sFmla{\False}{!B \lif !C}[\sigma.n]\}$ is
++  $\Gamma \cup \{\sFmla{\True}{!B}[\sigma.n], \sFmla{\False}{!C}[\sigma.n]\}$ is
+   satisfiable. To do this, we define an interpretation of $P(\Gamma)
+   \cup \{\sigma.n\}$ as follows:
+   
+@@ -161,9 +161,9 @@
+   $\mSat{M}{!B}[f'(\sigma.n)]$ and $\mSat/{M}{!C}[f'(\sigma.n)]$.
+   Since $f(\sigma') = f'(\sigma')$ for all prefixes $\sigma' \in
+   P(\Gamma)$, $\mSat{M}{\Gamma}[f']$.  So, $\mModel{M}, f'$ satisfies
+-  $\Gamma \cup \{\sFmla{\False}{!B \lif !C}[\sigma.n]\}$
++  $\Gamma \cup \{\sFmla{\True}{!B}[\sigma.n], \sFmla{\False}{!C}[\sigma.n]\}$
+ \end{enumerate}
+-Now let's consider the possible inferences with two premises.
++Now let's consider the possible inferences with two branches.
+ \begin{enumerate}
+ \item The branch is expanded by applying $\TRule{\False}{\land}$ to
+   $\sFmla{\False}{!B \land !C}[\sigma] \in \Gamma$, which results in
+@@ -202,7 +202,7 @@
+   of~$P(\Delta)$ into~$\mModel{M}$, and $\mModel{M}$ satisfies~$\Delta$ with
+   respect to~$f$. But by \olref{thm:tableau-soundness}, $\Delta$ is
+   unsatisfiable since it has a closed !!{tableau}, a
+-  contradiction. So we must have $\Gamma \Proves !A$ after all.
++  contradiction. So we must have $\Gamma \Entails !A$ after all.
+ \end{proof}
+ 
+ \begin{cor}

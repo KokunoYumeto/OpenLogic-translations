@@ -536,6 +536,14 @@ for (const [id, tag, label] of [["openlogic-es", "es", "Lector completo"], ["ope
   check(edition.status.includes("audit-needed") && edition.limitations.some(text => /canon|cânone/.test(text)), `${id}: reader inclusion must not erase review limitations`);
 }
 check(script.includes("evidence.public_reader_delivery || evidence.local_reader_closure"), "Current public-reader delivery must precede historical local-only evidence");
+// Keep the secondary README entry points consistent with the live catalogue.
+const currentReadme = await read("README.md");
+const guReadmeRow = currentReadme.split("\n").find(line => line.startsWith("| ગુજરાતી |"));
+const currentGu = catalogue.editions.find(item => item.id === "openlogic-gu-gujr-in");
+check(guReadmeRow?.includes(`${currentGu.standalone_reader_units}/722`) && guReadmeRow.includes(currentGu.version_doi), "Gujarati README must use the current reader scope and DOI");
+check(currentGu.ordered_downloads.filter(item => ["PDF", "EPUB"].includes(item.format) || item.role === "complete-cumulative-full-text").every(item => guReadmeRow?.includes(item.url)), "Gujarati README must use the published current reader/direct-source links");
+check(currentReadme.includes("Bengali, Telugu and Marathi now have complete 722-unit EPUBs.") && !currentReadme.includes("Javanese, Marathi, Pashto and Punjabi"), "EPUB summary must not call the full Marathi reader partial");
+check(currentReadme.includes("https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/review/") && !currentReadme.includes("పూర్తి నిర్ణయాల తెలుగు సమీక్షా వివరణలు ఇంకా సిద్ధమవుతున్నాయి") && !currentReadme.includes("రెండు నమ్మకస్థాయి అసంగతతల సవరణ ఇంకా అవసరం"), "Telugu README must link the completed native review and retire resolved findings");
 const result = {
   status: failures.length ? "FAIL" : "PASS",
   failures,

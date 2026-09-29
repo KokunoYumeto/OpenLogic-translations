@@ -226,13 +226,10 @@ check(taUnified.metadata_language==="ta-IN" && taUnified.ordered_downloads.every
 const newDelivery = JSON.parse(await read("evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json"));
 const sourceProgress = JSON.parse(await read("evidence/SOURCE_PROGRESS_TE270_MR163_20260919.json"));
 check(sourceProgress.source_readbacks.length === 26 && sourceProgress.source_readbacks.every(file => file.match), "Telugu/Marathi source readbacks must all match");
-for (const [id, sourceUnits, readerUnits] of [["openlogic-mr-deva-in",270,194]]) {
-  const edition = catalogue.editions.find(item => item.id === id);
-  check(edition.source_units_translated === sourceUnits && edition.standalone_reader_units === readerUnits, `${id}: cumulative sources must not inflate released reader coverage`);
-  check(edition.source_progress.targets_verified === sourceUnits && edition.source_progress.failures === 0, `${id}: public target identity evidence required`);
-}
+const marathiBeforeComplete = JSON.parse(await read("evidence/MARATHI_BEFORE_COMPLETE_20260929.json"));
+check(marathiBeforeComplete.source_units_translated === 270 && marathiBeforeComplete.standalone_reader_units === 194, "Preserve historical Marathi source270/reader194 evidence");
 const bengaliRepair = JSON.parse(await read("evidence/BENGALI_SOURCE_REPAIR_20260919.json"));
-const marathi194 = catalogue.editions.find(item => item.id === "openlogic-mr-deva-in");
+const marathi194 = marathiBeforeComplete; // Historical edition, not current reader.
 const marathi194Evidence = JSON.parse(await read(marathi194.evidence.public_readback));
 check(marathi194Evidence.files.length === 8 && marathi194Evidence.files.every(item => item.github_matches && item.zenodo_matches), "Marathi194 needs eight byte-matched assets on both public mirrors");
 check(marathi194Evidence.source_archive.manifest_entries_replayed === 2177 && marathi194Evidence.source_archive.translated_target_files_replayed === 194 && marathi194Evidence.source_archive.frozen_source_files_replayed === 722 && marathi194Evidence.source_archive.identity_failures.length === 0, "Marathi194 needs source-package identity replay");
@@ -240,6 +237,22 @@ check(marathi194.ordered_downloads.slice(0,4).map(item => item.format).join(",")
 check(marathi194.ordered_downloads.every(item => /[\u0900-\u097f]/.test(item.download_label || '')), "Every Marathi download label, including HTML-ZIP, must be localized");
 for (const item of marathi194.ordered_downloads) check(marathi194Evidence.files.some(file => file.url === item.url && file.bytes === item.bytes && file.sha256 === item.sha256), "Marathi194 download must match readback");
 check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.packaging_observations.length === 2, "Marathi194 bounded evidence must retain its limitations");
+const marathi722 = catalogue.editions.find(item => item.id === "openlogic-mr-deva-in");
+const marathi722Audit = JSON.parse(await read(marathi722.evidence.public_readback));
+check(["source_units_translated","standalone_reader_units","pdf_reader_units","html_reader_units","zenodo_reader_units"].every(k=>marathi722[k]===722), "Marathi complete PDF/HTML/source scope");
+check(marathi722Audit.files.length===182 && marathi722Audit.files.every(f=>f.match && f.anonymous), "Marathi needs91 exact anonymous assets on both mirrors");
+check(marathi722Audit.source_routing.disjoint && marathi722Audit.source_routing.exact_source_manifest_union && marathi722Audit.source_routing.units===722, "Marathi reader routing must partition frozen source");
+check(marathi722Audit.structural_audit.source_units===722 && marathi722Audit.structural_audit.aligned_segments===6644 && marathi722Audit.structural_audit.failed_checks.length===0, "Marathi source and segment identity");
+check(marathi722.ordered_downloads.map(f=>f.format).join(",")==="PDF,TEX,ZIP" && marathi722.readers[0].pages===921, "Marathi PDF/direct-TeX/source-ZIP order");
+for (const f of [...marathi722.ordered_downloads,...marathi722.supplementary_downloads[0].downloads]) {
+  check(marathi722Audit.files.filter(r=>r.name===f.name && r.bytes===f.bytes && r.sha256===f.sha256).length===2, "Marathi download must match both mirrors");
+  check(/[\u0900-\u097f]/.test(f.download_label), "Marathi localized labels");
+}
+check(marathi722.readers.find(f=>f.format==="EPUB")?.source_units===194 && marathi722.epub_reader_units===194 && !marathi722Audit.epub.complete_available, "Marathi historical EPUB must remain194");
+check(marathi722Audit.canon.empty_direct_passage_rows===101 && !marathi722.evidence.complete_linguistic_certification && !marathi722Audit.pdf.whole_pdf_visual_certification, "Marathi audit limits");
+check(marathi722.version_doi==="10.5281/zenodo.23029726" && marathi722.current_local_configured_reader.public_release_sync_verified, "Marathi current record and sync");
+const marathiGuide = await read(marathi722.evidence.manager_public_readback);
+check(marathiGuide.includes('lang="mr"') && marathiGuide.includes("१०१") && marathiGuide.includes("१९४") && marathiGuide.includes("GPT-6 Astra"), "Marathi native guide with audit gaps");
 const teBeforeComplete = JSON.parse(await read("evidence/TE_BEFORE_COMPLETE_20260928.json"));
 const telugu276 = teBeforeComplete; // Historical276-unit scope, not the current release.
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));

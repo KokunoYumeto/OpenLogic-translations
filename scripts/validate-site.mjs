@@ -282,16 +282,18 @@ check(bnCompleteEvidence.source_recheck.metadata.revision === 6 && bnCompleteEvi
 const ps500Evidence = JSON.parse(await read("evidence/PASHTO500_MANAGER_AUDIT_20260928.json"));
 const ps515Evidence = JSON.parse(await read("evidence/PASHTO515_MANAGER_AUDIT_20260929.json"));
 const ps520Evidence = JSON.parse(await read("evidence/PASHTO520_MANAGER_AUDIT_20260929.json"));
+const ps536Evidence = JSON.parse(await read("evidence/PASHTO536_MANAGER_AUDIT_20260929.json"));
+check(ps536Evidence.failures.length === 0 && ps536Evidence.accepted_draft_units === 536 && ps536Evidence.frozen_files === 722 && ps536Evidence.aligned_blocks === 7990 && ps536Evidence.canon_use_rows === 4977 && ps536Evidence.staged_unaccepted_units === 5 && ps536Evidence.delta_since520.units === 16 && ps536Evidence.unchanged_previous_targets === 519 && ps536Evidence.predicativity_repair_verified_exact_two_words, "Pashto536 source checkpoint must retain exact scope and predecessor bytes");
 check(ps520Evidence.failures.length === 0 && ps520Evidence.accepted_draft_units === 520 && ps520Evidence.frozen_files === 722 && ps520Evidence.aligned_blocks === 7817 && ps520Evidence.canon_hash_bound_changed_blocks === 4882 && ps520Evidence.unaccepted_staged_units === 5 && ps520Evidence.rule_label_repair.manager_read_full_diff_and_macro_definition, "Pashto520 needs current public identity and concrete label-repair evidence");
 const ps500 = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
 check(ps500Evidence.failures.length === 0 && ps500Evidence.source_files_verified === 722 && ps500Evidence.accepted_target_files_verified === 500, "Pashto500 requires actual source/target replay");
 check(ps500Evidence.aligned_blocks_verified === 7561 && ps500Evidence.changed_blocks_with_canon_hash_references === 4734 && ps500Evidence.staged_unaccepted_files === 4, "Pashto500 alignment and staged scope");
 check(ps500.previous_source_checkpoint_500.commit === ps500Evidence.commit, "Preserve historical Pashto500 checkpoint identity");
 check(ps515Evidence.failures.length === 0 && ps515Evidence.frozen_files === 722 && ps515Evidence.accepted_draft_units === 515 && ps515Evidence.aligned_blocks === 7765 && ps515Evidence.canon_hash_bound_changed_blocks === 4861 && ps515Evidence.unaccepted_staged_units === 4, "Pashto515 needs exact source/alignment/canon-reference replay");
-check(ps500.public_source_checkpoint.commit === ps520Evidence.commit && ps500.source_progress.archive_sha256 === ps520Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps520Evidence.archive.bytes, "Pashto520 public source identity");
-check(ps500.supplementary_downloads[0].downloads[0].url === ps520Evidence.archive.url && !ps520Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
-check((await read("README.md")).includes("PASHTO520_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
-for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",520,321,321],["openlogic-bn-beng-in",722,722,722]]) {
+check(ps500.public_source_checkpoint.commit === ps536Evidence.commit && ps500.source_progress.archive_sha256 === ps536Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps536Evidence.archive.bytes, "Pashto536 public source identity");
+check(ps500.supplementary_downloads[0].downloads[0].url === ps536Evidence.archive.url && !ps536Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
+check((await read("README.md")).includes("PASHTO536_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
+for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",536,321,321],["openlogic-bn-beng-in",722,722,722]]) {
   const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
@@ -342,7 +344,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 const taBeforeComplete = JSON.parse(await read("evidence/TAMIL_BEFORE_COMPLETE_20260928.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
-  const source = lane === 'ps' ? {...ps520Evidence, reader_units: ps520Evidence.public_reader_units, frozen_sources_verified: ps520Evidence.frozen_files, targets_verified: ps520Evidence.accepted_draft_units, full_semantic_reaudit: ps520Evidence.whole_corpus_translation_certified} : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'ps' ? {...ps536Evidence, reader_units: ps536Evidence.public_reader_units, frozen_sources_verified: ps536Evidence.frozen_files, targets_verified: ps536Evidence.accepted_draft_units, full_semantic_reaudit: ps536Evidence.whole_corpus_translation_certified} : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);
 }

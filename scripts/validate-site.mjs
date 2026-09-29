@@ -538,6 +538,10 @@ for (const [id, tag, label] of [["openlogic-es", "es", "Lector completo"], ["ope
 check(script.includes("evidence.public_reader_delivery || evidence.local_reader_closure"), "Current public-reader delivery must precede historical local-only evidence");
 // Keep the secondary README entry points consistent with the live catalogue.
 const currentReadme = await read("README.md");
+const pnbReadmeRow = currentReadme.split("\n").find(line => line.startsWith("| Punjabi (Pakistan, Shahmukhi) |"));
+check(pnbReadmeRow?.includes(`**${punjabi.source_units_translated}/722**`) && pnbReadmeRow.includes(`**${punjabi.standalone_reader_units}-unit**`), "Punjabi README must distinguish the current rechecked source from the released reader");
+check(pnbReadmeRow?.includes(punjabi.release) && pnbReadmeRow.includes(punjabi.version_doi) && pnbReadmeRow.includes(punjabi.public_source_checkpoint_commit), "Punjabi README must link current release, DOI and public source checkpoint");
+check(currentReadme.includes("The historical [Punjabi 70-unit replay]") && !currentReadme.includes("The current [Punjabi 70-unit replay]"), "Superseded Punjabi structural evidence must not be presented as current linguistic acceptance");
 const guReadmeRow = currentReadme.split("\n").find(line => line.startsWith("| ગુજરાતી |"));
 const currentGu = catalogue.editions.find(item => item.id === "openlogic-gu-gujr-in");
 check(guReadmeRow?.includes(`${currentGu.standalone_reader_units}/722`) && guReadmeRow.includes(currentGu.version_doi), "Gujarati README must use the current reader scope and DOI");

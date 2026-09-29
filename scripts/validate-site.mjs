@@ -240,19 +240,21 @@ check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.p
 const marathi722 = catalogue.editions.find(item => item.id === "openlogic-mr-deva-in");
 const marathi722Audit = JSON.parse(await read(marathi722.evidence.public_readback));
 check(["source_units_translated","standalone_reader_units","pdf_reader_units","html_reader_units","zenodo_reader_units"].every(k=>marathi722[k]===722), "Marathi complete PDF/HTML/source scope");
-check(marathi722Audit.files.length===182 && marathi722Audit.files.every(f=>f.match && f.anonymous), "Marathi needs91 exact anonymous assets on both mirrors");
+check(marathi722Audit.files.length===110 && marathi722Audit.files.every(f=>f.match && f.anonymous), "Marathi v1.1 needs16 GitHub and94 Zenodo exact anonymous matches");
+check(marathi722Audit.github_reused_78.length===78 && marathi722Audit.github_reused_78.every(f=>f.prior_match && !f.fresh_github_download), "Preserve78 prior GitHub identities without claiming fresh downloads");
 check(marathi722Audit.source_routing.disjoint && marathi722Audit.source_routing.exact_source_manifest_union && marathi722Audit.source_routing.units===722, "Marathi reader routing must partition frozen source");
 check(marathi722Audit.structural_audit.source_units===722 && marathi722Audit.structural_audit.aligned_segments===6644 && marathi722Audit.structural_audit.failed_checks.length===0, "Marathi source and segment identity");
-check(marathi722.ordered_downloads.map(f=>f.format).join(",")==="PDF,TEX,ZIP" && marathi722.readers[0].pages===921, "Marathi PDF/direct-TeX/source-ZIP order");
+check(marathi722.ordered_downloads.map(f=>f.format).join(",")==="PDF,TEX,ZIP,EPUB" && marathi722.readers[0].pages===921, "Marathi PDF/direct-TeX/source-ZIP/EPUB order");
 for (const f of [...marathi722.ordered_downloads,...marathi722.supplementary_downloads[0].downloads]) {
   check(marathi722Audit.files.filter(r=>r.name===f.name && r.bytes===f.bytes && r.sha256===f.sha256).length===2, "Marathi download must match both mirrors");
   check(/[\u0900-\u097f]/.test(f.download_label), "Marathi localized labels");
 }
-check(marathi722.readers.find(f=>f.format==="EPUB")?.source_units===194 && marathi722.epub_reader_units===194 && !marathi722Audit.epub.complete_available, "Marathi historical EPUB must remain194");
-check(marathi722Audit.canon.empty_direct_passage_rows===101 && !marathi722.evidence.complete_linguistic_certification && !marathi722Audit.pdf.whole_pdf_visual_certification, "Marathi audit limits");
-check(marathi722.version_doi==="10.5281/zenodo.23029726" && marathi722.current_local_configured_reader.public_release_sync_verified, "Marathi current record and sync");
+check(marathi722.readers.find(f=>f.format==="EPUB")?.source_units===722 && marathi722.epub_reader_units===722 && marathi722Audit.epub.complete_available && marathi722Audit.epub.reading_documents===98, "Marathi complete EPUB722 must be the current reader");
+check(marathi722.supplementary_downloads[1].downloads[0].source_units===194, "Historical EPUB194 access retained");
+check(marathi722Audit.canon.empty_direct_passage_rows===5 && marathi722Audit.canon.retrospective_contexts===101 && !marathi722.evidence.complete_linguistic_certification && !marathi722Audit.pdf.whole_pdf_visual_certification, "Marathi scoped retrospective evidence and audit limits");
+check(marathi722.version_doi==="10.5281/zenodo.23044506" && marathi722.current_local_configured_reader.public_release_sync_verified, "Marathi current record and sync");
 const marathiGuide = await read(marathi722.evidence.manager_public_readback);
-check(marathiGuide.includes('lang="mr"') && marathiGuide.includes("१०१") && marathiGuide.includes("१९४") && marathiGuide.includes("GPT-6 Astra"), "Marathi native guide with audit gaps");
+check(marathiGuide.includes('lang="mr"') && marathiGuide.includes("१०१") && marathiGuide.includes("१९४") && marathiGuide.includes("GPT-6 Astra") && marathiGuide.includes("06-openlogic-mr-complete.epub"), "Marathi native current EPUB guide with preserved history and limitations");
 const teBeforeComplete = JSON.parse(await read("evidence/TE_BEFORE_COMPLETE_20260928.json"));
 const telugu276 = teBeforeComplete; // Historical276-unit scope, not the current release.
 const telugu276Evidence = JSON.parse(await read(telugu276.evidence.public_readback));

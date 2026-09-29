@@ -194,15 +194,16 @@ for (const [id, units, hasEpub] of [["openlogic-jv-latn-id",24,true]]) {
 }
 const jv = catalogue.editions.find(item => item.id === "openlogic-jv-latn-id");
 const jvAudit = JSON.parse(await read(jv.evidence.source_checkpoint_readback));
-check(jv.source_units_translated === 710 && jv.standalone_reader_units === 24 && jv.source_archive.sha256 === "4ec915dcf2d31e00c91f6c0eda6cc2850689c6df7c221e6efd7a7562fa9f5dc9", "Javanese source progress must preserve the24-unit reader");
-check(jvAudit.targets_verified === 710 && jvAudit.frozen_files_verified === 722 && jvAudit.public_files_verified === 1933 && jvAudit.archive_crc_pass && jv.source_progress.archive_sha256 === jvAudit.archive.sha256, "Javanese710 public source identity missing");
+check(jv.source_units_translated === 722 && jv.standalone_reader_units === 24 && jv.source_archive.sha256 === "4ec915dcf2d31e00c91f6c0eda6cc2850689c6df7c221e6efd7a7562fa9f5dc9", "Javanese source progress must preserve the24-unit reader");
+check(jvAudit.targets_verified === 722 && jvAudit.frozen_files_verified === 722 && jvAudit.public_files_verified === 1953 && jvAudit.archive_crc_pass && jv.source_progress.archive_sha256 === jvAudit.archive.sha256, "Javanese722 public source identity missing");
 check(jvAudit.withdrawn_term_bundles === 444 && jvAudit.withdrawn_segment_bundles === 4143 && !jvAudit.canon_revalidation_complete && !jvAudit.whole_corpus_semantics_certified, "Javanese canon limitations must remain explicit");
-check(jvAudit.sample_segment_pairs === 5 && jvAudit.sample_all_source_target_hashes_match && jvAudit.canon_pages.length === 3, "Javanese710 source/canon sample must be replayed");
+check(jvAudit.sample_segment_pairs === 168 && jvAudit.sample_all_source_target_hashes_match && jvAudit.canon_pages.length === 3, "Javanese722 source/canon sample must be replayed");
 check(jv.metadata_language === "jv-Latn-ID" && jv.ui_labels.details === "Ragam lan watesan" && jv.evidence.manager_public_readback.endsWith(".html"), "Javanese needs a localized evidence entry point");
 check(jv.supplementary_downloads?.[0]?.downloads?.[0]?.url === jvAudit.archive.url, "Javanese source link must use supplementary_downloads");
 const jvPrior = JSON.parse(await read("evidence/JAVANESE671_MANAGER_AUDIT_20260928.json"));
 check(jvPrior.manager_corrections_present && jvPrior.OLP0671_all10_source_target_hash_pairs_match && jvAudit.prior_targets_changed.length === 0, "Previously verified Javanese proof repairs must be preserved");
 check(jvAudit.attribution_correction_verified && jvAudit.owner_runtime_phases.length === 2, "Javanese primary-task attribution correction must be evidenced");
+check(jvAudit.new_language_bearing_segment_delta === 89 && jvAudit.new_formal_only_changes === 1 && jvAudit.new_canon_bindings_checked === 89, "Javanese must distinguish language changes from the formal-only path correction");
 const tamil722 = JSON.parse(await read("evidence/TAMIL_BEFORE_UNIFIED_20260929.json"));
 const tamil722Audit = JSON.parse(await read("evidence/TAMIL722_MANAGER_AUDIT_20260928.json"));
 check(tamil722.source_units_translated === 722 && tamil722.standalone_reader_units === 695 && tamil722.companion_units === 27 && tamil722.combined_reader_units === 722, "Tamil source722 must distinguish main695 and companion27");

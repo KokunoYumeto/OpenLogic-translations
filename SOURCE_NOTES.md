@@ -1,5 +1,9 @@
 # Shared English source notes
 
+## Cardinal arithmetic and choice — 30 September 2026
+
+[Eight-report adjudication](evidence/SET_THEORY_SOURCE_REVIEW_20260930.md), [machine-readable findings](evidence/SET_THEORY_SOURCE_REVIEW_20260930.json), and [three local fixes](evidence/SET_THEORY_SOURCE_REVIEW_20260930.patch). Seven findings are supported; six already have Tamil aliases. The shared OLSTH-024 / TA-STH-041 malformed-formula claim is withdrawn: actual macro expansion gives an ordinary equinumerosity chain. The patch covers only the positive-exponent condition, sequence-definition referent and Hartogs carrier; separate proof-scope repairs are explained in the report. No additional upstream issue/comment was submitted. Review: OpenAI Codex — GPT-6 Astra, Ultra effort; no human review claimed.
+
 These corrections are shared across Open Logic translations. They are not silent changes to the upstream source: each finding is bound to frozen revision `9620cc73f9c8e0ad003c514a5d3748f29611c4c0`, the raw source manifest, exact file hashes and line locators. Translation editions should cite the stable finding ID, retain the untouched English bytes in provenance, and distinguish source correction from translation choice.
 
 The machine-readable audit is [SHARED_FUNCTIONS_SOURCE_AUDIT_20260904.json](evidence/SHARED_FUNCTIONS_SOURCE_AUDIT_20260904.json).

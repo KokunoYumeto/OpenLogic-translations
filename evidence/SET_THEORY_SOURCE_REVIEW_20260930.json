@@ -1,0 +1,202 @@
+{
+  "schema": "openlogic.manager.source-adjudication.v1",
+  "date": "2026-09-30",
+  "scope": "Eight Pashto reports in five English source files; corresponding earlier Tamil records",
+  "upstream_revision": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+  "frozen_revision": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+  "all_five_current_source_bytes_match_frozen": true,
+  "findings": [
+    {
+      "id": "OLSTH-019",
+      "unit_id": "OLP-0589",
+      "path": "content/set-theory/card-arithmetic/expotough.tex",
+      "lines": [
+        77
+      ],
+      "source_sha256": "3c24595966608c406bd3b8f2eec62edc0476017588fee15ec14ba64798b208ec",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/card-arithmetic/expotough.tex#L77",
+      "status": "confirmed",
+      "aliases": [
+        "TA-STH-035"
+      ],
+      "reason": "The definition counts functions from the exponent carrier to the base. The empty domain has exactly one function into any base, so an infinite cardinal to exponent zero is 1, not the base.",
+      "remedy": "Require a positive finite exponent. Included in the three-hunk patch."
+    },
+    {
+      "id": "OLSTH-020",
+      "unit_id": "OLP-0590",
+      "path": "content/set-theory/card-arithmetic/ch.tex",
+      "lines": [
+        35
+      ],
+      "source_sha256": "b1bdee185ce2a21eeba54cce52ebec13154b54b77a6652820ad4f7ac61e8b212",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/card-arithmetic/ch.tex#L35",
+      "status": "confirmed",
+      "aliases": [
+        "TA-STH-037"
+      ],
+      "reason": "The parameter a is not recursively defined here. The immediately preceding display recursively defines the aleph and beth sequences.",
+      "remedy": "Name the two sequences. Included in the three-hunk patch."
+    },
+    {
+      "id": "OLSTH-021",
+      "unit_id": "OLP-0590",
+      "path": "content/set-theory/card-arithmetic/ch.tex",
+      "lines": [
+        70
+      ],
+      "source_sha256": "b1bdee185ce2a21eeba54cce52ebec13154b54b77a6652820ad4f7ac61e8b212",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/card-arithmetic/ch.tex#L70",
+      "status": "confirmed_proof_domain_omission",
+      "aliases": [],
+      "reason": "At a=omega the printed induction hypothesis refers to aleph indices for finite b; these do not exist. The union substitution uses these undefined indices. The infinite-cardinal theorem itself is true.",
+      "remedy": "State the omega base case and restrict induction and the limit union to infinite cardinals below a. At a limit cardinal above omega those are cofinal. Establish uniqueness from strict monotonicity. Not silently included in the mechanical patch."
+    },
+    {
+      "id": "OLSTH-022",
+      "unit_id": "OLP-0591",
+      "path": "content/set-theory/card-arithmetic/fix.tex",
+      "lines": [
+        152,
+        160
+      ],
+      "source_sha256": "cc111d7d7472b0e7ef940196977faef0f1b2867feaab0a74843e9d39077f5074",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/card-arithmetic/fix.tex#L152",
+      "status": "confirmed",
+      "aliases": [
+        "TA-STH-038"
+      ],
+      "reason": "For a beth fixed point kappa=card(A), substitution gives tau_n(A)=kappa for every n, so strict growth fails. After W1 reaches a fixed point, W2=W1. Thus the displayed recursion is not injective.",
+      "remedy": "A proof repair must start the beth iteration strictly above card(A). The earlier Tamil proposal uses beth at the ordinal successor of card(A). Also state how W0=0, which is not a beth fixed point, is excluded from the codomain claim or change that seed. These proof changes are not covered by the three-hunk patch."
+    },
+    {
+      "id": "OLSTH-023",
+      "unit_id": "OLP-0595",
+      "path": "content/set-theory/choice/hartogs.tex",
+      "lines": [
+        33
+      ],
+      "source_sha256": "ffe4c3f0a800bd7893a39e68d109ca1eb9662b5f29cda42393cbc5777cf557c4",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/choice/hartogs.tex#L33",
+      "status": "confirmed",
+      "aliases": [
+        "TA-STH-039"
+      ],
+      "reason": "Membership in C supplies a well-order on a carrier B contained in A, not a carrier contained in its order relation R.",
+      "remedy": "Replace B subseteq R with B subseteq A. Included in the three-hunk patch."
+    },
+    {
+      "id": "OLSTH-024",
+      "unit_id": "OLP-0595",
+      "path": "content/set-theory/choice/hartogs.tex",
+      "lines": [
+        80,
+        81
+      ],
+      "source_sha256": "ffe4c3f0a800bd7893a39e68d109ca1eb9662b5f29cda42393cbc5777cf557c4",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/choice/hartogs.tex#L80",
+      "status": "rejected_false_positive",
+      "aliases": [
+        "TA-STH-041"
+      ],
+      "reason": "In both pinned source revisions, cardeq expands to #1 approx #2 with no parentheses. Nesting therefore produces the ordinary chain A disjointsum B approx A times B approx M. TeX arguments are not typed mathematical-function arguments.",
+      "remedy": "Withdraw the malformed-formula allegation. Preserve the source formula. An equivalent two-claim Tamil presentation can remain as editorial clarification, not as a source-error correction. Existing Pashto warning needs removal/correction; owner application not yet verified."
+    },
+    {
+      "id": "OLSTH-025",
+      "unit_id": "OLP-0596",
+      "path": "content/set-theory/choice/wellorderingproblem.tex",
+      "lines": [
+        61
+      ],
+      "source_sha256": "9ca7bb6570d323e7caebb910c975827a9411c1bbe2b4dabd6d41f9ebe2f04fa4",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/choice/wellorderingproblem.tex#L61",
+      "status": "confirmed",
+      "aliases": [
+        "TA-STH-043"
+      ],
+      "related_existing_scope_finding": "TA-STH-044",
+      "reason": "The printed delta<=alpha stop rule overwrites all selected values up to the first exhaustion stage. With two selected elements it makes both earlier values equal to A. Merely reversing the inequality still leaves the full sentinel-extended function noninjective.",
+      "remedy": "Apply the sentinel only at/after first exhaustion, and restrict the injectivity/range/bijection conclusions to the initial segment before exhaustion. Not a one-symbol fully repaired proof; omitted from the three-hunk patch."
+    },
+    {
+      "id": "OLSTH-026",
+      "unit_id": "OLP-0596",
+      "path": "content/set-theory/choice/wellorderingproblem.tex",
+      "lines": [
+        52
+      ],
+      "source_sha256": "9ca7bb6570d323e7caebb910c975827a9411c1bbe2b4dabd6d41f9ebe2f04fa4",
+      "source_url": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/content/set-theory/choice/wellorderingproblem.tex#L52",
+      "status": "confirmed",
+      "aliases": [
+        "TA-STH-042"
+      ],
+      "reason": "For empty A, the choice function on nonempty subsets has empty domain, so the displayed f(A) is undefined.",
+      "remedy": "Dispose of the empty-set case before introducing g(0)=f(A). This belongs with the stopping/scope proof repair, not the three-hunk patch."
+    }
+  ],
+  "counts": {
+    "incoming": 8,
+    "confirmed": 7,
+    "confirmed_with_prior_tamil_alias": 6,
+    "additional_relative_to_reviewed_intake": 1,
+    "false_positive": 1
+  },
+  "deduplication_scope": "Exact units and paths in the September19 central collection and September25 combined intake. Not a global issue/PR uniqueness claim. Five adjacent Tamil findings are outside this eight-report adjudication.",
+  "macro_evidence": [
+    {
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/open-logic-config.sty",
+      "ref": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
+      "bytes": 50435,
+      "sha256": "76af3674c68139572b71de9908d690700cd7e324d221d649930ecda020935724",
+      "passages": [
+        {
+          "line": 955,
+          "text": "\\DeclareDocumentCommand \\cardless { m m } {#1 \\prec #2}\n\n% - `\\cardeq{X}{Y}`: X is equinumerous with Y\n\\DeclareDocumentCommand \\cardeq { m m } {#1 \\approx #2}\n\n% - `\\tuple{x,y}`: pairs, tuples, sequences\n\\DeclareDocumentMacro \\openTuple {\\langle}"
+        },
+        {
+          "line": 956,
+          "text": "\n% - `\\cardeq{X}{Y}`: X is equinumerous with Y\n\\DeclareDocumentCommand \\cardeq { m m } {#1 \\approx #2}\n\n% - `\\tuple{x,y}`: pairs, tuples, sequences\n\\DeclareDocumentMacro \\openTuple {\\langle}\n\\DeclareDocumentMacro \\closeTuple {\\rangle}"
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/OpenLogicProject/OpenLogic/1e960beff9ed7835bf3e3f1335e21af3439cd107/open-logic-config.sty",
+      "ref": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+      "bytes": 50435,
+      "sha256": "76af3674c68139572b71de9908d690700cd7e324d221d649930ecda020935724",
+      "passages": [
+        {
+          "line": 955,
+          "text": "\\DeclareDocumentCommand \\cardless { m m } {#1 \\prec #2}\n\n% - `\\cardeq{X}{Y}`: X is equinumerous with Y\n\\DeclareDocumentCommand \\cardeq { m m } {#1 \\approx #2}\n\n% - `\\tuple{x,y}`: pairs, tuples, sequences\n\\DeclareDocumentMacro \\openTuple {\\langle}"
+        },
+        {
+          "line": 956,
+          "text": "\n% - `\\cardeq{X}{Y}`: X is equinumerous with Y\n\\DeclareDocumentCommand \\cardeq { m m } {#1 \\approx #2}\n\n% - `\\tuple{x,y}`: pairs, tuples, sequences\n\\DeclareDocumentMacro \\openTuple {\\langle}\n\\DeclareDocumentMacro \\closeTuple {\\rangle}"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "bounded_examples": 18,
+    "failures": 0,
+    "not_a_formal_proof_of_infinite_theorems": true,
+    "patch_apply_check_passed": true,
+    "patch_repairs_only": [
+      "OLSTH-019",
+      "OLSTH-020",
+      "OLSTH-023"
+    ]
+  },
+  "translation_status": {
+    "pashto_source_warning_repair": "requested from existing owner, not yet verified",
+    "tamil_classification_repair": "requested from existing owner, not yet verified",
+    "other_target_changes": "none by manager",
+    "reader_coverage_change": 0
+  },
+  "upstream_posted": false,
+  "model": "OpenAI Codex — GPT-6 Astra",
+  "effort": "Ultra",
+  "human_review_claimed": false
+}

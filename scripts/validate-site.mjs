@@ -333,6 +333,8 @@ const ps644Evidence = JSON.parse(await read("evidence/PASHTO644_PUBLIC_INTAKE_20
 const ps648Evidence = JSON.parse(await read("evidence/PASHTO648_PUBLIC_INTAKE_20260930.json"));
 const ps652Evidence = JSON.parse(await read("evidence/PASHTO652_PUBLIC_INTAKE_20260930.json"));
 const ps654Evidence = JSON.parse(await read("evidence/PASHTO654_PUBLIC_INTAKE_20260930.json"));
+const ps659Evidence = JSON.parse(await read("evidence/PASHTO659_PUBLIC_INTAKE_20260930.json"));
+check(ps659Evidence.changed_files.length===41 && ps659Evidence.changed_files.every(f=>f.matches) && ps659Evidence.delta_from_hub656.new_language_bearing_blocks===41 && ps659Evidence.new_blocks_by_classification["unchanged-structural"]===16 && ps659Evidence.reader_guide_choice_records.length===6 && !ps659Evidence.full_language_certification, "Pashto659 public source identity, language-bearing delta and scoped review");
 const ps656Evidence = JSON.parse(await read("evidence/PASHTO656_PUBLIC_INTAKE_20260930.json"));
 check(ps656Evidence.changed_files.length===43 && ps656Evidence.changed_files.every(f=>f.matches) && ps656Evidence.delta_from_hub654.new_language_bearing_blocks===55 && ps656Evidence.reader_guide_choice_records.length===6 && !ps656Evidence.full_language_certification, "Pashto656 changed public bytes and scope");
 check(ps654Evidence.changed_files.length===46 && ps654Evidence.changed_files.every(f=>f.matches) && ps654Evidence.delta_from_hub652.source_units===2 && ps654Evidence.math_sample.formula_containers===267 && ps654Evidence.reader_guide_choice_records.length===6, "Pashto654 verified changed bytes and bounded review");
@@ -376,15 +378,17 @@ const ps500 = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk"
 check(ps500Evidence.failures.length === 0 && ps500Evidence.source_files_verified === 722 && ps500Evidence.accepted_target_files_verified === 500, "Pashto500 requires actual source/target replay");
 check(ps500Evidence.aligned_blocks_verified === 7561 && ps500Evidence.changed_blocks_with_canon_hash_references === 4734 && ps500Evidence.staged_unaccepted_files === 4, "Pashto500 alignment and staged scope");
 check(ps500.previous_source_checkpoint_500.commit === ps500Evidence.commit, "Preserve historical Pashto500 checkpoint identity");
+check(ps500.coverage_basis.includes("۶۵۹") && ps500.coverage_basis.includes("۲۶") && ps500.coverage_basis.includes("۲۷۳") && !ps500.coverage_basis.includes("۶۴۴") && !ps500.coverage_basis.includes("۲۸۳"), "Pashto current prose coverage cannot retain stale source/review counts");
+check(ps500.previous_source_checkpoint_656.commit === ps656Evidence.commit && ps500.previous_source_progress_656.archive_sha256 === ps656Evidence.archive.sha256, "Preserve Pashto656 snapshot while advancing current source coverage");
 check(ps515Evidence.failures.length === 0 && ps515Evidence.frozen_files === 722 && ps515Evidence.accepted_draft_units === 515 && ps515Evidence.aligned_blocks === 7765 && ps515Evidence.canon_hash_bound_changed_blocks === 4861 && ps515Evidence.unaccepted_staged_units === 4, "Pashto515 needs exact source/alignment/canon-reference replay");
 check(ps500.previous_source_checkpoint_586.commit === ps586Evidence.commit && ps500.previous_source_progress_586.archive_sha256 === ps586Evidence.archive.sha256, "Preserve the historical Pashto586 source snapshot");
 check(ps500.previous_source_checkpoint_595.commit === ps595Evidence.commit && ps500.previous_source_progress_595.archive_sha256 === ps595Evidence.archive.sha256, "Preserve historical Pashto595 identity");
-check(ps500.independent_reaudit.owner_reviewed_units===23 && ps500.independent_reaudit.pending_units===276 && ps500.independent_reaudit.reviewed_ids.length===23, "Pashto current review counts must agree");
-check(ps500.public_source_checkpoint.commit === ps656Evidence.commit && ps500.source_progress.archive_sha256 === ps656Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps656Evidence.archive.bytes, "Pashto656 public source identity");
-check(ps500.supplementary_downloads[0].downloads[0].url === ps656Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
-check((await read("README.md")).includes("PASHTO656_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
-check(ps500.reader_guide === "evidence/PASHTO656_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
-for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",656,321,321],["openlogic-bn-beng-in",722,722,722]]) {
+check(ps500.independent_reaudit.owner_reviewed_units===26 && ps500.independent_reaudit.pending_units===273 && ps500.independent_reaudit.reviewed_ids.length===26, "Pashto current review counts must agree");
+check(ps500.public_source_checkpoint.commit === ps659Evidence.commit && ps500.source_progress.archive_sha256 === ps659Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps659Evidence.archive.bytes, "Pashto659 public source identity");
+check(ps500.supplementary_downloads[0].downloads[0].url === ps659Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
+check((await read("README.md")).includes("PASHTO659_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
+check(ps500.reader_guide === "evidence/PASHTO659_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
+for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",659,321,321],["openlogic-bn-beng-in",722,722,722]]) {
   const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
@@ -435,7 +439,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 const taBeforeComplete = JSON.parse(await read("evidence/TAMIL_BEFORE_COMPLETE_20260928.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
-  const source = lane === 'ps' ? ps656Evidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'ps' ? ps659Evidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);
 }

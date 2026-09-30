@@ -209,13 +209,17 @@ for (const [id, units, hasEpub] of [["openlogic-jv-latn-id",24,true]]) {
   for (const item of edition.ordered_downloads) check(receipt.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
 }
 const jv = catalogue.editions.find(item => item.id === "openlogic-jv-latn-id");
-const jvAudit = JSON.parse(await read(jv.evidence.source_checkpoint_readback));
+const jvAudit = JSON.parse(await read("evidence/JAVANESE722_MANAGER_AUDIT_20260929.json"));
+const jvCurrent = JSON.parse(await read(jv.evidence.source_checkpoint_readback));
+check(jvCurrent.targets_verified === 722 && jvCurrent.frozen_files_verified === 722 && jvCurrent.public_files_verified === 2173 && jvCurrent.archive_crc_pass && jvCurrent.all_inventory_rows_match && jvCurrent.failures.length === 0, "Javanese current source publication identity");
+check(jvCurrent.commit === jv.source_progress.commit && jvCurrent.archive.sha256 === jv.source_progress.archive_sha256 && jvCurrent.archive.bytes === jv.source_progress.archive_bytes, "Javanese current archive pointer");
+check(jvCurrent.fresh_reaudit_units === 161 && jvCurrent.remaining_reaudit_units === 561 && jvCurrent.choice_records_with_amendments === 1988 && jvCurrent.current_choice_occurrences === 1620 && !jvCurrent.whole_corpus_semantics_certified && !jvCurrent.new_reader_accepted, "Javanese review/source/reader limits");
 check(jv.source_units_translated === 722 && jv.standalone_reader_units === 24 && jv.source_archive.sha256 === "4ec915dcf2d31e00c91f6c0eda6cc2850689c6df7c221e6efd7a7562fa9f5dc9", "Javanese source progress must preserve the24-unit reader");
-check(jvAudit.targets_verified === 722 && jvAudit.frozen_files_verified === 722 && jvAudit.public_files_verified === 1953 && jvAudit.archive_crc_pass && jv.source_progress.archive_sha256 === jvAudit.archive.sha256, "Javanese722 public source identity missing");
+check(jvAudit.targets_verified === 722 && jvAudit.frozen_files_verified === 722 && jvAudit.public_files_verified === 1953 && jvAudit.archive_crc_pass, "Javanese722 public source identity missing");
 check(jvAudit.withdrawn_term_bundles === 444 && jvAudit.withdrawn_segment_bundles === 4143 && !jvAudit.canon_revalidation_complete && !jvAudit.whole_corpus_semantics_certified, "Javanese canon limitations must remain explicit");
 check(jvAudit.sample_segment_pairs === 168 && jvAudit.sample_all_source_target_hashes_match && jvAudit.canon_pages.length === 3, "Javanese722 source/canon sample must be replayed");
 check(jv.metadata_language === "jv-Latn-ID" && jv.ui_labels.details === "Ragam lan watesan" && jv.evidence.manager_public_readback.endsWith(".html"), "Javanese needs a localized evidence entry point");
-check(jv.supplementary_downloads?.[0]?.downloads?.[0]?.url === jvAudit.archive.url, "Javanese source link must use supplementary_downloads");
+check(jv.supplementary_downloads?.[0]?.downloads?.[0]?.url === jvCurrent.archive.url, "Javanese source link must use supplementary_downloads");
 const jvPrior = JSON.parse(await read("evidence/JAVANESE671_MANAGER_AUDIT_20260928.json"));
 check(jvPrior.manager_corrections_present && jvPrior.OLP0671_all10_source_target_hash_pairs_match && jvAudit.prior_targets_changed.length === 0, "Previously verified Javanese proof repairs must be preserved");
 check(jvAudit.attribution_correction_verified && jvAudit.owner_runtime_phases.length === 2, "Javanese primary-task attribution correction must be evidenced");
@@ -325,6 +329,9 @@ const ps632Evidence = JSON.parse(await read("evidence/PASHTO632_PUBLIC_INTAKE_20
 const ps635Evidence = JSON.parse(await read("evidence/PASHTO635_PUBLIC_INTAKE_20260930.json"));
 const ps638Evidence = JSON.parse(await read("evidence/PASHTO638_PUBLIC_INTAKE_20260930.json"));
 const ps642Evidence = JSON.parse(await read("evidence/PASHTO642_PUBLIC_INTAKE_20260930.json"));
+const ps644Evidence = JSON.parse(await read("evidence/PASHTO644_PUBLIC_INTAKE_20260930.json"));
+check(ps644Evidence.targets_verified === 644 && ps644Evidence.frozen_sources_verified === 722 && ps644Evidence.changed_files.length === 49 && ps644Evidence.changed_files.every(f=>f.matches) && ps644Evidence.failures.length === 0, "Pashto644 public source/archive bytes");
+check(ps644Evidence.whole_unit_reaudit_owner_count === 16 && ps644Evidence.whole_unit_reaudit_remaining === 283 && ps644Evidence.reader_units === 321 && !ps644Evidence.manager_full_semantic_rereview && ps644Evidence.metadata_findings.length === 0, "Pashto644 review limits and corrected native arithmetic");
 check(ps642Evidence.targets_verified === 642 && ps642Evidence.frozen_sources_verified === 722 && ps642Evidence.changed_files.length === 46 && ps642Evidence.changed_files.every(f=>f.matches) && ps642Evidence.byte_verification_failures.length === 0, "Pashto642 exact source/archive bytes");
 check(ps642Evidence.reader_units === 321 && ps642Evidence.whole_unit_reaudit_owner_count === 15 && ps642Evidence.whole_unit_reaudit_remaining === 299-15 && !ps642Evidence.manager_full_semantic_rereview && ps642Evidence.metadata_findings[0].displayed_remaining === 280, "Pashto642 separates accurate hub arithmetic from reported native-status defect");
 check(ps638Evidence.targets_verified === 638 && ps638Evidence.frozen_sources_verified === 722 && ps638Evidence.changed_files.length === 38 && ps638Evidence.changed_files.every(f=>f.matches) && ps638Evidence.failures.length === 0, "Pashto638 exact source/archive bytes");
@@ -361,11 +368,11 @@ check(ps500.previous_source_checkpoint_500.commit === ps500Evidence.commit, "Pre
 check(ps515Evidence.failures.length === 0 && ps515Evidence.frozen_files === 722 && ps515Evidence.accepted_draft_units === 515 && ps515Evidence.aligned_blocks === 7765 && ps515Evidence.canon_hash_bound_changed_blocks === 4861 && ps515Evidence.unaccepted_staged_units === 4, "Pashto515 needs exact source/alignment/canon-reference replay");
 check(ps500.previous_source_checkpoint_586.commit === ps586Evidence.commit && ps500.previous_source_progress_586.archive_sha256 === ps586Evidence.archive.sha256, "Preserve the historical Pashto586 source snapshot");
 check(ps500.previous_source_checkpoint_595.commit === ps595Evidence.commit && ps500.previous_source_progress_595.archive_sha256 === ps595Evidence.archive.sha256, "Preserve historical Pashto595 identity");
-check(ps500.public_source_checkpoint.commit === ps642Evidence.commit && ps500.source_progress.archive_sha256 === ps642Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps642Evidence.archive.bytes, "Pashto642 public source identity");
-check(ps500.supplementary_downloads[0].downloads[0].url === ps642Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
-check((await read("README.md")).includes("PASHTO642_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
-check(ps500.reader_guide === "evidence/PASHTO642_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
-for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",642,321,321],["openlogic-bn-beng-in",722,722,722]]) {
+check(ps500.public_source_checkpoint.commit === ps644Evidence.commit && ps500.source_progress.archive_sha256 === ps644Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps644Evidence.archive.bytes, "Pashto644 public source identity");
+check(ps500.supplementary_downloads[0].downloads[0].url === ps644Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
+check((await read("README.md")).includes("PASHTO644_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
+check(ps500.reader_guide === "evidence/PASHTO644_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
+for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",644,321,321],["openlogic-bn-beng-in",722,722,722]]) {
   const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
@@ -416,7 +423,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 const taBeforeComplete = JSON.parse(await read("evidence/TAMIL_BEFORE_COMPLETE_20260928.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
-  const source = lane === 'ps' ? ps642Evidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'ps' ? ps644Evidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);
 }
@@ -626,6 +633,7 @@ check(guReadmeRow?.includes(`${currentGu.standalone_reader_units}/722`) && guRea
 check(currentGu.ordered_downloads.filter(item => ["PDF", "EPUB"].includes(item.format) || item.role === "complete-cumulative-full-text").every(item => guReadmeRow?.includes(item.url)), "Gujarati README must use the published current reader/direct-source links");
 check(currentReadme.includes("Bengali, Telugu and Marathi now have complete 722-unit EPUBs.") && !currentReadme.includes("Javanese, Marathi, Pashto and Punjabi"), "EPUB summary must not call the full Marathi reader partial");
 check(currentReadme.includes("https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/review/") && !currentReadme.includes("పూర్తి నిర్ణయాల తెలుగు సమీక్షా వివరణలు ఇంకా సిద్ధమవుతున్నాయి") && !currentReadme.includes("రెండు నమ్మకస్థాయి అసంగతతల సవరణ ఇంకా అవసరం"), "Telugu README must link the completed native review and retire resolved findings");
+check(ps500.status.includes(`partial-source-${ps500.source_units_translated}/722`), "Pashto source status tag must agree with its verified count");
 const result = {
   status: failures.length ? "FAIL" : "PASS",
   failures,

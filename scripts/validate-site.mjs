@@ -36,7 +36,7 @@ check(persianPriority.includes(persian.release) && persianPriority.includes(pers
 check(persianPriority.includes("all 722 source units") && persianPriority.includes("۷۲۲") && persianPriority.includes("does not establish full linguistic or human review") && !persianPriority.includes("turn the current 642-unit"), "Persian priority must retain bilingual complete-reader status without overstating linguistic review");
 check(persian.download_layout === "compact-grouped" && persian.download_summary.includes("هنوز ادامه دارد"), "Persian compact downloads must retain the localized review caveat");
 check(persian.metadata_language === "fa-IR" && persian.metadata_direction === "rtl", "Persian metadata needs language and direction");
-check(html.includes('site.js?v=20260929-persian-r10') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Localized navigation and current publication evidence must reach browsers with a fresh script URL");
+check(html.includes('site.js?v=20260930-interface-ps') && script.includes('edition.ui_labels?.complete_edition') && script.includes('edition.ui_labels?.script_samples'), "Localized navigation and current publication evidence must reach browsers with a fresh script URL");
 check(persian.search_aliases?.includes("Persian") && persian.search_aliases?.includes("Farsi"), "Localized Persian must remain searchable by its English aliases");
 check(persian.ui_labels?.script_samples?.includes("یک واحد") && persian.ui_labels?.publication_and_evidence, "Persian sample and metadata navigation must be localized");
 const persianMirror = JSON.parse(await read(persian.evidence.mirror_public_readback)).public_readback;

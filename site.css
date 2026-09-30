@@ -88,6 +88,16 @@ button, input, select { font: inherit; }
   letter-spacing: -0.02em;
 }
 
+.site-header { flex-wrap: wrap; }
+.interface-picker { display: flex; align-items: center; gap: .5rem; font-size: .85rem; }
+.interface-picker select { width: auto; padding: .4rem; color: var(--text); background: var(--panel-solid); border: 1px solid var(--line-strong); border-radius: .4rem; }
+html[dir="rtl"] .catalogue-summary { text-align: start; }
+html[dir="rtl"] .method-grid article { border-left: 0; border-inline-start: 1px solid var(--line-strong); }
+html[dir="rtl"] .scope-note p { margin-inline: 1rem 0; }
+html[dir="rtl"] .skip-link { left: auto; right: .75rem; }
+html[dir="rtl"] .scope-note .scope-symbol,
+html[dir="rtl"] .coverage-row strong { direction: ltr; unicode-bidi: isolate; }
+
 .brand-mark {
   display: grid;
   width: 2.25rem;
@@ -529,7 +539,7 @@ h3 { line-height: 1.2; }
   border-left: 1px solid var(--line-strong);
 }
 
-.method-grid span { color: var(--gold); font-family: ui-monospace, monospace; font-size: 0.8rem; }
+.method-grid article > span { color: var(--gold); font-family: ui-monospace, monospace; font-size: 0.8rem; }
 .method-grid h3 { margin: 0.8rem 0 0.45rem; }
 .method-grid p { margin: 0; color: var(--muted); font-size: 0.87rem; }
 
@@ -544,6 +554,7 @@ footer {
 }
 
 footer p { max-width: 37rem; margin: 0; }
+.footer-notes { display: grid; gap: .8rem; }
 
 :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 

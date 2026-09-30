@@ -7,6 +7,8 @@ const dist = resolve(root, "dist");
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "catalogue"), { recursive: true });
 await cp(resolve(root, "index.html"), resolve(dist, "index.html"));
+await cp(resolve(root, "index.ps.html"), resolve(dist, "index.ps.html"));
+await cp(resolve(root, "interface-locales.js"), resolve(dist, "interface-locales.js"));
 await cp(resolve(root, "site.css"), resolve(dist, "site.css"));
 await cp(resolve(root, "site.js"), resolve(dist, "site.js"));
 await cp(resolve(root, "catalogue", "editions.json"), resolve(dist, "catalogue", "editions.json"));

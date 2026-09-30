@@ -1,3 +1,5 @@
+import { applyInterfaceLocale, initialInterfaceLocale, interfaceText } from "./interface-locales.js?v=20260930-ps";
+
 const TOTAL_UNITS = 722;
 
 const nativeNames = {
@@ -37,6 +39,7 @@ const clearFilters = document.querySelector("#clear-filters");
 const filterButtons = [...document.querySelectorAll(".filter")];
 
 let editions = [];
+let catalogueLoaded = false;
 let activeFilter = "all";
 let catalogueSignature = "";
 let catalogueRefreshPromise = null;
@@ -307,6 +310,7 @@ function cardFor(edition) {
 }
 
 function render() {
+  if (!catalogueLoaded) return;
   const query = search.value.trim().toLocaleLowerCase();
   let visible = 0;
   [...grid.children].forEach(card => {
@@ -315,7 +319,7 @@ function render() {
     card.hidden = !(matchesFilter && matchesSearch);
     if (!card.hidden) visible += 1;
   });
-  summary.textContent = `${visible} of ${editions.length} editions shown. Coverage is read from the live machine catalogue.`;
+  summary.textContent = interfaceText("summary", { visible, total: editions.length });
   emptyState.hidden = visible !== 0;
 }
 
@@ -326,6 +330,8 @@ function replaceCatalogue(nextEditions) {
   const placeholder = select.querySelector('option[value=""]');
 
   editions = nextEditions;
+  catalogueLoaded = true;
+  delete summary.dataset.ui;
   grid.replaceChildren();
   select.replaceChildren(placeholder);
 
@@ -406,19 +412,30 @@ async function start() {
     }
   } catch (error) {
     grid.setAttribute("aria-busy", "false");
-    summary.textContent = "The interactive catalogue could not load.";
+    summary.dataset.ui = "errorSummary";
+    summary.textContent = interfaceText("errorSummary");
     const message = document.createElement("div");
     message.className = "noscript-card";
     const heading = document.createElement("h3");
-    heading.textContent = "Catalogue temporarily unavailable";
+    heading.dataset.ui = "errorTitle";
+    heading.textContent = interfaceText("errorTitle");
     const paragraph = document.createElement("p");
-    paragraph.append("Use the ");
+    const before = document.createElement("span");
+    before.dataset.ui = "errorBefore";
+    before.textContent = interfaceText("errorBefore");
+    paragraph.append(before);
     const plain = document.createElement("a");
     plain.href = "README.md#read-or-inspect-an-edition";
-    plain.textContent = "plain-language edition table";
-    paragraph.append(plain, " while this view recovers.");
+    plain.id = "catalogue-fallback-link";
+    plain.dataset.ui = "errorLink";
+    plain.textContent = interfaceText("errorLink");
+    const after = document.createElement("span");
+    after.dataset.ui = "errorAfter";
+    after.textContent = interfaceText("errorAfter");
+    paragraph.append(plain, after);
     message.append(heading, paragraph);
     grid.append(message);
+    applyInterfaceLocale(document.documentElement.lang);
     console.error(error);
   }
 }
@@ -453,4 +470,12 @@ document.addEventListener("visibilitychange", () => {
   if (!document.hidden) refreshCatalogue().catch(error => console.error(error));
 });
 
+applyInterfaceLocale(initialInterfaceLocale());
+document.querySelector("#interface-language").addEventListener("change", event => {
+  const locale = applyInterfaceLocale(event.target.value);
+  const url = new URL(location.href);
+  url.searchParams.set("lang", locale);
+  history.replaceState(null, "", url);
+  render();
+});
 start();

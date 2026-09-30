@@ -321,6 +321,9 @@ const ps606Evidence = JSON.parse(await read("evidence/PASHTO606_MANAGER_AUDIT_20
 const ps608Evidence = JSON.parse(await read("evidence/PASHTO608_REAUDIT_INTAKE_20260930.json"));
 const ps612Evidence = JSON.parse(await read("evidence/PASHTO612_PUBLIC_INTAKE_20260930.json"));
 const ps622Evidence = JSON.parse(await read("evidence/PASHTO622_PUBLIC_INTAKE_20260930.json"));
+const ps632Evidence = JSON.parse(await read("evidence/PASHTO632_PUBLIC_INTAKE_20260930.json"));
+check(ps632Evidence.source_units===632 && ps632Evidence.source_unit_delta===10 && ps632Evidence.changed_files.length===39 && ps632Evidence.changed_files.every(f=>f.matches) && ps632Evidence.failures.length===0, "Pashto632 public source bytes");
+check(ps632Evidence.reader_units===321 && ps632Evidence.whole_sol6_units_reaudited===10 && ps632Evidence.whole_sol6_units_pending===289 && ps632Evidence.canon_sample.pages_actually_viewed.length===2 && !ps632Evidence.full_linguistic_certification, "Pashto632 reader, review and canon scope");
 check(ps622Evidence.source_units === 622 && ps622Evidence.source_unit_delta === 10 && ps622Evidence.changed_files.length === 27 && ps622Evidence.changed_files.every(f=>f.matches) && ps622Evidence.aligned_blocks_verified === 9217 && ps622Evidence.canon_record_hash_bindings === 5834 && ps622Evidence.failures.length === 0, "Pashto622 public source/alignment evidence");
 check(ps622Evidence.canon_sample.pages_actually_viewed.length === 2 && ps622Evidence.math_sample.new_unit_checks.length === 10 && ps622Evidence.whole_sol6_units_reaudited === 8 && ps622Evidence.whole_sol6_units_pending === 291 && !ps622Evidence.full_linguistic_certification && ps622Evidence.reader_units === 321, "Pashto622 bounded canon/math sample, incomplete full review and reader scope");
 check(ps612Evidence.source_units === 612 && ps612Evidence.source_unit_delta === 4 && ps612Evidence.changed_files.length === 45 && ps612Evidence.changed_files.every(f=>f.matches) && ps612Evidence.aligned_blocks_verified === 9074 && ps612Evidence.canon_record_hash_bindings === 5761 && ps612Evidence.failures.length === 0, "Pashto612 needs exact public source/alignment evidence");
@@ -349,11 +352,11 @@ check(ps500.previous_source_checkpoint_500.commit === ps500Evidence.commit, "Pre
 check(ps515Evidence.failures.length === 0 && ps515Evidence.frozen_files === 722 && ps515Evidence.accepted_draft_units === 515 && ps515Evidence.aligned_blocks === 7765 && ps515Evidence.canon_hash_bound_changed_blocks === 4861 && ps515Evidence.unaccepted_staged_units === 4, "Pashto515 needs exact source/alignment/canon-reference replay");
 check(ps500.previous_source_checkpoint_586.commit === ps586Evidence.commit && ps500.previous_source_progress_586.archive_sha256 === ps586Evidence.archive.sha256, "Preserve the historical Pashto586 source snapshot");
 check(ps500.previous_source_checkpoint_595.commit === ps595Evidence.commit && ps500.previous_source_progress_595.archive_sha256 === ps595Evidence.archive.sha256, "Preserve historical Pashto595 identity");
-check(ps500.public_source_checkpoint.commit === ps622Evidence.commit && ps500.source_progress.archive_sha256 === ps622Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps622Evidence.archive.bytes, "Pashto622 public source identity");
-check(ps500.supplementary_downloads[0].downloads[0].url === ps622Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
-check((await read("README.md")).includes("PASHTO622_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
-check(ps500.reader_guide === "evidence/PASHTO622_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
-for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",622,321,321],["openlogic-bn-beng-in",722,722,722]]) {
+check(ps500.public_source_checkpoint.commit === ps632Evidence.commit && ps500.source_progress.archive_sha256 === ps632Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps632Evidence.archive.bytes, "Pashto632 public source identity");
+check(ps500.supplementary_downloads[0].downloads[0].url === ps632Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
+check((await read("README.md")).includes("PASHTO632_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
+check(ps500.reader_guide === "evidence/PASHTO632_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
+for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",632,321,321],["openlogic-bn-beng-in",722,722,722]]) {
   const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
@@ -404,7 +407,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 const taBeforeComplete = JSON.parse(await read("evidence/TAMIL_BEFORE_COMPLETE_20260928.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
-  const source = lane === 'ps' ? ps622Evidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'ps' ? ps632Evidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);
 }

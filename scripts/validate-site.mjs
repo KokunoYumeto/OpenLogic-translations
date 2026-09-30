@@ -512,6 +512,12 @@ for (const group of [arabic.ordered_downloads, arabic.supplementary_downloads[1]
 }
 check(arabic.readers.filter(r => r.format === 'PDF' && r.scope_kind === 'complete').length === 3, 'Three current complete Arabic PDF readers required');
 check(arabic.reviewable_decisions === 1095 && arCurrent.review_index.rows === 1095 && arCurrent.review_index.unique_ids === 1095 && arabic.human_review_complete === false, 'Complete Arabic review directory must not imply human approval');
+const arReviewRepair = JSON.parse(await read('evidence/ARABIC_REVIEW_CORRECTIONS_20260930.json'));
+check(arReviewRepair.failures.length === 0 && arReviewRepair.files.length === 7 && arReviewRepair.pinned_source_inputs.length === 44 && arReviewRepair.pinned_source_inputs.every(p => p.anonymous && p.matches), 'Arabic review correction needs exact public assets and pinned source inputs');
+check(arabic.review_release_tag === arReviewRepair.release_tag && arReviewRepair.review_decisions === 1095 && arReviewRepair.corrected_explanations === 5 && arReviewRepair.full_linguistic_certification === false, 'Arabic review correction scope must remain explicit');
+for (const item of arabic.supplementary_downloads[3].downloads.filter(x => x.name)) check(arReviewRepair.files.some(f => f.name === item.name && f.url === item.url && f.bytes === item.bytes && f.sha256 === item.sha256), 'Arabic corrected review download identity mismatch');
+check(arabic.supplementary_downloads[3].downloads.some(d => d.url.endsWith('/SOL6_CORRECTIONS_AR.md')) && arabic.supplementary_downloads[4].downloads.some(d => d.url === arReviewRepair.historical_release), 'Arabic corrected explanations and historical review access both required');
+
 check(arabic.status.includes('classical-fixed-name-repair-verified') && !arabic.status.includes('classical-pdf-rendering-correction-required') && arRepair.inspection.pdf_pages.join(',') === '33,404,1044', 'Repaired classical listing requires inspected pages');
 check(arabic.pdf_version_doi === arRepair.doi && arabic.supplementary_downloads[2].downloads.slice(0, 3).every(asset => arRepair.files.some(f => f.name === asset.name && f.sha256 === asset.sha256 && f.github.url === asset.url)), 'Current classical PDF/TEX/ZIP must point to the corrected publication');
 check(arabic.evidence.manager_public_readback === arabic.evidence.epub_provenance_correction, 'Arabic card evidence must expose the current EPUB correction');

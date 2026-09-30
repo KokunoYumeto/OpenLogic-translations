@@ -319,6 +319,9 @@ const ps586Evidence = JSON.parse(await read("evidence/PASHTO586_MANAGER_AUDIT_20
 const ps595Evidence = JSON.parse(await read("evidence/PASHTO595_MANAGER_AUDIT_20260930.json"));
 const ps606Evidence = JSON.parse(await read("evidence/PASHTO606_MANAGER_AUDIT_20260930.json"));
 const ps608Evidence = JSON.parse(await read("evidence/PASHTO608_REAUDIT_INTAKE_20260930.json"));
+const ps612Evidence = JSON.parse(await read("evidence/PASHTO612_PUBLIC_INTAKE_20260930.json"));
+check(ps612Evidence.source_units === 612 && ps612Evidence.source_unit_delta === 4 && ps612Evidence.changed_files.length === 45 && ps612Evidence.changed_files.every(f=>f.matches) && ps612Evidence.aligned_blocks_verified === 9074 && ps612Evidence.canon_record_hash_bindings === 5761 && ps612Evidence.failures.length === 0, "Pashto612 needs exact public source/alignment evidence");
+check(ps612Evidence.canon_sample.pages_actually_viewed.length === 2 && ps612Evidence.whole_sol6_units_reaudited === 8 && ps612Evidence.whole_sol6_units_pending === 291 && !ps612Evidence.full_linguistic_certification && ps612Evidence.reader_units === 321, "Pashto612 must retain canon sample and incomplete linguistic/reader scope");
 check(ps608Evidence.failures.length === 0 && ps608Evidence.source_units === 608 && ps608Evidence.frozen_source_units === 722 && ps608Evidence.all44_archive_members_match_owner_public_receipt.length === 44 && ps608Evidence.all44_archive_members_match_owner_public_receipt.every(f=>f.matches), "Pashto608 needs anonymous archive/source/target and44-member identity evidence");
 check(ps608Evidence.owner_new_reaudit_whole_units === 5 && ps608Evidence.owner_new_reaudit_pending === 294 && ps608Evidence.whole_unit_reaudit_segment_records === 43 && !ps608Evidence.whole_corpus_linguistic_certification && ps608Evidence.reader_units === 321, "Five reviewed units must not be promoted to full608 linguistic certification");
 check(["OLSTH-024","OLSTH-031","OLSTH-032"].every(id=>ps608Evidence.correction_objects[id].status === "superseded"), "Withdrawn false positives must not remain active source findings");
@@ -343,11 +346,11 @@ check(ps500.previous_source_checkpoint_500.commit === ps500Evidence.commit, "Pre
 check(ps515Evidence.failures.length === 0 && ps515Evidence.frozen_files === 722 && ps515Evidence.accepted_draft_units === 515 && ps515Evidence.aligned_blocks === 7765 && ps515Evidence.canon_hash_bound_changed_blocks === 4861 && ps515Evidence.unaccepted_staged_units === 4, "Pashto515 needs exact source/alignment/canon-reference replay");
 check(ps500.previous_source_checkpoint_586.commit === ps586Evidence.commit && ps500.previous_source_progress_586.archive_sha256 === ps586Evidence.archive.sha256, "Preserve the historical Pashto586 source snapshot");
 check(ps500.previous_source_checkpoint_595.commit === ps595Evidence.commit && ps500.previous_source_progress_595.archive_sha256 === ps595Evidence.archive.sha256, "Preserve historical Pashto595 identity");
-check(ps500.public_source_checkpoint.commit === ps608Evidence.commit && ps500.source_progress.archive_sha256 === ps608Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps608Evidence.archive.bytes, "Pashto608 public source identity");
-check(ps500.supplementary_downloads[0].downloads[0].url === ps608Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
-check((await read("README.md")).includes("PASHTO608_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
-check(ps500.reader_guide === "evidence/PASHTO608_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
-for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",608,321,321],["openlogic-bn-beng-in",722,722,722]]) {
+check(ps500.public_source_checkpoint.commit === ps612Evidence.commit && ps500.source_progress.archive_sha256 === ps612Evidence.archive.sha256 && ps500.source_progress.archive_bytes === ps612Evidence.archive.bytes, "Pashto608 public source identity");
+check(ps500.supplementary_downloads[0].downloads[0].url === ps612Evidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
+check((await read("README.md")).includes("PASHTO612_REVIEW.ps.html") && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
+check(ps500.reader_guide === "evidence/PASHTO612_REVIEW.ps.html" && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
+for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",612,321,321],["openlogic-bn-beng-in",722,722,722]]) {
   const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
@@ -398,7 +401,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 const taBeforeComplete = JSON.parse(await read("evidence/TAMIL_BEFORE_COMPLETE_20260928.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
   const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
-  const source = lane === 'ps' ? {...ps608Evidence, frozen_sources_verified: ps608Evidence.frozen_source_units, targets_verified: ps608Evidence.source_units, full_semantic_reaudit: ps608Evidence.whole_corpus_linguistic_certification} : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
+  const source = lane === 'ps' ? ps612Evidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);
 }
@@ -483,7 +486,7 @@ check(createHash('sha256').update(await read(arabic.evidence.manager_public_read
 const arPackages = JSON.parse(await read(arabic.evidence.package_checks));
 check(arabic.metadata_language === 'ar' && arabic.metadata_direction === 'rtl' && arabic.search_aliases.includes('Arabic'), 'Arabic native metadata must remain discoverable');
 check(arabic.ui_labels.downloads === 'التنزيلات' && script.includes('edition.ui_labels?.downloads'), 'Arabic download-group accessibility names must be localized');
-check(arabic.version_doi === arEpubSuccessor.doi && arabic.epub_release_tag === arEpubSuccessor.release_tag, 'Arabic current record and preserved EPUB lineage mismatch');
+check(arabic.epub_version_doi === arEpubSuccessor.doi && arabic.epub_release_tag === arEpubSuccessor.release_tag, 'Arabic current record and preserved EPUB lineage mismatch');
 check(arPublic.anonymous && arPublic.files.length === 20 && arPublic.files.every(f => f.matches), 'Arabic full EPUB release needs ten exact assets on both mirrors');
 const arFull = arabic.readers.filter(r => r.format === 'EPUB' && r.scope_kind === 'complete');
 check(arFull.length === 3 && arFull.every(r => r.source_units === 722), 'Arabic requires three explicitly complete EPUB profiles');
@@ -513,9 +516,13 @@ for (const group of [arabic.ordered_downloads, arabic.supplementary_downloads[1]
 check(arabic.readers.filter(r => r.format === 'PDF' && r.scope_kind === 'complete').length === 3, 'Three current complete Arabic PDF readers required');
 check(arabic.reviewable_decisions === 1095 && arCurrent.review_index.rows === 1095 && arCurrent.review_index.unique_ids === 1095 && arabic.human_review_complete === false, 'Complete Arabic review directory must not imply human approval');
 const arReviewRepair = JSON.parse(await read('evidence/ARABIC_REVIEW_CORRECTIONS_20260930.json'));
+const arReadable = JSON.parse(await read('evidence/ARABIC_READABLE_REVIEW_20260930.json'));
+check(arReadable.files.length === 14 && arReadable.files.every(f=>f.anonymous && f.matches) && arReadable.pages.length === 150 && arReadable.pages.every(f=>f.anonymous && f.matches), 'Arabic readable review needs both asset mirrors and all150 page identities');
+check(arReadable.all_1095_rows_preserved && arReadable.all_split_card_payloads_preserved && arReadable.review_decisions === 1095 && arReadable.large_cards_preserved === 37 && arReadable.inherited_inventory_unchanged === 93 && arReadable.public_file_count === 100 && !arReadable.full_linguistic_certification, 'Arabic complete review preservation and bounded semantic claim');
+check(arabic.version_doi === arReadable.doi && arabic.review_release_tag === arReadable.release_tag, 'Arabic readable successor identity');
 check(arReviewRepair.failures.length === 0 && arReviewRepair.files.length === 7 && arReviewRepair.pinned_source_inputs.length === 44 && arReviewRepair.pinned_source_inputs.every(p => p.anonymous && p.matches), 'Arabic review correction needs exact public assets and pinned source inputs');
-check(arabic.review_release_tag === arReviewRepair.release_tag && arReviewRepair.review_decisions === 1095 && arReviewRepair.corrected_explanations === 5 && arReviewRepair.full_linguistic_certification === false, 'Arabic review correction scope must remain explicit');
-for (const item of arabic.supplementary_downloads[3].downloads.filter(x => x.name)) check(arReviewRepair.files.some(f => f.name === item.name && f.url === item.url && f.bytes === item.bytes && f.sha256 === item.sha256), 'Arabic corrected review download identity mismatch');
+check(arabic.previous_review_release_tag === arReviewRepair.release_tag && arReviewRepair.review_decisions === 1095 && arReviewRepair.corrected_explanations === 5 && arReviewRepair.full_linguistic_certification === false, 'Arabic review correction scope must remain explicit');
+for (const item of arabic.supplementary_downloads[3].downloads.filter(x => x.name)) check(arReadable.files.some(f => f.mirror === 'github' && f.name === item.name && f.url === item.url && f.bytes === item.bytes && f.sha256 === item.sha256), 'Arabic corrected review download identity mismatch');
 check(arabic.supplementary_downloads[3].downloads.some(d => d.url.endsWith('/SOL6_CORRECTIONS_AR.md')) && arabic.supplementary_downloads[4].downloads.some(d => d.url === arReviewRepair.historical_release), 'Arabic corrected explanations and historical review access both required');
 
 check(arabic.status.includes('classical-fixed-name-repair-verified') && !arabic.status.includes('classical-pdf-rendering-correction-required') && arRepair.inspection.pdf_pages.join(',') === '33,404,1044', 'Repaired classical listing requires inspected pages');
@@ -523,7 +530,7 @@ check(arabic.pdf_version_doi === arRepair.doi && arabic.supplementary_downloads[
 check(arabic.evidence.manager_public_readback === arabic.evidence.epub_provenance_correction, 'Arabic card evidence must expose the current EPUB correction');
 check(arEpubSuccessor.files.length === 4 && arEpubSuccessor.source_replay.manifest_members_verified === 2485 && arEpubSuccessor.source_replay.matching_direct_source_assets.length === 6, 'Arabic EPUB successor needs four exact changed assets and complete editable sources');
 check(arabic.epub_source_text_date === '2026-09-25' && arEpubSuccessor.full_linguistic_certification === false && arabic.epub_coverage_note.includes('إعادة فحص'), 'Arabic EPUB status must preserve source date and unfinished semantic review');
-check(arabic.evidence.latest_zenodo_record === `https://zenodo.org/records/${arEpubSuccessor.record_id}`, 'Arabic latest archive pointer must match the verified EPUB successor');
+check(arabic.evidence.latest_zenodo_record === `https://zenodo.org/records/${arReadable.record_id}`, 'Arabic latest archive pointer must match the verified EPUB successor');
 check(!JSON.stringify(arabic.supplementary_downloads).includes('٢٩٧ ميغابايت'), 'Arabic source ZIP must not retain the obsolete 297 MB label');
 check(arabic.limitations.slice(0, 5).some(text => text.includes('GPT-6 Sol') && text.includes('GPT-6.1 Sol') && text.includes('Ultra')), 'Rendered Arabic limitations must attribute EPUB conversion and provenance correction separately');
 check(arabic.supplementary_downloads[4].downloads.some(d => d.url.endsWith(arPublic.release_tag)), 'Previous Arabic EPUB lineage must remain available');

@@ -509,11 +509,14 @@ const dutchPublication = JSON.parse(await read('evidence/DUTCH_READERS160_PUBLIC
 const arabic = catalogue.editions.find(item => item.id === 'openlogic-ar');
 const arPublic = JSON.parse(await read('evidence/ARABIC_COMPLETE_EPUB_PUBLIC_20260926.json'));
 const arEpubSuccessor = JSON.parse(await read(arabic.evidence.epub_provenance_correction));
+const arCorrectedEpub = JSON.parse(await read(arabic.evidence.corrected_epubs));
 check(createHash('sha256').update(await read(arabic.evidence.manager_public_readback)).digest('hex') === arabic.evidence.manager_public_readback_sha256, 'Arabic public evidence hash must identify the exact published JSON bytes');
 const arPackages = JSON.parse(await read(arabic.evidence.package_checks));
 check(arabic.metadata_language === 'ar' && arabic.metadata_direction === 'rtl' && arabic.search_aliases.includes('Arabic'), 'Arabic native metadata must remain discoverable');
 check(arabic.ui_labels.downloads === 'التنزيلات' && script.includes('edition.ui_labels?.downloads'), 'Arabic download-group accessibility names must be localized');
-check(arabic.epub_version_doi === arEpubSuccessor.doi && arabic.epub_release_tag === arEpubSuccessor.release_tag, 'Arabic current record and preserved EPUB lineage mismatch');
+check(arabic.epub_version_doi === arCorrectedEpub.doi && arabic.epub_release_tag === arCorrectedEpub.release_tag, 'Arabic corrected EPUB lineage mismatch');
+check(arCorrectedEpub.files.length === 14 && arCorrectedEpub.files.every(f => f.anonymous && f.matches) && arCorrectedEpub.checks.failures.length === 0 && arCorrectedEpub.visual.pass, 'Arabic corrected EPUB/source assets need fourteen mirror matches and resolved independent checks');
+check(arCorrectedEpub.inventory.files === 100 && arCorrectedEpub.inventory.unchanged === 93 && arCorrectedEpub.source_package.manifest_members === 2493 && arCorrectedEpub.source_package.source_units_per_msa === 722, 'Arabic new EPUB source package and preserved100-file archive');
 check(arPublic.anonymous && arPublic.files.length === 20 && arPublic.files.every(f => f.matches), 'Arabic full EPUB release needs ten exact assets on both mirrors');
 const arFull = arabic.readers.filter(r => r.format === 'EPUB' && r.scope_kind === 'complete');
 check(arFull.length === 3 && arFull.every(r => r.source_units === 722), 'Arabic requires three explicitly complete EPUB profiles');
@@ -521,6 +524,13 @@ check(arPackages.status === 'PASS' && arPackages.failures.length === 0 && Object
 for (const r of arFull) {
   const q = arPackages.profiles[r.profile];
   check(q.source_units === 722 && q.cumulative_bodies_replayed === 722 && q.cold_replay_matches && q.cold_replay_sha256 === arPublic.files.find(f => f.name === r.name)?.sha256 && q.broken_internal_links.length === 0, `Arabic ${r.profile}: incomplete package proof`);
+  if (r.profile !== 'classical') {
+    const f = arCorrectedEpub.files.find(x => x.host === 'github' && x.name === r.name);
+    const p = arCorrectedEpub.profiles.find(x => x.profile === r.profile);
+    check(f?.sha256 === r.sha256 && f.bytes === r.bytes && f.url === r.url && r.mirror_doi === arCorrectedEpub.doi, 'Arabic corrected EPUB identity: '+r.profile);
+    check(p?.source_units === 722 && p.spine_items === 812 && p.documents === 812 && p.unchanged_members === 816 && p.changed_members.join(',') === 'OEBPS/modern-reader-3-7-3.xhtml,OEBPS/package.opf,OEBPS/provenance.xhtml' && p.proof_trees_preserved === 6 && p.original_formula_objects_preserved === 73 && p.formula_objects_added === 1 && p.byte_identical_independent_rebuild, 'Arabic bounded correction and exact rebuild: '+r.profile);
+    continue;
+  }
   const successor = arEpubSuccessor.files.find(f => f.name === r.name);
   const profile = arEpubSuccessor.profiles.find(p => p.profile === r.profile);
   check(successor?.sha256 === r.sha256 && successor.bytes === r.bytes && successor.github.matches && successor.zenodo.matches && successor.github.url === r.url && r.mirror_doi === arEpubSuccessor.doi, 'Arabic successor mirror identity mismatch: '+r.profile);
@@ -556,12 +566,12 @@ check(arFunctions.files.length === 14 && arFunctions.files.every(f => f.anonymou
 check(arFunctions.all_1095_ids_preserved && arFunctions.review_decisions === 1095 && arFunctions.changed_decisions.length === 3 && arFunctions.unchanged_decisions === 1092 && arFunctions.inherited_inventory_unchanged === 93 && arFunctions.public_file_count === 100, 'Arabic function review must preserve prior decisions and inherited inventory');
 check(arFunctions.source_files.length === 3 && arFunctions.source_files.every(f => f.matches && f.normalized_snapshot_equal) && arFunctions.canon_sample.physical_pages_viewed.join(',') === '69,361,703' && !arFunctions.full_linguistic_certification && arFunctions.translation_body_edits === 0, 'Arabic bounded source/canon evidence and unchanged reader scope');
 const arContext = JSON.parse(await read('evidence/ARABIC_CONTEXT_PROOF_REVIEW_20260930.json'));
-check(arabic.version_doi === arMsa.doi && arabic.release_tag === arMsa.release_tag && arabic.review_release_tag === arMsa.release_tag && arabic.previous_context_review_release_tag === arContext.release_tag && arabic.previous_function_review_release_tag === arFunctions.release_tag && arabic.previous_readable_review_release_tag === arReadable.release_tag, 'Arabic current and historical review identities');
+check(arabic.version_doi === arCorrectedEpub.doi && arabic.pdf_version_doi === arMsa.doi && arabic.release_tag === arMsa.release_tag && arabic.review_release_tag === arMsa.release_tag && arabic.previous_context_review_release_tag === arContext.release_tag && arabic.previous_function_review_release_tag === arFunctions.release_tag && arabic.previous_readable_review_release_tag === arReadable.release_tag, 'Arabic current and historical review identities');
 check(arContext.files.length === 14 && arContext.files.every(f=>f.anonymous && f.matches) && arContext.failures.length === 0, 'Arabic context/proof review requires both anonymous asset mirrors');
 check(arContext.all_1095_ids_preserved && arContext.all_original_occurrences_preserved && arContext.changed_decisions.length === 8 && arContext.unchanged_decisions === 1087 && arContext.recorded_locations_checked === 90, 'Arabic bounded review scope and occurrence preservation');
 check(arContext.package_files_checked === 828 && arContext.package_crc_passed && arContext.inherited_inventory_unchanged === 93 && arContext.public_file_count === 100, 'Arabic source package and inherited access');
 check(arContext.source_prose_corrections === 2 && arContext.source_inverse_reconstruction_passed && arContext.new_pdf_epub_builds === 0 && !arContext.full_linguistic_certification, 'Arabic public source repair is not a new reader build');
-check(arabic.supplementary_downloads[3].note.includes('لا يتضمنهما EPUB المحفوظ بعد') && arabic.evidence.context_proof_review === 'evidence/ARABIC_CONTEXT_PROOF_REVIEW_20260930.json', 'Current corrected PDF versus older EPUB distinction must be reader-facing');
+check(arabic.supplementary_downloads[3].note.includes('تضم نسختا PDF وEPUB المعياريتان الآن') && arabic.evidence.context_proof_review === 'evidence/ARABIC_CONTEXT_PROOF_REVIEW_20260930.json', 'Current corrected PDF and EPUB status must be reader-facing');
 check(arReviewRepair.failures.length === 0 && arReviewRepair.files.length === 7 && arReviewRepair.pinned_source_inputs.length === 44 && arReviewRepair.pinned_source_inputs.every(p => p.anonymous && p.matches), 'Arabic review correction needs exact public assets and pinned source inputs');
 check(arabic.previous_review_release_tag === arReviewRepair.release_tag && arReviewRepair.review_decisions === 1095 && arReviewRepair.corrected_explanations === 5 && arReviewRepair.full_linguistic_certification === false, 'Arabic review correction scope must remain explicit');
 for (const item of arabic.supplementary_downloads[3].downloads.filter(x => x.name)) check(arMsa.files.some(f => f.host === 'github' && f.name === item.name && f.url === item.url && f.bytes === item.bytes && f.sha256 === item.sha256), 'Arabic corrected review download identity mismatch');
@@ -571,8 +581,8 @@ check(arabic.status.includes('classical-fixed-name-repair-verified') && !arabic.
 check(arabic.pdf_version_doi === arMsa.doi && arabic.classical_pdf_version_doi === arRepair.doi && arabic.supplementary_downloads[2].downloads.slice(0, 3).every(asset => arRepair.files.some(f => f.name === asset.name && f.sha256 === asset.sha256 && f.github.url === asset.url)), 'Current MSA and classical PDF source pairs must retain their distinct verified lineages');
 check(arabic.evidence.manager_public_readback === arabic.evidence.current_msa_pdf && arabic.evidence.epub_provenance_correction, 'Arabic card evidence must expose current PDFs and preserve EPUB evidence');
 check(arEpubSuccessor.files.length === 4 && arEpubSuccessor.source_replay.manifest_members_verified === 2485 && arEpubSuccessor.source_replay.matching_direct_source_assets.length === 6, 'Arabic EPUB successor needs four exact changed assets and complete editable sources');
-check(arabic.epub_source_text_date === '2026-09-25' && arEpubSuccessor.full_linguistic_certification === false && arabic.epub_coverage_note.includes('إعادة فحص'), 'Arabic EPUB status must preserve source date and unfinished semantic review');
-check(arabic.evidence.latest_zenodo_record === `https://zenodo.org/records/${arMsa.record_id}`, 'Arabic latest archive pointer must match the verified reader successor');
+check(arabic.epub_source_text_date === '2026-09-30' && arabic.classical_epub_source_text_date === '2026-09-25' && arCorrectedEpub.full_linguistic_certification === false && arabic.epub_coverage_note.includes('إعادة فحص'), 'Arabic EPUB status must distinguish source dates and unfinished semantic review');
+check(arabic.evidence.latest_zenodo_record === `https://zenodo.org/records/${arCorrectedEpub.record_id}`, 'Arabic latest archive pointer must match the verified EPUB successor');
 check(!JSON.stringify(arabic.supplementary_downloads).includes('٢٩٧ ميغابايت'), 'Arabic source ZIP must not retain the obsolete 297 MB label');
 check(arabic.limitations.slice(0, 5).some(text => text.includes('GPT-6 Sol') && text.includes('GPT-6.1 Sol') && text.includes('Ultra')), 'Rendered Arabic limitations must attribute EPUB conversion and provenance correction separately');
 check(arabic.supplementary_downloads[4].downloads.some(d => d.url.endsWith(arPublic.release_tag)), 'Previous Arabic EPUB lineage must remain available');

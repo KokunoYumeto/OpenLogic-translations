@@ -161,6 +161,7 @@ check(french74.files.length === 8 && french74.files.every(file => file.matches),
 check(french74.source_package.static_assembly_matches_direct_tex && french74.source_package.complete_embedded_body_count === 74 && french74.source_package.external_body_imports === 0, "French74 needs complete matching cumulative source");
 check(french74.source_package.frozen_english_files_matched === 722 && french74.qa.failures === 0, "French74 needs frozen source and structural checks");
 const french111 = JSON.parse(await read("evidence/FRENCH_READER111_MANAGER_INTAKE_20261001.json"));
+check(!JSON.stringify(french111).includes("\uFFFD"), "French111 public verification text must not contain replacement characters");
 check(french111.files.length === 8 && french111.files.every(file => file.matches), "French111 needs eight anonymous mirror matches");
 check(french111.source_package.static_assembly_matches_direct_tex && french111.source_package.complete_embedded_body_count === 111 && french111.source_package.external_body_imports === 0, "French111 requires complete cumulative source");
 check(french111.source_package.frozen_english_files_matched === 722 && french111.source_package.aligned_draft_units === 132 && french111.qa.failures === 0, "French111 requires frozen-source and draft-alignment evidence");

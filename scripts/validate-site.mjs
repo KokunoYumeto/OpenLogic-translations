@@ -160,14 +160,19 @@ const french74 = JSON.parse(await read("evidence/FRENCH_READER74_MANAGER_INTAKE_
 check(french74.files.length === 8 && french74.files.every(file => file.matches), "French74 needs all eight anonymous mirror matches");
 check(french74.source_package.static_assembly_matches_direct_tex && french74.source_package.complete_embedded_body_count === 74 && french74.source_package.external_body_imports === 0, "French74 needs complete matching cumulative source");
 check(french74.source_package.frozen_english_files_matched === 722 && french74.qa.failures === 0, "French74 needs frozen source and structural checks");
-check(french.source_units_translated === 80 && french.reader_excluded_drafts.length === 6, "French source drafts must remain distinct from loaded reader units");
+const french111 = JSON.parse(await read("evidence/FRENCH_READER111_MANAGER_INTAKE_20261001.json"));
+check(french111.files.length === 8 && french111.files.every(file => file.matches), "French111 needs eight anonymous mirror matches");
+check(french111.source_package.static_assembly_matches_direct_tex && french111.source_package.complete_embedded_body_count === 111 && french111.source_package.external_body_imports === 0, "French111 requires complete cumulative source");
+check(french111.source_package.frozen_english_files_matched === 722 && french111.source_package.aligned_draft_units === 132 && french111.qa.failures === 0, "French111 requires frozen-source and draft-alignment evidence");
+check(french.metadata_language === "fr" && french.name === "Français" && french.ui_labels?.details === "Contenu et limites", "French card metadata must be in French");
+check(french.source_units_translated === 132 && french.reader_excluded_drafts.length === 21, "French source drafts must remain distinct from loaded reader units");
 check(frGuDelivery.files.length === 22 && frGuDelivery.files.every(file => file.matches), "French/Gujarati need all22 anonymous release-file checks");
-for (const [id, units] of [["openlogic-fr",74],["openlogic-gu-gujr-in",270]]) {
+for (const [id, units] of [["openlogic-fr",111],["openlogic-gu-gujr-in",270]]) {
   const edition = id === "openlogic-gu-gujr-in" ? gu270Historical : catalogue.editions.find(item => item.id === id);
-  check(edition.source_units_translated === (id === "openlogic-fr" ? 80 : units) && edition.standalone_reader_units === units, `${id}: source/reader scopes must match the verified package`);
+  check(edition.source_units_translated === (id === "openlogic-fr" ? 132 : units) && edition.standalone_reader_units === units, `${id}: source/reader scopes must match the verified package`);
   check(edition.ordered_downloads.slice(0,3).map(item => item.format).join(",") === "PDF,TEX,ZIP", `${id}: retain PDF/TeX/source-ZIP link order`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === units), `${id}: scoped EPUB missing`);
-  const delivery = id === "openlogic-gu-gujr-in" ? gu270Delivery : french74;
+  const delivery = id === "openlogic-gu-gujr-in" ? gu270Delivery : french111;
   for (const item of edition.ordered_downloads) check(delivery.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: download lacks matching byte evidence`);
 }
 check(frGuSources.french.direct_tex_unique_embedded_sources === 51 && frGuSources.french.external_content_imports === 0, "French cumulative LaTeX must contain the51-unit body");

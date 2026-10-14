@@ -33,7 +33,7 @@ check(indonesianSourceAudit.cakupan.unit_unik === 722 && indonesianSourceAudit.c
 check(indonesianSourceAudit.pemeriksaan.teks_1255_halaman_sama && indonesianSourceAudit.pemeriksaan.semua_tujuan_tautan_sama && indonesianSourceAudit.pemeriksaan.jumlah_tautan === 3359, "Indonesian reconstruction must preserve complete text and navigation");
 for (const item of indonesianHistorical.slice(1)) check(indonesianSourceAudit.public_downloads.some(x => x.url === item.url && x.bytes === item.bytes && x.sha256 === item.sha256 && x.status === "PASS"), "Indonesian historical source links need anonymous byte readback");
 check(indonesianSourceEdition.metadata_language === "id" && indonesianSourceEdition.ui_labels.source_zip === "Sumber ZIP", "Indonesian source access must be localized");
-check(indonesianSourceAudit.zenodo_source_mirror === false && indonesianSourceEdition.evidence.source_preservation_zenodo_mirrored === false && indonesianSourceAudit.full_linguistic_certification === false, "Do not overclaim Indonesian mirror or linguistic review");
+check(indonesianSourceAudit.zenodo_source_mirror === false && indonesianSourceEdition.evidence.source_preservation_zenodo_mirrored === true && indonesianExport.zenodo_mirrored === true && indonesianSourceAudit.full_linguistic_certification === false, "Do not overclaim Indonesian mirror or linguistic review");
 const accessible = catalogue.infrastructure.find(item => item.id === "openlogic-accessible-book");
 check(accessible?.language_tag === "en" && accessible.readers.some(item => item.format === "EPUB"), "accessible English needs a selectable language label and explicit EPUB download");
 check(accessible.name === "English — accessible / compatibility edition", "compatibility must be explicit in the edition name");

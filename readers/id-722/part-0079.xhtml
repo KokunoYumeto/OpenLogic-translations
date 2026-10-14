@@ -1,0 +1,1920 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>63 Semantik Perubahan Minimal — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0078.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0080.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0079" class="reader-chunk">
+<div id="source-OLP-0522-0574" class="source-unit" data-source-unit="OLP-0522" data-source-occurrence="574" data-source-path="source/main/openlogic/locale/id/content/counterfactuals/minimal-change-semantics/minimal-change-semantics.tex" data-source-sha256="9f698eca96e6d6d6618798f25fd2e0f4bb58ee5988fd42081437642d724edf66">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="63" data-native-label="cnt:min::chap" id="label-main-09ff7ad773608e92e726">63 Semantik Perubahan Minimal</h2>
+<div id="source-OLP-0523-0575" class="source-unit" data-source-unit="OLP-0523" data-source-occurrence="575" data-source-path="source/main/openlogic/locale/id/content/counterfactuals/minimal-change-semantics/introduction.tex" data-source-sha256="bd81ae6a5a466590eb4f484021d949637f8d4f9fc6da9386191b0527be56dd0a">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="63.1" data-native-label="cnt:min:int:sec" id="label-main-b181d6985810a03b65ac">63.1 Pendahuluan</h3>
+<p>Stalnaker dan Lewis mengajukan penjelasan tentang kondisional kontrafaktual seperti “seandainya korek api itu digesek, korek itu akan menyala.” Penjelasan mereka merupakan usulan tentang cara memahami secara tepat syarat kebenaran kalimat semacam itu. Gagasan di balik kedua usulan tersebut adalah sebagai berikut: untuk menilai apakah suatu kondisional kontrafaktual benar, kita harus mempertimbangkan dunia-dunia mungkin yang perbedaannya dari keadaan dunia aktual seminimal mungkin sehingga antesedennya menjadi benar. Jika konsekuennya benar di dunia-dunia mungkin ini, kontrafaktual tersebut benar. Sebagai contoh, andaikan saya memegang sebatang korek api dan sekotak korek api. Di dunia aktual, saya hanya memandang keduanya dan memikirkan apa yang akan terjadi seandainya saya menggesek korek api itu. Perubahan minimal dari dunia aktual tempat saya menggesek korek api ialah dunia tempat saya memutuskan untuk bertindak dan menggeseknya. Perubahan itu minimal dalam arti bahwa tidak ada hal lain yang berubah: saya tidak sekaligus melompat ke udara, menggesek korek api tidak sekaligus membakar rambut saya, jari-jari saya tidak tiba-tiba kehilangan seluruh kekuatannya, saya tidak pada saat yang sama diguyur air dalam penyergapan dengan SuperSoaker, dan sebagainya. Dalam kemungkinan alternatif itu, korek api tersebut menyala. Jadi, benar bahwa seandainya saya menggesek korek api itu, korek tersebut akan menyala.</p>
+<p>Penjelasan intuitif ini dapat dipadukan dengan semantik formal bagi logika kontrafaktual. Lewis memperkenalkan simbol “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029676" dir="ltr" display="inline">
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+</math>” untuk kondisional kontrafaktual, sedangkan Stalnaker memakai simbol “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029677" dir="ltr" display="inline">
+  <mo>&gt;</mo>
+</math>”. Kita akan memakai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029678" dir="ltr" display="inline">
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+</math> dan menambahkannya sebagai konektif biner ke dalam logika proposisi. Jadi, selain formula berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029679" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, kita juga mempunyai formula berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029680" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Seperti semantik relasional bagi logika modal, semantik formal ini didasarkan pada model-model tempat formula dinilai pada dunia-dunia, dan syarat keterpenuhan yang mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029681" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> diberikan dalam hubungannya dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029682" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029683" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk suatu dunia (lain) <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029684" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math>. Dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029685" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> yang mana? Secara intuitif, dunia yang paling dekat dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029686" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> di antara dunia-dunia tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029687" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Karena itu, suatu relasi “kedekatan” juga harus disertakan dalam model.</p>
+<p>Lewis memperkenalkan cara yang bermanfaat untuk merepresentasikan situasi kontrafaktual secara grafis. Setiap dunia mungkin berada di pusat suatu himpunan bola bersarang yang memuat dunia-dunia lain—bola-bola ini kita gambar sebagai lingkaran sepusat. Dunia-dunia yang berada di antara dua bola semuanya sama dekat dengan dunia di pusat; dunia-dunia yang termuat dalam bola yang lebih dalam lebih dekat, sedangkan dunia-dunia dalam bola yang mengelilinginya lebih jauh.</p>
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 553.2801 534.5000" width="553.2801" height="534.5000" role="img" aria-label="Diagram"><defs><marker id="dg-398a3b9151a8a1e9-a0cd225d43-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-398a3b9151a8a1e9-a0cd225d43-clip-1"><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096"/></clipPath></defs><circle cx="244.5000" cy="290.0000" r="19.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="52.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="84.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="149.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-398a3b9151a8a1e9-a0cd225d43-clip-1)"><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096" stroke="#000000" fill="none" stroke-width="1"/><path d="M 281.2070 103.8593 C 281.2070 103.8593 296.2134 364.7500 348.5000 364.7500 C 400.7866 364.7500 415.7930 103.8593 415.7930 103.8593" stroke="#000000" fill="none" stroke-width="1"/><foreignObject x="184.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><foreignObject x="282.0000" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></div></foreignObject><foreignObject x="379.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></div></foreignObject></svg></div></figure>
+</div>
+<p>Dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029688" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat adalah dunia-dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029689" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029690" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dipenuhi yang terletak dalam bola terkecil di sekitar dunia pusat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029691" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> (daerah abu-abu). Secara intuitif, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029692" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dipenuhi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029693" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029694" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> benar pada semua dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029695" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat.</p>
+<div id="source-OLP-0524-0576" class="source-unit" data-source-unit="OLP-0524" data-source-occurrence="576" data-source-path="source/main/openlogic/locale/id/content/counterfactuals/minimal-change-semantics/sphere-models.tex" data-source-sha256="f9ce7f8b279a814ae70f40b62cf4be9bf6a003bd312a84bea65aaab04ad5db1f">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="63.2" data-native-label="con:min:sph:sec" id="label-main-7f6409773db927dbdf25">63.2 Model Bola</h3>
+<p>Salah satu cara memberikan semantik formal bagi kontrafaktual adalah mengubah penjelasan informal Lewis menjadi suatu struktur matematis. Bola-bola di sekitar suatu dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029696" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> kemudian merupakan himpunan dunia. Karena bola-bola tersebut bersarang, himpunan-himpunan dunia di sekitar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029697" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> harus terurut linear oleh relasi himpunan bagian.</p>
+<div id="E02566" class="native-environment native-defn" data-source-edition="main" data-source-prefix="con:min:sph" data-source-unit_id="OLP-0524" data-source-occurrence="576" data-source-chapter="63" data-native-number="63.1">
+<p><strong>Definisi 63.1.</strong></p>
+<p>Suatu <em>model bola</em> adalah tripel <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029698" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>W</mi>
+  <mo>,</mo>
+  <mi>O</mi>
+  <mo>,</mo>
+  <mi>V</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029699" dir="ltr" display="inline">
+  <mi>W</mi>
+</math> suatu himpunan dunia takkosong, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029700" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo>:</mo>
+  <msub>
+    <mrow>
+      <mi>At</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi>W</mi>
+  <mo stretchy="false">)</mo>
+</math> suatu valuasi, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029701" dir="ltr" display="inline">
+  <mi>O</mi>
+  <mo>:</mo>
+  <mi>W</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi>W</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math> menetapkan kepada setiap dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029702" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> suatu <em>sistem bola</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029703" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math>. Untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029704" dir="ltr" display="inline">
+  <mi>w</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029705" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math> adalah suatu himpunan dari himpunan-himpunan dunia dan harus memenuhi:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029706" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math> <em>berpusat</em> pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029707" dir="ltr" display="inline">
+  <mi>w</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029708" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∈</mo>
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029709" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math> <em>bersarang</em>: kapan pun <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029710" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>1</mn>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029711" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>∈</mo>
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029712" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>⊆</mo>
+  <msub>
+    <mi>S</mi>
+    <mn>2</mn>
+  </msub>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029713" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>⊆</mo>
+  <msub>
+    <mi>S</mi>
+    <mn>1</mn>
+  </msub>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029714" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math> terurut linear oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029715" dir="ltr" display="inline">
+  <mo>⊆</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029716" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math> tertutup terhadap gabungan takkosong.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029717" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math> tertutup terhadap irisan takkosong.</p></li>
+</ol>
+</div>
+<p>Intuisi di balik <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029718" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math> ialah bahwa dunia-dunia “di sekitar” <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029719" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> terstratifikasi menurut jaraknya dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029720" dir="ltr" display="inline">
+  <mi>w</mi>
+</math>. Bola terdalam hanyalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029721" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> itu sendiri, yakni himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029722" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029723" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> lebih dekat dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029724" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> daripada dunia-dunia dalam bola lainnya. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029725" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo>⊊</mo>
+  <msup>
+    <mi>S</mi>
+    <mo>′</mo>
+  </msup>
+</math>, maka dunia-dunia dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029726" dir="ltr" display="inline">
+  <msup>
+    <mi>S</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>∖</mo>
+  <mi>S</mi>
+</math> lebih jauh dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029727" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> daripada dunia-dunia dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029728" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029729" dir="ltr" display="inline">
+  <msup>
+    <mi>S</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>∖</mo>
+  <mi>S</mi>
+</math> merupakan “lapisan” antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029730" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> dan dunia-dunia di luar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029731" dir="ltr" display="inline">
+  <msup>
+    <mi>S</mi>
+    <mo>′</mo>
+  </msup>
+</math>. Secara khusus, kita harus memandang bola-bola tersebut sebagai memuat semua dunia di dalam permukaan luarnya; bola-bola itu bukan sekadar setiap lapisan secara terpisah.</p>
+<figure id="FLOAT0053" class="native-float native-figure-float" data-native-number="63.1" data-source-edition="main" data-source-prefix="con:min:sph" data-source-unit_id="OLP-0524" data-source-occurrence="576" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 781.2499 697.0000" width="781.2499" height="697.0000" role="img" aria-label="Diagram"><defs><marker id="dg-66051dc4d46acafd-880300ff05-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-66051dc4d46acafd-880300ff05-clip-1"><path d="M 686.2499 153.5000 C 686.2499 153.5000 514.2500 164.5175 514.2500 348.5000 C 514.2500 532.4825 686.2499 543.5000 686.2499 543.5000"/></clipPath></defs><circle cx="348.5000" cy="348.5000" r="58.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="348.5000" cy="348.5000" r="156.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="348.5000" cy="348.5000" r="253.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-66051dc4d46acafd-880300ff05-clip-1)"><circle cx="348.5000" cy="348.5000" r="253.5000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 686.2499 153.5000 C 686.2499 153.5000 514.2500 164.5175 514.2500 348.5000 C 514.2500 532.4825 686.2499 543.5000 686.2499 543.5000" stroke="#000000" fill="none" stroke-width="1"/><circle cx="348.5000" cy="348.5000" r="18" fill="white" stroke="black"/><foreignObject x="288.5000" y="326.0000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><circle cx="441.3812" cy="402.1250" r="18" fill="white" stroke="black"/><foreignObject x="381.3812" y="379.6250" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math></div></foreignObject><circle cx="266.3417" cy="417.4390" r="18" fill="white" stroke="black"/><foreignObject x="206.3417" y="394.9390" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>3</mn>
+  </msub>
+</math></div></foreignObject><circle cx="348.5000" cy="241.2500" r="18" fill="white" stroke="black"/><foreignObject x="288.5000" y="218.7500" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+</math></div></foreignObject><circle cx="556.6394" cy="312.9455" r="18" fill="white" stroke="black"/><foreignObject x="496.6394" y="290.4455" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>5</mn>
+  </msub>
+</math></div></foreignObject><circle cx="556.6394" cy="384.0545" r="18" fill="white" stroke="black"/><foreignObject x="496.6394" y="361.5545" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>6</mn>
+  </msub>
+</math></div></foreignObject><circle cx="203.7199" cy="493.2801" r="18" fill="white" stroke="black"/><foreignObject x="143.7199" y="470.7801" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>4</mn>
+  </msub>
+</math></div></foreignObject><circle cx="632.5221" cy="245.1244" r="18" fill="white" stroke="black"/><foreignObject x="572.5221" y="222.6244" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>7</mn>
+  </msub>
+</math></div></foreignObject><foreignObject x="613.5000" y="326.0000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>p</mi>
+</math></div></foreignObject></svg></div></figure>
+<div id="label-main-a3614d34fe915fcc9143" class="native-anchor">
+
+</div>
+</div>
+<figcaption><p><strong>Gambar 63.1.</strong> Diagram suatu model bola</p></figcaption>
+</figure>
+<p>Diagram dalam <span class="native-reference"><a href="#label-main-a3614d34fe915fcc9143">Gambar 63.1</a></span> bersesuaian dengan model bola yang mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029732" dir="ltr" display="inline">
+  <mi>W</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>7</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029733" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>5</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>6</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>7</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Bola terdalam adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029734" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Dunia-dunia yang paling dekat dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029735" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029736" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>3</mn>
+  </msub>
+</math>, sehingga bola lebih besar berikutnya adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029737" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>3</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Dunia-dunia yang lebih jauh ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029738" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>4</mn>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029739" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>5</mn>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029740" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>6</mn>
+  </msub>
+</math>, sehingga bola terluar adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029741" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>3</mn>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>6</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Sistem bola di sekitar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029742" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029743" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>S</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>S</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>S</mi>
+    <mn>3</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029744" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>7</mn>
+  </msub>
+</math> tidak berada dalam bola mana pun di sekitar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029745" dir="ltr" display="inline">
+  <mi>w</mi>
+</math>. Dunia-dunia terdekat tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029746" dir="ltr" display="inline">
+  <mi>p</mi>
+</math> benar ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029747" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>5</mn>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029748" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>6</mn>
+  </msub>
+</math>, sehingga bola terkecil yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029749" dir="ltr" display="inline">
+  <mi>p</mi>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029750" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>3</mn>
+  </msub>
+</math>.</p>
+<p>Untuk mendefinisikan keterpenuhan suatu formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029751" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> pada dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029752" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> dalam model bola <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029753" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029754" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, kita memperluas definisi bagi formula modal dengan menyertakan satu klausa untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029755" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>:</p>
+<div id="E02567" class="native-environment native-defn" data-source-edition="main" data-source-prefix="con:min:sph" data-source-unit_id="OLP-0524" data-source-occurrence="576" data-source-chapter="63" data-native-number="63.2">
+<p><strong>Definisi 63.2.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029756" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> jika dan hanya jika salah satu dari yang berikut berlaku:</p>
+<ol>
+<li><p><span id="label-main-2b51a6926327965a037e" class="native-anchor"/> Untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029757" dir="ltr" display="inline">
+  <mi>u</mi>
+  <mo>∈</mo>
+  <mo>⋃</mo>
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029758" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>u</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, atau</p></li>
+<li><p><span id="label-main-b24c4d20613e2d90eb7c" class="native-anchor"/> Untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029759" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo>∈</mo>
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+</math>,</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029760" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>u</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029761" dir="ltr" display="inline">
+  <mi>u</mi>
+  <mo>∈</mo>
+  <mi>S</mi>
+</math>, dan</p></li>
+<li><p>untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029762" dir="ltr" display="inline">
+  <mi>v</mi>
+  <mo>∈</mo>
+  <mi>S</mi>
+</math>, berlaku salah satu dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029763" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>v</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029764" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>v</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p></li>
+</ol></li>
+</ol>
+</div>
+<p>Menurut definisi ini, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029765" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> jika dan hanya jika anteseden <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029766" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> salah di semua bola di sekitar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029767" dir="ltr" display="inline">
+  <mi>w</mi>
+</math>, atau terdapat suatu bola <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029768" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029769" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> benar dan kondisional material <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029770" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> benar pada semua dunia dalam bola yang “memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029771" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>” itu. Perhatikan bahwa dalam definisi tersebut kita tidak mensyaratkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029772" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> sebagai bola <em>terdalam</em> yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029773" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, berbeda dari apa yang mungkin diperkirakan berdasarkan penjelasan intuitif. Namun, jika syarat dalam <span class="native-reference"><a href="#label-main-b24c4d20613e2d90eb7c">enumi 2</a></span> dipenuhi oleh suatu bola <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029774" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>, syarat itu juga dipenuhi oleh setiap bola yang termuat dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029775" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> dan masih memuat dunia yang membuat anteseden benar, sehingga khususnya dipenuhi oleh bola terdalam semacam itu.</p>
+<p>Perhatikan pula bahwa definisi model bola tidak mensyaratkan bahwa <em>terdapat</em> bola terdalam yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029776" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>: kita mungkin mempunyai barisan tak hingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029777" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>⊋</mo>
+  <msub>
+    <mi>S</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>⊋</mo>
+  <mo>⋯</mo>
+  <mo>⊋</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> yang terdiri atas bola-bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029778" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, sehingga tidak ada bola terdalam yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029779" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Dalam hal itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029780" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029781" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> berlaku di seluruh bola <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029782" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mi>i</mi>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029783" dir="ltr" display="inline">
+  <msub>
+    <mi>S</mi>
+    <mrow>
+      <mi>i</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math>, …, untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029784" dir="ltr" display="inline">
+  <mi>i</mi>
+</math>.</p>
+<div id="source-OLP-0525-0577" class="source-unit" data-source-unit="OLP-0525" data-source-occurrence="577" data-source-path="source/main/openlogic/locale/id/content/counterfactuals/minimal-change-semantics/true-false.tex" data-source-sha256="621d313d91d7fa5e66bf34c6880eb811572c9aec373aa5f058600eb087caec36">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="63.3" data-native-label="con:min:tf:sec" id="label-main-e2745a7df2513fe8e239">63.3 Kebenaran dan Kepalsuan Kontrafaktual</h3>
+<p>Suatu kontrafaktual <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029785" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> benar (secara takvakum) jika semua dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029786" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat merupakan dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029787" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, sebagaimana digambarkan dalam <span class="native-reference"><a href="#label-main-0f5eb2a87c6bd18418c9">Gambar 63.2</a></span>.</p>
+<figure id="FLOAT0054" class="native-float native-figure-float" data-native-number="63.2" data-source-edition="main" data-source-prefix="con:min:tf" data-source-unit_id="OLP-0525" data-source-occurrence="577" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 553.2801 534.5000" width="553.2801" height="534.5000" role="img" aria-label="Diagram"><defs><marker id="dg-398a3b9151a8a1e9-3e111a5ea9-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-398a3b9151a8a1e9-3e111a5ea9-clip-1"><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096"/></clipPath></defs><circle cx="244.5000" cy="290.0000" r="19.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="52.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="84.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="149.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-398a3b9151a8a1e9-3e111a5ea9-clip-1)"><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096" stroke="#000000" fill="none" stroke-width="1"/><path d="M 281.2070 103.8593 C 281.2070 103.8593 296.2134 364.7500 348.5000 364.7500 C 400.7866 364.7500 415.7930 103.8593 415.7930 103.8593" stroke="#000000" fill="none" stroke-width="1"/><foreignObject x="184.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><foreignObject x="282.0000" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></div></foreignObject><foreignObject x="379.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></div></foreignObject></svg></div></figure>
+<div id="label-main-0f5eb2a87c6bd18418c9" class="native-anchor">
+
+</div>
+</div>
+<figcaption><p><strong>Gambar 63.2.</strong> Kontrafaktual yang benar secara takvakum</p></figcaption>
+</figure>
+<p>Suatu kontrafaktual juga benar pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029788" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> jika sistem bola di sekitar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029789" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> sama sekali tidak mempunyai bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029790" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Dalam hal itu, kontrafaktual tersebut benar secara <em>vakum</em> (lihat <span class="native-reference"><a href="#label-main-fba8789c8e151c3a1ef4">Gambar 63.3</a></span>).</p>
+<figure id="FLOAT0055" class="native-float native-figure-float" data-native-number="63.3" data-source-edition="main" data-source-prefix="con:min:tf" data-source-unit_id="OLP-0525" data-source-occurrence="577" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 553.2801 534.5000" width="553.2801" height="534.5000" role="img" aria-label="Diagram"><defs><marker id="dg-c13618b8b23933dd-dd134645db-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><circle cx="244.5000" cy="290.0000" r="19.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="52.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="84.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="149.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><path d="M 458.2801 212.1904 C 458.2801 212.1904 413.5000 216.5867 413.5000 290.0000 C 413.5000 363.4133 458.2801 367.8096 458.2801 367.8096" stroke="#000000" fill="none" stroke-width="1"/><path d="M 255.2070 103.8593 C 255.2070 103.8593 270.2134 364.7500 322.5000 364.7500 C 374.7866 364.7500 389.7930 103.8593 389.7930 103.8593" stroke="#000000" fill="none" stroke-width="1"/><foreignObject x="184.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><foreignObject x="282.0000" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></div></foreignObject><foreignObject x="382.7500" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></div></foreignObject></svg></div></figure>
+<div id="label-main-fba8789c8e151c3a1ef4" class="native-anchor">
+
+</div>
+</div>
+<figcaption><p><strong>Gambar 63.3.</strong> Kontrafaktual yang benar secara vakum</p></figcaption>
+</figure>
+<p>Kontrafaktual dapat salah dengan dua cara. Cara pertama terjadi jika tidak semua dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029791" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat merupakan dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029792" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, tetapi beberapa di antaranya memang demikian. Dalam hal ini, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029793" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> juga salah (lihat <span class="native-reference"><a href="#label-main-92b044d77d8478e9dab3">Gambar 63.4</a></span>).</p>
+<figure id="FLOAT0056" class="native-float native-figure-float" data-native-number="63.4" data-source-edition="main" data-source-prefix="con:min:tf" data-source-unit_id="OLP-0525" data-source-occurrence="577" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 553.2801 534.5000" width="553.2801" height="534.5000" role="img" aria-label="Diagram"><defs><marker id="dg-a3cc7c7543bbaf59-0712bdbb8f-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-a3cc7c7543bbaf59-0712bdbb8f-clip-1"><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096"/></clipPath></defs><circle cx="244.5000" cy="290.0000" r="19.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="52.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="84.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="149.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-a3cc7c7543bbaf59-0712bdbb8f-clip-1)"><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096" stroke="#000000" fill="none" stroke-width="1"/><path d="M 298.0303 101.6445 C 298.0303 101.6445 309.2850 299.7500 348.5000 299.7500 C 387.7150 299.7500 398.9697 101.6445 398.9697 101.6445" stroke="#000000" fill="none" stroke-width="1"/><foreignObject x="184.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><foreignObject x="282.0000" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></div></foreignObject><foreignObject x="379.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></div></foreignObject></svg></div></figure>
+<div id="label-main-92b044d77d8478e9dab3" class="native-anchor">
+
+</div>
+</div>
+<figcaption><p><strong>Gambar 63.4.</strong> Kontrafaktual salah, lawannya salah</p></figcaption>
+</figure>
+<p>Jika dunia-dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029794" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat sama sekali tidak beririsan dengan dunia-dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029795" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029796" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> salah. Namun, dalam hal ini semua dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029797" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat merupakan dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029798" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029799" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> benar (lihat <span class="native-reference"><a href="#label-main-721769763089a4ecf54e">Gambar 63.5</a></span>).</p>
+<figure id="FLOAT0057" class="native-float native-figure-float" data-native-number="63.5" data-source-edition="main" data-source-prefix="con:min:tf" data-source-unit_id="OLP-0525" data-source-occurrence="577" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 553.2801 534.5000" width="553.2801" height="534.5000" role="img" aria-label="Diagram"><defs><marker id="dg-ff274f9d55473b56-387469c72c-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-ff274f9d55473b56-387469c72c-clip-1"><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096"/></clipPath></defs><circle cx="244.5000" cy="290.0000" r="19.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="52.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="84.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="244.5000" cy="290.0000" r="149.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-ff274f9d55473b56-387469c72c-clip-1)"><circle cx="244.5000" cy="290.0000" r="117.0000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 458.2801 212.1904 C 458.2801 212.1904 332.2500 216.5867 332.2500 290.0000 C 332.2500 363.4133 458.2801 367.8096 458.2801 367.8096" stroke="#000000" fill="none" stroke-width="1"/><path d="M 129.0303 101.6445 C 129.0303 101.6445 140.2850 299.7500 179.5000 299.7500 C 218.7150 299.7500 229.9697 101.6445 229.9697 101.6445" stroke="#000000" fill="none" stroke-width="1"/><foreignObject x="184.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><foreignObject x="119.5000" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></div></foreignObject><foreignObject x="379.5000" y="267.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></div></foreignObject></svg></div></figure>
+<div id="label-main-721769763089a4ecf54e" class="native-anchor">
+
+</div>
+</div>
+<figcaption><p><strong>Gambar 63.5.</strong> Kontrafaktual salah, lawannya benar</p></figcaption>
+</figure>
+<p>Berbeda dari kondisional ketat, kontrafaktual dapat bersifat kontingen. Perhatikan model bola dalam <span class="native-reference"><a href="#label-main-7a26628f3a1f54749eec">Gambar 63.6</a></span>. Semua dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029800" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029801" dir="ltr" display="inline">
+  <mi>u</mi>
+</math> merupakan dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029802" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029803" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>u</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Namun, terdapat dunia-dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029804" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang paling dekat dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029805" dir="ltr" display="inline">
+  <mi>v</mi>
+</math> yang bukan dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029806" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029807" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>v</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.</p>
+<figure id="FLOAT0058" class="native-float native-figure-float" data-native-number="63.6" data-source-edition="main" data-source-prefix="con:min:tf" data-source-unit_id="OLP-0525" data-source-occurrence="577" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 723.0000 681.9580" width="723.0000" height="681.9580" role="img" aria-label="Diagram"><defs><marker id="dg-2b8b71b72bbcf484-be0fb4edc7-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-2b8b71b72bbcf484-be0fb4edc7-clip-1"><path d="M 433.1158 107.3630 C 433.1158 107.3630 304.8058 243.6666 371.5486 310.4094 C 438.2914 377.1522 574.5950 248.8422 574.5950 248.8422"/></clipPath></defs><defs><clipPath id="dg-2b8b71b72bbcf484-be0fb4edc7-clip-2"><path d="M 433.1158 107.3630 C 433.1158 107.3630 304.8058 243.6666 371.5486 310.4094 C 438.2914 377.1522 574.5950 248.8422 574.5950 248.8422"/></clipPath></defs><circle cx="309.5000" cy="372.4580" r="19.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="309.5000" cy="372.4580" r="52.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="309.5000" cy="372.4580" r="84.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="309.5000" cy="372.4580" r="117.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="309.5000" cy="372.4580" r="149.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="309.5000" cy="372.4580" r="182.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="309.5000" cy="372.4580" r="214.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="511.0000" cy="372.4580" r="19.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="511.0000" cy="372.4580" r="52.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="511.0000" cy="372.4580" r="84.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="511.0000" cy="372.4580" r="117.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-2b8b71b72bbcf484-be0fb4edc7-clip-1)"><circle cx="309.5000" cy="372.4580" r="117.0000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 433.1158 107.3630 C 433.1158 107.3630 304.8058 243.6666 371.5486 310.4094 C 438.2914 377.1522 574.5950 248.8422 574.5950 248.8422" stroke="#000000" fill="none" stroke-width="1"/><g clip-path="url(#dg-2b8b71b72bbcf484-be0fb4edc7-clip-2)"><path d="M426.5 372.4580089931738 a84.5 84.5 0 1 0 169.0 0 a84.5 84.5 0 1 0 -169.0 0 M459.0 372.4580089931738 a52.0 52.0 0 1 0 104.0 0 a52.0 52.0 0 1 0 -104.0 0" fill-rule="evenodd" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 302.7706 95.0000 C 302.7706 95.0000 308.2923 414.7080 400.5000 414.7080 C 492.7077 414.7080 498.2294 95.0000 498.2294 95.0000" stroke="#000000" fill="none" stroke-width="1"/><foreignObject x="249.5000" y="349.9580" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>u</mi>
+</math></div></foreignObject><foreignObject x="451.0000" y="349.9580" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>v</mi>
+</math></div></foreignObject><foreignObject x="465.1418" y="198.9640" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></div></foreignObject><foreignObject x="295.2129" y="90.7074" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></div></foreignObject></svg></div></figure>
+</div>
+<div id="label-main-7a26628f3a1f54749eec" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 63.6.</strong> Kontrafaktual kontingen</p></figcaption>
+</figure>
+<div id="source-OLP-0526-0578" class="source-unit" data-source-unit="OLP-0526" data-source-occurrence="578" data-source-path="source/main/openlogic/locale/id/content/counterfactuals/minimal-change-semantics/antecedent-strengthening.tex" data-source-sha256="05820b6616c10724e0720ae0429a16085d459dcc15de0b9f72ef7f8678f2644e">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="63.4" data-native-label="cnt:min:agg:sec" id="label-main-0fd9d65ce45edd564f31">63.4 Penguatan Anteseden</h3>
+<p>“Memperkuat anteseden” mengacu pada inferensi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029808" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>⊨</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Inferensi ini valid bagi kondisional material, tetapi tidak valid bagi kontrafaktual. Andaikan benar bahwa seandainya saya menggesek korek api ini, korek tersebut akan menyala. (Artinya, tidak ada masalah dengan korek api atau permukaan kotaknya, saya tidak akan mematahkan korek itu, dan sebagainya.) Namun, tidak benar bahwa seandainya saya menggesek korek api ini di luar angkasa, korek tersebut akan menyala. Jadi, inferensi berikut tidak valid:</p>
+<blockquote>
+<p>Seandainya korek api itu digesek, korek tersebut akan menyala.</p>
+<p>Oleh karena itu, seandainya korek api itu digesek di luar angkasa, korek tersebut akan menyala.</p>
+</blockquote>
+<p>Penjelasan Lewis–Stalnaker tentang kondisional menerangkan hal ini: dunia terdekat tempat saya menggesek korek api dan melakukannya di luar angkasa jauh lebih berbeda dari dunia aktual daripada dunia terdekat tempat saya menggesek korek api. Jadi, meskipun benar bahwa korek api menyala di dunia yang disebut terakhir, hal itu tidak benar di dunia yang disebut pertama. Dan memang demikianlah semestinya.</p>
+<div id="E02568" class="native-environment native-ex" data-source-edition="main" data-source-prefix="cnt:min:agg" data-source-unit_id="OLP-0526" data-source-occurrence="578" data-source-chapter="63" data-native-number="63.3">
+<p><strong>Contoh 63.3.</strong></p>
+<p>Semantik bola membuat inferensi tersebut tidak valid, yakni kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029809" dir="ltr" display="inline">
+  <mi>p</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>r</mi>
+  <mo>⊭</mo>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo>∧</mo>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>r</mi>
+</math>. Perhatikan model <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029810" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>W</mi>
+  <mo>,</mo>
+  <mi>O</mi>
+  <mo>,</mo>
+  <mi>V</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029811" dir="ltr" display="inline">
+  <mi>W</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029812" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029813" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029814" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029815" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>r</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Terdapat bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029816" dir="ltr" display="inline">
+  <mi>p</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029817" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029818" dir="ltr" display="inline">
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>r</mi>
+</math> benar pada semua dunia di dalamnya, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029819" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi>p</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>r</mi>
+</math>. Terdapat pula bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029820" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo>∧</mo>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029821" dir="ltr" display="inline">
+  <msup>
+    <mi>S</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, tetapi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029822" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>⊮</mo>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo>∧</mo>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>r</mi>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029823" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊮</mo>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo>∧</mo>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>r</mi>
+</math> (lihat <span class="native-reference"><a href="#label-main-3d0bc9b5a98de2d0b67d">Gambar 63.7</a></span>).</p>
+<figure id="FLOAT0059" class="native-float native-figure-float" data-native-number="63.7" data-source-edition="main" data-source-prefix="cnt:min:agg" data-source-unit_id="OLP-0526" data-source-occurrence="578" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 767.2633 736.0000" width="767.2633" height="736.0000" role="img" aria-label="Diagram"><defs><marker id="dg-8d6c235bb67b33b9-1256182183-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-8d6c235bb67b33b9-1256182183-clip-1"><path d="M 672.2633 359.1744 C 672.2633 359.1744 525.5132 338.1243 511.7319 416.2822 C 497.9505 494.4401 643.0500 524.8509 643.0500 524.8509"/></clipPath></defs><defs><clipPath id="dg-8d6c235bb67b33b9-1256182183-clip-2"><path d="M 348.5000 95.0000 C 348.5000 95.0000 320.8083 212.3250 401.9771 356.6250 C 483.1458 500.9250 641.0000 615.0000 641.0000 615.0000 L 641.0000 95.0000"/></clipPath></defs><circle cx="348.5000" cy="387.5000" r="58.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="348.5000" cy="387.5000" r="156.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="348.5000" cy="387.5000" r="253.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-8d6c235bb67b33b9-1256182183-clip-1)"><circle cx="348.5000" cy="387.5000" r="253.5000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 672.2633 359.1744 C 672.2633 359.1744 525.5132 338.1243 511.7319 416.2822 C 497.9505 494.4401 643.0500 524.8509 643.0500 524.8509" stroke="#000000" fill="none" stroke-width="1"/><g clip-path="url(#dg-8d6c235bb67b33b9-1256182183-clip-2)"><circle cx="348.5000" cy="387.5000" r="156.0000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 348.5000 95.0000 C 348.5000 95.0000 320.8083 212.3250 401.9771 356.6250 C 483.1458 500.9250 641.0000 615.0000 641.0000 615.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="6 4"/><path d="M 578.3097 157.6903 C 578.3097 157.6903 367.9244 284.6441 407.6062 353.3750 C 447.2880 422.1059 662.4259 303.3838 662.4259 303.3838" stroke="#000000" fill="none" stroke-width="1"/><circle cx="348.5000" cy="387.5000" r="18" fill="white" stroke="black"/><foreignObject x="288.5000" y="365.0000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><circle cx="441.3812" cy="333.8750" r="18" fill="white" stroke="black"/><foreignObject x="381.3812" y="311.3750" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+</math></div></foreignObject><circle cx="550.1394" cy="423.0545" r="18" fill="white" stroke="black"/><foreignObject x="490.1394" y="400.5545" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math></div></foreignObject><foreignObject x="586.1581" y="417.4852" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>q</mi>
+</math></div></foreignObject><foreignObject x="550.2562" y="213.8750" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>r</mi>
+</math></div></foreignObject><foreignObject x="353.5000" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>p</mi>
+</math></div></foreignObject></svg></div></figure>
+<div id="label-main-3d0bc9b5a98de2d0b67d" class="native-anchor">
+
+</div>
+</div>
+<figcaption><p><strong>Gambar 63.7.</strong> Model tandingan bagi penguatan anteseden</p></figcaption>
+</figure>
+</div>
+<div id="source-OLP-0527-0579" class="source-unit" data-source-unit="OLP-0527" data-source-occurrence="579" data-source-path="source/main/openlogic/locale/id/content/counterfactuals/minimal-change-semantics/transitivity.tex" data-source-sha256="a61602d5eb867837ffc666b25e42bf6d75f527ef4383fe01231c850355521b51">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="63.5" data-native-label="cnt:min:tra:sec" id="label-main-3a2b93ea8ddf0446ce42">63.5 Transitivitas</h3>
+<p>Bagi kondisional material berlaku aturan rantai: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029824" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Dengan kata lain, kondisional material bersifat transitif. Apakah hal yang sama berlaku bagi kontrafaktual? Perhatikan contoh berikut dari Stalnaker.</p>
+<blockquote>
+<p>Seandainya J. Edgar Hoover lahir sebagai orang Rusia, ia akan menjadi seorang Komunis.</p>
+<p>Seandainya J. Edgar Hoover seorang Komunis, ia akan menjadi pengkhianat.</p>
+<p>Oleh karena itu, seandainya J. Edgar Hoover lahir sebagai orang Rusia, ia akan menjadi pengkhianat.</p>
+</blockquote>
+<p>Seandainya Hoover lahir (pada waktu yang sama dengan waktu kelahirannya yang sebenarnya), bukan di Amerika Serikat, melainkan di Rusia, ia akan tumbuh di Uni Soviet dan menjadi seorang Komunis (mari kita andaikan demikian). Jadi, premis pertama benar. Demikian pula, premis kedua benar jika dipertimbangkan secara terpisah. Namun, kesimpulannya salah: seandainya lahir di Uni Soviet, besar kemungkinan Hoover akan menjadi seorang Komunis yang bersemangat dan bukan pengkhianat (terhadap negaranya). Pemberian nilai kebenaran secara intuitif ini didukung oleh penjelasan Stalnaker–Lewis. Dunia mungkin yang paling dekat dengan dunia kita dan hanya berbeda dalam hal tempat kelahiran Hoover ialah dunia tempat Hoover tumbuh menjadi warga Uni Soviet yang baik. Inilah dunia mungkin terdekat tempat anteseden premis pertama dan anteseden kesimpulan benar, dan di dunia itu Hoover merupakan anggota Partai Komunis yang setia sehingga bukan pengkhianat. Akan tetapi, untuk menilai premis kedua, kita harus melihat dunia yang berbeda: dunia terdekat tempat Hoover seorang Komunis, yaitu dunia tempat ia lahir di Amerika Serikat, beralih menjadi Komunis, dan dengan demikian menjadi pengkhianat.<a href="notes.xhtml#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></p>
+<div id="E02570" class="native-environment native-ex" data-source-edition="main" data-source-prefix="cnt:min:tra" data-source-unit_id="OLP-0527" data-source-occurrence="579" data-source-chapter="63" data-native-number="63.4">
+<p><strong>Contoh 63.4.</strong></p>
+<div id="label-main-30c9617671bef0152ea7" class="native-anchor">
+
+</div>
+<p>Semantik bola membuat inferensi tersebut tidak valid, yakni kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029825" dir="ltr" display="inline">
+  <mi>p</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>q</mi>
+  <mo>,</mo>
+  <mi>q</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>r</mi>
+  <mo>⊭</mo>
+  <mi>p</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>r</mi>
+</math>. Perhatikan model <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029826" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>W</mi>
+  <mo>,</mo>
+  <mi>O</mi>
+  <mo>,</mo>
+  <mi>V</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029827" dir="ltr" display="inline">
+  <mi>W</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029828" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029829" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029830" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029831" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>r</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Terdapat bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029832" dir="ltr" display="inline">
+  <mi>p</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029833" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029834" dir="ltr" display="inline">
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>q</mi>
+</math> benar pada semua dunia di dalamnya, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029835" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi>p</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>q</mi>
+</math>. Terdapat pula bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029836" dir="ltr" display="inline">
+  <mi>q</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029837" dir="ltr" display="inline">
+  <msup>
+    <mi>S</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029838" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊩</mo>
+  <mi>q</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>r</mi>
+</math> berlaku pada semua dunia di dalamnya, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029839" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi>q</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>r</mi>
+</math>. Namun, bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029840" dir="ltr" display="inline">
+  <mi>p</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029841" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, memuat suatu dunia, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029842" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math>, tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029843" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>⊮</mo>
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>r</mi>
+</math>.</p>
+</div>
+<div id="source-OLP-0528-0580" class="source-unit" data-source-unit="OLP-0528" data-source-occurrence="580" data-source-path="source/main/openlogic/locale/id/content/counterfactuals/minimal-change-semantics/contraposition.tex" data-source-sha256="f1e09b585a95f86670d73193996717727c3b65fcd142893658c5b98b9012f137">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="63.6" data-native-label="cnt:min:cpo:sec" id="label-main-4e87142a7c016eeb9cf9">63.6 Kontraposisi</h3>
+<p>Kondisional material dan kondisional ketat ekuivalen dengan kontraposisinya. Kontrafaktual tidak demikian. Berikut suatu contoh dari Kratzer:</p>
+<blockquote>
+<p>Seandainya Goethe tidak wafat pada 1832, sekarang ia (tetap) sudah wafat.</p>
+<p>Seandainya Goethe belum wafat sekarang, ia akan wafat pada 1832.</p>
+</blockquote>
+<p>Kalimat pertama benar: manusia tidak hidup selama ratusan tahun. Kalimat kedua jelas salah: seandainya Goethe belum wafat sekarang, ia masih hidup, sehingga tidak mungkin telah wafat pada 1832.</p>
+<div id="E02573" class="native-environment native-ex" data-source-edition="main" data-source-prefix="cnt:min:cpo" data-source-unit_id="OLP-0528" data-source-occurrence="580" data-source-chapter="63" data-native-number="63.5">
+<p><strong>Contoh 63.5.</strong></p>
+<div id="label-main-894bc0210297d1371206" class="native-anchor">
+
+</div>
+<p>Semantik bola membuat kontraposisi tidak valid, yakni kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029849" dir="ltr" display="inline">
+  <mi>p</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>q</mi>
+  <mo>⊭</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mi>q</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mi>p</mi>
+</math>. Pahami <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029850" dir="ltr" display="inline">
+  <mi>p</mi>
+</math> sebagai “Goethe tidak wafat pada 1832” dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029851" dir="ltr" display="inline">
+  <mi>q</mi>
+</math> sebagai “Goethe sudah wafat sekarang.” Kita dapat menangkap hal ini dalam suatu model <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029852" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>W</mi>
+  <mo>,</mo>
+  <mi>O</mi>
+  <mo>,</mo>
+  <mi>V</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029853" dir="ltr" display="inline">
+  <mi>W</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029854" dir="ltr" display="inline">
+  <msub>
+    <mi>O</mi>
+    <mi>w</mi>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029855" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029856" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029857" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> adalah dunia aktual tempat Goethe wafat pada 1832 dan kini sudah wafat; <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029858" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+</math> adalah dunia (dekat) tempat Goethe wafat, misalnya, pada 1833 dan kini juga sudah wafat; dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029859" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math> adalah dunia (jauh) tempat Goethe masih hidup.</p>
+<figure id="FLOAT0060" class="native-float native-figure-float" data-native-number="63.8" data-source-edition="main" data-source-prefix="cnt:min:cpo" data-source-unit_id="OLP-0528" data-source-occurrence="580" data-source-chapter="63">
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 708.5950 775.6937" width="708.5950" height="775.6937" role="img" aria-label="Diagram"><defs><marker id="dg-a45ebc8b36592022-1adb50a8bc-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><defs><clipPath id="dg-a45ebc8b36592022-1adb50a8bc-clip-1"><path d="M 613.5950 264.2310 C 613.5950 264.2310 299.7500 271.2153 299.7500 387.8469 C 299.7500 504.4784 613.5950 511.4627 613.5950 511.4627 L 641.0000 680.3469 L 56.0000 680.3469 L 56.0000 95.3469 L 641.0000 95.3469"/></clipPath></defs><defs><clipPath id="dg-a45ebc8b36592022-1adb50a8bc-clip-2"><path d="M 553.5536 95.0000 C 553.5536 95.0000 416.7500 111.5458 416.7500 387.8469 C 416.7500 664.1479 553.5536 680.6937 553.5536 680.6937"/></clipPath></defs><circle cx="348.5000" cy="387.8469" r="58.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="348.5000" cy="387.8469" r="156.0000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><circle cx="348.5000" cy="387.8469" r="253.5000" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="2 4"/><g clip-path="url(#dg-a45ebc8b36592022-1adb50a8bc-clip-1)"><path d="M94.99999999999997 387.8468558333146 a253.50000000000003 253.50000000000003 0 1 0 507.00000000000006 0 a253.50000000000003 253.50000000000003 0 1 0 -507.00000000000006 0 M192.49999999999997 387.8468558333146 a156.00000000000003 156.00000000000003 0 1 0 312.00000000000006 0 a156.00000000000003 156.00000000000003 0 1 0 -312.00000000000006 0" fill-rule="evenodd" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><g clip-path="url(#dg-a45ebc8b36592022-1adb50a8bc-clip-2)"><circle cx="348.5000" cy="387.8469" r="156.0000" stroke="none" fill="#bfbfbf" stroke-width="1"/></g><path d="M 553.5536 95.0000 C 553.5536 95.0000 416.7500 111.5458 416.7500 387.8469 C 416.7500 664.1479 553.5536 680.6937 553.5536 680.6937" stroke="#000000" fill="none" stroke-width="1"/><path d="M 613.5950 264.2310 C 613.5950 264.2310 299.7500 271.2153 299.7500 387.8469 C 299.7500 504.4784 613.5950 511.4627 613.5950 511.4627" stroke="#000000" fill="none" stroke-width="1"/><circle cx="348.5000" cy="387.8469" r="18" fill="white" stroke="black"/><foreignObject x="288.5000" y="365.3469" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>w</mi>
+</math></div></foreignObject><circle cx="455.7500" cy="387.8469" r="18" fill="white" stroke="black"/><foreignObject x="395.7500" y="365.3469" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+</math></div></foreignObject><circle cx="480.1108" cy="544.6945" r="18" fill="white" stroke="black"/><foreignObject x="420.1108" y="522.1945" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math></div></foreignObject><foreignObject x="469.2835" y="269.2226" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>q</mi>
+</math></div></foreignObject><foreignObject x="440.6589" y="228.3424" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mi>q</mi>
+</math></div></foreignObject><foreignObject x="461.8635" y="612.9356" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>p</mi>
+</math></div></foreignObject><foreignObject x="406.5985" y="643.5694" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mi>p</mi>
+</math></div></foreignObject></svg></div></figure>
+<div id="label-main-87b620bbf3c82ec7631d" class="native-anchor">
+
+</div>
+</div>
+<figcaption><p><strong>Gambar 63.8.</strong> Model tandingan bagi kontraposisi</p></figcaption>
+</figure>
+<p>Terdapat bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029860" dir="ltr" display="inline">
+  <mi>p</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029861" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029862" dir="ltr" display="inline">
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>q</mi>
+</math> benar pada semua dunia di dalamnya, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029863" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi>p</mi>
+  <mo lspace="0.2em" rspace="0.2em" stretchy="false" symmetric="false">□→</mo>
+  <mi>q</mi>
+</math>. Namun, bola yang memuat dunia-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029864" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mi>q</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029865" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, memuat suatu dunia, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029866" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math>, tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029867" dir="ltr" display="inline">
+  <mi>q</mi>
+</math> salah dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029868" dir="ltr" display="inline">
+  <mi>p</mi>
+</math> benar, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029869" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+  <mo>,</mo>
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>⊮</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mi>q</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi mathvariant="normal">¬</mi>
+  <mi>p</mi>
+</math>.</p>
+</div>
+<h3 class="unnumbered native-problems-heading" data-native-chapter="63" id="exercises-main-63">Soal</h3>
+<div id="E02569" class="native-environment native-prob" data-source-edition="main" data-source-prefix="cnt:min:tra" data-source-unit_id="OLP-0527" data-source-occurrence="579" data-source-chapter="63" data-native-number="63.1">
+<p><strong>Soal 63.1.</strong></p>
+<p>Temukan contoh intuitif yang meyakinkan bagi kegagalan transitivitas kontrafaktual.</p>
+</div>
+<div id="E02571" class="native-environment native-prob" data-source-edition="main" data-source-prefix="cnt:min:tra" data-source-unit_id="OLP-0527" data-source-occurrence="579" data-source-chapter="63" data-native-number="63.2">
+<p><strong>Soal 63.2.</strong></p>
+<p>Gambarlah diagram bola yang bersesuaian dengan model tandingan dalam <span class="native-reference"><a href="#label-main-30c9617671bef0152ea7">Contoh 63.4</a></span>.</p>
+</div>
+<div id="E02572" class="native-environment native-prob" data-source-edition="main" data-source-prefix="cnt:min:tra" data-source-unit_id="OLP-0527" data-source-occurrence="579" data-source-chapter="63" data-native-number="63.3">
+<p><strong>Soal 63.3.</strong></p>
+<p>Dalam <span class="native-reference"><a href="#label-main-30c9617671bef0152ea7">Contoh 63.4</a></span>, dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029844" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math> adalah dunia tempat Hoover lahir di Rusia, menjadi komunis, dan bukan pengkhianat, sedangkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029845" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+</math> adalah dunia tempat Hoover lahir di Amerika Serikat, menjadi komunis, dan menjadi pengkhianat. Dalam model ini, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029846" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>1</mn>
+  </msub>
+</math> lebih dekat dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029847" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> daripada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029848" dir="ltr" display="inline">
+  <msub>
+    <mi>w</mi>
+    <mn>2</mn>
+  </msub>
+</math>. Apakah hal ini perlu? Dapatkah Anda memberikan model tandingan yang tidak mengandaikan bahwa kelahiran Hoover di Rusia merupakan kemungkinan yang lebih jauh daripada keberadaan Hoover sebagai seorang Komunis?</p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0078.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0080.xhtml">Berikutnya →</a></nav></body></html>

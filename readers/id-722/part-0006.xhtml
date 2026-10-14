@@ -1,0 +1,2684 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>3 Fungsi — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0005.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0007.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0006" class="reader-chunk">
+<div id="source-OLP-0020-0020" class="source-unit" data-source-unit="OLP-0020" data-source-occurrence="20" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/functions/functions.tex" data-source-sha256="a180e7edae6546d3c99ccf1c70c303ed1024186e1af7ff62bfde9970689329c5">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="3" data-native-label="sfr:fun::chap" id="label-main-8998f0a6bf05fb68dedc">3 Fungsi</h2>
+<div id="source-OLP-0021-0021" class="source-unit" data-source-unit="OLP-0021" data-source-occurrence="21" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/functions/function-basics.tex" data-source-sha256="fd8de198f0b98b1f6329d8312a845ac2a329d202d4551970ea53174017d468ad">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="3.1" data-native-label="sfr:fun:bas:sec" id="label-main-01cbb9bbe245e9e319b8">3.1 Dasar-Dasar</h3>
+<div id="E00111" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3">
+<p>Suatu <em>fungsi</em> adalah pemetaan yang memetakan setiap anggota dari suatu himpunan tertentu ke sebuah anggota tertentu dalam suatu himpunan (lain) yang ditentukan. Sebagai contoh, operasi penambahan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000837" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> menentukan sebuah fungsi: setiap bilangan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000838" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> dipetakan ke satu-satunya bilangan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000839" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math>.</p>
+<p>Secara lebih umum, fungsi dapat menerima pasangan, tripel, dan sebagainya sebagai masukan serta menghasilkan suatu keluaran. Banyak fungsi sudah kita kenal dari aritmetika dasar. Sebagai contoh, penjumlahan dan perkalian adalah fungsi. Keduanya menerima dua bilangan dan menghasilkan bilangan ketiga.</p>
+<p>Dalam pengertian matematis yang abstrak ini, fungsi adalah sebuah <em>kotak hitam</em>: yang penting hanyalah keluaran mana yang dipasangkan dengan masukan mana, bukan cara menghitung keluaran tersebut.</p>
+</div>
+<div id="E00112" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3" data-native-number="3.1">
+<p><strong>Definisi 3.1.</strong></p>
+<p><strong>Fungsi</strong></p>
+<p>Suatu <em>fungsi</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000840" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> adalah pemetaan setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000841" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> ke sebuah anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000842" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>.</p>
+<p>Kita menyebut <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000843" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> sebagai <em>domain</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000844" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000845" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> sebagai <em>kodomain</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000846" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>. anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000847" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> disebut masukan atau <em>argumen</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000848" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>, dan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000849" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> yang dipasangkan dengan argumen <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000850" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000851" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> disebut <em>nilai dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000852" dir="ltr" display="inline">
+  <mi>f</mi>
+</math></em> untuk argumen <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000853" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>, yang ditulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000854" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+<p><em>Daerah hasil</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000855" dir="ltr" display="inline">
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000856" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> adalah himpunan bagian kodomain yang terdiri atas nilai-nilai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000857" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> untuk suatu argumen; <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000858" dir="ltr" display="inline">
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<p>Diagram dalam <span class="native-reference"><a href="#label-main-2069a662f6e1c3b2f9ec">Gambar 3.1</a></span> dapat membantu kita memahami fungsi. Elips di sebelah kiri menyatakan <em>domain</em> fungsi; elips di sebelah kanan menyatakan <em>kodomain</em> fungsi; dan sebuah panah menunjuk dari suatu <em>argumen</em> dalam domain ke <em>nilai</em> yang bersesuaian dalam kodomain.</p>
+<figure id="FLOAT0004" class="native-float native-figure-float" data-native-number="3.1" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 833.2126 535.1936" width="833.2126" height="535.1936" role="img" aria-label="Diagram"><defs><marker id="dg-0f9ad6d025a743c8-f46ef8b7b3-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 106.5010 362.1996 C 110.2134 379.2763 116.2386 396.6028 128.6392 408.9246 C 135.2215 415.4641 143.2956 420.2757 151.4841 424.6234 C 159.0944 428.6569 166.9759 432.3764 175.3998 434.1682 C 203.8203 440.1936 232.6405 422.8600 251.0093 400.3435 C 269.3780 377.8270 280.3579 350.3203 295.5782 325.5622 C 307.9216 305.4801 323.1135 287.1470 340.5613 271.2914 C 351.8410 261.0397 364.1915 251.6732 373.0654 239.2798 C 381.9391 226.8865 386.8937 210.3810 381.2466 196.2243 C 377.7557 187.4791 370.6380 180.6114 362.7351 175.5069 C 343.4383 163.0493 319.5798 160.0438 296.6134 159.5798 C 259.8473 158.8444 222.9673 163.8417 187.7147 174.3361 C 175.9210 177.8486 164.2986 181.9749 153.1547 187.1934 C 141.9035 192.4693 131.0736 198.9229 122.0783 207.4969 C 104.1380 224.5949 95.0000 250.1311 96.8991 274.7323 C 97.9342 288.1180 102.9743 346.0013 106.5010 362.1996 Z M 106.5010 362.1996" stroke="#808080" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 631.5053 117.2880 C 616.2064 108.8354 599.1941 101.9677 581.7607 103.1885 C 572.5085 103.8382 563.5632 106.7366 554.9037 110.0420 C 546.8579 113.1118 538.8693 116.5884 531.9730 121.7572 C 508.7211 139.1835 502.7957 172.2801 507.6504 200.9362 C 512.4977 229.5850 525.9690 255.9637 534.5860 283.7131 C 541.5750 306.2296 545.3658 329.7385 545.8085 353.3045 C 546.0941 368.5463 545.0089 384.0094 548.5000 398.8514 C 551.9837 413.6935 561.1431 428.2857 575.5211 433.3544 C 584.3950 436.4885 594.2468 435.6531 603.2990 433.0618 C 625.3802 426.7436 643.3491 410.7666 658.8193 393.7899 C 683.5846 366.5974 704.1094 335.5497 719.4226 302.1104 C 724.5413 290.9235 729.0960 279.4583 732.5014 267.6362 C 735.9424 255.6925 738.2126 243.2919 737.6842 230.8773 C 736.6206 206.1191 723.4276 182.4247 703.6596 167.6539 C 692.9082 159.6226 646.0190 125.3053 631.5053 117.2880 Z M 631.5053 117.2880" stroke="#a81c21" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 232.7120 237.3809 C 232.4408 230.8844 237.5379 225.3515 244.0273 225.0875 C 250.5239 224.8162 256.0494 229.9134 256.3208 236.4099 C 256.5849 242.8993 251.4947 248.4320 245.0055 248.7034 C 238.5089 248.9675 232.9761 243.8775 232.7120 237.3809" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 175.9923 384.1737 C 175.7282 377.6843 180.8184 372.1514 187.3150 371.8802 C 193.8042 371.6161 199.3370 376.7061 199.6083 383.2027 C 199.8725 389.6992 194.7752 395.2248 188.2858 395.4961 C 181.7892 395.7602 176.2566 390.6702 175.9923 384.1737" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 259.5690 295.2213 C 258.6481 288.7891 263.1598 282.7708 269.5922 281.8499 C 276.0244 280.9290 282.0427 285.4408 282.9636 291.8731 C 283.8846 298.3054 279.3726 304.3236 272.9404 305.2445 C 266.5082 306.1655 260.4899 301.6606 259.5690 295.2213" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 568.5676 168.7534 C 568.3036 162.2568 573.3938 156.7242 579.8830 156.4528 C 586.3795 156.1887 591.9124 161.2858 592.1836 167.7753 C 592.4477 174.2718 587.3505 179.8047 580.8611 180.0687 C 574.3717 180.3400 568.8319 175.2428 568.5676 168.7534" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 602.2853 277.6378 C 602.0212 271.1413 607.1114 265.6086 613.6077 265.3444 C 620.0972 265.0732 625.6300 270.1705 625.9012 276.6599 C 626.1655 283.1563 621.0753 288.6891 614.5787 288.9532 C 608.0893 289.2246 602.5567 284.1273 602.2854 277.6378" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 660.3543 219.7474 C 660.0900 213.2509 665.1802 207.7182 671.6767 207.4541 C 678.1661 207.1827 683.6988 212.2801 683.9702 218.7695 C 684.2343 225.2660 679.1441 230.7987 672.6476 231.0628 C 666.1583 231.3342 660.6183 226.2368 660.3543 219.7474" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 596.1886 366.8472 C 595.9245 360.3578 601.0145 354.8251 607.5111 354.5537 C 614.0005 354.2896 619.5332 359.3798 619.8046 365.8764 C 620.0686 372.3727 614.9786 377.8984 608.4821 378.1697 C 601.9927 378.4339 596.4527 373.3437 596.1886 366.8472" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 265.3016 227.4505 C 298.8907 211.9089 337.0560 210.9737 373.7721 206.2905 C 394.1755 203.6847 414.4004 199.8510 434.6181 196.0245 C 450.9451 192.9262 467.2792 189.8348 483.6062 186.7437 C 494.5217 184.6734 505.4444 182.6031 516.1529 179.6475 C 527.5682 176.4993 541.0538 174.6287 553.5543 173.0868" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 552.4691 173.3010 C 549.2566 170.8308 547.1792 165.3837 546.5724 161.5000 C 551.1342 166.2333 556.7883 170.1455 563.2420 171.9160 C 557.4309 175.1571 553.2117 180.6185 549.7493 186.2155 C 549.5422 181.9963 549.9136 176.7990 552.4691 173.3010" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 292.6727 293.5507 C 339.8831 294.8929 383.3242 295.1570 430.0205 288.0537 C 444.7984 285.8050 459.5191 282.6994 473.5400 277.5022 C 484.1344 273.5830 494.2576 268.4928 504.2879 263.2956 C 519.9652 255.1857 535.6425 246.6830 548.9569 235.0964 C 559.8011 225.6586 569.0675 213.9291 574.1361 200.5719" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 573.6721 201.5786 C 570.0740 203.4563 564.2629 203.0635 560.4791 201.9998 C 566.6902 199.8296 572.6085 196.3314 576.9132 191.2128 C 577.4273 197.8450 580.6256 203.9559 584.2594 209.4458 C 580.3399 207.8681 575.7780 205.3622 573.6721 201.5786" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 182.2604 359.9937 C 179.2050 335.8138 177.6558 318.5659 175.4570 294.3004 C 171.9374 255.3783 181.8322 215.3712 203.0922 182.5888 C 224.3593 149.7992 256.8490 124.4414 293.8150 111.7839 C 313.3759 105.0876 333.9577 101.8822 354.5252 99.8475 C 403.4776 95.0000 454.1719 96.8418 499.9187 114.9323 C 519.2440 122.5711 537.3202 132.9584 555.1535 143.6810" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 554.1469 143.2312 C 553.1188 139.3120 554.8108 133.7364 556.7026 130.2882 C 557.4166 136.8275 559.4940 143.3813 563.5133 148.7285 C 556.9381 147.7361 550.2632 149.4780 544.0951 151.7838 C 546.5152 148.3215 549.9849 144.4378 554.1469 143.2312" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/></svg></div></figure>
+<div id="label-main-2069a662f6e1c3b2f9ec" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 3.1.</strong> Suatu fungsi memetakan setiap anggota dari satu himpunan ke anggota dari himpunan lain. Sebuah panah menunjuk dari suatu argumen dalam domain ke nilai yang bersesuaian dalam kodomain.</p></figcaption>
+</figure>
+<div id="E00113" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3" data-native-number="3.2">
+<p><strong>Contoh 3.2.</strong></p>
+<p>Perkalian memetakan pasangan bilangan asli sebagai masukan ke bilangan asli sebagai keluaran. Jadi, pemetaan itu berjalan dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000859" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo>×</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> (domain) ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000860" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> (kodomain). Ternyata daerah hasilnya juga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000861" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math>, karena setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000862" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> sama dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000863" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>×</mo>
+  <mn>1</mn>
+</math>.</p>
+</div>
+<div id="E00114" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3" data-native-number="3.3">
+<p><strong>Contoh 3.3.</strong></p>
+<p>Perkalian merupakan fungsi: setiap masukan, yakni pasangan bilangan asli, dipasangkan dengan satu keluaran: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000864" dir="ltr" display="inline">
+  <mo>×</mo>
+  <mo>:</mo>
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mn>2</mn>
+  </msup>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math>. Sebaliknya, pemetaan suatu bilangan asli <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000865" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> ke bilangan real <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000866" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000867" dir="ltr" display="inline">
+  <msup>
+    <mi>x</mi>
+    <mn>2</mn>
+  </msup>
+  <mo>=</mo>
+  <mi>n</mi>
+</math> bukanlah fungsi, karena setiap bilangan bulat positif <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000868" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> mempunyai dua akar kuadrat: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000869" dir="ltr" display="inline">
+  <msqrt>
+    <mi>n</mi>
+  </msqrt>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000870" dir="ltr" display="inline">
+  <mo>−</mo>
+  <msqrt>
+    <mi>n</mi>
+  </msqrt>
+</math>. Kita dapat menjadikannya fungsi dengan hanya menghasilkan akar kuadrat utama, yaitu akar kuadrat nonnegatif: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000871" dir="ltr" display="inline">
+  <msqrt>
+    <mrow>
+      <mphantom>
+        <mi>X</mi>
+      </mphantom>
+    </mrow>
+  </msqrt>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E00115" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3" data-native-number="3.4">
+<p><strong>Contoh 3.4.</strong></p>
+<p>Relasi yang memasangkan setiap mahasiswa dalam suatu kelas dengan nilai akhir merupakan fungsi; satu mahasiswa tidak dapat memperoleh dua nilai akhir yang berbeda di kelas yang sama. Relasi yang memasangkan setiap mahasiswa dengan orang tuanya bukanlah fungsi: seorang mahasiswa dapat mempunyai nol, dua, atau lebih orang tua.</p>
+</div>
+<div id="E00116" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3">
+<p>Kita dapat mendefinisikan fungsi dengan menentukan secara saksama nilai fungsi untuk setiap argumen yang mungkin. Beberapa caranya ialah dengan memberikan rumus, menjelaskan metode untuk menghitung nilainya, atau mencantumkan nilai untuk setiap argumen. Bagaimanapun suatu fungsi didefinisikan, kita harus memastikan bahwa untuk setiap argumen ditentukan satu dan hanya satu nilai.</p>
+</div>
+<div id="E00117" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3" data-native-number="3.5">
+<p><strong>Contoh 3.5.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000872" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000873" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math>. Definisi ini menentukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000874" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> sebagai fungsi yang menerima bilangan asli dan menghasilkan bilangan asli. Definisi ini menyatakan bahwa, jika diberi bilangan asli <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000875" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000876" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> menghasilkan penerusnya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000877" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math>. Dalam hal ini, kodomain <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000878" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> bukan daerah hasil dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000879" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>, karena bilangan asli <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000880" dir="ltr" display="inline">
+  <mn>0</mn>
+</math> bukan penerus bilangan asli mana pun. Daerah hasil dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000881" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> adalah himpunan semua bilangan bulat positif, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000882" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℤ</mi>
+    </mrow>
+    <mrow>
+      <mo>+</mo>
+    </mrow>
+  </msup>
+</math>.</p>
+</div>
+<div id="E00118" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3" data-native-number="3.6">
+<p><strong>Contoh 3.6.</strong></p>
+<div id="label-main-2127d98516946e861d82" class="native-anchor">
+
+</div>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000883" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000884" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>2</mn>
+  <mo>−</mo>
+  <mn>1</mn>
+</math>. Definisi ini menyatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000885" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> adalah fungsi yang menerima bilangan asli dan menghasilkan bilangan asli. Jika diberi bilangan asli <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000886" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000887" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> menghasilkan pendahulu dari penerus dari penerus bilangan masukan (yang dalam rumus dilambangkan dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000888" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>), yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000889" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math>.</p>
+</div>
+<div id="E00119" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3">
+<p>Baru saja kita meninjau dua fungsi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000890" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000891" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>, dengan <em>definisi</em> yang berbeda. Namun, keduanya adalah <em>fungsi yang sama</em>. Lagi pula, untuk setiap bilangan asli <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000892" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000893" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>n</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+  <mo>=</mo>
+  <mi>n</mi>
+  <mo>+</mo>
+  <mn>2</mn>
+  <mo>−</mo>
+  <mn>1</mn>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math>. Dengan kata lain, definisi kita untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000894" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000895" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> menentukan pemetaan yang sama melalui persamaan yang berbeda. Jadi, secara tersirat kita mengandalkan prinsip ekstensionalitas untuk fungsi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000896" display="block" dir="ltr">
+  <mtext class="olp-math-prose">jika </mtext>
+  <mi mathvariant="normal">∀</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mtext class="olp-math-prose">, maka </mtext>
+  <mi>f</mi>
+  <mo>=</mo>
+  <mi>g</mi>
+</math> dengan syarat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000897" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000898" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> mempunyai domain dan kodomain yang sama.</p>
+</div>
+<div id="E00120" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:bas" data-source-unit_id="OLP-0021" data-source-occurrence="21" data-source-chapter="3" data-native-number="3.7">
+<p><strong>Contoh 3.7.</strong></p>
+<p>Kita juga dapat mendefinisikan fungsi secara kasus. Sebagai contoh, kita dapat mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000899" dir="ltr" display="inline">
+  <mi>h</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000900" display="block" dir="ltr">
+  <mi>h</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mo>{</mo>
+    <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mfrac>
+            <mi>x</mi>
+            <mn>2</mn>
+          </mfrac>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <mi>x</mi>
+            </mrow>
+            <mtext> genap</mtext>
+          </mrow>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+          <mfrac>
+            <mrow>
+              <mi>x</mi>
+              <mo>+</mo>
+              <mn>1</mn>
+            </mrow>
+            <mn>2</mn>
+          </mfrac>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <mi>x</mi>
+            </mrow>
+            <mtext> ganjil.</mtext>
+          </mrow>
+        </mtd>
+      </mtr>
+    </mtable>
+    <mo fence="true" stretchy="true" symmetric="true"/>
+  </mrow>
+</math> Karena setiap bilangan asli itu genap atau ganjil, keluaran fungsi ini selalu merupakan bilangan asli. Ingatlah bahwa jika Anda mendefinisikan fungsi secara kasus, setiap masukan yang mungkin harus termasuk dalam tepat satu kasus. Dalam keadaan tertentu, hal ini memerlukan pembuktian bahwa kasus-kasus tersebut mencakup semua kemungkinan dan saling lepas.</p>
+</div>
+<div id="source-OLP-0022-0022" class="source-unit" data-source-unit="OLP-0022" data-source-occurrence="22" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/functions/function-kinds.tex" data-source-sha256="e338e227482dca73b5dacf8c1c3e88665fcfc126620c0cc4bebf487412bc4df4">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="3.2" data-native-label="sfr:fun:kin:sec" id="label-main-e6da485c2dfccfff9b1b">3.2 Jenis-Jenis Fungsi</h3>
+<div id="E00121" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<p>Akan berguna jika kita memperkenalkan semacam klasifikasi bagi beberapa jenis fungsi yang paling sering kita jumpai.</p>
+<p>Sebagai permulaan, kita dapat meninjau fungsi yang mempunyai sifat bahwa setiap anggota kodomain merupakan nilai fungsi tersebut. Fungsi semacam itu disebut surjektif, dan dapat digambarkan seperti dalam <span class="native-reference"><a href="#label-main-f3cff4151b89b3bdddc7">Gambar 3.2</a></span>.</p>
+<figure id="FLOAT0005" class="native-float native-figure-float" data-native-number="3.2" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 881.8649 557.9100" width="881.8649" height="557.9100" role="img" aria-label="Diagram"><defs><marker id="dg-324e03fb275baee8-b1c150fa02-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 415.4781 290.0454 C 419.6688 273.0687 421.8890 254.8642 416.1777 238.3373 C 413.1509 229.5778 408.0250 221.6964 402.5850 214.1860 C 397.5378 207.2112 392.0979 200.4005 385.3229 195.0892 C 362.4566 177.1559 328.9532 180.0258 302.5459 192.1550 C 276.1385 204.2770 254.1575 224.1378 229.5921 239.6652 C 209.6670 252.2584 187.9500 262.0247 165.3051 268.5712 C 150.6630 272.8046 135.4497 275.7744 122.0211 282.9991 C 108.5998 290.2168 96.8846 302.8528 95.7139 318.0518 C 95.0000 327.4324 98.3624 336.7347 103.2170 344.8017 C 115.0463 364.4841 135.1427 377.6912 155.5604 388.2214 C 188.2500 405.0766 223.5596 416.8346 259.8260 422.9385 C 271.9623 424.9801 284.2199 426.3938 296.5205 426.6151 C 308.9425 426.8364 321.5072 425.8084 333.3578 422.0746 C 356.9952 414.6215 376.4492 395.7244 385.5800 372.8009 C 390.5415 360.3291 411.5090 306.1368 415.4781 290.0454 Z M 415.4781 290.0454" stroke="#808080" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 497.1773 378.7408 C 499.7758 396.0315 504.6590 413.7077 516.2313 426.8149 C 522.3709 433.7612 530.1168 439.0941 538.0054 443.9630 C 545.3371 448.4890 552.9545 452.7153 561.2428 455.0428 C 589.2207 462.9100 619.1048 447.4897 638.8941 426.2152 C 658.6908 404.9410 671.4481 378.2124 688.2391 354.4965 C 701.8676 335.2569 718.2231 317.9518 736.6632 303.2740 C 748.5855 293.7791 761.5285 285.2337 771.1875 273.4401 C 780.8467 261.6535 786.8649 245.5049 782.1530 231.0056 C 779.2404 222.0604 772.5796 214.7429 765.0265 209.1317 C 746.5864 195.4461 722.9705 190.8914 700.0828 188.9353 C 663.4381 185.8085 626.3152 188.3927 590.4558 196.5670 C 578.4622 199.3012 566.5900 202.6636 555.1319 207.1469 C 543.5596 211.6802 532.3298 217.4128 522.7993 225.3872 C 503.7808 241.2786 493.0009 266.1653 493.2937 290.8378 C 493.4578 304.2593 494.7214 362.3495 497.1773 378.7408 Z M 497.1773 378.7408" stroke="#a81c21" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 235.1891 276.5669 C 234.9250 270.0703 240.0150 264.5377 246.5116 264.2734 C 253.0010 264.0022 258.5337 269.0995 258.8051 275.5889 C 259.0691 282.0853 253.9718 287.6181 247.4826 287.8822 C 240.9860 288.1536 235.4532 283.0563 235.1891 276.5669" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 187.1291 364.0130 C 186.8650 357.5164 191.9550 351.9836 198.4516 351.7195 C 204.9410 351.4483 210.4738 356.5454 210.7451 363.0348 C 211.0091 369.5314 205.9120 375.0640 199.4226 375.3283 C 192.9260 375.5995 187.3934 370.5022 187.1291 364.0130" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 314.9893 314.9748 C 314.0682 308.5355 318.5801 302.5244 325.0123 301.6034 C 331.4447 300.6825 337.4628 305.1873 338.3837 311.6267 C 339.3046 318.0589 334.7929 324.0771 328.3607 324.9981 C 321.9283 325.9190 315.9102 321.4072 314.9893 314.9748" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 570.7306 274.5536 C 570.4665 268.0572 575.5567 262.5315 582.0533 262.2603 C 588.5425 261.9962 594.0754 267.0862 594.3466 273.5828 C 594.6108 280.0722 589.5206 285.6049 583.0241 285.8763 C 576.5347 286.1404 571.0020 281.0501 570.7306 274.5536" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 601.6070 346.9220 C 601.3428 340.4255 606.4330 334.8928 612.9295 334.6286 C 619.4189 334.3573 624.9516 339.4547 625.2230 345.9439 C 625.4871 352.4405 620.3969 357.9733 613.9003 358.2374 C 607.4111 358.5086 601.8783 353.4115 601.6070 346.9220" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 335.5138 291.5946 C 341.7392 262.2674 347.9643 229.0780 354.1896 199.7510 C 357.7734 182.8743 361.4642 165.7121 369.8313 150.6200 C 384.4304 124.2842 395.0391 109.0567 424.3164 102.0318 C 453.5935 95.0000 501.5321 95.1926 531.1519 100.5683 C 547.8002 103.5882 566.0118 108.7925 574.7714 123.2633 C 580.6111 132.9225 580.9752 144.8090 581.1751 156.0957 C 581.5748 178.6266 579.1476 205.7762 578.8477 229.4494" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 578.9906 228.3428 C 581.8890 225.5157 587.5646 224.2164 591.4981 224.1450 C 586.1725 228.0143 581.5178 233.0616 578.8621 239.2083 C 576.4634 233.0046 571.6373 228.0715 566.5829 223.8595 C 570.7878 224.2449 575.8780 225.3302 578.9906 228.3428" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 269.9991 274.0682 C 353.8755 267.4933 423.3382 241.6213 507.1648 248.8175 C 518.4160 249.7813 539.3190 252.2228 552.9189 257.6270" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 551.8479 257.2914 C 550.6200 253.4365 552.0049 247.7752 553.7112 244.2342 C 554.7821 250.7236 557.2022 257.1558 561.5000 262.2817 C 554.8821 261.6391 548.3070 263.7381 542.2744 266.3653 C 544.5019 262.7814 547.7644 258.7193 551.8479 257.2914" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 224.4377 369.2815 C 277.9233 365.8548 331.4089 362.4281 384.8947 359.0085 C 422.9742 356.5668 461.1323 354.1182 498.7692 347.8216 C 527.1255 343.0740 556.4884 336.1992 584.3306 341.6891" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 583.2454 341.5107 C 581.1395 338.0482 581.1466 332.2227 581.9676 328.3749 C 584.5375 334.4288 588.4069 340.1042 593.7968 344.0736 C 587.2148 345.0159 581.3178 348.6069 576.0778 352.5905 C 577.4057 348.5782 579.6116 343.8594 583.2454 341.5107" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/></svg></div></figure>
+<div id="label-main-f3cff4151b89b3bdddc7" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 3.2.</strong> Fungsi surjektif mempunyai setiap anggota kodomain sebagai suatu nilai.</p></figcaption>
+</figure>
+</div>
+<div id="E00122" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3" data-native-number="3.8">
+<p><strong>Definisi 3.8.</strong></p>
+<p><strong>Fungsi Surjektif</strong></p>
+<p>Suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000901" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat <em>surjektif</em> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000902" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> juga merupakan daerah hasil dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000903" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>, yaitu untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000904" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math> terdapat sekurang-kurangnya satu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000905" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000906" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>, atau dalam simbol: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000907" display="block" dir="ltr">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∀</mi>
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∃</mi>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+  <mo>.</mo>
+</math> Fungsi semacam itu kita sebut surjeksi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000908" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000909" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00123" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<p>Jika Anda hendak menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000910" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> merupakan surjeksi, Anda harus menunjukkan bahwa setiap objek dalam kodomain <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000911" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> adalah nilai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000912" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> untuk suatu masukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000913" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>.</p>
+<p>Perhatikan bahwa setiap fungsi <em>menginduksi</em> surjeksi. Jika diberikan suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000914" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math>, definisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000915" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000916" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000917" dir="ltr" display="inline">
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math> <em>didefinisikan</em> sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000918" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∈</mo>
+  <mi>B</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000919" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mo>′</mo>
+  </msup>
+</math> ini pasti merupakan surjeksi.</p>
+</div>
+<div id="E00124" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<p>Setiap fungsi memetakan tiap masukan yang mungkin ke satu-satunya keluaran. Namun, ada pula fungsi yang tidak pernah memetakan masukan yang berbeda ke keluaran yang sama. Fungsi semacam itu disebut injektif, dan dapat digambarkan seperti dalam <span class="native-reference"><a href="#label-main-565a408805f726a6b38a">Gambar 3.3</a></span>.</p>
+<figure id="FLOAT0006" class="native-float native-figure-float" data-native-number="3.3" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 819.9552 583.1037" width="819.9552" height="583.1037" role="img" aria-label="Diagram"><defs><marker id="dg-7e2a17dfe1cab689-4b09b24f5b-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 105.7228 354.4610 C 99.4619 370.7880 95.0000 388.5785 98.6122 405.6764 C 100.5327 414.7502 104.6376 423.2099 109.1066 431.3341 C 113.2545 438.8801 117.8020 446.3118 123.8701 452.4300 C 144.3307 473.0546 177.9341 474.3611 205.6406 465.6015 C 233.3473 456.8490 257.6199 439.8725 283.9202 427.5146 C 305.2588 417.4845 328.0180 410.4881 351.2982 406.8044 C 366.3545 404.4128 381.8248 403.3563 396.0386 397.8592 C 410.2525 392.3551 423.4453 381.2753 426.4866 366.3333 C 428.3641 357.1167 426.1796 347.4648 422.3674 338.8622 C 413.0652 317.8591 394.7607 302.2604 375.8137 289.2887 C 345.4658 268.5070 311.8838 252.4586 276.6597 241.9071 C 264.8732 238.3733 252.8868 235.4462 240.7075 233.7044 C 228.4000 231.9409 215.8066 231.4056 203.5846 233.6400 C 179.2048 238.1019 157.5592 254.4431 145.6585 276.0530 C 139.1835 287.8110 111.6554 338.9835 105.7228 354.4609 Z M 105.7228 354.4610" stroke="#808080" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 563.0491 178.1841 C 545.5871 177.3988 527.2968 178.7838 512.2120 187.6147 C 504.2092 192.2979 497.4842 198.8730 491.1876 205.6764 C 485.3336 211.9946 479.7152 218.6624 475.8316 226.3439 C 462.7243 252.2800 472.1050 284.5699 489.1601 308.1002 C 506.2225 331.6233 529.9954 349.2853 550.0346 370.3311 C 566.2903 387.4076 580.1115 406.7901 590.9699 427.7146 C 597.9875 441.2503 603.8844 455.5925 613.5864 467.3434 C 623.3026 479.0871 637.9803 488.1037 653.1152 486.2761 C 662.4602 485.1410 670.9199 480.0223 677.8805 473.6829 C 694.8641 458.2197 703.8807 435.9316 710.2132 413.8507 C 720.3362 378.4981 724.9552 341.5679 723.8415 304.8090 C 723.4703 292.5086 722.4566 280.2151 720.2649 268.1073 C 718.0517 255.8782 714.5822 243.7561 708.5998 232.8618 C 696.6632 211.1449 674.3251 195.7676 650.0525 191.3057 C 636.8595 188.8712 579.6116 178.9265 563.0491 178.1841 Z M 563.0491 178.1841" stroke="#a81c21" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 153.9256 317.3238 C 153.6542 310.8273 158.7515 305.2944 165.2409 305.0232 C 171.7375 304.7591 177.2702 309.8563 177.5342 316.3457 C 177.8056 322.8422 172.7083 328.3751 166.2189 328.6392 C 159.7223 328.9104 154.1897 323.8132 153.9256 317.3238" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 188.8353 402.9993 C 188.5712 396.5028 193.6613 390.9772 200.1578 390.7058 C 206.6472 390.4418 212.1801 395.5318 212.4513 402.0283 C 212.7154 408.5177 207.6182 414.0506 201.1288 414.3147 C 194.6323 414.5859 189.0996 409.4959 188.8353 402.9993" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 284.2270 314.7323 C 283.3061 308.2930 287.8181 302.2818 294.2503 301.3609 C 300.6827 300.4400 306.7008 304.9446 307.6217 311.3842 C 308.5426 317.8164 304.0308 323.8275 297.5986 324.7484 C 291.1662 325.6765 285.1482 321.1645 284.2270 314.7323" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 634.7678 245.5408 C 634.5037 239.0515 639.6009 233.5187 646.0903 233.2475 C 652.5797 232.9832 658.1125 238.0734 658.3837 244.5699 C 658.6478 251.0665 653.5578 256.5920 647.0684 256.8632 C 640.5719 257.1275 635.0392 252.0373 634.7678 245.5408" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 650.3524 431.0485 C 650.0810 424.5521 655.1783 419.0193 661.6677 418.7481 C 668.1643 418.4838 673.6970 423.5811 673.9610 430.0705 C 674.2324 436.5671 669.1351 442.0997 662.6457 442.3638 C 656.1491 442.6352 650.6165 437.5379 650.3524 431.0485" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 564.5482 228.6999 C 564.2841 222.2033 569.3743 216.6707 575.8709 216.4064 C 582.3601 216.1352 587.8930 221.2325 588.1642 227.7289 C 588.4283 234.2183 583.3382 239.7511 576.8417 240.0152 C 570.3523 240.2864 564.8196 235.1964 564.5482 228.6999" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 499.2833 275.8174 C 499.0192 269.3210 504.1092 263.7882 510.6058 263.5241 C 517.0952 263.2527 522.6280 268.3500 522.8992 274.8394 C 523.1633 281.3360 518.0733 286.8686 511.5768 287.1327 C 505.0873 287.4041 499.5545 282.3068 499.2833 275.8174" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 572.4370 313.5402 C 572.1728 307.0507 577.2630 301.5179 583.7595 301.2467 C 590.2487 300.9826 595.7816 306.0726 596.0528 312.5692 C 596.3171 319.0586 591.2269 324.5912 584.7303 324.8626 C 578.2409 325.1267 572.7082 320.0367 572.4370 313.5402" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 603.3133 385.9084 C 603.0492 379.4119 608.1392 373.8792 614.6358 373.6149 C 621.1252 373.3437 626.6578 378.4411 626.9292 384.9305 C 627.1933 391.4268 622.1031 396.9597 615.6066 397.2238 C 609.1173 397.4952 603.5845 392.3978 603.3133 385.9084" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 661.3821 319.0087 C 661.1180 312.5193 666.2080 306.9864 672.6974 306.7152 C 679.1940 306.4511 684.7268 311.5411 684.9981 318.0377 C 685.2621 324.5271 680.1650 330.0598 673.6756 330.3240 C 667.1790 330.5953 661.6464 325.5050 661.3821 319.0087" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 217.7270 410.0670 C 319.4440 423.1171 416.1421 460.0829 517.4806 444.3842 C 535.4782 441.6001 553.6755 439.0299 570.7308 432.6476 C 584.7161 427.4149 598.0447 419.3049 607.5610 407.9537" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 606.7828 408.7462 C 602.7778 409.3458 597.4092 407.0685 594.1824 404.8198 C 600.7574 404.8052 607.4966 403.4420 613.2437 400.0081 C 611.5588 406.4403 612.5797 413.2653 614.2145 419.6403 C 611.0305 416.8704 607.5396 413.0081 606.7828 408.7462" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 171.1877 294.9287 C 180.1901 269.3210 189.7135 245.6336 210.9664 228.7569 C 234.0469 210.4311 263.2741 201.3646 292.4583 197.2953 C 321.6499 193.2259 351.2483 193.7757 380.6969 192.5693 C 405.8120 191.5341 431.1770 189.2423 455.9207 193.6615 C 507.5789 202.8994 551.0056 241.9998 572.3870 290.0384" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 571.9301 289.0389 C 573.4722 285.2909 578.1768 281.8499 581.7605 280.2365 C 578.3981 285.8907 576.1136 292.3728 576.1065 299.0693 C 571.4518 294.3146 565.0695 291.6946 558.7586 289.8242 C 562.7707 288.5179 567.8823 287.4970 571.9301 289.0389" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 301.4393 290.2954 C 326.2332 220.1901 374.5572 161.4644 442.7635 131.8446 C 472.9045 118.7516 505.1517 111.2343 537.4485 105.1375 C 568.2036 99.3263 601.3000 95.0000 629.7419 108.0645 C 653.1294 118.8016 670.2987 140.3044 680.4433 163.9560 C 690.5951 187.6004 694.4215 213.4366 696.9774 239.0442 C 698.6765 256.0352 683.5702 272.4977 679.0370 289.3816" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 679.3583 288.3179 C 682.6065 285.8978 688.4105 285.3695 692.3155 285.8335 C 686.5257 288.9532 681.2286 293.3296 677.7805 299.0693 C 676.2313 292.6013 672.1121 287.0615 667.6644 282.2140 C 671.7765 283.1564 676.6810 284.9126 679.3583 288.3179" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/></svg></div></figure>
+<div id="label-main-565a408805f726a6b38a" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 3.3.</strong> Fungsi injektif tidak pernah memetakan dua argumen yang berbeda ke nilai yang sama.</p></figcaption>
+</figure>
+</div>
+<div id="E00125" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3" data-native-number="3.9">
+<p><strong>Definisi 3.9.</strong></p>
+<p><strong>Fungsi Injektif</strong></p>
+<p>Suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000920" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat <em>injektif</em> jika dan hanya jika untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000921" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math> terdapat paling banyak satu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000922" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000923" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>. Fungsi semacam itu kita sebut injeksi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000924" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000925" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00126" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<p>Jika Anda hendak menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000926" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> merupakan injeksi, Anda harus menunjukkan bahwa untuk sebarang anggota <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000927" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000928" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> dari domain <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000929" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000930" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000931" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>.</p>
+</div>
+<div id="E00127" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3" data-native-number="3.10">
+<p><strong>Contoh 3.10.</strong></p>
+<p>Fungsi konstan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000932" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> yang diberikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000933" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mn>1</mn>
+</math> tidak bersifat injektif maupun surjektif.</p>
+<p>Fungsi identitas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000934" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> yang diberikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000935" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math> bersifat injektif sekaligus surjektif.</p>
+<p>Fungsi penerus <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000936" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> yang diberikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000937" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math> bersifat injektif, tetapi tidak surjektif.</p>
+<p>Fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000938" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math> yang didefinisikan oleh: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000939" display="block" dir="ltr">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mo>{</mo>
+    <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mfrac>
+            <mi>x</mi>
+            <mn>2</mn>
+          </mfrac>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <mi>x</mi>
+            </mrow>
+            <mtext> genap</mtext>
+          </mrow>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+          <mfrac>
+            <mrow>
+              <mi>x</mi>
+              <mo>+</mo>
+              <mn>1</mn>
+            </mrow>
+            <mn>2</mn>
+          </mfrac>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <mi>x</mi>
+            </mrow>
+            <mtext> ganjil.</mtext>
+          </mrow>
+        </mtd>
+      </mtr>
+    </mtable>
+    <mo fence="true" stretchy="true" symmetric="true"/>
+  </mrow>
+</math> bersifat surjektif, tetapi tidak injektif.</p>
+</div>
+<div id="E00128" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<p>Cukup sering kita hendak meninjau fungsi yang sekaligus injektif dan surjektif. Fungsi semacam itu kita sebut bijektif. Bentuknya seperti fungsi yang digambarkan dalam <span class="native-reference"><a href="#label-main-bfbd159e55d887dbb166">Gambar 3.4</a></span>. Bijeksi kadang-kadang juga disebut <em>korespondensi satu-satu</em>, karena memasangkan secara unik elemen-elemen kodomain dengan elemen-elemen domain.</p>
+<figure id="FLOAT0007" class="native-float native-figure-float" data-native-number="3.4" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 836.8676 535.9003" width="836.8676" height="535.9003" role="img" aria-label="Diagram"><defs><marker id="dg-c6b3bf38943e8a2e-5fdb51c8aa-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 372.9795 191.3198 C 368.9959 174.3003 362.6993 157.0738 350.1061 144.9446 C 343.4238 138.5124 335.2783 133.8292 327.0185 129.6100 C 319.3512 125.6908 311.4125 122.0926 302.9599 120.4436 C 274.4467 114.8608 245.9048 132.6440 227.8930 155.4461 C 209.8812 178.2483 199.3226 205.9262 184.5019 230.9200 C 172.4727 251.1948 157.5735 269.7635 140.3756 285.8834 C 129.2529 296.3135 117.0525 305.8725 108.3714 318.4089 C 99.6975 330.9379 95.0000 347.5147 100.8682 361.5857 C 104.4949 370.2737 111.7195 377.0272 119.7081 382.0032 C 139.1976 394.1609 163.0992 396.7954 186.0654 396.8954 C 222.8457 397.0525 259.6403 391.4769 294.7214 380.4328 C 306.4581 376.7419 318.0161 372.4299 329.0745 367.0329 C 340.2471 361.5857 350.9700 354.9607 359.8294 346.2510 C 377.4986 328.8676 386.2367 303.1954 383.9522 278.6229 C 382.7099 265.2587 376.7560 207.4611 372.9795 191.3198 Z M 372.9795 191.3198" stroke="#808080" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 510.4343 185.5157 C 494.0717 191.6696 477.8091 200.1436 467.4146 214.2074 C 461.9033 221.6607 458.3123 230.3489 455.1997 239.0799 C 452.3085 247.1969 449.7740 255.5353 449.2316 264.1235 C 447.3968 293.1294 468.7281 319.1227 493.6720 334.0289 C 518.6157 348.9353 547.4288 355.8104 574.1288 367.2683 C 595.7958 376.5634 616.1349 388.9355 634.3537 403.8989 C 646.1330 413.5721 657.1986 424.4379 670.7485 431.4125 C 684.2985 438.3947 701.3464 440.9003 714.5392 433.2546 C 722.6779 428.5355 728.4390 420.4969 732.3440 411.9300 C 741.8676 391.0341 741.3820 366.9899 738.4979 344.2020 C 733.8933 307.7145 723.5988 271.9480 708.0928 238.5945 C 702.9097 227.4432 697.1415 216.5349 690.3595 206.2689 C 683.5060 195.9030 675.5531 186.1226 665.7583 178.4696 C 646.2330 163.2063 619.6474 157.8662 595.5817 163.3134 C 582.4886 166.2832 525.9475 179.6760 510.4343 185.5157 Z M 510.4343 185.5157" stroke="#a81c21" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 269.2423 204.1414 C 268.9710 197.6449 274.0611 192.1122 280.5576 191.8481 C 287.0542 191.5767 292.5868 196.6741 292.8511 203.1635 C 293.1223 209.6600 288.0250 215.1927 281.5286 215.4568 C 275.0392 215.7282 269.5063 210.6308 269.2423 204.1414" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 207.5111 277.0667 C 207.2469 270.5702 212.3442 265.0446 218.8336 264.7732 C 225.3302 264.5092 230.8557 269.5992 231.1269 276.0957 C 231.3912 282.5851 226.3010 288.1180 219.8116 288.3892 C 213.3150 288.6533 207.7823 283.5633 207.5111 277.0667" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 229.4779 314.2611 C 229.2138 307.7717 234.3038 302.2391 240.8004 301.9677 C 247.2969 301.7036 252.8224 306.7936 253.0938 313.2901 C 253.3579 319.7867 248.2677 325.3195 241.7712 325.5836 C 235.2819 325.8548 229.7491 320.7577 229.4779 314.2611" stroke="none" fill="#808080" stroke-width="1.3706939999451722"/><path d="M 643.5059 227.7146 C 643.2418 221.2252 648.3320 215.6923 654.8285 215.4211 C 661.3178 215.1570 666.8506 220.2471 667.1218 226.7436 C 667.3859 233.2402 662.2959 238.7730 655.7993 239.0371 C 649.3099 239.3083 643.7773 234.2112 643.5059 227.7146" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 563.3060 248.2178 C 563.0348 241.7213 568.1321 236.1886 574.6214 235.9245 C 581.1179 235.6531 586.6436 240.7505 586.9148 247.2399 C 587.1789 253.7364 582.0889 259.2691 575.5995 259.5332 C 569.1030 259.8046 563.5703 254.7072 563.3060 248.2178" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 582.9170 318.3590 C 582.6529 311.8624 587.7429 306.3296 594.2395 306.0653 C 600.7289 305.7943 606.2616 310.8914 606.5329 317.3808 C 606.7970 323.8772 601.7068 329.4101 595.2105 329.6741 C 588.7211 329.9455 583.1882 324.8482 582.9170 318.3588" stroke="none" fill="#a81c21" stroke-width="1.3706939999451722"/><path d="M 246.3760 332.8154 C 259.5975 356.7454 280.7504 375.0355 304.1736 387.4719 C 327.5967 399.9010 353.2972 406.8186 379.1120 411.6303 C 399.2084 415.3783 419.7616 417.9055 440.0008 415.1641 C 458.9406 412.5942 477.0380 405.5051 494.9356 398.4660 C 526.5400 386.0369 559.6866 372.4442 582.3886 346.6294" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 581.6106 347.4148 C 577.5841 347.8146 572.3369 345.2803 569.2243 342.8743 C 575.7923 343.1813 582.5886 342.1533 588.4997 339.0122 C 586.5007 345.3516 587.1789 352.2193 588.4997 358.6731 C 585.4584 355.7389 582.1602 351.7054 581.6106 347.4148" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 296.9988 185.2017 C 323.5203 160.1866 332.4440 133.7577 364.8268 117.0168 C 386.4508 105.8442 409.6598 96.2921 433.9825 95.6996 C 462.9599 95.0000 490.5521 106.9864 517.0451 118.7444 C 543.5095 130.4882 569.9740 142.2317 596.4382 153.9755 C 607.9464 159.0799 619.5973 164.2771 629.4064 172.1801 C 636.6453 178.0127 642.8492 185.5729 646.1617 194.1754" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 645.6906 193.1545 C 647.7179 189.6492 652.8366 186.8721 656.6060 185.7441 C 652.5225 190.9056 649.3956 197.0239 648.4961 203.6560 C 644.5125 198.3231 638.5372 194.8679 632.5332 192.1765 C 636.6811 191.4197 641.8853 191.0913 645.6906 193.1545" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/><path d="M 227.4575 259.5474 C 251.9658 234.7965 286.4902 223.1169 320.1221 214.0576 C 359.9721 203.3205 400.9288 195.0749 442.1853 196.1958 C 480.1793 197.2309 518.6801 206.7116 550.2844 227.5790" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 549.3421 227.0150 C 548.6211 223.0314 550.7271 217.5985 552.8759 214.3003 C 553.0973 220.8754 554.6608 227.5646 558.2659 233.2045 C 551.7838 231.7196 544.9945 232.9476 538.6693 234.7751 C 541.3464 231.5125 545.1016 227.9001 549.3421 227.0150" stroke="none" fill="#000000" stroke-width="1.3706939999451722"/></svg></div></figure>
+<div id="label-main-bfbd159e55d887dbb166" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 3.4.</strong> Fungsi bijektif memasangkan secara unik elemen-elemen kodomain dengan elemen-elemen domain.</p></figcaption>
+</figure>
+</div>
+<div id="E00129" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:kin" data-source-unit_id="OLP-0022" data-source-occurrence="22" data-source-chapter="3" data-native-number="3.11">
+<p><strong>Definisi 3.11.</strong></p>
+<p><strong>Bijeksi</strong></p>
+<p>Suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000940" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat <em>bijektif</em> jika dan hanya jika fungsi itu surjektif sekaligus injektif. Fungsi semacam itu kita sebut bijeksi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000941" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000942" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> (atau antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000943" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000944" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>).</p>
+</div>
+<div id="source-OLP-0023-0023" class="source-unit" data-source-unit="OLP-0023" data-source-occurrence="23" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/functions/functions-relations.tex" data-source-sha256="1c4598cef89a00611bfa59e0750e6f93beafa6df23ab083911c315aab0703d63">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="3.3" data-native-label="sfr:fun:rel:sec" id="label-main-6aeae9ee7301533d723d">3.3 Fungsi sebagai Relasi</h3>
+<div id="E00130" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3">
+<p>Suatu fungsi yang memetakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000945" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> ke anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000946" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> jelas menentukan relasi antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000947" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000948" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, yaitu relasi yang berlaku antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000949" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000950" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000951" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>. Bahkan, jika misalnya kita ingin mereduksi unsur-unsur dasar matematika, kita dapat <em>mengidentifikasi</em> fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000952" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dengan relasi ini, yaitu dengan suatu himpunan pasangan. Hal ini kemudian menimbulkan pertanyaan: relasi mana yang menentukan fungsi dengan cara tersebut?</p>
+</div>
+<div id="E00131" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3" data-native-number="3.12">
+<p><strong>Definisi 3.12.</strong></p>
+<p><strong>Graf suatu fungsi</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000953" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> suatu fungsi. <em>Graf</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000954" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> adalah relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000955" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>⊆</mo>
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> yang didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000956" display="block" dir="ltr">
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>:</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p>
+</div>
+<div id="E00132" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3">
+<p>Graf suatu fungsi ditentukan secara unik oleh ekstensionalitas. Selain itu, ekstensionalitas (pada himpunan) langsung membenarkan prinsip implisit ekstensionalitas untuk fungsi: jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000957" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000958" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> mempunyai domain dan kodomain yang sama, maka keduanya identik apabila nilainya sama untuk semua argumen.</p>
+<p>Demikian pula, jika suatu relasi bersifat “fungsional”, relasi itu merupakan graf suatu fungsi.</p>
+</div>
+<div id="E00133" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3" data-native-number="3.13">
+<p><strong>Proposisi 3.13.</strong></p>
+<div id="label-main-439116e29b9915ee0571" class="native-anchor">
+
+</div>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000959" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> sedemikian sehingga:</p>
+<ol>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000960" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000961" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>z</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000962" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>=</mo>
+  <mi>z</mi>
+</math>; dan</p></li>
+<li><p>untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000963" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> terdapat suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000964" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000965" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>.</p></li>
+</ol>
+<p>Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000966" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> adalah graf fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000967" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> yang didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000968" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000969" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math>.</p>
+</div>
+<div id="E00134" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3" data-native-number="8">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000970" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000971" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math>. Jika terdapat pula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000972" dir="ltr" display="inline">
+  <mi>z</mi>
+  <mo>≠</mo>
+  <mi>y</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000973" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>z</mi>
+</math>, syarat pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000974" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> akan dilanggar. Jadi, jika terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000975" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000976" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000977" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> tersebut unik, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000978" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> terdefinisi dengan baik. Jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000979" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>=</mo>
+  <mi>R</mi>
+</math>.</p>
+</div>
+<div id="E00135" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3">
+<p>Setiap fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000980" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> mempunyai graf, yaitu relasi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000981" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> yang didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000982" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>. Sebaliknya, setiap relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000983" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> dengan sifat-sifat yang diberikan dalam <span class="native-reference"><a href="#label-main-439116e29b9915ee0571">Proposisi 3.13</a></span> merupakan graf suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000984" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math>. Karena hubungan erat antara fungsi dan grafnya ini, kita dapat memandang suatu fungsi semata-mata sebagai grafnya. Dengan kata lain, fungsi dapat diidentifikasi dengan relasi tertentu, yaitu dengan himpunan tupel tertentu. Namun, perhatikan bahwa semangat “identifikasi” ini sama seperti dalam <span class="native-reference"><a href="part-0005.xhtml#label-main-a1514bcabce0034e5f77">Bagian 2.2</a></span>: ini bukan klaim tentang metafisika fungsi, melainkan pengamatan bahwa kita mudah <em>memperlakukan</em> fungsi sebagai himpunan tertentu. Salah satu alasan perlakuan ini begitu memudahkan ialah bahwa kita sekarang dapat meninjau operasi pada fungsi yang serupa dengan operasi yang kita lakukan pada relasi (lihat <span class="native-reference"><a href="part-0005.xhtml#label-main-35c623e8286e8911a71b">Bagian 2.8</a></span>). Secara khusus:</p>
+</div>
+<div id="E00136" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3" data-native-number="3.14">
+<p><strong>Definisi 3.14.</strong></p>
+<div id="label-main-0b89d8a7140728f714aa" class="native-anchor">
+
+</div>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000985" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> suatu fungsi dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000986" dir="ltr" display="inline">
+  <mi>C</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+</math>.</p>
+<p><em>Pembatasan</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000987" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000988" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> adalah fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000989" dir="ltr" display="inline">
+  <mi>f</mi>
+  <msub>
+    <mrow>
+      <mo stretchy="false">↾</mo>
+    </mrow>
+    <mrow>
+      <mi>C</mi>
+    </mrow>
+  </msub>
+  <mo>:</mo>
+  <mi>C</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> yang didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000990" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <msub>
+    <mrow>
+      <mo stretchy="false">↾</mo>
+    </mrow>
+    <mrow>
+      <mi>C</mi>
+    </mrow>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000991" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>C</mi>
+</math>. Dengan kata lain, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000992" dir="ltr" display="inline">
+  <mi>f</mi>
+  <msub>
+    <mrow>
+      <mo stretchy="false">↾</mo>
+    </mrow>
+    <mrow>
+      <mi>C</mi>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>C</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+<p><em>Penerapan</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000993" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000994" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000995" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>C</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Kita juga menyebutnya <em>peta</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000996" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> di bawah fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000997" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>.</p>
+</div>
+<div id="E00137" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:rel" data-source-unit_id="OLP-0023" data-source-occurrence="23" data-source-chapter="3">
+<p>Dari definisi-definisi ini diperoleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000998" dir="ltr" display="inline">
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">[</mo>
+  <mrow>
+    <mi>dom</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">]</mo>
+</math>, untuk setiap fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000999" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>. Gagasan-gagasan ini tepat seperti yang kita harapkan berdasarkan definisi dalam <span class="native-reference"><a href="part-0005.xhtml#label-main-35c623e8286e8911a71b">Bagian 2.8</a></span> dan identifikasi fungsi dengan relasi. Namun, dua operasi lain—invers dan hasil kali relatif—memerlukan sedikit penjelasan tambahan. Penjelasan itu akan kita berikan dalam <span class="native-reference"><a href="#label-main-5cc3992f2ec62aca30b9">Bagian 3.4</a></span> dan <span class="native-reference"><a href="#label-main-31e43fab7566f4f5194a">Bagian 3.5</a></span>.</p>
+</div>
+<div id="source-OLP-0024-0024" class="source-unit" data-source-unit="OLP-0024" data-source-occurrence="24" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/functions/inverses.tex" data-source-sha256="413fe12dd9f9f3dee4fedbbc9928990579acc4510811b67ec1e524d92c97e81b">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="3.4" data-native-label="sfr:fun:inv:sec" id="label-main-5cc3992f2ec62aca30b9">3.4 Invers Fungsi</h3>
+<div id="E00138" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3">
+<p>Kita memandang fungsi sebagai pemetaan. Karena itu, pertanyaan yang wajar tentang fungsi ialah apakah pemetaannya dapat “dibalik.” Sebagai contoh, fungsi penerus <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001000" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math> dapat dibalik, dalam arti bahwa fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001001" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+  <mo>−</mo>
+  <mn>1</mn>
+</math> “meniadakan” apa yang dilakukan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001002" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>.</p>
+<p>Namun, kita harus berhati-hati. Walaupun definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001003" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> menentukan suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001004" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℤ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℤ</mi>
+  </mrow>
+</math>, definisi itu tidak menentukan sebuah <em>fungsi</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001005" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math>, karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001006" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mn>0</mn>
+  <mo stretchy="false">)</mo>
+  <mo>∉</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math>. Jadi, bahkan dalam kasus sederhana, tidak sepenuhnya jelas apakah suatu fungsi dapat dibalik; jawabannya dapat bergantung pada domain dan kodomainnya.</p>
+<p>Hal ini dirumuskan lebih tepat melalui gagasan invers suatu fungsi.</p>
+</div>
+<div id="E00139" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.15">
+<p><strong>Definisi 3.15.</strong></p>
+<p>Suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001007" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math> adalah <em>invers</em> dari fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001008" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001009" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001010" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001011" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001012" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>.</p>
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001013" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> mempunyai invers <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001014" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>, kita sering menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001015" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+</math> sebagai ganti <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001016" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>.</p>
+<div id="E00140" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3">
+<p>Sekarang kita akan menentukan kapan suatu fungsi mempunyai invers. Calon yang baik untuk invers dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001017" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001018" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math> yang “didefinisikan oleh” <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001019" display="block" dir="ltr">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow class="olp-math-prose">
+    <mtext>“satu-satunya” </mtext>
+    <mrow>
+      <mi>x</mi>
+    </mrow>
+    <mtext> sedemikian sehingga </mtext>
+    <mrow>
+      <mi>f</mi>
+      <mo stretchy="false">(</mo>
+      <mi>x</mi>
+      <mo stretchy="false">)</mo>
+      <mo>=</mo>
+      <mi>y</mi>
+    </mrow>
+    <mtext>.</mtext>
+  </mrow>
+</math> Namun, tanda petik pada “didefinisikan oleh” (dan “satu-satunya”) menunjukkan bahwa ini belum tentu merupakan definisi. Setidaknya, cara ini tidak selalu berhasil secara umum. Agar definisi tersebut menentukan sebuah fungsi, harus ada satu dan hanya satu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001020" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001021" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>—keluaran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001022" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> harus ditentukan secara unik. Selain itu, keluaran tersebut harus ditentukan untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001023" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>. Jika terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001024" dir="ltr" display="inline">
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001025" dir="ltr" display="inline">
+  <msub>
+    <mi>x</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001026" dir="ltr" display="inline">
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>≠</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>2</mn>
+  </msub>
+</math>, tetapi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001027" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001028" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> tidak ditentukan secara unik untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001029" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>. Jika sama sekali tidak terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001030" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001031" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001032" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> sama sekali tidak ditentukan. Dengan kata lain, agar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001033" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> terdefinisi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001034" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> harus sekaligus injektif dan surjektif.</p>
+<p>Mari kita telaah secara perlahan. Kita bagi pertanyaannya menjadi dua. Jika diberikan fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001035" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math>, kapan terdapat fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001036" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001037" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math>? Fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001038" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> semacam itu “meniadakan” apa yang dilakukan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001039" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>, dan disebut <em>invers kiri</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001040" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>. Kedua, kapan terdapat fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001041" dir="ltr" display="inline">
+  <mi>h</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001042" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>h</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>? Fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001043" dir="ltr" display="inline">
+  <mi>h</mi>
+</math> semacam itu disebut <em>invers kanan</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001044" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>—<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001045" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> “meniadakan” apa yang dilakukan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001046" dir="ltr" display="inline">
+  <mi>h</mi>
+</math>.</p>
+</div>
+<div id="E00141" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.16">
+<p><strong>Proposisi 3.16.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001047" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat injektif dan domainnya tidak kosong, maka terdapat <em>invers kiri</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001048" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001049" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001050" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001051" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>.</p>
+</div>
+<div id="E00142" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="9">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001052" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat injektif dan domainnya tidak kosong. Tinjau suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001053" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001054" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math>, terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001055" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001056" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001057" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat injektif, hanya ada satu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001058" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> semacam itu. Jadi, kita dapat mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001059" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001060" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> adalah “satu-satunya” <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001061" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001062" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001063" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∉</mo>
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math>, karena domainnya tidak kosong, kita dapat memetakannya ke sembarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001064" dir="ltr" display="inline">
+  <mi>a</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>. Jadi, kita dapat memilih <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001065" dir="ltr" display="inline">
+  <mi>a</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> dan mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001066" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math> dengan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001067" display="block" dir="ltr">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mo>{</mo>
+    <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mi>x</mi>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <mi>f</mi>
+              <mo stretchy="false">(</mo>
+              <mi>x</mi>
+              <mo stretchy="false">)</mo>
+              <mo>=</mo>
+              <mi>y</mi>
+            </mrow>
+          </mrow>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+          <mi>a</mi>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <mi>y</mi>
+              <mo>∉</mo>
+              <mrow>
+                <mi>ran</mi>
+              </mrow>
+              <mo stretchy="false">(</mo>
+              <mi>f</mi>
+              <mo stretchy="false">)</mo>
+            </mrow>
+            <mtext>.</mtext>
+          </mrow>
+        </mtd>
+      </mtr>
+    </mtable>
+    <mo fence="true" stretchy="true" symmetric="true"/>
+  </mrow>
+</math> Fungsi ini terdefinisi untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001068" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, karena untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001069" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math> terdapat tepat satu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001070" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001071" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>. Berdasarkan definisi, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001072" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001073" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001074" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math>.</p>
+</div>
+<div id="E00144" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.17">
+<p><strong>Proposisi 3.17.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001078" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat surjektif, ada <em>invers kanan</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001079" dir="ltr" display="inline">
+  <mi>h</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001080" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001081" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>h</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001082" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00145" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="10">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001083" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat surjektif. Tinjau suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001084" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001085" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat surjektif, terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001086" dir="ltr" display="inline">
+  <msub>
+    <mi>x</mi>
+    <mi>y</mi>
+  </msub>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001087" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>y</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>. Lalu kita dapat mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001088" dir="ltr" display="inline">
+  <mi>h</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>y</mi>
+  </msub>
+</math>, yaitu untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001089" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math> kita memilih suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001090" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001091" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>; karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001092" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat surjektif, selalu ada sekurang-kurangnya satu yang dapat dipilih.<a href="notes.xhtml#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Berdasarkan definisi, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001103" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>=</mo>
+  <mi>h</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001104" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>, yaitu untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001105" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001106" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>h</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>.</p>
+</div>
+<div id="E00147" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3">
+<p>Dengan menggabungkan gagasan dalam pembuktian sebelumnya, sekarang kita memperoleh bahwa setiap bijeksi mempunyai invers, yaitu terdapat satu fungsi yang sekaligus merupakan invers kiri dan invers kanan dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001110" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>.</p>
+</div>
+<div id="E00148" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.18">
+<p><strong>Proposisi 3.18.</strong></p>
+<div id="label-main-4f239953d66293f5a514" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001111" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> bersifat bijektif, ada fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001112" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math>. Untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001113" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>, fungsi ini memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001114" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math>; dan untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001115" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001116" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>.</p>
+</div>
+<div id="E00149" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="11">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<div id="E00151" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3">
+<p>Ada cara yang sedikit lebih umum untuk memperoleh invers. Dalam <span class="native-reference"><a href="#label-main-e6da485c2dfccfff9b1b">Bagian 3.2</a></span>, kita melihat bahwa setiap fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001123" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> menginduksi surjeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001124" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math> dengan menetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001125" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001126" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>. Jelas bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001127" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat injektif, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001128" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mo>′</mo>
+  </msup>
+</math> bersifat bijektif, sehingga mempunyai invers yang unik menurut <span class="native-reference"><a href="#label-main-4f239953d66293f5a514">Proposisi 3.18</a></span>. Dengan sedikit penyalahgunaan notasi, kita kadang-kadang menyebut invers dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001129" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mo>′</mo>
+  </msup>
+</math> semata-mata sebagai “invers dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001130" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>.”</p>
+</div>
+<div id="E00152" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.19">
+<p><strong>Proposisi 3.19.</strong></p>
+<p><span id="label-main-a0f0a844bb9a87aa4cca" class="native-anchor"/> Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001131" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> mempunyai invers kiri <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001132" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> dan invers kanan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001133" dir="ltr" display="inline">
+  <mi>h</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001134" dir="ltr" display="inline">
+  <mi>h</mi>
+  <mo>=</mo>
+  <mi>g</mi>
+</math>.</p>
+</div>
+<div id="E00153" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="12">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<div id="E00155" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.20">
+<p><strong>Proposisi 3.20.</strong></p>
+<div id="label-main-b3236cdc68e43e1182fd" class="native-anchor">
+
+</div>
+<p>Setiap fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001135" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> mempunyai paling banyak satu invers.</p>
+</div>
+<div id="E00156" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="13">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001136" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001137" dir="ltr" display="inline">
+  <mi>h</mi>
+</math> keduanya merupakan invers dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001138" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>. Maka, secara khusus, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001139" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> merupakan invers kiri dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001140" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001141" dir="ltr" display="inline">
+  <mi>h</mi>
+</math> merupakan invers kanan. Menurut <span class="native-reference"><a href="#label-main-a0f0a844bb9a87aa4cca">Proposisi 3.19</a></span>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001142" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>=</mo>
+  <mi>h</mi>
+</math>.</p>
+</div>
+<div id="source-OLP-0025-0025" class="source-unit" data-source-unit="OLP-0025" data-source-occurrence="25" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/functions/composition.tex" data-source-sha256="8cf9550968e19aab526ea096efc30132705d42b76a95d8ff1a076a34002d3005">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="3.5" data-native-label="sfr:fun:cmp:sec" id="label-main-31e43fab7566f4f5194a">3.5 Komposisi Fungsi</h3>
+<div id="E00157" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:cmp" data-source-unit_id="OLP-0025" data-source-occurrence="25" data-source-chapter="3">
+<p>Dalam <span class="native-reference"><a href="#label-main-5cc3992f2ec62aca30b9">Bagian 3.4</a></span>, kita melihat bahwa invers <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001143" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+</math> dari bijeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001144" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> juga merupakan fungsi. Operasi lain pada fungsi adalah komposisi: kita dapat mendefinisikan fungsi baru dengan mengomposisikan dua fungsi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001145" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001146" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>, yaitu dengan terlebih dahulu menerapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001147" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>, kemudian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001148" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>. Tentu saja, hal ini hanya mungkin jika daerah hasil dan domainnya bersesuaian, yaitu daerah hasil <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001149" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> harus merupakan himpunan bagian dari domain <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001150" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>. Operasi pada fungsi ini merupakan padanan operasi hasil kali relatif pada relasi dari <span class="native-reference"><a href="part-0005.xhtml#label-main-35c623e8286e8911a71b">Bagian 2.8</a></span>.</p>
+<p>Sebuah diagram dapat membantu menjelaskan gagasan komposisi. Dalam <span class="native-reference"><a href="#label-main-6b4c4b5428e04489de71">Gambar 3.5</a></span>, kita menggambarkan dua fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001151" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001152" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math> beserta komposisinya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001153" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math>. Fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001154" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math> memasangkan setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001155" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dengan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001156" dir="ltr" display="inline">
+  <mi>C</mi>
+</math>. Kita menentukan anggota mana dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001157" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> yang dipasangkan dengan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001158" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> sebagai berikut: jika diberikan masukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001159" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>, mula-mula terapkan fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001160" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001161" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>, yang menghasilkan suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001162" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, kemudian terapkan fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001163" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001164" dir="ltr" display="inline">
+  <mi>y</mi>
+</math>, yang menghasilkan suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001165" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>z</mi>
+  <mo>∈</mo>
+  <mi>C</mi>
+</math>.</p>
+<figure id="FLOAT0008" class="native-float native-figure-float" data-native-number="3.5" data-source-edition="main" data-source-prefix="sfr:fun:cmp" data-source-unit_id="OLP-0025" data-source-occurrence="25" data-source-chapter="3">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 813.3359 459.0287" width="813.3359" height="459.0287" role="img" aria-label="Diagram"><defs><marker id="dg-d712231c90796b4b-3a7d40e187-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 287.2870 235.3033 C 289.8014 225.1216 291.1335 214.1946 287.7068 204.2829 C 285.8905 199.0227 282.8151 194.2938 279.5512 189.7877 C 276.5184 185.6071 273.2588 181.5164 269.1938 178.3296 C 255.4741 167.5697 235.3719 169.2958 219.5275 176.5691 C 203.6789 183.8424 190.4946 195.7588 175.7553 205.0753 C 163.8002 212.6311 150.7701 218.4909 137.1832 222.4188 C 128.3978 224.9590 119.2699 226.7409 111.2128 231.0756 C 103.1600 235.4062 96.1309 242.9878 95.4284 252.1071 C 95.0000 257.7399 97.0175 263.3168 99.9303 268.1572 C 107.0321 279.9666 119.0857 287.8908 131.3362 294.2090 C 150.9501 304.3222 172.1359 311.3768 193.8956 315.0392 C 201.1774 316.2642 208.5278 317.1124 215.9124 317.2451 C 223.3655 317.3779 230.9043 316.7611 238.0147 314.5208 C 252.1972 310.0489 263.8695 298.7107 269.3481 284.9568 C 272.3292 277.4735 284.9055 244.9581 287.2870 235.3033 Z M 287.2870 235.3033" stroke="#808080" fill="none" stroke-width="4.934498399802621" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 336.3107 288.5206 C 337.8656 298.8949 340.7954 309.5050 347.7388 317.3651 C 351.4227 321.5328 356.0701 324.7325 360.8033 327.6539 C 365.1981 330.3695 369.7728 332.9053 374.7459 334.3018 C 391.5325 339.0221 409.4586 329.7699 421.3365 317.0053 C 433.2145 304.2450 440.8689 288.2035 450.9435 273.9741 C 459.1207 262.4303 468.9339 252.0516 479.9980 243.2406 C 487.1513 237.5436 494.9172 232.4163 500.7126 225.3400 C 506.5081 218.2682 510.1191 208.5792 507.2920 199.8837 C 505.5442 194.5124 501.5478 190.1218 497.0160 186.7594 C 485.9477 178.5438 471.7824 175.8110 458.0497 174.6373 C 436.0630 172.7611 413.7892 174.3118 392.2736 179.2162 C 385.0774 180.8568 377.9540 182.8743 371.0792 185.5643 C 364.1358 188.2843 357.3980 191.7238 351.6796 196.5085 C 340.2685 206.0476 333.8007 220.9754 333.9763 235.7789 C 334.0704 243.8316 334.8329 278.6858 336.3107 288.5206 Z M 336.3107 288.5206" stroke="#a81c21" fill="none" stroke-width="4.934498399802621" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 179.1135 227.2162 C 178.9550 223.3183 182.0091 219.9987 185.9028 219.8403 C 189.8007 219.6774 193.1203 222.7357 193.2831 226.6294 C 193.4416 230.5273 190.3831 233.8469 186.4896 234.0056 C 182.5917 234.1684 179.2719 231.1099 179.1135 227.2162" stroke="none" fill="#808080" stroke-width="0.8224163999671034"/><path d="M 153.8072 283.1405 C 153.6487 279.2427 156.7026 275.9230 160.6005 275.7602 C 164.4942 275.6017 167.8138 278.6600 167.9767 282.5537 C 168.1351 286.4516 165.0810 289.7712 161.1831 289.9299 C 157.2852 290.0927 153.9698 287.0342 153.8072 283.1405" stroke="none" fill="#808080" stroke-width="0.8224163999671034"/><path d="M 212.0273 255.7139 C 211.4748 251.8545 214.1818 248.2436 218.0412 247.6909 C 221.9005 247.1384 225.5115 249.8455 226.0641 253.7050 C 226.6166 257.5643 223.9096 261.1753 220.0501 261.7277 C 216.1907 262.2802 212.5800 259.5732 212.0273 255.7139" stroke="none" fill="#808080" stroke-width="0.8224163999671034"/><path d="M 381.8777 227.2162 C 381.7148 223.3183 384.7733 219.9987 388.6670 219.8403 C 392.5649 219.6774 395.8845 222.7357 396.0430 226.6294 C 396.2058 230.5273 393.1473 233.8469 389.2538 234.0056 C 385.3558 234.1684 382.0361 231.1099 381.8777 227.2162" stroke="none" fill="#a81c21" stroke-width="0.8224163999671034"/><path d="M 398.9642 269.4294 C 398.8057 265.5315 401.8598 262.2117 405.7577 262.0532 C 409.6514 261.8904 412.9710 264.9489 413.1339 268.8426 C 413.2923 272.7404 410.2382 276.0601 406.3403 276.2185 C 402.4425 276.3814 399.1270 273.3229 398.9642 269.4294" stroke="none" fill="#a81c21" stroke-width="0.8224163999671034"/><path d="M 199.9995 225.7171 C 250.3254 221.7720 292.0031 206.2490 342.2990 210.5667 C 349.0495 211.1491 361.5914 212.6097 369.7514 215.8523" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 369.1088 215.6510 C 368.3721 213.3380 369.2029 209.9413 370.2268 207.8167 C 370.8693 211.7102 372.3172 215.5697 374.8999 218.6452 C 370.9293 218.2596 366.9843 219.5190 363.3605 221.0995 C 364.7012 218.9493 366.6544 216.5076 369.1088 215.6510" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/><path d="M 172.6626 282.8450 C 204.7540 280.7890 236.8454 278.7371 268.9369 276.6811 C 291.7845 275.2163 314.6837 273.7471 337.2616 269.9691 C 354.2754 267.1206 371.8930 262.9957 388.5985 266.2896" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 387.9473 266.1825 C 386.6837 264.1051 386.6881 260.6098 387.1806 258.3010 C 388.7225 261.9333 391.0443 265.3387 394.2782 267.7202 C 390.3288 268.2857 386.7950 270.4402 383.6468 272.8304 C 384.4392 270.4231 385.7628 267.5918 387.9473 266.1825" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/><path d="M 579.4718 162.5538 C 569.6585 166.2503 559.8966 171.3347 553.6600 179.7688 C 550.3573 184.2450 548.1986 189.4580 546.3310 194.6966 C 544.6004 199.5668 543.0757 204.5656 542.7500 209.7227 C 541.6492 227.1263 554.4480 242.7179 569.4144 251.6617 C 584.3807 260.6054 601.6684 264.7347 617.6928 271.6095 C 630.6886 277.1866 642.8922 284.6097 653.8234 293.5878 C 660.8910 299.3919 667.5303 305.9069 675.6603 310.0961 C 683.7902 314.2853 694.0190 315.7844 701.9347 311.2012 C 706.8179 308.3699 710.2746 303.5425 712.6175 298.4066 C 718.3359 285.8648 718.0404 271.4425 716.3142 257.7699 C 713.5471 235.8774 707.3703 214.4174 698.0712 194.4053 C 694.9614 187.7103 691.4961 181.1695 687.4267 175.0100 C 683.3147 168.7905 678.5430 162.9221 672.6662 158.3303 C 660.9553 149.1680 644.9996 145.9684 630.5601 149.2365 C 622.7044 151.0142 588.7839 159.0542 579.4718 162.5538 Z M 579.4718 162.5538" stroke="#1973ba" fill="none" stroke-width="4.934498399802621" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 640.8661 186.8836 C 640.7076 182.9900 643.7617 179.6703 647.6596 179.5075 C 651.5531 179.3490 654.8729 182.4031 655.0314 186.3010 C 655.1942 190.1947 652.1358 193.5143 648.2421 193.6770 C 644.3442 193.8354 641.0245 190.7815 640.8661 186.8836" stroke="none" fill="#1973ba" stroke-width="0.8224163999671034"/><path d="M 672.5205 265.3643 C 672.3621 261.4708 675.4162 258.1511 679.3141 257.9883 C 683.2077 257.8299 686.5274 260.8839 686.6900 264.7818 C 686.8485 268.6755 683.7946 271.9952 679.8965 272.1578 C 675.9986 272.3163 672.6834 269.2624 672.5205 265.3643" stroke="none" fill="#1973ba" stroke-width="0.8224163999671034"/><path d="M 573.2437 218.0583 C 573.0809 214.1647 576.1394 210.8450 580.0329 210.6822 C 583.9309 210.5237 587.2506 213.5778 587.4090 217.4757 C 587.5719 221.3694 584.5134 224.6890 580.6197 224.8475 C 576.7218 225.0103 573.4022 221.9562 573.2437 218.0583" stroke="none" fill="#1973ba" stroke-width="0.8224163999671034"/><path d="M 622.9614 228.3471 C 622.8029 224.4535 625.8612 221.1338 629.7549 220.9710 C 633.6528 220.8125 636.9682 223.8666 637.1309 227.7645 C 637.2893 231.6582 634.2354 234.9778 630.3417 235.1405 C 626.4438 235.2989 623.1242 232.2450 622.9614 228.3471" stroke="none" fill="#1973ba" stroke-width="0.8224163999671034"/><path d="M 399.8937 217.7670 C 403.4533 199.7510 582.2432 162.2282 629.0138 184.1379" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 628.4014 183.8723 C 627.7632 181.5250 628.7440 178.1712 629.8620 176.0937 C 630.3289 180.0130 631.6095 183.9323 634.0554 187.1192 C 630.1018 186.5580 626.1054 187.6417 622.4217 189.0596 C 623.8523 186.9736 625.9127 184.6220 628.4014 183.8723" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/><path d="M 421.1225 279.3925 C 447.4140 294.6116 475.3720 290.6922 505.7071 292.2600 C 550.9142 294.5986 596.3743 292.0459 641.0373 284.6655 C 649.3472 283.2904 657.8927 281.6372 665.2559 277.7307" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 664.6476 278.0048 C 662.2831 277.4394 659.8074 274.9677 658.5181 272.9932 C 662.1846 274.4624 666.2367 275.2163 670.2031 274.5995 C 667.8216 277.7992 666.8579 281.8256 666.3352 285.7407 C 665.1873 283.4832 664.1121 280.5448 664.6476 278.0048" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/><path d="M 192.5720 213.4366 C 192.5720 213.4366 193.2360 212.4771 194.4482 210.7379" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 198.1791 205.4008 C 216.1394 179.7730 271.5540 101.7034 279.4996 102.3160 C 289.0046 103.0485 621.6550 95.0000 630.0462 102.3160 C 636.1886 107.6659 646.4474 141.7321 650.9363 159.6710" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00" stroke-dasharray="4.888808599804448 4.888808599804448"/><path d="M 651.7074 162.8364 C 651.9901 164.0186 652.2343 165.0938 652.4357 166.0405" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 652.2814 165.5308 C 653.4337 163.9673 656.0251 162.9093 657.8799 162.5752 C 655.6610 164.8197 653.8405 167.5697 653.0609 170.6879 C 651.4460 167.9337 648.7776 165.9676 646.0533 164.3657 C 648.0750 164.2243 650.5766 164.3441 652.2814 165.5308" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/><path d="M 226.1369 236.2328 C 226.1369 236.2328 311.6682 121.3259 319.7081 122.7865 C 327.7482 124.2471 610.6595 122.7737 610.6595 122.7737 L 638.3475 168.8462" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00" stroke-dasharray="4.934498399802621 4.934498399802621"/><path d="M 638.0048 168.2808 C 638.5959 165.9204 641.0889 163.4662 643.0720 162.1940 C 641.5728 165.8435 640.7848 169.8912 641.3672 173.8663 C 638.1846 171.4548 634.1669 170.4523 630.2560 169.8955 C 632.5262 168.7689 635.4690 167.7195 638.0048 168.2808" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/><path d="M 233.3844 253.2552 C 276.1458 246.2689 328.1209 243.7459 371.6746 237.1410" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 371.0106 237.1795 C 369.0617 235.7317 367.7553 232.4848 367.3441 230.1632 C 370.1368 232.9518 373.5680 235.2392 377.4615 236.2328 C 374.0091 238.2375 371.5375 241.5614 369.5200 244.9539 C 369.3530 242.4267 369.5200 239.3041 371.0106 237.1795" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/><path d="M 167.6512 296.7747 C 167.6512 296.7747 293.3266 361.1031 305.4229 362.5681 C 317.5150 364.0287 657.4471 352.3306 663.2941 350.1375 C 668.1001 348.3342 676.0244 301.6064 678.6930 285.0082" stroke="#000000" fill="none" stroke-width="2.4672491999013104" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00" stroke-dasharray="4.934498399802621 4.934498399802621"/><path d="M 678.5730 285.6635 C 676.6026 287.0900 673.1202 287.3597 670.7814 287.0556 C 674.2767 285.2266 677.4892 282.6436 679.6054 279.2299 C 680.4834 283.1192 682.9120 286.4730 685.5421 289.4200 C 683.0835 288.8203 680.1537 287.7282 678.5730 285.6635" stroke="none" fill="#000000" stroke-width="0.8224163999671034"/></svg></div></figure>
+<div id="label-main-6b4c4b5428e04489de71" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 3.5.</strong> Komposisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001166" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+</math> dari dua fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001167" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001168" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>.</p></figcaption>
+</figure>
+</div>
+<div id="E00158" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:cmp" data-source-unit_id="OLP-0025" data-source-occurrence="25" data-source-chapter="3" data-native-number="3.21">
+<p><strong>Definisi 3.21.</strong></p>
+<p><strong>Komposisi</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001169" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001170" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math> fungsi. <em>Komposisi</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001171" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001172" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001173" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math>, dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001174" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<div id="E00159" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:cmp" data-source-unit_id="OLP-0025" data-source-occurrence="25" data-source-chapter="3" data-native-number="3.22">
+<p><strong>Contoh 3.22.</strong></p>
+<p>Tinjau fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001175" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001176" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mn>2</mn>
+  <mi>x</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001177" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math>, untuk setiap masukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001178" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> Anda harus terlebih dahulu mengambil penerusnya, kemudian mengalikan hasilnya dengan dua. Jadi, komposisi keduanya diberikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001179" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mn>2</mn>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<div id="source-OLP-0026-0026" class="source-unit" data-source-unit="OLP-0026" data-source-occurrence="26" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/functions/partial-functions.tex" data-source-sha256="1d49d40e0a901b7bdd7a0b2b78572615b4ec9c1c6cf246b93596cac63398dba0">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="3.6" data-native-label="sfr:fun:par:sec" id="label-main-974968b8f4ff4df4683a">3.6 Fungsi Parsial</h3>
+<div id="E00163" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3">
+<p>Kadang-kadang berguna untuk melonggarkan definisi fungsi sehingga keluaran fungsi tidak harus terdefinisi untuk semua masukan yang mungkin. Pemetaan semacam itu disebut <em>fungsi parsial</em>.</p>
+</div>
+<div id="E00164" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3" data-native-number="3.23">
+<p><strong>Definisi 3.23.</strong></p>
+<p>Suatu <em>fungsi parsial</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001190" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mrow>
+    <mo stretchy="false" symmetric="false">⇸</mo>
+  </mrow>
+  <mi>B</mi>
+</math> adalah pemetaan yang memasangkan setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001191" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dengan paling banyak satu anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001192" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001193" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> memasangkan suatu elemen dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001194" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001195" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>, kita mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001196" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> <em>terdefinisi</em>; jika tidak, <em>tidak terdefinisi</em>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001197" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> terdefinisi, kita tulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001198" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">↓</mo>
+</math>; jika tidak, kita tulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001199" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">↑</mo>
+</math>. <em>Domain</em> dari fungsi parsial <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001200" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> adalah himpunan bagian dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001201" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> tempat fungsi itu terdefinisi, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001202" dir="ltr" display="inline">
+  <mrow>
+    <mi>dom</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>:</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">↓</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00165" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3" data-native-number="3.24">
+<p><strong>Contoh 3.24.</strong></p>
+<p>Setiap fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001203" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> juga merupakan fungsi parsial. Fungsi parsial yang terdefinisi di seluruh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001204" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>—yaitu yang sejauh ini kita sebut fungsi begitu saja—disebut juga fungsi <em>total</em>.</p>
+</div>
+<div id="E00166" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3" data-native-number="3.25">
+<p><strong>Contoh 3.25.</strong></p>
+<p>Fungsi parsial <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001205" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false" symmetric="false">⇸</mo>
+  </mrow>
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+</math> yang diberikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001206" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mi>x</mi>
+</math> tidak terdefinisi untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001207" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+</math>, dan terdefinisi di semua tempat lainnya.</p>
+</div>
+<div id="E00168" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3" data-native-number="3.26">
+<p><strong>Definisi 3.26.</strong></p>
+<p><strong>Graf suatu fungsi parsial</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001220" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mrow>
+    <mo stretchy="false" symmetric="false">⇸</mo>
+  </mrow>
+  <mi>B</mi>
+</math> suatu fungsi parsial. <em>Graf</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001221" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> adalah relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001222" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>⊆</mo>
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> yang didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001223" display="block" dir="ltr">
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>:</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p>
+</div>
+<div id="E00169" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3" data-native-number="3.27">
+<p><strong>Proposisi 3.27.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001224" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> mempunyai sifat bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001225" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001226" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <msup>
+    <mi>y</mi>
+    <mo>′</mo>
+  </msup>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001227" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>=</mo>
+  <msup>
+    <mi>y</mi>
+    <mo>′</mo>
+  </msup>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001228" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> adalah graf fungsi parsial <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001229" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mrow>
+    <mo stretchy="false" symmetric="false">⇸</mo>
+  </mrow>
+  <mi>B</mi>
+</math> yang didefinisikan sebagai berikut: jika terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001230" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001231" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001232" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>; jika tidak, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001233" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">↑</mo>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001234" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> juga <em>serial</em>, yaitu untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001235" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001236" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001237" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001238" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat total.</p>
+</div>
+<div id="E00170" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3" data-native-number="14">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001239" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001240" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math>. Jika terdapat pula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001241" dir="ltr" display="inline">
+  <msup>
+    <mi>y</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>≠</mo>
+  <mi>y</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001242" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <msup>
+    <mi>y</mi>
+    <mo>′</mo>
+  </msup>
+</math>, syarat pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001243" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> akan dilanggar. Jadi, jika terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001244" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001245" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>x</mi>
+  <mi>y</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001246" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> tersebut unik, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001247" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> terdefinisi dengan baik. Jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001248" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>=</mo>
+  <mi>R</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001249" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat total jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001250" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> serial.</p>
+</div>
+<h3 class="unnumbered native-problems-heading" data-native-chapter="3" id="exercises-main-3">Soal</h3>
+<div id="E00143" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.1">
+<p><strong>Soal 3.1.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001075" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> mempunyai invers kiri <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001076" dir="ltr" display="inline">
+  <mi>g</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001077" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat injektif.</p>
+</div>
+<div id="E00146" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.2">
+<p><strong>Soal 3.2.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001107" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> mempunyai invers kanan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001108" dir="ltr" display="inline">
+  <mi>h</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001109" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bersifat surjektif.</p>
+</div>
+<div id="E00150" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.3">
+<p><strong>Soal 3.3.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-4f239953d66293f5a514">Proposisi 3.18</a></span>. Anda harus mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001117" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+</math>, menunjukkan bahwa ia merupakan suatu fungsi, dan menunjukkan bahwa ia adalah invers dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001118" dir="ltr" display="inline">
+  <mi>f</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001119" dir="ltr" display="inline">
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001120" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001121" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001122" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00154" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:inv" data-source-unit_id="OLP-0024" data-source-occurrence="24" data-source-chapter="3" data-native-number="3.4">
+<p><strong>Soal 3.4.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-a0f0a844bb9a87aa4cca">Proposisi 3.19</a></span>.</p>
+</div>
+<div id="E00160" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:cmp" data-source-unit_id="OLP-0025" data-source-occurrence="25" data-source-chapter="3" data-native-number="3.5">
+<p><strong>Soal 3.5.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001180" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001181" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math> keduanya injektif, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001182" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math> bersifat injektif.</p>
+</div>
+<div id="E00161" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:cmp" data-source-unit_id="OLP-0025" data-source-occurrence="25" data-source-chapter="3" data-native-number="3.6">
+<p><strong>Soal 3.6.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001183" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001184" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math> keduanya surjektif, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001185" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math> bersifat surjektif.</p>
+</div>
+<div id="E00162" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:cmp" data-source-unit_id="OLP-0025" data-source-occurrence="25" data-source-chapter="3" data-native-number="3.7">
+<p><strong>Soal 3.7.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001186" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001187" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>C</mi>
+</math>. Tunjukkan bahwa graf dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001188" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>∘</mo>
+  <mi>f</mi>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001189" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mi>f</mi>
+  </msub>
+  <mo>∣</mo>
+  <msub>
+    <mi>R</mi>
+    <mi>g</mi>
+  </msub>
+</math>.</p>
+</div>
+<div id="E00167" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:fun:par" data-source-unit_id="OLP-0026" data-source-occurrence="26" data-source-chapter="3" data-native-number="3.8">
+<p><strong>Soal 3.8.</strong></p>
+<p>Jika diberikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001208" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mrow>
+    <mo stretchy="false" symmetric="false">⇸</mo>
+  </mrow>
+  <mi>B</mi>
+</math>, definisikan fungsi parsial <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001209" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mrow>
+    <mo stretchy="false" symmetric="false">⇸</mo>
+  </mrow>
+  <mi>A</mi>
+</math> sebagai berikut: untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001210" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, jika terdapat tepat satu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001211" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math> sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001212" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001213" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math>; jika tidak, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001214" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">↑</mo>
+</math>. Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001215" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> injektif, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001216" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>x</mi>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001217" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi>dom</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001218" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M001219" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0005.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0007.xhtml">Berikutnya →</a></nav></body></html>

@@ -1,0 +1,946 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Logika intuisionistik dan kalkulus lambda — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0109.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0111.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0110" class="reader-chunk">
+<h2 id="logika-intuisionistik-dan-kalkulus-lambda">Logika intuisionistik dan kalkulus lambda</h2>
+<div id="source-OLP-0649-0759" class="source-unit" data-source-unit="OLP-0649" data-source-occurrence="759" data-source-path="source/supplement/openlogic/locale/id/content/intuitionistic-logic/semantics/propositions.tex" data-source-sha256="1baaeb11f947cab4f202d6f4f6ccea1f9893f10fbb9d0fab26acf2fd0873422b">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="10.1" data-native-label="int:sem:pro:sec" id="label-supplement-16514a9906be26baa8ab">10.1 Proposisi</h3>
+<p>Kadang-kadang berguna untuk memberi nama kepada himpunan dunia dalam model relasional <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038311" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math> tempat formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038312" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> benar. Himpunan ini kita sebut <em>proposisi</em> yang didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038313" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, dan kita tulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038314" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+</math>.</p>
+<div id="E03119" class="native-environment native-defn" data-source-edition="supplement" data-source-prefix="int:sem:pro" data-source-unit_id="OLP-0649" data-source-occurrence="759" data-source-chapter="6" data-native-number="10.1">
+<p><strong>Definisi 10.1.</strong></p>
+<p>Secara induktif, kita memperluas fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038315" dir="ltr" display="inline">
+  <mi>V</mi>
+</math> menjadi fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038316" dir="ltr" display="inline">
+  <mrow>
+    <mo minsize="1.2em" maxsize="1.2em">(</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">↦</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mrow>
+    <mo minsize="1.2em" maxsize="1.2em">)</mo>
+  </mrow>
+  <mo>:</mo>
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi>W</mi>
+  <mo stretchy="false">)</mo>
+</math> sebagai berikut:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038317" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mi mathvariant="normal">⊥</mi>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038318" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>=</mo>
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038319" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>=</mo>
+  <mrow/>
+</math> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038320" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>∈</mo>
+  <mi>W</mi>
+  <mo>:</mo>
+  <mrow class="olp-math-prose">
+    <mtext>untuk setiap </mtext>
+    <mrow>
+      <msup>
+        <mi>w</mi>
+        <mo>′</mo>
+      </msup>
+    </mrow>
+    <mtext> sedemikian sehingga </mtext>
+    <mrow>
+      <mi>R</mi>
+      <mi>w</mi>
+      <msup>
+        <mi>w</mi>
+        <mo>′</mo>
+      </msup>
+    </mrow>
+    <mtext>, </mtext>
+    <mrow>
+      <msup>
+        <mi>w</mi>
+        <mo>′</mo>
+      </msup>
+      <mo>∉</mo>
+      <mrow>
+        <mo stretchy="false">[</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mo stretchy="false">[</mo>
+      </mrow>
+      <mrow>
+        <mi>ψ</mi>
+      </mrow>
+      <mrow>
+        <mo stretchy="false">]</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <msub>
+          <mo stretchy="false">]</mo>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mi mathvariant="normal">𝔐</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038321" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>∩</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038322" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>∪</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038323" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+  <mo>=</mo>
+  <mrow/>
+</math> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038324" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>w</mi>
+  <mo>∈</mo>
+  <mi>W</mi>
+  <mo>:</mo>
+  <mrow class="olp-math-prose">
+    <mtext>untuk setiap </mtext>
+    <mrow>
+      <msup>
+        <mi>w</mi>
+        <mo>′</mo>
+      </msup>
+    </mrow>
+    <mtext> sedemikian sehingga </mtext>
+    <mrow>
+      <mi>R</mi>
+      <mi>w</mi>
+      <msup>
+        <mi>w</mi>
+        <mo>′</mo>
+      </msup>
+    </mrow>
+    <mtext>, jika </mtext>
+    <mrow>
+      <msup>
+        <mi>w</mi>
+        <mo>′</mo>
+      </msup>
+      <mo>∈</mo>
+      <mrow>
+        <mo stretchy="false">[</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mo stretchy="false">[</mo>
+      </mrow>
+      <mrow>
+        <mi>ψ</mi>
+      </mrow>
+      <mrow>
+        <mo stretchy="false">]</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <msub>
+          <mo stretchy="false">]</mo>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mi mathvariant="normal">𝔐</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+      </mrow>
+    </mrow>
+    <mtext> maka </mtext>
+    <mrow>
+      <msup>
+        <mi>w</mi>
+        <mo>′</mo>
+      </msup>
+      <mo>∈</mo>
+      <mrow>
+        <mo stretchy="false">[</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mo stretchy="false">[</mo>
+      </mrow>
+      <mrow>
+        <mi>χ</mi>
+      </mrow>
+      <mrow>
+        <mo stretchy="false">]</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <mstyle scriptlevel="0">
+          <mspace width="-0.167em"/>
+        </mstyle>
+        <msub>
+          <mo stretchy="false">]</mo>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mi mathvariant="normal">𝔐</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p></li>
+</ol>
+</div>
+<div id="E03120" class="native-environment native-prop" data-source-edition="supplement" data-source-prefix="int:sem:pro" data-source-unit_id="OLP-0649" data-source-occurrence="759" data-source-chapter="6" data-native-number="10.2">
+<p><strong>Proposisi 10.2.</strong></p>
+<div id="label-supplement-dd9a43ab547ebfa0bbda" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038325" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038326" dir="ltr" display="inline">
+  <mi>w</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mo stretchy="false">[</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">]</mo>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <mstyle scriptlevel="0">
+      <mspace width="-0.167em"/>
+    </mstyle>
+    <msub>
+      <mo stretchy="false">]</mo>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔐</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+    </msub>
+  </mrow>
+</math></p>
+</div>
+<div id="E03121" class="native-environment native-proof" data-source-edition="supplement" data-source-prefix="int:sem:pro" data-source-unit_id="OLP-0649" data-source-occurrence="759" data-source-chapter="6" data-native-number="57">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<div id="E03122" class="native-environment native-prob" data-source-edition="supplement" data-source-prefix="int:sem:pro" data-source-unit_id="OLP-0649" data-source-occurrence="759" data-source-chapter="6" data-native-number="10.1">
+<p><strong>Soal 10.1.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-supplement-dd9a43ab547ebfa0bbda">Proposisi 10.2</a></span>.</p>
+</div>
+<div id="E03123" class="native-environment native-editorial" data-source-edition="supplement" data-source-prefix="pt:seq:extra-mG3i" data-source-unit_id="DRIVER-supplement" data-source-chapter="6">
+<p>Bagian konversi berikut terhenti dalam sumber asli setelah mengumumkan definisi berikutnya. Tidak ada teks lanjutan dalam berkas beku.</p>
+</div>
+<div id="source-OLP-0651-0760" class="source-unit" data-source-unit="OLP-0651" data-source-occurrence="760" data-source-path="source/supplement/openlogic/locale/id/content/lambda-calculus/syntax/conversion.tex" data-source-sha256="6354ee787e77dd45200371f3b656d6e381fde9469b1690b2150e4d9c4e573661">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="10.2" data-native-label="lam:int:con:sec" id="label-supplement-db84fc5a514848cde785">10.2 Konversi dan Reduksi</h3>
+<p>Ada tiga jenis konversi atau reduksi dalam kalkulus lambda. Perbedaan antara konversi dan reduksi ialah apakah “transformasi” tersebut searah atau dua arah, sebagaimana akan kita lihat.</p>
+<p>Konversi-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038327" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> berkaitan dengan penggantian nama variabel. Wajar untuk menganggap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038328" dir="ltr" display="inline">
+  <mi>λ</mi>
+  <mi>x</mi>
+  <mo>.</mo>
+  <mi>x</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038329" dir="ltr" display="inline">
+  <mi>λ</mi>
+  <mi>y</mi>
+  <mo>.</mo>
+  <mi>y</mi>
+</math> merepresentasikan fungsi yang sama (fungsi identitas); gagasan ini kita formalkan sebagai berikut:</p>
+<div id="source-OLP-0650-0761" class="source-unit" data-source-unit="OLP-0650" data-source-occurrence="761" data-source-path="source/supplement/openlogic/locale/id/content/lambda-calculus/lambda-definability/lists.tex" data-source-sha256="4be048718f57285ca28cbf3b7b0b393c7e014cf28f7eb9c741664123b909fdc1">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="10.3" data-native-label="lam:ldf:lst:sec" id="label-supplement-a5218542b8102b512892">10.3 Daftar</h3>
+<p>Daftar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038330" dir="ltr" display="inline">
+  <mo stretchy="false">[</mo>
+  <msub>
+    <mi>M</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>M</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>M</mi>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">]</mo>
+</math> dapat didefinisikan sebagai berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038331" display="block" dir="ltr">
+  <mo stretchy="false">[</mo>
+  <msub>
+    <mi>M</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>M</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>M</mi>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">]</mo>
+  <mo>≡</mo>
+  <mi>λ</mi>
+  <mi>s</mi>
+  <mi>z</mi>
+  <mo>.</mo>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>s</mi>
+  <msub>
+    <mi>M</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>s</mi>
+  <msub>
+    <mi>M</mi>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mo>…</mo>
+  <mo stretchy="false">(</mo>
+  <mi>s</mi>
+  <msub>
+    <mi>M</mi>
+    <mi>n</mi>
+  </msub>
+  <mi>z</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math> Secara informal, suku yang merepresentasikan suatu daftar merupakan fungsi “akumulator” daftar itu: fungsi yang menerima dua suku; suku pertama ialah fungsi yang menerima nilai terakumulasi beserta suatu elemen baru dan mengembalikan nilai terakumulasi yang baru; suku kedua ialah nilai terakumulasi awal. Fungsi tersebut mengakumulasikan elemen satu per satu dan pada akhirnya mengembalikan hasilnya.</p>
+<div id="E03124" class="native-environment native-digress" data-source-edition="supplement" data-source-prefix="lam:ldf:lst" data-source-unit_id="OLP-0650" data-source-occurrence="761" data-source-chapter="6">
+<p>Jika Anda mengenal pemrograman fungsional, definisi ini akan tampak serupa dengan <em>lipatan kanan</em>: suatu daftar didefinisikan sebagai fungsi lipatan kanan atas elemen-elemen yang dikandungnya.</p>
+</div>
+<p>Kita dapat dengan mudah mendefinisikan beberapa fungsi berguna berdasarkan pengodean ini: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038332" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mrow>
+          <mi>Sum</mi>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>≡</mo>
+        <mi>λ</mi>
+        <mi>l</mi>
+        <mo>.</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>l</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mo stretchy="false">(</mo>
+        <mi>λ</mi>
+        <mi>x</mi>
+        <mi>a</mi>
+        <mo>.</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mrow>
+          <mi>Add</mi>
+        </mrow>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>x</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>a</mi>
+        <mo stretchy="false">)</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mover>
+          <mn>0</mn>
+          <mo accent="true">―</mo>
+        </mover>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mrow>
+          <mi>Len</mi>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>≡</mo>
+        <mi>λ</mi>
+        <mi>l</mi>
+        <mo>.</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>l</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mo stretchy="false">(</mo>
+        <mi>λ</mi>
+        <mi>x</mi>
+        <mi>a</mi>
+        <mo>.</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mrow>
+          <mi>Add</mi>
+        </mrow>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>a</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mover>
+          <mn>1</mn>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+        <mover>
+          <mn>0</mn>
+          <mo accent="true">―</mo>
+        </mover>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038333" dir="ltr" display="inline">
+  <mrow>
+    <mi>Sum</mi>
+  </mrow>
+</math> menghitung jumlah suatu daftar numeral Church. Fungsi ini bekerja dengan melakukan akumulasi pada daftar tersebut: nilai awalnya ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038334" dir="ltr" display="inline">
+  <mover>
+    <mn>0</mn>
+    <mo accent="true">―</mo>
+  </mover>
+</math> dan, bagi setiap elemen, fungsi mengembalikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038335" dir="ltr" display="inline">
+  <mrow>
+    <mi>Add</mi>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>a</mi>
+</math> sebagai nilai baru (dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038336" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sebagai elemen saat ini dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038337" dir="ltr" display="inline">
+  <mi>a</mi>
+</math> sebagai nilai terakumulasi). Hasilnya ialah jumlah semua elemen.</p>
+<div id="E03125" class="native-environment native-prob" data-source-edition="supplement" data-source-prefix="lam:ldf:lst" data-source-unit_id="OLP-0650" data-source-occurrence="761" data-source-chapter="6" data-native-number="10.2">
+<p><strong>Soal 10.2.</strong></p>
+<p>Apa yang dilakukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M038338" dir="ltr" display="inline">
+  <mrow>
+    <mi>Len</mi>
+  </mrow>
+</math>? Jelaskan.</p>
+</div>
+<div id="E03126" class="native-environment native-prob" data-source-edition="supplement" data-source-prefix="lam:ldf:lst" data-source-unit_id="OLP-0650" data-source-occurrence="761" data-source-chapter="6" data-native-number="10.3">
+<p><strong>Soal 10.3.</strong></p>
+<p>Definisikan fungsi yang membalikkan suatu daftar.</p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0109.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0111.xhtml">Berikutnya →</a></nav></body></html>

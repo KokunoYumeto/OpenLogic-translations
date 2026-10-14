@@ -1,0 +1,5041 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>60 Kesahihan dan Kelengkapan — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0074.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0076.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0075" class="reader-chunk">
+<div id="source-OLP-0503-0555" class="source-unit" data-source-unit="OLP-0503" data-source-occurrence="555" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/soundness-completeness.tex" data-source-sha256="c453345be34dce075c9273ecaa39220ae2fae088d130b8a0569353fa8c3cd1f0">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="60" data-native-label="int:sc::chap" id="label-main-5d09f5862c54585d58f7">60 Kesahihan dan Kelengkapan</h2>
+<div id="E02526" class="native-environment native-editorial" data-source-edition="main" data-source-prefix="udf:udf:udf" data-source-unit_id="OLP-0503" data-source-occurrence="555" data-source-chapter="60">
+<p>Bab ini menghimpun hasil kesahihan dan kelengkapan bagi logika proposisional intuisionistik. Bab ini masih memerlukan pengantar. Bukti kelengkapan menggunakan fakta-fakta tentang keterbuktian yang semestinya dinyatakan dan dibuktikan secara eksplisit di suatu tempat.</p>
+</div>
+<div id="source-OLP-0504-0556" class="source-unit" data-source-unit="OLP-0504" data-source-occurrence="556" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/soundness-axd.tex" data-source-sha256="dfee2576f3dd2f96b34fad67ada3fb167f6f315a82b6ecb45476949206a4a938">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="60.1" data-native-label="int:sc:sax:sec" id="label-main-32cc8fad5664b1201cb6">60.1 Kesahihan Derivasi Aksiomatik</h3>
+<div id="E02527" class="native-environment native-editorial" data-source-edition="main" data-source-prefix="int:sc:sax" data-source-unit_id="OLP-0504" data-source-occurrence="556" data-source-chapter="60">
+<p>Bukti kesahihan bergantung pada fakta bahwa semua aksioma valid secara intuisionistik; fakta ini masih perlu dibuktikan, misalnya dalam bab Semantik.</p>
+</div>
+<div id="E02528" class="native-environment native-thm" data-source-edition="main" data-source-prefix="int:sc:sax" data-source-unit_id="OLP-0504" data-source-occurrence="556" data-source-chapter="60" data-native-number="60.1">
+<p><strong>Teorema 60.1.</strong></p>
+<p><strong>Kesahihan</strong></p>
+<div id="label-main-abadffd7fc4869d8cf37" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028814" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028815" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02529" class="native-environment native-proof" data-source-edition="main" data-source-prefix="int:sc:sax" data-source-unit_id="OLP-0504" data-source-occurrence="556" data-source-chapter="60" data-native-number="557">
+<p><strong>Bukti.</strong></p>
+<p>Kita membuktikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028816" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028817" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Bukti dilakukan dengan induksi pada jumlah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028818" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> formula dalam derivasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028819" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028820" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>. Kita menunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028821" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028822" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>=</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan derivasi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028823" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028824" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>. Perhatikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028825" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028826" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> merupakan derivasi, demikian pula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028827" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028828" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028829" dir="ltr" display="inline">
+  <mi>k</mi>
+  <mo>&lt;</mo>
+  <mi>n</mi>
+</math>.</p>
+<p>Tidak ada derivasi yang panjangnya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028830" dir="ltr" display="inline">
+  <mn>0</mn>
+</math>, sehingga untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028831" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+</math> klaim berlaku secara hampa. Jadi, klaim berlaku bagi semua derivasi yang panjangnya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028832" dir="ltr" display="inline">
+  <mo>&lt;</mo>
+  <mi>n</mi>
+</math>. Kita membedakan kasus menurut justifikasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028833" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>.</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028834" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> merupakan aksioma. Semua aksioma valid, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028835" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> untuk sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028836" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028837" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>. Maka, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028838" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028839" dir="ltr" display="inline">
+  <mi>w</mi>
+</math>, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028840" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>, jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028841" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028842" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028843" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> mengikuti melalui <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mtext style="font-variant:small-caps">mp</mtext>
+  <mrow/>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028844" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028845" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>≡</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028846" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028847" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028848" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028849" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math> merupakan derivasi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028850" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>, sehingga berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028851" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028852" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>.</p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028853" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028854" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028855" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028856" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>. Menurut definisi, ini berarti bahwa, untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028857" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028858" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>w</mi>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math>, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028859" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028860" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028861" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> refleksif, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028862" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> termasuk di antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028863" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028864" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>w</mi>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math>; jadi, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028865" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028866" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028867" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028868" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math>. Dengan demikian, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028869" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>, sebagaimana hendak ditunjukkan.</p></li>
+</ol>
+</div>
+<div id="source-OLP-0505-0557" class="source-unit" data-source-unit="OLP-0505" data-source-occurrence="557" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/soundness-nd.tex" data-source-sha256="c2d5184886d81aebebbee7da1d02ad62f102506c1da7bec1d45d76bdde41586c">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="60.2" data-native-label="int:sc:snd:sec" id="label-main-205ea6e915b8e45e8c29">60.2 Kesahihan Deduksi Alami</h3>
+<p>Sekarang kita akan membuktikan kesahihan deduksi alami terhadap semantik relasional, yakni menunjukkan bahwa jika formula dapat diturunkan dari suatu himpunan asumsi, maka himpunan asumsi tersebut mengikutkan formula itu.</p>
+<div id="E02530" class="native-environment native-thm" data-source-edition="main" data-source-prefix="int:sc:snd" data-source-unit_id="OLP-0505" data-source-occurrence="557" data-source-chapter="60" data-native-number="60.2">
+<p><strong>Teorema 60.2.</strong></p>
+<p><strong>Kesahihan</strong></p>
+<div id="label-main-cbe7c4c4a77836a7678a" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028870" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028871" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02531" class="native-environment native-proof" data-source-edition="main" data-source-prefix="int:sc:snd" data-source-unit_id="OLP-0505" data-source-occurrence="557" data-source-chapter="60" data-native-number="558">
+<p><strong>Bukti.</strong></p>
+<p>Kita membuktikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028872" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028873" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Bukti dilakukan dengan induksi pada derivasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028874" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028875" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>.</p>
+<ol>
+<li><p>Jika derivasi hanya terdiri atas asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028876" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028877" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, dan hendak menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028878" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028879" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Maka jelas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028880" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028881" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math>: Derivasi premis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028882" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dari asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028883" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> yang belum dilepaskan dan premis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028884" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dari asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028885" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math> yang belum dilepaskan menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028886" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028887" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028888" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028889" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Kita harus menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028890" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, karena asumsi yang belum dilepaskan dalam seluruh derivasi ialah asumsi dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028891" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> bersama asumsi dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028892" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math>. Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028893" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mi mathvariant="normal">Δ</mi>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028894" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028895" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028896" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Demikian pula, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028897" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028898" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028899" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math>: Derivasi premis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028900" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dari asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028901" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> yang belum dilepaskan menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028902" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028903" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Kita harus menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028904" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028905" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028906" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028907" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028908" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Demikian pula, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028909" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math> berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028910" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028911" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028912" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∨</mo>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math>: Andaikan premisnya ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028913" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, dan asumsi yang belum dilepaskan dalam derivasi yang berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028914" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028915" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>. Maka kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028916" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan, berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028917" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Kita harus menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028918" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028919" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028920" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028921" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Dengan demikian, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028922" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Demikian pula, jika premisnya ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028923" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028924" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028925" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∨</mo>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math>: Derivasi yang berakhir dengan premis-premisnya masing-masing menyimpulkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028926" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dari asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028927" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> yang belum dilepaskan, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028928" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math> dari asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028929" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math> yang belum dilepaskan, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028930" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math> dari asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028931" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math> yang belum dilepaskan. Jadi, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028932" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028933" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028934" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028935" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028936" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028937" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>. Kita harus membuktikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028938" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∪</mo>
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>.</p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028939" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∪</mo>
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>2</mn>
+  </msub>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028940" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> dan, karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028941" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028942" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Menurut definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028943" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊩</mo>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028944" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028945" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Jadi, kita membedakan kasus: (a) <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028946" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028947" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028948" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028949" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>. (b) <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028950" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028951" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028952" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Δ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028953" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>. Jadi, pada kedua kasus, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028954" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>, sebagaimana hendak ditunjukkan.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028955" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math> dan menyimpulkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028956" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Premisnya ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028957" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, dan derivasi yang berakhir dengan premis tersebut mempunyai asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028958" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math> yang belum dilepaskan. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028959" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, dan berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028960" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Kita harus menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028961" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028962" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>. Kita hendak menunjukkan bahwa untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028963" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028964" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>w</mi>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math>, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028965" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028966" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Jadi, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028967" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>w</mi>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028968" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Berdasarkan <span class="native-reference"><a href="part-0074.xhtml#label-main-de7b2992aa7c032acdc5">Proposisi 59.3</a></span>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028969" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028970" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028971" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, sebagaimana hendak ditunjukkan.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028972" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math> dan menyimpulkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028973" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Premis-premisnya ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028974" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028975" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, dengan derivasi dari asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028976" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028977" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math> yang belum dilepaskan. Jadi, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028978" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028979" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028980" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028981" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Kita harus menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028982" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028983" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mi mathvariant="normal">Δ</mi>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028984" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028985" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028986" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Menurut definisi, ini berarti bahwa untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028987" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028988" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>w</mi>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math>, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028989" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028990" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028991" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> refleksif, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028992" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> termasuk di antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028993" dir="ltr" display="inline">
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math> yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028994" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>w</mi>
+  <msup>
+    <mi>w</mi>
+    <mo>′</mo>
+  </msup>
+</math>; dengan kata lain, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028995" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028996" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028997" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Δ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028998" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M028999" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029000" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, sebagaimana hendak ditunjukkan.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029001" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mi mathvariant="normal">⊥</mi>
+      <mi>I</mi>
+    </msub>
+  </mrow>
+</math> dan menyimpulkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029002" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Premisnya ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029003" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math>, dan asumsi yang belum dilepaskan dalam derivasi premis tersebut ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029004" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029005" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>. Berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029006" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>. Kita harus menunjukkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029007" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Kita membuktikannya secara tak langsung. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029008" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊭</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, terdapat model <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029009" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math> dan dunia <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029010" dir="ltr" display="inline">
+  <mi>w</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029011" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029012" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029013" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029014" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>. Namun, hal ini mustahil karena, menurut definisi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029015" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊮</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029016" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029017" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">¬</mi>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math>: Latihan.</p></li>
+<li><p>Derivasi berakhir dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029018" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">¬</mi>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math>: Latihan.</p></li>
+</ol>
+</div>
+<div id="source-OLP-0506-0558" class="source-unit" data-source-unit="OLP-0506" data-source-occurrence="558" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/lindenbaum.tex" data-source-sha256="78eec9461acb577120b1afaba6472e3e6d5ef4f47426857e1ead432b38366002">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="60.3" data-native-label="int:sc:lin:sec" id="label-main-98b7561f679a4a2d5c7e">60.3 Lema Lindenbaum</h3>
+<p>Teorema kelengkapan bagi logika intuisionistik dibuktikan dengan mengandaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029027" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan mengonstruksi model yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029028" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029029" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Dalam logika klasik, relasi keterderivasian dapat direduksi menjadi gagasan konsistensi karena formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029030" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dapat diturunkan dari suatu himpunan formula jika dan hanya jika himpunan itu bersama negasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029031" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> tidak konsisten. Hal ini tidak mungkin dilakukan dalam logika intuisionistik. Dalam logika intuisionistik, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029032" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> tidak konsisten, kita hanya memperoleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029033" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029034" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> secara umum tidak berlaku secara intuisionistik, kita tidak dapat menyimpulkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029035" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Oleh karena itu, ketika mengonstruksi model <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029036" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math>, kita perlu terus mencatat ketak-keterderivasian formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029037" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Dengan demikian, kita tidak dapat menggunakan himpunan lengkap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029038" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊇</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> untuk membangun model <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029039" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math>, sebab dalam setiap himpunan lengkap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029040" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029041" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Sebagai ganti himpunan lengkap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029042" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>, kita menggunakan gagasan himpunan prima formula:</p>
+<div id="E02534" class="native-environment native-defn" data-source-edition="main" data-source-prefix="int:sc:lin" data-source-unit_id="OLP-0506" data-source-occurrence="558" data-source-chapter="60" data-native-number="60.3">
+<p><strong>Definisi 60.3.</strong></p>
+<div id="label-main-cc746abac86a35950c45" class="native-anchor">
+
+</div>
+<p>Suatu himpunan formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029043" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> disebut <em>prima</em> jika dan hanya jika</p>
+<ol>
+<li><p><span id="label-main-5af5b7f97b1d774b55b0" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029044" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> konsisten, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029045" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊬</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>;</p></li>
+<li><p><span id="label-main-d3a1089f320e747110f5" class="native-anchor"/> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029046" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029047" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>; dan</p></li>
+<li><p><span id="label-main-403d1c8992589aec22d5" class="native-anchor"/> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029048" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029049" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029050" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>.</p></li>
+</ol>
+</div>
+<div id="E02535" class="native-environment native-lem" data-source-edition="main" data-source-prefix="int:sc:lin" data-source-unit_id="OLP-0506" data-source-occurrence="558" data-source-chapter="60" data-native-number="60.4">
+<p><strong>Lema 60.4.</strong></p>
+<p><strong>Lema Lindenbaum</strong></p>
+<p><span id="label-main-0ed9e2a583e82cfdc878" class="native-anchor"/> Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029051" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029052" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊇</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029053" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> prima dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029054" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02536" class="native-environment native-proof" data-source-edition="main" data-source-prefix="int:sc:lin" data-source-unit_id="OLP-0506" data-source-occurrence="558" data-source-chapter="60" data-native-number="559">
+<p><strong>Bukti.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029055" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029056" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+</math>, …, merupakan enumerasi semua formula berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029057" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Kita akan mendefinisikan suatu barisan menaik himpunan formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029058" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>, dengan setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029059" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math> didefinisikan sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029060" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math> bersama satu formula baru. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029061" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> akan menjadi gabungan semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029062" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Formula baru dipilih sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029063" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> prima dan tetap memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029064" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Ini berarti bahwa pada setiap tahap kita harus menemukan disjungsi pertama <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029065" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> sedemikian sehingga:</p>
+<ol>
+<li><p><span id="label-main-1141996f6f21189c69f3" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029066" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊢</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math></p></li>
+<li><p><span id="label-main-b25a200d467446d9e06c" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029067" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>∉</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029068" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>∉</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>.</p></li>
+</ol>
+<p>Kita menambahkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029069" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029070" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029071" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, dan menambahkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029072" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> jika tidak. Kita perlu menunjukkan bahwa prosedur ini berhasil. Untuk sementara, definisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029073" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math> sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029074" dir="ltr" display="inline">
+  <mi>i</mi>
+</math> terkecil sedemikian sehingga <span class="native-reference"><a href="#label-main-1141996f6f21189c69f3">enumi 1</a></span> dan <span class="native-reference"><a href="#label-main-b25a200d467446d9e06c">enumi 2</a></span> berlaku.</p>
+<p>Definisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029075" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>=</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029076" display="block" dir="ltr">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <mrow>
+    <mo>{</mo>
+    <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+          <msub>
+            <mi mathvariant="normal">Γ</mi>
+            <mi>n</mi>
+          </msub>
+          <mo>∪</mo>
+          <mo fence="false" stretchy="false">{</mo>
+          <msub>
+            <mrow>
+              <mi>ψ</mi>
+            </mrow>
+            <mrow>
+              <mi>i</mi>
+              <mo stretchy="false">(</mo>
+              <mi>n</mi>
+              <mo stretchy="false">)</mo>
+            </mrow>
+          </msub>
+          <mo fence="false" stretchy="false">}</mo>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <msub>
+                <mi mathvariant="normal">Γ</mi>
+                <mi>n</mi>
+              </msub>
+              <mo>∪</mo>
+              <mo fence="false" stretchy="false">{</mo>
+              <msub>
+                <mrow>
+                  <mi>ψ</mi>
+                </mrow>
+                <mrow>
+                  <mi>i</mi>
+                  <mo stretchy="false">(</mo>
+                  <mi>n</mi>
+                  <mo stretchy="false">)</mo>
+                </mrow>
+              </msub>
+              <mo fence="false" stretchy="false">}</mo>
+              <mo>⊬</mo>
+              <mrow>
+                <mi>φ</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+          <msub>
+            <mi mathvariant="normal">Γ</mi>
+            <mi>n</mi>
+          </msub>
+          <mo>∪</mo>
+          <mo fence="false" stretchy="false">{</mo>
+          <msub>
+            <mrow>
+              <mi>χ</mi>
+            </mrow>
+            <mrow>
+              <mi>i</mi>
+              <mo stretchy="false">(</mo>
+              <mi>n</mi>
+              <mo stretchy="false">)</mo>
+            </mrow>
+          </msub>
+          <mo fence="false" stretchy="false">}</mo>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+          <mtext class="olp-math-prose">jika tidak</mtext>
+        </mtd>
+      </mtr>
+    </mtable>
+    <mo fence="true" stretchy="true" symmetric="true"/>
+  </mrow>
+</math> Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029077" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math> tidak terdefinisi, yakni jika setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029078" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029079" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029080" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>, kita menetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029081" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Sekarang tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029082" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>=</mo>
+  <munderover>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>=</mo>
+      <mn>0</mn>
+    </mrow>
+    <mi mathvariant="normal">∞</mi>
+  </munderover>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>.</p>
+<p>Pertama, kita menunjukkan bahwa untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029083" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029084" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Kita melakukan induksi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029085" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>. Untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029086" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+</math>, klaim berlaku berdasarkan hipotesis teorema, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029087" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029088" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>&gt;</mo>
+  <mn>0</mn>
+</math>, kita harus menunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029089" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029090" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029091" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math> tidak terdefinisi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029092" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math> dan tidak ada yang perlu dibuktikan. Jadi, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029093" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math> terdefinisi. Agar ringkas, tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029094" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo>=</mo>
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+<p>Kita membuktikan kontraposisi klaim tersebut. Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029095" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Berdasarkan konstruksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029096" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029097" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>; jika tidak, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029098" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Jelas bahwa kasus pertama tidak mungkin, sebab dalam kasus itu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029099" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029100" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029101" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Menurut definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029102" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029103" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊢</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math>. Kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029104" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Kita juga mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029105" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Oleh karena itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029106" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, sebagaimana hendak ditunjukkan.</p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029107" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, terdapat suatu himpunan bagian berhingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029108" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊆</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029109" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029110" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029111" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, yang langsung bertentangan dengan hasil di atas. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029112" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>≠</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>, setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029113" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>′</mo>
+  </msup>
+</math> harus termuat dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029114" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>i</mi>
+  </msub>
+</math> untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029115" dir="ltr" display="inline">
+  <mi>i</mi>
+</math>. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029116" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> merupakan indeks terbesar di antara indeks-indeks tersebut. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029117" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>⊆</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029118" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo>≤</mo>
+  <mi>n</mi>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029119" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊆</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Namun, ini mengakibatkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029120" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, bertentangan dengan hasil di atas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029121" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Terakhir, kita menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029122" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> prima, yakni memenuhi syarat <span class="native-reference"><a href="#label-main-5af5b7f97b1d774b55b0">enumi 1</a></span>, <span class="native-reference"><a href="#label-main-d3a1089f320e747110f5">enumi 2</a></span>, dan <span class="native-reference"><a href="#label-main-403d1c8992589aec22d5">enumi 3</a></span> dalam <span class="native-reference"><a href="#label-main-cc746abac86a35950c45">Definisi 60.3</a></span>.</p>
+<p>Pertama, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029123" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029124" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> konsisten dan <span class="native-reference"><a href="#label-main-5af5b7f97b1d774b55b0">enumi 1</a></span> berlaku.</p>
+<p>Sekarang kita menunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029125" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029126" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029127" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>. Ini membuktikan <span class="native-reference"><a href="#label-main-403d1c8992589aec22d5">enumi 3</a></span>, sebab jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029128" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029129" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Jadi, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029130" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, tetapi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029131" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∉</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029132" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>∉</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029133" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029134" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029135" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029136" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> muncul dalam enumerasi semua disjungsi, katakanlah sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029137" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math>. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029138" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math> memenuhi sifat-sifat dalam definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029139" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math>: kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029140" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊢</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math>, sedangkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029141" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∉</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029142" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∉</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Pada setiap tahap selama disjungsi ke-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029143" dir="ltr" display="inline">
+  <mi>j</mi>
+</math> belum diproses, satu disjungsi yang memenuhi syarat dan berindeks tidak lebih dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029144" dir="ltr" display="inline">
+  <mi>j</mi>
+</math> tersingkir karena kita menambahkan salah satu disjungennya. Hanya ada berhingga banyak indeks demikian. Karena itu, pada suatu tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029145" dir="ltr" display="inline">
+  <mi>m</mi>
+</math> akan berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029146" dir="ltr" display="inline">
+  <mi>j</mi>
+  <mo>=</mo>
+  <mi>i</mi>
+  <mo stretchy="false">(</mo>
+  <mi>m</mi>
+  <mo stretchy="false">)</mo>
+</math>. Namun, kemudian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029147" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>m</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029148" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mrow>
+      <mi>m</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math>, bertentangan dengan asumsi bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029149" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∉</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029150" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo>∉</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>.</p>
+<p>Sekarang andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029151" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029152" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Namun, kita baru saja membuktikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029153" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029154" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029155" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> memenuhi <span class="native-reference"><a href="#label-main-d3a1089f320e747110f5">enumi 2</a></span> dalam <span class="native-reference"><a href="#label-main-cc746abac86a35950c45">Definisi 60.3</a></span>.</p>
+</div>
+<div id="source-OLP-0507-0559" class="source-unit" data-source-unit="OLP-0507" data-source-occurrence="559" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/canonical-model.tex" data-source-sha256="a66bf196adcb22082e4cb350fd673d2739c2073622fa06291fb2eeb55bec630e">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="60.4" data-native-label="int:sc:mod:sec" id="label-main-e22af5d6977f6f4280f5">60.4 Model Kanonis</h3>
+<p>Dunia-dunia dalam model kita akan berupa barisan berhingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029159" dir="ltr" display="inline">
+  <mi>σ</mi>
+</math> dari bilangan asli, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029160" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>∈</mo>
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math>. Perhatikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029161" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math> didefinisikan secara induktif oleh:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029162" dir="ltr" display="inline">
+  <mi mathvariant="normal">Λ</mi>
+  <mo>∈</mo>
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math>.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029163" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>∈</mo>
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029164" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029165" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo>∈</mo>
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math> (dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029166" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+</math> berarti <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029167" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>⌢</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>n</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>, sedangkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029168" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>⌢</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math> merupakan konkatenasi barisan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029169" dir="ltr" display="inline">
+  <mi>σ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029170" dir="ltr" display="inline">
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math>).</p></li>
+<li><p>Tidak ada objek lain yang termasuk dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029171" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math>.</p></li>
+</ol>
+<p>Jadi, kita dapat menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029172" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math> untuk memberikan definisi-definisi induktif.</p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029173" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029174" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>, …, merupakan enumerasi semua pasangan formula. Dengan diberikan suatu himpunan formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029175" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math>, definisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029176" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+</math> secara induktif sebagai berikut:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029177" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">Λ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi mathvariant="normal">Δ</mi>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029178" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow/>
+</math> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029179" display="block" dir="ltr">
+  <mrow>
+    <mo>{</mo>
+    <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mo stretchy="false">(</mo>
+          <mi mathvariant="normal">Δ</mi>
+          <mo stretchy="false">(</mo>
+          <mi>σ</mi>
+          <mo stretchy="false">)</mo>
+          <mo>∪</mo>
+          <mo fence="false" stretchy="false">{</mo>
+          <msub>
+            <mrow>
+              <mi>ψ</mi>
+            </mrow>
+            <mi>n</mi>
+          </msub>
+          <mo fence="false" stretchy="false">}</mo>
+          <msup>
+            <mo stretchy="false">)</mo>
+            <mo>∗</mo>
+          </msup>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+          <mrow class="olp-math-prose">
+            <mtext>jika </mtext>
+            <mrow>
+              <mi mathvariant="normal">Δ</mi>
+              <mo stretchy="false">(</mo>
+              <mi>σ</mi>
+              <mo stretchy="false">)</mo>
+              <mo>∪</mo>
+              <mo fence="false" stretchy="false">{</mo>
+              <msub>
+                <mrow>
+                  <mi>ψ</mi>
+                </mrow>
+                <mi>n</mi>
+              </msub>
+              <mo fence="false" stretchy="false">}</mo>
+              <mo>⊬</mo>
+              <msub>
+                <mrow>
+                  <mi>χ</mi>
+                </mrow>
+                <mi>n</mi>
+              </msub>
+            </mrow>
+          </mrow>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+          <mi mathvariant="normal">Δ</mi>
+          <mo stretchy="false">(</mo>
+          <mi>σ</mi>
+          <mo stretchy="false">)</mo>
+        </mtd>
+        <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+          <mtext class="olp-math-prose">jika tidak</mtext>
+          <mo>.</mo>
+        </mtd>
+      </mtr>
+    </mtable>
+    <mo fence="true" stretchy="true" symmetric="true"/>
+  </mrow>
+</math></p></li>
+</ol>
+<p>Di sini, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029180" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <msup>
+    <mo stretchy="false">)</mo>
+    <mo>∗</mo>
+  </msup>
+</math> berarti himpunan prima formula yang keberadaannya dijamin oleh <span class="native-reference"><a href="#label-main-0ed9e2a583e82cfdc878">Lema 60.4</a></span>, diterapkan pada himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029181" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math> dan formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029182" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>. Perhatikan bahwa, menurut definisi ini, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029183" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊬</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029184" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029185" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊬</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>. Perhatikan pula bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029186" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊆</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029187" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029188" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math> prima, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029189" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+</math> prima untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029190" dir="ltr" display="inline">
+  <mi>σ</mi>
+</math>.</p>
+<div id="E02538" class="native-environment native-defn" data-source-edition="main" data-source-prefix="int:sc:mod" data-source-unit_id="OLP-0507" data-source-occurrence="559" data-source-chapter="60" data-native-number="60.5">
+<p><strong>Definisi 60.5.</strong></p>
+<div id="label-main-bc60fa48f326a5b3d5bb" class="native-anchor">
+
+</div>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029191" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math> prima. Maka <em>model kanonis</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029192" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+</math> bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029193" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math> didefinisikan oleh:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029194" dir="ltr" display="inline">
+  <mi>W</mi>
+  <mo>=</mo>
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℕ</mi>
+    </mrow>
+    <mo>∗</mo>
+  </msup>
+</math>, yakni himpunan barisan berhingga bilangan asli.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029195" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> merupakan tatanan parsial yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029196" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>σ</mi>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029197" dir="ltr" display="inline">
+  <mi>σ</mi>
+</math> merupakan segmen awal dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029198" dir="ltr" display="inline">
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math> (yakni, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029199" dir="ltr" display="inline">
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>=</mo>
+  <mi>σ</mi>
+  <mo>⌢</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>″</mo>
+  </msup>
+</math> untuk suatu barisan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029200" dir="ltr" display="inline">
+  <msup>
+    <mi>σ</mi>
+    <mo>″</mo>
+  </msup>
+</math>).</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029201" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>σ</mi>
+  <mo>:</mo>
+  <mi>p</mi>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p></li>
+</ol>
+</div>
+<p>Mudah diperiksa bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029202" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> memang merupakan tatanan parsial. Syarat monotonisitas pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029203" dir="ltr" display="inline">
+  <mi>V</mi>
+</math> juga terpenuhi. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029204" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊆</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math>, dengan induksi pada panjang ekor <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029205" dir="ltr" display="inline">
+  <msup>
+    <mi>σ</mi>
+    <mo>″</mo>
+  </msup>
+</math> kita memperoleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029206" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊆</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">)</mo>
+</math> setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029207" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>σ</mi>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math>.</p>
+<div id="source-OLP-0508-0560" class="source-unit" data-source-unit="OLP-0508" data-source-occurrence="560" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/truth-lemma.tex" data-source-sha256="c3e9d306944962987a38fbfdac8b93a6693e069465303b35c789a2b80bd130dc">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="60.5" data-native-label="int:sc:tru:sec" id="label-main-ed5dacf9931c35664058">60.5 Lema Kebenaran</h3>
+<p>Lema berikut menghubungkan keterpenuhan dalam model kanonis dengan formula yang merupakan anggota dari himpunan prima <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029208" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math>.</p>
+<div id="E02539" class="native-environment native-lem" data-source-edition="main" data-source-prefix="int:sc:tru" data-source-unit_id="OLP-0508" data-source-occurrence="560" data-source-chapter="60" data-native-number="60.6">
+<p><strong>Lema 60.6.</strong></p>
+<div id="label-main-ca9ff7e705ea8918d87a" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029209" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math> prima, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029210" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029211" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02540" class="native-environment native-proof" data-source-edition="main" data-source-prefix="int:sc:tru" data-source-unit_id="OLP-0508" data-source-occurrence="560" data-source-chapter="60" data-native-number="560">
+<p><strong>Bukti.</strong></p>
+<p>Dengan induksi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029212" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029213" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>: Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029214" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+</math> prima, himpunan tersebut konsisten, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029215" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Menurut definisi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029216" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029217" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mi>p</mi>
+</math>: Menurut definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029218" dir="ltr" display="inline">
+  <mrow>
+    <mrow/>
+  </mrow>
+  <mo>⊩</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029219" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029220" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>∈</mo>
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029221" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029222" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+</math> prima, ini berlaku jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029223" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029224" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>: latihan.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029225" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029226" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029227" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029228" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029229" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029230" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, dan demikian pula bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029231" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Namun, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029232" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029233" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029234" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029235" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029236" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029237" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029238" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, ini berlaku jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029239" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029240" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Kita harus menunjukkan bahwa syarat terakhir ini berlaku jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029241" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Arah dari kiri ke kanan jelas. Arah dari kanan ke kiri mengikuti fakta bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029242" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+</math> prima.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029243" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>: Pertama, kita membuktikan kontraposisi arah dari kiri ke kanan. Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029244" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029245" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029246" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> sama dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029247" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029248" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029249" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <msup>
+    <mo stretchy="false">)</mo>
+    <mo>∗</mo>
+  </msup>
+</math>, serta <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029250" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> tetapi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029251" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029252" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029253" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029254" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>σ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>.</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math>, ini berarti bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029255" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Sekarang andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029256" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, dan misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029257" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>σ</mi>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029258" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>⊆</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">)</mo>
+</math>, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029259" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029260" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Dengan kata lain, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029261" dir="ltr" display="inline">
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029262" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>σ</mi>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029263" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">)</mo>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029264" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">)</mo>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>. Berdasarkan hipotesis induksi, ini berarti bahwa setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029265" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mi>σ</mi>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029266" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029267" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <msup>
+    <mi>σ</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>; dengan kata lain, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029268" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <mi mathvariant="normal">Δ</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+</ol>
+</div>
+<div id="source-OLP-0509-0561" class="source-unit" data-source-unit="OLP-0509" data-source-occurrence="561" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/completeness-thm.tex" data-source-sha256="093226562531bd9021df01d4a26bbf76772f6a36b57865d2b31b9204ef2b66e1">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="60.6" data-native-label="int:sc:cpl:sec" id="label-main-e89bcb853d368d57e1d0">60.6 Teorema Kelengkapan</h3>
+<div id="E02541" class="native-environment native-thm" data-source-edition="main" data-source-prefix="int:sc:cpl" data-source-unit_id="OLP-0509" data-source-occurrence="561" data-source-chapter="60" data-native-number="60.7">
+<p><strong>Teorema 60.7.</strong></p>
+<div id="label-main-ea7e7f9cbeb074b6bfbe" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029269" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029270" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02542" class="native-environment native-proof" data-source-edition="main" data-source-prefix="int:sc:cpl" data-source-unit_id="OLP-0509" data-source-occurrence="561" data-source-chapter="60" data-native-number="561">
+<p><strong>Bukti.</strong></p>
+<p>Kita membuktikan kontraposisinya. Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029271" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Berdasarkan <span class="native-reference"><a href="#label-main-0ed9e2a583e82cfdc878">Lema 60.4</a></span>, terdapat himpunan prima <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029272" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊇</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029273" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Pertimbangkan model kanonis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029274" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <msup>
+      <mi mathvariant="normal">Γ</mi>
+      <mo>∗</mo>
+    </msup>
+    <mo stretchy="false">)</mo>
+  </mrow>
+</math> bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029275" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math> sebagaimana didefinisikan dalam <span class="native-reference"><a href="#label-main-bc60fa48f326a5b3d5bb">Definisi 60.5</a></span>. Untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029276" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029277" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Perhatikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029278" dir="ltr" display="inline">
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">Λ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msup>
+    <mi mathvariant="normal">Γ</mi>
+    <mo>∗</mo>
+  </msup>
+</math>. Berdasarkan Lema Kebenaran (<span class="native-reference"><a href="#label-main-ca9ff7e705ea8918d87a">Lema 60.6</a></span>), kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029279" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <msup>
+      <mi mathvariant="normal">Γ</mi>
+      <mo>∗</mo>
+    </msup>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi mathvariant="normal">Λ</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029280" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>, serta <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029281" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+    <mo stretchy="false">(</mo>
+    <msup>
+      <mi mathvariant="normal">Γ</mi>
+      <mo>∗</mo>
+    </msup>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mo>,</mo>
+  <mi mathvariant="normal">Λ</mi>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Ini menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029282" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊭</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="source-OLP-0510-0562" class="source-unit" data-source-unit="OLP-0510" data-source-occurrence="562" data-source-path="source/main/openlogic/locale/id/content/intuitionistic-logic/soundness-completeness/decidability.tex" data-source-sha256="b053f9e4a7d26940b5f8ac3a8f7dc01e483055a401c317e0c6b2fb8084e16fb5">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="60.7" data-native-label="int:sc:dec:sec" id="label-main-c447d870a23834524a31">60.7 Keterputusan</h3>
+<p>Perhatikan bahwa bukti teorema kelengkapan memberikan, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029299" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊬</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, sebuah model dengan tak berhingga banyak dunia yang menjadi saksi bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029300" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊭</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Proposisi berikut menunjukkan bahwa untuk membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029301" dir="ltr" display="inline">
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, cukup dibuktikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029302" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk semua model berhingga (yakni model dengan himpunan dunia berhingga).</p>
+<div id="E02546" class="native-environment native-thm" data-source-edition="main" data-source-prefix="int:sc:dec" data-source-unit_id="OLP-0510" data-source-occurrence="562" data-source-chapter="60" data-native-number="60.8">
+<p><strong>Teorema 60.8.</strong></p>
+<div id="label-main-8e2feac8f38093646225" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029303" dir="ltr" display="inline">
+  <mo>⊭</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, terdapat suatu model berhingga sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029304" dir="ltr" display="inline">
+  <mrow>
+    <msup>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mo>′</mo>
+    </msup>
+  </mrow>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02547" class="native-environment native-proof" data-source-edition="main" data-source-prefix="int:sc:dec" data-source-unit_id="OLP-0510" data-source-occurrence="562" data-source-chapter="60" data-native-number="562">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029305" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>W</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo>,</mo>
+  <mi>V</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029306" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, dan misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029307" dir="ltr" display="inline">
+  <mi>P</mi>
+</math> merupakan himpunan semua subformula dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029308" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Definisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029309" dir="ltr" display="inline">
+  <mrow>
+    <msup>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mo>′</mo>
+    </msup>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msup>
+    <mi>W</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>,</mo>
+  <msup>
+    <mi>R</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>,</mo>
+  <msup>
+    <mi>V</mi>
+    <mo>′</mo>
+  </msup>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dengan menetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029310" dir="ltr" display="inline">
+  <msup>
+    <mi>W</mi>
+    <mo>′</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo stretchy="false">[</mo>
+  <mi>w</mi>
+  <mo stretchy="false">]</mo>
+  <mo>:</mo>
+  <mi>w</mi>
+  <mo>∈</mo>
+  <mi>W</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029311" dir="ltr" display="inline">
+  <mo stretchy="false">[</mo>
+  <mi>w</mi>
+  <mo stretchy="false">]</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi>P</mi>
+  <mo>:</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>; tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029312" dir="ltr" display="inline">
+  <msup>
+    <mi>R</mi>
+    <mo>′</mo>
+  </msup>
+</math> sebagai relasi himpunan bagian; dan tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029313" dir="ltr" display="inline">
+  <msup>
+    <mi>V</mi>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo stretchy="false">[</mo>
+  <mi>w</mi>
+  <mo stretchy="false">]</mo>
+  <mo>:</mo>
+  <mi>p</mi>
+  <mo>∈</mo>
+  <mo stretchy="false">[</mo>
+  <mi>w</mi>
+  <mo stretchy="false">]</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029314" dir="ltr" display="inline">
+  <msup>
+    <mi>W</mi>
+    <mo>′</mo>
+  </msup>
+</math> berhingga dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029315" dir="ltr" display="inline">
+  <mrow>
+    <msup>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mo>′</mo>
+    </msup>
+  </mrow>
+</math> merupakan model relasional.</p>
+<p>Dengan induksi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029316" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, dapat ditunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029317" display="block" dir="ltr">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+  <mrow>
+    <msup>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mo>′</mo>
+    </msup>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mi>w</mi>
+    <mo stretchy="false">]</mo>
+  </mrow>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029318" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi>P</mi>
+</math>. Pembuktiannya diserahkan sebagai latihan kepada pembaca. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029319" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi>P</mi>
+</math>, hasil tersebut memberikan model tandingan berhingga bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029320" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<p>Berdasarkan <span class="native-reference"><a href="#label-main-8e2feac8f38093646225">Teorema 60.8</a></span>, terdapat suatu algoritme untuk memutuskan apakah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029325" dir="ltr" display="inline">
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<h3 class="unnumbered native-problems-heading" data-native-chapter="60" id="exercises-main-60">Soal</h3>
+<div id="E02532" class="native-environment native-prob" data-source-edition="main" data-source-prefix="int:sc:snd" data-source-unit_id="OLP-0505" data-source-occurrence="557" data-source-chapter="60" data-native-number="60.1">
+<p><strong>Soal 60.1.</strong></p>
+<p>Lengkapi bukti <span class="native-reference"><a href="#label-main-cbe7c4c4a77836a7678a">Teorema 60.2</a></span>. Untuk kasus <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029019" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">¬</mi>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029020" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">¬</mi>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math>, gunakan definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029021" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dalam <span class="native-reference"><a href="part-0074.xhtml#label-main-a8df6ae687ff742f788f">Definisi 59.2</a></span>; dengan kata lain, jangan perlakukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029022" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> sebagai formula yang didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029023" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi mathvariant="normal">⊥</mi>
+</math>.</p>
+</div>
+<div id="E02533" class="native-environment native-prob" data-source-edition="main" data-source-prefix="int:sc:snd" data-source-unit_id="OLP-0505" data-source-occurrence="557" data-source-chapter="60" data-native-number="60.2">
+<p><strong>Soal 60.2.</strong></p>
+<p>Tunjukkan bahwa formula berikut tidak dapat diturunkan dalam logika intuisionistik:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029024" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029025" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029026" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mo minsize="1.2em" maxsize="1.2em">(</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo minsize="1.2em" maxsize="1.2em">)</mo>
+  </mrow>
+</math></p></li>
+</ol>
+</div>
+<div id="E02537" class="native-environment native-prob" data-source-edition="main" data-source-prefix="int:sc:lin" data-source-unit_id="OLP-0506" data-source-occurrence="558" data-source-chapter="60" data-native-number="60.3">
+<p><strong>Soal 60.3.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029156" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊬</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029157" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> konsisten dalam logika klasik, yakni terdapat suatu valuasi yang membuat semua formula dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029158" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> benar.</p>
+</div>
+<div id="E02543" class="native-environment native-prob" data-source-edition="main" data-source-prefix="int:sc:cpl" data-source-unit_id="OLP-0509" data-source-occurrence="561" data-source-chapter="60" data-native-number="60.4">
+<p><strong>Soal 60.4.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029283" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> hanya memuat variabel proposisi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029284" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029285" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029286" dir="ltr" display="inline">
+  <mo>⊭</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Gunakan hasil ini untuk menyimpulkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029287" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+</math> tidak dapat didefinisikan dalam logika intuisionistik dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029288" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029289" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math>.</p>
+</div>
+<div id="E02544" class="native-environment native-prob" data-source-edition="main" data-source-prefix="int:sc:cpl" data-source-unit_id="OLP-0509" data-source-occurrence="561" data-source-chapter="60" data-native-number="60.5">
+<p><strong>Soal 60.5.</strong></p>
+<p>Dengan menggunakan teorema kelengkapan, buktikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029290" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029291" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029292" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. (Petunjuk: Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029293" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029294" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mn>2</mn>
+    </msub>
+  </mrow>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, lalu konstruksikan model baru <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029295" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029296" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊮</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.)</p>
+</div>
+<div id="E02545" class="native-environment native-prob" data-source-edition="main" data-source-prefix="int:sc:cpl" data-source-unit_id="OLP-0509" data-source-occurrence="561" data-source-chapter="60" data-native-number="60.6">
+<p><strong>Soal 60.6.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029297" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+</math> merupakan model relasional yang menggunakan tatanan linear, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029298" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>⊩</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<div id="E02548" class="native-environment native-prob" data-source-edition="main" data-source-prefix="int:sc:dec" data-source-unit_id="OLP-0510" data-source-occurrence="562" data-source-chapter="60" data-native-number="60.7">
+<p><strong>Soal 60.7.</strong></p>
+<p>Selesaikan bukti <span class="native-reference"><a href="#label-main-8e2feac8f38093646225">Teorema 60.8</a></span> dengan menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029321" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔐</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mi>w</mi>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029322" dir="ltr" display="inline">
+  <mrow>
+    <msup>
+      <mrow>
+        <mi mathvariant="normal">𝔐</mi>
+      </mrow>
+      <mo>′</mo>
+    </msup>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mo stretchy="false">[</mo>
+    <mi>w</mi>
+    <mo stretchy="false">]</mo>
+  </mrow>
+  <mo>⊩</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk semua subformula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029323" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M029324" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0074.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0076.xhtml">Berikutnya →</a></nav></body></html>

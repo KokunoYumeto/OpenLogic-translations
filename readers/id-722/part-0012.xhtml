@@ -1,0 +1,1916 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>8 Sistem Derivasi — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0011.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0013.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0012" class="reader-chunk">
+<div id="source-OLP-0063-0063" class="source-unit" data-source-unit="OLP-0063" data-source-occurrence="63" data-source-path="source/main/openlogic/locale/id/content/first-order-logic/proof-systems/proof-systems.tex" data-source-sha256="907af9733ac30d4d49d72a40cb7af244e9800ce7ebf7e3785377e24ecd397a31">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="8" data-native-label="pl:prf::chap" id="label-main-82bdc865d8e601ca9f15">8 Sistem Derivasi</h2>
+<div id="E00382" class="native-environment native-editorial" data-source-edition="main" data-source-prefix="udf:udf:udf" data-source-unit_id="OLP-0063" data-source-occurrence="63" data-source-chapter="8">
+<p>Bab ini menghimpun materi umum mengenai sistem derivasi. Buku teks yang menggunakan sistem tertentu dapat menyisipkan bagian pendahuluan beserta bagian tinjauan yang relevan pada awal bab yang memperkenalkan sistem tersebut.</p>
+</div>
+<div id="source-OLP-0064-0064" class="source-unit" data-source-unit="OLP-0064" data-source-occurrence="64" data-source-path="source/main/openlogic/locale/id/content/first-order-logic/proof-systems/introduction.tex" data-source-sha256="f0fd9207187515506bd4f7eb6b71e98bf4be578af14d0908eb2649eab7d44f8c">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="8.1" data-native-label="pl:prf:int:sec" id="label-main-8e347841cf1ae85fedbf">8.1 Pendahuluan</h3>
+<p>Logika pada umumnya memiliki semantik sekaligus sistem derivasi. Semantik berkenaan dengan konsep-konsep seperti kebenaran, keterpenuhan, validitas, dan perikutan. Tujuan sistem derivasi adalah menyediakan metode yang sepenuhnya sintaktis untuk menetapkan perikutan dan validitas. Sistem itu sepenuhnya sintaktis dalam arti bahwa suatu derivasi di dalam sistem demikian merupakan objek sintaktis berhingga, biasanya berupa barisan (atau susunan berhingga lainnya) dari kalimat atau formula. Sistem derivasi yang baik memiliki sifat bahwa setiap barisan atau susunan tertentu dari kalimat atau formula dapat diperiksa secara mekanis apakah “benar.”</p>
+<p>Sistem derivasi yang paling sederhana (dan secara historis pertama) bagi logika orde pertama bersifat <em>aksiomatik</em>. Sebuah barisan formula dianggap sebagai derivasi dalam sistem demikian apabila setiap formula di dalamnya merupakan salah satu dari sekumpulan tetap “aksioma” atau mengikuti dari formula yang mendahuluinya dalam barisan melalui salah satu dari sejumlah tetap “aturan inferensi”—dan dapat diperiksa secara mekanis apakah formula merupakan aksioma serta apakah formula itu mengikuti secara tepat dari formula lain melalui salah satu aturan inferensi. Sistem derivasi aksiomatik mudah dideskripsikan—dan juga mudah ditangani secara metateoretis—tetapi derivasi di dalamnya sulit dibaca dan dipahami, serta juga sulit dihasilkan.</p>
+<p>Sistem derivasi lain telah dikembangkan dengan tujuan agar derivasi lebih mudah disusun atau derivasi lebih mudah dipahami setelah selesai. Contohnya ialah deduksi alami, pohon kebenaran, yang juga dikenal sebagai pembuktian tableau, dan kalkulus sekuen. Sejumlah sistem derivasi dirancang khusus dengan mempertimbangkan mekanisasi; misalnya, metode resolusi mudah diimplementasikan dalam perangkat lunak (tetapi derivasi di dalamnya pada dasarnya mustahil dipahami). Sebagian besar sistem derivasi lain ini merepresentasikan derivasi sebagai pohon formula, bukan sebagai barisan. Dengan demikian, lebih mudah dilihat bagian mana dari derivasi yang bergantung pada bagian lainnya.</p>
+<p>Jadi, untuk suatu logika, seperti logika orde pertama, berbagai sistem derivasi akan memberikan eksplikasi yang berbeda mengenai apa artinya kalimat merupakan <em>teorema</em> dan apa artinya kalimat dapat diturunkan dari beberapa kalimat lain. Apa pun caranya (melalui derivasi aksiomatik, deduksi alami, derivasi sekuen, pohon kebenaran, atau refutasi resolusi), kita menginginkan agar relasi-relasi ini bersesuaian dengan gagasan semantis validitas dan perikutan. Kita tulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003377" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003378" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan teorema” dan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003379" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>” untuk “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003380" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dapat diturunkan dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003381" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>.” Bagaimanapun <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003382" dir="ltr" display="inline">
+  <mo>⊢</mo>
+</math>  didefinisikan, kita menginginkannya bersesuaian dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003383" dir="ltr" display="inline">
+  <mo>⊨</mo>
+</math>, yaitu:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003384" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003385" dir="ltr" display="inline">
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003386" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003387" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></p></li>
+</ol>
+<p>Arah “hanya jika” di atas disebut <em>kesahihan</em>. Suatu sistem derivasi bersifat sahih jika keterderivasian menjamin perikutan (atau validitas). Setiap sistem derivasi yang layak harus bersifat sahih; sistem derivasi yang tidak sahih sama sekali tidak berguna. Lagi pula, seluruh tujuan derivasi ialah memberikan jaminan sintaktis atas validitas atau perikutan. Kita akan membuktikan kesahihan bagi sistem-sistem derivasi yang kita sajikan.</p>
+<p>Arah kebalikan, yakni arah “jika,” juga penting: arah ini disebut <em>kelengkapan</em>. Sistem derivasi yang lengkap cukup kuat untuk menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003388" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan teorema setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003389" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> valid, dan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003390" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003391" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Kelengkapan lebih sulit dibuktikan, dan beberapa logika tidak memiliki sistem derivasi yang lengkap. Logika orde pertama memilikinya. Kurt Gödel adalah orang pertama yang membuktikan kelengkapan bagi sistem derivasi logika orde pertama dalam disertasinya pada tahun 1929.</p>
+<p>Konsep lain yang berkaitan dengan sistem derivasi ialah <em>konsistensi</em>. Himpunan kalimat disebut tidak konsisten jika apa pun dapat diturunkan darinya, dan disebut konsisten jika tidak demikian. Ketidakkonsistenan merupakan padanan sintaktis dari ketakterpenuhan: seperti himpunan yang tidak dapat dipenuhi, himpunan kalimat yang tidak konsisten tidak dapat menjadi teori yang baik; himpunan tersebut cacat secara mendasar. Himpunan kalimat yang konsisten belum tentu benar atau berguna, tetapi setidaknya memenuhi ambang minimal kegunaan logis tersebut. Untuk sistem derivasi yang berbeda, definisi khusus konsistensi himpunan kalimat mungkin berbeda, tetapi seperti <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003392" dir="ltr" display="inline">
+  <mo>⊢</mo>
+</math>, kita menginginkan agar konsistensi bertepatan dengan padanan semantisnya, yaitu keterpenuhan. Kita menginginkan agar selalu berlaku bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003393" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> konsisten jika dan hanya jika ia dapat dipenuhi. Di sini, arah “hanya jika” sama artinya dengan kelengkapan (konsistensi menjamin keterpenuhan), sedangkan arah “jika” sama artinya dengan kesahihan (keterpenuhan menjamin konsistensi). Bahkan, untuk logika orde pertama klasik, kedua versi kesahihan dan kelengkapan itu ekuivalen.</p>
+<div id="source-OLP-0065-0065" class="source-unit" data-source-unit="OLP-0065" data-source-occurrence="65" data-source-path="source/main/openlogic/locale/id/content/first-order-logic/proof-systems/sequent-calculus.tex" data-source-sha256="04fe414e682651cbbf0b1d7aca69f7c533a38f8ae92acd2ab1321ec9199726bf">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="8.2" data-native-label="pl:prf:seq:sec" id="label-main-d01a1588769fd0c99541">8.2 Kalkulus Sekuen</h3>
+<p>Sementara banyak sistem derivasi bekerja dengan susunan kalimat, kalkulus sekuen bekerja dengan <em>sekuen</em>. Sekuen adalah ekspresi berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003394" display="block" dir="ltr">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo stretchy="false">⇒</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+</math> yaitu sepasang barisan kalimat yang dipisahkan oleh simbol sekuen <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003395" dir="ltr" display="inline">
+  <mo stretchy="false">⇒</mo>
+</math>. Masing-masing barisan itu dapat kosong. Suatu derivasi dalam kalkulus sekuen merupakan pohon sekuen; sekuen paling atas memiliki bentuk khusus (disebut “sekuen awal” atau “aksioma”), dan setiap sekuen lainnya mengikuti dari sekuen-sekuen tepat di atasnya melalui salah satu aturan inferensi. Aturan inferensi dapat memanipulasi kalimat dalam sekuen (menambahkan, menghapus, atau menyusun ulang kalimat-kalimat itu di sisi kiri ataupun kanan), atau memperkenalkan formula kompleks dalam kesimpulan aturan tersebut. Sebagai contoh, aturan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003396" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mi mathvariant="normal">L</mi>
+    </mrow>
+  </mrow>
+</math> memungkinkan inferensi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003397" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>,</mo>
+  <mi mathvariant="normal">Γ</mi>
+  <mo stretchy="false">⇒</mo>
+  <mi mathvariant="normal">Δ</mi>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003398" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>,</mo>
+  <mi mathvariant="normal">Γ</mi>
+  <mo stretchy="false">⇒</mo>
+  <mi mathvariant="normal">Δ</mi>
+</math>, dan aturan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003399" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mi mathvariant="normal">R</mi>
+    </mrow>
+  </mrow>
+</math> memungkinkan inferensi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003400" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>,</mo>
+  <mi mathvariant="normal">Γ</mi>
+  <mo stretchy="false">⇒</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo>,</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003401" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo stretchy="false">⇒</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo>,</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, untuk sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003402" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003403" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003404" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003405" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. (Secara khusus, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003406" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003407" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+</math> dapat kosong.)</p>
+<p>Relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003408" dir="ltr" display="inline">
+  <mo>⊢</mo>
+</math> berdasarkan kalkulus sekuen didefinisikan sebagai berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003409" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika terdapat suatu barisan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003410" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+</math> sedemikian sehingga setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003411" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003412" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003413" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> dan terdapat suatu derivasi dengan sekuen <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003414" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">⇒</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> pada akarnya. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003415" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan teorema dalam kalkulus sekuen jika sekuen <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003416" dir="ltr" display="inline">
+  <mo stretchy="false">⇒</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> memiliki derivasi. Sebagai contoh, berikut adalah derivasi yang menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003417" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>:</p>
+<p><a id="proof-view-0001" href="#proof-structure-0001" class="proof-structure-link" aria-label="Bentuk terstruktur derivasi 1">[struktur 1]</a><span class="proof-visual" aria-hidden="true"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003418" display="block" dir="ltr">
+  <mrow>
+    <mrow>
+      <mstyle class="proof-style-compatibility" displaystyle="true" scriptlevel="0"><mfrac linethickness="0.06em" class="olp-inference" data-rule="solid"><mrow><mtable framespacing="0 0">
+              <mtr>
+                <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                  <mrow>
+                    <mrow>
+                      <mstyle class="proof-style-compatibility" displaystyle="true" scriptlevel="0"><mfrac linethickness="0.06em" class="olp-inference" data-rule="solid"><mrow><mtable framespacing="0 0">
+                              <mtr>
+                                <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                                  <mrow>
+                                    <mspace width=".5ex"/>
+                                    <mstyle displaystyle="false" scriptlevel="0">
+                                      <mrow>
+                                        <mrow>
+                                          <mi>φ</mi>
+                                        </mrow>
+                                        <mrow>
+                                          <mstyle scriptlevel="0">
+                                            <mspace width="0.167em"/>
+                                          </mstyle>
+                                          <mo stretchy="false">⇒</mo>
+                                          <mstyle scriptlevel="0">
+                                            <mspace width="0.167em"/>
+                                          </mstyle>
+                                        </mrow>
+                                        <mrow>
+                                          <mi>φ</mi>
+                                        </mrow>
+                                      </mrow>
+                                    </mstyle>
+                                    <mspace width=".5ex"/>
+                                  </mrow>
+                                </mtd>
+                              </mtr>
+                            </mtable>
+                          </mrow><mrow><mrow>
+                              <mspace width=".5ex"/>
+                              <mstyle displaystyle="false" scriptlevel="0">
+                                <mrow>
+                                  <mrow>
+                                    <mi>φ</mi>
+                                  </mrow>
+                                  <mo>∧</mo>
+                                  <mrow>
+                                    <mi>ψ</mi>
+                                  </mrow>
+                                  <mrow>
+                                    <mstyle scriptlevel="0">
+                                      <mspace width="0.167em"/>
+                                    </mstyle>
+                                    <mo stretchy="false">⇒</mo>
+                                    <mstyle scriptlevel="0">
+                                      <mspace width="0.167em"/>
+                                    </mstyle>
+                                  </mrow>
+                                  <mrow>
+                                    <mi>φ</mi>
+                                  </mrow>
+                                </mrow>
+                              </mstyle>
+                              <mspace width=".5ex"/>
+                            </mrow>
+                          </mrow></mfrac></mstyle><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+                        <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+                          <mrow>
+                            <mrow>
+                              <mo>∧</mo>
+                            </mrow>
+                            <mrow>
+                              <mi mathvariant="normal">L</mi>
+                            </mrow>
+                          </mrow>
+                        </mstyle>
+                      </mpadded>
+                    </mrow>
+                    </mrow>
+                </mtd>
+              </mtr>
+            </mtable>
+          </mrow><mrow><mrow>
+              <mspace width=".5ex"/>
+              <mstyle displaystyle="false" scriptlevel="0">
+                <mrow>
+                  <mrow>
+                    <mstyle scriptlevel="0">
+                      <mspace width="0.167em"/>
+                    </mstyle>
+                    <mo stretchy="false">⇒</mo>
+                    <mstyle scriptlevel="0">
+                      <mspace width="0.167em"/>
+                    </mstyle>
+                  </mrow>
+                  <mo stretchy="false">(</mo>
+                  <mrow>
+                    <mi>φ</mi>
+                  </mrow>
+                  <mo>∧</mo>
+                  <mrow>
+                    <mi>ψ</mi>
+                  </mrow>
+                  <mo stretchy="false">)</mo>
+                  <mrow>
+                    <mo stretchy="false">→</mo>
+                  </mrow>
+                  <mrow>
+                    <mi>φ</mi>
+                  </mrow>
+                </mrow>
+              </mstyle>
+              <mspace width=".5ex"/>
+            </mrow>
+          </mrow></mfrac></mstyle><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+        <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+          <mrow>
+            <mrow>
+              <mrow>
+                <mo stretchy="false">→</mo>
+              </mrow>
+            </mrow>
+            <mrow>
+              <mi mathvariant="normal">R</mi>
+            </mrow>
+          </mrow>
+        </mstyle>
+      </mpadded>
+    </mrow>
+    </mrow>
+</math></span></p>
+<p>Himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003419" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> tidak konsisten dalam kalkulus sekuen jika terdapat derivasi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003420" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">⇒</mo>
+</math> (dengan setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003421" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003422" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> dan sisi kanan sekuen kosong). Dengan menggunakan aturan <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">W</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mi mathvariant="normal">R</mi>
+    </mrow>
+  </mrow>
+</math>, setiap kalimat dapat diturunkan dari himpunan yang tidak konsisten.</p>
+<p>Kalkulus sekuen diciptakan pada tahun 1930-an oleh Gerhard Gentzen. Karena rancangannya sistematis dan simetris, kalkulus ini merupakan formalisme yang sangat berguna untuk mengembangkan teori tentang derivasi. Menemukan derivasi dalam kalkulus sekuen relatif mudah, tetapi derivasi tersebut sering kali sulit dibaca dan kaitannya dengan pembuktian kadang-kadang tidak mudah dilihat. Namun, kalkulus sekuen telah terbukti sebagai pendekatan yang sangat elegan terhadap sistem derivasi, dan banyak logika memiliki sistem kalkulus sekuen.</p>
+<div id="source-OLP-0066-0066" class="source-unit" data-source-unit="OLP-0066" data-source-occurrence="66" data-source-path="source/main/openlogic/locale/id/content/first-order-logic/proof-systems/natural-deduction.tex" data-source-sha256="4200eced3b9252a4a58760382628c530faf282150165ff730373cf0e38508ff2">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="8.3" data-native-label="pl:prf:ntd:sec" id="label-main-89dcb44d352c40954266">8.3 Deduksi Alami</h3>
+<p>Deduksi alami adalah sistem derivasi yang dimaksudkan untuk mencerminkan penalaran yang sesungguhnya (terutama jenis penalaran sistematis yang digunakan oleh matematikawan). Penalaran yang sesungguhnya berlangsung mengikuti sejumlah pola “alami.” Sebagai contoh, pembuktian per kasus memungkinkan kita menetapkan suatu kesimpulan berdasarkan premis disjungtif dengan menetapkan bahwa kesimpulan itu mengikuti dari masing-masing disjung. Pembuktian tak langsung memungkinkan kita menetapkan suatu kesimpulan dengan menunjukkan bahwa negasinya mengarah pada kontradiksi. Pembuktian bersyarat menetapkan klaim bersyarat “jika …maka …” dengan menunjukkan bahwa konsekuen mengikuti dari anteseden. Deduksi alami merupakan formalisasi dari beberapa inferensi alami ini. Setiap penghubung logis dan kuantor memiliki dua aturan, yaitu aturan introduksi dan aturan eliminasi, dan masing-masing bersesuaian dengan salah satu pola inferensi alami tersebut. Sebagai contoh, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003423" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math> bersesuaian dengan pembuktian bersyarat, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003424" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∨</mo>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math> dengan pembuktian per kasus. Aturan yang sangat sederhana ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003425" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mi>Elim</mi>
+    </mrow>
+  </mrow>
+</math>, yang memungkinkan inferensi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003426" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003427" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> (atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003428" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>).</p>
+<p>Salah satu ciri yang membedakan deduksi alami dari sistem derivasi lain ialah penggunaan asumsi. Suatu derivasi dalam deduksi alami merupakan pohon formula. Sebuah formula tunggal berada di akar pohon formula tersebut, sedangkan “daun-daun” pohon itu adalah formula yang darinya kesimpulan diturunkan. Dalam deduksi alami, beberapa formula daun berperan di dalam derivasi, tetapi sudah “habis digunakan” ketika derivasi mencapai kesimpulan. Hal ini bersesuaian dengan praktik dalam penalaran yang sesungguhnya untuk memperkenalkan hipotesis yang hanya berlaku dalam waktu singkat. Sebagai contoh, dalam pembuktian per kasus kita mengasumsikan kebenaran masing-masing disjung; dalam pembuktian bersyarat kita mengasumsikan kebenaran anteseden; dalam pembuktian tak langsung kita mengasumsikan kebenaran negasi kesimpulan. Cara memperkenalkan asumsi hipotetis, lalu melepaskannya demi menetapkan suatu langkah perantara, merupakan ciri khas deduksi alami. Formula pada daun suatu derivasi deduksi alami disebut asumsi, dan beberapa aturan inferensi dapat “melepaskan” asumsi-asumsi tersebut. Sebagai contoh, jika kita memiliki derivasi untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003429" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dari beberapa asumsi yang mencakup <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003430" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, aturan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003431" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math> memungkinkan kita menyimpulkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003432" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan melepaskan asumsi-asumsi berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003433" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> yang dipilih serta diberi label untuk inferensi tersebut. (Untuk mencatat asumsi mana yang dilepaskan pada inferensi mana, kita memberi label berupa angka pada inferensi dan asumsi yang dilepaskannya.) Asumsi yang belum dilepaskan pada akhir derivasi secara bersama-sama cukup bagi kebenaran kesimpulan; dengan demikian, derivasi menetapkan bahwa asumsi-asumsi yang belum dilepaskan dalam derivasi itu mengakibatkan kesimpulannya.</p>
+<p>Relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003434" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berdasarkan deduksi alami berlaku jika dan hanya jika terdapat derivasi dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003435" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> sebagai kalimat terakhir dalam pohon, dan setiap daun yang belum dilepaskan berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003436" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003437" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan teorema dalam deduksi alami jika dan hanya jika terdapat derivasi dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003438" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> sebagai kalimat terakhir dan semua asumsi dilepaskan. Sebagai contoh, berikut adalah derivasi yang menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003439" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>:</p>
+<p><a id="proof-view-0002" href="#proof-structure-0002" class="proof-structure-link" aria-label="Bentuk terstruktur derivasi 2">[struktur 2]</a><span class="proof-visual" aria-hidden="true"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003440" display="block" dir="ltr">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mpadded voffset="-.15em" class="olp-rule-label" data-label-side="left">
+          <mstyle displaystyle="false" scriptlevel="0">
+            <mstyle mathsize="0.7">
+              <mrow>
+                <mn>1</mn>
+              </mrow>
+            </mstyle>
+          </mstyle>
+        <mspace width="0.3em"/></mpadded>
+        <mstyle class="proof-style-compatibility" displaystyle="true" scriptlevel="0"><mfrac linethickness="0.06em" class="olp-inference" data-rule="solid"><mrow><mtable framespacing="0 0">
+                <mtr>
+                  <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                    <mrow>
+                      <mrow>
+                        <mrow>
+                          <mstyle class="proof-style-compatibility" displaystyle="true" scriptlevel="0"><mfrac linethickness="0.06em" class="olp-inference" data-rule="solid"><mrow><mtable framespacing="0 0">
+                                  <mtr>
+                                    <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                                      <mrow>
+                                        <mspace width=".5ex"/>
+                                        <mstyle displaystyle="false" scriptlevel="0">
+                                          <mrow>
+                                            <mo stretchy="false">[</mo>
+                                            <mrow>
+                                              <mi>φ</mi>
+                                            </mrow>
+                                            <mo>∧</mo>
+                                            <mrow>
+                                              <mi>ψ</mi>
+                                            </mrow>
+                                            <msup>
+                                              <mo stretchy="false">]</mo>
+                                              <mrow>
+                                                <mn>1</mn>
+                                              </mrow>
+                                            </msup>
+                                          </mrow>
+                                        </mstyle>
+                                        <mspace width=".5ex"/>
+                                      </mrow>
+                                    </mtd>
+                                  </mtr>
+                                </mtable>
+                              </mrow><mrow><mrow>
+                                  <mspace width=".5ex"/>
+                                  <mstyle displaystyle="false" scriptlevel="0">
+                                    <mrow>
+                                      <mi>φ</mi>
+                                    </mrow>
+                                  </mstyle>
+                                  <mspace width=".5ex"/>
+                                </mrow>
+                              </mrow></mfrac></mstyle><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+                            <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+                              <mrow>
+                                <mrow>
+                                  <mo>∧</mo>
+                                </mrow>
+                                <mrow>
+                                  <mi>Elim</mi>
+                                </mrow>
+                              </mrow>
+                            </mstyle>
+                          </mpadded>
+                        </mrow>
+                      </mrow>
+                      </mrow>
+                  </mtd>
+                </mtr>
+              </mtable>
+            </mrow><mrow><mrow>
+                <mspace width=".5ex"/>
+                <mstyle displaystyle="false" scriptlevel="0">
+                  <mrow>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo>∧</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mrow>
+                      <mo stretchy="false">→</mo>
+                    </mrow>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                  </mrow>
+                </mstyle>
+                <mspace width=".5ex"/>
+              </mrow>
+            </mrow></mfrac></mstyle><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+          <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+            <mrow>
+              <mrow>
+                <mrow>
+                  <mo stretchy="false">→</mo>
+                </mrow>
+              </mrow>
+              <mrow>
+                <mi>Intro</mi>
+              </mrow>
+            </mrow>
+          </mstyle>
+        </mpadded>
+      </mrow>
+    </mrow>
+    </mrow>
+</math></span></p>
+<p>Label <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003441" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> menunjukkan bahwa asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003442" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dilepaskan pada inferensi <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mi>Intro</mi>
+    </mrow>
+  </mrow>
+</math>.</p>
+<p>Himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003443" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> tidak konsisten jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003444" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math> dalam deduksi alami. Aturan <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mi mathvariant="normal">⊥</mi>
+      <mi>I</mi>
+    </msub>
+  </mrow>
+  <mrow/>
+</math> memastikan bahwa setiap kalimat dapat diturunkan dari himpunan yang tidak konsisten.</p>
+<p>Sistem deduksi alami dikembangkan oleh Gerhard Gentzen dan Stanisław Jaśkowski pada tahun 1930-an, lalu dikembangkan lebih lanjut oleh Dag Prawitz dan Frederic Fitch. Karena inferensinya mencerminkan metode pembuktian alami, sistem ini disukai oleh para filsuf. Versi yang dikembangkan oleh Fitch sering digunakan dalam buku teks pengantar logika. Dalam filsafat logika, aturan deduksi alami kadang-kadang dianggap memberikan makna operator logis (“semantik teori-bukti”).</p>
+<div id="source-OLP-0067-0067" class="source-unit" data-source-unit="OLP-0067" data-source-occurrence="67" data-source-path="source/main/openlogic/locale/id/content/first-order-logic/proof-systems/tableaux.tex" data-source-sha256="4d61a7b695b9eb0ca94a91684fd0f98ffe209439914e7d189ae9dabacfa1781e">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="8.4" data-native-label="pl:prf:tab:sec" id="label-main-ad56839f790108593348">8.4 Tableau</h3>
+<p>Sementara banyak sistem derivasi bekerja dengan susunan kalimat, tableau bekerja dengan formula bertanda. Suatu formula bertanda adalah pasangan yang terdiri atas tanda nilai kebenaran (<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003445" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003446" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math>) dan kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003447" display="block" dir="ltr">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mtext class="olp-math-prose"> atau </mtext>
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔽</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>.</mo>
+</math> Suatu tableau terdiri atas formula bertanda yang disusun dalam pohon bercabang ke bawah. Tableau itu berawal dengan sejumlah <em>asumsi</em> dan dilanjutkan dengan formula bertanda yang diperoleh dari salah satu formula bertanda di atasnya melalui penerapan salah satu aturan inferensi. Setiap aturan memungkinkan kita menambahkan satu atau lebih formula bertanda pada ujung suatu cabang, atau dua formula bertanda secara berdampingan—dalam hal ini sebuah cabang terbelah menjadi dua, dengan dua formula bertanda yang ditambahkan membentuk ujung kedua cabang tersebut.</p>
+<p>Aturan penghubung yang diterapkan pada formula bertanda kompleks menghasilkan penambahan formula bertanda yang merupakan sub-formula langsung; aturan kuantor dapat menghasilkan instans substitusi dari suatu subformula. Aturan-aturan itu muncul berpasangan, satu aturan untuk masing-masing dari kedua tanda. Sebagai contoh, aturan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003448" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝕋</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+  </mrow>
+</math> diterapkan pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003449" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, dan memungkinkan penambahan kedua formula bertanda, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003450" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003451" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, pada ujung setiap cabang yang memuat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003452" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, sedangkan aturan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003453" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝔽</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+  </mrow>
+</math> memungkinkan suatu cabang dibelah dengan menambahkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003454" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔽</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003455" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔽</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> secara berdampingan. Suatu tableau tertutup jika setiap cabangnya memuat pasangan formula bertanda yang cocok, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003456" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003457" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔽</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003458" dir="ltr" display="inline">
+  <mo>⊢</mo>
+</math> berdasarkan tableau didefinisikan sebagai berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003459" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika terdapat suatu himpunan berhingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003460" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">Γ</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊆</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> sedemikian sehingga terdapat tableau tertutup untuk asumsi-asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003461" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔽</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math> Sebagai contoh, berikut adalah suatu tableau tertutup yang menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003462" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>:</p>
+<div class="diagram-scroll" dir="ltr"><ul class="tableau" aria-label="Tableau"><li data-source-node="1" data-source-line="1"><div class="tableau-node"><span class="tableau-line-number">1.</span> <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔽</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> <span class="tableau-justification">Asumsi</span></div><ul><li data-source-node="2" data-source-line="2"><div class="tableau-node"><span class="tableau-line-number">2.</span> <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> <span class="tableau-justification"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝔽</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mstyle scriptlevel="0">
+      <mspace width="0.167em"/>
+    </mstyle>
+    <mn>1</mn>
+  </mrow>
+</math></span></div><ul><li data-source-node="3" data-source-line="3"><div class="tableau-node"><span class="tableau-line-number">3.</span> <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔽</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> <span class="tableau-justification"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo stretchy="false">→</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝔽</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mstyle scriptlevel="0">
+      <mspace width="0.167em"/>
+    </mstyle>
+    <mn>1</mn>
+  </mrow>
+</math></span></div><ul><li data-source-node="4" data-source-line="4"><div class="tableau-node"><span class="tableau-line-number">4.</span> <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> <span class="tableau-justification"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝕋</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mstyle scriptlevel="0">
+      <mspace width="0.167em"/>
+    </mstyle>
+    <mn>2</mn>
+  </mrow>
+</math></span></div><ul><li data-source-node="5" data-source-line="5"><div class="tableau-node"><span class="tableau-line-number">5.</span> <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> <span class="tableau-justification"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mo>∧</mo>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝕋</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mstyle scriptlevel="0">
+      <mspace width="0.167em"/>
+    </mstyle>
+    <mn>2</mn>
+  </mrow>
+</math></span><div class="tableau-close" aria-label="Cabang tertutup">×</div></div></li></ul></li></ul></li></ul></li></ul></li></ul></div>
+<p>Himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003463" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> tidak konsisten dalam kalkulus tableau jika terdapat suatu tableau tertutup untuk asumsi-asumsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003464" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝕋</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mstyle scriptlevel="0">
+    <mspace width="0.278em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math> dengan syarat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003465" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> berlaku untuk setiap indeks dalam daftar berhingga tersebut.</p>
+<p>Tableau diciptakan pada tahun 1950-an secara independen oleh Evert Beth dan Jaakko Hintikka, lalu disederhanakan dan dipopulerkan oleh Raymond Smullyan. Tableau sangat mudah digunakan karena penyusunan tableau merupakan prosedur yang sangat sistematis. Karena sifat sistematis tableau, tableau juga mudah diimplementasikan dengan komputer. Namun, tableau sering kali sulit dibaca dan kaitannya dengan pembuktian kadang-kadang tidak mudah dilihat. Pendekatan ini juga cukup umum, dan banyak logika berbeda yang memiliki sistem tableau. Tableau juga membantu kita menemukan struktur yang memenuhi (himpunan) kalimat tertentu: jika himpunan itu dapat dipenuhi, himpunan itu tidak akan memiliki tableau tertutup, yaitu setiap tableau akan memiliki cabang terbuka. Adapun struktur yang memenuhi dapat “dibaca” dari cabang terbuka, asalkan setiap aturan yang mungkin diterapkan pada cabang itu telah diterapkan. Terdapat pula kaitan yang sangat erat dengan kalkulus sekuen: pada dasarnya, suatu tableau tertutup merupakan derivasi kalkulus sekuen yang dipadatkan dan ditulis terbalik.</p>
+<div id="source-OLP-0068-0068" class="source-unit" data-source-unit="OLP-0068" data-source-occurrence="68" data-source-path="source/main/openlogic/locale/id/content/first-order-logic/proof-systems/axiomatic-deduction.tex" data-source-sha256="ace4b2e3d141b1df2102fd32d6d4cbc286ba4f0abd7ec75d5221f9be24791efe">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="8.5" data-native-label="pl:prf:axd:sec" id="label-main-c9744408acbac886349a">8.5 Derivasi Aksiomatik</h3>
+<p>Sistem derivasi aksiomatik merupakan sistem derivasi logis yang paling tua dan paling sederhana. Di dalamnya, derivasi hanyalah barisan kalimat. Suatu barisan kalimat dianggap sebagai derivasi yang benar jika setiap kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003466" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> di dalamnya memenuhi salah satu syarat berikut:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003467" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan aksioma, atau</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003468" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan anggota dari suatu himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003469" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> yang beranggotakan kalimat, atau</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003470" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dijustifikasi oleh aturan inferensi.</p></li>
+</ol>
+<p>Untuk menjadi aksioma, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003471" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> harus memiliki bentuk salah satu dari sejumlah skema kalimat yang tetap. Terdapat banyak himpunan skema aksioma yang menghasilkan sistem derivasi logika orde pertama yang memadai (sahih dan lengkap). Beberapa di antaranya disusun menurut penghubung yang diaturnya, misalnya skema <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003472" display="block" dir="ltr">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mstyle scriptlevel="0">
+    <mspace width="2em"/>
+  </mstyle>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mstyle scriptlevel="0">
+    <mspace width="2em"/>
+  </mstyle>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> merupakan aksioma umum yang mengatur <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003473" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003474" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003475" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math>. Beberapa sistem aksioma mengupayakan jumlah aksioma yang minimal. Bergantung pada penghubung yang diambil sebagai penghubung primitif, bahkan dimungkinkan untuk menemukan sistem aksioma yang hanya terdiri atas satu aksioma.</p>
+<p>Aturan inferensi adalah pernyataan bersyarat yang memberikan syarat cukup agar kalimat dalam derivasi dapat dijustifikasi. Modus ponens merupakan salah satu aturan semacam itu yang sangat umum: aturan ini menyatakan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003476" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003477" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> sudah dijustifikasi, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003478" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dijustifikasi. Artinya, suatu baris dalam derivasi yang memuat kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003479" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dijustifikasi, asalkan baik <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003480" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> maupun <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003481" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> (untuk suatu kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003482" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>) muncul dalam derivasi sebelum <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003483" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.</p>
+<p>Relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003484" dir="ltr" display="inline">
+  <mo>⊢</mo>
+</math> berdasarkan derivasi aksiomatik didefinisikan sebagai berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003485" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika terdapat derivasi dengan kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003486" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> sebagai formula terakhirnya (dan himpunan berhingga kalimat dalam derivasi tersebut yang dijustifikasi oleh (2) di atas merupakan himpunan bagian dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003487" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math>). <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003488" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan teorema jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003489" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> memiliki derivasi dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003490" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> kosong, yaitu setiap kalimat dalam derivasi dijustifikasi oleh (1) atau (3). Sebagai contoh, berikut adalah derivasi yang menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003491" dir="ltr" display="inline">
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math>:</p>
+<div class="diagram-scroll" dir="ltr"><table class="derivation" aria-label="Derivasi"><tbody><tr><td dir="ltr">1.</td><td dir="ltr"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math></td><td dir="ltr"/></tr><tr><td dir="ltr">2.</td><td dir="ltr"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math></td><td dir="ltr"/></tr><tr><td dir="ltr">3.</td><td dir="ltr"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math></td><td dir="ltr"/></tr></tbody></table></div>
+<p>Pada baris 1, kalimat tersebut memiliki bentuk aksioma <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003492" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> (dengan peran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003493" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003494" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dipertukarkan). Kalimat pada baris 2 memiliki bentuk aksioma <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003495" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>. Dengan demikian, kedua baris itu dijustifikasi. Baris 3 dijustifikasi oleh modus ponens: jika kita menyingkatnya sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003496" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>, maka baris 2 berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003497" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+</math>, dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003498" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003499" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>, yaitu baris 1.</p>
+<p>Himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003500" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> tidak konsisten jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003501" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>. Sistem aksioma lengkap juga akan membuktikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003502" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003503" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, sehingga jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003504" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> tidak konsisten, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003505" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003506" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Sistem derivasi aksiomatik untuk logika pertama kali diberikan oleh Gottlob Frege dalam <em>Begriffsschrift</em> karyanya pada tahun 1879; karena alasan ini, karya tersebut sering dianggap sebagai karya pertama dalam logika modern. Sistem-sistem itu disempurnakan dalam <em>Principia Mathematica</em> karya Alfred North Whitehead dan Bertrand Russell, serta oleh David Hilbert dan para mahasiswanya pada tahun 1920-an. Oleh karena itu, sistem-sistem tersebut sering disebut “sistem Frege” atau “sistem Hilbert.” Sistem-sistem itu sangat luwes dalam arti bahwa sistem aksiomatik bagi suatu logika sering mudah ditemukan. Karena derivasi memiliki struktur yang sangat sederhana dan hanya satu atau dua aturan inferensi, membuktikan berbagai hal <em>tentangnya</em> juga relatif mudah. Namun, sistem-sistem itu sangat sulit digunakan dalam praktik, yaitu sulit menemukan dan menuliskan pembuktian.</p>
+<section id="proof-structures-group-0012" class="proof-structures-appendix"><h2>Bentuk terstruktur derivasi dalam bacaan ini</h2><p>Bagian ini menyajikan kembali susunan diagram sumber untuk navigasi tanpa tata letak pohon. “Lihat bagian n” menunjuk bagian diagram yang tercantum dalam daftar, bukan simbol matematika baru. Bagian atas, bagian bawah, serta label kiri dan kanan dipertahankan. Susunan tanpa garis dan dengan dua garis diberi keterangan tersendiri; tidak diasumsikan sebagai aturan inferensi biasa. Teks dan diagram sumber tidak diubah.</p><section id="proof-structure-0001" class="proof-structure"><h3>Derivasi 1 — bentuk terstruktur</h3><p><a href="#proof-view-0001">Kembali ke tampilan sumber</a></p><p><strong>Susunan keseluruhan: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" dir="ltr" class="proof-structural-math">
+  <mrow>
+    <mrow>
+      <mtext data-proof-part-ref="2">lihat bagian 2</mtext><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+        <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+          <mrow>
+            <mrow>
+              <mrow>
+                <mo stretchy="false">→</mo>
+              </mrow>
+            </mrow>
+            <mrow>
+              <mi mathvariant="normal">R</mi>
+            </mrow>
+          </mrow>
+        </mstyle>
+      </mpadded>
+    </mrow>
+    </mrow>
+</math></span><span class="proof-part-links"> — Tautan bagian: <a href="#proof-structure-0001-node-2" aria-label="Lihat bagian 2">2</a></span></p><ol><li id="proof-structure-0001-node-1"><p><strong>Bagian 1 — satu garis</strong></p><p><strong>Bagian atas: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mtable framespacing="0 0">
+                              <mtr>
+                                <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                                  <mrow>
+                                    <mspace width=".5ex"/>
+                                    <mstyle displaystyle="false" scriptlevel="0">
+                                      <mrow>
+                                        <mrow>
+                                          <mi>φ</mi>
+                                        </mrow>
+                                        <mrow>
+                                          <mstyle scriptlevel="0">
+                                            <mspace width="0.167em"/>
+                                          </mstyle>
+                                          <mo stretchy="false">⇒</mo>
+                                          <mstyle scriptlevel="0">
+                                            <mspace width="0.167em"/>
+                                          </mstyle>
+                                        </mrow>
+                                        <mrow>
+                                          <mi>φ</mi>
+                                        </mrow>
+                                      </mrow>
+                                    </mstyle>
+                                    <mspace width=".5ex"/>
+                                  </mrow>
+                                </mtd>
+                              </mtr>
+                            </mtable>
+                          </mrow></math></span></p><p><strong>Bagian bawah: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mrow>
+                              <mspace width=".5ex"/>
+                              <mstyle displaystyle="false" scriptlevel="0">
+                                <mrow>
+                                  <mrow>
+                                    <mi>φ</mi>
+                                  </mrow>
+                                  <mo>∧</mo>
+                                  <mrow>
+                                    <mi>ψ</mi>
+                                  </mrow>
+                                  <mrow>
+                                    <mstyle scriptlevel="0">
+                                      <mspace width="0.167em"/>
+                                    </mstyle>
+                                    <mo stretchy="false">⇒</mo>
+                                    <mstyle scriptlevel="0">
+                                      <mspace width="0.167em"/>
+                                    </mstyle>
+                                  </mrow>
+                                  <mrow>
+                                    <mi>φ</mi>
+                                  </mrow>
+                                </mrow>
+                              </mstyle>
+                              <mspace width=".5ex"/>
+                            </mrow>
+                          </mrow></math></span></p><p><strong>Label kanan: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+                        <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+                          <mrow>
+                            <mrow>
+                              <mo>∧</mo>
+                            </mrow>
+                            <mrow>
+                              <mi mathvariant="normal">L</mi>
+                            </mrow>
+                          </mrow>
+                        </mstyle>
+                      </mpadded>
+                    </math></span></p></li><li id="proof-structure-0001-node-2"><p><strong>Bagian 2 — satu garis</strong></p><p><strong>Bagian atas: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mtable framespacing="0 0">
+              <mtr>
+                <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                  <mrow>
+                    <mrow>
+                      <mtext data-proof-part-ref="1">lihat bagian 1</mtext><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+                        <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+                          <mrow>
+                            <mrow>
+                              <mo>∧</mo>
+                            </mrow>
+                            <mrow>
+                              <mi mathvariant="normal">L</mi>
+                            </mrow>
+                          </mrow>
+                        </mstyle>
+                      </mpadded>
+                    </mrow>
+                    </mrow>
+                </mtd>
+              </mtr>
+            </mtable>
+          </mrow></math></span><span class="proof-part-links"> — Tautan bagian: <a href="#proof-structure-0001-node-1" aria-label="Lihat bagian 1">1</a></span></p><p><strong>Bagian bawah: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mrow>
+              <mspace width=".5ex"/>
+              <mstyle displaystyle="false" scriptlevel="0">
+                <mrow>
+                  <mrow>
+                    <mstyle scriptlevel="0">
+                      <mspace width="0.167em"/>
+                    </mstyle>
+                    <mo stretchy="false">⇒</mo>
+                    <mstyle scriptlevel="0">
+                      <mspace width="0.167em"/>
+                    </mstyle>
+                  </mrow>
+                  <mo stretchy="false">(</mo>
+                  <mrow>
+                    <mi>φ</mi>
+                  </mrow>
+                  <mo>∧</mo>
+                  <mrow>
+                    <mi>ψ</mi>
+                  </mrow>
+                  <mo stretchy="false">)</mo>
+                  <mrow>
+                    <mo stretchy="false">→</mo>
+                  </mrow>
+                  <mrow>
+                    <mi>φ</mi>
+                  </mrow>
+                </mrow>
+              </mstyle>
+              <mspace width=".5ex"/>
+            </mrow>
+          </mrow></math></span></p><p><strong>Label kanan: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+        <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+          <mrow>
+            <mrow>
+              <mrow>
+                <mo stretchy="false">→</mo>
+              </mrow>
+            </mrow>
+            <mrow>
+              <mi mathvariant="normal">R</mi>
+            </mrow>
+          </mrow>
+        </mstyle>
+      </mpadded>
+    </math></span></p></li></ol></section><section id="proof-structure-0002" class="proof-structure"><h3>Derivasi 2 — bentuk terstruktur</h3><p><a href="#proof-view-0002">Kembali ke tampilan sumber</a></p><p><strong>Susunan keseluruhan: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" dir="ltr" class="proof-structural-math">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mpadded voffset="-.15em" class="olp-rule-label" data-label-side="left">
+          <mstyle displaystyle="false" scriptlevel="0">
+            <mstyle mathsize="0.7">
+              <mrow>
+                <mn>1</mn>
+              </mrow>
+            </mstyle>
+          </mstyle>
+        <mspace width="0.3em"/></mpadded>
+        <mtext data-proof-part-ref="2">lihat bagian 2</mtext><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+          <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+            <mrow>
+              <mrow>
+                <mrow>
+                  <mo stretchy="false">→</mo>
+                </mrow>
+              </mrow>
+              <mrow>
+                <mi>Intro</mi>
+              </mrow>
+            </mrow>
+          </mstyle>
+        </mpadded>
+      </mrow>
+    </mrow>
+    </mrow>
+</math></span><span class="proof-part-links"> — Tautan bagian: <a href="#proof-structure-0002-node-2" aria-label="Lihat bagian 2">2</a></span></p><ol><li id="proof-structure-0002-node-1"><p><strong>Bagian 1 — satu garis</strong></p><p><strong>Bagian atas: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mtable framespacing="0 0">
+                                  <mtr>
+                                    <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                                      <mrow>
+                                        <mspace width=".5ex"/>
+                                        <mstyle displaystyle="false" scriptlevel="0">
+                                          <mrow>
+                                            <mo stretchy="false">[</mo>
+                                            <mrow>
+                                              <mi>φ</mi>
+                                            </mrow>
+                                            <mo>∧</mo>
+                                            <mrow>
+                                              <mi>ψ</mi>
+                                            </mrow>
+                                            <msup>
+                                              <mo stretchy="false">]</mo>
+                                              <mrow>
+                                                <mn>1</mn>
+                                              </mrow>
+                                            </msup>
+                                          </mrow>
+                                        </mstyle>
+                                        <mspace width=".5ex"/>
+                                      </mrow>
+                                    </mtd>
+                                  </mtr>
+                                </mtable>
+                              </mrow></math></span></p><p><strong>Bagian bawah: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mrow>
+                                  <mspace width=".5ex"/>
+                                  <mstyle displaystyle="false" scriptlevel="0">
+                                    <mrow>
+                                      <mi>φ</mi>
+                                    </mrow>
+                                  </mstyle>
+                                  <mspace width=".5ex"/>
+                                </mrow>
+                              </mrow></math></span></p><p><strong>Label kanan: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+                            <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+                              <mrow>
+                                <mrow>
+                                  <mo>∧</mo>
+                                </mrow>
+                                <mrow>
+                                  <mi>Elim</mi>
+                                </mrow>
+                              </mrow>
+                            </mstyle>
+                          </mpadded>
+                        </math></span></p></li><li id="proof-structure-0002-node-2"><p><strong>Bagian 2 — satu garis</strong></p><p><strong>Bagian atas: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mtable framespacing="0 0">
+                <mtr>
+                  <mtd rowalign="bottom" style="vertical-align:bottom;vertical-align:bottom">
+                    <mrow>
+                      <mrow>
+                        <mrow>
+                          <mtext data-proof-part-ref="1">lihat bagian 1</mtext><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+                            <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+                              <mrow>
+                                <mrow>
+                                  <mo>∧</mo>
+                                </mrow>
+                                <mrow>
+                                  <mi>Elim</mi>
+                                </mrow>
+                              </mrow>
+                            </mstyle>
+                          </mpadded>
+                        </mrow>
+                      </mrow>
+                      </mrow>
+                  </mtd>
+                </mtr>
+              </mtable>
+            </mrow></math></span><span class="proof-part-links"> — Tautan bagian: <a href="#proof-structure-0002-node-1" aria-label="Lihat bagian 1">1</a></span></p><p><strong>Bagian bawah: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mrow><mrow>
+                <mspace width=".5ex"/>
+                <mstyle displaystyle="false" scriptlevel="0">
+                  <mrow>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo>∧</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mrow>
+                      <mo stretchy="false">→</mo>
+                    </mrow>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                  </mrow>
+                </mstyle>
+                <mspace width=".5ex"/>
+              </mrow>
+            </mrow></math></span></p><p><strong>Label kiri: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="left">
+          <mstyle displaystyle="false" scriptlevel="0">
+            <mstyle mathsize="0.7">
+              <mrow>
+                <mn>1</mn>
+              </mrow>
+            </mstyle>
+          </mstyle>
+        <mspace width="0.3em"/></mpadded>
+        </math></span></p><p><strong>Label kanan: </strong><span class="proof-math-fragment"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline" class="proof-structural-math"><mpadded voffset="-.15em" class="olp-rule-label" data-label-side="right">
+          <mspace width="0.3em"/><mstyle displaystyle="false" scriptlevel="0">
+            <mrow>
+              <mrow>
+                <mrow>
+                  <mo stretchy="false">→</mo>
+                </mrow>
+              </mrow>
+              <mrow>
+                <mi>Intro</mi>
+              </mrow>
+            </mrow>
+          </mstyle>
+        </mpadded>
+      </math></span></p></li></ol></section></section>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0011.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0013.xhtml">Berikutnya →</a></nav></body></html>

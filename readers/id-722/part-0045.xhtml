@@ -1,0 +1,2408 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>36 Teori dan Komputabilitas — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0044.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0046.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0045" class="reader-chunk">
+<h2 class="native-numbered-heading" data-native-number="36" data-native-label="inc:tcp::chap" id="label-main-1ec07c1d6a57f940d8bf">36 Teori dan Komputabilitas</h2>
+<div id="source-OLP-0302-0354" class="source-unit" data-source-unit="OLP-0302" data-source-occurrence="354" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/introduction.tex" data-source-sha256="bd7e595cf00481653dedda30bc0791fc260ebc090ff46487d4cf75f820a3518f">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.1" data-native-label="inc:tcp:int:sec" id="label-main-9ec3de0323b31e8d954c">36.1 Pengantar</h3>
+<div id="E01777" class="native-environment native-editorial" data-source-edition="main" data-source-prefix="inc:tcp:int" data-source-unit_id="OLP-0302" data-source-occurrence="354" data-source-chapter="36">
+<p>Bagian ini perlu ditulis ulang.</p>
+</div>
+<p>Kita telah memperoleh hal-hal berikut:</p>
+<ol>
+<li><p>definisi tentang apa artinya suatu fungsi dapat direpresentasikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019263" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> (<span class="native-reference"><a href="part-0044.xhtml#label-main-f2a6b83a48563c61ddd8">Definisi 35.1</a></span>);</p></li>
+<li><p>definisi tentang apa artinya suatu relasi dapat direpresentasikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019264" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> (<span class="native-reference"><a href="part-0044.xhtml#label-main-6a3837072f0ad3a46744">Definisi 35.28</a></span>);</p></li>
+<li><p>teorema yang menyatakan bahwa fungsi-fungsi yang dapat direpresentasikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019265" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> tepat merupakan fungsi-fungsi yang dapat dihitung (<span class="native-reference"><a href="part-0044.xhtml#label-main-5f243ae8f78e53c987f9">Teorema 35.2</a></span>);</p></li>
+<li><p>teorema yang menyatakan bahwa relasi-relasi yang dapat direpresentasikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019266" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> tepat merupakan relasi-relasi yang dapat dihitung <span class="native-reference"><a href="part-0044.xhtml#label-main-6a4bbbe7ddb207d68fd1">Teorema 35.29</a></span>.</p></li>
+</ol>
+<p>Suatu <span><em>teori</em></span> adalah himpunan kalimat yang tertutup secara deduktif, yakni memiliki sifat bahwa setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019267" dir="ltr" display="inline">
+  <mi>T</mi>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019268" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019269" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019270" dir="ltr" display="inline">
+  <mi>T</mi>
+</math>. Barangkali paling baik memandang teori sebagai kumpulan kalimat beserta semua hal yang diimplikasikan oleh kalimat-kalimat tersebut. Mulai sekarang, kita akan menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019271" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> untuk menyebut <span><em>teori</em></span> yang terdiri atas himpunan kalimat yang dapat diturunkan dari delapan aksioma dalam <span class="native-reference"><a href="part-0044.xhtml#label-main-cbb737f0c28f1f3b9e2c">Bagian 35.1</a></span>. Ingat bahwa kita dapat mengodekan formula-formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019272" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> sebagai bilangan; jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019273" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> adalah formula semacam itu, misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019274" dir="ltr" display="inline">
+  <mrow>
+    <msup>
+      <mi/>
+      <mrow>
+        <mtext style="display:inline-block;transform:scaleX(-1)">#</mtext>
+      </mrow>
+    </msup>
+  </mrow>
+  <mrow>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+  </mrow>
+  <mrow>
+    <msup>
+      <mi/>
+      <mrow>
+        <mstyle displaystyle="false" scriptlevel="0" class="olp-math-prose">
+          <mtext mathsize="0.5">#</mtext>
+        </mstyle>
+      </mrow>
+    </msup>
+  </mrow>
+</math> menyatakan bilangan yang mengodekan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019275" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Dengan pengodean ini, kita sekarang dapat menanyakan apakah berbagai himpunan formula dapat dihitung atau tidak.</p>
+<div id="source-OLP-0303-0355" class="source-unit" data-source-unit="OLP-0303" data-source-occurrence="355" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/q-is-ce.tex" data-source-sha256="5bc66cd6946670a12859620c77200e1dc1b1140787845a59f2e8cf49cb2b0622">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.2" data-native-label="inc:tcp:qce:sec" id="label-main-9b797ff1d75d33a441ff">36.2 <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019276" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> C.e.-Lengkap</h3>
+<div id="E01778" class="native-environment native-thm" data-source-edition="main" data-source-prefix="inc:tcp:qce" data-source-unit_id="OLP-0303" data-source-occurrence="355" data-source-chapter="36" data-native-number="36.1">
+<p><strong>Teorema 36.1.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019277" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> bersifat c.e., tetapi tidak dapat diputuskan. Bahkan, teori itu merupakan himpunan c.e. lengkap.</p>
+</div>
+<div id="E01779" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:qce" data-source-unit_id="OLP-0303" data-source-occurrence="355" data-source-chapter="36" data-native-number="382">
+<p><strong>Bukti.</strong></p>
+<p>Mudah dilihat bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019278" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> bersifat c.e., sebab teori itu merupakan himpunan (kode) kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019279" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> sedemikian sehingga terdapat bukti <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019280" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019281" dir="ltr" display="inline">
+  <mi>y</mi>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019282" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019283" display="block" dir="ltr">
+  <mi>Q</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>y</mi>
+  <mo>:</mo>
+  <mi mathvariant="normal">∃</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>Prf</mi>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝐐</mi>
+      </mrow>
+    </mrow>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math> Namun, kita mengetahui bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019284" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>Prf</mi>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝐐</mi>
+      </mrow>
+    </mrow>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> dapat dihitung (bahkan rekursif primitif), dan setiap himpunan yang dapat ditulis dalam bentuk di atas bersifat c.e.</p>
+<p>Pernyataan bahwa teori itu merupakan himpunan c.e. lengkap ekuivalen dengan pernyataan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019285" dir="ltr" display="inline">
+  <mi>K</mi>
+  <msub>
+    <mo>≤</mo>
+    <mi>m</mi>
+  </msub>
+  <mi>Q</mi>
+</math>, dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019286" dir="ltr" display="inline">
+  <mi>K</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>x</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">↓</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Jadi, mari kita tunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019287" dir="ltr" display="inline">
+  <mi>K</mi>
+</math> tereduksi ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019288" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>. Karena predikat Kleene <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019289" dir="ltr" display="inline">
+  <mi>T</mi>
+  <mo stretchy="false">(</mo>
+  <mi>e</mi>
+  <mo>,</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>s</mi>
+  <mo stretchy="false">)</mo>
+</math> bersifat rekursif primitif, predikat itu dapat direpresentasikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019290" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>, misalnya oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019291" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+</math>. Maka untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019292" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019293" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>x</mi>
+        <mo>∈</mo>
+        <mi>K</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi mathvariant="normal">∃</mi>
+        <mi>s</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>T</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>s</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi mathvariant="normal">∃</mi>
+        <mi>s</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <mi mathvariant="normal">𝐐</mi>
+        </mrow>
+        <mo>⊢</mo>
+        <msub>
+          <mrow>
+            <mi>φ</mi>
+          </mrow>
+          <mi>T</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>x</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo>,</mo>
+        <mover>
+          <mi>x</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo>,</mo>
+        <mover>
+          <mi>s</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mrow>
+          <mi mathvariant="normal">𝐐</mi>
+        </mrow>
+        <mo>⊢</mo>
+        <mi mathvariant="normal">∃</mi>
+        <mi>s</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <msub>
+          <mrow>
+            <mi>φ</mi>
+          </mrow>
+          <mi>T</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>x</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo>,</mo>
+        <mover>
+          <mi>x</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo>,</mo>
+        <mi>s</mi>
+        <mo stretchy="false">)</mo>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Sebaliknya, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019294" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+  <mo>⊢</mo>
+  <mi mathvariant="normal">∃</mi>
+  <mi>s</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mi>s</mi>
+  <mo stretchy="false">)</mo>
+</math>, maka sesungguhnya, untuk suatu bilangan asli <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019295" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>, formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019296" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>n</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math> harus benar. Sekarang, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019297" dir="ltr" display="inline">
+  <mi>T</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math> salah, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019298" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> akan membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019299" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>n</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math>, sebab <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019300" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+</math> merepresentasikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019301" dir="ltr" display="inline">
+  <mi>T</mi>
+</math>. Namun, dengan demikian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019302" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> membuktikan suatu formula yang salah, dan ini merupakan kontradiksi. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019303" dir="ltr" display="inline">
+  <mi>T</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+</math> harus benar, yang mengimplikasikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019304" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>x</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">↓</mo>
+</math>.</p>
+<p>Ringkasnya, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019305" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019306" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019307" dir="ltr" display="inline">
+  <mi>K</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019308" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019309" dir="ltr" display="inline">
+  <mi mathvariant="normal">∃</mi>
+  <mi>s</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>T</mi>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mi>s</mi>
+  <mo stretchy="false">)</mo>
+</math>. Jadi fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019310" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> yang memetakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019311" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> ke (kode) kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019312" dir="ltr" display="inline">
+  <mi mathvariant="normal">∃</mi>
+  <mi>s</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>T</mi>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mi>s</mi>
+  <mo stretchy="false">)</mo>
+</math> merupakan reduksi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019313" dir="ltr" display="inline">
+  <mi>K</mi>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019314" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="source-OLP-0304-0356" class="source-unit" data-source-unit="OLP-0304" data-source-occurrence="356" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/oconsis-ext-of-q-undec.tex" data-source-sha256="14fe2c98a577a57f5ad82ccf456cacdc491655610de3e0f1eeeed5d40084b44a">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.3" data-native-label="inc:tcp:oqn:sec" id="label-main-94759c5b98cf4704c28e">36.3 Perluasan yang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019315" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-Konsisten dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019316" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> Tidak Dapat Diputuskan</h3>
+<div id="E01780" class="native-environment native-explain" data-source-edition="main" data-source-prefix="inc:tcp:oqn" data-source-unit_id="OLP-0304" data-source-occurrence="356" data-source-chapter="36">
+<p>Pembuktian bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019317" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> bersifat c.e.-lengkap bergantung pada fakta bahwa setiap kalimat yang dapat dibuktikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019318" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> adalah “benar” mengenai bilangan asli. Definisi dan teorema berikut memperkuat hasil ini dengan menunjukkan secara tepat aspek-aspek “kebenaran” yang diperlukan dalam pembuktian di atas. Namun, jangan terlalu lama mencurahkan perhatian pada teorema ini, sebab kita akan segera memperkuatnya lebih jauh lagi. Kita menyertakannya terutama untuk tujuan historis: makalah asli Gödel menggunakan gagasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019319" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsistensi, tetapi tak lama kemudian hasilnya diperkuat dengan mengganti <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019320" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsistensi dengan konsistensi biasa.</p>
+</div>
+<div id="E01781" class="native-environment native-defn" data-source-edition="main" data-source-prefix="inc:tcp:oqn" data-source-unit_id="OLP-0304" data-source-occurrence="356" data-source-chapter="36" data-native-number="36.2">
+<p><strong>Definisi 36.2.</strong></p>
+<div id="label-main-75ea96120785a29029d9" class="native-anchor">
+
+</div>
+<p>Suatu teori <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019321" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> bersifat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019322" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsisten jika hal berikut berlaku: jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019323" dir="ltr" display="inline">
+  <mi mathvariant="normal">∃</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> adalah sebarang kalimat dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019324" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019325" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mn>0</mn>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019326" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mn>1</mn>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019327" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mn>2</mn>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math>, …, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019328" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tidak membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019329" dir="ltr" display="inline">
+  <mi mathvariant="normal">∃</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<div id="E01782" class="native-environment native-thm" data-source-edition="main" data-source-prefix="inc:tcp:oqn" data-source-unit_id="OLP-0304" data-source-occurrence="356" data-source-chapter="36" data-native-number="36.3">
+<p><strong>Teorema 36.3.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019330" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> sebarang teori <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019331" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsisten yang memuat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019332" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019333" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tidak dapat diputuskan.</p>
+</div>
+<div id="E01783" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:oqn" data-source-unit_id="OLP-0304" data-source-occurrence="356" data-source-chapter="36" data-native-number="383">
+<p><strong>Bukti.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019334" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> memuat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019335" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019336" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> merepresentasikan fungsi dan relasi yang dapat dihitung. Kita hanya perlu mengubah sedikit pembuktian sebelumnya. Seperti di atas, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019337" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>K</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019338" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019339" dir="ltr" display="inline">
+  <mi mathvariant="normal">∃</mi>
+  <mi>s</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mi>s</mi>
+  <mo stretchy="false">)</mo>
+</math>. Sebaliknya, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019340" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019341" dir="ltr" display="inline">
+  <mi mathvariant="normal">∃</mi>
+  <mi>s</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mi>s</mi>
+  <mo stretchy="false">)</mo>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019342" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> harus berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019343" dir="ltr" display="inline">
+  <mi>K</mi>
+</math>: jika tidak, tidak ada komputasi berhenti dari mesin <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019344" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> dengan masukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019345" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>; karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019346" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+</math> merepresentasikan relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019347" dir="ltr" display="inline">
+  <mi>T</mi>
+</math> Kleene, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019348" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019349" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mn>0</mn>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019350" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>T</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mi>x</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>,</mo>
+  <mover>
+    <mn>1</mn>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math>, …, yang membuat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019351" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tidak <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019352" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsisten.</p>
+</div>
+<div id="source-OLP-0305-0357" class="source-unit" data-source-unit="OLP-0305" data-source-occurrence="357" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/extensions-of-q-not-decidable.tex" data-source-sha256="5582c75443a8f52b1edcf827769f3f6d01a6498cbb263b56f8f7c9857f739092">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.4" data-native-label="inc:tcp:cqn:sec" id="label-main-6edad330de9489a8d49a">36.4 Perluasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019353" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> yang Konsisten Tidak Dapat Diputuskan</h3>
+<div id="E01784" class="native-environment native-explain" data-source-edition="main" data-source-prefix="inc:tcp:cqn" data-source-unit_id="OLP-0305" data-source-occurrence="357" data-source-chapter="36">
+<p>Ingat bahwa suatu teori <em>konsisten</em> jika teori itu tidak membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019354" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> sekaligus <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019355" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk sebarang formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019356" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Karena apa pun merupakan konsekuensi logis dari suatu kontradiksi, teori yang tak konsisten bersifat trivial: setiap kalimat dapat dibuktikan. Jelas bahwa jika suatu teori <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019357" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsisten, maka teori itu konsisten. Namun, konsistensi merupakan syarat yang lebih lemah (yakni terdapat teori yang konsisten tetapi tidak <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019358" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsisten). Kita dapat memperlemah asumsi dalam <span class="native-reference"><a href="#label-main-75ea96120785a29029d9">Definisi 36.2</a></span> menjadi konsistensi biasa untuk memperoleh teorema yang lebih kuat.</p>
+</div>
+<div id="E01785" class="native-environment native-lem" data-source-edition="main" data-source-prefix="inc:tcp:cqn" data-source-unit_id="OLP-0305" data-source-occurrence="357" data-source-chapter="36" data-native-number="36.4">
+<p><strong>Lema 36.4.</strong></p>
+<p>Tidak ada “relasi dapat dihitung universal.” Artinya, tidak ada relasi dapat dihitung dua-tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019359" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> dengan sifat berikut: setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019360" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> merupakan relasi dapat dihitung satu-tempat, terdapat suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019361" dir="ltr" display="inline">
+  <mi>k</mi>
+</math> sedemikian sehingga, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019362" dir="ltr" display="inline">
+  <mi>y</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019363" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> benar jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019364" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>k</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> benar.</p>
+</div>
+<div id="E01786" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:cqn" data-source-unit_id="OLP-0305" data-source-occurrence="357" data-source-chapter="36" data-native-number="384">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019365" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> merupakan relasi dapat dihitung universal. Definisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019366" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> sebagai relasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019367" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019368" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> dapat dihitung, untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019369" dir="ltr" display="inline">
+  <mi>k</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019370" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> ekuivalen dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019371" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>k</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math>. Namun, dengan demikian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019372" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>k</mi>
+  <mo stretchy="false">)</mo>
+</math> ekuivalen dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019373" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>k</mi>
+  <mo>,</mo>
+  <mi>k</mi>
+  <mo stretchy="false">)</mo>
+</math> sekaligus <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019374" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>k</mi>
+  <mo>,</mo>
+  <mi>k</mi>
+  <mo stretchy="false">)</mo>
+</math>, dan ini merupakan kontradiksi.</p>
+</div>
+<div id="E01787" class="native-environment native-thm" data-source-edition="main" data-source-prefix="inc:tcp:cqn" data-source-unit_id="OLP-0305" data-source-occurrence="357" data-source-chapter="36" data-native-number="36.5">
+<p><strong>Teorema 36.5.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019375" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> sebarang teori konsisten yang memuat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019376" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019377" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tidak dapat diputuskan.</p>
+</div>
+<div id="E01788" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:cqn" data-source-unit_id="OLP-0305" data-source-occurrence="357" data-source-chapter="36" data-native-number="385">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019378" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> merupakan perluasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019379" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> yang konsisten dan dapat diputuskan. Kita akan memperoleh kontradiksi dengan menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019380" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> untuk mendefinisikan relasi dapat dihitung universal.</p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019381" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> berlaku jika dan hanya jika</p>
+<blockquote>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019382" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> mengodekan suatu formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019383" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>u</mi>
+  <mo stretchy="false">)</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019384" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019385" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>y</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</blockquote>
+<p>Karena kita mengasumsikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019386" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> dapat diputuskan, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019387" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> dapat dihitung. Mari kita tunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019388" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> bersifat universal. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019389" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> sebarang relasi yang dapat dihitung, maka relasi itu dapat direpresentasikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019390" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> (dan karena itu dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019391" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math>) oleh suatu formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019392" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>θ</mi>
+    </mrow>
+    <mi>S</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>u</mi>
+  <mo stretchy="false">)</mo>
+</math>. Maka untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019393" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019394" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right center left" columnspacing="0em 0.278em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>S</mi>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>T</mi>
+        <mo>⊢</mo>
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi>R</mi>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <msup>
+            <mi/>
+            <mrow>
+              <mtext style="display:inline-block;transform:scaleX(-1)">#</mtext>
+            </mrow>
+          </msup>
+        </mrow>
+        <mrow>
+          <msub>
+            <mrow>
+              <mi>θ</mi>
+            </mrow>
+            <mi>S</mi>
+          </msub>
+          <mo stretchy="false">(</mo>
+          <mi>u</mi>
+          <mo stretchy="false">)</mo>
+        </mrow>
+        <mrow>
+          <msup>
+            <mi/>
+            <mrow>
+              <mstyle displaystyle="false" scriptlevel="0" class="olp-math-prose">
+                <mtext mathsize="0.5">#</mtext>
+              </mstyle>
+            </mrow>
+          </msup>
+        </mrow>
+        <mo>,</mo>
+        <mi>n</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019395" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right center left" columnspacing="0em 0.278em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi mathvariant="normal">¬</mi>
+        <mi>S</mi>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>T</mi>
+        <mo>⊢</mo>
+        <mi mathvariant="normal">¬</mi>
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi>T</mi>
+        <mo>⊬</mo>
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+        <mstyle scriptlevel="0">
+          <mspace width="1em"/>
+        </mstyle>
+        <mrow class="olp-math-prose">
+          <mtext>(karena </mtext>
+          <mrow>
+            <mi mathvariant="normal">𝐓</mi>
+          </mrow>
+          <mtext> konsisten)</mtext>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi mathvariant="normal">¬</mi>
+        <mi>R</mi>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <msup>
+            <mi/>
+            <mrow>
+              <mtext style="display:inline-block;transform:scaleX(-1)">#</mtext>
+            </mrow>
+          </msup>
+        </mrow>
+        <mrow>
+          <msub>
+            <mrow>
+              <mi>θ</mi>
+            </mrow>
+            <mi>S</mi>
+          </msub>
+          <mo stretchy="false">(</mo>
+          <mi>u</mi>
+          <mo stretchy="false">)</mo>
+        </mrow>
+        <mrow>
+          <msup>
+            <mi/>
+            <mrow>
+              <mstyle displaystyle="false" scriptlevel="0" class="olp-math-prose">
+                <mtext mathsize="0.5">#</mtext>
+              </mstyle>
+            </mrow>
+          </msup>
+        </mrow>
+        <mo>,</mo>
+        <mi>n</mi>
+        <mo stretchy="false">)</mo>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Artinya, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019396" dir="ltr" display="inline">
+  <mi>y</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019397" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> benar jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019398" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msup>
+      <mi/>
+      <mrow>
+        <mtext style="display:inline-block;transform:scaleX(-1)">#</mtext>
+      </mrow>
+    </msup>
+  </mrow>
+  <mrow>
+    <msub>
+      <mrow>
+        <mi>θ</mi>
+      </mrow>
+      <mi>S</mi>
+    </msub>
+    <mo stretchy="false">(</mo>
+    <mi>u</mi>
+    <mo stretchy="false">)</mo>
+  </mrow>
+  <mrow>
+    <msup>
+      <mi/>
+      <mrow>
+        <mstyle displaystyle="false" scriptlevel="0" class="olp-math-prose">
+          <mtext mathsize="0.5">#</mtext>
+        </mstyle>
+      </mrow>
+    </msup>
+  </mrow>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> benar. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019399" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> bersifat universal, dan kita memperoleh kontradiksi yang dicari.</p>
+</div>
+<p>Misalkan “aritmetika sejati” sebagai teori <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019400" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>:</mo>
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">ℕ</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, yakni himpunan kalimat dalam bahasa aritmetika yang benar dalam interpretasi standar.</p>
+<div id="E01789" class="native-environment native-cor" data-source-edition="main" data-source-prefix="inc:tcp:cqn" data-source-unit_id="OLP-0305" data-source-occurrence="357" data-source-chapter="36" data-native-number="36.6">
+<p><strong>Akibat 36.6.</strong></p>
+<p>Aritmetika sejati tidak dapat diputuskan.</p>
+</div>
+<div id="source-OLP-0306-0358" class="source-unit" data-source-unit="OLP-0306" data-source-occurrence="358" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/computably-axiomatizable.tex" data-source-sha256="e322eac696c7ff0c90484011cae6537ea32743ceff89413dcc7cadb8bb239c39">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.5" data-native-label="inc:tcp:cax:sec" id="label-main-71c1d31804a7da82c346">36.5 Teori yang Dapat diaksiomatisasi</h3>
+<p>Suatu teori <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019401" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> disebut <em>dapat diaksiomatisasi</em> jika teori itu memiliki suatu himpunan aksioma <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019402" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> yang dapat dihitung. (Pernyataan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019403" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah himpunan aksioma bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019404" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> berarti <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019405" dir="ltr" display="inline">
+  <mi>T</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.) Setiap aksiomatisasi bilangan asli yang “wajar” akan memiliki sifat ini. Secara khusus, setiap teori dengan himpunan aksioma berhingga bersifat dapat diaksiomatisasi.</p>
+<div id="E01790" class="native-environment native-lem" data-source-edition="main" data-source-prefix="inc:tcp:cax" data-source-unit_id="OLP-0306" data-source-occurrence="358" data-source-chapter="36" data-native-number="36.7">
+<p><strong>Lema 36.7.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019406" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> bersifat dapat diaksiomatisasi. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019407" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> terenumerasi secara komputabel.</p>
+</div>
+<div id="E01791" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:cax" data-source-unit_id="OLP-0306" data-source-occurrence="358" data-source-chapter="36" data-native-number="386">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019408" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> merupakan himpunan aksioma yang dapat dihitung bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019409" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math>. Untuk menentukan apakah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019410" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi>T</mi>
+</math>, cukup cari derivasi atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019411" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dari aksioma-aksioma tersebut.</p>
+<p>Dengan ungkapan yang sedikit berbeda, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019412" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019413" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> jika dan hanya jika terdapat suatu daftar berhingga aksioma <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019414" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019415" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019416" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan derivasi atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019417" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <mo>⋯</mo>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dalam logika orde pertama. Namun, kita telah mengetahui bahwa setiap himpunan dengan definisi berbentuk “terdapat …sedemikian sehingga …” bersifat c.e., asalkan bagian “…” yang kedua dapat dihitung.</p>
+</div>
+<div id="source-OLP-0307-0359" class="source-unit" data-source-unit="OLP-0307" data-source-occurrence="359" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/complete-decidable.tex" data-source-sha256="f0346f7114cf793c2c6f1c33bad7725b07b6debf98503e513e92666caea883f8">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.6" data-native-label="inc:tcp:cdc:sec" id="label-main-8b29d3a5ea50021d25b1">36.6 Teori Lengkap yang Dapat diaksiomatisasi Dapat Diputuskan</h3>
+<p>Suatu teori disebut <span><em>lengkap</em></span> jika, untuk setiap kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019418" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019419" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019420" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dapat dibuktikan.</p>
+<div id="E01792" class="native-environment native-lem" data-source-edition="main" data-source-prefix="inc:tcp:cdc" data-source-unit_id="OLP-0307" data-source-occurrence="359" data-source-chapter="36" data-native-number="36.8">
+<p><strong>Lema 36.8.</strong></p>
+<p>Andaikan suatu teori <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019421" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> lengkap dan dapat diaksiomatisasi. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019422" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> dapat diputuskan.</p>
+</div>
+<div id="E01793" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:cdc" data-source-unit_id="OLP-0307" data-source-occurrence="359" data-source-chapter="36" data-native-number="387">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019423" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> lengkap dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019424" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> merupakan himpunan aksioma yang dapat dihitung. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019425" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tak konsisten, teori itu jelas dapat dihitung. (Algoritmenya: “cukup jawab ya.”) Jadi, kita dapat mengasumsikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019426" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> juga konsisten.</p>
+<p>Untuk memutuskan apakah suatu kalimat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019427" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019428" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> atau tidak, carilah secara bersamaan derivasi atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019429" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019430" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> dan derivasi atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019431" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019432" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> lengkap, salah satunya pasti ditemukan; dan karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019433" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> konsisten, jika derivasi atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019434" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> ditemukan, tidak ada derivasi atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019435" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+<p>Dengan ungkapan lain, kita telah mengetahui bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019436" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> bersifat c.e.; jadi, menurut suatu teorema yang telah dibuktikan sebelumnya, cukup ditunjukkan bahwa komplemen <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019437" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> juga bersifat c.e.. Namun, formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019438" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019439" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐓</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019440" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019441" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math>; jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019442" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐓</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+  <msub>
+    <mo>≤</mo>
+    <mi>m</mi>
+  </msub>
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="source-OLP-0308-0360" class="source-unit" data-source-unit="OLP-0308" data-source-occurrence="360" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/first-incompleteness.tex" data-source-sha256="dcc9a88c5d9efbe4749b967c339e5871a25a948e1b99c50e5c441dd0dba3de50">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.7" data-native-label="inc:tcp:inc:sec" id="label-main-59ef6578037f89035bb3">36.7 <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019443" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> Tidak Memiliki Perluasan Lengkap dan Konsisten yang Dapat diaksiomatisasi</h3>
+<div id="E01794" class="native-environment native-thm" data-source-edition="main" data-source-prefix="inc:tcp:inc" data-source-unit_id="OLP-0308" data-source-occurrence="360" data-source-chapter="36" data-native-number="36.9">
+<p><strong>Teorema 36.9.</strong></p>
+<div id="label-main-c3594f4cc805fca7509c" class="native-anchor">
+
+</div>
+<p>Tidak ada perluasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019444" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> yang lengkap, konsisten, dan dapat diaksiomatisasi.</p>
+</div>
+<div id="E01795" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:inc" data-source-unit_id="OLP-0308" data-source-occurrence="360" data-source-chapter="36" data-native-number="388">
+<p><strong>Bukti.</strong></p>
+<p>Kita telah mengetahui bahwa tidak ada perluasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019445" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> yang konsisten dan dapat diputuskan. Namun, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019446" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> lengkap dan diaksiomatisasi secara komputabel, maka teori itu dapat diputuskan.</p>
+</div>
+<div id="E01796" class="native-environment native-explain" data-source-edition="main" data-source-prefix="inc:tcp:inc" data-source-unit_id="OLP-0308" data-source-occurrence="360" data-source-chapter="36">
+<p>Teorema ini tidak terlalu jauh dari rumusan asli Gödel pada 1931 tentang Teorema Ketaklengkapan Pertama. Selain istilah yang lebih modern, perbedaan utamanya ialah sebagai berikut: Gödel menggunakan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019447" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>-konsisten” alih-alih “konsisten”; dan ia belum dapat mengatakan “dapat diaksiomatisasi” dalam keumuman penuh karena gagasan formal komputabilitas belum tersedia. (Model-model formal komputabilitas dikembangkan sepanjang dasawarsa berikutnya, termasuk oleh Gödel, dan sebagian besar untuk dapat mencirikan jenis teori yang terkena fenomena Gödel.)</p>
+<p>Teorema tersebut menyatakan bahwa kita tidak dapat memperoleh semuanya sekaligus, yakni kelengkapan, konsistensi, dan keteraksiomatisasian. Namun, jika salah satunya dilepaskan, dua sifat lainnya dapat diperoleh: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019448" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> konsisten dan diaksiomatisasi secara komputabel, tetapi tidak lengkap; teori tak konsisten lengkap dan diaksiomatisasi secara komputabel (misalnya oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019449" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo>≠</mo>
+  <mn>0</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>), tetapi tidak konsisten; dan himpunan kalimat aritmetika yang benar lengkap dan konsisten, tetapi tidak diaksiomatisasi secara komputabel.</p>
+</div>
+<div id="source-OLP-0309-0361" class="source-unit" data-source-unit="OLP-0309" data-source-occurrence="361" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/inseparability.tex" data-source-sha256="4b5cd9fd5c3baa61a9a295607d67cbd0a667c8863e12a933579152282ad1bbca">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.8" data-native-label="inc:tcp:ins:sec" id="label-main-21118df2ed401a0d4b64">36.8 Kalimat yang Dapat Dibuktikan dan Disangkal dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019450" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> Tak Terpisahkan secara Komputabel</h3>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019451" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+</math> sebagai himpunan kalimat yang <span><em>negasinya</em></span> dapat dibuktikan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019452" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019453" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+  <mo>⊢</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Ingat bahwa himpunan saling lepas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019454" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019455" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> disebut tak terpisahkan secara komputabel jika tidak ada himpunan dapat dihitung <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019456" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019457" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>C</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019458" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⊆</mo>
+  <mover>
+    <mi>C</mi>
+    <mo accent="true">―</mo>
+  </mover>
+</math>.</p>
+<div id="E01797" class="native-environment native-lem" data-source-edition="main" data-source-prefix="inc:tcp:ins" data-source-unit_id="OLP-0309" data-source-occurrence="361" data-source-chapter="36" data-native-number="36.10">
+<p><strong>Lema 36.10.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019459" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019460" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+</math> tak terpisahkan secara komputabel.</p>
+</div>
+<div id="E01798" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:ins" data-source-unit_id="OLP-0309" data-source-occurrence="361" data-source-chapter="36" data-native-number="389">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019461" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> suatu himpunan dapat dihitung sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019462" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+  <mo>⊆</mo>
+  <mi>C</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019463" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+  <mo>⊆</mo>
+  <mover>
+    <mi>C</mi>
+    <mo accent="true">―</mo>
+  </mover>
+</math>. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019464" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> sebagai relasi</p>
+<blockquote>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019465" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> mengodekan suatu formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019466" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>u</mi>
+  <mo stretchy="false">)</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019467" dir="ltr" display="inline">
+  <mrow>
+    <mi>θ</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>y</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019468" dir="ltr" display="inline">
+  <mi>C</mi>
+</math>.</p>
+</blockquote>
+<p>Kita akan menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019469" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> merupakan relasi dapat dihitung universal, yang menghasilkan kontradiksi.</p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019470" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> dapat dihitung dan direpresentasikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019471" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>θ</mi>
+    </mrow>
+    <mi>S</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>u</mi>
+  <mo stretchy="false">)</mo>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019472" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019473" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right center left" columnspacing="0em 0.278em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>S</mi>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mrow>
+          <mi mathvariant="normal">𝐐</mi>
+        </mrow>
+        <mo>⊢</mo>
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+        <mo>∈</mo>
+        <mi>C</mi>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019474" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right center left" columnspacing="0em 0.278em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi mathvariant="normal">¬</mi>
+        <mi>S</mi>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mrow>
+          <mi mathvariant="normal">𝐐</mi>
+        </mrow>
+        <mo>⊢</mo>
+        <mi mathvariant="normal">¬</mi>
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+        <mo>∈</mo>
+        <mrow>
+          <mrow>
+            <mover>
+              <mi mathvariant="normal">𝐐</mi>
+              <mo mathvariant="normal" stretchy="false">¯</mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:center;padding-left:calc(0em / 2);padding-right:calc(0.278em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0.278em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <msub>
+          <mrow>
+            <mi>θ</mi>
+          </mrow>
+          <mi>S</mi>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mover>
+          <mi>n</mi>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">)</mo>
+        <mo>∉</mo>
+        <mi>C</mi>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019475" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math> ekuivalen dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019476" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">#</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>θ</mi>
+    </mrow>
+    <mi>S</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mover>
+    <mi>u</mi>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<div id="source-OLP-0310-0362" class="source-unit" data-source-unit="OLP-0310" data-source-occurrence="362" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/consis-with-q.tex" data-source-sha256="da316d56392fded7654946251d8173050c2ade9bf22868241de7e83a2961c8fd">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.9" data-native-label="inc:tcp:con:sec" id="label-main-49ada0f2415d7f67412f">36.9 Teori yang Konsisten dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019477" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> Tidak Dapat Diputuskan</h3>
+<p>Teorema berikut menyatakan bahwa bukan hanya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019478" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> yang tidak dapat diputuskan, tetapi sesungguhnya setiap teori yang tidak bertentangan dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019479" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> juga tidak dapat diputuskan.</p>
+<div id="E01799" class="native-environment native-thm" data-source-edition="main" data-source-prefix="inc:tcp:con" data-source-unit_id="OLP-0310" data-source-occurrence="362" data-source-chapter="36" data-native-number="36.11">
+<p><strong>Teorema 36.11.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019480" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> sebarang teori dalam bahasa aritmetika yang konsisten dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019481" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> (yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019482" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+  <mo>∪</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> konsisten). Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019483" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tidak dapat diputuskan.</p>
+</div>
+<div id="E01800" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:con" data-source-unit_id="OLP-0310" data-source-occurrence="362" data-source-chapter="36" data-native-number="390">
+<p><strong>Bukti.</strong></p>
+<p>Ingat bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019484" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> mempunyai himpunan aksioma berhingga, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019485" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>Q</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019486" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>Q</mi>
+    </mrow>
+    <mn>8</mn>
+  </msub>
+</math>. Kita bahkan dapat mengganti semua aksioma tersebut dengan satu aksioma, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019487" dir="ltr" display="inline">
+  <mrow>
+    <mi>α</mi>
+  </mrow>
+  <mo>=</mo>
+  <msub>
+    <mrow>
+      <mi>Q</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <mo>⋯</mo>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi>Q</mi>
+    </mrow>
+    <mn>8</mn>
+  </msub>
+</math>.</p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019488" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> suatu teori yang dapat diputuskan dan konsisten dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019489" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019490" display="block" dir="ltr">
+  <mi>C</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+  <mo>⊢</mo>
+  <mrow>
+    <mi>α</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math> Kita tunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019491" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> akan menjadi pemisah dapat dihitung bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019492" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019493" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+</math>, suatu kontradiksi. Pertama, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019494" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019495" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019496" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dapat dibuktikan dari aksioma-aksioma <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019497" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>; menurut teorema deduksi, terdapat derivasi atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019498" dir="ltr" display="inline">
+  <mrow>
+    <mi>α</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dalam logika orde pertama. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019499" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019500" dir="ltr" display="inline">
+  <mi>C</mi>
+</math>.</p>
+<p>Di pihak lain, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019501" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019502" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+</math>, maka terdapat suatu pembuktian atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019503" dir="ltr" display="inline">
+  <mrow>
+    <mi>α</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dalam logika orde pertama. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019504" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> juga membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019505" dir="ltr" display="inline">
+  <mrow>
+    <mi>α</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019506" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019507" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>α</mi>
+  </mrow>
+</math>; dalam hal itu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019508" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+  <mo>∪</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> tak konsisten. Namun, kita mengasumsikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019509" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+  <mo>∪</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> konsisten, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019510" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tidak membuktikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019511" dir="ltr" display="inline">
+  <mrow>
+    <mi>α</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, dan dengan demikian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019512" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> tidak berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019513" dir="ltr" display="inline">
+  <mi>C</mi>
+</math>.</p>
+<p>Kita telah menunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019514" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019515" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>, maka kalimat itu berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019516" dir="ltr" display="inline">
+  <mi>C</mi>
+</math>, dan jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019517" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019518" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+</math>, maka kalimat itu berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019519" dir="ltr" display="inline">
+  <mover>
+    <mi>C</mi>
+    <mo accent="true">―</mo>
+  </mover>
+</math>. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019520" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> merupakan pemisah dapat dihitung, dan inilah kontradiksi yang dicari.</p>
+</div>
+<p>Teorema ini sangat kuat. Sebagai contoh, teorema itu mengimplikasikan:</p>
+<div id="E01801" class="native-environment native-cor" data-source-edition="main" data-source-prefix="inc:tcp:con" data-source-unit_id="OLP-0310" data-source-occurrence="362" data-source-chapter="36" data-native-number="36.12">
+<p><strong>Akibat 36.12.</strong></p>
+<p>Logika orde pertama untuk bahasa aritmetika (yakni himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019521" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>:</mo>
+  <mrow class="olp-math-prose">
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mtext> dapat dibuktikan dalam logika orde pertama</mtext>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>) tidak dapat diputuskan.</p>
+</div>
+<div id="E01802" class="native-environment native-proof" data-source-edition="main" data-source-prefix="inc:tcp:con" data-source-unit_id="OLP-0310" data-source-occurrence="362" data-source-chapter="36" data-native-number="391">
+<p><strong>Bukti.</strong></p>
+<p>Logika orde pertama merupakan himpunan konsekuensi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019522" dir="ltr" display="inline">
+  <mi mathvariant="normal">∅</mi>
+</math>, yang konsisten dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019523" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="source-OLP-0311-0363" class="source-unit" data-source-unit="OLP-0311" data-source-occurrence="363" data-source-path="source/main/openlogic/locale/id/content/incompleteness/theories-computability/interpretability.tex" data-source-sha256="d9648ce0c700f953ef14ce6a372001c65fa6bf5a8b734b8ec5c1eaec24536904">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="36.10" data-native-label="inc:tcp:itp:sec" id="label-main-306cf4c25b9c7e33829e">36.10 Teori Tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019524" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> Dapat Diinterpretasikan Tidak Dapat Diputuskan</h3>
+<p>Kita dapat memperkuat hasil-hasil ini lebih jauh lagi. Secara informal, suatu interpretasi bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019525" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+</math> dalam bahasa lain <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019526" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+      <mn>2</mn>
+    </msub>
+  </mrow>
+</math> melibatkan pendefinisian semesta, simbol relasi, dan simbol fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019527" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+</math> dengan formula dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019528" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+      <mn>2</mn>
+    </msub>
+  </mrow>
+</math>. Walaupun kita tidak akan meluangkan waktu untuk melakukannya, definisi ini dapat dibuat tepat.</p>
+<div id="E01803" class="native-environment native-thm" data-source-edition="main" data-source-prefix="inc:tcp:itp" data-source-unit_id="OLP-0311" data-source-occurrence="363" data-source-chapter="36" data-native-number="36.13">
+<p><strong>Teorema 36.13.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019529" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> suatu teori dalam bahasa tempat bahasa aritmetika dapat diinterpretasikan sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019530" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> konsisten dengan interpretasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019531" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019532" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> tidak dapat diputuskan. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019533" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> membuktikan interpretasi aksioma-aksioma <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019534" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math>, maka tidak ada perluasan konsisten <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019535" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐓</mi>
+  </mrow>
+</math> yang dapat diputuskan.</p>
+</div>
+<p>Pembuktiannya hanya merupakan sedikit perubahan dari pembuktian teorema terakhir; suatu contoh tandingan dapat digunakan untuk memperoleh pemisahan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019536" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019537" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">𝐐</mi>
+        <mo mathvariant="normal" stretchy="false">¯</mo>
+      </mover>
+    </mrow>
+  </mrow>
+</math>. Kita dapat menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019538" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>, yakni teori himpunan Zermelo–Fraenkel dengan aksioma pilihan, sebagai landasan aksiomatik yang cukup kuat untuk melaksanakan sebagian besar matematika biasa. Dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019539" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>, bilangan asli dapat didefinisikan dan, melalui interpretasi ini, aksioma-aksioma <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019540" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐐</mi>
+  </mrow>
+</math> benar. Jadi kita memperoleh</p>
+<div id="E01804" class="native-environment native-cor" data-source-edition="main" data-source-prefix="inc:tcp:itp" data-source-unit_id="OLP-0311" data-source-occurrence="363" data-source-chapter="36" data-native-number="36.14">
+<p><strong>Akibat 36.14.</strong></p>
+<p>Tidak ada perluasan konsisten <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019541" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math> yang dapat diputuskan.</p>
+</div>
+<div id="E01805" class="native-environment native-cor" data-source-edition="main" data-source-prefix="inc:tcp:itp" data-source-unit_id="OLP-0311" data-source-occurrence="363" data-source-chapter="36" data-native-number="36.15">
+<p><strong>Akibat 36.15.</strong></p>
+<p>Tidak ada perluasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019542" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math> yang lengkap, konsisten, dan secara komputabel dapat diaksiomatisasi.</p>
+</div>
+<p>Bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019543" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math> hanya memiliki satu relasi dua-tempat, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019544" dir="ltr" display="inline">
+  <mo>∈</mo>
+</math>. (Bahkan, kita tidak memerlukan kesamaan.) Jadi kita memperoleh</p>
+<div id="E01806" class="native-environment native-cor" data-source-edition="main" data-source-prefix="inc:tcp:itp" data-source-unit_id="OLP-0311" data-source-occurrence="363" data-source-chapter="36" data-native-number="36.16">
+<p><strong>Akibat 36.16.</strong></p>
+<p>Logika orde pertama untuk setiap bahasa dengan suatu simbol relasi dua-tempat tidak dapat diputuskan.</p>
+</div>
+<p>Hasil ini meluas ke setiap bahasa dengan dua simbol fungsi satu-tempat, sebab keduanya dapat digunakan untuk menyimulasikan suatu simbol relasi dua-tempat. Hasil-hasil yang baru dikutip bersifat tajam: ternyata logika orde pertama untuk bahasa yang hanya memiliki simbol relasi <em>satu-tempat</em> dan paling banyak satu simbol fungsi <em>satu-tempat</em> dapat diputuskan.</p>
+<p>Satu fakta kecil lagi. Kita mengetahui bahwa himpunan kalimat dalam bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019545" dir="ltr" display="inline">
+  <mrow>
+    <mn mathvariant="normal">0</mn>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019546" dir="ltr" display="inline">
+  <msup>
+    <mi/>
+    <mo>′</mo>
+  </msup>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019547" dir="ltr" display="inline">
+  <mo>+</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019548" dir="ltr" display="inline">
+  <mo>×</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019549" dir="ltr" display="inline">
+  <mo>&lt;</mo>
+</math> yang benar dalam model standar tidak dapat diputuskan. Sesungguhnya, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019550" dir="ltr" display="inline">
+  <mo>&lt;</mo>
+</math> dapat didefinisikan dengan simbol-simbol lainnya, lalu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019551" dir="ltr" display="inline">
+  <mo>+</mo>
+</math> dapat didefinisikan menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019552" dir="ltr" display="inline">
+  <mo>×</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019553" dir="ltr" display="inline">
+  <msup>
+    <mi/>
+    <mo>′</mo>
+  </msup>
+</math>. Jadi, himpunan kalimat benar dalam bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019554" dir="ltr" display="inline">
+  <mrow>
+    <mn mathvariant="normal">0</mn>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019555" dir="ltr" display="inline">
+  <msup>
+    <mi/>
+    <mo>′</mo>
+  </msup>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019556" dir="ltr" display="inline">
+  <mo>×</mo>
+</math> tidak dapat diputuskan. Di pihak lain, Presburger telah menunjukkan bahwa himpunan kalimat dalam bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019557" dir="ltr" display="inline">
+  <mrow>
+    <mn mathvariant="normal">0</mn>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019558" dir="ltr" display="inline">
+  <msup>
+    <mi/>
+    <mo>′</mo>
+  </msup>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M019559" dir="ltr" display="inline">
+  <mo>+</mo>
+</math> yang benar dalam model standar aritmetika dapat diputuskan. Namun, prosedurnya tidak layak secara komputasional.</p>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0044.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0046.xhtml">Berikutnya →</a></nav></body></html>

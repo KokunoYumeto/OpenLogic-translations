@@ -1,0 +1,2795 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>1 Himpunan — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0003.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0005.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0004" class="reader-chunk">
+<div id="source-OLP-0004-0004" class="source-unit" data-source-unit="OLP-0004" data-source-occurrence="4" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/sets/sets.tex" data-source-sha256="4636752663fad9f8a562905393ee38271b5fd74b82115c1677377535c7f6bfe1">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="1" data-native-label="sfr:set::chap" id="label-main-229dd5caf28c9ac40f35">1 Himpunan</h2>
+<div id="source-OLP-0005-0005" class="source-unit" data-source-unit="OLP-0005" data-source-occurrence="5" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/sets/basics.tex" data-source-sha256="b7d5d501c8a76d51d0bf49218cf4b98dab35b9a63d884e0feabd2589bbd048f7">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="1.1" data-native-label="sfr:set:bas:sec" id="label-main-fff3ae345ee7b7e3d9c3">1.1 Ekstensionalitas</h3>
+<p>Sebuah <em>himpunan</em> adalah kumpulan objek yang dipandang sebagai satu objek. Objek-objek yang membentuk himpunan disebut <em>elemen</em> atau <em>anggota</em> himpunan tersebut. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000001" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> merupakan anggota himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000002" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, kita tulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000003" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>; jika bukan, kita tulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000004" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∉</mo>
+  <mi>A</mi>
+</math>. Himpunan yang tidak mempunyai anggota disebut <em>himpunan kosong</em> dan dilambangkan dengan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000005" dir="ltr" display="inline">
+  <mi mathvariant="normal">∅</mi>
+</math>”.</p>
+<div id="E00003" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:bas" data-source-unit_id="OLP-0005" data-source-occurrence="5" data-source-chapter="1">
+<p>Tidak menjadi soal bagaimana kita <em>menentukan</em> himpunan itu, bagaimana kita <em>mengurutkan</em> anggota, atau bahkan berapa <em>kali</em> kita menghitung anggota itu. Yang penting hanyalah objek mana yang menjadi anggota himpunan itu. Hal ini kita rumuskan dalam prinsip berikut.</p>
+</div>
+<div id="E00004" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:bas" data-source-unit_id="OLP-0005" data-source-occurrence="5" data-source-chapter="1" data-native-number="1.1">
+<p><strong>Definisi 1.1.</strong></p>
+<p><strong>Ekstensionalitas</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000006" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000007" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> adalah himpunan, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000008" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi>B</mi>
+</math> jika dan hanya jika setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000009" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> juga merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000010" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, dan sebaliknya.</p>
+</div>
+<p>Ekstensionalitas membenarkan penggunaan suatu notasi. Secara umum, jika kita mempunyai objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000011" dir="ltr" display="inline">
+  <msub>
+    <mi>a</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000012" dir="ltr" display="inline">
+  <msub>
+    <mi>a</mi>
+    <mrow>
+      <mi>n</mi>
+    </mrow>
+  </msub>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000013" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>a</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>a</mi>
+    <mrow>
+      <mi>n</mi>
+    </mrow>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math> adalah <em>satu-satunya</em> himpunan dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000014" dir="ltr" display="inline">
+  <msub>
+    <mi>a</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>a</mi>
+    <mi>n</mi>
+  </msub>
+</math> sebagai anggota. Kita menekankan kata “<em>satu-satunya</em>”, sebab ekstensionalitas menyatakan bahwa hanya ada <em>satu</em> himpunan semacam itu. Ekstensionalitas juga membenarkan kesamaan berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000015" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math> Jadi, ketika membahas himpunan, kita tidak memedulikan urutan anggota ataupun berapa kali anggota itu dicantumkan.</p>
+<div id="E00005" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:bas" data-source-unit_id="OLP-0005" data-source-occurrence="5" data-source-chapter="1" data-native-number="1.2">
+<p><strong>Contoh 1.2.</strong></p>
+<p>Setiap kali kita mempunyai sekumpulan objek, kita dapat menghimpunnya menjadi sebuah himpunan. Sebagai contoh, himpunan saudara kandung Richard memuat satu orang dan dapat kita tulis sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000016" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mtext class="olp-math-prose">Ruth</mtext>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Himpunan bilangan bulat positif yang kurang dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000017" dir="ltr" display="inline">
+  <mn>4</mn>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000018" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>3</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, tetapi dapat pula ditulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000019" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>3</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math> atau bahkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000020" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>3</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Berdasarkan ekstensionalitas, semua ini adalah himpunan yang sama. Setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000021" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>3</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math> juga merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000022" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>3</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math> (dan dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000023" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>3</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>), dan sebaliknya.</p>
+</div>
+<p>Sering kali kita menentukan sebuah himpunan melalui suatu sifat yang dimiliki bersama oleh anggota. Kita akan menggunakan notasi ringkas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000024" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000025" dir="ltr" display="inline">
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> menyatakan sifat yang harus dimiliki <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000026" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> agar dihitung sebagai salah satu anggota himpunan itu.</p>
+<div id="E00006" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:bas" data-source-unit_id="OLP-0005" data-source-occurrence="5" data-source-chapter="1" data-native-number="1.3">
+<p><strong>Contoh 1.3.</strong></p>
+<p>Dalam contoh kita, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000027" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> dapat pula ditentukan sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000028" display="block" dir="ltr">
+  <mi>S</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mtext class="olp-math-prose"> adalah saudara kandung Richard</mtext>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p>
+</div>
+<div id="E00007" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:bas" data-source-unit_id="OLP-0005" data-source-occurrence="5" data-source-chapter="1" data-native-number="1.4">
+<p><strong>Contoh 1.4.</strong></p>
+<p>Suatu bilangan disebut <em>sempurna</em> jika dan hanya jika bilangan itu sama dengan jumlah pembagi sejatinya (yaitu bilangan-bilangan yang membaginya sampai habis, tetapi tidak sama dengan bilangan tersebut). Sebagai contoh, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000029" dir="ltr" display="inline">
+  <mn>6</mn>
+</math> sempurna karena pembagi sejatinya adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000030" dir="ltr" display="inline">
+  <mn>1</mn>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000031" dir="ltr" display="inline">
+  <mn>2</mn>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000032" dir="ltr" display="inline">
+  <mn>3</mn>
+</math>, serta <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000033" dir="ltr" display="inline">
+  <mn>6</mn>
+  <mo>=</mo>
+  <mn>1</mn>
+  <mo>+</mo>
+  <mn>2</mn>
+  <mo>+</mo>
+  <mn>3</mn>
+</math>. Bahkan, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000034" dir="ltr" display="inline">
+  <mn>6</mn>
+</math> adalah satu-satunya bilangan bulat positif kurang dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000035" dir="ltr" display="inline">
+  <mn>10</mn>
+</math> yang sempurna. Karena itu, dengan menggunakan ekstensionalitas, kita dapat mengatakan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000036" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>6</mn>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mtext class="olp-math-prose"> sempurna dan </mtext>
+  <mn>0</mn>
+  <mo>≤</mo>
+  <mi>x</mi>
+  <mo>≤</mo>
+  <mn>10</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math> Notasi di sebelah kanan dibaca “himpunan semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000037" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000038" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sempurna dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000039" dir="ltr" display="inline">
+  <mn>0</mn>
+  <mo>≤</mo>
+  <mi>x</mi>
+  <mo>≤</mo>
+  <mn>10</mn>
+</math>”. Identitas ini menegaskan bahwa, ketika membahas himpunan, kita tidak memedulikan cara himpunan tersebut ditentukan. Secara lebih umum, ekstensionalitas menjamin bahwa selalu hanya ada satu himpunan semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000040" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000041" dir="ltr" display="inline">
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>. Jadi, ekstensionalitas membenarkan penyebutan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000042" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math> sebagai <em>himpunan</em> semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000043" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000044" dir="ltr" display="inline">
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<p>Ekstensionalitas memberi kita cara untuk menunjukkan bahwa dua himpunan identik: untuk menunjukkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000045" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi>B</mi>
+</math>, tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000046" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000047" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, dan jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000048" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000049" dir="ltr" display="inline">
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>.</p>
+<div id="source-OLP-0006-0006" class="source-unit" data-source-unit="OLP-0006" data-source-occurrence="6" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/sets/subsets.tex" data-source-sha256="0afe964d79817b258d7b5fcbb3db224440aaf048df714ebea57febe47f5b779a">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="1.2" data-native-label="sfr:set:sub:sec" id="label-main-5e094c43bb9074c7743d">1.2 Himpunan Bagian dan Himpunan Kuasa</h3>
+<div id="E00009" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1">
+<p>Kita akan sering membandingkan himpunan. Salah satu perbandingan yang wajar adalah sebagai berikut: <em>semua yang ada di dalam satu himpunan juga ada di dalam himpunan yang lain</em>. Situasi ini cukup penting sehingga kita memperkenalkan notasi baru.</p>
+</div>
+<div id="E00010" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.5">
+<p><strong>Definisi 1.5.</strong></p>
+<p><strong>Himpunan bagian</strong></p>
+<p>Jika setiap anggota himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000053" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> juga merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000054" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, kita mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000055" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah <em>himpunan bagian</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000056" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> dan menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000057" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>B</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000058" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bukan himpunan bagian dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000059" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, kita menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000060" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊈</mo>
+  <mi>B</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000061" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>B</mi>
+</math> tetapi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000062" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≠</mo>
+  <mi>B</mi>
+</math>, kita menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000063" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊊</mo>
+  <mi>B</mi>
+</math> dan mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000064" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah <em>himpunan bagian sejati</em> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000065" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00011" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.6">
+<p><strong>Contoh 1.6.</strong></p>
+<p>Setiap himpunan merupakan himpunan bagian dari dirinya sendiri, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000066" dir="ltr" display="inline">
+  <mi mathvariant="normal">∅</mi>
+</math> merupakan himpunan bagian dari setiap himpunan. Himpunan bilangan asli genap merupakan himpunan bagian dari himpunan bilangan asli. Selain itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000067" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊆</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Akan tetapi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000068" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>e</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> bukan himpunan bagian dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000069" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00012" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.7">
+<p><strong>Contoh 1.7.</strong></p>
+<p>Bilangan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000070" dir="ltr" display="inline">
+  <mn>2</mn>
+</math> merupakan anggota dari himpunan bilangan bulat, sedangkan himpunan bilangan genap merupakan himpunan bagian dari himpunan bilangan bulat. Meskipun demikian, sebuah himpunan dapat <em>sekaligus</em> merupakan anggota dan himpunan bagian dari himpunan lain. Sebagai contoh, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000071" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∈</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math> dan juga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000072" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊆</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<p>Ekstensionalitas memberikan kriteria identitas bagi himpunan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000073" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi>B</mi>
+</math> jika dan hanya jika setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000074" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> juga merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000075" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, dan sebaliknya. Definisi “himpunan bagian” mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000076" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>B</mi>
+</math> tepat sebagai separuh pertama kriteria ini: setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000077" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> juga merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000078" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. Tentu saja definisi itu juga berlaku jika kita menukar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000079" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000080" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000081" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+</math> jika dan hanya jika setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000082" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> juga merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000083" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Pernyataan terakhir ini tepat merupakan bagian “sebaliknya” dari ekstensionalitas. Dengan kata lain, ekstensionalitas menyatakan bahwa dua himpunan sama jika dan hanya jika keduanya merupakan himpunan bagian satu sama lain.</p>
+<div id="E00013" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.8">
+<p><strong>Proposisi 1.8.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000084" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi>B</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000085" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000086" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+</math>.</p>
+</div>
+<p>Sekarang juga merupakan saat yang tepat untuk memperkenalkan beberapa notasi lain yang berguna. Dalam mendefinisikan kapan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000087" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> merupakan himpunan bagian dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000088" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, kita mengatakan bahwa “setiap anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000089" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah …,” lalu mengisi “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000090" dir="ltr" display="inline">
+  <mo>…</mo>
+</math>” dengan “anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000091" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>”. <em>Bentuk</em> ungkapan ini begitu umum sehingga berguna untuk memperkenalkan notasi formal baginya.</p>
+<div id="E00014" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.9">
+<p><strong>Definisi 1.9.</strong></p>
+<div id="label-main-083e0fcd54ef8b462d42" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000092" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∀</mi>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+  <mi>φ</mi>
+</math> menyingkat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000093" dir="ltr" display="inline">
+  <mi mathvariant="normal">∀</mi>
+  <mi>x</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>φ</mi>
+  <mo stretchy="false">)</mo>
+</math>. Demikian pula, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000094" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∃</mi>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+  <mi>φ</mi>
+</math> menyingkat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000095" dir="ltr" display="inline">
+  <mi mathvariant="normal">∃</mi>
+  <mi>x</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>∧</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<p>Dengan notasi ini, kita dapat mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000096" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>B</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000097" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∀</mi>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>.</p>
+<p>Sekarang kita beralih kepada suatu jenis himpunan tertentu: himpunan semua himpunan bagian dari suatu himpunan yang diberikan.</p>
+<div id="E00015" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.10">
+<p><strong>Definisi 1.10.</strong></p>
+<p><strong>Himpunan kuasa</strong></p>
+<p>Himpunan yang terdiri atas semua himpunan bagian dari himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000098" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> disebut <em>himpunan kuasa dari</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000099" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan ditulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000100" dir="ltr" display="inline">
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+</math>. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000101" display="block" dir="ltr">
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>B</mi>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math></p>
+</div>
+<div id="E00016" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.11">
+<p><strong>Contoh 1.11.</strong></p>
+<p>Apa saja himpunan bagian yang mungkin dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000102" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>? Semuanya adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000103" dir="ltr" display="inline">
+  <mi mathvariant="normal">∅</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000104" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000105" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000106" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000107" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000108" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000109" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000110" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Himpunan yang terdiri atas semua himpunan bagian ini adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000111" dir="ltr" display="inline">
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo stretchy="false">)</mo>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000112" display="block" dir="ltr">
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi mathvariant="normal">∅</mi>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math></p>
+</div>
+<div id="source-OLP-0007-0007" class="source-unit" data-source-unit="OLP-0007" data-source-occurrence="7" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/sets/important-sets.tex" data-source-sha256="c4fa0f42ffe82a66bbab78691db4c7443a06bc30c30ecc13f4cdc4b9f0a6ced1">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="1.3" data-native-label="sfr:set:imp:sec" id="label-main-e857a3a5cb274afdec63">1.3 Beberapa Himpunan Penting</h3>
+<div id="E00019" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:imp" data-source-unit_id="OLP-0007" data-source-occurrence="7" data-source-chapter="1" data-native-number="1.12">
+<p><strong>Contoh 1.12.</strong></p>
+<p>Kita terutama akan membahas himpunan dengan objek matematika sebagai anggota. Empat himpunan semacam itu cukup penting sehingga mempunyai nama khusus: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000118" display="block" dir="ltr">
+  <mtable displaystyle="true" rowspacing=".5em" columnspacing="100%" width="100%" framespacing="1em 0">
+    <mtr>
+      <mtd columnalign="left" style="text-align:left;padding-left:0;padding-right:0;padding-top:0;padding-bottom:calc(.5em / 2)">
+        <mrow>
+          <mi mathvariant="normal">ℕ</mi>
+        </mrow>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>2</mn>
+        <mo>,</mo>
+        <mn>3</mn>
+        <mo>,</mo>
+        <mo>…</mo>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:calc(.5em / 2)">
+        <mrow>
+          <mtext class="olp-math-prose">himpunan bilangan asli (dengan 0)</mtext>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:calc(.5em / 2)">
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">ℤ</mi>
+          </mrow>
+          <mo>=</mo>
+          <mo fence="false" stretchy="false">{</mo>
+          <mo>…</mo>
+          <mo>,</mo>
+          <mo>−</mo>
+          <mn>2</mn>
+          <mo>,</mo>
+          <mo>−</mo>
+          <mn>1</mn>
+          <mo>,</mo>
+          <mn>0</mn>
+          <mo>,</mo>
+          <mn>1</mn>
+          <mo>,</mo>
+          <mn>2</mn>
+          <mo>,</mo>
+          <mo>…</mo>
+          <mo fence="false" stretchy="false">}</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:calc(.5em / 2)">
+        <mrow>
+          <mtext class="olp-math-prose">himpunan bilangan bulat</mtext>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:calc(.5em / 2)">
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">ℚ</mi>
+          </mrow>
+          <mo>=</mo>
+          <mo fence="false" stretchy="false">{</mo>
+          <mfrac>
+            <mi>m</mi>
+            <mi>n</mi>
+          </mfrac>
+          <mo>:</mo>
+          <mi>m</mi>
+          <mo>,</mo>
+          <mi>n</mi>
+          <mo>∈</mo>
+          <mrow>
+            <mi mathvariant="normal">ℤ</mi>
+          </mrow>
+          <mtext class="olp-math-prose"> dan </mtext>
+          <mi>n</mi>
+          <mo>≠</mo>
+          <mn>0</mn>
+          <mo fence="false" stretchy="false">}</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:calc(.5em / 2)">
+        <mrow>
+          <mtext class="olp-math-prose">himpunan bilangan rasional</mtext>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:calc(.5em / 2)">
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">ℝ</mi>
+          </mrow>
+          <mo>=</mo>
+          <mo stretchy="false">(</mo>
+          <mo>−</mo>
+          <mi mathvariant="normal">∞</mi>
+          <mo>,</mo>
+          <mi mathvariant="normal">∞</mi>
+          <mo stretchy="false">)</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd columnalign="right" style="text-align:right;padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:0">
+        <mtext class="olp-math-prose">himpunan bilangan real (kontinuum)</mtext>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Dalam teks ini, konvensi bilangan asli mencakup nol, sebagaimana dinyatakan oleh definisi di atas. Semua ini merupakan himpunan <em>tak hingga</em>, yakni masing-masing mempunyai anggota yang banyaknya tak hingga.</p>
+<p>Ketika bergerak melalui himpunan-himpunan ini, kita menambahkan <em>lebih banyak</em> bilangan ke dalam persediaan kita. Jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000119" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo>⊆</mo>
+  <mrow>
+    <mi mathvariant="normal">ℤ</mi>
+  </mrow>
+  <mo>⊆</mo>
+  <mrow>
+    <mi mathvariant="normal">ℚ</mi>
+  </mrow>
+  <mo>⊆</mo>
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+</math>: setiap bilangan asli merupakan bilangan bulat; setiap bilangan bulat merupakan bilangan rasional; dan setiap bilangan rasional merupakan bilangan real. Jelas pula bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000120" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℕ</mi>
+  </mrow>
+  <mo>⊊</mo>
+  <mrow>
+    <mi mathvariant="normal">ℤ</mi>
+  </mrow>
+  <mo>⊊</mo>
+  <mrow>
+    <mi mathvariant="normal">ℚ</mi>
+  </mrow>
+</math>, sebab <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000121" dir="ltr" display="inline">
+  <mo>−</mo>
+  <mn>1</mn>
+</math> adalah bilangan bulat tetapi bukan bilangan asli, sedangkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000122" dir="ltr" display="inline">
+  <mfrac>
+    <mn>1</mn>
+    <mn>2</mn>
+  </mfrac>
+</math> adalah bilangan rasional tetapi bukan bilangan bulat. Tidak begitu jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000123" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℚ</mi>
+  </mrow>
+  <mo>⊊</mo>
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+</math>, yaitu bahwa ada bilangan real yang bukan bilangan rasional.</p>
+<p>Kadang-kadang kita juga akan menggunakan himpunan bilangan bulat positif <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000124" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℤ</mi>
+    </mrow>
+    <mo>+</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>3</mn>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math> dan himpunan yang hanya memuat dua anggota pertama himpunan bilangan asli menurut konvensi di atas, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000125" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔹</mi>
+  </mrow>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00020" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:imp" data-source-unit_id="OLP-0007" data-source-occurrence="7" data-source-chapter="1" data-native-number="1.13">
+<p><strong>Contoh 1.13.</strong></p>
+<p><strong>Untai</strong></p>
+<p>Contoh menarik lainnya adalah himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000126" dir="ltr" display="inline">
+  <msup>
+    <mi>A</mi>
+    <mrow>
+      <mo>∗</mo>
+    </mrow>
+  </msup>
+</math> dari <em>untai berhingga</em> atas alfabet <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000127" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>: setiap barisan berhingga anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000128" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> merupakan untai atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000129" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Kita menyertakan <em>untai kosong <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000130" dir="ltr" display="inline">
+  <mi mathvariant="normal">Λ</mi>
+</math></em> di antara untai-untai atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000131" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, untuk setiap alfabet <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000132" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Sebagai contoh, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000133" display="block" dir="ltr">
+  <mtable displaystyle="true" rowspacing=".5em" columnspacing="100%" width="100%" framespacing="1em 0">
+    <mtr>
+      <mtd columnalign="left" style="text-align:left;padding-left:0;padding-right:0;padding-top:0;padding-bottom:calc(.5em / 2)">
+        <msup>
+          <mrow>
+            <mi mathvariant="normal">𝔹</mi>
+          </mrow>
+          <mo>∗</mo>
+        </msup>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mi mathvariant="normal">Λ</mi>
+        <mo>,</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>00</mn>
+        <mo>,</mo>
+        <mn>01</mn>
+        <mo>,</mo>
+        <mn>10</mn>
+        <mo>,</mo>
+        <mn>11</mn>
+        <mo>,</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd columnalign="right" style="text-align:right;padding-left:0;padding-right:0;padding-top:calc(.5em / 2);padding-bottom:0">
+        <mn>000</mn>
+        <mo>,</mo>
+        <mn>001</mn>
+        <mo>,</mo>
+        <mn>010</mn>
+        <mo>,</mo>
+        <mn>011</mn>
+        <mo>,</mo>
+        <mn>100</mn>
+        <mo>,</mo>
+        <mn>101</mn>
+        <mo>,</mo>
+        <mn>110</mn>
+        <mo>,</mo>
+        <mn>111</mn>
+        <mo>,</mo>
+        <mn>0000</mn>
+        <mo>,</mo>
+        <mo>…</mo>
+        <mo fence="false" stretchy="false">}</mo>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000134" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>=</mo>
+  <msub>
+    <mi>x</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>…</mo>
+  <msub>
+    <mi>x</mi>
+    <mrow>
+      <mi>n</mi>
+    </mrow>
+  </msub>
+  <mo>∈</mo>
+  <msup>
+    <mi>A</mi>
+    <mrow>
+      <mo>∗</mo>
+    </mrow>
+  </msup>
+</math> adalah untai yang terdiri atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000135" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> “huruf” dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000136" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, kita mengatakan bahwa <em>panjang</em> untai itu adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000137" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> dan menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000138" dir="ltr" display="inline">
+  <mrow>
+    <mi>len</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>n</mi>
+</math>.</p>
+</div>
+<div id="E00021" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:imp" data-source-unit_id="OLP-0007" data-source-occurrence="7" data-source-chapter="1" data-native-number="1.14">
+<p><strong>Contoh 1.14.</strong></p>
+<p><strong>Barisan tak hingga</strong></p>
+<p>Untuk setiap himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000139" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, kita juga dapat meninjau himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000140" dir="ltr" display="inline">
+  <msup>
+    <mi>A</mi>
+    <mi>ω</mi>
+  </msup>
+</math> dari barisan tak hingga anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000141" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Barisan tak hingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000142" dir="ltr" display="inline">
+  <msub>
+    <mi>a</mi>
+    <mn>1</mn>
+  </msub>
+  <msub>
+    <mi>a</mi>
+    <mn>2</mn>
+  </msub>
+  <msub>
+    <mi>a</mi>
+    <mn>3</mn>
+  </msub>
+  <msub>
+    <mi>a</mi>
+    <mn>4</mn>
+  </msub>
+  <mo>…</mo>
+</math> terdiri atas daftar objek satu arah yang tak berhingga, dan setiap objek dalam daftar itu merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000143" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>.</p>
+</div>
+<div id="source-OLP-0008-0008" class="source-unit" data-source-unit="OLP-0008" data-source-occurrence="8" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/sets/unions-and-intersections.tex" data-source-sha256="89b0e3a252e78b52b7a683b8a9c7a5620bb77eb10dd9360ff0327f50016b28c8">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="1.4" data-native-label="sfr:set:uni:sec" id="label-main-a451d5f3dc5d8dd3d6e6">1.4 Gabungan dan Irisan</h3>
+<div id="E00022" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1">
+<p>Dalam <span class="native-reference"><a href="#label-main-fff3ae345ee7b7e3d9c3">Bagian 1.1</a></span>, kita memperkenalkan definisi himpunan melalui abstraksi, yaitu definisi berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000144" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Di sini kita menggunakan suatu sifat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000145" dir="ltr" display="inline">
+  <mi>φ</mi>
+</math>, dan sifat tersebut dapat menyebut himpunan yang sudah kita definisikan. Sebagai contoh, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000146" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000147" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> adalah himpunan, maka himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000148" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>∨</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> terdiri atas semua objek yang merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000149" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000150" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. Dengan kata lain, himpunan itu menggabungkan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000151" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000152" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. Kita dapat memvisualisasikannya seperti dalam <span class="native-reference"><a href="#label-main-3c5cee50d8844185cc15">Gambar 1.1</a></span>; daerah yang diarsir menunjukkan anggota kedua himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000153" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000154" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> secara bersama-sama.</p>
+<figure id="FLOAT0001" class="native-float native-figure-float" data-native-number="1.1" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 699.2342 602.5575" width="699.2342" height="602.5575" role="img" aria-label="Diagram"><defs><marker id="dg-f9ca5508f0bac1f8-96926b24e4-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 319.7366 137.2631 C 304.9660 120.4222 287.4610 104.7449 265.9084 98.6338 C 254.4788 95.3927 242.4423 95.0000 230.5629 95.2142 C 219.5332 95.4141 208.3891 96.1351 197.8377 99.3621 C 162.2353 110.2562 140.6969 147.5720 134.0862 184.2093 C 127.4683 220.8469 132.2301 258.4982 130.5452 295.6998 C 129.1816 325.8693 123.5274 355.8460 113.8112 384.4449 C 107.5289 402.9421 99.4975 421.1109 97.2487 440.5077 C 95.0000 459.9116 99.6903 481.4858 114.8107 493.8434 C 124.1415 501.4751 136.3849 504.7591 148.4141 505.5729 C 177.7769 507.5575 206.3831 496.1208 232.4121 482.3782 C 274.0825 460.3828 312.3191 431.8910 345.3158 398.2447 C 356.3528 386.9936 366.8256 375.1499 376.0707 362.3782 C 385.4086 349.4851 393.5399 335.5283 398.3017 320.3364 C 407.7966 290.0313 402.1924 255.7354 384.7876 229.3424 C 375.3283 214.9858 333.7363 153.2331 319.7366 137.2631 Z M 319.7366 137.2631" stroke="#808080" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 307.7074 146.4368 C 286.7400 154.3255 265.9012 165.1910 252.5869 183.2029 C 245.5263 192.7548 240.9217 203.8846 236.9310 215.0786 C 233.2330 225.4731 229.9775 236.1530 229.2851 247.1686 C 226.9293 284.3201 254.2646 317.6309 286.2261 336.7277 C 318.1874 355.8246 355.0963 364.6342 389.3136 379.3192 C 417.0701 391.2271 443.1347 407.0829 466.4795 426.2510 C 481.5713 438.6445 495.7423 452.5656 513.1044 461.5037 C 530.4737 470.4488 552.3119 473.6615 569.2100 463.8667 C 579.6401 457.8200 587.0219 447.5184 592.0264 436.5457 C 604.2342 409.7671 603.6059 378.9621 599.9222 349.7636 C 594.0181 303.0101 580.8253 257.1917 560.9645 214.4574 C 554.3181 200.1580 546.9220 186.1870 538.2338 173.0369 C 529.4528 159.7510 519.2583 147.2222 506.7150 137.4131 C 481.6998 117.8522 447.6324 111.0130 416.7989 117.9949 C 400.0222 121.8000 327.5825 138.9622 307.7074 146.4368 Z M 307.7074 146.4368" stroke="#a81c21" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 173.1438 143.1030 C 213.3150 149.0211 254.0718 139.9617 294.6787 139.8332" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 182.1317 206.3833 C 246.2332 201.4717 309.2351 186.5724 373.2865 181.0184 C 409.8883 177.8486 446.8899 177.7130 482.9278 170.5453" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 172.7940 254.9644 C 270.3202 234.8609 369.8883 226.9222 468.3569 212.1231 C 482.8848 209.9385 498.1909 207.2470 509.3707 197.7165" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 177.7413 308.7641 C 251.2734 295.6140 325.2550 284.9698 399.5081 276.8527 C 445.2978 271.8482 491.7658 267.6861 535.1141 252.1016" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 417.1487 360.1008 C 460.9967 353.9256 504.8446 347.7574 548.6995 341.5822" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 495.5851 406.4047 C 498.8478 403.7061 503.1669 402.7566 507.3218 401.9212 C 525.6335 398.2375 544.0949 395.2321 562.6349 392.9191" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 145.6727 368.1609 C 210.0241 355.3535 274.6251 343.8025 339.4260 333.5223 L 374.9070 323.1350 C 427.5360 313.3331 480.3149 304.3379 533.2222 296.1493" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 174.1004 406.3617 C 219.9329 402.8566 265.6227 397.4237 310.9983 390.0920" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 154.8249 460.0831 C 187.6503 456.9632 220.3328 452.2586 252.7082 445.9834" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/></svg></div></figure>
+<div id="label-main-3c5cee50d8844185cc15" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 1.1.</strong> Gabungan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000155" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∪</mo>
+  <mi>B</mi>
+</math> dari dua himpunan adalah himpunan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000156" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersama dengan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000157" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>.</p></figcaption>
+</figure>
+<p>Operasi pada himpunan ini—yakni menggabungkan keduanya—sangat berguna dan umum, sehingga kita memberinya nama dan lambang formal.</p>
+</div>
+<div id="E00023" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.15">
+<p><strong>Definisi 1.15.</strong></p>
+<p><strong>Gabungan</strong></p>
+<p><em>Gabungan</em> dua himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000158" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000159" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, yang ditulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000160" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∪</mo>
+  <mi>B</mi>
+</math>, adalah himpunan semua objek yang merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000161" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000162" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, atau dari keduanya. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000163" display="block" dir="ltr">
+  <mi>A</mi>
+  <mo>∪</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>∨</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math></p>
+</div>
+<div id="E00024" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.16">
+<p><strong>Contoh 1.16.</strong></p>
+<p>Karena banyaknya pencantuman anggota tidak berpengaruh, gabungan dua himpunan yang mempunyai anggota bersama hanya memuat anggota tersebut satu kali. Sebagai contoh, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000164" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo>,</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+<p>Gabungan sebuah himpunan dengan salah satu himpunan bagiannya sama dengan himpunan yang lebih besar: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000165" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+<p>Gabungan sebuah himpunan dengan himpunan kosong identik dengan himpunan itu: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000166" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∪</mo>
+  <mi mathvariant="normal">∅</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00026" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1">
+<p>Kita juga dapat meninjau operasi yang “dual” terhadap gabungan. Operasi ini membentuk himpunan semua anggota yang merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000169" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> sekaligus anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000170" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. Operasi ini disebut <em>irisan</em> dan dapat digambarkan seperti dalam <span class="native-reference"><a href="#label-main-80b036db24d07ac909a9">Gambar 1.2</a></span>.</p>
+<figure id="FLOAT0002" class="native-float native-figure-float" data-native-number="1.2" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 699.2342 602.5575" width="699.2342" height="602.5575" role="img" aria-label="Diagram"><defs><marker id="dg-d95d0e70278ddbdc-02d6158582-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 319.7368 137.2631 C 304.9660 120.4222 287.4612 104.7447 265.9084 98.6338 C 254.4788 95.3926 242.4424 95.0000 230.5631 95.2142 C 219.5332 95.4141 208.3893 96.1351 197.8377 99.3619 C 162.2355 110.2562 140.6969 147.5647 134.0862 184.2093 C 127.4683 220.8469 132.2301 258.4980 130.5452 295.6924 C 129.1816 325.8691 123.5276 355.8460 113.8114 384.4449 C 107.5291 402.9421 99.4977 421.1038 97.2489 440.5077 C 95.0000 459.9116 99.6903 481.4785 114.8109 493.8434 C 124.1415 501.4751 136.3849 504.7589 148.4143 505.5727 C 177.7771 507.5575 206.3831 496.1208 232.4121 482.3780 C 274.0826 460.3828 312.3193 431.8908 345.3158 398.2447 C 356.3528 386.9936 366.8258 375.1499 376.0709 362.3782 C 385.4088 349.4851 393.5401 335.5285 398.3017 320.3364 C 407.7968 290.0313 402.1926 255.7353 384.7876 229.3423 C 375.3283 214.9785 333.7363 153.2331 319.7368 137.2631 Z M 319.7368 137.2631" stroke="#808080" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 307.7074 146.4367 C 286.7402 154.3253 265.9012 165.1837 252.5870 183.2027 C 245.5265 192.7548 240.9219 203.8845 236.9312 215.0785 C 233.2330 225.4729 229.9777 236.1530 229.2852 247.1613 C 226.9293 284.3201 254.2646 317.6236 286.2261 336.7276 C 318.1875 355.8246 355.0963 364.6343 389.3138 379.3190 C 417.0703 391.2269 443.1349 407.0827 466.4795 426.2510 C 481.5713 438.6443 495.7423 452.5655 513.1044 461.5037 C 530.4739 470.4488 552.3121 473.6542 569.2102 463.8665 C 579.6403 457.8198 587.0221 447.5182 592.0264 436.5455 C 604.2342 409.7671 603.6061 378.9621 599.9222 349.7634 C 594.0183 303.0101 580.8253 257.1845 560.9645 214.4574 C 554.3181 200.1580 546.9220 186.1868 538.2340 173.0367 C 529.4530 159.7510 519.2583 147.2220 506.7152 137.4129 C 481.6998 117.8520 447.6324 111.0128 416.7989 117.9948 C 400.0224 121.8000 327.5825 138.9622 307.7074 146.4367 Z M 307.7074 146.4367" stroke="#a81c21" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 261.7678 204.5413 C 279.7511 201.7857 297.3488 196.5171 313.8827 188.9353" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 256.9917 230.1347 C 282.1496 223.7809 307.9931 220.0830 333.9291 219.1406" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 258.0126 259.2049 C 277.8592 254.9713 298.2840 253.4508 318.5373 254.7144 C 329.3101 255.3855 341.0396 256.6134 350.0491 250.6666" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 274.5966 296.1707 C 310.1704 290.4595 346.4010 288.8817 382.3318 291.4733" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 319.2942 323.0279 C 330.2668 321.8712 341.2324 320.7219 352.2051 319.5725" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/></svg></div></figure>
+<div id="label-main-80b036db24d07ac909a9" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 1.2.</strong> Irisan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000171" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∩</mo>
+  <mi>B</mi>
+</math> dari dua himpunan adalah himpunan anggota yang dimiliki keduanya secara bersama.</p></figcaption>
+</figure>
+</div>
+<div id="E00027" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.17">
+<p><strong>Definisi 1.17.</strong></p>
+<p><strong>Irisan</strong></p>
+<p><em>Irisan</em> dua himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000172" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000173" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, yang ditulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000174" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∩</mo>
+  <mi>B</mi>
+</math>, adalah himpunan semua objek yang merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000175" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan juga dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000176" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000177" display="block" dir="ltr">
+  <mi>A</mi>
+  <mo>∩</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>∧</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> Dua himpunan disebut <em>saling asing</em> jika irisannya kosong. Ini berarti keduanya tidak mempunyai anggota bersama.</p>
+</div>
+<div id="E00028" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.18">
+<p><strong>Contoh 1.18.</strong></p>
+<p>Jika dua himpunan tidak mempunyai anggota bersama, irisannya kosong: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000178" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∩</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>.</p>
+<p>Jika dua himpunan mempunyai anggota bersama, irisannya adalah himpunan semua anggota tersebut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000179" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∩</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>d</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+<p>Irisan sebuah himpunan dengan salah satu himpunan bagiannya sama dengan himpunan yang lebih kecil: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000180" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∩</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+<p>Irisan setiap himpunan dengan himpunan kosong adalah kosong: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000181" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∩</mo>
+  <mi mathvariant="normal">∅</mi>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>.</p>
+</div>
+<div id="E00030" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1">
+<p>Kita juga dapat membentuk gabungan atau irisan lebih dari dua himpunan. Cara yang anggun untuk menanganinya secara umum adalah sebagai berikut: misalkan semua himpunan yang ingin kita gabungkan (atau irisankan) dihimpun ke dalam satu himpunan. Kita kemudian dapat mendefinisikan gabungan semua himpunan semula sebagai himpunan semua objek yang termasuk dalam paling sedikit satu anggota dari himpunan tersebut, dan mendefinisikan irisannya sebagai himpunan semua objek yang termasuk dalam setiap anggota dari himpunan tersebut.</p>
+</div>
+<div id="E00031" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.19">
+<p><strong>Definisi 1.19.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000184" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah himpunan dari himpunan-himpunan, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000185" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>A</mi>
+</math> adalah himpunan anggota dari anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000186" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000187" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mo>⋃</mo>
+        <mi>A</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mi>x</mi>
+        <mo>:</mo>
+        <mi>x</mi>
+        <mtext class="olp-math-prose"> termasuk dalam anggota dari </mtext>
+        <mi>A</mi>
+        <mo fence="false" stretchy="false">}</mo>
+        <mo>,</mo>
+        <mtext class="olp-math-prose"> yaitu,</mtext>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mi>x</mi>
+        <mo>:</mo>
+        <mtext class="olp-math-prose">terdapat </mtext>
+        <mi>B</mi>
+        <mo>∈</mo>
+        <mi>A</mi>
+        <mtext class="olp-math-prose"> sedemikian sehingga </mtext>
+        <mi>x</mi>
+        <mo>∈</mo>
+        <mi>B</mi>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+</div>
+<div id="E00032" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.20">
+<p><strong>Definisi 1.20.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000188" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah himpunan dari himpunan-himpunan, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000189" dir="ltr" display="inline">
+  <mo>⋂</mo>
+  <mi>A</mi>
+</math> adalah himpunan objek yang dimiliki bersama oleh semua anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000190" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000191" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mo>⋂</mo>
+        <mi>A</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mi>x</mi>
+        <mo>:</mo>
+        <mi>x</mi>
+        <mtext class="olp-math-prose"> termasuk dalam setiap anggota dari </mtext>
+        <mi>A</mi>
+        <mo fence="false" stretchy="false">}</mo>
+        <mo>,</mo>
+        <mtext class="olp-math-prose"> yaitu,</mtext>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mi>x</mi>
+        <mo>:</mo>
+        <mtext class="olp-math-prose">untuk setiap </mtext>
+        <mi>B</mi>
+        <mo>∈</mo>
+        <mi>A</mi>
+        <mo>,</mo>
+        <mi>x</mi>
+        <mo>∈</mo>
+        <mi>B</mi>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+</div>
+<div id="E00033" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.21">
+<p><strong>Contoh 1.21.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000192" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>d</mi>
+  <mo>,</mo>
+  <mi>e</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>d</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000193" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>A</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>d</mi>
+  <mo>,</mo>
+  <mi>e</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000194" dir="ltr" display="inline">
+  <mo>⋂</mo>
+  <mi>A</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<p>Kita juga dapat melakukan hal yang sama untuk barisan himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000198" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mn>1</mn>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000199" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mn>2</mn>
+  </msub>
+</math>, … <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000200" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <munder>
+          <mo>⋃</mo>
+          <mi>i</mi>
+        </munder>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mi>x</mi>
+        <mo>:</mo>
+        <mi>x</mi>
+        <mtext class="olp-math-prose"> termasuk dalam salah satu </mtext>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <munder>
+          <mo>⋂</mo>
+          <mi>i</mi>
+        </munder>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mi>x</mi>
+        <mo>:</mo>
+        <mi>x</mi>
+        <mtext class="olp-math-prose"> termasuk dalam setiap </mtext>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+        <mo fence="false" stretchy="false">}</mo>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+<p>Jika kita mempunyai suatu <em>himpunan indeks</em> bagi himpunan-himpunan itu, yaitu himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000201" dir="ltr" display="inline">
+  <mi>I</mi>
+</math> sedemikian sehingga kita meninjau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000202" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mi>i</mi>
+  </msub>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000203" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo>∈</mo>
+  <mi>I</mi>
+</math>, kita juga dapat menggunakan singkatan berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000204" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <munder>
+          <mo>⋃</mo>
+          <mrow>
+            <mi>i</mi>
+            <mo>∈</mo>
+            <mi>I</mi>
+          </mrow>
+        </munder>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo>⋃</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+        <mo>:</mo>
+        <mi>i</mi>
+        <mo>∈</mo>
+        <mi>I</mi>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <munder>
+          <mo>⋂</mo>
+          <mrow>
+            <mi>i</mi>
+            <mo>∈</mo>
+            <mi>I</mi>
+          </mrow>
+        </munder>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mo>⋂</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <msub>
+          <mi>A</mi>
+          <mi>i</mi>
+        </msub>
+        <mo>:</mo>
+        <mi>i</mi>
+        <mo>∈</mo>
+        <mi>I</mi>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+<p>Terakhir, kita mungkin ingin meninjau himpunan semua anggota dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000205" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> yang tidak terdapat dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000206" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. Hal ini dapat digambarkan seperti dalam <span class="native-reference"><a href="#label-main-bb80f4abfc95ae199ac3">Gambar 1.3</a></span>.</p>
+<figure id="FLOAT0003" class="native-float native-figure-float" data-native-number="1.3" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 699.2342 602.5575" width="699.2342" height="602.5575" role="img" aria-label="Diagram"><defs><marker id="dg-c4214baef02f0261-b7e077830c-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M 319.7366 137.2631 C 304.9660 120.4222 287.4610 104.7449 265.9084 98.6267 C 254.4788 95.3856 242.4423 95.0000 230.5629 95.2142 C 219.5332 95.4141 208.3891 96.1351 197.8377 99.3621 C 162.2353 110.2491 140.6969 147.5648 134.0862 184.2093 C 127.4683 220.8469 132.2301 258.4982 130.5452 295.6924 C 129.1816 325.8693 123.5274 355.8460 113.8112 384.4449 C 107.5289 402.9350 99.4975 421.1038 97.2487 440.5077 C 95.0000 459.9045 99.6903 481.4787 114.8107 493.8434 C 124.1415 501.4751 136.3849 504.7520 148.4141 505.5658 C 177.7769 507.5575 206.3831 496.1137 232.4121 482.3782 C 274.0825 460.3757 312.3191 431.8839 345.3158 398.2447 C 356.3528 386.9865 366.8256 375.1428 376.0707 362.3782 C 385.4086 349.4779 393.5399 335.5283 398.3017 320.3293 C 407.7966 290.0242 402.1924 255.7354 384.7876 229.3351 C 375.3283 214.9787 333.7363 153.2260 319.7366 137.2631 Z M 319.7366 137.2631" stroke="#808080" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 307.7074 146.4368 C 286.7400 154.3255 265.9012 165.1839 252.5869 183.1958 C 245.5263 192.7548 240.9217 203.8846 236.9310 215.0715 C 233.2330 225.4659 229.9775 236.1530 229.2851 247.1615 C 226.9293 284.3201 254.2646 317.6236 286.2261 336.7206 C 318.1874 355.8246 355.0963 364.6342 389.3136 379.3119 C 417.0701 391.2271 443.1347 407.0758 466.4795 426.2439 C 481.5713 438.6445 495.7423 452.5585 513.1044 461.5037 C 530.4737 470.4417 552.3119 473.6542 569.2100 463.8596 C 579.6401 457.8128 587.0219 447.5112 592.0264 436.5384 C 604.2342 409.7600 603.6059 378.9550 599.9222 349.7636 C 594.0181 303.0099 580.8253 257.1845 560.9645 214.4503 C 554.3181 200.1580 546.9220 186.1870 538.2338 173.0298 C 529.4528 159.7439 519.2583 147.2222 506.7150 137.4131 C 481.6998 117.8520 447.6324 111.0130 416.7989 117.9949 C 400.0222 121.7929 327.5825 138.9550 307.7074 146.4368 Z M 307.7074 146.4368" stroke="#a81c21" fill="none" stroke-width="8.224163999671033" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 173.1438 136.5635 C 213.3150 142.4818 254.0718 133.4224 294.6787 133.2868" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 128.4462 406.3617 C 189.5634 402.8495 250.4881 397.4166 310.9983 390.0920" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 154.8249 460.0831 C 187.6503 456.9632 220.3328 452.2515 252.7082 445.9834" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 162.9278 171.3020 C 179.8472 168.5178 197.0452 167.4399 214.1789 168.0894" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 150.9128 223.4598 C 170.9878 219.6619 191.8266 219.9903 211.7659 224.4235" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 166.7114 364.4700 C 188.5426 361.8070 211.0949 361.1647 233.2758 362.5710 C 242.8778 363.1777 253.1437 364.0987 261.7676 361.5643" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 156.9524 324.2773 L 200.8147 324.2773" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 158.0733 282.0570 C 169.2531 284.6841 180.8040 285.7549 192.2835 285.2196" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/><path d="M 148.4284 249.9955 C 161.3500 248.4963 174.4074 248.1109 187.4003 248.8533" stroke="#000000" fill="none" stroke-width="4.1120819998355165" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10.00"/></svg></div></figure>
+<div id="label-main-bb80f4abfc95ae199ac3" class="native-anchor">
+
+</div>
+<figcaption><p><strong>Gambar 1.3.</strong> Selisih <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000207" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∖</mo>
+  <mi>B</mi>
+</math> dari dua himpunan adalah himpunan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000208" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> yang bukan merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000209" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>.</p></figcaption>
+</figure>
+<div id="E00035" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.22">
+<p><strong>Definisi 1.22.</strong></p>
+<p><strong>Selisih</strong></p>
+<p><em>Selisih himpunan</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000210" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∖</mo>
+  <mi>B</mi>
+</math> adalah himpunan semua anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000211" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> yang bukan merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000212" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000213" display="block" dir="ltr">
+  <mi>A</mi>
+  <mo>∖</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mtext class="olp-math-prose"> dan </mtext>
+  <mi>x</mi>
+  <mo>∉</mo>
+  <mi>B</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p>
+</div>
+<div id="source-OLP-0009-0009" class="source-unit" data-source-unit="OLP-0009" data-source-occurrence="9" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/sets/pairs-and-products.tex" data-source-sha256="da745212e2156cc733982e83338f45db669bfe7dab8d6b0d55665649b6c2cce8">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="1.5" data-native-label="sfr:set:pai:sec" id="label-main-50be1db31373abf74588">1.5 Pasangan, Tupel, dan Hasil Kali Kartesius</h3>
+<div id="E00037" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1">
+<p>Dari ekstensionalitas diperoleh bahwa anggota sebuah himpunan tidak mempunyai urutan. Karena itu, jika kita ingin merepresentasikan urutan, kita menggunakan <em>pasangan terurut</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000216" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>. Dalam pasangan tak terurut <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000217" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, urutan tidak berpengaruh: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000218" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Dalam pasangan terurut, urutan berpengaruh: jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000219" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>≠</mo>
+  <mi>y</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000220" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>≠</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>.</p>
+<p>Bagaimana kita seharusnya memahami pasangan terurut dalam teori himpunan? Yang sangat penting, kita ingin mempertahankan gagasan bahwa dua pasangan terurut identik jika dan hanya jika keduanya mempunyai anggota pertama yang sama dan anggota kedua yang sama, yaitu: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000221" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>c</mi>
+  <mo>,</mo>
+  <mi>d</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+  <mi>a</mi>
+  <mo>=</mo>
+  <mi>c</mi>
+  <mtext class="olp-math-prose"> dan </mtext>
+  <mi>b</mi>
+  <mo>=</mo>
+  <mi>d</mi>
+  <mo>.</mo>
+</math> Kita dapat mendefinisikan pasangan terurut dalam teori himpunan dengan definisi Wiener–Kuratowski.</p>
+</div>
+<div id="E00038" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.23">
+<p><strong>Definisi 1.23.</strong></p>
+<p><strong>Pasangan terurut</strong></p>
+<div id="label-main-83d9e57b169854a7dc69" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000222" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00040" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1">
+<p>Setelah menetapkan definisi pasangan terurut, kita dapat menggunakannya untuk mendefinisikan himpunan lain. Sebagai contoh, kadang-kadang kita juga memerlukan barisan terurut yang terdiri atas lebih dari dua objek, misalnya <em>tripel</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000226" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>z</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>, <em>kuadruplet</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000227" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>z</mi>
+  <mo>,</mo>
+  <mi>u</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>, dan seterusnya. Kita dapat memandang tripel sebagai pasangan terurut khusus yang anggota pertamanya sendiri merupakan pasangan terurut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000228" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>z</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000229" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mi>z</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>. Hal yang sama berlaku bagi kuadruplet: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000230" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>z</mi>
+  <mo>,</mo>
+  <mi>u</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000231" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mi>z</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mi>u</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>, dan seterusnya. Secara umum, kita berbicara tentang <em>tupel-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000232" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> terurut</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000233" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>.</p>
+<p>Himpunan tertentu yang terdiri atas pasangan terurut atau tupel-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000234" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> terurut lainnya akan berguna.</p>
+</div>
+<div id="E00041" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.24">
+<p><strong>Definisi 1.24.</strong></p>
+<p><strong>Hasil kali Kartesius</strong></p>
+<p>Untuk himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000235" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000236" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, <em>hasil kali Kartesius</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000237" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> didefinisikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000238" display="block" dir="ltr">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mtext class="olp-math-prose"> dan </mtext>
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p>
+</div>
+<div id="E00042" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.25">
+<p><strong>Contoh 1.25.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000239" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000240" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, maka hasil kali keduanya adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000241" display="block" dir="ltr">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mi>a</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math></p>
+</div>
+<div id="E00043" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.26">
+<p><strong>Contoh 1.26.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000242" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah himpunan, hasil kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000243" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dengan dirinya sendiri, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000244" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>A</mi>
+</math>, juga ditulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000245" dir="ltr" display="inline">
+  <msup>
+    <mi>A</mi>
+    <mn>2</mn>
+  </msup>
+</math>. Ini adalah himpunan <em>semua</em> pasangan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000246" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000247" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>. Himpunan semua tripel <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000248" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo>,</mo>
+  <mi>z</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000249" dir="ltr" display="inline">
+  <msup>
+    <mi>A</mi>
+    <mn>3</mn>
+  </msup>
+</math>, dan seterusnya. Kita dapat memberikan definisi rekursif: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000250" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <msup>
+          <mi>A</mi>
+          <mn>1</mn>
+        </msup>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mi>A</mi>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <msup>
+          <mi>A</mi>
+          <mrow>
+            <mi>k</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <msup>
+          <mi>A</mi>
+          <mi>k</mi>
+        </msup>
+        <mo>×</mo>
+        <mi>A</mi>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+</div>
+<div id="E00045" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.27">
+<p><strong>Proposisi 1.27.</strong></p>
+<div id="label-main-71c919c8ff7600edb40d" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000252" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000253" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> anggota dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000254" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000255" dir="ltr" display="inline">
+  <mi>m</mi>
+</math> anggota, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000256" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000257" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>⋅</mo>
+  <mi>m</mi>
+</math> anggota.</p>
+</div>
+<div id="E00046" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1">
+<p><strong>Bukti.</strong></p>
+<p>Untuk setiap anggota <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000258" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000259" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000260" dir="ltr" display="inline">
+  <mi>m</mi>
+</math> anggota berbentuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000261" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math>. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000262" dir="ltr" display="inline">
+  <msub>
+    <mi>B</mi>
+    <mi>x</mi>
+  </msub>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>:</mo>
+  <mi>y</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Karena jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000263" dir="ltr" display="inline">
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>≠</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>2</mn>
+  </msub>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000264" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>≠</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>, diperoleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000265" dir="ltr" display="inline">
+  <msub>
+    <mi>B</mi>
+    <mrow>
+      <msub>
+        <mi>x</mi>
+        <mn>1</mn>
+      </msub>
+    </mrow>
+  </msub>
+  <mo>∩</mo>
+  <msub>
+    <mi>B</mi>
+    <mrow>
+      <msub>
+        <mi>x</mi>
+        <mn>2</mn>
+      </msub>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>. Akan tetapi, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000266" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>x</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>x</mi>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000267" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <msub>
+    <mi>B</mi>
+    <mrow>
+      <msub>
+        <mi>x</mi>
+        <mn>1</mn>
+      </msub>
+    </mrow>
+  </msub>
+  <mo>∪</mo>
+  <mo>⋯</mo>
+  <mo>∪</mo>
+  <msub>
+    <mi>B</mi>
+    <mrow>
+      <msub>
+        <mi>x</mi>
+        <mi>n</mi>
+      </msub>
+    </mrow>
+  </msub>
+</math>, sehingga himpunan ini mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000268" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>⋅</mo>
+  <mi>m</mi>
+</math> anggota.</p>
+<p>Untuk memvisualisasikannya, susun anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000269" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+</math> dalam sebuah kisi: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000270" display="block" dir="ltr">
+  <mtable columnalign="right center center center center" columnspacing="1em" rowspacing="4pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(4pt / 2)">
+        <msub>
+          <mi>B</mi>
+          <mrow>
+            <msub>
+              <mi>x</mi>
+              <mn>1</mn>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(4pt / 2)">
+        <mo fence="false" stretchy="false">{</mo>
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mn>1</mn>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(4pt / 2)">
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mn>2</mn>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(4pt / 2)">
+        <mo>…</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(4pt / 2)">
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mi>m</mi>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)">
+        <msub>
+          <mi>B</mi>
+          <mrow>
+            <msub>
+              <mi>x</mi>
+              <mn>2</mn>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)">
+        <mo fence="false" stretchy="false">{</mo>
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mn>1</mn>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)">
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mn>2</mn>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)">
+        <mo>…</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)">
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mi>m</mi>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)">
+        <mrow>
+          <mo>⋮</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)"/>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:calc(4pt / 2)">
+        <mrow>
+          <mo>⋮</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:0">
+        <msub>
+          <mi>B</mi>
+          <mrow>
+            <msub>
+              <mi>x</mi>
+              <mi>n</mi>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:0">
+        <mo fence="false" stretchy="false">{</mo>
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mi>n</mi>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mn>1</mn>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:0">
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mi>n</mi>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mn>2</mn>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:calc(1em / 2);padding-top:calc(4pt / 2);padding-bottom:0">
+        <mo>…</mo>
+      </mtd>
+      <mtd style="text-align:center;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(4pt / 2);padding-bottom:0">
+        <mo fence="false" stretchy="false">⟨</mo>
+        <msub>
+          <mi>x</mi>
+          <mi>n</mi>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>y</mi>
+          <mi>m</mi>
+        </msub>
+        <mo fence="false" stretchy="false">⟩</mo>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Karena semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000271" dir="ltr" display="inline">
+  <msub>
+    <mi>x</mi>
+    <mi>i</mi>
+  </msub>
+</math> berbeda dan semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000272" dir="ltr" display="inline">
+  <msub>
+    <mi>y</mi>
+    <mi>j</mi>
+  </msub>
+</math> berbeda, tidak ada dua pasangan dalam kisi ini yang sama, dan jumlah pasangan itu adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000273" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>⋅</mo>
+  <mi>m</mi>
+</math>.</p>
+</div>
+<div id="E00048" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.28">
+<p><strong>Contoh 1.28.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000280" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah himpunan, sebuah <em>kata</em> atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000281" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah sebarang barisan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000282" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Sebuah barisan dapat dipandang sebagai tupel-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000283" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> dari anggota dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000284" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Sebagai contoh, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000285" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>, maka barisan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000286" dir="ltr" display="inline">
+  <mi>b</mi>
+  <mi>a</mi>
+  <mi>c</mi>
+</math>” dapat dipandang sebagai tripel <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000287" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>. Kata, yaitu barisan simbol, sangat penting dalam ilmu komputer. Berdasarkan konvensi, kita menghitung anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000288" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> sebagai barisan dengan panjang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000289" dir="ltr" display="inline">
+  <mn>1</mn>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000290" dir="ltr" display="inline">
+  <mi mathvariant="normal">∅</mi>
+</math> sebagai barisan dengan panjang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000291" dir="ltr" display="inline">
+  <mn>0</mn>
+</math>. Himpunan <em>semua</em> kata atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000292" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> kemudian adalah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000293" display="block" dir="ltr">
+  <msup>
+    <mi>A</mi>
+    <mo>∗</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi mathvariant="normal">∅</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>∪</mo>
+  <mi>A</mi>
+  <mo>∪</mo>
+  <msup>
+    <mi>A</mi>
+    <mn>2</mn>
+  </msup>
+  <mo>∪</mo>
+  <msup>
+    <mi>A</mi>
+    <mn>3</mn>
+  </msup>
+  <mo>∪</mo>
+  <mo>…</mo>
+</math></p>
+</div>
+<div id="source-OLP-0010-0010" class="source-unit" data-source-unit="OLP-0010" data-source-occurrence="10" data-source-path="source/main/openlogic/locale/id/content/sets-functions-relations/sets/russells-paradox.tex" data-source-sha256="d2dff818dbe6d613d579933e0819768abbf9165e0a337717b7229bd37fa138c9">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="1.6" data-native-label="sfr:set:rus:sec" id="label-main-f55076e49039c101897e">1.6 Paradoks Russell</h3>
+<p>Ekstensionalitas membenarkan notasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000294" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math> untuk <em>himpunan</em> semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000295" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000296" dir="ltr" display="inline">
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>. Akan tetapi, ekstensionalitas <em>sesungguhnya</em> hanya membenarkan pemikiran berikut. <em>Jika</em> ada himpunan yang anggotanya tepat semua objek yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000297" dir="ltr" display="inline">
+  <mi>φ</mi>
+</math>, <em>maka</em> hanya ada satu himpunan semacam itu. Dengan kata lain, setelah suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000298" dir="ltr" display="inline">
+  <mi>φ</mi>
+</math> ditetapkan, himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000299" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math> bersifat unik <em>jika himpunan itu ada</em>.</p>
+<p>Namun, syarat ini penting! Tidak setiap sifat memungkinkan <em>komprehensi</em>, yaitu pembentukan himpunan dari semua objek yang memiliki sifat tersebut. Dengan kata lain, beberapa sifat <em>tidak</em> mendefinisikan himpunan. Jika semuanya mendefinisikan himpunan, kita akan menghadapi kontradiksi langsung. Contoh paling terkenal adalah Paradoks Russell.</p>
+<p>Himpunan dapat menjadi anggota dari himpunan lain—sebagai contoh, himpunan kuasa dari himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000300" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> tersusun atas himpunan-himpunan. Karena itu, masuk akal untuk menanyakan atau menyelidiki apakah sebuah himpunan merupakan anggota dari himpunan lain. Dapatkah sebuah himpunan menjadi anggota dirinya sendiri? Tidak ada sesuatu dalam gagasan tentang himpunan yang tampaknya menutup kemungkinan ini. Sebagai contoh, jika <em>semua</em> himpunan membentuk suatu kumpulan objek, mungkin kita berpikir bahwa semuanya dapat dihimpun menjadi satu himpunan—himpunan semua himpunan. Karena himpunan itu sendiri adalah sebuah himpunan, ia akan menjadi anggota dari himpunan semua himpunan.</p>
+<p>Paradoks Russell muncul ketika kita meninjau sifat tidak memuat dirinya sendiri sebagai anggota, yakni sifat <em>tidak beranggotakan diri sendiri</em>. Bagaimana jika kita mengandaikan bahwa terdapat himpunan semua himpunan yang tidak memuat dirinya sendiri sebagai anggota? Apakah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000301" display="block" dir="ltr">
+  <mi>R</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∉</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> ada? Ternyata kita dapat membuktikan bahwa himpunan itu tidak ada.</p>
+<div id="E00049" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sfr:set:rus" data-source-unit_id="OLP-0010" data-source-occurrence="10" data-source-chapter="1" data-native-number="1.29">
+<p><strong>Teorema 1.29.</strong></p>
+<p><strong>Paradoks Russell</strong></p>
+<div id="label-main-360e9cc5c42d6aef6575" class="native-anchor">
+
+</div>
+<p>Tidak ada himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000302" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∉</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00050" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sfr:set:rus" data-source-unit_id="OLP-0010" data-source-occurrence="10" data-source-chapter="1" data-native-number="2">
+<p><strong>Bukti.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000303" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∉</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> ada, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000304" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000305" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∉</mo>
+  <mi>R</mi>
+</math>, dan ini merupakan kontradiksi.</p>
+</div>
+<div id="E00051" class="native-environment native-explain" data-source-edition="main" data-source-prefix="sfr:set:rus" data-source-unit_id="OLP-0010" data-source-occurrence="10" data-source-chapter="1">
+<p>Mari kita telaah bukti ini dengan lebih perlahan. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000306" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> ada, masuk akal untuk menanyakan apakah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000307" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>. Andaikan memang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000308" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>. Himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000309" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> didefinisikan sebagai himpunan semua himpunan yang tidak merupakan anggota dari dirinya sendiri. Jadi, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000310" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000311" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> sendiri tidak memiliki sifat yang mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000312" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>. Namun, hanya himpunan yang memiliki sifat tersebut yang berada di dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000313" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>. Karena itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000314" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> tidak mungkin merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000315" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000316" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∉</mo>
+  <mi>R</mi>
+</math>. Akan tetapi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000317" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> tidak mungkin sekaligus merupakan dan bukan merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000318" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>, sehingga kita memperoleh kontradiksi.</p>
+<p>Karena asumsi bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000319" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math> menghasilkan kontradiksi, kita mendapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000320" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∉</mo>
+  <mi>R</mi>
+</math>. Namun, hal ini juga menghasilkan kontradiksi! Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000321" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>∉</mo>
+  <mi>R</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000322" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> sendiri memiliki sifat yang mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000323" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000324" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> akan menjadi anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000325" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>, sama seperti semua himpunan lain yang tidak beranggotakan dirinya sendiri. Sekali lagi, himpunan itu tidak mungkin sekaligus bukan merupakan dan merupakan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000326" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>.</p>
+</div>
+<div id="E00052" class="native-environment native-digress" data-source-edition="main" data-source-prefix="sfr:set:rus" data-source-unit_id="OLP-0010" data-source-occurrence="10" data-source-chapter="1">
+<p>Bagaimana kita menyusun teori himpunan yang tidak terjerumus ke dalam Paradoks Russell, yaitu teori yang tidak membuat klaim <em>inkonsisten</em> bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000327" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>x</mi>
+  <mo>∉</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> ada? Kita perlu menetapkan aksioma-aksioma yang memberikan syarat sangat tepat untuk menyatakan kapan himpunan ada (dan kapan himpunan tidak ada).</p>
+<p>Teori himpunan yang digambarkan secara garis besar dalam bab ini tidak melakukan hal tersebut. Teori ini benar-benar <em>naif</em>. Teori ini hanya menyatakan bahwa himpunan mematuhi ekstensionalitas dan bahwa, jika kita mempunyai beberapa himpunan, kita dapat membentuk gabungan, irisan, dan sebagainya. Teori himpunan dapat dikembangkan secara lebih ketat daripada ini.</p>
+</div>
+<h3 class="unnumbered native-problems-heading" data-native-chapter="1" id="exercises-main-1">Soal</h3>
+<div id="E00008" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:bas" data-source-unit_id="OLP-0005" data-source-occurrence="5" data-source-chapter="1" data-native-number="1.1">
+<p><strong>Soal 1.1.</strong></p>
+<p>Buktikan bahwa terdapat paling banyak satu himpunan kosong, yakni tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000050" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000051" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> adalah himpunan tanpa anggota, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000052" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00017" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.2">
+<p><strong>Soal 1.2.</strong></p>
+<p>Tuliskan semua himpunan bagian dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000113" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo>,</mo>
+  <mi>c</mi>
+  <mo>,</mo>
+  <mi>d</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00018" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:sub" data-source-unit_id="OLP-0006" data-source-occurrence="6" data-source-chapter="1" data-native-number="1.3">
+<p><strong>Soal 1.3.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000114" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000115" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> anggota, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000116" dir="ltr" display="inline">
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+</math> mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000117" dir="ltr" display="inline">
+  <msup>
+    <mn>2</mn>
+    <mi>n</mi>
+  </msup>
+</math> anggota.</p>
+</div>
+<div id="E00025" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.4">
+<p><strong>Soal 1.4.</strong></p>
+<p>Buktikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000167" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>B</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000168" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∪</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00029" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.5">
+<p><strong>Soal 1.5.</strong></p>
+<p>Buktikan secara ketat bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000182" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mi>B</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000183" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∩</mo>
+  <mi>B</mi>
+  <mo>=</mo>
+  <mi>A</mi>
+</math>.</p>
+</div>
+<div id="E00034" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.6">
+<p><strong>Soal 1.6.</strong></p>
+<p>Tunjukkan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000195" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> adalah himpunan dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000196" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000197" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊆</mo>
+  <mo>⋃</mo>
+  <mi>B</mi>
+</math>.</p>
+</div>
+<div id="E00036" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:uni" data-source-unit_id="OLP-0008" data-source-occurrence="8" data-source-chapter="1" data-native-number="1.7">
+<p><strong>Soal 1.7.</strong></p>
+<p>Buktikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000214" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊊</mo>
+  <mi>B</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000215" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>∖</mo>
+  <mi>A</mi>
+  <mo>≠</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>.</p>
+</div>
+<div id="E00039" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.8">
+<p><strong>Soal 1.8.</strong></p>
+<p>Dengan menggunakan <span class="native-reference"><a href="#label-main-83d9e57b169854a7dc69">Definisi 1.23</a></span>, buktikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000223" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>c</mi>
+  <mo>,</mo>
+  <mi>d</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000224" dir="ltr" display="inline">
+  <mi>a</mi>
+  <mo>=</mo>
+  <mi>c</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000225" dir="ltr" display="inline">
+  <mi>b</mi>
+  <mo>=</mo>
+  <mi>d</mi>
+</math>.</p>
+</div>
+<div id="E00044" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.9">
+<p><strong>Soal 1.9.</strong></p>
+<p>Tuliskan semua anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000251" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mo>,</mo>
+  <mn>3</mn>
+  <msup>
+    <mo fence="false" stretchy="false">}</mo>
+    <mn>3</mn>
+  </msup>
+</math>.</p>
+</div>
+<div id="E00047" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sfr:set:pai" data-source-unit_id="OLP-0009" data-source-occurrence="9" data-source-chapter="1" data-native-number="1.10">
+<p><strong>Soal 1.10.</strong></p>
+<p>Tunjukkan, dengan induksi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000274" dir="ltr" display="inline">
+  <mi>k</mi>
+</math>, bahwa untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000275" dir="ltr" display="inline">
+  <mi>k</mi>
+  <mo>≥</mo>
+  <mn>1</mn>
+</math>, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000276" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000277" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> anggota, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000278" dir="ltr" display="inline">
+  <msup>
+    <mi>A</mi>
+    <mi>k</mi>
+  </msup>
+</math> mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M000279" dir="ltr" display="inline">
+  <msup>
+    <mi>n</mi>
+    <mi>k</mi>
+  </msup>
+</math> anggota.</p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0003.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0005.xhtml">Berikutnya →</a></nav></body></html>

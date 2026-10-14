@@ -1,0 +1,1916 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>47 Logika Bernilai Tak Hingga — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0058.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0060.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0059" class="reader-chunk">
+<div id="source-OLP-0398-0450" class="source-unit" data-source-unit="OLP-0398" data-source-occurrence="450" data-source-path="source/main/openlogic/locale/id/content/many-valued-logic/infinite-valued-logics/infinite-valued-logics.tex" data-source-sha256="84d2d13ce1e6583b18edfec767cc7581fcf77806865e391193564fa088fe8b5e">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="47" data-native-label="mvl:inf::chap" id="label-main-aca8b1c402408fbcd2bf">47 Logika Bernilai Tak Hingga</h2>
+<div id="source-OLP-0399-0451" class="source-unit" data-source-unit="OLP-0399" data-source-occurrence="451" data-source-path="source/main/openlogic/locale/id/content/many-valued-logic/infinite-valued-logics/introduction.tex" data-source-sha256="db1aa14bd9b7a7bac7b741faeecfc1fc10eeae27b6bbc7b3d579a9ffe19bf831">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="47.1" data-native-label="mvl:inf:int:sec" id="label-main-439318525e888247f14d">47.1 Pengantar</h3>
+<p>Banyaknya nilai kebenaran dalam suatu matriks tidak harus berhingga. Pilihan yang jelas untuk himpunan nilai kebenaran yang tak berhingga ialah himpunan bilangan rasional antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023596" dir="ltr" display="inline">
+  <mn>0</mn>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023597" dir="ltr" display="inline">
+  <mn>1</mn>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023598" dir="ltr" display="inline">
+  <msub>
+    <mi>V</mi>
+    <mi mathvariant="normal">∞</mi>
+  </msub>
+  <mo>=</mo>
+  <mo stretchy="false">[</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo stretchy="false">]</mo>
+  <mo>∩</mo>
+  <mrow>
+    <mi mathvariant="normal">ℚ</mi>
+  </mrow>
+</math>, yakni, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023599" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mi>V</mi>
+          <mi mathvariant="normal">∞</mi>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mfrac>
+          <mi>n</mi>
+          <mi>m</mi>
+        </mfrac>
+        <mo>:</mo>
+        <mi>n</mi>
+        <mo>,</mo>
+        <mi>m</mi>
+        <mo>∈</mo>
+        <mrow>
+          <mi mathvariant="normal">ℕ</mi>
+        </mrow>
+        <mtext class="olp-math-prose"> dan </mtext>
+        <mi>n</mi>
+        <mo>≤</mo>
+        <mi>m</mi>
+        <mo fence="false" stretchy="false">}</mo>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd columnspan="2" data-native-intertext="true" style="text-align:left;padding-left:0;padding-right:0;padding-top:0.6em;padding-bottom:0.6em">
+        <mtext class="olp-math-prose">Ketika mempertimbangkan himpunan nilai kebenaran tak hingga ini, sering kali berguna untuk juga mempertimbangkan himpunan-himpunan bagiannya</mtext>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mi>V</mi>
+          <mi>m</mi>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mfrac>
+          <mi>n</mi>
+          <mrow>
+            <mi>m</mi>
+            <mo>−</mo>
+            <mn>1</mn>
+          </mrow>
+        </mfrac>
+        <mo>:</mo>
+        <mi>n</mi>
+        <mo>∈</mo>
+        <mrow>
+          <mi mathvariant="normal">ℕ</mi>
+        </mrow>
+        <mtext class="olp-math-prose"> dan </mtext>
+        <mi>n</mi>
+        <mo>&lt;</mo>
+        <mi>m</mi>
+        <mo fence="false" stretchy="false">}</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd columnspan="2" data-native-intertext="true" style="text-align:left;padding-left:0;padding-right:0;padding-top:0.6em;padding-bottom:0.6em">
+        <mrow class="olp-math-prose">
+          <mtext>Sebagai contoh, </mtext>
+          <mrow>
+            <msub>
+              <mi>V</mi>
+              <mn>5</mn>
+            </msub>
+          </mrow>
+          <mtext> merupakan himpunan dengan </mtext>
+          <mrow>
+            <mn>5</mn>
+          </mrow>
+          <mtext> nilai kebenaran yang berjarak sama,</mtext>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <msub>
+          <mi>V</mi>
+          <mn>5</mn>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mfrac>
+          <mn>1</mn>
+          <mn>4</mn>
+        </mfrac>
+        <mo>,</mo>
+        <mfrac>
+          <mn>1</mn>
+          <mn>2</mn>
+        </mfrac>
+        <mo>,</mo>
+        <mfrac>
+          <mn>3</mn>
+          <mn>4</mn>
+        </mfrac>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo fence="false" stretchy="false">}</mo>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Dalam logika yang didasarkan pada himpunan-himpunan nilai kebenaran ini, biasanya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023600" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> merupakan satu-satunya nilai kebenaran yang ditetapkan, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023601" dir="ltr" display="inline">
+  <msup>
+    <mi>V</mi>
+    <mo>+</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Dengan kata lain, kita membiarkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023602" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> memainkan peran kebenaran (mutlak) dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023603" dir="ltr" display="inline">
+  <mn>0</mn>
+</math> memainkan peran kepalsuan mutlak, tetapi formula dapat mengambil nilai perantara mana pun dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023604" dir="ltr" display="inline">
+  <mi>V</mi>
+</math>.</p>
+<p>Namun, kita juga dapat mempertimbangkan himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023605" dir="ltr" display="inline">
+  <msub>
+    <mi>V</mi>
+    <mrow>
+      <mo stretchy="false">[</mo>
+      <mn>0</mn>
+      <mo>,</mo>
+      <mn>1</mn>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <mo stretchy="false">[</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo stretchy="false">]</mo>
+</math> dari semua bilangan <em>real</em> antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023606" dir="ltr" display="inline">
+  <mn>0</mn>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023607" dir="ltr" display="inline">
+  <mn>1</mn>
+</math>, atau himpunan bagian tak berhingga lainnya dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023608" dir="ltr" display="inline">
+  <mo stretchy="false">[</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo stretchy="false">]</mo>
+</math>. Logika dengan himpunan nilai kebenaran ini sering disebut <em>logika kabur</em>.</p>
+<div id="source-OLP-0400-0452" class="source-unit" data-source-unit="OLP-0400" data-source-occurrence="452" data-source-path="source/main/openlogic/locale/id/content/many-valued-logic/infinite-valued-logics/lukasiewicz.tex" data-source-sha256="02929ea5a9daf746880daf4be2dec07abab988bd12bc15a2eaab19085c2a74f1">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="47.2" data-native-label="mvl:inf:luk:sec" id="label-main-9ec9833b892448f78d71">47.2 Logika Łukasiewicz</h3>
+<div id="E02152" class="native-environment native-editorial" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47">
+<p>Ini adalah “rintisan” singkat untuk suatu bagian mengenai logika Ł ukasiewicz bernilai tak hingga.</p>
+</div>
+<div id="E02153" class="native-environment native-defn" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47" data-native-number="47.1">
+<p><strong>Definisi 47.1.</strong></p>
+<p><span id="label-main-c2cd566b14e211aeb779" class="native-anchor"/> Logika Łukasiewicz bernilai tak hingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023609" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math> didefinisikan dengan menggunakan matriks berikut:</p>
+<ol>
+<li><p>Bahasa proposisional baku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023610" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023611" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023612" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023613" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023614" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+</math>.</p></li>
+<li><p>Himpunan nilai kebenaran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023615" dir="ltr" display="inline">
+  <msub>
+    <mi>V</mi>
+    <mi mathvariant="normal">∞</mi>
+  </msub>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023616" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> merupakan satu-satunya nilai kebenaran yang ditetapkan, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023617" dir="ltr" display="inline">
+  <msup>
+    <mi>V</mi>
+    <mo>+</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p></li>
+<li><p>Fungsi kebenaran diberikan oleh fungsi-fungsi berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023618" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mrow>
+            <mover>
+              <mi mathvariant="normal">¬</mi>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mn>1</mn>
+        <mo>−</mo>
+        <mi>x</mi>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mrow>
+            <mover>
+              <mo>∧</mo>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo movablelimits="true">min</mo>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mrow>
+            <mover>
+              <mo>∨</mo>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo movablelimits="true">max</mo>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <msub>
+          <mrow>
+            <mover>
+              <mrow>
+                <mo stretchy="false">→</mo>
+              </mrow>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mo movablelimits="true">min</mo>
+        <mo stretchy="false">(</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo>−</mo>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>−</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mn>1</mn>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mtext class="olp-math-prose">jika </mtext>
+                <mi>x</mi>
+                <mo>≤</mo>
+                <mi>y</mi>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mn>1</mn>
+                <mo>−</mo>
+                <mo stretchy="false">(</mo>
+                <mi>x</mi>
+                <mo>−</mo>
+                <mi>y</mi>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mtext class="olp-math-prose">selain itu.</mtext>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p></li>
+</ol>
+<p>Logika Łukasiewicz bernilai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023619" dir="ltr" display="inline">
+  <mi>m</mi>
+</math> didefinisikan dengan cara yang sama, kecuali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023620" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo>=</mo>
+  <msub>
+    <mi>V</mi>
+    <mi>m</mi>
+  </msub>
+</math>.</p>
+</div>
+<div id="E02154" class="native-environment native-prop" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47" data-native-number="47.2">
+<p><strong>Proposisi 47.2.</strong></p>
+<p>Logika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023621" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mn>3</mn>
+  <mo stretchy="false">]</mo>
+</math> yang didefinisikan oleh <span class="native-reference"><a href="part-0058.xhtml#label-main-195eefe7d4fecb202109">Definisi 46.1</a></span> sama dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023622" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mn>3</mn>
+  <mo stretchy="false">]</mo>
+</math> yang didefinisikan oleh <span class="native-reference"><a href="#label-main-c2cd566b14e211aeb779">Definisi 47.1</a></span>.</p>
+</div>
+<div id="E02155" class="native-environment native-proof" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47" data-native-number="471">
+<p><strong>Bukti.</strong></p>
+<p>Hal ini dapat dilihat dengan membandingkan tabel kebenaran untuk konektif-konektif yang diberikan dalam <span class="native-reference"><a href="part-0058.xhtml#label-main-195eefe7d4fecb202109">Definisi 46.1</a></span> dengan tabel kebenaran yang ditentukan oleh persamaan-persamaan dalam <span class="native-reference"><a href="#label-main-c2cd566b14e211aeb779">Definisi 47.1</a></span>:</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023623" dir="ltr" display="inline">
+  <mrow>
+    <mover>
+      <mi mathvariant="normal">¬</mi>
+      <mo>~</mo>
+    </mover>
+  </mrow>
+</math></th>
+<th style="text-align: center;"/>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023624" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023625" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023626" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023627" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023628" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023629" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" dir="ltr">
+  <mstyle scriptlevel="0">
+    <mspace width="1em"/>
+  </mstyle>
+</math>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023630" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mover>
+        <mo>∧</mo>
+        <mo>~</mo>
+      </mover>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mn>3</mn>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023631" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023632" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023633" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023634" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023635" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023636" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023637" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023638" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023639" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023640" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023641" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023642" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023643" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023644" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023645" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+<p><br/>
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023646" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mover>
+        <mo>∨</mo>
+        <mo>~</mo>
+      </mover>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mn>3</mn>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023647" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023648" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023649" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023650" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023651" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023652" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023653" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023654" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023655" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023656" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023657" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023658" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023659" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023660" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023661" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" dir="ltr">
+  <mstyle scriptlevel="0">
+    <mspace width="1em"/>
+  </mstyle>
+</math>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023662" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mover>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mo>~</mo>
+      </mover>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mn>3</mn>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023663" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023664" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023665" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023666" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023667" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023668" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023669" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023670" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023671" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023672" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023673" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023674" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023675" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023676" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023677" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="E02156" class="native-environment native-prop" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47" data-native-number="47.3">
+<p><strong>Proposisi 47.3.</strong></p>
+<div id="label-main-380e705047e28630c5e9" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023678" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <msub>
+    <mo>⊨</mo>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mi mathvariant="normal">∞</mi>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023679" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <msub>
+    <mo>⊨</mo>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mi>m</mi>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023680" dir="ltr" display="inline">
+  <mi>m</mi>
+  <mo>≥</mo>
+  <mn>2</mn>
+</math>.</p>
+</div>
+<div id="E02157" class="native-environment native-proof" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47" data-native-number="472">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<p>Faktanya, kebalikannya juga berlaku.</p>
+<p>Logika Łukasiewicz bernilai tak hingga merupakan logika kabur yang paling populer. Dalam literatur logika kabur, implikasi sering didefinisikan sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023681" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>. Hasilnya adalah logika Kleene kuat bernilai tak hingga.</p>
+<div id="source-OLP-0401-0453" class="source-unit" data-source-unit="OLP-0401" data-source-occurrence="453" data-source-path="source/main/openlogic/locale/id/content/many-valued-logic/infinite-valued-logics/goedel.tex" data-source-sha256="5fcd94e72e87ba849d096bededaa7a8967652d1abbe944ab6918f2e017ef703c">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="47.3" data-native-label="mvl:inf:god:sec" id="label-main-56b3147fe0d7cbf9c495">47.3 Logika-Logika Gödel</h3>
+<div id="E02160" class="native-environment native-editorial" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47">
+<p>Ini adalah “rintisan” singkat untuk suatu bagian mengenai logika Gödel bernilai tak hingga.</p>
+</div>
+<div id="E02161" class="native-environment native-defn" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="47.4">
+<p><strong>Definisi 47.4.</strong></p>
+<p><span id="label-main-0503061a46b66d95a509" class="native-anchor"/> Logika Gödel bernilai tak hingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023684" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math> didefinisikan dengan menggunakan matriks berikut:</p>
+<ol>
+<li><p>Bahasa proposisional baku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023685" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023686" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023687" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023688" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023689" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023690" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+</math>.</p></li>
+<li><p>Himpunan nilai kebenaran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023691" dir="ltr" display="inline">
+  <msub>
+    <mi>V</mi>
+    <mi mathvariant="normal">∞</mi>
+  </msub>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023692" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> merupakan satu-satunya nilai kebenaran yang ditetapkan, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023693" dir="ltr" display="inline">
+  <msup>
+    <mi>V</mi>
+    <mo>+</mo>
+  </msup>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p></li>
+<li><p>Fungsi kebenaran diberikan oleh fungsi-fungsi berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023694" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mrow>
+          <mover>
+            <mi mathvariant="normal">⊥</mi>
+            <mo>~</mo>
+          </mover>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mrow>
+            <mover>
+              <mi mathvariant="normal">¬</mi>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mi mathvariant="normal">𝐆</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mn>1</mn>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mtext class="olp-math-prose">jika </mtext>
+                <mi>x</mi>
+                <mo>=</mo>
+                <mn>0</mn>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mn>0</mn>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mtext class="olp-math-prose">selain itu</mtext>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mrow>
+            <mover>
+              <mo>∧</mo>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mi mathvariant="normal">𝐆</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo movablelimits="true">min</mo>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <msub>
+          <mrow>
+            <mover>
+              <mo>∨</mo>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mi mathvariant="normal">𝐆</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mo movablelimits="true">max</mo>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <msub>
+          <mrow>
+            <mover>
+              <mrow>
+                <mo stretchy="false">→</mo>
+              </mrow>
+              <mo>~</mo>
+            </mover>
+          </mrow>
+          <mrow>
+            <mrow>
+              <mrow>
+                <mi mathvariant="normal">𝐆</mi>
+              </mrow>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mn>1</mn>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mtext class="olp-math-prose">jika </mtext>
+                <mi>x</mi>
+                <mo>≤</mo>
+                <mi>y</mi>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mi>y</mi>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mtext class="olp-math-prose">selain itu.</mtext>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p></li>
+</ol>
+<p>Logika Gödel bernilai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023695" dir="ltr" display="inline">
+  <mi>m</mi>
+</math> didefinisikan dengan cara yang sama, kecuali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023696" dir="ltr" display="inline">
+  <mi>V</mi>
+  <mo>=</mo>
+  <msub>
+    <mi>V</mi>
+    <mi>m</mi>
+  </msub>
+</math>.</p>
+</div>
+<div id="E02162" class="native-environment native-prop" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="47.5">
+<p><strong>Proposisi 47.5.</strong></p>
+<p>Logika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023697" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mn>3</mn>
+  <mo stretchy="false">]</mo>
+</math> yang didefinisikan oleh <span class="native-reference"><a href="part-0058.xhtml#label-main-8e68f5e7a74153f75ec2">Definisi 46.6</a></span> sama dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023698" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mn>3</mn>
+  <mo stretchy="false">]</mo>
+</math> yang didefinisikan oleh <span class="native-reference"><a href="#label-main-0503061a46b66d95a509">Definisi 47.4</a></span>.</p>
+</div>
+<div id="E02163" class="native-environment native-proof" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="473">
+<p><strong>Bukti.</strong></p>
+<p>Hal ini dapat dilihat dengan membandingkan tabel kebenaran untuk konektif-konektif yang diberikan dalam <span class="native-reference"><a href="part-0058.xhtml#label-main-8e68f5e7a74153f75ec2">Definisi 46.6</a></span> dengan tabel kebenaran yang ditentukan oleh persamaan-persamaan dalam <span class="native-reference"><a href="#label-main-0503061a46b66d95a509">Definisi 47.4</a></span>:</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023699" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mover>
+        <mi mathvariant="normal">¬</mi>
+        <mo>~</mo>
+      </mover>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝐆</mi>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mn>3</mn>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+</math></th>
+<th style="text-align: center;"/>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023700" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023701" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023702" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023703" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023704" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023705" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" dir="ltr">
+  <mstyle scriptlevel="0">
+    <mspace width="1em"/>
+  </mstyle>
+</math>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023706" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mover>
+        <mo>∧</mo>
+        <mo>~</mo>
+      </mover>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝐆</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+  </msub>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023707" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023708" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023709" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023710" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023711" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023712" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023713" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023714" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023715" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023716" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023717" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023718" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023719" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023720" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023721" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+<p><br/>
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023722" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mover>
+        <mo>∨</mo>
+        <mo>~</mo>
+      </mover>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝐆</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+  </msub>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023723" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023724" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023725" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023726" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023727" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023728" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023729" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023730" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023731" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023732" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023733" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023734" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023735" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023736" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023737" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" dir="ltr">
+  <mstyle scriptlevel="0">
+    <mspace width="1em"/>
+  </mstyle>
+</math>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023738" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mover>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mo>~</mo>
+      </mover>
+    </mrow>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝐆</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+  </msub>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023739" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023740" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023741" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023742" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023743" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023744" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023745" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023746" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mn>2</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023747" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023748" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023749" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023750" dir="ltr" display="inline">
+  <mn>0</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023751" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023752" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023753" dir="ltr" display="inline">
+  <mn>1</mn>
+</math></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="E02164" class="native-environment native-prop" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="47.6">
+<p><strong>Proposisi 47.6.</strong></p>
+<div id="label-main-8bdf8797863435d54811" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023754" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <msub>
+    <mo>⊨</mo>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝐆</mi>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mi mathvariant="normal">∞</mi>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023755" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <msub>
+    <mo>⊨</mo>
+    <mrow>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">𝐆</mi>
+        </mrow>
+      </mrow>
+      <mo stretchy="false">[</mo>
+      <mi>m</mi>
+      <mo stretchy="false">]</mo>
+    </mrow>
+  </msub>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023756" dir="ltr" display="inline">
+  <mi>m</mi>
+  <mo>≥</mo>
+  <mn>2</mn>
+</math>.</p>
+</div>
+<div id="E02165" class="native-environment native-proof" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="474">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<p>Faktanya, kebalikannya juga berlaku.</p>
+<p>Sebagaimana dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023757" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mn>3</mn>
+  <mo stretchy="false">]</mo>
+</math>, semua formula yang valid secara intuisionistik merupakan tautologi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023758" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math>, dan contoh-contoh non-tautologi yang sama juga merupakan non-tautologi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023759" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023760" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left right left" columnspacing="0em 2em 0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:calc(2em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>p</mi>
+        <mo>∨</mo>
+        <mi mathvariant="normal">¬</mi>
+        <mi>p</mi>
+      </mtd>
+      <mtd style="text-align:right;padding-left:calc(2em / 2);padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo stretchy="false">(</mo>
+        <mi>p</mi>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi>q</mi>
+        <mo stretchy="false">)</mo>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <mi mathvariant="normal">¬</mi>
+        <mi>p</mi>
+        <mo>∨</mo>
+        <mi>q</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:calc(2em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi mathvariant="normal">¬</mi>
+        <mi mathvariant="normal">¬</mi>
+        <mi>p</mi>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi>p</mi>
+      </mtd>
+      <mtd style="text-align:right;padding-left:calc(2em / 2);padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi mathvariant="normal">¬</mi>
+        <mo stretchy="false">(</mo>
+        <mi mathvariant="normal">¬</mi>
+        <mi>p</mi>
+        <mo>∧</mo>
+        <mi mathvariant="normal">¬</mi>
+        <mi>q</mi>
+        <mo stretchy="false">)</mo>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <mi>p</mi>
+        <mo>∨</mo>
+        <mi>q</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:calc(2em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>p</mi>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi>q</mi>
+        <mo stretchy="false">)</mo>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi>p</mi>
+        <mo stretchy="false">)</mo>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi>p</mi>
+      </mtd>
+      <mtd style="text-align:right;padding-left:calc(2em / 2);padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi mathvariant="normal">¬</mi>
+        <mo stretchy="false">(</mo>
+        <mi>p</mi>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi>q</mi>
+        <mo stretchy="false">)</mo>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <mi>p</mi>
+        <mo>∧</mo>
+        <mi mathvariant="normal">¬</mi>
+        <mi>q</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Contoh formula yang tidak valid secara intuisionistik tetapi tetap merupakan tautologi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023761" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mn>3</mn>
+  <mo stretchy="false">]</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023762" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mi>q</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+</math>, juga merupakan tautologi dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023763" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math>. Faktanya, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023764" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math> dapat dicirikan sebagai logika intuisionistik yang diperoleh dengan menambahkan skema <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023765" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>. Hasil ini dibuktikan oleh Michael Dummett; karena itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023766" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math> sering disebut logika Gödel–Dummett <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023767" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐋𝐂</mi>
+    </mrow>
+  </mrow>
+</math>.</p>
+<h3 class="unnumbered native-problems-heading" data-native-chapter="47" id="exercises-main-47">Soal</h3>
+<div id="E02158" class="native-environment native-prob" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47" data-native-number="47.1">
+<p><strong>Soal 47.1.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-380e705047e28630c5e9">Proposisi 47.3</a></span>.</p>
+</div>
+<div id="E02159" class="native-environment native-prob" data-source-edition="main" data-source-prefix="mvl:inf:luk" data-source-unit_id="OLP-0400" data-source-occurrence="452" data-source-chapter="47" data-native-number="47.2">
+<p><strong>Soal 47.2.</strong></p>
+<p>Tunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023682" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mi>q</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+</math> merupakan tautologi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023683" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mtext mathvariant="normal" class="olp-math-prose">Ł</mtext>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math>.</p>
+</div>
+<div id="E02166" class="native-environment native-prob" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="47.3">
+<p><strong>Soal 47.3.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-8bdf8797863435d54811">Proposisi 47.6</a></span>.</p>
+</div>
+<div id="E02167" class="native-environment native-prob" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="47.4">
+<p><strong>Soal 47.4.</strong></p>
+<p>Tunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023768" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mi>q</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>p</mi>
+  <mo stretchy="false">)</mo>
+</math> merupakan tautologi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023769" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math>.</p>
+</div>
+<div id="E02168" class="native-environment native-prob" data-source-edition="main" data-source-prefix="mvl:inf:god" data-source-unit_id="OLP-0401" data-source-occurrence="453" data-source-chapter="47" data-native-number="47.5">
+<p><strong>Soal 47.5.</strong></p>
+<p>Tunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023770" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>p</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>q</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mi>q</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>r</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <mi>r</mi>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi>s</mi>
+  <mo stretchy="false">)</mo>
+</math>, yang merupakan tautologi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023771" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mn>3</mn>
+  <mo stretchy="false">]</mo>
+</math>, bukan tautologi dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M023772" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝐆</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mi mathvariant="normal">∞</mi>
+  <mo stretchy="false">]</mo>
+</math>.</p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0058.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0060.xhtml">Berikutnya →</a></nav></body></html>

@@ -1,0 +1,2928 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>72 Pilihan — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0088.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0090.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0089" class="reader-chunk">
+<div id="source-OLP-0592-0644" class="source-unit" data-source-unit="OLP-0592" data-source-occurrence="644" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/choice.tex" data-source-sha256="c583ecb77723c117e437a2d21f1ac5eb4c080a7c5733b80e2006b4e63ec54ad2">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="72" data-native-label="sth:choice::chap" id="label-main-e73fb8a4bab6bcf6baef">72 Pilihan</h2>
+<div id="source-OLP-0593-0645" class="source-unit" data-source-unit="OLP-0593" data-source-occurrence="645" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/introduction.tex" data-source-sha256="898e33781d86f0d6d7901f8c34f78e84a7552425104c106106c863cd7b5df2df">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.1" data-native-label="sth:choice:intro:sec" id="label-main-f010904faa6931a26665">72.1 Pengantar</h3>
+<p>Dalam <span class="native-reference"><a href="part-0087.xhtml#label-main-525b3cb94e1ea4f9518c">Bab 70</a>–<a href="part-0088.xhtml#label-main-f55ca5f50031e7d81526">Bab 71</a></span>, kita mengembangkan suatu teori kardinal dengan memperlakukan kardinal sebagai ordinal. Pendekatan itu bergantung pada Aksioma Pengurutan Baik. Ternyata Pengurutan Baik ekuivalen dengan prinsip lain—Aksioma Pilihan—dan telah terjadi pembahasan filosofis yang serius mengenai dapat diterima atau tidaknya prinsip tersebut. Pertanyaan kita dalam bab ini adalah: Bagaimana Aksioma itu digunakan, dan dapatkah ia dibenarkan?</p>
+<div id="source-OLP-0594-0646" class="source-unit" data-source-unit="OLP-0594" data-source-occurrence="646" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/tarskiscott.tex" data-source-sha256="a6571e45af37e1534629282a35ef66d7f5219adbf73a3a66a46fc2421ebe9cb7">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.2" data-native-label="sth:choice:tarskiscott:sec" id="label-main-7575f76b0b9ae70d39ba">72.2 Trik Tarski–Scott</h3>
+<p>Dalam <span class="native-reference"><a href="part-0087.xhtml#label-main-2dcc9ba529b86bcfc14f">Definisi 70.1</a></span>, kita mendefinisikan kardinal sebagai ordinal. Untuk melakukannya, kita mengandaikan Aksioma Pengurutan Baik. Kita melakukannya semata-mata karena itulah “standar industri”.</p>
+<p>Sebelum membahas persoalan-persoalan filosofis seputar Pengurutan Baik, penting untuk memperjelas bahwa kita <em>dapat</em> menyimpang dari standar industri dan mengembangkan teori kardinal <em>tanpa</em> mengandaikan Pengurutan Baik. Kita masih dapat menggunakan definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031856" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>B</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031857" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>B</mi>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031858" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≺</mo>
+  <mi>B</mi>
+</math> sebagaimana muncul dalam <span class="native-reference"><a href="part-0007.xhtml#label-main-4e8954b1cceb1a8b93cf">Bab 4</a></span>. Kita hanya memerlukan suatu pengertian <em>kardinal</em> yang baru.</p>
+<p>Gagasan naifnya ialah mencoba mendefinisikan kardinalitas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031859" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> sebagai berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031860" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math> Anda mungkin ingin membandingkannya dengan definisi Frege tentang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031861" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mi>F</mi>
+  <mi>x</mi>
+</math> yang diuraikan secara ringkas pada bagian paling akhir <span class="native-reference"><a href="part-0087.xhtml#label-main-424d3d7198c85108a9f6">Bagian 70.5</a></span>. Karena alasan yang telah kita singgung di sana, definisi ini gagal. Setiap himpunan singleton sama banyak dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031862" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi mathvariant="normal">∅</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Namun, himpunan-himpunan singleton baru terbentuk pada setiap tahap penerus hierarki (perhatikan saja singleton dari tahap sebelumnya). Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031863" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>x</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math> tidak ada karena ia tidak dapat mempunyai peringkat.</p>
+<p>Untuk mengatasi masalah ini, kita menggunakan suatu trik yang berasal dari Tarski dan Scott:<a href="notes.xhtml#fn47" class="footnote-ref" id="fnref47" role="doc-noteref"><sup>47</sup></a></p>
+<div id="E02841" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sth:choice:tarskiscott" data-source-unit_id="OLP-0594" data-source-occurrence="646" data-source-chapter="72" data-native-number="72.1">
+<p><strong>Definisi 72.1.</strong></p>
+<p><strong>Tarski–Scott</strong></p>
+<p>Untuk sebarang formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031864" dir="ltr" display="inline">
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>, misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031865" dir="ltr" display="inline">
+  <mo stretchy="false">[</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">]</mo>
+</math> himpunan semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031866" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> yang berperingkat serendah mungkin dan memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031867" dir="ltr" display="inline">
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> (atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031868" dir="ltr" display="inline">
+  <mi mathvariant="normal">∅</mi>
+</math> jika tidak ada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031869" dir="ltr" display="inline">
+  <mi>x</mi>
+</math> yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031870" dir="ltr" display="inline">
+  <mi>φ</mi>
+</math>).</p>
+</div>
+<p>Kita perlu memeriksa bahwa definisi ini sah. Dengan bekerja dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031871" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math>, <span class="native-reference"><a href="part-0084.xhtml#label-main-fd0b9b5293aec38d5385">Teorema 67.13</a></span> menjamin bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031872" dir="ltr" display="inline">
+  <mrow>
+    <mi>rank</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> ada bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031873" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>. Sekarang, jika terdapat entitas yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031874" dir="ltr" display="inline">
+  <mi>φ</mi>
+</math>, kita dapat mengambil <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031875" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> sebagai peringkat terkecil sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031876" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∃</mi>
+  <mi>x</mi>
+  <mo>⊆</mo>
+  <msub>
+    <mi>V</mi>
+    <mi>α</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031877" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∀</mi>
+  <mi>β</mi>
+  <mo>∈</mo>
+  <mi>α</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∀</mi>
+  <mi>x</mi>
+  <mo>⊆</mo>
+  <msub>
+    <mi>V</mi>
+    <mi>β</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>. Kemudian, berdasarkan Pemisahan, kita dapat mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031878" dir="ltr" display="inline">
+  <mo stretchy="false">[</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">]</mo>
+</math> sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031879" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>x</mi>
+  <mo>∈</mo>
+  <msub>
+    <mi>V</mi>
+    <mrow>
+      <mi>α</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>:</mo>
+  <mi>φ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+<p>Setelah membenarkan trik Tarski–Scott, sekarang kita dapat menggunakannya untuk mendefinisikan suatu pengertian kardinalitas:</p>
+<div id="E02842" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sth:choice:tarskiscott" data-source-unit_id="OLP-0594" data-source-occurrence="646" data-source-chapter="72" data-native-number="72.2">
+<p><strong>Definisi 72.2.</strong></p>
+<p><span class="smallcaps">ts</span>-kardinalitas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031880" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031881" dir="ltr" display="inline">
+  <mtext class="olp-math-prose">tsc</mtext>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo stretchy="false">[</mo>
+  <mi>x</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>x</mi>
+  <mo stretchy="false">]</mo>
+</math>.</p>
+</div>
+<p>Definisi suatu <span class="smallcaps">ts</span>-kardinal tidak menggunakan Pengurutan Baik. Namun, bahkan tanpa Aksioma tersebut, kita dapat menunjukkan bahwa <em><span class="smallcaps">ts</span>-kardinal</em> berperilaku cukup mirip dengan <em>kardinal</em> sebagaimana didefinisikan dalam <span class="native-reference"><a href="part-0087.xhtml#label-main-2dcc9ba529b86bcfc14f">Definisi 70.1</a></span>. Sebagai contoh, jika kita menyatakan ulang <span class="native-reference"><a href="part-0087.xhtml#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span> dan <span class="native-reference"><a href="part-0088.xhtml#label-main-01d77e7f6a2ad0454001">Lema 71.4</a></span> dalam istilah <span class="smallcaps">ts</span>-kardinal, bukti-buktinya tetap berlaku dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031882" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math> tanpa mengandaikan Pengurutan Baik.</p>
+<p>Selagi membahas hal ini, patut dicatat bahwa kita juga dapat mengembangkan suatu teori ordinal dengan menggunakan trik Tarski–Scott. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031883" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mo>&lt;</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan suatu pengurutan baik, misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031884" dir="ltr" display="inline">
+  <mtext class="olp-math-prose">tso</mtext>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mo>&lt;</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo stretchy="false">[</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>X</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>:</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mo>&lt;</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>≅</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>X</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo stretchy="false">]</mo>
+</math>. Untuk pembahasan lebih lanjut tentang perlakuan terhadap kardinal dan ordinal ini, lihat <span class="native-citation"><a href="part-0120.xhtml#bibliography-bae6bf36fe843e5e86a1">Potter</a> (<a href="part-0120.xhtml#bibliography-bae6bf36fe843e5e86a1">2004</a>, bab 9–12)</span>.</p>
+<div id="source-OLP-0595-0647" class="source-unit" data-source-unit="OLP-0595" data-source-occurrence="647" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/hartogs.tex" data-source-sha256="4561b5ffea87734e692f39d846f53b45a9692af26e1eaefdb2bf5f5c0892960d">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.3" data-native-label="sth:choice:hartogs:sec" id="label-main-9edcd82af7279316f2bd">72.3 Keterbandingan dan Lema Hartogs</h3>
+<p>Itulah sisi positifnya. Berikut sisi negatifnya. Tanpa Pilihan, keadaan menjadi <em>rumit</em>. Untuk melihat alasannya, berikut suatu hasil bagus dari <span class="native-citation">(<a href="part-0120.xhtml#bibliography-a3d80e5e80babbc67fcb">Hartogs</a>, <a href="part-0120.xhtml#bibliography-a3d80e5e80babbc67fcb">1915</a>)</span>:</p>
+<div id="E02843" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:hartogs" data-source-unit_id="OLP-0595" data-source-occurrence="647" data-source-chapter="72" data-native-number="72.3">
+<p><strong>Lema 72.3.</strong></p>
+<p><strong><em>dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031885" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math></em></strong></p>
+<div id="label-main-1296a7e3b8f73a2012d2" class="native-anchor">
+
+</div>
+<p>Untuk sebarang himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031886" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, terdapat suatu ordinal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031887" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031888" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>⋠</mo>
+  <mi>A</mi>
+</math>.</p>
+</div>
+<div id="E02844" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:hartogs" data-source-unit_id="OLP-0595" data-source-occurrence="647" data-source-chapter="72" data-native-number="666">
+<p><strong>Bukti.</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031889" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031890" dir="ltr" display="inline">
+  <mi>R</mi>
+  <mo>⊆</mo>
+  <msup>
+    <mi>B</mi>
+    <mn>2</mn>
+  </msup>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031891" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>⊆</mo>
+  <msub>
+    <mi>V</mi>
+    <mrow>
+      <mrow>
+        <mi>rank</mi>
+      </mrow>
+      <mo stretchy="false">(</mo>
+      <mi>A</mi>
+      <mo stretchy="false">)</mo>
+      <mo>+</mo>
+      <mn>4</mn>
+    </mrow>
+  </msub>
+</math> berdasarkan <span class="native-reference"><a href="part-0086.xhtml#label-main-2a7841599c3510d2b8e7">Lema 69.9</a></span>. Jadi, dengan menggunakan Pemisahan, pertimbangkan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031892" display="block" dir="ltr">
+  <mi>C</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <msub>
+    <mi>V</mi>
+    <mrow>
+      <mrow>
+        <mi>rank</mi>
+      </mrow>
+      <mo stretchy="false">(</mo>
+      <mi>A</mi>
+      <mo stretchy="false">)</mo>
+      <mo>+</mo>
+      <mn>5</mn>
+    </mrow>
+  </msub>
+  <mo>:</mo>
+  <mi>B</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+  <mrow class="olp-math-prose">
+    <mtext> dan </mtext>
+    <mrow>
+      <mo fence="false" stretchy="false">⟨</mo>
+      <mi>B</mi>
+      <mo>,</mo>
+      <mi>R</mi>
+      <mo fence="false" stretchy="false">⟩</mo>
+    </mrow>
+    <mtext> merupakan pengurutan baik</mtext>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math> Dengan menggunakan Penggantian dan <span class="native-reference"><a href="part-0083.xhtml#label-main-575aaa5a1f7dc261e92e">Teorema 66.26</a></span>, bentuk himpunan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031893" display="block" dir="ltr">
+  <mi>α</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>ord</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo stretchy="false">)</mo>
+  <mo>:</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <mi>C</mi>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>.</mo>
+</math> Berdasarkan <span class="native-reference"><a href="part-0083.xhtml#label-main-2e5f204493635267364f">Akibat 66.19</a></span>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031894" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> merupakan ordinal karena ia merupakan himpunan transitif ordinal-ordinal. Memang, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031895" dir="ltr" display="inline">
+  <mi>γ</mi>
+  <mo>∈</mo>
+  <mi>β</mi>
+  <mo>∈</mo>
+  <mi>α</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031896" dir="ltr" display="inline">
+  <mi>β</mi>
+  <mo>=</mo>
+  <mrow>
+    <mi>ord</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo stretchy="false">)</mo>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031897" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⊆</mo>
+  <mi>A</mi>
+</math>. Selanjutnya, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031898" dir="ltr" display="inline">
+  <mi>γ</mi>
+  <mo>=</mo>
+  <mrow>
+    <mi>ord</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>B</mi>
+    <mi>b</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>R</mi>
+    <mi>b</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031899" dir="ltr" display="inline">
+  <mi>b</mi>
+  <mo>∈</mo>
+  <mi>B</mi>
+</math> berdasarkan <span class="native-reference"><a href="part-0083.xhtml#label-main-74eff7560cc91ff47076">Lema 66.10</a></span>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031900" dir="ltr" display="inline">
+  <mi>γ</mi>
+  <mo>∈</mo>
+  <mi>α</mi>
+</math>.</p>
+<p>Untuk reductio, andaikan terdapat injeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031901" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>α</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math>. Tetapkan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031902" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>B</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mi>ran</mi>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <mi>f</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi>R</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <mo fence="false" stretchy="false">⟨</mo>
+        <mi>f</mi>
+        <mo stretchy="false">(</mo>
+        <mi>γ</mi>
+        <mo stretchy="false">)</mo>
+        <mo>,</mo>
+        <mi>f</mi>
+        <mo stretchy="false">(</mo>
+        <mi>δ</mi>
+        <mo stretchy="false">)</mo>
+        <mo fence="false" stretchy="false">⟩</mo>
+        <mo>∈</mo>
+        <mi>A</mi>
+        <mo>×</mo>
+        <mi>A</mi>
+        <mo>:</mo>
+        <mi>γ</mi>
+        <mo>∈</mo>
+        <mi>δ</mi>
+        <mo fence="false" stretchy="false">}</mo>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031903" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>=</mo>
+  <mrow>
+    <mi>ord</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo stretchy="false">)</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031904" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <mi>C</mi>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031905" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>∈</mo>
+  <mi>α</mi>
+</math>, suatu kontradiksi.</p>
+</div>
+<p>Hal ini mengakibatkan suatu hasil yang mendalam:</p>
+<div id="E02845" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:hartogs" data-source-unit_id="OLP-0595" data-source-occurrence="647" data-source-chapter="72" data-native-number="72.4">
+<p><strong>Teorema 72.4.</strong></p>
+<p><strong><em>dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031906" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math></em></strong></p>
+<p>Klaim-klaim berikut ekuivalen:</p>
+<ol>
+<li><p><span id="label-main-f5e73533c55225a75cad" class="native-anchor"/> Aksioma Pengurutan Baik</p></li>
+<li><p><span id="label-main-58f7f35823a737bade7b" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031907" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>B</mi>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031908" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⪯</mo>
+  <mi>A</mi>
+</math>, bagi sebarang himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031909" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031910" dir="ltr" display="inline">
+  <mi>B</mi>
+</math></p></li>
+</ol>
+</div>
+<div id="E02846" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:hartogs" data-source-unit_id="OLP-0595" data-source-occurrence="647" data-source-chapter="72" data-native-number="667">
+<p><strong>Bukti.</strong></p>
+<p><em><span class="native-reference"><a href="#label-main-f5e73533c55225a75cad">enumi 1</a></span> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031911" dir="ltr" display="inline">
+  <mo stretchy="false">⇒</mo>
+</math> <span class="native-reference"><a href="#label-main-58f7f35823a737bade7b">enumi 2</a></span>.</em> Tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031912" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031913" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>. Dengan menggunakan <span class="native-reference"><a href="#label-main-f5e73533c55225a75cad">enumi 1</a></span>, terdapat pengurutan baik <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031914" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031915" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>S</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>. Dengan menggunakan <span class="native-reference"><a href="part-0083.xhtml#label-main-575aaa5a1f7dc261e92e">Teorema 66.26</a></span>, misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031916" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>α</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031917" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>:</mo>
+  <mi>β</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mi>S</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> isomorfisme. Berdasarkan <span class="native-reference"><a href="part-0083.xhtml#label-main-c54ef8f9d6551e1809a7">Proposisi 66.22</a></span>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031918" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>⊆</mo>
+  <mi>β</mi>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031919" dir="ltr" display="inline">
+  <mi>β</mi>
+  <mo>⊆</mo>
+  <mi>α</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031920" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>⊆</mo>
+  <mi>β</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031921" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo>∘</mo>
+  <msup>
+    <mi>f</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math> merupakan injeksi, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031922" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>B</mi>
+</math>; demikian pula, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031923" dir="ltr" display="inline">
+  <mi>β</mi>
+  <mo>⊆</mo>
+  <mi>α</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031924" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⪯</mo>
+  <mi>A</mi>
+</math>.</p>
+<p><em><span class="native-reference"><a href="#label-main-58f7f35823a737bade7b">enumi 2</a></span> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031925" dir="ltr" display="inline">
+  <mo stretchy="false">⇒</mo>
+</math> <span class="native-reference"><a href="#label-main-f5e73533c55225a75cad">enumi 1</a></span>.</em> Tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031926" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>; berdasarkan <span class="native-reference"><a href="#label-main-1296a7e3b8f73a2012d2">Lema 72.3</a></span>, terdapat suatu ordinal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031927" dir="ltr" display="inline">
+  <mi>β</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031928" dir="ltr" display="inline">
+  <mi>β</mi>
+  <mo>⋠</mo>
+  <mi>A</mi>
+</math>. Dengan menggunakan <span class="native-reference"><a href="#label-main-58f7f35823a737bade7b">enumi 2</a></span>, kita memperoleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031929" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>β</mi>
+</math>. Jadi, terdapat suatu injeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031930" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>β</mi>
+</math>, dan kita dapat menggunakan injeksi ini untuk mengurutkan baik anggota-anggota <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031931" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dengan mendefinisikan pengurutan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031932" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>a</mi>
+  <mo>,</mo>
+  <mi>b</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>A</mi>
+  <mo>:</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>a</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∈</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>b</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<p> Sebagai konsekuensi langsung, jika Pengurutan Baik gagal, beberapa himpunan secara <em>harfiah tidak dapat dibandingkan</em> menurut ukurannya. Jadi, jika Pengurutan Baik gagal, aritmetika kardinal transfinit akan menjadi rumit. Sebagai contoh, kita harus meninggalkan gagasan bahwa, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031933" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031934" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> tak hingga, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031935" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⊔</mo>
+  <mi>B</mi>
+  <mo>≈</mo>
+  <mi>M</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031936" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>×</mo>
+  <mi>B</mi>
+  <mo>≈</mo>
+  <mi>M</mi>
+</math>, dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031937" dir="ltr" display="inline">
+  <mi>M</mi>
+</math> himpunan yang lebih besar di antara <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031938" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031939" dir="ltr" display="inline">
+  <mi>B</mi>
+</math> (lihat <span class="native-reference"><a href="part-0088.xhtml#label-main-cda21572768846a3f5ff">Teorema 71.11</a></span>). Masalahnya sederhana: jika kita tidak dapat <em>membandingkan</em> ukuran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031940" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031941" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, tidak masuk akal untuk bertanya mana yang lebih besar.</p>
+<div id="source-OLP-0596-0648" class="source-unit" data-source-unit="OLP-0596" data-source-occurrence="648" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/wellorderingproblem.tex" data-source-sha256="31fb9b4d468f3b19723a4eb627fbafa16eb7cfe0f66217209a919454dd6041a0">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.4" data-native-label="sth:choice:woproblem:sec" id="label-main-a9e6ca3c97008a203fb0">72.4 Masalah Pengurutan Baik</h3>
+<p>Jelas bahwa cukup banyak hal bergantung pada apakah kita menerima Pengurutan Baik. Namun, pembahasan prinsip ini cenderung berfokus pada suatu prinsip yang ekuivalen, yaitu Aksioma Pilihan. Karena itu, sekarang kita akan mengalihkan perhatian kepadanya (dan membuktikan ekuivalensinya).</p>
+<p>Pada <span class="native-citation"><a href="part-0120.xhtml#bibliography-a917f74592cea836453f">1883</a></span>, Cantor menyatakan dukungannya terhadap Aksioma Pengurutan Baik dengan menyebutnya “suatu hukum pikiran yang bagi saya tampak mendasar, kaya akan konsekuensi, dan khususnya luar biasa karena keberlakuannya yang umum” (dikutip dalam <span class="native-citation"><a href="part-0120.xhtml#bibliography-bae6bf36fe843e5e86a1">Potter</a></span> <span class="native-citation"><a href="part-0120.xhtml#bibliography-bae6bf36fe843e5e86a1">2004</a>, hlm. 243</span>). Namun, pada akhirnya Cantor menjadi yakin bahwa “Aksioma” itu memerlukan bukti. Komunitas matematika pun berpandangan demikian.</p>
+<p>Masalah tersebut “dipecahkan” oleh Zermelo pada <span class="native-citation"><a href="part-0120.xhtml#bibliography-8fc235e224bd9797d9fc">1904</a></span>. Untuk menjelaskan penyelesaiannya, kita memerlukan beberapa definisi.</p>
+<div id="E02847" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sth:choice:woproblem" data-source-unit_id="OLP-0596" data-source-occurrence="648" data-source-chapter="72" data-native-number="72.5">
+<p><strong>Definisi 72.5.</strong></p>
+<p>Suatu fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031942" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> merupakan <em>fungsi pilihan</em> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031943" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∈</mo>
+  <mi>x</mi>
+</math> bagi semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031944" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi>dom</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math>. Kita mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031945" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> merupakan <em>fungsi pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031946" dir="ltr" display="inline">
+  <mi>A</mi>
+</math></em> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031947" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> merupakan fungsi pilihan dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031948" dir="ltr" display="inline">
+  <mrow>
+    <mi>dom</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>A</mi>
+  <mo>∖</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi mathvariant="normal">∅</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<p>Secara intuitif, bagi setiap himpunan (tak kosong) <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031949" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>, suatu fungsi pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031950" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> <em>memilih</em> satu anggota tertentu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031951" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>, dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031952" dir="ltr" display="inline">
+  <mi>x</mi>
+</math>. Aksioma Pilihan kemudian berbunyi:</p>
+<div id="E02848" class="native-environment native-axiom" data-source-edition="main" data-source-prefix="sth:choice:woproblem" data-source-unit_id="OLP-0596" data-source-occurrence="648" data-source-chapter="72" data-native-number="">
+<p><strong>Aksioma.</strong></p>
+<p><strong>Pilihan</strong></p>
+<p>Setiap himpunan mempunyai suatu fungsi pilihan.</p>
+</div>
+<p>Zermelo menunjukkan bahwa Pilihan mengakibatkan pengurutan baik, dan sebaliknya:</p>
+<div id="E02849" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:woproblem" data-source-unit_id="OLP-0596" data-source-occurrence="648" data-source-chapter="72" data-native-number="72.6">
+<p><strong>Teorema 72.6.</strong></p>
+<p><strong>dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031953" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math></strong></p>
+<div id="label-main-9f84f26149ca86bb2fda" class="native-anchor">
+
+</div>
+<p>Pengurutan Baik dan Pilihan ekuivalen.</p>
+</div>
+<div id="E02850" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:woproblem" data-source-unit_id="OLP-0596" data-source-occurrence="648" data-source-chapter="72" data-native-number="668">
+<p><strong>Bukti.</strong></p>
+<p><em>Dari kiri ke kanan.</em> Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031954" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> suatu himpunan yang anggota-anggotanya juga himpunan. Berdasarkan Aksioma Gabungan, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031955" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>A</mi>
+</math> ada; jadi, berdasarkan Pengurutan Baik, terdapat suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031956" dir="ltr" display="inline">
+  <mo>&lt;</mo>
+</math> yang mengurutkan baik <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031957" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>A</mi>
+</math>. Sekarang tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031958" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow class="olp-math-prose">
+    <mtext>anggota terkecil-</mtext>
+    <mrow>
+      <mo>&lt;</mo>
+    </mrow>
+    <mtext> dari </mtext>
+  </mrow>
+  <mi>x</mi>
+</math>. Ini merupakan fungsi pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031959" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>.</p>
+<p><em>Dari kanan ke kiri.</em> Tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031960" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031961" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>, pengurutan kosong mengurutkan baik <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031962" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>; jadi, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031963" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≠</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>. Berdasarkan Pilihan, terdapat suatu fungsi pilihan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031964" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031965" dir="ltr" display="inline">
+  <mi mathvariant="normal">℘</mi>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∖</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi mathvariant="normal">∅</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Dengan menggunakan Rekursi Transfinit, definisikan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031966" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>g</mi>
+        <mo stretchy="false">(</mo>
+        <mn>0</mn>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mi>f</mi>
+        <mo stretchy="false">(</mo>
+        <mi>A</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi>g</mi>
+        <mo stretchy="false">(</mo>
+        <mi>α</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mtext class="olp-math-prose">berhenti!</mtext>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mtext class="olp-math-prose">jika </mtext>
+                <mi>A</mi>
+                <mo>=</mo>
+                <mi>g</mi>
+                <mo stretchy="false">[</mo>
+                <mi>α</mi>
+                <mo stretchy="false">]</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mi>f</mi>
+                <mo stretchy="false">(</mo>
+                <mi>A</mi>
+                <mo>∖</mo>
+                <mi>g</mi>
+                <mo stretchy="false">[</mo>
+                <mi>α</mi>
+                <mo stretchy="false">]</mo>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mtext class="olp-math-prose">jika tidak</mtext>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Instruksi untuk “berhenti!” hanya merupakan singkatan bagi definisi yang lebih panjang: rekursi dilanjutkan selama <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031967" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≠</mo>
+  <mi>g</mi>
+  <mo stretchy="false">[</mo>
+  <mi>α</mi>
+  <mo stretchy="false">]</mo>
+</math>, lalu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031968" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> diambil sebagai pembatasannya pada ordinal terkecil <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031969" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031970" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">[</mo>
+  <mi>α</mi>
+  <mo stretchy="false">]</mo>
+</math>. Pada mulanya, kita hanya dapat memastikan bahwa hal ini mendefinisikan suatu <em>suku</em> (lihat catatan sesudah <span class="native-reference"><a href="part-0084.xhtml#label-main-16efe503256e9a388426">Teorema 67.4</a></span>); tetapi kita akan menunjukkan bahwa kita memang memperoleh suatu fungsi.</p>
+<p>Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031971" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> merupakan fungsi pilihan, bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031972" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> sebelum konstruksi berhenti berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031973" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>α</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo>∖</mo>
+  <mi>g</mi>
+  <mo stretchy="false">[</mo>
+  <mi>α</mi>
+  <mo stretchy="false">]</mo>
+  <mo stretchy="false">)</mo>
+  <mo>∈</mo>
+  <mi>A</mi>
+  <mo>∖</mo>
+  <mi>g</mi>
+  <mo stretchy="false">[</mo>
+  <mi>α</mi>
+  <mo stretchy="false">]</mo>
+</math>; yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031974" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>α</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∉</mo>
+  <mi>g</mi>
+  <mo stretchy="false">[</mo>
+  <mi>α</mi>
+  <mo stretchy="false">]</mo>
+</math>. Jadi, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031975" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>α</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>β</mi>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031976" dir="ltr" display="inline">
+  <mi>g</mi>
+  <mo stretchy="false">(</mo>
+  <mi>β</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∉</mo>
+  <mi>g</mi>
+  <mo stretchy="false">[</mo>
+  <mi>α</mi>
+  <mo stretchy="false">]</mo>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031977" dir="ltr" display="inline">
+  <mi>β</mi>
+  <mo>∉</mo>
+  <mi>α</mi>
+</math>, dan secara serupa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031978" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>∉</mo>
+  <mi>β</mi>
+</math>. Berdasarkan Trikotomi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031979" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>=</mo>
+  <mi>β</mi>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031980" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> bersifat injektif.</p>
+<p>Selanjutnya, perhatikan bahwa konstruksi memang berhenti; yakni terdapat suatu ordinal terkecil <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031981" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031982" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi>g</mi>
+  <mo stretchy="false">[</mo>
+  <mi>α</mi>
+  <mo stretchy="false">]</mo>
+</math>. Andaikan sebaliknya. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031983" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> bersifat injektif, kita akan memperoleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031984" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>≺</mo>
+  <mi>A</mi>
+</math> bagi setiap ordinal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031985" dir="ltr" display="inline">
+  <mi>α</mi>
+</math>, bertentangan dengan <span class="native-reference"><a href="#label-main-1296a7e3b8f73a2012d2">Lema 72.3</a></span>. Karena itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031986" dir="ltr" display="inline">
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>g</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>A</mi>
+</math>.</p>
+<p>Dengan menggabungkan fakta-fakta ini, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031987" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> merupakan bijeksi dari suatu ordinal ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031988" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Sekarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031989" dir="ltr" display="inline">
+  <mi>g</mi>
+</math> dapat digunakan untuk mengurutkan baik <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031990" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>.</p>
+</div>
+<p>Jadi, Pengurutan Baik dan Pilihan berdiri atau runtuh bersama-sama. Namun, pertanyaannya tetap ada: apakah keduanya berdiri atau runtuh?</p>
+<div id="source-OLP-0597-0649" class="source-unit" data-source-unit="OLP-0597" data-source-occurrence="649" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/countablechoice.tex" data-source-sha256="20dc8dd6816e118a298b127aab4b2c2ea97553b979391dc12dc3bf259b4b477a">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.5" data-native-label="sth:choice:countablechoice:sec" id="label-main-6ca20eefb7a108228be1">72.5 Pilihan Terhitung</h3>
+<p>Mudah dibuktikan, tanpa menggunakan Pilihan/Pengurutan Baik sama sekali, bahwa:</p>
+<div id="E02851" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="72.7">
+<p><strong>Lema 72.7.</strong></p>
+<p><strong>dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031991" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">𝐙</mi>
+    </mrow>
+    <mrow>
+      <mo>−</mo>
+    </mrow>
+  </msup>
+</math></strong></p>
+<p>Setiap himpunan hingga mempunyai suatu fungsi pilihan.</p>
+</div>
+<div id="E02852" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="669">
+<p><strong>Bukti.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031992" dir="ltr" display="inline">
+  <mi>a</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <msub>
+    <mi>b</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>b</mi>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Demi kesederhanaan, andaikan setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031993" dir="ltr" display="inline">
+  <msub>
+    <mi>b</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>≠</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>. Jadi, terdapat objek-objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031994" dir="ltr" display="inline">
+  <msub>
+    <mi>c</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031995" dir="ltr" display="inline">
+  <msub>
+    <mi>c</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∈</mo>
+  <msub>
+    <mi>b</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∈</mo>
+  <msub>
+    <mi>b</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Berdasarkan <span class="native-reference"><a href="part-0082.xhtml#label-main-87bad1aa4ec9352bbb49">Proposisi 65.5</a></span>, himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031996" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mi>b</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>c</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mi>b</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo fence="false" stretchy="false">}</mo>
+</math> ada; himpunan ini merupakan suatu fungsi pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031997" dir="ltr" display="inline">
+  <mi>a</mi>
+</math>.</p>
+</div>
+<p>Namun, keadaan menjadi lebih keruh begitu kita mempertimbangkan himpunan-himpunan tak hingga. Sebagai contoh, pertimbangkan perluasan “minimal” berikut dari hasil di atas:</p>
+<div id="E02853" class="native-environment native-defish" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72">
+<p><em>Pilihan Terhitung.</em> Setiap himpunan <em>terhitung</em> mempunyai suatu fungsi pilihan.</p>
+</div>
+<p>Ini merupakan suatu kasus khusus Pilihan. Ternyata prinsip ini cukup sering digunakan tanpa kesadaran yang jelas akan penggunaannya. Berikut dua contoh yang bagus.<a href="notes.xhtml#fn48" class="footnote-ref" id="fnref48" role="doc-noteref"><sup>48</sup></a></p>
+<div id="E02854" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="72.8">
+<p><strong>Contoh 72.8.</strong></p>
+<p>Berikut suatu gagasan alami: bagi sebarang himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031998" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031999" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>⪯</mo>
+  <mi>A</mi>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032000" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>n</mi>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032001" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>. Ini merupakan salah satu cara untuk menyatakan gagasan intuitif bahwa setiap himpunan bersifat hingga atau tak hingga. Cantor dan banyak matematikawan lain mengemukakan klaim ini tanpa membuktikannya. Dengan kehati-hatian kita, kita telah membuktikannya dalam <span class="native-reference"><a href="part-0087.xhtml#label-main-c5e07561eddffa410c36">Teorema 70.7</a></span>. Namun, dalam bukti itu kita bekerja dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032002" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math> karena mengandaikan bahwa setiap himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032003" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dapat diurutkan baik, sehingga keberadaan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032004" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> terjamin. Artinya, kita secara eksplisit mengandaikan Pilihan.</p>
+<p>Sesungguhnya, <span class="native-citation"><a href="part-0120.xhtml#bibliography-40a75feb2ea48793cecb">Dedekind</a> (<a href="part-0120.xhtml#bibliography-40a75feb2ea48793cecb">1888</a>)</span> memberikan buktinya sendiri bagi klaim ini sebagai berikut:</p>
+<div id="E02855" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="72.9">
+<p><strong>Teorema 72.9.</strong></p>
+<p><strong>dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032005" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">𝐙</mi>
+    </mrow>
+    <mrow>
+      <mo>−</mo>
+    </mrow>
+  </msup>
+  <mo>+</mo>
+  <mtext class="olp-math-prose">Pilihan Terhitung</mtext>
+</math></strong></p>
+<p>Untuk sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032006" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032007" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>⪯</mo>
+  <mi>A</mi>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032008" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>n</mi>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032009" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>.</p>
+</div>
+<div id="E02856" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="670">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032010" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≉</mo>
+  <mi>n</mi>
+</math> bagi semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032011" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>. Maka, khususnya, bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032012" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>&lt;</mo>
+  <mi>ω</mi>
+</math> terdapat himpunan bagian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032013" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>⊆</mo>
+  <mi>A</mi>
+</math> dengan tepat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032014" dir="ltr" display="inline">
+  <msup>
+    <mn>2</mn>
+    <mrow>
+      <mi>n</mi>
+    </mrow>
+  </msup>
+</math> anggota. Dengan menggunakan barisan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032015" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>A</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>A</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+</math>, bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032016" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> kita definisikan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032017" display="block" dir="ltr">
+  <msub>
+    <mi>B</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi>A</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∖</mo>
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>i</mi>
+      <mo>&lt;</mo>
+      <mi>n</mi>
+    </mrow>
+  </munder>
+  <msub>
+    <mi>A</mi>
+    <mi>i</mi>
+  </msub>
+  <mo>.</mo>
+</math> Sekarang perhatikan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032018" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mrow>
+          <mo>|</mo>
+          <munder>
+            <mo>⋃</mo>
+            <mrow>
+              <mi>i</mi>
+              <mo>&lt;</mo>
+              <mi>n</mi>
+            </mrow>
+          </munder>
+          <msub>
+            <mi>A</mi>
+            <mi>i</mi>
+          </msub>
+          <mo>|</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>≤</mo>
+        <mrow>
+          <mo>|</mo>
+          <msub>
+            <mi>A</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>|</mo>
+        </mrow>
+        <mo>+</mo>
+        <mrow>
+          <mo>|</mo>
+          <msub>
+            <mi>A</mi>
+            <mn>1</mn>
+          </msub>
+          <mo>|</mo>
+        </mrow>
+        <mo>+</mo>
+        <mo>…</mo>
+        <mo>+</mo>
+        <mrow>
+          <mo>|</mo>
+          <msub>
+            <mi>A</mi>
+            <mrow>
+              <mi>n</mi>
+              <mo>−</mo>
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>|</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mn>1</mn>
+        <mo>+</mo>
+        <mn>2</mn>
+        <mo>+</mo>
+        <mo>…</mo>
+        <mo>+</mo>
+        <msup>
+          <mn>2</mn>
+          <mrow>
+            <mi>n</mi>
+            <mo>−</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <msup>
+          <mn>2</mn>
+          <mi>n</mi>
+        </msup>
+        <mo>−</mo>
+        <mn>1</mn>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>&lt;</mo>
+        <msup>
+          <mn>2</mn>
+          <mi>n</mi>
+        </msup>
+        <mo>=</mo>
+        <mrow>
+          <mo>|</mo>
+          <msub>
+            <mi>A</mi>
+            <mi>n</mi>
+          </msub>
+          <mo>|</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Karena itu, setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032019" dir="ltr" display="inline">
+  <msub>
+    <mi>B</mi>
+    <mi>n</mi>
+  </msub>
+</math> mempunyai sekurang-kurangnya satu anggota, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032020" dir="ltr" display="inline">
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Selain itu, himpunan-himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032021" dir="ltr" display="inline">
+  <msub>
+    <mi>B</mi>
+    <mi>n</mi>
+  </msub>
+</math> saling lepas; jadi, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032022" dir="ltr" display="inline">
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi>c</mi>
+    <mi>m</mi>
+  </msub>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032023" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>=</mo>
+  <mi>m</mi>
+</math>. Namun, setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032024" dir="ltr" display="inline">
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>. Dengan demikian, fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032025" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+</math> merupakan suatu injeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032026" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>A</mi>
+</math>.</p>
+</div>
+<p> Dedekind tidak menandai bahwa ia telah menggunakan Pilihan Terhitung. Namun, <em>apakah Anda</em> melihat penggunaannya? Perhatikan kembali. (Sungguh: <em>perhatikan kembali</em>.)</p>
+<p>Bukti tersebut menggunakan Pilihan Terhitung dua kali. Kita menggunakannya sekali untuk memperoleh barisan himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032027" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>A</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>A</mi>
+    <mn>2</mn>
+  </msub>
+</math>, … lalu sekali lagi untuk memilih anggota <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032028" dir="ltr" display="inline">
+  <msub>
+    <mi>c</mi>
+    <mi>n</mi>
+  </msub>
+</math> dari setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032029" dir="ltr" display="inline">
+  <msub>
+    <mi>B</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Selain itu, penggunaan Pilihan ini tidak dapat dihilangkan. <span class="native-citation"><a href="part-0120.xhtml#bibliography-74e73dbbb487e12c964e">Cohen</a> (<a href="part-0120.xhtml#bibliography-74e73dbbb487e12c964e">1966</a>, hlm. 138)</span> membuktikan bahwa hasil tersebut gagal jika kita sama sekali tidak mempunyai suatu bentuk Pilihan. Artinya, konsisten dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032030" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math> bahwa terdapat himpunan-himpunan yang <em>tidak dapat dibandingkan</em> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032031" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math>.</p>
+</div>
+<div id="E02857" class="native-environment native-ex" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="72.10">
+<p><strong>Contoh 72.10.</strong></p>
+<p>Pada <span class="native-citation"><a href="part-0120.xhtml#bibliography-d68b538b76525d08b752">1878</a></span>, Cantor menyatakan bahwa suatu gabungan terhitung dari himpunan-himpunan terhitung bersifat terhitung. Ia tidak menyajikan bukti, barangkali karena menganggap bukti tersebut jelas. Dengan kehati-hatian kita, kita telah membuktikan versi yang lebih umum dari hasil ini dalam <span class="native-reference"><a href="part-0088.xhtml#label-main-643a47c8217359793fb6">Proposisi 71.12</a></span>. Namun, bukti kita secara eksplisit mengandaikan Pilihan. Bahkan bukti hasil yang kurang umum pun memerlukan Pilihan Terhitung.</p>
+<div id="E02858" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="72.11">
+<p><strong>Teorema 72.11.</strong></p>
+<p><strong>dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032032" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">𝐙</mi>
+    </mrow>
+    <mrow>
+      <mo>−</mo>
+    </mrow>
+  </msup>
+  <mo>+</mo>
+  <mtext class="olp-math-prose">Pilihan Terhitung</mtext>
+</math></strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032033" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mi>n</mi>
+  </msub>
+</math> terhitung bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032034" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032035" dir="ltr" display="inline">
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>&lt;</mo>
+      <mi>ω</mi>
+    </mrow>
+  </munder>
+  <msub>
+    <mi>A</mi>
+    <mi>n</mi>
+  </msub>
+</math> terhitung.</p>
+</div>
+<div id="E02859" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:countablechoice" data-source-unit_id="OLP-0597" data-source-occurrence="649" data-source-chapter="72" data-native-number="671">
+<p><strong>Bukti.</strong></p>
+<p>Tanpa mengurangi keumuman, andaikan setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032036" dir="ltr" display="inline">
+  <msub>
+    <mi>A</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>≠</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>. Jadi, bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032037" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>, terdapat surjeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032038" dir="ltr" display="inline">
+  <msub>
+    <mi>f</mi>
+    <mi>n</mi>
+  </msub>
+  <mo>:</mo>
+  <mi>ω</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <msub>
+    <mi>A</mi>
+    <mi>n</mi>
+  </msub>
+</math>. Definisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032039" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>ω</mi>
+  <mo>×</mo>
+  <mi>ω</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>&lt;</mo>
+      <mi>ω</mi>
+    </mrow>
+  </munder>
+  <msub>
+    <mi>A</mi>
+    <mi>n</mi>
+  </msub>
+</math> dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032040" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo stretchy="false">(</mo>
+  <mi>m</mi>
+  <mo>,</mo>
+  <mi>n</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msub>
+    <mi>f</mi>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>m</mi>
+  <mo stretchy="false">)</mo>
+</math>. Hasilnya mengikuti karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032041" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>×</mo>
+  <mi>ω</mi>
+</math> terhitung (<span class="native-reference"><a href="part-0007.xhtml#label-main-6060da8b715802f20cff">Proposisi 4.12</a></span>) dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032042" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> merupakan surjeksi.</p>
+</div>
+<p> Apakah Anda melihat penggunaan Pilihan Terhitung? Prinsip itu digunakan untuk memilih barisan fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032043" dir="ltr" display="inline">
+  <msub>
+    <mi>f</mi>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>f</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>f</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+</math>.<a href="notes.xhtml#fn49" class="footnote-ref" id="fnref49" role="doc-noteref"><sup>49</sup></a> Sekali lagi, hasil tersebut gagal jika tidak ada prinsip Pilihan sama sekali. Secara khusus, <span class="native-citation"><a href="part-0120.xhtml#bibliography-198e90ad38b1e5d800ce"><span>Feferman</span> and <span>Levy</span></a> (<a href="part-0120.xhtml#bibliography-198e90ad38b1e5d800ce">1963</a>)</span> membuktikan bahwa konsisten dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032046" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math> bahwa suatu gabungan terhitung dari himpunan-himpunan terhitung mempunyai kardinalitas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032047" dir="ltr" display="inline">
+  <msub>
+    <mi>ℶ</mi>
+    <mn>1</mn>
+  </msub>
+</math>. Berikut pernyataan yang jauh lebih lucu mengenai pokok ini dari Russell:</p>
+<blockquote>
+<p>Hal ini digambarkan oleh seorang jutawan yang membeli sepasang kaus kaki setiap kali ia membeli sepasang sepatu bot, dan tidak pernah pada waktu lain. Kegemarannya membeli keduanya begitu besar sehingga akhirnya ia mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032048" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">ℵ</mi>
+    <mn>0</mn>
+  </msub>
+</math> pasang sepatu bot dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032049" dir="ltr" display="inline">
+  <msub>
+    <mi mathvariant="normal">ℵ</mi>
+    <mn>0</mn>
+  </msub>
+</math> pasang kaus kaki… Di antara sepatu bot kita dapat membedakan yang kanan dan yang kiri, sehingga kita dapat memilih satu dari setiap pasang: kita dapat memilih semua sepatu bot kanan atau semua sepatu bot kiri. Namun, bagi kaus kaki tidak ada prinsip pemilihan seperti itu yang tersedia, dan tanpa mengandaikan aksioma multiplikatif [yakni, pada hakikatnya Pilihan], kita tidak dapat memastikan bahwa terdapat suatu kelas yang terdiri atas satu kaus kaki dari setiap pasang. <span class="native-citation">(<a href="part-0120.xhtml#bibliography-fa2a9d1879d9324f6783">Russell</a>, <a href="part-0120.xhtml#bibliography-fa2a9d1879d9324f6783">1919</a>, hlm. 126)</span></p>
+</blockquote>
+<p>Singkatnya, suatu bentuk Pilihan diperlukan untuk membuktikan hal berikut: Jika Anda mempunyai pasangan kaus kaki dalam jumlah terhitung, maka Anda mempunyai (hanya) sejumlah terhitung kaus kaki. Bahkan, tanpa Pilihan Terhitung (atau sesuatu yang ekuivalen), gabungan terhitung dari himpunan-himpunan terhitung dapat gagal bersifat terhitung.</p>
+</div>
+<p>Pelajarannya ialah bahwa Pilihan Terhitung digunakan berulang kali tanpa banyak disadari oleh para penggunanya. Pertanyaan filosofisnya ialah: Bagaimana kita dapat <em>membenarkan</em> Pilihan Terhitung?</p>
+<p>Suatu upaya pembenaran intuitif mungkin mengacu pada suatu supertugas. Andaikan kita membuat pilihan pertama dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032050" dir="ltr" display="inline">
+  <mfrac>
+    <mn>1</mn>
+    <mn>2</mn>
+  </mfrac>
+</math> menit, pilihan kedua dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032051" dir="ltr" display="inline">
+  <mfrac>
+    <mn>1</mn>
+    <mn>4</mn>
+  </mfrac>
+</math> menit, …, pilihan ke-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032052" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032053" dir="ltr" display="inline">
+  <mfrac>
+    <mn>1</mn>
+    <msup>
+      <mn>2</mn>
+      <mi>n</mi>
+    </msup>
+  </mfrac>
+</math> menit, … Dalam waktu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032054" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> menit, kita akan telah membuat suatu barisan pilihan sepanjang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032055" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math> dan mendefinisikan suatu fungsi pilihan.</p>
+<p>Namun, apa yang sebenarnya dapat ditunjukkan oleh eksperimen pikiran seperti itu? Pertama, ia bergantung pada pemahaman yang sangat harfiah terhadap gagasan “memilih”. Selain itu, ia tampak mengikat matematika pada kemungkinan metafisis.</p>
+<p>Yang lebih penting, hal itu tidak akan memberikan pembenaran bagi Pilihan <em>secara penuh</em>, bukan <em>sekadar</em> Pilihan Terhitung. Sebab, jika kita memerlukan <em>setiap</em> himpunan mempunyai suatu fungsi pilihan, kita perlu mampu melakukan “supertugas dengan panjang ordinal sebarang”. Terus terang, gagasan itu menggelikan.</p>
+<div id="source-OLP-0598-0650" class="source-unit" data-source-unit="OLP-0598" data-source-occurrence="650" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/justifications.tex" data-source-sha256="f0748a7841958ffa2364ce2b7ded29144850e27331a11f2b220e2c1891ce54bc">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.6" data-native-label="sth:choice:justifications:sec" id="label-main-7caeaee2017b83e43030">72.6 Pertimbangan Intrinsik tentang Pilihan</h3>
+<p>Pertanyaan yang lebih luas ialah apakah Pengurutan Baik, Pilihan, atau bahkan keterbandingan semua himpunan menurut ukurannya—tidak menjadi soal yang mana—dapat dibenarkan.</p>
+<p>Berikut suatu upaya pembenaran <em>intrinsik</em>. Sebelumnya, dalam <span class="native-reference"><a href="part-0082.xhtml#label-main-16759efcadeb348826bc">Bagian 65.1</a></span>, kita memperkenalkan beberapa prinsip tentang hierarki. Salah satunya patut dinyatakan kembali:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mtext mathvariant="normal">𝑆𝑡𝑎𝑔𝑒𝑠-𝑎𝑐𝑐𝑢𝑚𝑢𝑙𝑎𝑡𝑒</mtext>
+</math>. Untuk sebarang tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032056" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> dan sebarang himpunan yang terbentuk <em>sebelum</em> tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032057" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>: pada tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032058" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> terbentuk suatu himpunan yang anggota-anggotanya tepat merupakan himpunan-himpunan tersebut. Tidak ada hal lain yang terbentuk pada tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032059" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>.</p></li>
+</ol>
+<p>Sesungguhnya, banyak penulis telah mengemukakan bahwa Aksioma Pilihan dapat dibenarkan melalui prinsip ini (atau sesuatu yang serupa dengannya). Kita akan memberikan suatu uraian ringkas mengenai pendekatan tersebut.</p>
+<p>Kita mulai dengan suatu hasil sederhana yang menawarkan <em>satu lagi</em> perumusan ekuivalen bagi Pilihan:</p>
+<div id="E02860" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:justifications" data-source-unit_id="OLP-0598" data-source-occurrence="650" data-source-chapter="72" data-native-number="72.12">
+<p><strong>Teorema 72.12.</strong></p>
+<p><strong>dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032060" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math></strong></p>
+<div id="label-main-a65120855b2a8a4b84e8" class="native-anchor">
+
+</div>
+<p>Pilihan ekuivalen dengan prinsip berikut. Jika anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032061" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> saling lepas dan tak kosong, maka terdapat suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032062" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032063" dir="ltr" display="inline">
+  <mi>C</mi>
+  <mo>∩</mo>
+  <mi>x</mi>
+</math> merupakan singleton bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032064" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>∈</mo>
+  <mi>A</mi>
+</math>. (Kita menyebut <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032065" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> seperti ini sebagai suatu himpunan pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032066" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>.)</p>
+</div>
+<p>Bukti hasil ini lugas dan kita serahkan sebagai latihan kepada pembaca.</p>
+<p>Pokok yang mendasar ialah bahwa himpunan pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032067" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> tidak lain adalah daerah hasil suatu fungsi pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032068" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Jadi, untuk membenarkan Pilihan, kita cukup mencoba membenarkan perumusan ekuivalennya dalam hal keberadaan himpunan pilihan. Itulah yang sekarang akan kita coba lakukan.</p>
+<p>Andaikan anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032069" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> saling lepas dan tak kosong. Berdasarkan <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mtext mathvariant="normal">𝑆𝑡𝑎𝑔𝑒𝑠-𝑎𝑟𝑒-𝑘𝑒𝑦</mtext>
+  <mrow/>
+</math> (lihat <span class="native-reference"><a href="part-0082.xhtml#label-main-16759efcadeb348826bc">Bagian 65.1</a></span>), <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032070" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> terbentuk pada suatu tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032071" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>. Perhatikan bahwa semua anggota dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032072" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>A</mi>
+</math> tersedia sebelum tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032073" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>. Berdasarkan <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mtext mathvariant="normal">𝑆𝑡𝑎𝑔𝑒𝑠-𝑎𝑐𝑐𝑢𝑚𝑢𝑙𝑎𝑡𝑒</mtext>
+  <mrow/>
+</math>, bagi <em>sebarang</em> himpunan yang terbentuk sebelum <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032074" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>, terbentuk pula suatu himpunan yang anggota-anggotanya tepat merupakan himpunan-himpunan tersebut. Dengan kata lain, setiap koleksi <em>yang mungkin</em> dari himpunan-himpunan yang tersedia sebelumnya akan ada pada tahap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032075" dir="ltr" display="inline">
+  <mi>S</mi>
+</math>. Namun, tentu <em>mungkin</em> untuk memilih objek-objek yang dapat membentuk suatu himpunan pilihan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032076" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>; ini hanya merupakan suatu himpunan bagian yang sangat spesifik dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032077" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>A</mi>
+</math>. Dengan demikian, himpunan pilihan seperti itu ada, sebagaimana diperlukan.</p>
+<p>Itulah suatu upaya yang <em>sangat</em> singkat untuk membenarkan Pilihan berdasarkan pertimbangan intrinsik. Namun, untuk mendalami gagasan ini, Anda sebaiknya membaca pengembangan yang rapi oleh Potter (<span class="native-citation"><a href="part-0120.xhtml#bibliography-bae6bf36fe843e5e86a1">2004</a>, §14.8</span>).</p>
+<div id="source-OLP-0599-0651" class="source-unit" data-source-unit="OLP-0599" data-source-occurrence="651" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/banach.tex" data-source-sha256="1a9cbe71556774a1ed3230e8e60dc0e9141c40ff175a1f7347c439400303f69d">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.7" data-native-label="sth:choice:banach:sec" id="label-main-d2f0b57497004b16c710">72.7 Paradoks Banach–Tarski</h3>
+<p>Kita juga dapat mencoba membenarkan Pilihan, sebagaimana Boolos mencoba membenarkan Penggantian, dengan mengacu pada pertimbangan <em>ekstrinsik</em> (lihat <span class="native-reference"><a href="part-0085.xhtml#label-main-4d00dfb63865a80c73de">Bagian 68.3</a></span>). Lagi pula, menerima Pilihan mempunyai banyak konsekuensi yang diinginkan: kemampuan membandingkan setiap kardinal; kemampuan mengurutkan baik setiap himpunan; kemampuan memperlakukan kardinal sebagai suatu jenis ordinal tertentu; dan sebagainya.</p>
+<p>Namun, kadang-kadang diklaim bahwa Pilihan mempunyai konsekuensi yang <em>tidak diinginkan</em>. Sebagian besar klaim ini disebabkan oleh suatu hasil dari <span class="native-citation">(<a href="part-0120.xhtml#bibliography-483e71cb23679d28c80e">Banach and Tarski</a>, <a href="part-0120.xhtml#bibliography-483e71cb23679d28c80e">1924</a>)</span>.</p>
+<div id="E02862" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:banach" data-source-unit_id="OLP-0599" data-source-occurrence="651" data-source-chapter="72" data-native-number="72.13">
+<p><strong>Teorema 72.13.</strong></p>
+<p><strong>Paradoks Banach–Tarski (dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032078" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>)</strong></p>
+<p>Sebarang bola dapat diuraikan menjadi sejumlah hingga kepingan yang dapat disusun kembali (melalui rotasi dan translasi) untuk membentuk dua salinan bola tersebut.</p>
+</div>
+<p> Sekilas, hasil ini cukup mencengangkan. Jelas bahwa kedua bola mempunyai <em>dua kali</em> volume bola semula. Namun, gerak kaku—rotasi dan translasi—tidak mengubah volume. Jadi, tampaknya Banach–Tarski memungkinkan kita mengada-adakan materi baru.</p>
+<p>Keadaannya bahkan lebih buruk.<a href="notes.xhtml#fn50" class="footnote-ref" id="fnref50" role="doc-noteref"><sup>50</sup></a> Penalaran yang serupa menunjukkan bahwa sebutir kacang polong dapat dipotong menjadi sejumlah hingga kepingan yang kemudian dapat disusun kembali (melalui rotasi dan translasi) untuk membentuk suatu benda dengan bentuk dan ukuran Big Ben.</p>
+<p>Namun, tidak satu pun dari hasil ini berlaku hanya dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032079" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math>.<a href="notes.xhtml#fn51" class="footnote-ref" id="fnref51" role="doc-noteref"><sup>51</sup></a> Jadi, kita menghadapi suatu keputusan: menolak Pilihan atau belajar hidup dengan “paradoks” tersebut.</p>
+<p>Kita akan mengemukakan bahwa kita sebaiknya belajar hidup dengan “paradoks” itu. Bahkan, kita tidak menganggapnya sebagai paradoks yang berarti. Secara khusus, kita tidak melihat mengapa hasil itu lebih atau kurang paradoksal daripada hasil-hasil berikut:<a href="notes.xhtml#fn52" class="footnote-ref" id="fnref52" role="doc-noteref"><sup>52</sup></a></p>
+<ol>
+<li><p>Terdapat sama banyak titik dalam interval <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032080" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>1</mn>
+  <mo stretchy="false">)</mo>
+</math> dengan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032081" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+</math>.<br/>
+<em>Bukti</em>: perhatikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032082" dir="ltr" display="inline">
+  <mi>tan</mi>
+  <mo>⁡</mo>
+  <mo stretchy="false">(</mo>
+  <mi>π</mi>
+  <mo stretchy="false">(</mo>
+  <mi>r</mi>
+  <mo>−</mo>
+  <mfrac>
+    <mn>1</mn>
+    <mn>2</mn>
+  </mfrac>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p>Terdapat sama banyak titik pada suatu garis dengan dalam suatu persegi.<br/>
+Lihat <span class="native-reference"><a href="part-0095.xhtml#label-main-7bbd07705bb8204be8d3">Bagian 76.3</a></span> dan <span class="native-reference"><a href="part-0095.xhtml#label-main-04abcf4d9056d6ff2645">Bagian 76.5</a></span>.</p></li>
+<li><p>Terdapat kurva-kurva pengisi ruang.<br/>
+Lihat <span class="native-reference"><a href="part-0095.xhtml#label-main-7bbd07705bb8204be8d3">Bagian 76.3</a></span> dan <span class="native-reference"><a href="part-0095.xhtml#label-main-bbb89fb1e1a85c79fa0c">Bagian 76.6</a></span>.</p></li>
+</ol>
+<p>Tidak satu pun dari ketiga hasil ini memerlukan Pilihan. Bahkan, sekarang kita cukup menganggapnya sebagai bagian matematika yang mengejutkan dan indah. Barangkali kita sebaiknya bersikap sama terhadap Paradoks Banach–Tarski.</p>
+<p>Memang, suatu pengamatan teknis diperlukan di sini; tetapi kita hanya perlu tetap berpikir jernih. Gerak kaku mempertahankan volume. Akibatnya, kelima kepingan<a href="notes.xhtml#fn53" class="footnote-ref" id="fnref53" role="doc-noteref"><sup>53</sup></a> yang menjadi hasil penguraian bola tidak mungkin semuanya <em>terukur</em>. Secara kasar, tidak masuk akal untuk menetapkan volume kepada kepingan-kepingan individual ini. Anda perlu membayangkannya sebagai “hamburan-hamburan tak hingga” titik yang tidak dapat digambarkan. Barangkali memang “aneh” untuk memikirkan himpunan “yang terhambur secara tak hingga” seperti itu. Namun, keberadaannya tampak mengikuti perintah yang terkandung dalam <math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mtext mathvariant="normal">𝑆𝑡𝑎𝑔𝑒𝑠-𝑎𝑐𝑐𝑢𝑚𝑢𝑙𝑎𝑡𝑒</mtext>
+  <mrow/>
+</math> bahwa kita harus membentuk <em>semua koleksi yang mungkin</em> dari himpunan-himpunan yang telah tersedia sebelumnya.</p>
+<p>Jika semua itu tidak meyakinkan, berikut suatu argumen (ekstrinsik) terakhir untuk menerima Paradoks Banach–Tarski. Paradoks itu segera menghasilkan lelucon matematika terbaik sepanjang masa:</p>
+<ol>
+<li><p><em>Pertanyaan</em>. Apa anagram dari “Banach–Tarski”?</p></li>
+<li><p><em>Jawaban</em>. “Banach–Tarski Banach–Tarski”.</p></li>
+</ol>
+<div id="source-OLP-0600-0652" class="source-unit" data-source-unit="OLP-0600" data-source-occurrence="652" data-source-path="source/main/openlogic/locale/id/content/set-theory/choice/vitali.tex" data-source-sha256="b6ff03f9265a5f3a5a2f33f82bb944ecc96527f62873d634985347807885ae83">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="72.8" data-native-label="sth:choice:vitali:sec" id="label-main-863e1ae3765c9db3fad0">72.8 Lampiran: Paradoks Vitali</h3>
+<p>Untuk benar-benar memahami apakah konstruksi Banach–Tarski dapat diterima, kita perlu memeriksa <em>buktinya</em>. Sayangnya, hal itu memerlukan jauh lebih banyak aljabar daripada yang dapat kita sajikan di sini. Namun, kita dapat memberikan beberapa catatan singkat yang mungkin memperjelas bukti Banach–Tarski,<a href="notes.xhtml#fn54" class="footnote-ref" id="fnref54" role="doc-noteref"><sup>54</sup></a> dengan berfokus pada hasil berikut:</p>
+<div id="E02863" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.14">
+<p><strong>Teorema 72.14.</strong></p>
+<p><strong>Paradoks Vitali (dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032083" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>)</strong></p>
+<div id="label-main-f80d9d934ddbb62a3f74" class="native-anchor">
+
+</div>
+<p>Sebarang lingkaran dapat diuraikan menjadi sejumlah terhitung kepingan yang dapat disusun kembali (melalui rotasi dan translasi) untuk membentuk dua salinan lingkaran tersebut.</p>
+</div>
+<p>Paradoks Vitali jauh lebih mudah dibuktikan daripada Paradoks Banach–Tarski. Kita menyebutnya “Paradoks Vitali” karena ia mengikuti konstruksi suatu himpunan tak terukur oleh Vitali pada <span class="native-citation"><a href="part-0120.xhtml#bibliography-24153e649e8185412852">1905</a></span>. Namun, aspek teori-himpunan dari bukti Paradoks Vitali dan Paradoks Banach–Tarski sangat serupa. Perbedaan mendasar antara kedua hasil itu hanyalah bahwa Banach–Tarski mempertimbangkan suatu penguraian <em>hingga</em>, sedangkan Paradoks Vitali mempertimbangkan suatu penguraian <em>tak hingga terhitung</em>. Sebagaimana dikatakan <span class="native-citation"><a href="part-0120.xhtml#bibliography-18aaf2770081a91364b1">Weston</a> (<a href="part-0120.xhtml#bibliography-18aaf2770081a91364b1">2003</a>)</span>, Paradoks Vitali “tentu tidak semencolok paradoks Banach–Tarski, tetapi ia memang menunjukkan bahwa paradoks geometris dapat terjadi bahkan dalam situasi yang sederhana.”</p>
+<p>Paradoks Vitali menyangkut suatu bangun dua dimensi, yakni lingkaran. Jadi, kita akan bekerja pada bidang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032084" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℝ</mi>
+    </mrow>
+    <mn>2</mn>
+  </msup>
+</math>. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032085" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> himpunan rotasi titik (searah jarum jam) mengelilingi titik asal dengan besar sudut radian <em>rasional</em> dalam interval <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032086" dir="ltr" display="inline">
+  <mo stretchy="false">[</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mn>2</mn>
+  <mi>π</mi>
+  <mo stretchy="false">)</mo>
+</math>. Berikut beberapa fakta aljabar mengenai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032087" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> (jika Anda tidak memahami pernyataan hasilnya, bukti akan memperjelas maknanya):</p>
+<div id="E02864" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.15">
+<p><strong>Lema 72.15.</strong></p>
+<div id="label-main-07beab1c0f4e27ada445" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032088" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> membentuk suatu grup abelian di bawah komposisi fungsi.</p>
+</div>
+<div id="E02865" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="672">
+<p><strong>Bukti.</strong></p>
+<p>Dengan menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032089" dir="ltr" display="inline">
+  <msub>
+    <mn>0</mn>
+    <mrow>
+      <mi>R</mi>
+    </mrow>
+  </msub>
+</math> untuk rotasi sebesar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032090" dir="ltr" display="inline">
+  <mn>0</mn>
+</math> radian, rotasi ini merupakan unsur identitas bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032091" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>, sebab <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032092" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∘</mo>
+  <msub>
+    <mn>0</mn>
+    <mrow>
+      <mi>R</mi>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mn>0</mn>
+    <mrow>
+      <mi>R</mi>
+    </mrow>
+  </msub>
+  <mo>∘</mo>
+  <mi>ρ</mi>
+  <mo>=</mo>
+  <mi>ρ</mi>
+</math> bagi sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032093" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>.</p>
+<p>Setiap anggota mempunyai invers. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032094" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math> berotasi sebesar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032095" dir="ltr" display="inline">
+  <mi>r</mi>
+</math> radian, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032096" dir="ltr" display="inline">
+  <msup>
+    <mi>ρ</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math> berotasi sebesar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032097" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mo>−</mo>
+  <mi>r</mi>
+  <mo stretchy="false">)</mo>
+  <mo lspace="thickmathspace" rspace="thickmathspace">mod</mo>
+  <mn>2</mn>
+  <mi>π</mi>
+</math> radian, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032098" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∘</mo>
+  <msup>
+    <mi>ρ</mi>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msup>
+  <mo>=</mo>
+  <msub>
+    <mn>0</mn>
+    <mi>R</mi>
+  </msub>
+</math>.</p>
+<p>Komposisi bersifat asosiatif: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032099" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>τ</mi>
+  <mo>∘</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∘</mo>
+  <mi>ρ</mi>
+  <mo>=</mo>
+  <mi>τ</mi>
+  <mo>∘</mo>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo>∘</mo>
+  <mi>ρ</mi>
+  <mo stretchy="false">)</mo>
+</math> bagi sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032100" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>,</mo>
+  <mi>τ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>.</p>
+<p>Komposisi bersifat komutatif: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032101" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>∘</mo>
+  <mi>ρ</mi>
+  <mo>=</mo>
+  <mi>ρ</mi>
+  <mo>∘</mo>
+  <mi>σ</mi>
+</math> bagi sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032102" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>,</mo>
+  <mi>σ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>.</p>
+</div>
+<p>Bahkan, kita dapat membelah grup <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032103" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> menjadi dua, lalu menggunakan salah satu belahan untuk memulihkan seluruh grup:</p>
+<div id="E02866" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.16">
+<p><strong>Lema 72.16.</strong></p>
+<div id="label-main-e41bcbe8d1e5d24e98b9" class="native-anchor">
+
+</div>
+<p>Terdapat suatu partisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032104" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> menjadi dua himpunan saling lepas, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032105" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032106" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+</math>, yang masing-masing merupakan basis bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032107" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>.</p>
+</div>
+<div id="E02867" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="673">
+<p><strong>Bukti.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032108" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math> terdiri atas rotasi dengan besar sudut radian rasional dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032109" dir="ltr" display="inline">
+  <mo stretchy="false">[</mo>
+  <mn>0</mn>
+  <mo>,</mo>
+  <mi>π</mi>
+  <mo stretchy="false">)</mo>
+</math>; misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032110" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+  <mo>=</mo>
+  <mi>R</mi>
+  <mo>∖</mo>
+  <msub>
+    <mi>R</mi>
+    <mn>1</mn>
+  </msub>
+</math>. Berdasarkan aljabar elementer, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032111" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>ρ</mi>
+  <mo>∘</mo>
+  <mi>ρ</mi>
+  <mo>:</mo>
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <msub>
+    <mi>R</mi>
+    <mn>1</mn>
+  </msub>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>=</mo>
+  <mi>R</mi>
+</math>. Hasil serupa dapat diperoleh bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032112" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mn>2</mn>
+  </msub>
+</math>.</p>
+</div>
+<p>Kita akan menggunakan fakta tentang grup ini untuk menetapkan <span class="native-reference"><a href="#label-main-f80d9d934ddbb62a3f74">Teorema 72.14</a></span>. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032113" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> lingkaran satuan, yakni himpunan titik yang berjarak tepat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032114" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> satuan dari titik asal bidang, yaitu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032115" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>r</mi>
+  <mo>,</mo>
+  <mi>s</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>∈</mo>
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℝ</mi>
+    </mrow>
+    <mn>2</mn>
+  </msup>
+  <mo>:</mo>
+  <msqrt>
+    <msup>
+      <mi>r</mi>
+      <mn>2</mn>
+    </msup>
+    <mo>+</mo>
+    <msup>
+      <mi>s</mi>
+      <mn>2</mn>
+    </msup>
+  </msqrt>
+  <mo>=</mo>
+  <mn>1</mn>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Kita akan membagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032116" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> menjadi beberapa bagian dengan mempertimbangkan relasi berikut pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032117" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032118" display="block" dir="ltr">
+  <mi>r</mi>
+  <mo>∼</mo>
+  <mi>s</mi>
+  <mtext mathvariant="normal"> 𝑗𝑖𝑘𝑎 𝑑𝑎𝑛 ℎ𝑎𝑛𝑦𝑎 𝑗𝑖𝑘𝑎 </mtext>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">∃</mi>
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+  <mo stretchy="false">)</mo>
+  <mi>ρ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>r</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>s</mi>
+  <mo>.</mo>
+</math> Artinya, titik-titik pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032119" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> dihubungkan oleh relasi ini jika dan hanya jika kita dapat berpindah dari satu titik ke titik lain melalui rotasi bernilai rasional mengelilingi titik asal. Tidak mengejutkan bahwa:</p>
+<div id="E02868" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.17">
+<p><strong>Lema 72.17.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032120" dir="ltr" display="inline">
+  <mo>∼</mo>
+</math> merupakan suatu relasi ekuivalensi.</p>
+</div>
+<div id="E02869" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="674">
+<p><strong>Bukti.</strong></p>
+<p>Trivial, dengan menggunakan <span class="native-reference"><a href="#label-main-07beab1c0f4e27ada445">Lema 72.15</a></span>.</p>
+</div>
+<p>Sekarang kita menggunakan Pilihan untuk memperoleh suatu himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032121" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> yang memuat tepat satu anggota dari setiap kelas ekuivalensi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032122" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> di bawah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032123" dir="ltr" display="inline">
+  <mo>∼</mo>
+</math>. Artinya, kita mempertimbangkan suatu fungsi pilihan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032124" dir="ltr" display="inline">
+  <mi>f</mi>
+</math> pada himpunan kelas-kelas ekuivalensi,<a href="notes.xhtml#fn55" class="footnote-ref" id="fnref55" role="doc-noteref"><sup>55</sup></a> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032129" display="block" dir="ltr">
+  <mi>E</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mo stretchy="false">[</mo>
+  <mi>r</mi>
+  <msub>
+    <mo stretchy="false">]</mo>
+    <mrow>
+      <mo>∼</mo>
+    </mrow>
+  </msub>
+  <mo>:</mo>
+  <mi>r</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>,</mo>
+</math> dan menetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032130" dir="ltr" display="inline">
+  <mi>C</mi>
+  <mo>=</mo>
+  <mrow>
+    <mi>ran</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>f</mi>
+  <mo stretchy="false">)</mo>
+</math>. Bagi setiap rotasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032131" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>, himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032132" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math> terdiri atas titik-titik yang diperoleh dengan menerapkan rotasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032133" dir="ltr" display="inline">
+  <mi>ρ</mi>
+</math> kepada setiap titik dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032134" dir="ltr" display="inline">
+  <mi>C</mi>
+</math>. Dua hasil berikut menunjukkan bahwa himpunan-himpunan ini menutupi lingkaran secara lengkap dan tanpa tumpang tindih:</p>
+<div id="E02870" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.18">
+<p><strong>Lema 72.18.</strong></p>
+<div id="label-main-1eaa723000a5bfc4a988" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032135" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+  <mo>=</mo>
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <mi>R</mi>
+    </mrow>
+  </munder>
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math>.</p>
+</div>
+<div id="E02871" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="675">
+<p><strong>Bukti.</strong></p>
+<p>Tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032136" dir="ltr" display="inline">
+  <mi>s</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math>; terdapat suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032137" dir="ltr" display="inline">
+  <mi>r</mi>
+  <mo>∈</mo>
+  <mi>C</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032138" dir="ltr" display="inline">
+  <mi>r</mi>
+  <mo>∈</mo>
+  <mo stretchy="false">[</mo>
+  <mi>s</mi>
+  <msub>
+    <mo stretchy="false">]</mo>
+    <mrow>
+      <mo>∼</mo>
+    </mrow>
+  </msub>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032139" dir="ltr" display="inline">
+  <mi>r</mi>
+  <mo>∼</mo>
+  <mi>s</mi>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032140" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>r</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>s</mi>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032141" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>.</p>
+</div>
+<div id="E02872" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.19">
+<p><strong>Lema 72.19.</strong></p>
+<div id="label-main-27bcd1496bb46278c03b" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032142" dir="ltr" display="inline">
+  <msub>
+    <mi>ρ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>≠</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mn>2</mn>
+  </msub>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032143" dir="ltr" display="inline">
+  <msub>
+    <mi>ρ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo>∩</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>.</p>
+</div>
+<div id="E02873" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="676">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032144" dir="ltr" display="inline">
+  <mi>s</mi>
+  <mo>∈</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo>∩</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032145" dir="ltr" display="inline">
+  <mi>s</mi>
+  <mo>=</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>r</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>r</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032146" dir="ltr" display="inline">
+  <msub>
+    <mi>r</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>r</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+  <mo>∈</mo>
+  <mi>C</mi>
+</math>. Karena itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032147" dir="ltr" display="inline">
+  <msubsup>
+    <mi>ρ</mi>
+    <mn>2</mn>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msubsup>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>r</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msub>
+    <mi>r</mi>
+    <mn>2</mn>
+  </msub>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032148" dir="ltr" display="inline">
+  <msubsup>
+    <mi>ρ</mi>
+    <mn>2</mn>
+    <mrow>
+      <mo>−</mo>
+      <mn>1</mn>
+    </mrow>
+  </msubsup>
+  <mo>∘</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032149" dir="ltr" display="inline">
+  <msub>
+    <mi>r</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>∼</mo>
+  <msub>
+    <mi>r</mi>
+    <mn>2</mn>
+  </msub>
+</math>. Jadi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032150" dir="ltr" display="inline">
+  <msub>
+    <mi>r</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi>r</mi>
+    <mn>2</mn>
+  </msub>
+</math>, sebab <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032151" dir="ltr" display="inline">
+  <mi>C</mi>
+</math> memilih tepat satu anggota dari setiap kelas ekuivalensi di bawah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032152" dir="ltr" display="inline">
+  <mo>∼</mo>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032153" dir="ltr" display="inline">
+  <mi>s</mi>
+  <mo>=</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>r</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>r</mi>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032154" dir="ltr" display="inline">
+  <msub>
+    <mi>ρ</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>=</mo>
+  <msub>
+    <mi>ρ</mi>
+    <mn>2</mn>
+  </msub>
+</math>.</p>
+</div>
+<p>Sekarang kita menerapkan fakta-fakta aljabar sebelumnya pada lingkaran kita:</p>
+<div id="E02874" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.20">
+<p><strong>Lema 72.20.</strong></p>
+<div id="label-main-bd33d3fb3710dbdeeedd" class="native-anchor">
+
+</div>
+<p>Terdapat suatu partisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032155" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> menjadi dua himpunan saling lepas, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032156" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032157" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+</math>, sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032158" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math> dapat dipartisi menjadi sejumlah terhitung himpunan yang dapat dirotasi untuk membentuk suatu salinan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032159" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> (dan demikian pula bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032160" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+</math>).</p>
+</div>
+<div id="E02875" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="677">
+<p><strong>Bukti.</strong></p>
+<p>Dengan menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032161" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mrow>
+      <mn>1</mn>
+    </mrow>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032162" dir="ltr" display="inline">
+  <msub>
+    <mi>R</mi>
+    <mrow>
+      <mn>2</mn>
+    </mrow>
+  </msub>
+</math> dari <span class="native-reference"><a href="#label-main-e41bcbe8d1e5d24e98b9">Lema 72.16</a></span>, tetapkan: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032163" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left right left" columnspacing="0em 2em 0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:0">
+        <msub>
+          <mi>D</mi>
+          <mrow>
+            <mn>1</mn>
+          </mrow>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:calc(2em / 2);padding-top:0;padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <munder>
+          <mo>⋃</mo>
+          <mrow>
+            <mi>ρ</mi>
+            <mo>∈</mo>
+            <msub>
+              <mi>R</mi>
+              <mn>1</mn>
+            </msub>
+          </mrow>
+        </munder>
+        <mi>ρ</mi>
+        <mo stretchy="false">[</mo>
+        <mi>C</mi>
+        <mo stretchy="false">]</mo>
+      </mtd>
+      <mtd style="text-align:right;padding-left:calc(2em / 2);padding-right:calc(0em / 2);padding-top:0;padding-bottom:0">
+        <msub>
+          <mi>D</mi>
+          <mrow>
+            <mn>2</mn>
+          </mrow>
+        </msub>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <munder>
+          <mo>⋃</mo>
+          <mrow>
+            <mi>ρ</mi>
+            <mo>∈</mo>
+            <msub>
+              <mi>R</mi>
+              <mn>2</mn>
+            </msub>
+          </mrow>
+        </munder>
+        <mi>ρ</mi>
+        <mo stretchy="false">[</mo>
+        <mi>C</mi>
+        <mo stretchy="false">]</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Ini merupakan suatu partisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032164" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> berdasarkan <span class="native-reference"><a href="#label-main-1eaa723000a5bfc4a988">Lema 72.18</a></span>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032165" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mn>1</mn>
+  </msub>
+</math> serta <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032166" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mn>2</mn>
+  </msub>
+</math> saling lepas berdasarkan <span class="native-reference"><a href="#label-main-27bcd1496bb46278c03b">Lema 72.19</a></span>. Berdasarkan konstruksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032167" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mn>1</mn>
+  </msub>
+</math> dapat dipartisi menjadi sejumlah terhitung himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032168" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math>, satu bagi setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032169" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <msub>
+    <mi>R</mi>
+    <mn>1</mn>
+  </msub>
+</math>. Himpunan-himpunan ini dapat dirotasi untuk membentuk suatu salinan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032170" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math>, sebab <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032171" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+  <mo>=</mo>
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <mi>R</mi>
+    </mrow>
+  </munder>
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo>=</mo>
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <msub>
+        <mi>R</mi>
+        <mn>1</mn>
+      </msub>
+    </mrow>
+  </munder>
+  <mo stretchy="false">(</mo>
+  <mi>ρ</mi>
+  <mo>∘</mo>
+  <mi>ρ</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math> berdasarkan <span class="native-reference"><a href="#label-main-e41bcbe8d1e5d24e98b9">Lema 72.16</a></span> dan <span class="native-reference"><a href="#label-main-1eaa723000a5bfc4a988">Lema 72.18</a></span>. Penalaran yang sama berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032172" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mn>2</mn>
+  </msub>
+</math>.</p>
+</div>
+<p> Hal ini langsung mengakibatkan Paradoks Vitali. Kita dapat menghasilkan <em>dua</em> salinan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032173" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032174" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> hanya dengan membaginya menjadi sejumlah terhitung kepingan (berbagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032175" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math>) lalu menggerakkannya secara kaku (cukup rotasikan setiap kepingan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032176" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mn>1</mn>
+  </msub>
+</math>, serta translasikan lalu rotasikan setiap kepingan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032177" dir="ltr" display="inline">
+  <msub>
+    <mi>D</mi>
+    <mn>2</mn>
+  </msub>
+</math>).</p>
+<p>Mari kita rangkum strategi buktinya. Kita mulai dengan beberapa fakta aljabar tentang grup rotasi pada bidang. Kita menggunakan grup ini untuk mempartisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032178" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+</math> menjadi kelas-kelas ekuivalensi. Kemudian kita memperoleh suatu “paradoks” dengan menggunakan Pilihan untuk memilih anggota dari setiap kelas.</p>
+<p>Kita menggunakan strategi yang persis sama untuk membuktikan Banach–Tarski. Perbedaan utamanya ialah bahwa fakta-fakta aljabar yang digunakan untuk membuktikan Banach–Tarski jauh lebih rumit daripada yang digunakan untuk membuktikan Paradoks Vitali. Namun, fakta-fakta aljabar tersebut tidak berhubungan dengan Pilihan. Kita akan merangkumnya dengan cepat.</p>
+<p>Untuk membuktikan Banach–Tarski, kita mulai dengan menetapkan suatu analog dari <span class="native-reference"><a href="#label-main-e41bcbe8d1e5d24e98b9">Lema 72.16</a></span>: sebarang <em>grup bebas</em> dapat dibagi menjadi empat kepingan yang secara intuitif dapat kita “gerakkan” untuk memulihkan dua salinan seluruh grup.<a href="notes.xhtml#fn56" class="footnote-ref" id="fnref56" role="doc-noteref"><sup>56</sup></a> Kemudian kita menunjukkan bahwa kita dapat menggunakan dua rotasi tertentu mengelilingi titik asal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032179" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℝ</mi>
+    </mrow>
+    <mn>3</mn>
+  </msup>
+</math> untuk menghasilkan suatu grup bebas rotasi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032180" dir="ltr" display="inline">
+  <mi>F</mi>
+</math>.<a href="notes.xhtml#fn57" class="footnote-ref" id="fnref57" role="doc-noteref"><sup>57</sup></a> (Belum ada Pilihan.) Sekarang kita menganggap titik-titik pada permukaan bola “serupa” jika dan hanya jika salah satunya dapat diperoleh dari yang lain melalui suatu rotasi dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032181" dir="ltr" display="inline">
+  <mi>F</mi>
+</math>. Kemudian kita <em>menggunakan Pilihan</em> untuk memilih tepat satu titik dari setiap kelas ekuivalensi titik-titik “serupa”. Dengan menerapkan pembagian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032182" dir="ltr" display="inline">
+  <mi>F</mi>
+</math> pada permukaan bola seperti dalam <span class="native-reference"><a href="#label-main-bd33d3fb3710dbdeeedd">Lema 72.20</a></span>, kita membagi permukaan itu menjadi empat kepingan yang dapat kita “gerakkan” untuk memperoleh dua salinan permukaan bola. Hal ini menetapkan <span class="native-citation">(<a href="part-0120.xhtml#bibliography-ad8ce13c6237aa47d739">Hausdorff</a>, <a href="part-0120.xhtml#bibliography-ad8ce13c6237aa47d739">1914</a>)</span>:</p>
+<div id="E02876" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.21">
+<p><strong>Teorema 72.21.</strong></p>
+<p><strong>Paradoks Hausdorff (dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032183" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>)</strong></p>
+<p>Permukaan sebarang bola dapat diuraikan menjadi sejumlah hingga kepingan yang dapat disusun kembali (melalui rotasi dan translasi) untuk membentuk dua salinan saling lepas dari bola tersebut.</p>
+</div>
+<p>Beberapa trik aljabar tambahan diperlukan untuk memperoleh Teorema Banach–Tarski sepenuhnya (yang menyangkut bukan hanya permukaan bola, melainkan juga bagian dalamnya). Terus terang, hal ini hanya merupakan hiasan di atas kue aljabar. Karena itu, Weston menulis:</p>
+<blockquote>
+<p>[…] hasil tentang grup bebas merupakan <em>langkah kunci</em> dalam bukti paradoks Banach–Tarski. Dari sudut pandang ini, paradoks Banach–Tarski bukanlah pernyataan mengenai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032184" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℝ</mi>
+    </mrow>
+    <mn>3</mn>
+  </msup>
+</math> sebagaimana ia merupakan pernyataan mengenai kompleksitas grup [translasi dan rotasi dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032185" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">ℝ</mi>
+    </mrow>
+    <mn>3</mn>
+  </msup>
+</math>]. <span class="native-citation">(<a href="part-0120.xhtml#bibliography-18aaf2770081a91364b1">Weston</a>, <a href="part-0120.xhtml#bibliography-18aaf2770081a91364b1">2003</a>, hlm. 16)</span></p>
+</blockquote>
+<p>Artinya, apakah kita dapat memberikan suatu penguraian <em>hingga</em> (seperti dalam Banach–Tarski) atau penguraian <em>tak hingga terhitung</em> (seperti dalam Paradoks Vitali) ditentukan oleh fakta-fakta teori grup tertentu tentang bekerja dalam dua atau tiga dimensi.</p>
+<p>Memang, pengamatan terakhir ini sedikit merusak lelucon pada akhir <span class="native-reference"><a href="#label-main-d2f0b57497004b16c710">Bagian 72.7</a></span>. Karena bersifat dua dimensi, “Banach–Tarski” harus dibagi menjadi sejumlah <em>tak hingga</em> terhitung kepingan jika orang ingin menyusun ulang kepingan-kepingan itu untuk membentuk “Banach–Tarski Banach–Tarski”. Untuk memperbaiki leluconnya, orang harus menulis dalam tiga dimensi. Kita serahkan hal ini sebagai latihan kepada pembaca.</p>
+<p>Satu komentar terakhir. Dalam <span class="native-reference"><a href="#label-main-d2f0b57497004b16c710">Bagian 72.7</a></span>, kita menyebutkan bahwa “kepingan-kepingan” bola yang diperoleh tidak dapat <em>terukur</em>, melainkan harus merupakan “hamburan-hamburan tak hingga” yang tidak dapat digambarkan. Hal yang sama berlaku pada penggunaan Pilihan untuk memperoleh <span class="native-reference"><a href="#label-main-bd33d3fb3710dbdeeedd">Lema 72.20</a></span>. Pokok ini patut dijelaskan.</p>
+<p>Sekali lagi, kita harus menguraikan sedikit latar belakang (tetapi ini <em>hanya</em> sebuah uraian ringkas; Anda mungkin ingin membaca entri buku teks tentang <em>ukuran</em>). Mendefinisikan ukuran bagi suatu himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032186" dir="ltr" display="inline">
+  <mi>X</mi>
+</math> berarti menetapkan suatu nilai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032187" dir="ltr" display="inline">
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>E</mi>
+  <mo stretchy="false">)</mo>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+</math> kepada setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032188" dir="ltr" display="inline">
+  <mi>E</mi>
+</math> dalam suatu “aljabar-<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032189" dir="ltr" display="inline">
+  <mi>σ</mi>
+</math>” pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032190" dir="ltr" display="inline">
+  <mi>X</mi>
+</math>. Perinciannya tidak penting di sini, kecuali bahwa fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032191" dir="ltr" display="inline">
+  <mi>μ</mi>
+</math> harus memenuhi prinsip aditivitas terhitung: ukuran suatu gabungan terhitung dari himpunan-himpunan saling lepas merupakan jumlah ukuran masing-masing, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032192" dir="ltr" display="inline">
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>&lt;</mo>
+      <mi>ω</mi>
+    </mrow>
+  </munder>
+  <msub>
+    <mi>X</mi>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <munder>
+    <mo>∑</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>&lt;</mo>
+      <mi>ω</mi>
+    </mrow>
+  </munder>
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>X</mi>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math> jika himpunan-himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032193" dir="ltr" display="inline">
+  <msub>
+    <mi>X</mi>
+    <mi>n</mi>
+  </msub>
+</math> saling lepas. Mengatakan bahwa suatu himpunan “tak terukur” berarti tidak ada ukuran yang dapat ditetapkan kepadanya secara semestinya. Sekarang, dengan menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032194" dir="ltr" display="inline">
+  <mi>R</mi>
+</math> di atas:</p>
+<div id="E02877" class="native-environment native-cor" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="72.22">
+<p><strong>Akibat 72.22.</strong></p>
+<p><strong>Vitali</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032195" dir="ltr" display="inline">
+  <mi>μ</mi>
+</math> suatu ukuran sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032196" dir="ltr" display="inline">
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mn>1</mn>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032197" dir="ltr" display="inline">
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>X</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>Y</mi>
+  <mo stretchy="false">)</mo>
+</math> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032198" dir="ltr" display="inline">
+  <mi>X</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032199" dir="ltr" display="inline">
+  <mi>Y</mi>
+</math> kongruen. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032200" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math> tak terukur bagi semua <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032201" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>.</p>
+</div>
+<div id="E02878" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:choice:vitali" data-source-unit_id="OLP-0600" data-source-occurrence="652" data-source-chapter="72" data-native-number="678">
+<p><strong>Bukti.</strong></p>
+<p>Untuk reductio, andaikan sebaliknya. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032202" dir="ltr" display="inline">
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>σ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>r</mi>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032203" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math> dan suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032204" dir="ltr" display="inline">
+  <mi>r</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">ℝ</mi>
+  </mrow>
+</math>. Bagi sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032205" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032206" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032207" dir="ltr" display="inline">
+  <mi>σ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math> kongruen; karena itu, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032208" dir="ltr" display="inline">
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>r</mi>
+</math> bagi sebarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032209" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo>∈</mo>
+  <mi>R</mi>
+</math>. Berdasarkan <span class="native-reference"><a href="#label-main-1eaa723000a5bfc4a988">Lema 72.18</a></span> dan <span class="native-reference"><a href="#label-main-27bcd1496bb46278c03b">Lema 72.19</a></span>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032210" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+  <mo>=</mo>
+  <munder>
+    <mo>⋃</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <mi>R</mi>
+    </mrow>
+  </munder>
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math> merupakan suatu gabungan terhitung dari himpunan-himpunan saling lepas berpasangan. Jadi, aditivitas terhitung mengharuskan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032211" dir="ltr" display="inline">
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mn>1</mn>
+</math> merupakan jumlah ukuran setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032212" dir="ltr" display="inline">
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+</math>, yakni: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032213" display="block" dir="ltr">
+  <mn>1</mn>
+  <mo>=</mo>
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi mathvariant="normal">𝐒</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <munder>
+    <mo>∑</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <mi>R</mi>
+    </mrow>
+  </munder>
+  <mi>μ</mi>
+  <mo stretchy="false">(</mo>
+  <mi>ρ</mi>
+  <mo stretchy="false">[</mo>
+  <mi>C</mi>
+  <mo stretchy="false">]</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <munder>
+    <mo>∑</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <mi>R</mi>
+    </mrow>
+  </munder>
+  <mi>r</mi>
+</math> Namun, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032214" dir="ltr" display="inline">
+  <mi>r</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032215" dir="ltr" display="inline">
+  <munder>
+    <mo>∑</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <mi>R</mi>
+    </mrow>
+  </munder>
+  <mi>r</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+</math>; dan jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032216" dir="ltr" display="inline">
+  <mi>r</mi>
+  <mo>&gt;</mo>
+  <mn>0</mn>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M032217" dir="ltr" display="inline">
+  <munder>
+    <mo>∑</mo>
+    <mrow>
+      <mi>ρ</mi>
+      <mo>∈</mo>
+      <mi>R</mi>
+    </mrow>
+  </munder>
+  <mi>r</mi>
+  <mo>=</mo>
+  <mi mathvariant="normal">∞</mi>
+</math>.</p>
+</div>
+<h3 class="unnumbered native-problems-heading" data-native-chapter="72" id="exercises-main-72">Soal</h3>
+<div id="E02861" class="native-environment native-prob" data-source-edition="main" data-source-prefix="sth:choice:justifications" data-source-unit_id="OLP-0598" data-source-occurrence="650" data-source-chapter="72" data-native-number="72.1">
+<p><strong>Soal 72.1.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-a65120855b2a8a4b84e8">Teorema 72.12</a></span>. Jika Anda mengalami kesulitan, suatu bukti dapat ditemukan dalam <span class="native-citation">(<a href="part-0120.xhtml#bibliography-bae6bf36fe843e5e86a1">Potter</a>, <a href="part-0120.xhtml#bibliography-bae6bf36fe843e5e86a1">2004</a>, hlm. 242–243)</span>.</p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0088.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0090.xhtml">Berikutnya →</a></nav></body></html>

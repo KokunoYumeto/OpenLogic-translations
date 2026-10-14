@@ -1,0 +1,5193 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>7 Sintaks dan Semantik — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0010.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0012.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0011" class="reader-chunk">
+<div id="source-OLP-0056-0056" class="source-unit" data-source-unit="OLP-0056" data-source-occurrence="56" data-source-path="source/main/openlogic/locale/id/content/propositional-logic/syntax-and-semantics/syntax-and-semantics.tex" data-source-sha256="462431e7b2bce9ecb44ca9b5ee98870a39e2921d78c2e7f2954a968e4aafa195">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="7" data-native-label="pl:syn::chap" id="label-main-29caf09662dbf167fb98">7 Sintaks dan Semantik</h2>
+<div id="E00337" class="native-environment native-editorial" data-source-edition="main" data-source-prefix="udf:udf:udf" data-source-unit_id="OLP-0056" data-source-occurrence="56" data-source-chapter="7">
+<p>Bab ini hanyalah ringkasan definisi yang sangat singkat. Bab ini sebaiknya diperluas untuk memberikan pengantar yang mudah diikuti tentang pembuktian melalui induksi pada formula, disertai jauh lebih banyak contoh.</p>
+</div>
+<div id="source-OLP-0057-0057" class="source-unit" data-source-unit="OLP-0057" data-source-occurrence="57" data-source-path="source/main/openlogic/locale/id/content/propositional-logic/syntax-and-semantics/introduction.tex" data-source-sha256="755779eaec9923d35a349eb526b3af07b9f07b3a20b41e5423bd009f837a4c9d">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="7.1" data-native-label="pl:syn:int:sec" id="label-main-eadeba0104f01446dc00">7.1 Pendahuluan</h3>
+<p>Logika proposisi membahas formula yang dibangun dari variabel proposisi dengan menggunakan penghubung proposisional <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002960" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002961" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002962" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002963" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002964" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+</math>. Secara intuitif, variabel proposisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002965" dir="ltr" display="inline">
+  <mi>p</mi>
+</math> mewakili sebuah kalimat atau proposisi yang bernilai benar atau salah. Setiap kali “nilai kebenaran” variabel proposisi dalam formula ditentukan, nilai kebenaran setiap formula yang dibentuk darinya dengan menggunakan penghubung proposisional juga ditentukan. Kita mengatakan bahwa logika proposisi bersifat <em>fungsional-kebenaran</em>, karena semantiknya diberikan oleh fungsi-fungsi atas nilai kebenaran. Secara khusus, dalam logika proposisi kita tidak mempertimbangkan penentuan lebih lanjut mengenai kebenaran dan kesalahan; misalnya, apakah sesuatu niscaya benar alih-alih sekadar benar secara kontingen, apakah sesuatu diketahui benar, atau apakah sesuatu benar sekarang alih-alih benar pada masa lalu atau masa mendatang. Kita hanya mempertimbangkan dua nilai kebenaran, yaitu benar (<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002966" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math>) dan salah (<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002967" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math>), sehingga kita mengecualikan kemungkinan bahwa suatu pernyataan tidak benar maupun tidak salah, atau hanya setengah benar. Kita juga hanya memusatkan perhatian pada penghubung yang membuat nilai kebenaran formula yang dibangun dengannya sepenuhnya ditentukan oleh nilai kebenaran bagian-bagiannya (dan bukan, misalnya, oleh maknanya). Secara khusus, masih diperdebatkan apakah nilai kebenaran kalimat bersyarat dalam bahasa Inggris bersifat fungsional-kebenaran dalam pengertian ini. Implikasi material <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002968" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+</math> memang demikian; logika-logika lain membahas kalimat bersyarat yang tidak bersifat fungsional-kebenaran.</p>
+<p>Untuk mengembangkan teori dan metateori logika proposisi berbasis fungsi kebenaran, kita harus lebih dahulu mendefinisikan sintaks serta semantik ungkapannya. Kita akan menguraikan salah satu cara membangun formula dari variabel proposisi dengan menggunakan penghubung-penghubung tersebut. Definisi alternatif juga dimungkinkan. Sistem lain akan memilih simbol yang berbeda, memilih himpunan penghubung primitif yang berbeda, dan menggunakan tanda kurung secara berbeda (atau bahkan tidak menggunakannya sama sekali, seperti dalam apa yang disebut notasi Polandia). Meskipun demikian, semua pendekatan memiliki kesamaan: aturan pembentukan mendefinisikan himpunan formula secara <em>induktif</em>. Jika dilakukan dengan tepat, setiap ungkapan pada dasarnya hanya dapat dihasilkan melalui satu cara menurut aturan pembentukan. Definisi induktif yang menghasilkan ungkapan yang <em>terbaca secara unik</em> memungkinkan kita memberikan makna kepada ungkapan tersebut dengan metode yang sama—definisi induktif.</p>
+<p>Pemberian makna kepada ungkapan merupakan ranah semantik. Konsep utama dalam semantik logika proposisi ialah pemuasan dalam valuasi. valuasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002969" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math> memberikan nilai kebenaran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002970" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002971" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math> kepada variabel proposisi. Setiap valuasi menentukan nilai kebenaran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002972" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> bagi setiap formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002973" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. formula dipenuhi dalam valuasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002974" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002975" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math>—kita menuliskannya sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002976" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Relasi ini juga dapat didefinisikan melalui induksi pada struktur <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002977" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, dengan menggunakan fungsi kebenaran bagi penghubung logis untuk mendefinisikan, misalnya, pemuasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002978" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> berdasarkan dipenuhi atau tidaknya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002979" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002980" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.</p>
+<p>Berdasarkan relasi pemuasan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002981" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk kalimat, selanjutnya kita dapat mendefinisikan gagasan semantis dasar berupa tautologi, perikutan, dan keterpenuhan. formula merupakan tautologi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002982" dir="ltr" display="inline">
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, jika setiap valuasi memenuhinya, yakni jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002983" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002984" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math>. Formula itu merupakan konsekuensi semantis dari suatu himpunan formula, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002985" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, jika setiap valuasi yang memenuhi semua formula dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002986" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> juga memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002987" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Suatu himpunan formula dapat dipenuhi jika terdapat valuasi yang memenuhi semua formula di dalamnya secara bersamaan. Karena formula didefinisikan secara induktif dan pemuasan selanjutnya didefinisikan melalui induksi pada struktur formula, kita dapat menggunakan induksi untuk membuktikan sifat-sifat semantik kita serta menghubungkan gagasan-gagasan semantis yang telah didefinisikan.</p>
+<div id="source-OLP-0058-0058" class="source-unit" data-source-unit="OLP-0058" data-source-occurrence="58" data-source-path="source/main/openlogic/locale/id/content/propositional-logic/syntax-and-semantics/formulas.tex" data-source-sha256="102d32ad31976a33e2846eac0c86f6fe5efd2d864ade0a0095cff5b624b77efa">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="7.2" data-native-label="pl:syn:fml:sec" id="label-main-e3adba89ae84badbb489">7.2 Formula Proposisi</h3>
+<p>Formula dalam logika proposisi dibangun dari <em>variabel proposisi</em>, konstanta proposisional <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002988" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math> dan konstanta proposisional <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002989" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊤</mi>
+</math> dengan menggunakan <em>penghubung logis</em>.</p>
+<ol>
+<li><p>Himpunan terbilang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002990" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>At</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math> dari variabel proposisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002991" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002992" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …</p></li>
+<li><p>Konstanta proposisional untuk kepalsuan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002993" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math>.</p></li>
+<li><p>Konstanta proposisional untuk kebenaran <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002994" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊤</mi>
+</math>.</p></li>
+<li><p>Penghubung logis:  <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002995" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+</math> (negasi) , <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002996" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math> (konjungsi) , <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002997" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math> (disjungsi) , <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002998" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+</math> (implikasi) , <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M002999" dir="ltr" display="inline">
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+</math> (biimplikasi)</p></li>
+<li><p>Tanda baca: (, ), dan koma.</p></li>
+</ol>
+<p>Kita menyatakan bahasa logika proposisi ini dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003000" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math>.</p>
+<div id="E00338" class="native-environment native-intro" data-source-edition="main" data-source-prefix="pl:syn:fml" data-source-unit_id="OLP-0058" data-source-occurrence="58" data-source-chapter="7">
+<p>Anda mungkin lebih mengenal istilah dan simbol yang berbeda dari yang kita gunakan di atas. Teks-teks logika (dan para pengajar) lazim menggunakan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003001" dir="ltr" display="inline">
+  <mo>∼</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003002" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+</math>, dan ! untuk “negasi”, serta <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003003" dir="ltr" display="inline">
+  <mo>∧</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003004" dir="ltr" display="inline">
+  <mo>⋅</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003005" dir="ltr" display="inline">
+  <mi mathvariant="normal">&amp;</mi>
+</math> untuk “konjungsi”. Simbol yang lazim digunakan untuk “implikasi” ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003006" dir="ltr" display="inline">
+  <mo stretchy="false">→</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003007" dir="ltr" display="inline">
+  <mo stretchy="false">⇒</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003008" dir="ltr" display="inline">
+  <mo>⊃</mo>
+</math>. Simbol untuk “biimplikasi”, “implikasi dua arah”, atau “ekuivalensi (material)” ialah <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003009" dir="ltr" display="inline">
+  <mo stretchy="false">↔</mo>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003010" dir="ltr" display="inline">
+  <mo stretchy="false">⇔</mo>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003011" dir="ltr" display="inline">
+  <mo>≡</mo>
+</math>. Simbol <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003012" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math> disebut dengan berbagai nama, antara lain “kepalsuan”, “falsum”, “absurditas”, atau “bawah”. Simbol <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003013" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊤</mi>
+</math> disebut dengan berbagai nama, antara lain “kebenaran”, “verum”, atau “atas”.</p>
+</div>
+<div id="E00339" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:fml" data-source-unit_id="OLP-0058" data-source-occurrence="58" data-source-chapter="7" data-native-number="7.1">
+<p><strong>Definisi 7.1.</strong></p>
+<p><strong>Formula</strong></p>
+<div id="label-main-1b7b83b49d5a56aa8d15" class="native-anchor">
+
+</div>
+<p>Himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003014" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> dari <em>formula</em> logika proposisi didefinisikan secara induktif sebagai berikut:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003015" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math> merupakan formula atomik.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003016" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊤</mi>
+</math> merupakan formula atomik.</p></li>
+<li><p>Setiap variabel proposisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003017" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> merupakan formula atomik.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003018" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003019" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan formula.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003020" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003021" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> merupakan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003022" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> merupakan formula.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003023" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003024" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> merupakan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003025" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> merupakan formula.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003026" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003027" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> merupakan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003028" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> merupakan formula.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003029" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003030" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> merupakan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003031" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> merupakan formula.</p></li>
+<li><p>Tidak ada ungkapan lain yang merupakan formula.</p></li>
+</ol>
+</div>
+<div id="E00340" class="native-environment native-explain" data-source-edition="main" data-source-prefix="pl:syn:fml" data-source-unit_id="OLP-0058" data-source-occurrence="58" data-source-chapter="7">
+<p>Definisi formula merupakan sebuah <em>definisi induktif</em>. Pada dasarnya, kita membangun himpunan formula dalam tak hingga banyaknya tahap. Pada tahap awal, kita menetapkan semua formula atomik sebagai formula; hal ini bersesuaian dengan beberapa kasus pertama dalam definisi, yaitu kasus untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003032" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊤</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003033" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003034" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math>. Dengan demikian, “formula atomik” berarti setiap formula yang berbentuk demikian.</p>
+<p>Kasus-kasus lain dalam definisi memberikan aturan untuk membangun formula baru dari formula yang sudah dibangun. Pada tahap kedua, kita dapat menggunakan aturan tersebut untuk membangun formula dari formula atomik. Pada tahap ketiga, kita membangun formula baru dari formula atomik dan formula yang diperoleh pada tahap kedua, dan demikian seterusnya. Suatu ungkapan merupakan suatu formula jika pada akhirnya dibangun pada salah satu tahap tersebut, dan tidak ada ungkapan lain yang merupakan formula.</p>
+</div>
+<p>Ketika menulis formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003035" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∗</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> yang dibangun dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003036" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003037" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dengan menggunakan penghubung dua-tempat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003038" dir="ltr" display="inline">
+  <mo>∗</mo>
+</math>, kita akan sering menghilangkan pasangan tanda kurung terluar dan cukup menuliskan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003039" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∗</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p>
+<div id="E00341" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:fml" data-source-unit_id="OLP-0058" data-source-occurrence="58" data-source-chapter="7" data-native-number="7.2">
+<p><strong>Definisi 7.2.</strong></p>
+<p><strong>Identitas Sintaktis</strong></p>
+<p>Simbol <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003040" dir="ltr" display="inline">
+  <mo>≡</mo>
+</math> menyatakan identitas sintaktis antara untai simbol, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003041" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003042" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003043" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> merupakan untai simbol dengan panjang yang sama dan memuat simbol yang sama pada setiap posisi.</p>
+</div>
+<p>Simbol <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003044" dir="ltr" display="inline">
+  <mo>≡</mo>
+</math> dapat diapit oleh untai yang diperoleh melalui konkatenasi; misalnya, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003045" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> berarti: untai simbol <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003046" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> sama dengan untai yang diperoleh dengan menggabungkan sebuah tanda kurung buka, untai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003047" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, simbol <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003048" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math>, untai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003049" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>, dan sebuah tanda kurung tutup, dalam urutan tersebut. Jika demikian, kita mengetahui bahwa simbol pertama dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003050" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> adalah tanda kurung buka, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003051" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> memuat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003052" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> sebagai subuntai (dimulai pada simbol kedua), subuntai itu diikuti oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003053" dir="ltr" display="inline">
+  <mo>∨</mo>
+</math>, dan seterusnya.</p>
+<div id="source-OLP-0059-0059" class="source-unit" data-source-unit="OLP-0059" data-source-occurrence="59" data-source-path="source/main/openlogic/locale/id/content/propositional-logic/syntax-and-semantics/preliminaries.tex" data-source-sha256="df60b0058fd7d79d8b369ebdb98d5ca109093aa2c0ed99badf87e1a4500edb2e">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="7.3" data-native-label="pl:syn:pre:sec" id="label-main-8a7771904fe826083117">7.3 Persiapan</h3>
+<div id="E00342" class="native-environment native-thm" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.3">
+<p><strong>Teorema 7.3.</strong></p>
+<p><strong><em>Prinsip induksi pada formula</em></strong></p>
+<div id="label-main-9419779151916a1c6d87" class="native-anchor">
+
+</div>
+<p>Jika suatu sifat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003054" dir="ltr" display="inline">
+  <mi>P</mi>
+</math> berlaku bagi semua formula atomik dan memenuhi ketentuan berikut:</p>
+<ol>
+<li><p>sifat itu berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003055" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> setiap kali berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003056" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>;</p></li>
+<li><p>sifat itu berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003057" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> setiap kali berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003058" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003059" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>;</p></li>
+<li><p>sifat itu berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003060" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> setiap kali berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003061" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003062" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>;</p></li>
+<li><p>sifat itu berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003063" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> setiap kali berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003064" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003065" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>;</p></li>
+<li><p>sifat itu berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003066" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> setiap kali berlaku bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003067" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003068" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>;</p></li>
+</ol>
+<p>maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003069" dir="ltr" display="inline">
+  <mi>P</mi>
+</math> berlaku bagi semua formula.</p>
+</div>
+<div id="E00343" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="46">
+<p><strong>Bukti.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003070" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> ialah koleksi semua formula yang memiliki sifat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003071" dir="ltr" display="inline">
+  <mi>P</mi>
+</math>. Jelas bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003072" dir="ltr" display="inline">
+  <mi>S</mi>
+  <mo>⊆</mo>
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003073" dir="ltr" display="inline">
+  <mi>S</mi>
+</math> memenuhi semua syarat dalam <span class="native-reference"><a href="#label-main-1b7b83b49d5a56aa8d15">Definisi 7.1</a></span>: himpunan itu memuat semua formula atomik dan tertutup terhadap operator logis. <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003074" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> merupakan kelas terkecil yang demikian, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003075" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>⊆</mo>
+  <mi>S</mi>
+</math>. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003076" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>S</mi>
+</math>, dan setiap formula memiliki sifat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003077" dir="ltr" display="inline">
+  <mi>P</mi>
+</math>.</p>
+</div>
+<div id="E00344" class="native-environment native-prop" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.4">
+<p><strong>Proposisi 7.4.</strong></p>
+<div id="label-main-e24931eaffd1e10faee5" class="native-anchor">
+
+</div>
+<p>Setiap formula dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003078" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> bersifat <em>seimbang</em>, dalam arti memiliki tanda kurung kiri sebanyak tanda kurung kanan.</p>
+</div>
+<div id="E00346" class="native-environment native-prop" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.5">
+<p><strong>Proposisi 7.5.</strong></p>
+<div id="label-main-28d16cfeb6897fe7f97a" class="native-anchor">
+
+</div>
+<p>Tidak ada segmen awal sejati dari formula yang merupakan formula.</p>
+</div>
+<div id="E00348" class="native-environment native-prop" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.6">
+<p><strong>Proposisi 7.6.</strong></p>
+<p><strong>Keterbacaan Unik</strong></p>
+<p>Setiap formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003079" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003080" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> memiliki tepat satu penguraian sebagai salah satu bentuk berikut:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003081" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊥</mi>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003082" dir="ltr" display="inline">
+  <mi mathvariant="normal">⊤</mi>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003083" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> untuk suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003084" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>∈</mo>
+  <msub>
+    <mrow>
+      <mi>At</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003085" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> untuk suatu formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003086" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003087" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> untuk formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003088" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003089" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> tertentu.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003090" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> untuk formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003091" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003092" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> tertentu.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003093" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> untuk formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003094" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003095" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> tertentu.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003096" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> untuk formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003097" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003098" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> tertentu.</p></li>
+</ol>
+<p>Selain itu, penguraian ini <em>unik</em>.</p>
+</div>
+<div id="E00349" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="47">
+<p><strong>Bukti.</strong></p>
+<p>Melalui induksi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003099" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Sebagai contoh, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003100" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> memiliki dua penguraian berbeda sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003101" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003102" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <msup>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mo>′</mo>
+  </msup>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msup>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mo>′</mo>
+  </msup>
+  <mo stretchy="false">)</mo>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003103" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003104" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mo>′</mo>
+  </msup>
+</math> harus sama (jika tidak, salah satunya merupakan segmen awal sejati dari yang lain); jadi, jika kedua penguraian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003105" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> itu berbeda, penyebabnya pastilah bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003106" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003107" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mo>′</mo>
+  </msup>
+</math> merupakan penguraian berbeda dari barisan simbol yang sama, dan hal ini mustahil menurut hipotesis induksi.</p>
+</div>
+<div id="E00350" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.7">
+<p><strong>Definisi 7.7.</strong></p>
+<p><strong>Substitusi Seragam</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003108" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003109" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> merupakan formula, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003110" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> merupakan suatu variabel proposisi, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003111" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo stretchy="false">]</mo>
+</math> menyatakan hasil penggantian setiap kemunculan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003112" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> dengan satu kemunculan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003113" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> di dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003114" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>; serupa dengan itu, substitusi serentak <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003115" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003116" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> dengan formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003117" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math>, …, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003118" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> dinyatakan dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003119" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">]</mo>
+</math>.</p>
+</div>
+<div id="source-OLP-0060-0060" class="source-unit" data-source-unit="OLP-0060" data-source-occurrence="60" data-source-path="source/main/openlogic/locale/id/content/propositional-logic/syntax-and-semantics/formation-sequences.tex" data-source-sha256="72801592ce5a90faf543cf23558731abb1b7239f109821f6bc6edbf2ab3b5777">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="7.4" data-native-label="pl:syn:fseq:sec" id="label-main-f8c1170cd0cdd0491f1c">7.4 Barisan Pembentukan</h3>
+<p>Mendefinisikan formula melalui suatu definisi induktif, beserta teknik pelengkap berupa pembuktian sifat-sifat formula melalui induksi, merupakan pendekatan yang anggun dan efisien. Namun, pendekatan dari bawah ke atas dan langkah demi langkah terhadap pembangunan formula juga dapat berguna. Di sini kita melakukannya dengan menggunakan gagasan <em>barisan pembentukan</em>.</p>
+<div id="E00353" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="7.8">
+<p><strong>Definisi 7.8.</strong></p>
+<p><strong>Barisan pembentukan untuk formula</strong></p>
+<div id="label-main-92d9f1572792d3971a36" class="native-anchor">
+
+</div>
+<p>Suatu barisan berhingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003131" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dari untai simbol dalam bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003132" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math> merupakan <em>barisan pembentukan</em> untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003133" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003134" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> dan, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003135" dir="ltr" display="inline">
+  <mi>i</mi>
+  <mo>≤</mo>
+  <mi>n</mi>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003136" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math> merupakan formula atomik atau terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003137" dir="ltr" display="inline">
+  <mi>j</mi>
+  <mo>,</mo>
+  <mi>k</mi>
+  <mo>&lt;</mo>
+  <mi>i</mi>
+</math> sedemikian sehingga salah satu dari hal berikut berlaku:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003138" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>≡</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003139" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003140" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003141" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003142" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+</ol>
+</div>
+<div id="E00354" class="native-environment native-ex" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="7.9">
+<p><strong>Contoh 7.9.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003143" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>,</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003144" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>, demikian pula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003145" display="block" dir="ltr">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>,</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>,</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>.</mo>
+</math> Sebagaimana tampak dari contoh kedua, barisan pembentukan dapat memuat ‘sampah’: formula yang mubazir atau tidak turut membangun hasil akhirnya.</p>
+</div>
+<div id="E00355" class="native-environment native-prop" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="7.10">
+<p><strong>Proposisi 7.10.</strong></p>
+<div id="label-main-a04ec7815cb3fd66d513" class="native-anchor">
+
+</div>
+<p>Setiap formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003146" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003147" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> memiliki barisan pembentukan.</p>
+</div>
+<div id="E00356" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="48">
+<p><strong>Bukti.</strong></p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003148" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> atomik. Maka barisan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003149" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003150" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Sekarang andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003151" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003152" dir="ltr" display="inline">
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> masing-masing memiliki barisan pembentukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003153" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003154" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>.</p>
+<ol>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003155" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003156" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003157" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003158" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003159" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo>,</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003160" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003161" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003162" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo>,</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003163" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003164" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003165" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo>,</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003166" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003167" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003168" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo>,</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>ψ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>χ</mi>
+    </mrow>
+    <mi>m</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003169" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+</ol>
+<p>Menurut prinsip induksi pada formula, setiap formula memiliki barisan pembentukan.</p>
+</div>
+<p>Kita juga dapat membuktikan arah sebaliknya. Hal ini penting karena menunjukkan bahwa kedua cara kita mendefinisikan formula adalah ekuivalen: keduanya memberikan hasil yang sama. Hal ini juga berarti bahwa kita dapat membuktikan teorema tentang formula dengan menggunakan induksi biasa pada panjang barisan pembentukan.</p>
+<div id="E00357" class="native-environment native-lem" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="7.11">
+<p><strong>Lema 7.11.</strong></p>
+<div id="label-main-37a1875c70654e1c4aa0" class="native-anchor">
+
+</div>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003170" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003171" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003172" dir="ltr" display="inline">
+  <mi>k</mi>
+  <mo>≤</mo>
+  <mi>n</mi>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003173" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003174" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+</math>.</p>
+</div>
+<div id="E00358" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="49">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<div id="E00359" class="native-environment native-thm" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="7.12">
+<p><strong>Teorema 7.12.</strong></p>
+<div id="label-main-2380918d6dd7f9e59494" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003175" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> merupakan himpunan semua untai simbol dalam bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003176" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math> yang memiliki barisan pembentukan.</p>
+</div>
+<div id="E00360" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:fseq" data-source-unit_id="OLP-0060" data-source-occurrence="60" data-source-chapter="7" data-native-number="50">
+<p><strong>Bukti.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003177" dir="ltr" display="inline">
+  <mi>F</mi>
+</math> ialah himpunan semua untai simbol dalam bahasa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003178" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math> yang memiliki barisan pembentukan. Kita telah melihat dalam <span class="native-reference"><a href="#label-main-a04ec7815cb3fd66d513">Proposisi 7.10</a></span> bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003179" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>⊆</mo>
+  <mi>F</mi>
+</math>, sehingga sekarang kita membuktikan arah sebaliknya.</p>
+<p>Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003180" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> memiliki barisan pembentukan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003181" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>. Kita membuktikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003182" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math> melalui induksi kuat pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003183" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>, yaitu indeks terakhir barisan tersebut. Hipotesis induksi kita menyatakan bahwa setiap untai simbol dengan barisan pembentukan berindeks terakhir <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003184" dir="ltr" display="inline">
+  <mi>m</mi>
+  <mo>&lt;</mo>
+  <mi>n</mi>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003185" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>. Menurut definisi barisan pembentukan, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003186" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> merupakan formula atomik atau harus terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003187" dir="ltr" display="inline">
+  <mi>j</mi>
+  <mo>,</mo>
+  <mi>k</mi>
+  <mo>&lt;</mo>
+  <mi>n</mi>
+</math> sedemikian sehingga salah satu dari hal berikut berlaku:</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003188" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>≡</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003189" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003190" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003191" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003192" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+</ol>
+<p>Sekarang kita bernalar menurut kasus. Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003193" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> atomik, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003194" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo>∈</mo>
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>. Sebaliknya, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003195" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>. Menurut <span class="native-reference"><a href="#label-main-37a1875c70654e1c4aa0">Lema 7.11</a></span>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003196" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003197" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>,</mo>
+  <mo>…</mo>
+  <mo>,</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> masing-masing merupakan barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003198" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003199" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+</math>. Karena keduanya merupakan subbarisan awal sejati dari barisan pembentukan untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003200" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, indeks terakhir keduanya lebih kecil daripada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003201" dir="ltr" display="inline">
+  <mi>n</mi>
+</math>. Oleh karena itu, menurut hipotesis induksi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003202" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003203" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+</math> berada dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003204" dir="ltr" display="inline">
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>, sehingga menurut definisi formula, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003205" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>j</mi>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi>φ</mi>
+    </mrow>
+    <mi>k</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math> juga berada di dalamnya. Kasus-kasus lain mengikuti penalaran yang sejajar.</p>
+</div>
+<div id="source-OLP-0061-0061" class="source-unit" data-source-unit="OLP-0061" data-source-occurrence="61" data-source-path="source/main/openlogic/locale/id/content/propositional-logic/syntax-and-semantics/valuations-sat.tex" data-source-sha256="22b344cb5a7008a0cb27236055077a9fa505e35bf9b4349ef4b39a1512577677">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="7.5" data-native-label="pl:syn:val:sec" id="label-main-1ebd486ab2a0f2778fa7">7.5 Valuasi dan Pemuasan</h3>
+<div id="E00361" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="7.13">
+<p><strong>Definisi 7.13.</strong></p>
+<p><strong>Valuasi</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003206" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math> ialah himpunan dua nilai kebenaran, “benar” dan “salah”. Suatu <em>valuasi</em> untuk <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003207" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+</math> adalah fungsi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003208" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math> yang memberikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003209" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003210" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math> kepada variabel proposisi dalam bahasa tersebut, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003211" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>:</mo>
+  <msub>
+    <mrow>
+      <mi>At</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo accent="false" stretchy="false">→</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math>.</p>
+</div>
+<div id="E00362" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="7.14">
+<p><strong>Definisi 7.14.</strong></p>
+<p>Diberikan valuasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003212" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math>, definisikan fungsi evaluasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003213" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo>:</mo>
+  <mrow>
+    <mi>Frm</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mrow>
+          <mi mathvariant="normal">ℒ</mi>
+        </mrow>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo accent="false" stretchy="false">→</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+  <mo>,</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math> secara induktif sebagai berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003214" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mi mathvariant="normal">⊥</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔽</mi>
+          </mrow>
+        </mrow>
+        <mo>;</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mi mathvariant="normal">⊤</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝕋</mi>
+          </mrow>
+        </mrow>
+        <mo>;</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mrow>
+            <mi mathvariant="normal">𝘱</mi>
+          </mrow>
+          <mi>n</mi>
+        </msub>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mrow>
+            <mi mathvariant="normal">𝔳</mi>
+          </mrow>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mrow>
+            <mi mathvariant="normal">𝘱</mi>
+          </mrow>
+          <mi>n</mi>
+        </msub>
+        <mo stretchy="false">)</mo>
+        <mo>;</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mi mathvariant="normal">¬</mi>
+        <mrow>
+          <mi>φ</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝕋</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mtext class="olp-math-prose">jika </mtext>
+                <mover>
+                  <mrow>
+                    <mrow>
+                      <mi mathvariant="normal">𝔳</mi>
+                    </mrow>
+                  </mrow>
+                  <mo accent="true">―</mo>
+                </mover>
+                <mo stretchy="false">(</mo>
+                <mrow>
+                  <mi>φ</mi>
+                </mrow>
+                <mo stretchy="false">)</mo>
+                <mo>=</mo>
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝔽</mi>
+                  </mrow>
+                </mrow>
+                <mo>;</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝔽</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mtext class="olp-math-prose">selain itu.</mtext>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <mi>φ</mi>
+        </mrow>
+        <mo>∧</mo>
+        <mrow>
+          <mi>ψ</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝕋</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝕋</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext> dan </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝕋</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext>;</mtext>
+                </mrow>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝔽</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝔽</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext> atau </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝔽</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                </mrow>
+                <mo>.</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <mi>φ</mi>
+        </mrow>
+        <mo>∨</mo>
+        <mrow>
+          <mi>ψ</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝕋</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝕋</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext> atau </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝕋</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext>;</mtext>
+                </mrow>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝔽</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝔽</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext> dan </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝔽</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                </mrow>
+                <mo>.</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <mi>φ</mi>
+        </mrow>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mrow>
+          <mi>ψ</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝕋</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝔽</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext> atau </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝕋</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext>;</mtext>
+                </mrow>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝔽</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝕋</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext> dan </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝔽</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                </mrow>
+                <mo>.</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <mi>φ</mi>
+        </mrow>
+        <mrow>
+          <mo stretchy="false">↔</mo>
+        </mrow>
+        <mrow>
+          <mi>ψ</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi/>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝕋</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                  </mrow>
+                  <mtext>;</mtext>
+                </mrow>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">𝔽</mi>
+                  </mrow>
+                </mrow>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>≠</mo>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>ψ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                  </mrow>
+                </mrow>
+                <mo>.</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+</div>
+<div id="E00363" class="native-environment native-explain" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7">
+<p>Klausa-klausa tersebut bersesuaian dengan tabel kebenaran berikut:</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003215" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003216" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003217" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003218" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003219" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003220" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003221" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003222" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003223" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003224" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003225" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003226" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003227" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003228" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003229" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003230" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003231" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003232" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003233" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003234" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003235" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003236" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003237" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003238" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003239" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003240" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003241" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003242" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003243" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003244" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003245" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003246" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003247" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003248" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003249" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003250" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+</tbody>
+</table>
+<p><br/>
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003251" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003252" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003253" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003254" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003255" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003256" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003257" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003258" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003259" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003260" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003261" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003262" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003263" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003264" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003265" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003266" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003267" dir="ltr" display="inline">
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+<th style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003268" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003269" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003270" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003271" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003272" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003273" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003274" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003275" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003276" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003277" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+<tr>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003278" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003279" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔽</mi>
+    </mrow>
+  </mrow>
+</math></td>
+<td style="text-align: center;"><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003280" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="E00365" class="native-environment native-thm" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="7.15">
+<p><strong>Teorema 7.15.</strong></p>
+<p><strong>Penentuan Lokal</strong></p>
+<p><span id="label-main-3fdf5744a23b28bc3691" class="native-anchor"/> Andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003284" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003285" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+      <mn>2</mn>
+    </msub>
+  </mrow>
+</math> merupakan valuasi yang bersepakat pada variabel proposisi yang muncul dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003286" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003287" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+      <mn>2</mn>
+    </msub>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math> setiap kali <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003288" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>n</mi>
+  </msub>
+</math> muncul dalam formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003289" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003290" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <msub>
+        <mrow>
+          <mi mathvariant="normal">𝔳</mi>
+        </mrow>
+        <mn>1</mn>
+      </msub>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003291" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <msub>
+        <mrow>
+          <mi mathvariant="normal">𝔳</mi>
+        </mrow>
+        <mn>2</mn>
+      </msub>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+</math> juga bersepakat pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003292" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003293" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <msub>
+        <mrow>
+          <mi mathvariant="normal">𝔳</mi>
+        </mrow>
+        <mn>1</mn>
+      </msub>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mover>
+    <mrow>
+      <msub>
+        <mrow>
+          <mi mathvariant="normal">𝔳</mi>
+        </mrow>
+        <mn>2</mn>
+      </msub>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>.</p>
+</div>
+<div id="E00366" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="51">
+<p><strong>Bukti.</strong></p>
+<p>Melalui induksi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003294" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E00367" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="7.16">
+<p><strong>Definisi 7.16.</strong></p>
+<p><strong>Pemuasan</strong></p>
+<p><span id="label-main-1be1f1706feea76d9238" class="native-anchor"/> Kita dapat mendefinisikan secara induktif gagasan <em>pemuasan formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003295" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> oleh valuasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003296" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math></em>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003297" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, sebagai berikut. (Kita menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003298" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊭</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk menyatakan “tidak <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003299" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.” )</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003300" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mi mathvariant="normal">⊥</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003301" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊭</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003302" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mi mathvariant="normal">⊤</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003303" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003304" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003305" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003306" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003307" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003308" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003309" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊭</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003310" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∧</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003311" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003312" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003313" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003314" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mo>∨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003315" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003316" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003317" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> (atau keduanya).</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003318" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003319" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003320" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊭</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003321" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> (atau keduanya).</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003322" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>≡</mo>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003323" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003324" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003325" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> keduanya berlaku, atau tidak satu pun dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003326" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003327" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>χ</mi>
+  </mrow>
+</math> berlaku.</p></li>
+</ol>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003328" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> merupakan himpunan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003329" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003330" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003331" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>.</p>
+</div>
+<div id="E00368" class="native-environment native-prop" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="7.17">
+<p><strong>Proposisi 7.17.</strong></p>
+<div id="label-main-8e6b85fa9f83332fbc4c" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003332" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003333" dir="ltr" display="inline">
+  <mover>
+    <mrow>
+      <mrow>
+        <mi mathvariant="normal">𝔳</mi>
+      </mrow>
+    </mrow>
+    <mo accent="true">―</mo>
+  </mover>
+  <mo stretchy="false">(</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝕋</mi>
+    </mrow>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E00369" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="52">
+<p><strong>Bukti.</strong></p>
+<p>Melalui induksi pada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003334" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="source-OLP-0062-0062" class="source-unit" data-source-unit="OLP-0062" data-source-occurrence="62" data-source-path="source/main/openlogic/locale/id/content/propositional-logic/syntax-and-semantics/semantic-notions.tex" data-source-sha256="1e32925e1d401747f5ac5b73403884083b85efd85f70d708bad9c66369580115">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="7.6" data-native-label="pl:syn:sem:sec" id="label-main-8fd1982736f6702ac0c8">7.6 Gagasan Semantis</h3>
+<p>Kita mendefinisikan gagasan-gagasan semantis berikut:</p>
+<div id="E00371" class="native-environment native-defn" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.18">
+<p><strong>Definisi 7.18.</strong></p>
+<ol>
+<li><p>formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003335" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> <em>dapat dipenuhi</em> jika terdapat suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003336" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003337" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>; formula itu <em>tidak dapat dipenuhi</em> jika tidak terdapat <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003338" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003339" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>;</p></li>
+<li><p>formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003340" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan <em>tautologi</em> jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003341" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> untuk semua valuasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003342" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math>;</p></li>
+<li><p>formula <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003343" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> bersifat <em>kontingen</em> jika formula itu dapat dipenuhi tetapi bukan tautologi;</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003344" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> merupakan himpunan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003345" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> (“<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003346" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> mengakibatkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003347" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> secara semantis”) jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003348" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> bagi setiap valuasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003349" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math> yang baginya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003350" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>.</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003351" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> merupakan himpunan formula, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003352" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> <em>dapat dipenuhi</em> jika terdapat valuasi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003353" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+</math> yang baginya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003354" dir="ltr" display="inline">
+  <mrow>
+    <mrow>
+      <mi mathvariant="normal">𝔳</mi>
+    </mrow>
+  </mrow>
+  <mo>⊨</mo>
+  <mi mathvariant="normal">Γ</mi>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003355" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> <em>tidak dapat dipenuhi</em> jika tidak demikian.</p></li>
+</ol>
+</div>
+<div id="E00373" class="native-environment native-prop" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.19">
+<p><strong>Proposisi 7.19.</strong></p>
+<div id="label-main-f2c8f609dcd357fb6fa2" class="native-anchor">
+
+</div>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003360" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> merupakan tautologi jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003361" dir="ltr" display="inline">
+  <mi mathvariant="normal">∅</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>;</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003362" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003363" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003364" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>;</p></li>
+<li><p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003365" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> dapat dipenuhi, maka setiap himpunan bagian berhingga dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003366" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+</math> juga dapat dipenuhi;</p></li>
+<li><p><span id="label-main-b7a8667a5584ee3f6102" class="native-anchor"/> Monotonisitas: jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003367" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊆</mo>
+  <mi mathvariant="normal">Δ</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003368" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003369" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> juga;</p></li>
+<li><p><span id="label-main-ecf6688fe15f49f7896b" class="native-anchor"/> Transitivitas: jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003370" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003371" dir="ltr" display="inline">
+  <mi mathvariant="normal">Δ</mi>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003372" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mi mathvariant="normal">Δ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.</p></li>
+</ol>
+</div>
+<div id="E00374" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="53">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<div id="E00376" class="native-environment native-prop" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.20">
+<p><strong>Proposisi 7.20.</strong></p>
+<div id="label-main-b9244e4b1e603273208c" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003373" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003374" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+</math> tidak dapat dipenuhi.</p>
+</div>
+<div id="E00377" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="54">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<div id="E00379" class="native-environment native-thm" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.21">
+<p><strong>Teorema 7.21.</strong></p>
+<p><strong>Teorema Deduksi Semantis</strong></p>
+<p><span id="label-main-974e901690576704d3aa" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003375" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003376" dir="ltr" display="inline">
+  <mi mathvariant="normal">Γ</mi>
+  <mo>∪</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo fence="false" stretchy="false">}</mo>
+  <mo>⊨</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E00380" class="native-environment native-proof" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="55">
+<p><strong>Bukti.</strong></p>
+<p>Latihan.</p>
+</div>
+<h3 class="unnumbered native-problems-heading" data-native-chapter="7" id="exercises-main-7">Soal</h3>
+<div id="E00345" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.1">
+<p><strong>Soal 7.1.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-e24931eaffd1e10faee5">Proposisi 7.4</a></span></p>
+</div>
+<div id="E00347" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.2">
+<p><strong>Soal 7.2.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-28d16cfeb6897fe7f97a">Proposisi 7.5</a></span></p>
+</div>
+<div id="E00351" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.3">
+<p><strong>Soal 7.3.</strong></p>
+<p>Untuk masing-masing dari lima formula di bawah ini, tentukan apakah formula tersebut dapat dinyatakan sebagai substitusi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003120" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo stretchy="false">]</mo>
+</math>, dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003121" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+</math> berupa (i) <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003122" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+</math>; (ii) <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003123" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>; dan (iii) <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003124" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>. Dalam setiap kasus, tentukan substitusi yang bersangkutan.</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003125" dir="ltr" display="inline">
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003126" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003127" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003128" dir="ltr" display="inline">
+  <mi mathvariant="normal">¬</mi>
+  <mo stretchy="false">(</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003129" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>∨</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>∧</mo>
+  <mi mathvariant="normal">¬</mi>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+</ol>
+</div>
+<div id="E00352" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:pre" data-source-unit_id="OLP-0059" data-source-occurrence="59" data-source-chapter="7" data-native-number="7.4">
+<p><strong>Soal 7.4.</strong></p>
+<p>Berikan definisi yang ketat secara matematis bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003130" dir="ltr" display="inline">
+  <mrow>
+    <mi>φ</mi>
+  </mrow>
+  <mo stretchy="false">[</mo>
+  <mrow>
+    <mi>ψ</mi>
+  </mrow>
+  <mrow>
+    <mo>/</mo>
+  </mrow>
+  <mi>p</mi>
+  <mo stretchy="false">]</mo>
+</math> melalui induksi.</p>
+</div>
+<div id="E00364" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="7.5">
+<p><strong>Soal 7.5.</strong></p>
+<p>Pertimbangkan penambahan ke dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003281" dir="ltr" display="inline">
+  <mrow>
+    <msub>
+      <mrow>
+        <mi mathvariant="normal">ℒ</mi>
+      </mrow>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+</math> suatu penghubung terner <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003282" dir="ltr" display="inline">
+  <mi mathvariant="normal">♢</mi>
+</math> dengan evaluasi yang diberikan oleh <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003283" display="block" dir="ltr">
+  <mtable displaystyle="true" columnspacing="1em" rowspacing="3pt">
+    <mtr>
+      <mtd style="padding-left:0;padding-right:0;padding-top:0;padding-bottom:0">
+        <mover>
+          <mrow>
+            <mrow>
+              <mi mathvariant="normal">𝔳</mi>
+            </mrow>
+          </mrow>
+          <mo accent="true">―</mo>
+        </mover>
+        <mo stretchy="false">(</mo>
+        <mi mathvariant="normal">♢</mi>
+        <mo stretchy="false">(</mo>
+        <mrow>
+          <mi>φ</mi>
+        </mrow>
+        <mo>,</mo>
+        <mrow>
+          <mi>ψ</mi>
+        </mrow>
+        <mo>,</mo>
+        <mrow>
+          <mi>χ</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <mrow>
+          <mo>{</mo>
+          <mtable columnalign="left left" columnspacing="1em" rowspacing=".2em">
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mover>
+                  <mrow>
+                    <mrow>
+                      <mi mathvariant="normal">𝔳</mi>
+                    </mrow>
+                  </mrow>
+                  <mo accent="true">―</mo>
+                </mover>
+                <mo stretchy="false">(</mo>
+                <mrow>
+                  <mi>ψ</mi>
+                </mrow>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:0;padding-bottom:calc(.2em / 2)">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝕋</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                  <mtext>;</mtext>
+                </mrow>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd style="text-align:left;padding-left:0;padding-right:calc(1em / 2);padding-top:calc(.2em / 2);padding-bottom:0">
+                <mover>
+                  <mrow>
+                    <mrow>
+                      <mi mathvariant="normal">𝔳</mi>
+                    </mrow>
+                  </mrow>
+                  <mo accent="true">―</mo>
+                </mover>
+                <mo stretchy="false">(</mo>
+                <mrow>
+                  <mi>χ</mi>
+                </mrow>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd style="text-align:left;padding-left:calc(1em / 2);padding-right:0;padding-top:calc(.2em / 2);padding-bottom:0">
+                <mrow class="olp-math-prose">
+                  <mtext>jika </mtext>
+                  <mrow>
+                    <mover>
+                      <mrow>
+                        <mrow>
+                          <mi mathvariant="normal">𝔳</mi>
+                        </mrow>
+                      </mrow>
+                      <mo accent="true">―</mo>
+                    </mover>
+                    <mo stretchy="false">(</mo>
+                    <mrow>
+                      <mi>φ</mi>
+                    </mrow>
+                    <mo stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mrow>
+                      <mrow>
+                        <mi mathvariant="normal">𝔽</mi>
+                      </mrow>
+                    </mrow>
+                  </mrow>
+                </mrow>
+                <mo>.</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo fence="true" stretchy="true" symmetric="true"/>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Tuliskan tabel kebenaran bagi penghubung ini.</p>
+</div>
+<div id="E00370" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:val" data-source-unit_id="OLP-0061" data-source-occurrence="61" data-source-chapter="7" data-native-number="7.6">
+<p><strong>Soal 7.6.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-8e6b85fa9f83332fbc4c">Proposisi 7.17</a></span></p>
+</div>
+<div id="E00372" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.7">
+<p><strong>Soal 7.7.</strong></p>
+<p>Untuk masing-masing dari empat formula berikut, tentukan apakah formula itu (a) dapat dipenuhi, (b) merupakan tautologi, dan (c) bersifat kontingen.</p>
+<ol>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003356" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003357" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>∧</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003358" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M003359" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi mathvariant="normal">¬</mi>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo>∧</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>∨</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>2</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">→</mo>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>0</mn>
+  </msub>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <msub>
+    <mrow>
+      <mi mathvariant="normal">𝘱</mi>
+    </mrow>
+    <mn>1</mn>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math>.</p></li>
+</ol>
+</div>
+<div id="E00375" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.8">
+<p><strong>Soal 7.8.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-f2c8f609dcd357fb6fa2">Proposisi 7.19</a></span></p>
+</div>
+<div id="E00378" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.9">
+<p><strong>Soal 7.9.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-b9244e4b1e603273208c">Proposisi 7.20</a></span></p>
+</div>
+<div id="E00381" class="native-environment native-prob" data-source-edition="main" data-source-prefix="pl:syn:sem" data-source-unit_id="OLP-0062" data-source-occurrence="62" data-source-chapter="7" data-native-number="7.10">
+<p><strong>Soal 7.10.</strong></p>
+<p>Buktikan <span class="native-reference"><a href="#label-main-974e901690576704d3aa">Teorema 7.21</a></span></p>
+</div>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0010.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0012.xhtml">Berikutnya →</a></nav></body></html>

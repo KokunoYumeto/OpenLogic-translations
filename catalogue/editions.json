@@ -1895,14 +1895,16 @@
         "accepted_translation_files_changed": 0,
         "source_preservation_readback": "evidence/INDONESIAN_SOURCE_PRESERVATION_20261014.json",
         "source_preservation_zenodo_mirrored": false,
-        "retained_reader_readback": "evidence/INDONESIAN_STANDALONE_722_MANAGER_READBACK_20260905.json"
+        "retained_reader_readback": "evidence/INDONESIAN_STANDALONE_722_MANAGER_READBACK_20260905.json",
+        "reflowable_readback": "evidence/INDONESIAN_REFLOWABLE_20261014.json",
+        "reflowable_zenodo_mirrored": false
       },
       "limitations": [
         "401 unit akhir tidak memiliki kuitansi penelaahan independen setara yang dipertahankan.",
         "PDF warisan belum bertag; tiga font matematika Type 3 tidak memiliki ToUnicode.",
         "Pengemasan sumber bukan sertifikasi kebahasaan seluruh korpus atau PDF/UA.",
         "Identitas revisi teknis masih tercetak pada bagian pembuka PDF historis; PDF tidak diubah dalam pengemasan ini.",
-        "Koreksi setelah rilis dan EPUB tetap merupakan pekerjaan terpisah."
+        "HTML/EPUB mencakup dua koreksi Cauchy; bukan audit kanon baru atas seluruh pilihan bahasa. Dukungan MathML bergantung pada aplikasi."
       ],
       "metadata_language": "id",
       "metadata_direction": "ltr",
@@ -1914,58 +1916,153 @@
         "repository": "Proyek",
         "evidence": "Bukti pemeriksaan",
         "details": "Cakupan dan batas pemeriksaan",
-        "complete_edition": "Pembaca lengkap · 722 unit",
+        "complete_edition": "Pembaca lengkap · HTML / EPUB · 722 unit",
         "source_zip": "Sumber ZIP",
         "publication_and_evidence": "Terbitan dan bukti pemeriksaan",
-        "doi": "DOI pembaca historis"
+        "doi": "DOI pembaca historis",
+        "downloads": "unduhan"
       },
       "download_layout": "compact-grouped",
-      "download_summary": "PDF historis dan sumber lengkap tersedia. EPUB belum tersedia; paket sumber baru belum dicerminkan ke Zenodo.",
-      "epub_coverage_note": "Tidak ada EPUB baru. Dua koreksi Cauchy pada cabang sumber tanggal 2 Oktober 2026 belum masuk ke PDF historis atau sumber reproduksinya.",
+      "download_summary": "HTML dan EPUB lengkap tersedia, termasuk dua koreksi Cauchy. PDF historis dipertahankan; berkas baru belum dicerminkan ke Zenodo.",
+      "epub_coverage_note": "EPUB lengkap 722 unit. Seluruh rumus sumber dipertahankan; derivasi mempunyai bentuk terstruktur. Ucapan pembaca layar belum diuji secara langsung.",
       "ordered_downloads": [
+        {
+          "name": "09a_OPENLOGIC_id_REFLOWABLE_722_SOURCE.tex",
+          "bytes": 4294788,
+          "sha256": "f54e625475c313be65b74d297eac60623766dff8e23bff746f4a7361f88806bd",
+          "format": "TEX",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/09a_OPENLOGIC_id_REFLOWABLE_722_SOURCE.tex",
+          "download_label": "LaTeX lengkap untuk HTML/EPUB",
+          "scope_kind": "standalone",
+          "source_units": 722
+        },
+        {
+          "name": "09b_OPENLOGIC_id_REFLOWABLE_SOURCE_20261014.zip",
+          "bytes": 15503621,
+          "sha256": "161e4a9a7c848d43f2f4934976eb43f154f0eb62538da5d1045ea0db984f4211",
+          "format": "ZIP",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/09b_OPENLOGIC_id_REFLOWABLE_SOURCE_20261014.zip",
+          "download_label": "Seluruh sumber dan perangkat reproduksi HTML/EPUB",
+          "scope_kind": "standalone",
+          "source_units": 722
+        },
+        {
+          "format": "HTML",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-translations/readers/id-722/index.xhtml",
+          "download_label": "Baca daring dalam bahasa Indonesia",
+          "scope_kind": "standalone",
+          "source_units": 722
+        },
+        {
+          "name": "09c_OPENLOGIC_id_REFLOWABLE_722_20261014.epub",
+          "bytes": 2324788,
+          "sha256": "72dfef273d0184eea816445fc334483c4d39af381defa5a5f775050b94412424",
+          "format": "EPUB",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/09c_OPENLOGIC_id_REFLOWABLE_722_20261014.epub",
+          "download_label": "Unduh EPUB lengkap 722 unit",
+          "scope_kind": "standalone",
+          "source_units": 722
+        }
+      ],
+      "direct_cumulative_source": {
+        "name": "09a_OPENLOGIC_id_REFLOWABLE_722_SOURCE.tex",
+        "bytes": 4294788,
+        "sha256": "f54e625475c313be65b74d297eac60623766dff8e23bff746f4a7361f88806bd",
+        "format": "TEX",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/09a_OPENLOGIC_id_REFLOWABLE_722_SOURCE.tex",
+        "download_label": "LaTeX lengkap untuk HTML/EPUB",
+        "scope_kind": "standalone",
+        "source_units": 722
+      },
+      "source_archive": {
+        "name": "09b_OPENLOGIC_id_REFLOWABLE_SOURCE_20261014.zip",
+        "bytes": 15503621,
+        "sha256": "161e4a9a7c848d43f2f4934976eb43f154f0eb62538da5d1045ea0db984f4211",
+        "format": "ZIP",
+        "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/09b_OPENLOGIC_id_REFLOWABLE_SOURCE_20261014.zip",
+        "download_label": "Seluruh sumber dan perangkat reproduksi HTML/EPUB",
+        "scope_kind": "standalone",
+        "source_units": 722
+      },
+      "profiles": [
+        "Naskah utama: OpenAI 5.6 Sol, Ultra mode; model/upaya pelengkap tidak tercatat. Ekspor HTML/EPUB dan pengemasan: OpenAI Codex — GPT-6 Astra, Ultra. Bukan penelaahan manusia."
+      ],
+      "supplementary_downloads": [
+        {
+          "title": "PDF historis dan sumbernya",
+          "note": "PDF tetap tersedia, tetapi belum memuat dua koreksi Cauchy yang ada dalam HTML/EPUB.",
+          "downloads": [
+            {
+              "name": "08_OPENLOGIC_id_STANDALONE_READER_ALL_722_20260905.pdf",
+              "format": "PDF",
+              "bytes": 5754676,
+              "sha256": "1b763b8b15c9f28a1212d81ee3e3a3f60ee3212fe1ffa4620c947caf43c89930",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08_OPENLOGIC_id_STANDALONE_READER_ALL_722_20260905.pdf",
+              "download_label": "Baca atau unduh PDF lengkap 722 unit"
+            },
+            {
+              "name": "08a_OPENLOGIC_id_ALL_722_CUMULATIVE_SOURCE.tex",
+              "format": "TEX",
+              "bytes": 4294992,
+              "sha256": "d2a9bd53b91805990cf6300dcd80aead3eca8faba003b888b1adf53afb901b75",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08a_OPENLOGIC_id_ALL_722_CUMULATIVE_SOURCE.tex",
+              "download_label": "Unduh LaTeX lengkap 722 unit"
+            },
+            {
+              "name": "08b_OPENLOGIC_id_ALL_722_EDITABLE_SOURCE_TREE_20261014.zip",
+              "format": "ZIP",
+              "bytes": 3688182,
+              "sha256": "1b9d4b8f4ed8b98be6f9ce1e5b7a6e33f43b7a547ae92c0881bd3337c71a36bd",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08b_OPENLOGIC_id_ALL_722_EDITABLE_SOURCE_TREE_20261014.zip",
+              "download_label": "Unduh seluruh sumber dan perangkat reproduksi"
+            }
+          ]
+        },
+        {
+          "title": "Unduhan luring tambahan",
+          "downloads": [
+            {
+              "name": "09d_OPENLOGIC_id_REFLOWABLE_HTML_20261014.zip",
+              "bytes": 2298453,
+              "sha256": "1f8f991c47191138b70f7fe48e3ac56e6d865bc4ff30f249112c33fa932babf4",
+              "format": "ZIP",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/09d_OPENLOGIC_id_REFLOWABLE_HTML_20261014.zip",
+              "download_label": "Unduh HTML lengkap untuk penggunaan luring",
+              "scope_kind": "standalone",
+              "source_units": 722
+            }
+          ]
+        }
+      ],
+      "readers": [
+        {
+          "format": "HTML",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-translations/readers/id-722/index.xhtml",
+          "download_label": "Baca daring dalam bahasa Indonesia",
+          "scope_kind": "standalone",
+          "source_units": 722
+        },
+        {
+          "name": "09c_OPENLOGIC_id_REFLOWABLE_722_20261014.epub",
+          "bytes": 2324788,
+          "sha256": "72dfef273d0184eea816445fc334483c4d39af381defa5a5f775050b94412424",
+          "format": "EPUB",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/09c_OPENLOGIC_id_REFLOWABLE_722_20261014.epub",
+          "download_label": "Unduh EPUB lengkap 722 unit",
+          "scope_kind": "standalone",
+          "source_units": 722
+        },
         {
           "name": "08_OPENLOGIC_id_STANDALONE_READER_ALL_722_20260905.pdf",
           "format": "PDF",
           "bytes": 5754676,
           "sha256": "1b763b8b15c9f28a1212d81ee3e3a3f60ee3212fe1ffa4620c947caf43c89930",
           "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08_OPENLOGIC_id_STANDALONE_READER_ALL_722_20260905.pdf",
-          "download_label": "Baca atau unduh PDF lengkap 722 unit"
-        },
-        {
-          "name": "08a_OPENLOGIC_id_ALL_722_CUMULATIVE_SOURCE.tex",
-          "format": "TEX",
-          "bytes": 4294992,
-          "sha256": "d2a9bd53b91805990cf6300dcd80aead3eca8faba003b888b1adf53afb901b75",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08a_OPENLOGIC_id_ALL_722_CUMULATIVE_SOURCE.tex",
-          "download_label": "Unduh LaTeX lengkap 722 unit"
-        },
-        {
-          "name": "08b_OPENLOGIC_id_ALL_722_EDITABLE_SOURCE_TREE_20261014.zip",
-          "format": "ZIP",
-          "bytes": 3688182,
-          "sha256": "1b9d4b8f4ed8b98be6f9ce1e5b7a6e33f43b7a547ae92c0881bd3337c71a36bd",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08b_OPENLOGIC_id_ALL_722_EDITABLE_SOURCE_TREE_20261014.zip",
-          "download_label": "Unduh seluruh sumber dan perangkat reproduksi"
+          "download_label": "Baca atau unduh PDF lengkap 722 unit",
+          "scope_kind": "standalone",
+          "source_units": 722,
+          "profile": "PDF historis"
         }
-      ],
-      "direct_cumulative_source": {
-        "name": "08a_OPENLOGIC_id_ALL_722_CUMULATIVE_SOURCE.tex",
-        "format": "TEX",
-        "bytes": 4294992,
-        "sha256": "d2a9bd53b91805990cf6300dcd80aead3eca8faba003b888b1adf53afb901b75",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08a_OPENLOGIC_id_ALL_722_CUMULATIVE_SOURCE.tex",
-        "download_label": "Unduh LaTeX lengkap 722 unit"
-      },
-      "source_archive": {
-        "name": "08b_OPENLOGIC_id_ALL_722_EDITABLE_SOURCE_TREE_20261014.zip",
-        "format": "ZIP",
-        "bytes": 3688182,
-        "sha256": "1b9d4b8f4ed8b98be6f9ce1e5b7a6e33f43b7a547ae92c0881bd3337c71a36bd",
-        "url": "https://github.com/KokunoYumeto/OpenLogic-id/releases/download/id-olp-0722-20260814/08b_OPENLOGIC_id_ALL_722_EDITABLE_SOURCE_TREE_20261014.zip",
-        "download_label": "Unduh seluruh sumber dan perangkat reproduksi"
-      },
-      "profiles": [
-        "Terjemahan awal: OpenAI 5.6 Sol, Ultra mode. Rekonstruksi dan pengemasan: OpenAI Codex — GPT-6 Astra, Ultra effort; bukan penelaahan manusia."
       ]
     },
     {

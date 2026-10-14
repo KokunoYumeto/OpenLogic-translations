@@ -1,0 +1,1469 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>70 Kardinal — Open Logic</title><link rel="stylesheet" href="reader.css" type="text/css"/></head><body><a href="#reader-main" class="skip-link">Langsung ke isi</a><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0086.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0088.xhtml">Berikutnya →</a></nav><main id="reader-main"><div id="part-0087" class="reader-chunk">
+<div id="source-OLP-0580-0632" class="source-unit" data-source-unit="OLP-0580" data-source-occurrence="632" data-source-path="source/main/openlogic/locale/id/content/set-theory/cardinals/cardinals.tex" data-source-sha256="5db0c8c4f15baa09e8690236a67f21f26e56f476c70cc7330ec5a85e6b7ae184">
+
+</div>
+<h2 class="native-numbered-heading" data-native-number="70" data-native-label="sth:cardinals::chap" id="label-main-525b3cb94e1ea4f9518c">70 Kardinal</h2>
+<div id="source-OLP-0581-0633" class="source-unit" data-source-unit="OLP-0581" data-source-occurrence="633" data-source-path="source/main/openlogic/locale/id/content/set-theory/cardinals/cp.tex" data-source-sha256="99f0e5d56ec40a166416782ff1f28c81b6e7797aa11824238f802c059396b944">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="70.1" data-native-label="sth:cardinals:cp:sec" id="label-main-b09788fc5948b238268a">70.1 Prinsip Cantor</h3>
+<p>Ingat kembali <span class="native-reference"><a href="part-0083.xhtml#label-main-98d13170492b1ef61844">Bagian 66.5</a></span>. Kita sedang membahas himpunan terurut baik dan mengusulkan bahwa akan berguna jika terdapat objek yang mewakili pengurutan baik. Dengan gagasan ini, kita memperkenalkan ordinal, lalu menunjukkan dalam <span class="native-reference"><a href="part-0083.xhtml#label-main-f52ba36b8c003f7acede">Akibat 66.28</a></span> bahwa ordinal berperilaku sebagaimana kita inginkan, yakni: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031383" display="block" dir="ltr">
+  <mrow>
+    <mi>ord</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mo>&lt;</mo>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mi>ord</mi>
+  </mrow>
+  <mo stretchy="false">(</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mo>⋖</mo>
+  <mo stretchy="false">)</mo>
+  <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mo>&lt;</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>≅</mo>
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>B</mi>
+  <mo>,</mo>
+  <mo>⋖</mo>
+  <mo fence="false" stretchy="false">⟩</mo>
+  <mo>.</mo>
+</math> Ingat lebih jauh lagi, yakni <span class="native-reference"><a href="part-0007.xhtml#label-main-194d88d6f661760fe9ea">Bagian 4.8</a></span>. Di sana, dengan bekerja secara naif, kita memperkenalkan gagasan “ukuran” suatu himpunan. Secara khusus, kita mengatakan bahwa dua himpunan berkardinalitas sama, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031384" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>B</mi>
+</math>, tepat jika terdapat bijeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031385" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math>. Gagasan ini secara intrinsik <span>lebih sederhana</span> daripada pengurutan baik: kita hanya memperhatikan bijeksi, bukan (seperti pada isomorfisme urutan) apakah bijeksi tersebut “mempertahankan suatu struktur”.</p>
+<p>Semua ini memunculkan suatu gagasan yang jelas. Sebagaimana kita memperkenalkan objek-objek tertentu, yakni <em>ordinal</em>, untuk mengukur pengurutan baik, kita dapat memperkenalkan objek-objek tertentu, yakni <em>kardinal</em>, untuk mengukur ukuran. Itulah tujuan bab ini.</p>
+<p>Sebelum mengatakan apa yang akan menjadi kardinal-kardinal tersebut, kita perlu menetapkan suatu prinsip yang harus dipenuhinya. Dengan menulis <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031386" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>X</mi>
+    <mo>|</mo>
+  </mrow>
+</math> untuk kardinalitas himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031387" dir="ltr" display="inline">
+  <mi>X</mi>
+</math>, kita ingin agar berlaku: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031388" display="block" dir="ltr">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>B</mi>
+    <mo>|</mo>
+  </mrow>
+  <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>B</mi>
+  <mo>.</mo>
+</math> Kita akan menyebutnya <em>Prinsip Cantor</em>, sebab Cantor mungkin merupakan orang pertama yang memahaminya dengan sangat jelas. (Kita akan membahas lebih lanjut hubungannya dengan <em>Prinsip Hume</em> dalam <span class="native-reference"><a href="#label-main-424d3d7198c85108a9f6">Bagian 70.5</a></span>.) Jadi, tujuan kita ialah mendefinisikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031389" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>X</mi>
+    <mo>|</mo>
+  </mrow>
+</math>, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031390" dir="ltr" display="inline">
+  <mi>X</mi>
+</math>, sedemikian sehingga definisi tersebut menghasilkan Prinsip Cantor.</p>
+<div id="source-OLP-0582-0634" class="source-unit" data-source-unit="OLP-0582" data-source-occurrence="634" data-source-path="source/main/openlogic/locale/id/content/set-theory/cardinals/cardsasords.tex" data-source-sha256="a208be8fc787461c19a608a555d2179f041f98949f5b55192e54c6d44f7fe9ed">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="70.2" data-native-label="sth:cardinals:cardsasords:sec" id="label-main-63f3f65ad91335184fbf">70.2 Kardinal sebagai Ordinal</h3>
+<p>Pada kenyataannya, teori kardinal kita akan memanfaatkan teori ordinal kita (tanpa malu-malu). Artinya, kita hanya akan mendefinisikan kardinal sebagai ordinal-ordinal tertentu. Secara khusus, kita mengajukan definisi berikut:</p>
+<div id="E02764" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sth:cardinals:cardsasords" data-source-unit_id="OLP-0582" data-source-occurrence="634" data-source-chapter="70" data-native-number="70.1">
+<p><strong>Definisi 70.1.</strong></p>
+<div id="label-main-2dcc9ba529b86bcfc14f" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031391" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dapat diurutkan dengan baik, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031392" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> ialah ordinal terkecil <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031393" dir="ltr" display="inline">
+  <mi>γ</mi>
+</math> sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031394" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>γ</mi>
+</math>. Untuk sebarang ordinal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031395" dir="ltr" display="inline">
+  <mi>γ</mi>
+</math>, kita mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031396" dir="ltr" display="inline">
+  <mi>γ</mi>
+</math> merupakan suatu <em>kardinal</em> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031397" dir="ltr" display="inline">
+  <mi>γ</mi>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>γ</mi>
+    <mo>|</mo>
+  </mrow>
+</math>.</p>
+</div>
+<p>Kita baru saja menggunakan ungkapan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031398" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dapat diurutkan dengan baik”. Seperti hampir selalu terjadi dalam matematika, ungkapan modal di sini hanyalah uraian informal bagi suatu klaim eksistensial: mengatakan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031399" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dapat diurutkan dengan baik” hanyalah mengatakan “terdapat suatu relasi yang mengurutkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031400" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dengan baik”.</p>
+<p>Namun, terdapat masalah pada <span class="native-reference"><a href="#label-main-2dcc9ba529b86bcfc14f">Definisi 70.1</a></span>. Kita menginginkan agar <em>setiap</em> himpunan mempunyai ukuran, yakni agar <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031401" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> ada untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031402" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Akan tetapi, definisi yang baru saja kita berikan diawali suatu syarat: “<em>Jika</em> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031403" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dapat diurutkan dengan baik…”. Jika terdapat suatu himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031404" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> yang tidak dapat diurutkan dengan baik, definisi kita akan gagal mendefinisikan objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031405" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math>.</p>
+<p>Jadi, untuk menggunakan <span class="native-reference"><a href="#label-main-2dcc9ba529b86bcfc14f">Definisi 70.1</a></span>, kita memerlukan jaminan bahwa setiap himpunan dapat diurutkan dengan baik. Sayangnya, jaminan ini tidak tersedia dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031406" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math>. Maka, jika kita hendak menggunakan <span class="native-reference"><a href="#label-main-2dcc9ba529b86bcfc14f">Definisi 70.1</a></span>, tidak ada pilihan selain menambahkan suatu aksioma baru, misalnya:</p>
+<div id="E02765" class="native-environment native-axiom" data-source-edition="main" data-source-prefix="sth:cardinals:cardsasords" data-source-unit_id="OLP-0582" data-source-occurrence="634" data-source-chapter="70" data-native-number="">
+<p><strong>Aksioma.</strong></p>
+<p><strong>Pengurutan Baik</strong></p>
+<p>Setiap himpunan dapat diurutkan dengan baik.</p>
+</div>
+<p>Kita akan membahas apakah Aksioma Pengurutan Baik dapat diterima dalam <span class="native-reference"><a href="part-0089.xhtml#label-main-e73fb8a4bab6bcf6baef">Bab 72</a></span>. Namun, mulai sekarang kita akan langsung menggunakannya. Dengan aksioma tersebut, cukup mudah untuk membuktikan bahwa kardinal (sebagaimana didefinisikan dalam <span class="native-reference"><a href="#label-main-2dcc9ba529b86bcfc14f">Definisi 70.1</a></span>) ada dan berperilaku dengan baik:</p>
+<div id="E02766" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:cardinals:cardsasords" data-source-unit_id="OLP-0582" data-source-occurrence="634" data-source-chapter="70" data-native-number="70.2">
+<p><strong>Lema 70.2.</strong></p>
+<div id="label-main-26a518ed5c15a6b02683" class="native-anchor">
+
+</div>
+<p>Untuk setiap himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031407" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>:</p>
+<ol>
+<li><p><span id="label-main-2edcf539890d92d7e90b" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031408" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> ada dan unik;</p></li>
+<li><p><span id="label-main-c6d7a5190328369a7290" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031409" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>≈</mo>
+  <mi>A</mi>
+</math>;</p></li>
+<li><p><span id="label-main-573b3f55e7574cef18b6" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031410" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> merupakan suatu kardinal, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031411" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mrow>
+      <mo>|</mo>
+      <mi>A</mi>
+      <mo>|</mo>
+    </mrow>
+    <mo>|</mo>
+  </mrow>
+</math>;</p></li>
+</ol>
+</div>
+<div id="E02767" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:cardsasords" data-source-unit_id="OLP-0582" data-source-occurrence="634" data-source-chapter="70" data-native-number="633">
+<p><strong>Bukti.</strong></p>
+<p>Tetapkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031412" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>. Berdasarkan Pengurutan Baik, terdapat suatu pengurutan baik <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031413" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math>. Berdasarkan <span class="native-reference"><a href="part-0083.xhtml#label-main-575aaa5a1f7dc261e92e">Teorema 66.26</a></span>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031414" dir="ltr" display="inline">
+  <mo fence="false" stretchy="false">⟨</mo>
+  <mi>A</mi>
+  <mo>,</mo>
+  <mi>R</mi>
+  <mo fence="false" stretchy="false">⟩</mo>
+</math> isomorfik dengan suatu ordinal unik, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031415" dir="ltr" display="inline">
+  <mi>β</mi>
+</math>. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031416" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>β</mi>
+</math>. Berdasarkan Induksi Transfinit, terdapat suatu ordinal terkecil yang unik, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031417" dir="ltr" display="inline">
+  <mi>γ</mi>
+</math>, sedemikian sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031418" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>γ</mi>
+</math>. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031419" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mi>γ</mi>
+</math>, yang menetapkan <span class="native-reference"><a href="#label-main-2edcf539890d92d7e90b">enumi 1</a></span> dan <span class="native-reference"><a href="#label-main-c6d7a5190328369a7290">enumi 2</a></span>. Untuk menetapkan <span class="native-reference"><a href="#label-main-573b3f55e7574cef18b6">enumi 3</a></span>, perhatikan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031420" dir="ltr" display="inline">
+  <mi>δ</mi>
+  <mo>∈</mo>
+  <mi>γ</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031421" dir="ltr" display="inline">
+  <mi>δ</mi>
+  <mo>≺</mo>
+  <mi>A</mi>
+</math> berdasarkan pilihan kita atas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031422" dir="ltr" display="inline">
+  <mi>γ</mi>
+</math>, sehingga juga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031423" dir="ltr" display="inline">
+  <mi>δ</mi>
+  <mo>≺</mo>
+  <mi>γ</mi>
+</math> karena kesamaan kardinalitas merupakan relasi ekuivalensi (<span class="native-reference"><a href="part-0007.xhtml#label-main-2435fbd810a563bf1e85">Proposisi 4.20</a></span>). Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031424" dir="ltr" display="inline">
+  <mi>γ</mi>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>γ</mi>
+    <mo>|</mo>
+  </mrow>
+</math>.</p>
+</div>
+<p>Hasil berikutnya menjamin Prinsip Cantor, bahkan lebih dari itu. (Perhatikan bahwa kardinal mewarisi pengurutannya dari ordinal, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031425" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+  <mo>&lt;</mo>
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031426" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+</math>. Dalam merumuskan hal ini, kita akan menggunakan huruf Fraktur untuk objek yang kita ketahui sebagai kardinal. Konvensi ini cukup baku. Alternatif yang lazim ialah menggunakan huruf Yunani, sebab kardinal merupakan ordinal, tetapi memilihnya dari bagian tengah alfabet, misalnya <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031427" dir="ltr" display="inline">
+  <mi>κ</mi>
+  <mo>,</mo>
+  <mi>λ</mi>
+</math>.):</p>
+<div id="E02768" class="native-environment native-lem" data-source-edition="main" data-source-prefix="sth:cardinals:cardsasords" data-source-unit_id="OLP-0582" data-source-occurrence="634" data-source-chapter="70" data-native-number="70.3">
+<p><strong>Lema 70.3.</strong></p>
+<div id="label-main-cbf9bc42b9e88579e1df" class="native-anchor">
+
+</div>
+<p>Untuk sebarang himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031428" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031429" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031430" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi>A</mi>
+        <mo>≈</mo>
+        <mi>B</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+        <mrow>
+          <mo>|</mo>
+          <mi>A</mi>
+          <mo>|</mo>
+        </mrow>
+        <mo>=</mo>
+        <mrow>
+          <mo>|</mo>
+          <mi>B</mi>
+          <mo>|</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi>A</mi>
+        <mo>⪯</mo>
+        <mi>B</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+        <mrow>
+          <mo>|</mo>
+          <mi>A</mi>
+          <mo>|</mo>
+        </mrow>
+        <mo>≤</mo>
+        <mrow>
+          <mo>|</mo>
+          <mi>B</mi>
+          <mo>|</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi>A</mi>
+        <mo>≺</mo>
+        <mi>B</mi>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+        <mrow>
+          <mo>|</mo>
+          <mi>A</mi>
+          <mo>|</mo>
+        </mrow>
+        <mo>&lt;</mo>
+        <mrow>
+          <mo>|</mo>
+          <mi>B</mi>
+          <mo>|</mo>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</math></p>
+</div>
+<div id="E02769" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:cardsasords" data-source-unit_id="OLP-0582" data-source-occurrence="634" data-source-chapter="70" data-native-number="634">
+<p><strong>Bukti.</strong></p>
+<p>Kita akan membuktikan arah kiri-ke-kanan dari klaim kedua (kasus-kasus lain serupa dan diserahkan sebagai latihan). Jadi, perhatikan diagram berikut:</p>
+<div class="center">
+<figure class="semantic-diagram" dir="ltr"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 327.0694 235.6898" width="327.0694" height="235.6898" role="img" aria-label="Diagram"><defs><marker id="dg-817a873fa8e5cf00-559f5c1c5b-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"/></marker></defs><path d="M95.0000 95.0000 L232.0694 95.0000" stroke="#000000" fill="none" stroke-width="1" marker-end="url(#dg-817a873fa8e5cf00-559f5c1c5b-arrow)"/><path d="M95.0000 95.0000 L95.0000 140.6898" stroke="#000000" fill="none" stroke-width="1" marker-end="url(#dg-817a873fa8e5cf00-559f5c1c5b-arrow)" marker-start="url(#dg-817a873fa8e5cf00-559f5c1c5b-arrow)"/><path d="M232.0694 95.0000 L232.0694 140.6898" stroke="#000000" fill="none" stroke-width="1" marker-end="url(#dg-817a873fa8e5cf00-559f5c1c5b-arrow)" marker-start="url(#dg-817a873fa8e5cf00-559f5c1c5b-arrow)"/><path d="M95.0000 140.6898 L232.0694 140.6898" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#dg-817a873fa8e5cf00-559f5c1c5b-arrow)"/><foreignObject x="35.0000" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>A</mi>
+</math></div></foreignObject><foreignObject x="172.0694" y="72.5000" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mi>B</mi>
+</math></div></foreignObject><foreignObject x="35.0000" y="118.1898" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math></div></foreignObject><foreignObject x="172.0694" y="118.1898" width="120" height="45"><div xmlns="http://www.w3.org/1999/xhtml" dir="ltr" style="text-align:center;font-size:16px;height:100%;display:flex;align-items:center;justify-content:center;"><math xmlns="http://www.w3.org/1998/Math/MathML" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>B</mi>
+    <mo>|</mo>
+  </mrow>
+</math></div></foreignObject></svg></div></figure>
+</div>
+<p>Panah berkepala dua menunjukkan bijeksi, yang keberadaannya dijamin oleh <span class="native-reference"><a href="#label-main-26a518ed5c15a6b02683">Lema 70.2</a></span>. Dengan mengandaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031431" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>B</mi>
+</math>, terdapat injeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031432" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>B</mi>
+</math>. Sekarang, dengan mengikuti panah dari <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031433" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031434" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, lalu ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031435" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>, lalu ke <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031436" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>B</mi>
+    <mo>|</mo>
+  </mrow>
+</math>, kita memperoleh injeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031437" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo accent="false" stretchy="false">→</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>B</mi>
+    <mo>|</mo>
+  </mrow>
+</math> (panah putus-putus).</p>
+</div>
+<p>Kita juga dapat menggunakan <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span> untuk membuktikan kembali Schröder–Bernstein. Klaim ini menyatakan bahwa jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031438" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031439" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⪯</mo>
+  <mi>A</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031440" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>B</mi>
+</math>. Kita menyatakannya sebagai <span class="native-reference"><a href="part-0007.xhtml#label-main-3dee6e7ae90c497e66fd">Teorema 4.25</a></span>, tetapi pertama kali membuktikannya—dengan usaha yang cukup besar—dalam <span class="native-reference"><a href="part-0009.xhtml#label-main-e86cca4288400ec8cd66">Bagian 6.5</a></span>. Sekarang perhatikan:</p>
+<div id="E02770" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:cardsasords" data-source-unit_id="OLP-0582" data-source-occurrence="634" data-source-chapter="70" data-native-number="635">
+<p><strong>Pembuktian kembali Schröder–Bernstein</strong></p>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031441" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>B</mi>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031442" dir="ltr" display="inline">
+  <mi>B</mi>
+  <mo>⪯</mo>
+  <mi>A</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031443" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>≤</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>B</mi>
+    <mo>|</mo>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031444" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>B</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>≤</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> berdasarkan <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span>. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031445" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>B</mi>
+    <mo>|</mo>
+  </mrow>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031446" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>≈</mo>
+  <mi>B</mi>
+</math> berdasarkan Trikotomi dan <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span>.</p>
+</div>
+<p> Walaupun bukti ini sangat sederhana, bukti tersebut secara implisit bergantung baik pada Penggantian (untuk memperoleh <span class="native-reference"><a href="part-0083.xhtml#label-main-575aaa5a1f7dc261e92e">Teorema 66.26</a></span>) maupun pada Pengurutan Baik (untuk menjamin <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span>). Sebaliknya, bukti dalam <span class="native-reference"><a href="part-0009.xhtml#label-main-e86cca4288400ec8cd66">Bagian 6.5</a></span> jauh lebih mandiri (bahkan dapat dilakukan dalam <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031447" dir="ltr" display="inline">
+  <msup>
+    <mrow>
+      <mi mathvariant="normal">𝐙</mi>
+    </mrow>
+    <mrow>
+      <mo>−</mo>
+    </mrow>
+  </msup>
+</math>).</p>
+<div id="source-OLP-0583-0635" class="source-unit" data-source-unit="OLP-0583" data-source-occurrence="635" data-source-path="source/main/openlogic/locale/id/content/set-theory/cardinals/milestone.tex" data-source-sha256="e3c5169857dc0cbae90545f7616bf29b58e76eada215c3d77a3202c961193d8f">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="70.3" data-native-label="sth:cardinals:zfc:sec" id="label-main-ae85d1970c82642a091e">70.3 <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031448" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>: Sebuah Tonggak</h3>
+<p>Dengan penambahan Pengurutan Baik, kita telah mencapai tonggak teoretis terakhir. Kini kita mempunyai semua aksioma yang diperlukan bagi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031449" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>. Secara terperinci:</p>
+<div id="E02771" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sth:cardinals:zfc" data-source-unit_id="OLP-0583" data-source-occurrence="635" data-source-chapter="70" data-native-number="70.4">
+<p><strong>Definisi 70.4.</strong></p>
+<p>Teori <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031450" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math> mempunyai aksioma-aksioma berikut: Ekstensionalitas, Gabungan, Pasangan, Himpunan Kuasa, Ketakhinggaan, Fondasi, Pengurutan Baik, serta semua instans skema Pemisahan dan Penggantian. Dengan kata lain, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031451" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math> menambahkan Pengurutan Baik kepada <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031452" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math>.</p>
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031453" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math> merupakan singkatan dari teori himpunan <em>Zermelo–Fraenkel</em> dengan <em>Pilihan</em>. Hal ini mungkin tampak agak aneh, sebab aksioma yang kita tambahkan disebut “Pengurutan Baik”, bukan “Pilihan”. Namun, ketika kelak kita merumuskan <span>Pilihan</span>, ternyata Pengurutan Baik ekuivalen (modulo <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031454" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅</mi>
+  </mrow>
+</math>) dengan Pilihan (lihat <span class="native-reference"><a href="part-0089.xhtml#label-main-9f84f26149ca86bb2fda">Teorema 72.6</a></span>). Jadi, aksioma mana yang dipilih sebagai aksioma “dasar” tidak menjadi soal. Nama “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031455" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>” sendiri sepenuhnya baku dalam literatur.</p>
+<div id="source-OLP-0584-0636" class="source-unit" data-source-unit="OLP-0584" data-source-occurrence="636" data-source-path="source/main/openlogic/locale/id/content/set-theory/cardinals/classing.tex" data-source-sha256="9cc33fd3d8abeb77452885972570fcd56293cf657ab3f4928fc116e5ef798de5">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="70.4" data-native-label="sth:cardinals:classing:sec" id="label-main-fb2635d10d6d243425a1">70.4 Hingga, Terhitung, Takterhitung</h3>
+<p>Setelah mengenal kardinal, ada baiknya kita meluangkan sedikit waktu untuk membahas berbagai jenis kardinal; khususnya, kardinal hingga, terhitung, dan takterhitung.</p>
+<p>Dua hasil pertama kita menyiratkan bahwa kardinal hingga tepat merupakan ordinal hingga, yang kita definisikan sebagai <em>bilangan asli</em> dalam <span class="native-reference"><a href="part-0082.xhtml#label-main-d66e9f7a92cdf72e7afd">Definisi 65.7</a></span>:</p>
+<div id="E02772" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.5">
+<p><strong>Proposisi 70.5.</strong></p>
+<div id="label-main-33c756061aec759a78d4" class="native-anchor">
+
+</div>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031456" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>,</mo>
+  <mi>m</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031457" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>=</mo>
+  <mi>m</mi>
+</math> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031458" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>≈</mo>
+  <mi>m</mi>
+</math>.</p>
+</div>
+<div id="E02773" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="636">
+<p><strong>Bukti.</strong></p>
+<p>Arah <em>kiri-ke-kanan</em> sepele. Untuk membuktikan arah <em>kanan-ke-kiri</em>, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031459" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>≈</mo>
+  <mi>m</mi>
+</math> meskipun <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031460" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>≠</mo>
+  <mi>m</mi>
+</math>. Berdasarkan Trikotomi, berlaku <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031461" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>m</mi>
+</math> atau <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031462" dir="ltr" display="inline">
+  <mi>m</mi>
+  <mo>∈</mo>
+  <mi>n</mi>
+</math>; tanpa mengurangi keumuman, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031463" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>m</mi>
+</math>. Maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031464" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>⊊</mo>
+  <mi>m</mi>
+</math> dan terdapat bijeksi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031465" dir="ltr" display="inline">
+  <mi>f</mi>
+  <mo>:</mo>
+  <mi>m</mi>
+  <mo accent="false" stretchy="false">→</mo>
+  <mi>n</mi>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031466" dir="ltr" display="inline">
+  <mi>m</mi>
+</math> bersifat tak hingga Dedekind, bertentangan dengan <span class="native-reference"><a href="part-0082.xhtml#label-main-ca5e0d5c8c2db6fd1bc8">Proposisi 65.8</a></span>.</p>
+</div>
+<div id="E02774" class="native-environment native-cor" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.6">
+<p><strong>Akibat 70.6.</strong></p>
+<div id="label-main-94ae224c87f8307fbd2a" class="native-anchor">
+
+</div>
+<p>Jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031467" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031468" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> merupakan suatu kardinal.</p>
+</div>
+<div id="E02775" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="637">
+<p><strong>Bukti.</strong></p>
+<p>Langsung.</p>
+</div>
+<p> Selain itu, beberapa gagasan yang wajar tentang arti menyebut suatu kardinal “hingga” atau “tak hingga” ternyata bertepatan:</p>
+<div id="E02776" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.7">
+<p><strong>Teorema 70.7.</strong></p>
+<p><span id="label-main-c5e07561eddffa410c36" class="native-anchor"/>Untuk sebarang himpunan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031469" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>, hal-hal berikut ekuivalen:</p>
+<ol>
+<li><p><span id="label-main-f8f30bc41e91cafec6d2" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031470" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>∉</mo>
+  <mi>ω</mi>
+</math>, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031471" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> bukan bilangan asli;</p></li>
+<li><p><span id="label-main-b14c285f3f073e017716" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031472" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>≤</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math>;</p></li>
+<li><p><span id="label-main-713f20529cb5db895f68" class="native-anchor"/> <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031473" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersifat tak hingga Dedekind.</p></li>
+</ol>
+</div>
+<div id="E02777" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="638">
+<p><strong>Bukti.</strong></p>
+<p>Dari <span class="native-reference"><a href="part-0086.xhtml#label-main-0f6d1fe3e15cdc058b94">Lema 69.10</a></span>, <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span>, dan <span class="native-reference"><a href="#label-main-94ae224c87f8307fbd2a">Akibat 70.6</a></span>.</p>
+</div>
+<p>Hal ini membenarkan <em>definisi</em> berikut bagi beberapa gagasan yang kita gunakan secara agak informal dalam <span class="native-reference"><a href="part-0003.xhtml#label-main-900a5b78d36a11fb79d5">Bagian I</a></span>:</p>
+<div id="E02778" class="native-environment native-defn" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.8">
+<p><strong>Definisi 70.8.</strong></p>
+<div id="label-main-2dc5962f1926099d1e7b" class="native-anchor">
+
+</div>
+<p>Kita mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031474" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersifat <em>hingga</em> jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031475" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math> merupakan bilangan asli, yakni <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031476" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>. Jika tidak, kita mengatakan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031477" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersifat <em>tak hingga</em>.</p>
+</div>
+<p> Namun, perhatikan bahwa definisi ini disajikan dengan latar belakang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031478" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝐙𝐅𝐂</mi>
+  </mrow>
+</math>. Bagaimanapun, kita memerlukan Pengurutan Baik untuk menjamin bahwa setiap himpunan mempunyai suatu kardinalitas. Bahkan, tanpa Pengurutan Baik, dapat terdapat suatu himpunan yang bukan hingga dan bukan pula tak hingga Dedekind. Kita akan kembali membahas persoalan semacam ini dalam <span class="native-reference"><a href="part-0089.xhtml#label-main-e73fb8a4bab6bcf6baef">Bab 72</a></span>. Untuk sekarang, kita terus mengandalkan Pengurutan Baik.</p>
+<p>Sekarang mari beralih dari kardinal hingga ke kardinal tak hingga. Berikut dua hal mendasar:</p>
+<div id="E02779" class="native-environment native-cor" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.9">
+<p><strong>Akibat 70.9.</strong></p>
+<div id="label-main-076709de3ee1ca6f5a37" class="native-anchor">
+
+</div>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031479" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math> merupakan kardinal tak hingga terkecil.</p>
+</div>
+<div id="E02780" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="639">
+<p><strong>Bukti.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031480" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math> merupakan suatu kardinal, sebab <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031481" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math> bersifat tak hingga Dedekind dan, jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031482" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>≈</mo>
+  <mi>n</mi>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031483" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031484" dir="ltr" display="inline">
+  <mi>n</mi>
+</math> akan bersifat tak hingga Dedekind, bertentangan dengan <span class="native-reference"><a href="part-0082.xhtml#label-main-ca5e0d5c8c2db6fd1bc8">Proposisi 65.8</a></span>. Sekarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031485" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math> merupakan kardinal tak hingga terkecil berdasarkan definisi.</p>
+</div>
+<div id="E02781" class="native-environment native-cor" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.10">
+<p><strong>Akibat 70.10.</strong></p>
+<p>Setiap kardinal tak hingga merupakan ordinal limit.</p>
+</div>
+<div id="E02782" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="640">
+<p><strong>Bukti.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031486" dir="ltr" display="inline">
+  <mi>α</mi>
+</math> suatu ordinal penerus yang tak hingga, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031487" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>=</mo>
+  <mi>β</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math> bagi suatu <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031488" dir="ltr" display="inline">
+  <mi>β</mi>
+</math>. Berdasarkan <span class="native-reference"><a href="#label-main-33c756061aec759a78d4">Proposisi 70.5</a></span>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031489" dir="ltr" display="inline">
+  <mi>β</mi>
+</math> juga tak hingga, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031490" dir="ltr" display="inline">
+  <mi>β</mi>
+  <mo>≈</mo>
+  <mi>β</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math> berdasarkan <span class="native-reference"><a href="part-0086.xhtml#label-main-0f6d1fe3e15cdc058b94">Lema 69.10</a></span>. Sekarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031491" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>β</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>β</mi>
+    <mo>+</mo>
+    <mn>1</mn>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>α</mi>
+    <mo>|</mo>
+  </mrow>
+</math> berdasarkan <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031492" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>≠</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>α</mi>
+    <mo>|</mo>
+  </mrow>
+</math>.</p>
+</div>
+<p>Sejak <span class="native-reference"><a href="part-0007.xhtml#label-main-76899695c7a770eea521">Definisi 4.27</a></span>, kita telah mencatat bahwa himpunan tak hingga yang terhitung dapat dibedakan dari yang takterhitung. Definisi tersebut secara alami menghasilkan pernyataan berikut:</p>
+<div id="E02783" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.11">
+<p><strong>Proposisi 70.11.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031493" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersifat terhitung jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031494" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>≤</mo>
+  <mi>ω</mi>
+</math>, dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031495" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersifat takterhitung jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031496" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>&lt;</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02784" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="641">
+<p><strong>Bukti.</strong></p>
+<p>Berdasarkan Trikotomi, kedua klaim ekuivalen, sehingga cukup dibuktikan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031497" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersifat terhitung jika dan hanya jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031498" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>≤</mo>
+  <mi>ω</mi>
+</math>. Untuk arah <em>kanan-ke-kiri</em>: jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031499" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>≤</mo>
+  <mi>ω</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031500" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>⪯</mo>
+  <mi>ω</mi>
+</math> berdasarkan <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span> dan <span class="native-reference"><a href="#label-main-076709de3ee1ca6f5a37">Akibat 70.9</a></span>. Untuk arah <em>kiri-ke-kanan</em>: andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031501" dir="ltr" display="inline">
+  <mi>A</mi>
+</math> bersifat terhitung; berdasarkan <span class="native-reference"><a href="part-0007.xhtml#label-main-76899695c7a770eea521">Definisi 4.27</a></span>, terdapat tiga kemungkinan:</p>
+<ol>
+<li><p>jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031502" dir="ltr" display="inline">
+  <mi>A</mi>
+  <mo>=</mo>
+  <mi mathvariant="normal">∅</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031503" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mn>0</mn>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>, berdasarkan <span class="native-reference"><a href="#label-main-94ae224c87f8307fbd2a">Akibat 70.6</a></span> dan <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span>.</p></li>
+<li><p>jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031504" dir="ltr" display="inline">
+  <mi>n</mi>
+  <mo>≈</mo>
+  <mi>A</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031505" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mi>n</mi>
+  <mo>∈</mo>
+  <mi>ω</mi>
+</math>, berdasarkan <span class="native-reference"><a href="#label-main-94ae224c87f8307fbd2a">Akibat 70.6</a></span> dan <span class="native-reference"><a href="#label-main-cbf9bc42b9e88579e1df">Lema 70.3</a></span>.</p></li>
+<li><p>jika <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031506" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>≈</mo>
+  <mi>A</mi>
+</math>, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031507" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>=</mo>
+  <mi>ω</mi>
+</math>, berdasarkan <span class="native-reference"><a href="#label-main-076709de3ee1ca6f5a37">Akibat 70.9</a></span>.</p></li>
+</ol>
+<p>Jadi, dalam semua kasus, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031508" dir="ltr" display="inline">
+  <mrow>
+    <mo>|</mo>
+    <mi>A</mi>
+    <mo>|</mo>
+  </mrow>
+  <mo>≤</mo>
+  <mi>ω</mi>
+</math>.</p>
+</div>
+<p> Memang, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031509" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math> menempati kedudukan khusus. Walaupun terdapat banyak ordinal yang terhitung:</p>
+<div id="E02785" class="native-environment native-cor" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.12">
+<p><strong>Akibat 70.12.</strong></p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031510" dir="ltr" display="inline">
+  <mi>ω</mi>
+</math> merupakan satu-satunya kardinal tak hingga yang terhitung.</p>
+</div>
+<div id="E02786" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="642">
+<p><strong>Bukti.</strong></p>
+<p>Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031511" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+</math> suatu kardinal tak hingga yang terhitung. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031512" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+</math> tak hingga, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031513" dir="ltr" display="inline">
+  <mi>ω</mi>
+  <mo>≤</mo>
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031514" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+</math> merupakan kardinal yang terhitung, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031515" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo>|</mo>
+    <mrow>
+      <mi mathvariant="normal">𝔞</mi>
+    </mrow>
+    <mo>|</mo>
+  </mrow>
+  <mo>≤</mo>
+  <mi>ω</mi>
+</math>. Jadi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031516" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+  <mo>=</mo>
+  <mi>ω</mi>
+</math> berdasarkan Trikotomi.</p>
+</div>
+<p>Tentu saja, terdapat tak hingga banyak kardinal. Jadi, kita mungkin bertanya: <em>Ada berapa banyak kardinal?</em> Hasil-hasil berikut menunjukkan bahwa kita mungkin perlu mempertimbangkan kembali pertanyaan itu.</p>
+<div id="E02787" class="native-environment native-prop" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.13">
+<p><strong>Proposisi 70.13.</strong></p>
+<div id="label-main-7e89e525d855359c1a6a" class="native-anchor">
+
+</div>
+<p>Jika setiap anggota <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031517" dir="ltr" display="inline">
+  <mi>X</mi>
+</math> merupakan suatu kardinal, maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031518" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>X</mi>
+</math> merupakan suatu kardinal.</p>
+</div>
+<div id="E02788" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="643">
+<p><strong>Bukti.</strong></p>
+<p>Mudah diperiksa bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031519" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>X</mi>
+</math> merupakan suatu ordinal. Misalkan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031520" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>∈</mo>
+  <mo>⋃</mo>
+  <mi>X</mi>
+</math> suatu ordinal; maka <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031521" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>∈</mo>
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi>X</mi>
+</math> bagi suatu kardinal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031522" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031523" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+</math> suatu kardinal, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031524" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>≺</mo>
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+</math>. Karena <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031525" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+  <mo>⊆</mo>
+  <mo>⋃</mo>
+  <mi>X</mi>
+</math>, kita mempunyai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031526" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+  <mo>⪯</mo>
+  <mo>⋃</mo>
+  <mi>X</mi>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031527" dir="ltr" display="inline">
+  <mi>α</mi>
+  <mo>≉</mo>
+  <mo>⋃</mo>
+  <mi>X</mi>
+</math>. Dengan menggeneralisasi, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031528" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>X</mi>
+</math> merupakan suatu kardinal.</p>
+</div>
+<div id="E02789" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.14">
+<p><strong>Teorema 70.14.</strong></p>
+<div id="label-main-46b20ccfb406ae556214" class="native-anchor">
+
+</div>
+<p>Tidak terdapat kardinal terbesar.</p>
+</div>
+<div id="E02790" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="644">
+<p><strong>Bukti.</strong></p>
+<p>Untuk sebarang kardinal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031529" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+</math>, Teorema Cantor (<span class="native-reference"><a href="part-0007.xhtml#label-main-58b32d481fcd07dbc3b7">Teorema 4.24</a></span>) dan <span class="native-reference"><a href="#label-main-26a518ed5c15a6b02683">Lema 70.2</a></span> menyiratkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031530" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+  <mo>&lt;</mo>
+  <mrow>
+    <mo>|</mo>
+    <mi mathvariant="normal">℘</mi>
+    <mo stretchy="false">(</mo>
+    <mrow>
+      <mi mathvariant="normal">𝔞</mi>
+    </mrow>
+    <mo stretchy="false">)</mo>
+    <mo>|</mo>
+  </mrow>
+</math>.</p>
+</div>
+<div id="E02791" class="native-environment native-thm" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="70.15">
+<p><strong>Teorema 70.15.</strong></p>
+<p>Himpunan semua kardinal tidak ada.</p>
+</div>
+<div id="E02792" class="native-environment native-proof" data-source-edition="main" data-source-prefix="sth:cardinals:classing" data-source-unit_id="OLP-0584" data-source-occurrence="636" data-source-chapter="70" data-native-number="645">
+<p><strong>Bukti.</strong></p>
+<p>Untuk memperoleh kontradiksi, andaikan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031531" dir="ltr" display="inline">
+  <mi>C</mi>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+  <mo>:</mo>
+  <mrow>
+    <mi mathvariant="normal">𝔞</mi>
+  </mrow>
+  <mtext class="olp-math-prose"> merupakan suatu kardinal</mtext>
+  <mo fence="false" stretchy="false">}</mo>
+</math>. Sekarang <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031532" dir="ltr" display="inline">
+  <mo>⋃</mo>
+  <mi>C</mi>
+</math> merupakan suatu kardinal berdasarkan <span class="native-reference"><a href="#label-main-7e89e525d855359c1a6a">Proposisi 70.13</a></span>, sehingga berdasarkan <span class="native-reference"><a href="#label-main-46b20ccfb406ae556214">Teorema 70.14</a></span> terdapat suatu kardinal <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031533" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+  <mo>&gt;</mo>
+  <mo>⋃</mo>
+  <mi>C</mi>
+</math>. Berdasarkan definisi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031534" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+  <mo>∈</mo>
+  <mi>C</mi>
+</math>, sehingga <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031535" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+  <mo>⊆</mo>
+  <mo>⋃</mo>
+  <mrow>
+    <mi>C</mi>
+  </mrow>
+</math>, dan dengan demikian <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031536" dir="ltr" display="inline">
+  <mrow>
+    <mi mathvariant="normal">𝔟</mi>
+  </mrow>
+  <mo>≤</mo>
+  <mo>⋃</mo>
+  <mi>C</mi>
+</math>, suatu kontradiksi.</p>
+</div>
+<p>Anda patut membandingkan hal ini dengan Paradoks Russell dan Burali–Forti.</p>
+<div id="source-OLP-0585-0637" class="source-unit" data-source-unit="OLP-0585" data-source-occurrence="637" data-source-path="source/main/openlogic/locale/id/content/set-theory/cardinals/hp.tex" data-source-sha256="f9c46e108a30be18a23d84714d27b411df0b9f4119480b95b5de8898abc28de9">
+
+</div>
+<h3 class="native-numbered-heading" data-native-number="70.5" data-native-label="sth:cardinals:hp:sec" id="label-main-424d3d7198c85108a9f6">70.5 Lampiran: Prinsip Hume</h3>
+<p>Dalam <span class="native-reference"><a href="#label-main-b09788fc5948b238268a">Bagian 70.1</a></span>, kita menguraikan Prinsip Cantor. Prinsip tersebut berbunyi: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031537" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mrow>
+          <mo>|</mo>
+          <mi>A</mi>
+          <mo>|</mo>
+        </mrow>
+        <mo>=</mo>
+        <mrow>
+          <mo>|</mo>
+          <mi>B</mi>
+          <mo>|</mo>
+        </mrow>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+        <mi>A</mi>
+        <mo>≈</mo>
+        <mi>B</mi>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd columnspan="2" data-native-intertext="true" style="text-align:left;padding-left:0;padding-right:0;padding-top:0.6em;padding-bottom:0.6em">
+        <mrow class="olp-math-prose">
+          <mtext>Hal ini sangat mirip dengan prinsip yang kini disebut </mtext>
+          <mtext mathvariant="normal">𝑃𝑟𝑖𝑛𝑠𝑖𝑝 𝐻𝑢𝑚𝑒</mtext>
+          <mtext>, yang menyatakan:</mtext>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi mathvariant="normal">#</mi>
+        <mi>x</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>F</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <mi mathvariant="normal">#</mi>
+        <mi>x</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>G</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+        <mi>F</mi>
+        <mo>∼</mo>
+        <mi>G</mi>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> di mana ‘<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031538" dir="ltr" display="inline">
+  <mi>F</mi>
+  <mo>∼</mo>
+  <mi>G</mi>
+</math>’ menyingkat pernyataan bahwa objek-objek yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031539" dir="ltr" display="inline">
+  <mi>F</mi>
+</math> tepat sama banyaknya dengan objek-objek yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031540" dir="ltr" display="inline">
+  <mi>G</mi>
+</math>, yakni bahwa kedua kumpulan itu dapat dipasangkan melalui suatu bijeksi, yakni: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031541" display="block" dir="ltr">
+  <mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt">
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi mathvariant="normal">∃</mi>
+        <mi>R</mi>
+        <mo stretchy="false">(</mo>
+      </mtd>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:0;padding-bottom:calc(3pt / 2)">
+        <mi mathvariant="normal">∀</mi>
+        <mi>v</mi>
+        <mi mathvariant="normal">∀</mi>
+        <mi>y</mi>
+        <mo stretchy="false">(</mo>
+        <mi>R</mi>
+        <mi>v</mi>
+        <mi>y</mi>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <mi>F</mi>
+        <mi>v</mi>
+        <mo>∧</mo>
+        <mi>G</mi>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo>∧</mo>
+        <mrow/>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:calc(3pt / 2)">
+        <mi mathvariant="normal">∀</mi>
+        <mi>v</mi>
+        <mo stretchy="false">(</mo>
+        <mi>F</mi>
+        <mi>v</mi>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi mathvariant="normal">∃</mi>
+        <mrow>
+          <mtext>!</mtext>
+        </mrow>
+        <mi>y</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>R</mi>
+        <mi>v</mi>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo>∧</mo>
+        <mrow/>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd style="text-align:right;padding-left:0;padding-right:calc(0em / 2);padding-top:calc(3pt / 2);padding-bottom:0"/>
+      <mtd style="text-align:left;padding-left:calc(0em / 2);padding-right:0;padding-top:calc(3pt / 2);padding-bottom:0">
+        <mi mathvariant="normal">∀</mi>
+        <mi>y</mi>
+        <mo stretchy="false">(</mo>
+        <mi>G</mi>
+        <mi>y</mi>
+        <mrow>
+          <mo stretchy="false">→</mo>
+        </mrow>
+        <mi mathvariant="normal">∃</mi>
+        <mrow>
+          <mtext>!</mtext>
+        </mrow>
+        <mi>v</mi>
+        <mstyle scriptlevel="0">
+          <mspace width="0.167em"/>
+        </mstyle>
+        <mi>R</mi>
+        <mi>v</mi>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math> Namun, terdapat perbedaan tipe antara Prinsip Hume dan Prinsip Cantor. Dalam pernyataan Prinsip Cantor, variabel “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031542" dir="ltr" display="inline">
+  <mi>A</mi>
+</math>” dan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031543" dir="ltr" display="inline">
+  <mi>B</mi>
+</math>” merupakan suku orde pertama yang menyatakan <em>himpunan</em>. Dalam pernyataan Prinsip Hume, “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031544" dir="ltr" display="inline">
+  <mi>F</mi>
+</math>”, “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031545" dir="ltr" display="inline">
+  <mi>G</mi>
+</math>”, dan “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031546" dir="ltr" display="inline">
+  <mi>R</mi>
+</math>” <em>bukan</em> suku orde pertama; alih-alih, semuanya berada dalam <em>posisi predikat</em>. (Mungkin semuanya menyatakan <em>sifat</em>.) Jadi, kita dapat menguraikan Prinsip Hume dalam bahasa biasa sebagai berikut: banyaknya objek yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031547" dir="ltr" display="inline">
+  <mi>F</mi>
+</math> sama dengan banyaknya objek yang memenuhi <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031548" dir="ltr" display="inline">
+  <mi>G</mi>
+</math> jika dan hanya jika kedua kumpulan objek itu dapat dipasangkan secara bijektif. Prinsip ini disebut <em>Prinsip Hume</em> karena Hume pernah menulis:</p>
+<blockquote>
+<p>Apabila dua bilangan dipadankan sedemikian rupa sehingga bilangan yang satu selalu mempunyai suatu satuan yang bersesuaian dengan setiap satuan pada bilangan yang lain, kita menyatakan keduanya sama. <span class="native-citation">(<a href="part-0120.xhtml#bibliography-ed62df772ebb17a262dc">Hume</a>, <a href="part-0120.xhtml#bibliography-ed62df772ebb17a262dc">1740</a>, Pt.III Bk.1 §1)</span></p>
+</blockquote>
+<p>Prinsip Hume diangkat ke kedudukan penting dalam matematika dan logika kontemporer oleh <span class="native-citation"><a href="part-0120.xhtml#bibliography-247ce476331c017562d9">Frege</a> (<a href="part-0120.xhtml#bibliography-247ce476331c017562d9">1884</a>, §63)</span>, yang mengutip bagian dari Hume ini sebelum (pada dasarnya) menguraikan secara garis besar prinsip yang kita sebut Prinsip Hume.</p>
+<p>Anda patut memperhatikan kemiripan struktural antara Prinsip Hume dan Hukum Dasar V. Kita merumuskannya dalam <span class="native-reference"><a href="part-0081.xhtml#label-main-ca913be0dc954188bb0d">Bagian 64.6</a></span> sebagai berikut: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031549" display="block" dir="ltr">
+  <mtext>ϵ</mtext>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mtext>ϵ</mtext>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>G</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mtext class="olp-math-prose"> jika dan hanya jika </mtext>
+  <mi mathvariant="normal">∀</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mo stretchy="false">(</mo>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mrow>
+    <mo stretchy="false">↔</mo>
+  </mrow>
+  <mi>G</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+  <mo>.</mo>
+</math> Pada titik ini, beberapa ulasan dan perbandingan mungkin membantu.</p>
+<p>Terdapat dua cara memahami suatu prinsip seperti Prinsip Hume atau Hukum Dasar V: secara <em>predikatif</em> atau secara <em>impredikatif</em> (ingat <span class="native-reference"><a href="part-0081.xhtml#label-main-059cee210fe8ca7ea80e">Bagian 64.3</a></span>). Pada pembacaan impredikatif atas Hukum Dasar V, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031550" dir="ltr" display="inline">
+  <mi>F</mi>
+</math>, objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031551" dir="ltr" display="inline">
+  <mtext>ϵ</mtext>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> berada dalam domain kuantifikasi yang kita gunakan untuk merumuskan Hukum Dasar V itu sendiri. Demikian pula, pada pembacaan impredikatif atas Prinsip Hume, untuk setiap <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031552" dir="ltr" display="inline">
+  <mi>F</mi>
+</math>, objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031553" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> berada dalam domain kuantifikasi yang kita gunakan untuk merumuskan Prinsip Hume. Sebaliknya, menurut pemahaman <em>predikatif</em>, objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031554" dir="ltr" display="inline">
+  <mtext>ϵ</mtext>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> dan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031555" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> akan menjadi entitas dari suatu domain yang <em>berbeda</em>.</p>
+<p>Jika kita membaca Hukum Dasar V secara impredikatif, prinsip tersebut menghasilkan ketidakkonsistenan melalui Komprehensi Naif (untuk rinciannya, lihat <span class="native-reference"><a href="part-0081.xhtml#label-main-ca913be0dc954188bb0d">Bagian 64.6</a></span>). Seperti Komprehensi Naif, prinsip tersebut dapat dibuat konsisten dengan membacanya secara <em>predikatif</em>. Namun, kemungkinan besar prinsip itu tidak akan melakukan semua yang kita inginkan.</p>
+<p>Akan tetapi, Prinsip Hume <em>dapat</em> dibaca secara impredikatif dengan konsisten. Dengan pembacaan tersebut, prinsip ini cukup kuat.</p>
+<p>Sebagai ilustrasi, perhatikan predikat “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031556" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>≠</mo>
+  <mi>x</mi>
+</math>”, yang jelas tidak dipenuhi oleh apa pun. Prinsip Hume kini menghasilkan suatu objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031557" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>≠</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math>. Kita dapat memperlakukannya sebagai bilangan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031558" dir="ltr" display="inline">
+  <mn>0</mn>
+</math>. Sekarang, berdasarkan pemahaman <em>impredikatif</em>—dan <em>hanya</em> berdasarkan pemahaman impredikatif—entitas <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031559" dir="ltr" display="inline">
+  <mn>0</mn>
+</math> ini berada dalam domain kuantifikasi awal kita. Jadi, kita dapat secara bermakna menerapkan Prinsip Hume dengan predikat “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031560" dir="ltr" display="inline">
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+</math>” untuk memperoleh suatu objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031561" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+  <mo stretchy="false">)</mo>
+</math>. Kita dapat memperlakukannya sebagai bilangan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031562" dir="ltr" display="inline">
+  <mn>1</mn>
+</math>. Lebih jauh, Prinsip Hume menyiratkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031563" dir="ltr" display="inline">
+  <mn>0</mn>
+  <mo>≠</mo>
+  <mn>1</mn>
+</math>, sebab tidak mungkin terdapat bijeksi dari objek-objek yang tidak identik dengan dirinya sendiri ke objek-objek yang identik dengan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031564" dir="ltr" display="inline">
+  <mn>0</mn>
+</math> (tidak ada objek jenis pertama, tetapi terdapat satu objek jenis kedua). Sekarang, dengan kembali bekerja secara impredikatif, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031565" dir="ltr" display="inline">
+  <mn>1</mn>
+</math> berada dalam domain kuantifikasi awal kita. Jadi, kita dapat secara bermakna menerapkan Prinsip Hume dengan predikat “<math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031566" dir="ltr" display="inline">
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+  <mo>∨</mo>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>1</mn>
+  <mo stretchy="false">)</mo>
+</math>” untuk memperoleh suatu objek <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031567" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+  <mo>∨</mo>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>1</mn>
+  <mo stretchy="false">)</mo>
+</math>. Kita dapat memperlakukannya sebagai bilangan <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031568" dir="ltr" display="inline">
+  <mn>2</mn>
+</math>, dan kita dapat menunjukkan bahwa <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031569" dir="ltr" display="inline">
+  <mn>0</mn>
+  <mo>≠</mo>
+  <mn>2</mn>
+</math>, <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031570" dir="ltr" display="inline">
+  <mn>1</mn>
+  <mo>≠</mo>
+  <mn>2</mn>
+</math>, dan seterusnya.</p>
+<p>Singkatnya, jika dipahami secara impredikatif, Prinsip Hume menyiratkan bahwa terdapat <em>tak hingga banyak objek</em>. Hal ini mendorong para <em>logisis neo-Fregean</em> untuk menjadikan Prinsip Hume sebagai landasan aritmetika.</p>
+<p>Namun, Frege <em>sendiri</em> tidak menjadikan Prinsip Hume sebagai landasan aritmetikanya. Sebaliknya, Frege membuktikan Prinsip Hume dari suatu definisi eksplisit: <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031571" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+</math> didefinisikan sebagai ekstensi konsep <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031572" dir="ltr" display="inline">
+  <mi>F</mi>
+  <mo>∼</mo>
+  <mi mathvariant="normal">Φ</mi>
+</math>. Dalam istilah modern, kita mungkin mencoba menyatakannya sebagai <math xmlns="http://www.w3.org/1998/Math/MathML" data-source-math="M031573" dir="ltr" display="inline">
+  <mi mathvariant="normal">#</mi>
+  <mi>x</mi>
+  <mstyle scriptlevel="0">
+    <mspace width="0.167em"/>
+  </mstyle>
+  <mi>F</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mo fence="false" stretchy="false">{</mo>
+  <mi>G</mi>
+  <mo>:</mo>
+  <mi>F</mi>
+  <mo>∼</mo>
+  <mi>G</mi>
+  <mo fence="false" stretchy="false">}</mo>
+</math>; tetapi langkah ini akan membawa kita kembali ke masalah-masalah Komprehensi Naif.</p>
+</div>
+</main><nav class="page-navigation" aria-label="Navigasi bacaan"><a href="part-0086.xhtml">← Sebelumnya</a><a href="index.xhtml">Beranda</a><a href="part-0088.xhtml">Berikutnya →</a></nav></body></html>

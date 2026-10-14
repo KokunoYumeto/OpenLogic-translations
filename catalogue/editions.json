@@ -1408,7 +1408,7 @@
     {
       "id": "openlogic-fa-ir",
       "download_layout": "compact-grouped",
-      "download_summary": "PDF، EPUB و HTML بازنگری R11، هرکدام شامل همهٔ ۷۲۲ واحد متن مبدأ هستند. منابعِ دقیقِ هر قالب در همان بخش آمده‌اند. بررسی انتخاب‌های ترجمه بر پایهٔ منابع علمی فارسی هنوز ادامه دارد.",
+      "download_summary": "هر ۷۲۲ واحد با ده اصلاحِ مستند در پنج واحد؛ فرمول‌ها و نمودارها تغییر نکرده‌اند. بازبینی همهٔ انتخاب‌های ترجمه هنوز ادامه دارد. PDF تاریخی R11 این ده اصلاح را ندارد. فایل‌های تازه در GitHub هستند؛ آینهٔ Zenodo هنوز این افزوده را ندارد.",
       "owner_task_id": "01a06cb0-a69e-7650-873a-2af9d8c4b1de",
       "name": "فارسی ایرانی",
       "language_tag": "fa-IR",
@@ -1433,12 +1433,13 @@
         "reader_bytes": 9275918,
         "reader_sha256": "246cc4d8dacb064c76637c32eb0140066fa84cafc79ddd1bc2785789c7eab657",
         "reader_pages": 1197,
-        "epub_bytes": 5952805,
-        "epub_sha256": "7384ace3e602189cb35636a30fe9f85c6b33494315500cdd657a8fb8dceeffd3",
-        "html_bytes": 43530286,
-        "html_sha256": "7d4b82cc00cde549b56d8501655c8ed13e6389dda269a000fe215366b973393c",
+        "epub_bytes": 5963450,
+        "epub_sha256": "ee1c8805452c96f1e1a1b70d74b1e166a945721a9b88ca5e800f28bf881bc827",
         "reader_revision": "R11",
-        "reflowable_revision": "R11"
+        "reflowable_revision": "R11+canon-20261014",
+        "historical_r11_html_bytes": 43530286,
+        "historical_r11_html_sha256": "7d4b82cc00cde549b56d8501655c8ed13e6389dda269a000fe215366b973393c",
+        "html_file_manifest": "evidence/PERSIAN_CANON_REFLOWABLE_PUBLIC_20261014.json"
       },
       "evidence": {
         "manager_public_readback": "evidence/PERSIAN_R11_PUBLIC_MANAGER_AUDIT_20261002.json",
@@ -1455,14 +1456,16 @@
         "retained_reflowable_readback": "evidence/PERSIAN_R10_PUBLIC_MANAGER_AUDIT_20260929.json",
         "previous_r10_snapshot": "evidence/PERSIAN_BEFORE_R11_20261002.json",
         "reflowable_readback": "evidence/PERSIAN_R11_REFLOWABLE_PUBLIC_20261014.json",
-        "reflowable_zenodo_mirrored": false
+        "reflowable_zenodo_mirrored": false,
+        "corrected_reflowable_readback": "evidence/PERSIAN_CANON_REFLOWABLE_PUBLIC_20261014.json",
+        "corrected_reflowable_zenodo_mirrored": false
       },
       "limitations": [
         "پوشش هر ۷۲۲ واحد تأیید شده است؛ این به معنی پایان بررسی همهٔ انتخاب‌های ترجمه بر پایهٔ منابع علمی فارسی نیست.",
         "PDF ثابت‌صفحه و بدون برچسب‌های ساختاری است؛ انطباق با PDF/UA یا کپی‌کردن بی‌خطای فرمول‌ها ادعا نمی‌شود.",
         "EPUB و HTML از MathML و SVG استفاده می‌کنند؛ پشتیبانی نرم‌افزارهای مطالعه یکسان نیست و تأیید همهٔ دستگاه‌ها یا دسترس‌پذیری کامل ادعا نمی‌شود.",
         "PDF و EPUB/HTML هرکدام LaTeX مستقیم و ZIP منبعِ مربوط به خود را دارند. LaTeX مستقیمِ EPUB/HTML جریانِ تبدیل است و راه‌اندازِ مستقلِ PDF نیست.",
-        "سه فایل PDF و منابعِ R11 در GitHub و Zenodo تطبیق داده شده‌اند. چهار فایل جدیدِ EPUB، HTML و منابعشان در GitHub از نظر اندازه و SHA-256 تأیید شده‌اند؛ آینهٔ Zenodo هنوز نسخه‌های بازچینش‌پذیرِ R10 را دارد. همهٔ نسخه‌های تاریخی حفظ شده‌اند.",
+        "فایل‌های اصلاح‌شده و خوانشگر کامل مرورگر از GitHub بدون ورود به حساب دریافت و از نظر اندازه و SHA-256 تطبیق داده شدند. آینهٔ Zenodo هنوز این اصلاح‌ها را ندارد. سه فایل PDF و منابع تاریخی R11 در هر دو آینه حفظ شده‌اند.",
         "دو نمونهٔ فارسی و لاتین فقط OLP-0005 را پوشش می‌دهند. چهار نمونهٔ جداگانهٔ Inter-Farsi نیز تک‌واحدی‌اند؛ هیچ‌کدام ویرایش کاملِ لاتین یا Inter-Farsi نیست."
       ],
       "next_action": "بررسی مستند انتخاب‌های ترجمه و اصلاح‌های بعدی ادامه یابد؛ فایل‌های منتشرشده بدون دلیل تازه بازسازی یا دوباره بارگذاری نشوند.",
@@ -1479,26 +1482,25 @@
           "profile": "دریافت PDF بازنگری R11 — ۷۲۲ واحد"
         },
         {
-          "name": "05_OPENLOGIC_fa-IR_R11_REFLOWABLE_READER_722.epub",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/download/fa-ir-olp-0722-complete-r11-20261001/05_OPENLOGIC_fa-IR_R11_REFLOWABLE_READER_722.epub",
-          "bytes": 5952805,
-          "sha256": "7384ace3e602189cb35636a30fe9f85c6b33494315500cdd657a8fb8dceeffd3",
+          "name": "05_OPENLOGIC_fa-IR_CANON_20261014_READER_722.epub",
+          "url": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/download/fa-ir-olp-0722-complete-r11-20261001/05_OPENLOGIC_fa-IR_CANON_20261014_READER_722.epub",
+          "bytes": 5963450,
+          "sha256": "ee1c8805452c96f1e1a1b70d74b1e166a945721a9b88ca5e800f28bf881bc827",
           "format": "EPUB",
           "scope_kind": "complete",
           "source_units": 722,
-          "download_label": "EPUB کاملِ بازچینش‌پذیر — ۷۲۲ واحد — R11",
-          "profile": "EPUB کاملِ بازچینش‌پذیر — ۷۲۲ واحد — R11"
+          "download_label": "EPUB کاملِ اصلاح‌شده — ۷۲۲ واحد",
+          "profile": "EPUB کاملِ اصلاح‌شده — ۷۲۲ واحد"
         },
         {
-          "name": "06_OPENLOGIC_fa-IR_R11_REFLOWABLE_READER_722.html",
-          "url": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/download/fa-ir-olp-0722-complete-r11-20261001/06_OPENLOGIC_fa-IR_R11_REFLOWABLE_READER_722.html",
-          "bytes": 43530286,
-          "sha256": "7d4b82cc00cde549b56d8501655c8ed13e6389dda269a000fe215366b973393c",
           "format": "HTML",
+          "name": "index.html",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-translations/readers/fa-ir-canon-20261014/index.html",
           "scope_kind": "complete",
           "source_units": 722,
-          "download_label": "HTML کاملِ بازچینش‌پذیر — ۷۲۲ واحد — R11",
-          "profile": "HTML کاملِ بازچینش‌پذیر — ۷۲۲ واحد — R11"
+          "download_label": "مطالعهٔ آنلاینِ کامل — HTML اصلاح‌شده",
+          "profile": "مطالعهٔ آنلاینِ کامل — HTML اصلاح‌شده",
+          "file_manifest": "evidence/PERSIAN_CANON_REFLOWABLE_PUBLIC_20261014.json"
         },
         {
           "name": "05_OpenLogic-standard-fa-ir-OLP-0005.epub",
@@ -1529,7 +1531,7 @@
           "profile": "نمونهٔ EPUB با خط لاتین — یک واحد"
         }
       ],
-      "epub_coverage_note": "EPUB و HTML بازنگری R11 هر ۷۲۲ واحد را در ۷۷۴ جایگاه در بر دارند و با منبعِ PDF جاری همگام‌اند. نمونه‌های خطی فقط OLP-0005 را دارند؛ نمونهٔ لاتین و نمونه‌های جداگانهٔ Inter-Farsi ویرایش کامل نیستند.",
+      "epub_coverage_note": "EPUB و HTML اصلاح‌شده هر ۷۲۲ واحد را در ۷۷۴ جایگاه دارند. PDF تاریخی R11 با منبع خودش باقی است. نمونه‌های خط فارسی و لاتین فقط OLP-0005 را پوشش می‌دهند؛ Inter-Farsi ویرایش کاملِ منتشرشده نیست.",
       "epub_evidence": "evidence/PERSIAN_R11_REFLOWABLE_PUBLIC_20261014.json",
       "historical_r3": {
         "release": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/tag/fa-ir-olp-0722-standalone-letter-r3-20260905",
@@ -1756,8 +1758,68 @@
       },
       "supplementary_downloads": [
         {
-          "title": "EPUB و HTML بازنگری R11 — ۷۲۲ واحد",
-          "note": "منبعِ مستقیم و ZIP این بخش دقیقاً به همین EPUB و HTML مربوط‌اند. هر دو قالب اکنون با متن R11 همگام‌اند. چهار فایل جدید فعلاً در GitHub هستند؛ آینهٔ Zenodo هنوز خروجی‌های R10 را نگه می‌دارد.",
+          "title": "خوانشگر اصلاح‌شدهٔ کامل — ۱۴ اکتبر ۲۰۲۶",
+          "note": "هر ۷۲۲ واحد با ده اصلاحِ مستند در پنج واحد؛ فرمول‌ها و نمودارها تغییر نکرده‌اند. بازبینی همهٔ انتخاب‌های ترجمه هنوز ادامه دارد. PDF تاریخی R11 این ده اصلاح را ندارد. فایل‌های تازه در GitHub هستند؛ آینهٔ Zenodo هنوز این افزوده را ندارد.",
+          "downloads": [
+            {
+              "name": "03_OPENLOGIC_fa-IR_CANON_20261014_CUMULATIVE_SOURCE_722.tex",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/download/fa-ir-olp-0722-complete-r11-20261001/03_OPENLOGIC_fa-IR_CANON_20261014_CUMULATIVE_SOURCE_722.tex",
+              "bytes": 4301714,
+              "sha256": "77d3346e345e308192c9010d197421c2ef9a6df50fd3d06f57362e2ffd1eba2e",
+              "format": "TEX",
+              "scope_kind": "complete",
+              "source_units": 722,
+              "download_label": "LaTeX مستقیم و کاملِ متن اصلاح‌شده — ۱۴ اکتبر",
+              "profile": "LaTeX مستقیم و کاملِ متن اصلاح‌شده — ۱۴ اکتبر"
+            },
+            {
+              "name": "06_OPENLOGIC_fa-IR_CANON_20261014_HTML_COMPLETE_SOURCE_722.zip",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/download/fa-ir-olp-0722-complete-r11-20261001/06_OPENLOGIC_fa-IR_CANON_20261014_HTML_COMPLETE_SOURCE_722.zip",
+              "bytes": 65444633,
+              "sha256": "678e2152d53ea362a2da3727697136c9e9023aa69794a9624643ca8195414ca3",
+              "format": "ZIP",
+              "scope_kind": "complete",
+              "source_units": 722,
+              "download_label": "منبع کامل و ابزار بازسازیِ EPUB و HTML",
+              "profile": "منبع کامل و ابزار بازسازیِ EPUB و HTML"
+            },
+            {
+              "format": "HTML",
+              "name": "index.html",
+              "url": "https://kokunoyumeto.github.io/OpenLogic-translations/readers/fa-ir-canon-20261014/index.html",
+              "scope_kind": "complete",
+              "source_units": 722,
+              "download_label": "مطالعهٔ آنلاینِ کامل — HTML اصلاح‌شده",
+              "profile": "مطالعهٔ آنلاینِ کامل — HTML اصلاح‌شده",
+              "file_manifest": "evidence/PERSIAN_CANON_REFLOWABLE_PUBLIC_20261014.json"
+            },
+            {
+              "name": "05_OPENLOGIC_fa-IR_CANON_20261014_READER_722.epub",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/download/fa-ir-olp-0722-complete-r11-20261001/05_OPENLOGIC_fa-IR_CANON_20261014_READER_722.epub",
+              "bytes": 5963450,
+              "sha256": "ee1c8805452c96f1e1a1b70d74b1e166a945721a9b88ca5e800f28bf881bc827",
+              "format": "EPUB",
+              "scope_kind": "complete",
+              "source_units": 722,
+              "download_label": "EPUB کاملِ اصلاح‌شده — ۷۲۲ واحد",
+              "profile": "EPUB کاملِ اصلاح‌شده — ۷۲۲ واحد"
+            },
+            {
+              "name": "07_OPENLOGIC_fa-IR_CANON_20261014_HTML_READER_722.zip",
+              "url": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/download/fa-ir-olp-0722-complete-r11-20261001/07_OPENLOGIC_fa-IR_CANON_20261014_HTML_READER_722.zip",
+              "bytes": 5959045,
+              "sha256": "bdd0203747e6655c9426dd2d0b30107b8667070aaf04e3ac54412be65c834649",
+              "format": "ZIP",
+              "scope_kind": "complete",
+              "source_units": 722,
+              "download_label": "خوانشگر کامل HTML برای مطالعهٔ آفلاین",
+              "profile": "خوانشگر کامل HTML برای مطالعهٔ آفلاین"
+            }
+          ]
+        },
+        {
+          "title": "نسخه‌های تاریخی EPUB و HTML — R11 پیش از اصلاح‌های ۱۴ اکتبر",
+          "note": "این چهار فایلِ تاریخی و منابع دقیقشان حفظ شده‌اند؛ ده اصلاحِ تازه را ندارند. آینهٔ Zenodo هنوز فایل‌های بازچینش‌پذیر R10 را نگه می‌دارد.",
           "downloads": [
             {
               "name": "03_OPENLOGIC_fa-IR_R11_REFLOWABLE_CUMULATIVE_SOURCE_722.tex",
@@ -1858,13 +1920,19 @@
           ]
         }
       ],
-      "reader_guide": "evidence/PERSIAN_R11_REVIEW_FA_20261014.html",
+      "reader_guide": "evidence/PERSIAN_CANON_REVIEW_FA_20261014.html",
       "historical_r9": {
         "release": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/tag/fa-ir-olp-0722-complete-r9-20260927",
         "version_doi": "10.5281/zenodo.23001846",
         "evidence": "evidence/PERSIAN_R9_PUBLIC_MANAGER_AUDIT_20260927.json",
         "snapshot": "evidence/PERSIAN_BEFORE_R10_20260929.json"
-      }
+      },
+      "related_editions": [
+        {
+          "label": "مطالعهٔ آنلاینِ متن کامل و اصلاح‌شده",
+          "url": "https://kokunoyumeto.github.io/OpenLogic-translations/readers/fa-ir-canon-20261014/index.html"
+        }
+      ]
     },
     {
       "id": "openlogic-hi",

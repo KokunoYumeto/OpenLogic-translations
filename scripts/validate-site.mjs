@@ -47,7 +47,7 @@ check(script.includes("[...accessible, ...data.editions]"), "accessible editions
 const persian = catalogue.editions.find(item => item.id === "openlogic-fa-ir");
 const priorities = await read("PRIORITIES.md");
 const persianPriority = priorities.split("\n").find(line => line.startsWith("1. **")) || "";
-check(persianPriority.includes(persian.release) && persianPriority.includes(persian.version_doi) && persianPriority.includes(persian.evidence.manager_public_readback), "Persian priority must link its current published reader and evidence");
+check(persianPriority.includes(persian.release) && persianPriority.includes(persian.evidence.manager_public_readback), "Persian priority must link its current published reader and evidence");
 check(persianPriority.includes("all 722 source units") && persianPriority.includes("۷۲۲") && persianPriority.includes("does not establish full linguistic or human review"), "Persian priority must distinguish complete coverage from linguistic review");
 check(persian.download_layout === "compact-grouped" && (persian.download_summary.includes("بازبینی همهٔ انتخاب‌های ترجمه") || persian.download_summary.includes("بازبینی زبانی کل کتاب") || persian.download_summary.includes("بازبینی زبانی و قراردادهای نمایشیِ باقی‌مانده")) && persian.download_summary.includes("ادامه دارد"), "Persian compact downloads must retain the localized review caveat");
 check(persian.metadata_language === "fa-IR" && persian.metadata_direction === "rtl", "Persian metadata needs language and direction");
@@ -730,11 +730,11 @@ check(script.includes("evidence.public_reader_delivery || evidence.local_reader_
 const currentReadme = await read("README.md");
 const pnbReadmeRow = currentReadme.split("\n").find(line => line.startsWith("| Punjabi (Pakistan, Shahmukhi) |"));
 check(pnbReadmeRow?.includes(`**${punjabi.source_units_translated}/722**`) && pnbReadmeRow.includes(`**${punjabi.standalone_reader_units}-unit**`), "Punjabi README must distinguish the current rechecked source from the released reader");
-check(pnbReadmeRow?.includes(punjabi.release) && pnbReadmeRow.includes(punjabi.version_doi) && pnbReadmeRow.includes(punjabi.public_source_checkpoint_commit), "Punjabi README must link current release, DOI and public source checkpoint");
+check(pnbReadmeRow?.includes(punjabi.release) && pnbReadmeRow.includes(punjabi.public_source_checkpoint_commit), "Punjabi README must link current release and public source checkpoint");
 check(currentReadme.includes("The historical [Punjabi 70-unit replay]") && !currentReadme.includes("The current [Punjabi 70-unit replay]"), "Superseded Punjabi structural evidence must not be presented as current linguistic acceptance");
 const guReadmeRow = currentReadme.split("\n").find(line => line.startsWith("| ગુજરાતી |"));
 const currentGu = catalogue.editions.find(item => item.id === "openlogic-gu-gujr-in");
-check(guReadmeRow?.includes(`${currentGu.standalone_reader_units}/722`) && guReadmeRow.includes(currentGu.version_doi), "Gujarati README must use the current reader scope and DOI");
+check(guReadmeRow?.includes(`${currentGu.standalone_reader_units}/722`), "Gujarati README must use the current reader scope");
 check(currentGu.ordered_downloads.filter(item => ["PDF", "EPUB"].includes(item.format) || item.role === "complete-cumulative-full-text").every(item => guReadmeRow?.includes(item.url)), "Gujarati README must use the published current reader/direct-source links");
 check(currentReadme.includes("Bengali, Telugu and Marathi now have complete 722-unit EPUBs.") && !currentReadme.includes("Javanese, Marathi, Pashto and Punjabi"), "EPUB summary must not call the full Marathi reader partial");
 check(currentReadme.includes("https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/review/") && !currentReadme.includes("పూర్తి నిర్ణయాల తెలుగు సమీక్షా వివరణలు ఇంకా సిద్ధమవుతున్నాయి") && !currentReadme.includes("రెండు నమ్మకస్థాయి అసంగతతల సవరణ ఇంకా అవసరం"), "Telugu README must link the completed native review and retire resolved findings");

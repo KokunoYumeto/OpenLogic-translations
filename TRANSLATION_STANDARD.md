@@ -96,7 +96,7 @@ Build under the project’s machine-wide TeX mutex. Require zero fatal errors, u
 
 ## 8. Publish and read back
 
-Use the established GitHub repository and Zenodo concept lineage. Preserve historical assets. Publish only non-duplicative, privacy-safe packages with no credentials, private paths, or personal names. After publication, anonymously download each new artifact and verify filename, byte count, and SHA-256 against the sealed local manifest.
+Use the established GitHub repository. Preserve historical assets. Publish only non-duplicative, privacy-safe packages with no credentials, private paths, or personal names. After publication, anonymously download each new artifact and verify filename, byte count, and SHA-256 against the sealed local manifest.
 
 Statuses are evidence claims:
 
@@ -104,7 +104,7 @@ Statuses are evidence claims:
 - `published-source-722-reader-642`: all sources translated, but 80 remain outside the reader;
 - `partial-n/722`: exact accepted prefix or set only;
 - `scaffold`: structural or provisional content not canon-admitted as a finished edition;
-- `cross-mirror-repair`: GitHub, Zenodo, or README identities do not agree;
+- `cross-mirror-repair`: GitHub or README identities do not agree;
 - `audit-needed`: a public claim exists without enough replayed evidence for a stronger label.
 
 ## 9. Audit throughput as well as correctness

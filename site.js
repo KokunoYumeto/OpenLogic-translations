@@ -50,6 +50,8 @@ function safeLink(value) {
   if (!value) return null;
   try {
     const url = new URL(value, window.location.href);
+    // The Zenodo records of these editions were deleted in October 2026; do not render links to them.
+    if (/(^|\.)zenodo\.org$/.test(url.hostname) || /^\/10\.5281\/zenodo\./i.test(url.pathname)) return null;
     return ["https:", "http:"].includes(url.protocol) ? url.href : null;
   } catch {
     return null;
@@ -211,7 +213,6 @@ function cardFor(edition) {
   const readerUrl = (edition.readers || []).find(item => item.url && !["chapter", "sample"].includes(item.scope_kind))?.url;
   const primary = link(readerUrl ? "Read / download" : "Open release", readerUrl || edition.release, true);
   const repository = link(edition.ui_labels?.repository || "Repository", edition.repository, !primary);
-  const doi = link(edition.ui_labels?.doi || "DOI", edition.version_doi ? `https://doi.org/${edition.version_doi}` : edition.concept_doi ? `https://doi.org/${edition.concept_doi}` : null);
   const evidence = localEvidenceLink(edition);
   if (orderedDownloads.length) {
     orderedDownloads.forEach((item, index) => {
@@ -264,7 +265,7 @@ function cardFor(edition) {
     metadata.setAttribute("aria-label", edition.ui_labels?.publication_and_evidence || `${edition.name} publication and evidence`);
     actions.append(metadata);
   }
-  [repository, doi, evidence].filter(Boolean).forEach(item => metadata.append(item));
+  [repository, evidence].filter(Boolean).forEach(item => metadata.append(item));
   for (const related of edition.related_editions || []) {
     const relatedLink = link(related.label, related.url);
     if (relatedLink) actions.append(relatedLink);

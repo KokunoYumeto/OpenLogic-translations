@@ -150,6 +150,7 @@ def main(argv=None):
     drivers=sub.add_parser('drivers');drivers.add_argument('--repo',required=True);drivers.add_argument('--metadata-dir');drivers.add_argument('--out',required=True);drivers.add_argument('--check',action='store_true');drivers.add_argument('--book',default='sets-logic-computation')
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin')
+    export=sub.add_parser('export');export.add_argument('--source',required=True);export.add_argument('--product',choices=['cumulative-tex','source-zip'],required=True);export.add_argument('--out',required=True);export.add_argument('--profile');export.add_argument('--build');export.add_argument('--credits');export.add_argument('--instructions')
     pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
     for action in ('compare','links'):
         q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
@@ -157,7 +158,10 @@ def main(argv=None):
     q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')
     a=p.parse_args(argv)
     try:
-        if a.command=='check':
+        if a.command=='export':
+            from .sourceexport import export_command
+            return export_command(a.source,a.product,a.out,a.profile,a.build,a.credits,a.instructions)
+        elif a.command=='check':
             from .credits import credits_command
             return credits_command(a.source,a.policy,a.out,a.pdf,a.build)
         elif a.command=='pdf':

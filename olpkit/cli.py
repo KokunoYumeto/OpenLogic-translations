@@ -135,25 +135,14 @@ def plan(from_ref, to_ref, out, check=False):
         print(f'{len(record["files"])} changed files: {counts["M"]} content units modified, {counts["A"]} added, {counts["D"]} deleted, {counts["R"]} renamed; {len(builds)} build file'+('s' if len(builds)!=1 else '')+' ('+', '.join(x['path'] for x in builds)+')')
 
 
-def verify_vendored(repo,directory,ref):
-    root=Path(repo).resolve();folder=(root/directory).resolve()
-    if not folder.is_relative_to(root):raise ValueError('vendored directory escapes the repository')
-    expected=tree(commit(ref));failures=[];count=0
-    for path in folder.rglob('*'):
-        if not path.is_file():continue
-        rel=path.relative_to(folder).as_posix();count+=1
-        if rel not in expected or path.read_bytes()!=blob(expected[rel]):failures.append(rel)
-    if not count:raise ValueError('vendored directory is empty or missing')
-    if failures:raise ValueError(f'{len(failures)} vendored files differ or are not upstream: '+', '.join(failures[:12]))
-    print(f'{count} of {count} files equal upstream')
-
-
 def main(argv=None):
     p=argparse.ArgumentParser(prog='olpkit');sub=p.add_subparsers(dest='command',required=True)
     units=sub.add_parser('units').add_subparsers(dest='action',required=True);r=units.add_parser('registry');r.add_argument('--check',action='store_true')
     sync=sub.add_parser('sync').add_subparsers(dest='action',required=True);q=sync.add_parser('plan');q.add_argument('--from',dest='from_ref');q.add_argument('--to',dest='to_ref');q.add_argument('--out');q.add_argument('--check',metavar='FOLDER')
-    v=sync.add_parser('verify-vendored');v.add_argument('--repo',required=True);v.add_argument('--dir',required=True);v.add_argument('--commit',required=True)
+    v=sync.add_parser('verify-vendored');v.add_argument('--repo',required=True);v.add_argument('--dir',required=True);v.add_argument('--commit',required=True);v.add_argument('--components');v.add_argument('--out')
     lint=sub.add_parser('lint').add_subparsers(dest='action',required=True);l=lint.add_parser('structure');l.add_argument('--en',required=True);l.add_argument('--tr',required=True);l.add_argument('--json',action='store_true')
+    for action in ('units','tokens'):
+        l=lint.add_parser(action);l.add_argument('--repo');l.add_argument('--ref',default='HEAD');l.add_argument('--english',action='store_true');l.add_argument('--olp-pin');l.add_argument('--scope');l.add_argument('--out',required=True);l.add_argument('--check',action='store_true')
     edition=sub.add_parser('edition').add_subparsers(dest='action',required=True)
     e=edition.add_parser('validate');e.add_argument('--repo',required=True);e.add_argument('--metadata-dir')
     e=edition.add_parser('import-manifest');e.add_argument('--repo',required=True);e.add_argument('--adapter',required=True);e.add_argument('--out')
@@ -167,7 +156,9 @@ def main(argv=None):
         elif a.command=='sync' and a.action=='plan':
             if not a.check and not all([a.from_ref,a.to_ref,a.out]):raise ValueError('plan requires --from, --to and --out, or --check FOLDER')
             plan(a.from_ref,a.to_ref,a.check or a.out,bool(a.check))
-        elif a.command=='sync':verify_vendored(a.repo,a.dir,a.commit)
+        elif a.command=='sync':
+            from .vendored import verify
+            verify(a.repo,a.dir,commit(a.commit),CACHE,a.components,a.out)
         elif a.command=='drivers':
             from .drivers import drivers_command
             drivers_command(a.repo,a.metadata_dir,CACHE,a.out,a.check,a.book)
@@ -177,6 +168,9 @@ def main(argv=None):
         elif a.command=='build':
             from .build import build_command
             return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin)
+        elif a.command=='lint' and a.action in ('units','tokens'):
+            from .unitlint import lint_units
+            return lint_units(a.repo,a.ref,CACHE,a.out,a.english,a.olp_pin,a.scope,a.check,a.action=='tokens')
         elif a.command=='fetch':
             from .cache import fetch_edition
             fetch_edition(a.repo,a.metadata_dir,CACHE)

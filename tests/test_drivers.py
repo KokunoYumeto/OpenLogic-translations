@@ -81,6 +81,12 @@ class DriverTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'engien'):
             self.generate()
 
+    def test_low_contrast_profile_is_rejected_before_build(self):
+        p=self.data/'languages/gu.toml'
+        p.write_text(p.read_text(encoding='utf-8').replace('color = "0B3C6F"','color = "FFFFFF"'),encoding='utf-8')
+        with self.assertRaisesRegex(ValueError,'contrast'):
+            self.generate()
+
     def test_font_override_requires_reason_and_is_used(self):
         edition=self.edition('gu')
         edition['fonts']={'main':{'file':'ChangedFixtureFont.ttf'}}

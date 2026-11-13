@@ -360,6 +360,16 @@
       "required": [],
       "additionalProperties": false
     },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["single", "color", "minimum_contrast"],
+      "properties": {
+        "single": {"const": true},
+        "color": {"type": "string", "pattern": "^[0-9A-Fa-f]{6}$"},
+        "minimum_contrast": {"type": "number", "minimum": 7, "maximum": 21}
+      }
+    },
     "layout": {
       "type": "object",
       "properties": {
@@ -399,7 +409,8 @@
     "preamble",
     "strings",
     "fonts",
-    "layout"
+    "layout",
+    "links"
   ],
   "additionalProperties": false,
   "$schema": "https://json-schema.org/draft/2020-12/schema"

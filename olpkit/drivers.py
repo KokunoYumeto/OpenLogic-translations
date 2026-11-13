@@ -64,6 +64,10 @@ def generate_drivers(edition, source_files, book_id='sets-logic-computation', da
     language_bytes = language_path.read_bytes()
     language = tomllib.loads(language_bytes.decode('utf-8'))
     validate_schema('language',language)
+    from .pdfaudit import contrast
+    link_colour=tuple(int(language['links']['color'][i:i+2],16)/255 for i in (0,2,4))
+    if contrast(link_colour)<language['links']['minimum_contrast']:
+        raise ValueError('declared link colour does not meet required contrast on white paper')
     for key in ('locale','engine','script','babel'):
         if language[key]!=edition[key]:
             raise ValueError('language preamble profile differs from edition '+key)

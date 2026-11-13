@@ -150,9 +150,15 @@ def main(argv=None):
     drivers=sub.add_parser('drivers');drivers.add_argument('--repo',required=True);drivers.add_argument('--metadata-dir');drivers.add_argument('--out',required=True);drivers.add_argument('--check',action='store_true');drivers.add_argument('--book',default='sets-logic-computation')
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin')
+    pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
+    for action in ('compare','links'):
+        q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
     a=p.parse_args(argv)
     try:
-        if a.command=='units':registry(a.check)
+        if a.command=='pdf':
+            from .pdfaudit import pdf_command
+            return pdf_command(a.action,a.first,a.second,a.out,a.first_build,a.second_build)
+        elif a.command=='units':registry(a.check)
         elif a.command=='sync' and a.action=='plan':
             if not a.check and not all([a.from_ref,a.to_ref,a.out]):raise ValueError('plan requires --from, --to and --out, or --check FOLDER')
             plan(a.from_ref,a.to_ref,a.check or a.out,bool(a.check))

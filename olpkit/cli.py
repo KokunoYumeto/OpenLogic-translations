@@ -140,6 +140,7 @@ def main(argv=None):
     units=sub.add_parser('units').add_subparsers(dest='action',required=True);r=units.add_parser('registry');r.add_argument('--check',action='store_true')
     sync=sub.add_parser('sync').add_subparsers(dest='action',required=True);q=sync.add_parser('plan');q.add_argument('--from',dest='from_ref');q.add_argument('--to',dest='to_ref');q.add_argument('--out');q.add_argument('--check',metavar='FOLDER')
     v=sync.add_parser('verify-vendored');v.add_argument('--repo',required=True);v.add_argument('--dir',required=True);v.add_argument('--commit',required=True);v.add_argument('--components');v.add_argument('--out')
+    e=sync.add_parser('edition');e.add_argument('--repo',required=True);e.add_argument('--ref',default='HEAD');e.add_argument('--plan',required=True);e.add_argument('--out',required=True)
     lint=sub.add_parser('lint').add_subparsers(dest='action',required=True);l=lint.add_parser('structure');l.add_argument('--en',required=True);l.add_argument('--tr',required=True);l.add_argument('--json',action='store_true')
     for action in ('units','tokens'):
         l=lint.add_parser(action);l.add_argument('--repo');l.add_argument('--ref',default='HEAD');l.add_argument('--english',action='store_true');l.add_argument('--olp-pin');l.add_argument('--scope');l.add_argument('--out',required=True);l.add_argument('--check',action='store_true')
@@ -171,6 +172,9 @@ def main(argv=None):
         elif a.command=='sync' and a.action=='plan':
             if not a.check and not all([a.from_ref,a.to_ref,a.out]):raise ValueError('plan requires --from, --to and --out, or --check FOLDER')
             plan(a.from_ref,a.to_ref,a.check or a.out,bool(a.check))
+        elif a.command=='sync' and a.action=='edition':
+            from .syncedition import edition_command
+            return edition_command(a.repo,a.ref,a.plan,CACHE,a.out)
         elif a.command=='sync':
             from .vendored import verify
             verify(a.repo,a.dir,commit(a.commit),CACHE,a.components,a.out)

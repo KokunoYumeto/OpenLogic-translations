@@ -144,5 +144,14 @@ class PDFAuditTests(unittest.TestCase):
         pdf.write_bytes(pdf.read_bytes()+b'changed')
         with self.assertRaisesRegex(ValueError,'PDF bytes changed'):record_pdf_links(self.root,result)
 
+    def test_dark_colour_override_is_detected_even_when_contrast_passes(self):
+        pdf=self.root/'override.pdf';fixture(pdf,colour=(0,0,0))
+        report=inspect_links(pdf,expected_color='0B3C6F')
+        self.assertTrue(all(c['contrast_white']>=7 for c in report['text_colours']))
+        self.assertEqual(report['status'],'fail')
+        self.assertIn('declared-link-colour-overridden',[i['rule'] for i in report['issues']])
+        fixture(pdf)
+        self.assertEqual(inspect_links(pdf,expected_color='0B3C6F')['status'],'pass')
+
 
 if __name__=='__main__':unittest.main()

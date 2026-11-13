@@ -140,11 +140,16 @@ def split_citations(links,chars):
     return found
 
 
-def inspect_links(path,minimum_contrast=7,progress=None):
+def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None):
     from pypdf import PdfReader
     import pdfplumber
     if minimum_contrast < 7:
         raise ValueError('link contrast acceptance cannot be below 7:1')
+    expected_rgb=None
+    if expected_color is not None:
+        if not isinstance(expected_color,str) or not re.fullmatch(r'[0-9a-fA-F]{6}',expected_color):
+            raise ValueError('expected link colour must be six hexadecimal digits')
+        expected_rgb=tuple(int(expected_color[i:i+2],16)/255 for i in (0,2,4))
     pdf = PdfReader(path)
     observations=[]; issues=[]; unknown=[]; colours=Counter(); citation_count=0
     with pdfplumber.open(path) as parsed:
@@ -201,9 +206,14 @@ def inspect_links(path,minimum_contrast=7,progress=None):
             geometry.close()
             if progress and number%50==0:progress(number)
     if len(colours)>1:issues.append({'rule':'multiple-link-text-colours','count':len(colours)})
+    if expected_rgb is not None:
+        for actual in colours:
+            if any(abs(a-b)>0.0001 for a,b in zip(actual,expected_rgb)):
+                issues.append({'rule':'declared-link-colour-overridden','expected_rgb':list(expected_rgb),'actual_rgb':list(actual)})
     return {'schema':'olpkit.pdf-links.v1','artifact':file_record(path),'pages':len(pdf.pages),
             'status':'fail' if issues else ('incomplete' if unknown else ('pass' if observations else 'not_applicable')),
             'minimum_required_contrast':minimum_contrast,'link_areas':len(observations),
+            'expected_colour':expected_color,
             'citation_areas':citation_count,'text_colours':[{'rgb':list(k),'characters':v,'contrast_white':contrast(k)} for k,v in colours.items()],
             'issues':issues,'unmeasured':unknown,'observations':observations,
             'limits':['Background accepted only for unpainted white paper or white vector fill; other overlaps require rendering.',

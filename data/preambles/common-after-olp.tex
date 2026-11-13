@@ -7,11 +7,4 @@
 \renewcommand{\printglossaries}{%
   \printglossary[title=\olpBookGlossary,toctitle=\olpBookGlossary]}
 \tikzset{initial text=@@strings.initial@@}
-\definecolor{olpkitlink}{HTML}{@@links.color@@}
-\hypersetup{colorlinks=true,allcolors=olpkitlink}
-\makeatletter
-% Keep natbib's separator inside the existing citation link. Each citation
-% retains its own destination, including citations with several keys.
-\renewcommand*\hyper@natlinkbreak[2]{#1}
-\makeatother
 \errorcontextlines=20

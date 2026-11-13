@@ -26,7 +26,7 @@ Install the PDF inspection dependencies with `python -m pip install -e ".[pdf]"`
 
 `olpkit pdf links --first READER.pdf --out OUTPUT` measures painted link text and its annotation rectangles. It checks one link colour, at least 7:1 contrast on white paper, and citation destinations split by unlinked text on the same line. Reports retain page numbers, rectangles, text and measured colours for inspection. Distinct mentions of the same bibliography entry can need contextual adjudication. Rotated/cropped pages, unsupported colour spaces, image-backed links and links without extractable text remain explicitly unmeasured; they do not pass silently. Link destination validity, tables, font scale and semantic fidelity require their own checks.
 
-Language profiles declare the link colour and contrast threshold. The common preamble retains natbib separators inside each citation's existing link, preserving separate destinations for different citation keys. Output must still be checked with the PDF link command and visually inspected.
+Language profiles declare the link colour and contrast threshold. The common link preamble applies that colour after the OLP class's begin-document setup, and retains natbib separators inside each citation's existing link, preserving separate destinations for different citation keys. Build inspection also detects a different painted colour, even when it passes contrast. Output must still be visually inspected.
 
 Driver generation checks the mapped driver labels; assembly verifies bytes and structure of the input set. Neither certifies book translation. Existing source files, publication history and substantive corrections must remain intact.
 

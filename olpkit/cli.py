@@ -153,9 +153,14 @@ def main(argv=None):
     pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
     for action in ('compare','links'):
         q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
+    check=sub.add_parser('check').add_subparsers(dest='action',required=True)
+    q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')
     a=p.parse_args(argv)
     try:
-        if a.command=='pdf':
+        if a.command=='check':
+            from .credits import credits_command
+            return credits_command(a.source,a.policy,a.out,a.pdf,a.build)
+        elif a.command=='pdf':
             from .pdfaudit import pdf_command
             return pdf_command(a.action,a.first,a.second,a.out,a.first_build,a.second_build)
         elif a.command=='units':registry(a.check)

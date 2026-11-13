@@ -67,6 +67,25 @@ def record_pdf_links(output,result,minimum_contrast=7):
     return links['status']=='pass'
 
 
+def record_pdf_credits(output,result,policy_path):
+    """Record notice and reader checks without calling missing policy a pass."""
+    from .credits import inspect_credits
+    output=Path(output).resolve();policy_path=Path(policy_path)
+    if not policy_path.is_file():
+        result['gates']['G-CREDIT']={'status':'not_implemented','reason':'Component credit policy not configured.'}
+        (output/'BUILD.json').write_bytes(json_bytes(result))
+        return False
+    policy=json.loads(policy_path.read_text(encoding='utf-8'))
+    credits=inspect_credits(output/'source',policy,output/result['pdf']['path'],output/'BUILD.json')
+    payload=json_bytes(credits);path=output/'G-CREDIT.json';path.write_bytes(payload)
+    result['gates']['G-CREDIT']={'status':credits['status'],'report':path.name,'sha256':digest(payload),
+                               'notices':len(credits['files']),'issues':len(credits['issues']),
+                               'unmeasured':len(credits['unmeasured'])}
+    result['release_ready']=False
+    (output/'BUILD.json').write_bytes(json_bytes(result))
+    return credits['status']=='pass'
+
+
 def compile_book(folder,report,engine,epoch,output,expected=None,reference=False):
     """Compile once per validated input batch; every tool stays under the slot."""
     folder=Path(folder).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
@@ -203,8 +222,10 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
     result=compile_book(source,report,engine,epoch,output,expected,english)
     if not english and result.get('pdf'):
         language=tomllib.loads((ROOT/'data/languages'/(report['locale']+'.toml')).read_text(encoding='utf-8'))
-        if not record_pdf_links(output,result,language['links']['minimum_contrast']):
-            print('PDF link acceptance incomplete; inspect G-LINK.json',flush=True)
+        links_ok=record_pdf_links(output,result,language['links']['minimum_contrast'])
+        credits_ok=record_pdf_credits(output,result,ROOT/'data/credits'/('slc-'+report['locale']+'.json'))
+        if not links_ok or not credits_ok:
+            print('PDF link/credit acceptance incomplete; inspect recorded gate results',flush=True)
             return 1
     if english and result['status']=='reference_compiled':
         registry=dict(line.split('\t')[::-1] for line in (ROOT/'data/units/olp-units.tsv').read_text().splitlines()[1:])

@@ -132,5 +132,17 @@ class PDFAuditTests(unittest.TestCase):
         chars=[{'text':',','x0':22,'x1':24,'top':0,'bottom':10}]
         self.assertEqual(split_citations(links,chars),[])
 
+    def test_build_receipt_contains_actual_pdf_link_result(self):
+        from olpkit.build import record_pdf_links
+        pdf=self.root/'book.pdf';fixture(pdf,split=True)
+        result={'pdf':{'path':pdf.name,'sha256':digest(pdf.read_bytes())},'gates':{},'release_ready':False}
+        self.assertFalse(record_pdf_links(self.root,result))
+        stored=json.loads((self.root/'BUILD.json').read_text())
+        self.assertEqual(stored['gates']['G-LINK']['status'],'fail')
+        self.assertEqual(stored['gates']['G-LINK']['issues'],1)
+        self.assertFalse(stored['release_ready'])
+        pdf.write_bytes(pdf.read_bytes()+b'changed')
+        with self.assertRaisesRegex(ValueError,'PDF bytes changed'):record_pdf_links(self.root,result)
+
 
 if __name__=='__main__':unittest.main()

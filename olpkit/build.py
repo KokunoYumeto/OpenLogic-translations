@@ -51,6 +51,22 @@ def verify_assembly(folder,report):
             raise ValueError('assembled input changed: '+name)
 
 
+def record_pdf_links(output,result,minimum_contrast=7):
+    """Inspect the built PDF after the TeX slot has been released."""
+    from .pdfaudit import inspect_links
+    output=Path(output).resolve();pdf=(output/result['pdf']['path']).resolve()
+    if not pdf.is_relative_to(output) or digest(pdf.read_bytes())!=result['pdf']['sha256']:
+        raise ValueError('PDF bytes changed before link inspection')
+    links=inspect_links(pdf,minimum_contrast,progress=lambda n:print(f'PDF links: inspected page {n}',flush=True))
+    payload=json_bytes(links);path=output/'G-LINK.json';path.write_bytes(payload)
+    result['gates']['G-LINK']={'status':links['status'],'report':path.name,'sha256':digest(payload),
+                             'link_areas':links['link_areas'],'citation_areas':links['citation_areas'],
+                             'issues':len(links['issues']),'unmeasured':len(links['unmeasured'])}
+    result['release_ready']=False
+    (output/'BUILD.json').write_bytes(json_bytes(result))
+    return links['status']=='pass'
+
+
 def compile_book(folder,report,engine,epoch,output,expected=None,reference=False):
     """Compile once per validated input batch; every tool stays under the slot."""
     folder=Path(folder).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
@@ -185,6 +201,11 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
     bare=SourceCache(cache_root).locations('olp',olp_pin)[0]
     epoch=int(run_git(bare,'show','-s','--format=%ct',olp_pin).stdout.decode().strip())
     result=compile_book(source,report,engine,epoch,output,expected,english)
+    if not english and result.get('pdf'):
+        language=tomllib.loads((ROOT/'data/languages'/(report['locale']+'.toml')).read_text(encoding='utf-8'))
+        if not record_pdf_links(output,result,language['links']['minimum_contrast']):
+            print('PDF link acceptance incomplete; inspect G-LINK.json',flush=True)
+            return 1
     if english and result['status']=='reference_compiled':
         registry=dict(line.split('\t')[::-1] for line in (ROOT/'data/units/olp-units.tsv').read_text().splitlines()[1:])
         rows=sorted(((registry[p],p) for p in result['content_inputs']))

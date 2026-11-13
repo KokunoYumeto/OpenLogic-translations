@@ -375,10 +375,16 @@
         "table_column_separation": {
           "type": "string",
           "pattern": "^[0-9]+(?:\\.[0-9]+)?(?:pt|em|ex)$"
+        },
+        "portrait_spacing": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
         }
       },
       "required": [
-        "portrait_width"
+        "portrait_width",
+        "portrait_spacing"
       ],
       "additionalProperties": false
     }

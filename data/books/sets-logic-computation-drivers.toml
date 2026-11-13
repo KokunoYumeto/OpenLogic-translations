@@ -75,8 +75,16 @@ reason = "Place locale configuration immediately before and after the OLP style.
 
 [[files.transforms]]
 id = "cover-portrait-width"
-before = ".29\\textwidth"
-after = "\\olpCoverPortraitWidth\\textwidth"
-matches = 7
+before = "width=.29\\textwidth"
+after = "width=\\olpCoverPortraitWidth\\textwidth"
+matches = 5
 kind = "layout"
-reason = "Parameterize the native pilot cover width so the accepted Javanese correction remains data, not a driver fork."
+reason = "Preserve each native pilot's accepted portrait width as language data."
+
+[[files.transforms]]
+id = "cover-portrait-spacing"
+before = "\\hspace{.29\\textwidth}"
+after = "\\hspace{\\olpCoverPortraitSpacing\\textwidth}"
+matches = 2
+kind = "layout"
+reason = "The accepted Gujarati cover retains its spacing while reducing portrait width."

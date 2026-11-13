@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "locale": "jv",
+  "product": "slc-screen-pdf",
+  "book": "sets-logic-computation",
+  "source_id": "slc",
+  "manifest": "textbooks/slc/MANIFEST.json",
+  "manifest_pins": {
+    "olp": "open_logic",
+    "slc": "slc",
+    "portraits": "portraits",
+    "photos": "photos"
+  },
+  "upstream_include": [
+    "content/*",
+    "sty/*",
+    "include/*",
+    "bib/*",
+    "assets/*",
+    "open-logic-*.sty",
+    "LICENSE.md"
+  ],
+  "assets": [
+    {
+      "source": "portraits",
+      "to": "assets/portraits",
+      "include": [
+        "*.pdf",
+        "*.png",
+        "LICENSE.md",
+        "README.md"
+      ]
+    },
+    {
+      "source": "photos",
+      "to": "assets/photos",
+      "include": [
+        "*.png",
+        "*.tex",
+        "README.md"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-envs.sty",
+      "to": "locale/{locale}/courses/{book}/slc-envs.sty"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-metadata.tex",
+      "to": "locale/{locale}/courses/{book}/slc-metadata.tex"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-screen.xmpdata",
+      "to": "locale/{locale}/courses/{book}/slc-screen.xmpdata"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-config.jv.sty",
+      "to": "locale/{locale}/courses/{book}/slc-config.sty"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/LICENSE-SLC.md",
+      "to": "locale/{locale}/courses/{book}/LICENSE-SLC.md"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/assets/tex/nowidow.sty",
+      "to": "locale/{locale}/courses/{book}/nowidow.sty"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/assets/tex/nowidow.dtx",
+      "to": "locale/{locale}/courses/{book}/nowidow.dtx"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/assets/tex/nowidow.ins",
+      "to": "locale/{locale}/courses/{book}/nowidow.ins"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/locale/open-logic-locale.sty",
+      "to": "locale/{locale}/open-logic-locale.sty"
+    },
+    {
+      "source": "edition",
+      "from": "edition/jv-localization.sty",
+      "to": "locale/{locale}/jv-token-base.sty",
+      "transforms": [
+        {
+          "id": "babel-english",
+          "before": "{english}",
+          "after": "{javanese}",
+          "matches": 13,
+          "reason": "Preserve the native configuration alias while relocating the build to locale/jv/."
+        },
+        {
+          "id": "babel-captionsenglish",
+          "before": "captionsenglish",
+          "after": "captionsjavanese",
+          "matches": 1,
+          "reason": "Preserve the native configuration alias while relocating the build to locale/jv/."
+        },
+        {
+          "id": "babel-extrasenglish",
+          "before": "extrasenglish",
+          "after": "extrasjavanese",
+          "matches": 1,
+          "reason": "Preserve the native configuration alias while relocating the build to locale/jv/."
+        }
+      ]
+    },
+    {
+      "source": "edition",
+      "from": "edition/jv-complete-localization.sty",
+      "to": "locale/{locale}/open-logic-config.sty",
+      "transforms": [
+        {
+          "id": "babel-english",
+          "before": "{english}",
+          "after": "{javanese}",
+          "matches": 8,
+          "reason": "Preserve the native configuration alias while relocating the build to locale/jv/."
+        },
+        {
+          "id": "babel-captionsenglish",
+          "before": "captionsenglish",
+          "after": "captionsjavanese",
+          "matches": 1,
+          "reason": "Preserve the native configuration alias while relocating the build to locale/jv/."
+        },
+        {
+          "id": "token-base-path",
+          "before": "\\input{jv-localization.sty}",
+          "after": "\\input{\\olpath/locale/jv/jv-token-base.sty}",
+          "matches": 1,
+          "reason": "Preserve the native configuration alias while relocating the build to locale/jv/."
+        }
+      ]
+    }
+  ],
+  "trees": [
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/include",
+      "to": "locale/{locale}/courses/{book}/include",
+      "include": [
+        "*.tex"
+      ]
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/illustrations",
+      "to": "locale/{locale}/courses/{book}/illustrations",
+      "include": [
+        "*.png"
+      ]
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/locale/photocredits",
+      "to": "locale/{locale}/photocredits",
+      "include": [
+        "*.tex"
+      ]
+    }
+  ],
+  "required_book_files": [
+    "slc-config.sty",
+    "slc-envs.sty",
+    "slc-metadata.tex",
+    "slc-screen.xmpdata",
+    "include/preface.tex",
+    "include/glossary.tex",
+    "include/summary-1.tex",
+    "include/summary-2.tex",
+    "include/summary-3.tex",
+    "include/summary-4.tex",
+    "include/summary-6.tex",
+    "include/summary-7.tex",
+    "include/summary-8.tex",
+    "include/summary-10.tex",
+    "include/summary-11.tex",
+    "include/summary-12.tex",
+    "include/summary-14.tex",
+    "include/summary-15.tex"
+  ],
+  "legacy_overlays": [
+    "textbooks/slc/locale/patches.json",
+    "textbooks/slc/terminology.py"
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "locale": "gu",
+  "product": "slc-screen-pdf",
+  "book": "sets-logic-computation",
+  "source_id": "slc",
+  "manifest": "textbooks/slc/MANIFEST.json",
+  "manifest_pins": {
+    "olp": "open_logic",
+    "slc": "slc",
+    "portraits": "portraits",
+    "photos": "photos"
+  },
+  "upstream_include": [
+    "content/*",
+    "sty/*",
+    "include/*",
+    "bib/*",
+    "assets/*",
+    "open-logic-*.sty",
+    "LICENSE.md"
+  ],
+  "assets": [
+    {
+      "source": "portraits",
+      "to": "assets/portraits",
+      "include": [
+        "*.pdf",
+        "*.png",
+        "LICENSE.md",
+        "README.md"
+      ]
+    },
+    {
+      "source": "photos",
+      "to": "assets/photos",
+      "include": [
+        "*.png",
+        "*.tex",
+        "README.md"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-envs.sty",
+      "to": "locale/{locale}/courses/{book}/slc-envs.sty"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-metadata.tex",
+      "to": "locale/{locale}/courses/{book}/slc-metadata.tex"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-screen.xmpdata",
+      "to": "locale/{locale}/courses/{book}/slc-screen.xmpdata"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/slc-config.gu.sty",
+      "to": "locale/{locale}/courses/{book}/slc-config.sty"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/LICENSE-SLC.md",
+      "to": "locale/{locale}/courses/{book}/LICENSE-SLC.md"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/assets/tex/nowidow.sty",
+      "to": "locale/{locale}/courses/{book}/nowidow.sty"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/assets/tex/nowidow.dtx",
+      "to": "locale/{locale}/courses/{book}/nowidow.dtx"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/assets/tex/nowidow.ins",
+      "to": "locale/{locale}/courses/{book}/nowidow.ins"
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/locale/open-logic-locale.sty",
+      "to": "locale/{locale}/open-logic-locale.sty"
+    },
+    {
+      "source": "edition",
+      "from": "reader/full-reader-config.sty",
+      "to": "locale/{locale}/gu-reader-tokens.sty",
+      "transforms": [
+        {
+          "id": "babel-language",
+          "before": "{english}",
+          "after": "{gujarati}",
+          "matches": 28,
+          "reason": "Preserve the native configuration alias while relocating the build to locale/gu/."
+        }
+      ]
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/locale/open-logic-config.sty",
+      "to": "locale/{locale}/open-logic-config.sty"
+    },
+    {
+      "source": "edition",
+      "from": "fonts/NotoSansGujarati-Regular.ttf",
+      "to": "fonts/NotoSansGujarati-Regular.ttf"
+    },
+    {
+      "source": "edition",
+      "from": "fonts/NotoSansGujarati-Bold.ttf",
+      "to": "fonts/NotoSansGujarati-Bold.ttf"
+    },
+    {
+      "source": "edition",
+      "from": "fonts/OFL.txt",
+      "to": "fonts/OFL.txt"
+    }
+  ],
+  "trees": [
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/include",
+      "to": "locale/{locale}/courses/{book}/include",
+      "include": [
+        "*.tex"
+      ]
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/book/illustrations",
+      "to": "locale/{locale}/courses/{book}/illustrations",
+      "include": [
+        "*.png"
+      ]
+    },
+    {
+      "source": "book",
+      "from": "textbooks/slc/locale/photocredits",
+      "to": "locale/{locale}/photocredits",
+      "include": [
+        "*.tex"
+      ]
+    }
+  ],
+  "required_book_files": [
+    "slc-config.sty",
+    "slc-envs.sty",
+    "slc-metadata.tex",
+    "slc-screen.xmpdata",
+    "include/preface.tex",
+    "include/glossary.tex",
+    "include/summary-1.tex",
+    "include/summary-2.tex",
+    "include/summary-3.tex",
+    "include/summary-4.tex",
+    "include/summary-6.tex",
+    "include/summary-7.tex",
+    "include/summary-8.tex",
+    "include/summary-10.tex",
+    "include/summary-11.tex",
+    "include/summary-12.tex",
+    "include/summary-14.tex",
+    "include/summary-15.tex"
+  ],
+  "legacy_overlays": [
+    "textbooks/slc/locale/patches.json"
+  ]
+}

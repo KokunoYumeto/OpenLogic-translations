@@ -52,8 +52,9 @@ class DriverTests(unittest.TestCase):
         self.assertNotEqual(jv['olpkit-after-olp.tex'],gu['olpkit-after-olp.tex'])
         self.assertEqual(jv_report['untranslated_driver_labels'],0)
         self.assertEqual(gu_report['untranslated_driver_labels'],0)
-        self.assertEqual(len(gu_report['transformations']),9)
+        self.assertEqual(len(gu_report['transformations']),10)
         self.assertIn(b'{0.245}',jv['olpkit-after-olp.tex'])
+        self.assertIn(b'{0.26}',gu['olpkit-after-olp.tex'])
         self.assertIn(b'{0.29}',gu['olpkit-after-olp.tex'])
 
     def test_source_imports_are_preserved_except_explicit_about_route(self):

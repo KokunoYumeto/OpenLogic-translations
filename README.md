@@ -40,8 +40,8 @@ The [frozen English source snapshot](https://github.com/OpenLogicProject/OpenLog
 | Language | Textbook | Downloads | PDF pages |
 | --- | --- | --- | ---: |
 | বাংলা · SLC | সেট, যুক্তি, গণনা | [PDF](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-bn-Beng-IN/5ce49d98d5a06a94e68b6d838dd6df60442f6220/textbooks/slc/slc-screen-bn.pdf) · [LaTeX](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-bn-Beng-IN/5ce49d98d5a06a94e68b6d838dd6df60442f6220/textbooks/slc/slc-screen-bn.tex) · [ZIP](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-bn-Beng-IN/5ce49d98d5a06a94e68b6d838dd6df60442f6220/textbooks/slc/slc-screen-bn-sources.zip) | 344 |
-| ગુજરાતી · SLC | ગણો, તર્ક, સંગણન | [PDF](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/d8d9a34cc7f38ab53fb014ac2a6f8fc5aa56fb4c/textbooks/slc/slc-screen-gu.pdf) | 311 |
-| Basa Jawa · SLC | Himpunan, Logika, Komputasi | [PDF](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-jv-Latn-ID/2880142dad280fa0d5a7675be190b28f2e300952/textbooks/slc/slc-screen-jv.pdf) | 475 |
+| ગુજરાતી · SLC | ગણો, તર્ક, સંગણન | [PDF](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/dcf9b9eca8a24759bea53ef17bac00239592a64a/textbooks/slc/slc-screen-gu.pdf) · [LaTeX](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/dcf9b9eca8a24759bea53ef17bac00239592a64a/textbooks/slc/slc-screen-gu.tex) · [ZIP](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/dcf9b9eca8a24759bea53ef17bac00239592a64a/textbooks/slc/slc-source-gu.zip) | 299 |
+| Basa Jawa · SLC | Himpunan, Logika, Komputasi | [PDF](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-jv-Latn-ID/a56163e19864f50f2da5197b56ba4c561b5e9b15/textbooks/slc/slc-screen-jv.pdf) · [LaTeX](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-jv-Latn-ID/a56163e19864f50f2da5197b56ba4c561b5e9b15/textbooks/slc/slc-screen-jv.tex) · [ZIP](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-jv-Latn-ID/a56163e19864f50f2da5197b56ba4c561b5e9b15/textbooks/slc/slc-source-jv.zip) | 345 |
 | मराठी · SLC | संच, तर्कशास्त्र, संगणन | [PDF](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-mr-Deva-IN/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/slc-screen-mr.pdf) · [LaTeX](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-mr-Deva-IN/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/slc-screen-mr.tex) · [ZIP](https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-mr-Deva-IN/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/slc-source-mr.zip) | 451 |
 
 Text: CC BY 4.0. Portraits: Matthew Leadbeater, CC BY-NC 4.0. Photographs and fonts retain their individual terms. The linked editions identify the models responsible for their AI translation; no human linguistic review is implied. [Edition and source details](catalogue/textbooks.json).
@@ -162,8 +162,8 @@ These links identify the published release for each work and language. The langu
 | Português brasileiro | [v2026-09-25-reader722-r2](https://github.com/KokunoYumeto/OpenLogic-pt-BR/releases/tag/v2026-09-25-reader722-r2) | 2026-09-25 |
 | Canon-first Inter-Turkic | [v2.2.0](https://github.com/KokunoYumeto/canon-first-turkic-interlanguage-openlogic/releases/tag/v2.2.0) | 2026-08-31 |
 | Punjabi (Pakistan, Shahmukhi) | [v0.3.1](https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK/releases/tag/v0.3.1) | 2026-11-13 |
-| Basa Jawa (aksara Latin) | [v0.3.0](https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.3.0) | 2026-11-12 |
-| ગુજરાતી | [full-edition-v1.1.0](https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/releases/tag/full-edition-v1.1.0) | 2026-11-12 |
+| Basa Jawa (aksara Latin) | [v0.3.1](https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.3.1) | 2026-11-13 |
+| ગુજરાતી | [full-edition-v1.2.0](https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/releases/tag/full-edition-v1.2.0) | 2026-11-13 |
 | मराठी | [complete-v1.2](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/complete-v1.2) | 2026-10-01 |
 | বাংলা (ভারত) | [v1.0.1-corrected-edition](https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN/releases/tag/v1.0.1-corrected-edition) | 2026-10-01 |
 | پښتو (پاکستان) | [v1.0.0](https://github.com/KokunoYumeto/openlogic-ps-Arab-PK/releases/tag/v1.0.0) | 2026-11-13 |

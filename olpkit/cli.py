@@ -154,6 +154,9 @@ def main(argv=None):
     sync=sub.add_parser('sync').add_subparsers(dest='action',required=True);q=sync.add_parser('plan');q.add_argument('--from',dest='from_ref');q.add_argument('--to',dest='to_ref');q.add_argument('--out');q.add_argument('--check',metavar='FOLDER')
     v=sync.add_parser('verify-vendored');v.add_argument('--repo',required=True);v.add_argument('--dir',required=True);v.add_argument('--commit',required=True)
     lint=sub.add_parser('lint').add_subparsers(dest='action',required=True);l=lint.add_parser('structure');l.add_argument('--en',required=True);l.add_argument('--tr',required=True);l.add_argument('--json',action='store_true')
+    edition=sub.add_parser('edition').add_subparsers(dest='action',required=True)
+    e=edition.add_parser('validate');e.add_argument('--repo',required=True);e.add_argument('--metadata-dir')
+    e=edition.add_parser('import-manifest');e.add_argument('--repo',required=True);e.add_argument('--adapter',required=True);e.add_argument('--out')
     a=p.parse_args(argv)
     try:
         if a.command=='units':registry(a.check)
@@ -161,6 +164,10 @@ def main(argv=None):
             if not a.check and not all([a.from_ref,a.to_ref,a.out]):raise ValueError('plan requires --from, --to and --out, or --check FOLDER')
             plan(a.from_ref,a.to_ref,a.check or a.out,bool(a.check))
         elif a.command=='sync':verify_vendored(a.repo,a.dir,a.commit)
+        elif a.command=='edition':
+            from .edition import import_manifest,validate_edition
+            if a.action=='import-manifest':import_manifest(a.repo,a.adapter,a.out,UPSTREAM)
+            else:validate_edition(a.repo,a.metadata_dir,UPSTREAM)
         else:
             d=differences(Path(a.en).read_text(encoding='utf-8-sig'),Path(a.tr).read_text(encoding='utf-8-sig'))
             if a.json:print(json.dumps(d,ensure_ascii=False,indent=2))

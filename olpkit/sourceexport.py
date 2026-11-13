@@ -189,7 +189,7 @@ def deterministic_zip(files):
     return data
 
 
-def source_package(source, assembly, build_path, policy, instructions, cumulative_body, cumulative_name):
+def source_package(source, assembly, build_path, policy, instructions, cumulative_body, cumulative_name, driver_inputs=()):
     """Use recorded source inputs plus explicit attribution and BibTeX dependencies."""
     from .credits import inspect_credits
     from .recorder import read_inputs, input_hashes
@@ -237,8 +237,17 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
             add(name,'TeX recorder input',row['sha256'])
         elif name.endswith('.xmpdata'):
             add(name,'generated reader metadata',row['sha256'])
+        elif name in {job.with_suffix('.pcr').as_posix(), job.with_suffix('.prb').as_posix()}:
+            # OLP regenerates the photo-credit list and deferred exercises.
+            continue
         elif Path(name).suffix not in {'.aux','.bbl','.gls','.toc','.out','.idx','.ind','.ilg','.glo','.ist'}:
             raise ValueError('unclassified generated recorder input: '+name)
+    for name in driver_inputs:
+        relative_path(name)
+        path=book+'/'+name
+        if path not in assembly['files']:
+            raise ValueError('unrecorded PDF driver input: '+path)
+        add(path,'PDF driver input',assembly['files'][path]['sha256'])
     for unit, paths in build['content_inputs'].items():
         if not paths or any(p not in files for p in paths):
             raise ValueError('recorded source unit missing from ZIP: '+unit)
@@ -248,9 +257,16 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
     for kind,names in re.findall(r'\\(bibdata|bibstyle)\{([^}]+)\}',aux):
         suffix='.bib' if kind=='bibdata' else '.bst'
         for name in names.split(','):
-            name=name.strip();relative_path(name)
+            name=name.strip()
             if not name.endswith(suffix):name+=suffix
-            candidates=[p for p in assembly['files'] if p==name or p==book+'/'+name or p=='bib/'+name]
+            if name.startswith('../'):
+                # BibTeX runs from the book directory and may address a pinned shared bibliography.
+                requested=posixpath.normpath(posixpath.join(book,name))
+                relative_path(requested)
+                candidates=[requested] if requested in assembly['files'] else []
+            else:
+                relative_path(name)
+                candidates=[p for p in assembly['files'] if p==name or p==book+'/'+name or p=='bib/'+name]
             if len(candidates)!=1:raise ValueError('unresolved bibliography dependency: '+name)
             path=candidates[0];add(path,'BibTeX input',assembly['files'][path]['sha256'])
     if not instructions.strip():raise ValueError('localized build instructions are required')
@@ -273,7 +289,9 @@ def export_command(source, product, out, profile_path=None, build_path=None, cre
     if out==boundary or not out.is_relative_to(boundary) or out.exists():
         raise ValueError('export needs a fresh named output folder')
     assembly=json.loads((source/'ASSEMBLY.json').read_text(encoding='utf-8'))
-    profile_path=Path(profile_path) if profile_path else ROOT/'data/exports'/f"{assembly['product']}.json"
+    default_profile=ROOT/'data/exports'/f"{assembly['product']}.json"
+    locale_profile=default_profile.with_stem(f"{default_profile.stem}-{assembly['locale']}")
+    profile_path=Path(profile_path) if profile_path else locale_profile if locale_profile.is_file() else default_profile
     profile=json.loads(profile_path.read_text(encoding='utf-8'))
     pins={k:v['commit'] for k,v in assembly['sources'].items()}
     _, imports, lock=select_lock(ROOT/'data/books'/profile['book'], pins)
@@ -285,7 +303,10 @@ def export_command(source, product, out, profile_path=None, build_path=None, cre
         if not all([build_path,credit_path,instructions_path]):
             raise ValueError('source ZIP requires --build, --credits and localized --instructions')
         policy=json.loads(Path(credit_path).read_text(encoding='utf-8'))
-        packed,package_report=source_package(source,assembly,build_path,policy,Path(instructions_path).read_bytes(),body,filename)
+        packed,package_report=source_package(
+            source,assembly,build_path,policy,Path(instructions_path).read_bytes(),body,filename,
+            profile.get('driver_inputs',())
+        )
         outputs[profile['stem']+'-'+assembly['locale']+'-source.zip']=packed
         report['package']=package_report
     report.update(schema='olpkit.source-export.v1', product=product, locale=assembly['locale'],

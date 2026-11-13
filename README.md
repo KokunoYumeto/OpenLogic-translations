@@ -30,6 +30,8 @@ Language profiles declare the link colour and contrast threshold. The common lin
 
 Driver generation checks the mapped driver labels; assembly verifies bytes and structure of the input set. Neither certifies book translation. Existing source files, publication history and substantive corrections must remain intact.
 
+If a prepared build stopped because the TeX slot was occupied and started no engine, the same `build` command with `--resume` reuses its output directory. Assembly generation checks every existing byte against the requested source revision and current profiles before reuse. The prior receipt is preserved under `attempts/`; a per-directory lock prevents concurrent invocations. Started, failed, completed or changed-input builds cannot use this route. Resume only at a later substantive checkpoint, never by polling the slot. This avoids another full staging copy for each occupied-slot attempt.
+
 `olpkit check credits --source ASSEMBLED_TREE --policy POLICY.json --out OUTPUT` checks the actual component notices against separately specified witness hashes. Policies account for original text, textbook, translation, portraits, photographs, fonts and bundled packages. Missing or altered notices fail. Unresolved requirements remain incomplete. Add `--pdf READER.pdf --build BUILD.json` to check actual reader attribution and bind it to the unchanged source assembly; source notices alone do not establish reader attribution. The report is a notice-preservation check, not copyright clearance or a review of translation quality.
 
 Builder code produced by OpenAI Codex — GPT-6 Astra, Ultra effort. This is a code attribution, not attribution of the inherited translations or original Open Logic Project texts.

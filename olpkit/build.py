@@ -87,7 +87,49 @@ def record_pdf_credits(output,result,policy_path):
     return credits['status']=='pass'
 
 
-def compile_book(folder,report,engine,epoch,output,expected=None,reference=False):
+def validate_unstarted_attempt(previous,report,engine,epoch):
+    """Only a zero-command occupied-slot attempt can reuse its prepared tree."""
+    if (previous.get('schema')!='olpkit.build.v1' or previous.get('status')!='slot_occupied'
+            or previous.get('commands')!=[] or previous.get('mutex_acquired') is not False
+            or previous.get('passes')!=0 or previous.get('pdf')):
+        raise ValueError('resume requires an occupied-slot receipt with no engine commands')
+    if (previous.get('assembly_sha256')!=digest(json_bytes(report))
+            or previous.get('source_inputs')!=report['files']
+            or previous.get('engine')!=engine or previous.get('source_date_epoch')!=epoch
+            or previous.get('book_directory')!=report['book_directory']
+            or previous.get('build_tree')!='source'):
+        raise ValueError('prepared build identity changed; do not resume this tree')
+
+
+def compile_book(folder,report,engine,epoch,output,expected=None,reference=False,resume=False):
+    """Serialize a build directory and preserve any resumable zero-engine receipt."""
+    folder=Path(folder);output=Path(output);output.mkdir(parents=True,exist_ok=True)
+    lock=output/'.olpkit-build.lock'
+    try:
+        with lock.open('xb') as stream:stream.write(str(os.getpid()).encode())
+    except FileExistsError:
+        raise ValueError('another invocation owns this build directory; do not restart it') from None
+    try:
+        receipt=output/'BUILD.json'
+        if resume:
+            if not receipt.is_file():raise ValueError('resume requires the previous occupied-slot receipt')
+            original=receipt.read_bytes();previous=json.loads(original)
+            validate_unstarted_attempt(previous,report,engine,epoch)
+            verify_assembly(folder,report)
+            history=output/'attempts';history.mkdir(exist_ok=True)
+            archived=history/('BUILD-'+digest(original)+'.json')
+            if archived.exists() and archived.read_bytes()!=original:
+                raise ValueError('attempt archive identity differs')
+            if receipt.read_bytes()!=original:raise ValueError('build receipt changed during resume')
+            receipt.replace(archived)
+        elif receipt.exists():
+            raise ValueError('a build receipt already exists; use --resume only for a zero-engine occupied slot')
+        return _compile_book(folder,report,engine,epoch,output,expected,reference)
+    finally:
+        lock.unlink()
+
+
+def _compile_book(folder,report,engine,epoch,output,expected=None,reference=False):
     """Compile once per validated input batch; every tool stays under the slot."""
     folder=Path(folder).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
     verify_assembly(folder,report)
@@ -177,7 +219,7 @@ def compile_book(folder,report,engine,epoch,output,expected=None,reference=False
     finally:save()
 
 
-def reference_tree(cache_root,olp_pin,out):
+def reference_tree(cache_root,olp_pin,out,check=False):
     data=json.loads((ROOT/'data/build-products/slc-screen-pdf.json').read_text())
     validate_schema('build-product',data)
     cache=SourceCache(cache_root);tree=AssemblyTree();sources={}
@@ -194,29 +236,30 @@ def reference_tree(cache_root,olp_pin,out):
         tree.add('courses/'+data['book']+'/'+Path(name).name,body,{'source':'package-witness','commit':snap.commit,'path':name})
     report={'schema':'olpkit.reference-assembly.v1','book_directory':'courses/'+data['book'],
             'pins':sources,'files':tree.origins,'unreconciled_legacy_inputs':[]}
-    write_assembly(tree,report,out);return report
+    write_assembly(tree,report,out,check);return report
 
 
-def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None):
+def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False):
     if product!='slc-screen-pdf':raise ValueError('build product not yet implemented: '+product)
     if not out:raise ValueError('build requires an explicit named --out directory')
     output=Path(out).resolve();boundary=(ROOT.parent/'out').resolve()
     if output==boundary or not output.is_relative_to(boundary):raise ValueError('build output escapes named builder outputs')
-    if output.exists():raise ValueError('build output already exists; preserve it and select a new directory')
+    if output.exists() and not resume:raise ValueError('build output already exists; preserve it or resume an unstarted build')
+    if resume and not output.is_dir():raise ValueError('resume requires an existing prepared build directory')
     source=output/'source';lock_dir=ROOT/'data/books/sets-logic-computation'
     if english:
         if not olp_pin:raise ValueError('English reference requires an explicit full --olp-pin')
-        report=reference_tree(cache_root,olp_pin,source);engine='pdflatex';expected=None
+        report=reference_tree(cache_root,olp_pin,source,resume);engine='pdflatex';expected=None
     else:
         if not repo:raise ValueError('translation build requires --repo')
         edition=tomllib.loads((GitSnapshot(repo,edition_ref or ref).read_many(['olp-edition.toml'])['olp-edition.toml']
                               if not metadata_dir else (Path(metadata_dir)/'olp-edition.toml').read_bytes()).decode('utf-8-sig'))
         engine=edition['engine'];olp_pin=edition['pins']['olp']['commit']
         _,expected,_=select_lock(lock_dir,{s:edition['pins'][s]['commit'] for s in ('olp','slc','portraits','photos')})
-        report=assemble_command(repo,ref,edition_ref,metadata_dir,cache_root,source,product)
+        report=assemble_command(repo,ref,edition_ref,metadata_dir,cache_root,source,product,check=resume)
     bare=SourceCache(cache_root).locations('olp',olp_pin)[0]
     epoch=int(run_git(bare,'show','-s','--format=%ct',olp_pin).stdout.decode().strip())
-    result=compile_book(source,report,engine,epoch,output,expected,english)
+    result=compile_book(source,report,engine,epoch,output,expected,english,resume)
     if not english and result.get('pdf'):
         language=tomllib.loads((ROOT/'data/languages'/(report['locale']+'.toml')).read_text(encoding='utf-8'))
         links_ok=record_pdf_links(output,result,language['links']['minimum_contrast'],language['links']['color'])

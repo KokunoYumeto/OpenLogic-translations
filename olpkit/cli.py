@@ -160,6 +160,7 @@ def main(argv=None):
     fetch=sub.add_parser('fetch');fetch.add_argument('--repo',required=True);fetch.add_argument('--metadata-dir')
     drivers=sub.add_parser('drivers');drivers.add_argument('--repo',required=True);drivers.add_argument('--metadata-dir');drivers.add_argument('--out',required=True);drivers.add_argument('--check',action='store_true');drivers.add_argument('--book',default='sets-logic-computation')
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
+    build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin')
     a=p.parse_args(argv)
     try:
         if a.command=='units':registry(a.check)
@@ -173,6 +174,9 @@ def main(argv=None):
         elif a.command=='assemble':
             from .assembly import assemble_command
             assemble_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.check)
+        elif a.command=='build':
+            from .build import build_command
+            return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin)
         elif a.command=='fetch':
             from .cache import fetch_edition
             fetch_edition(a.repo,a.metadata_dir,CACHE)

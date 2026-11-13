@@ -1,0 +1,11 @@
+id = "gu-current-line-width"
+path = "sty/open-logic.sty"
+before = "\\begin{adjustbox}{max width=\\textwidth}"
+after = "\\begin{adjustbox}{max width=\\dimexpr\\linewidth-1pt\\relax}"
+reason = "Bound wide objects by the current environment's line width, preserving the accepted textbook layout."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/blob/dcf9b9eca8a24759bea53ef17bac00239592a64a/textbooks/slc/prepare.py"]
+
+[[conditions]]
+locale = "gu"
+engine = "lualatex"
+script = "Gujr"

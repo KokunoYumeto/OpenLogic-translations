@@ -151,11 +151,18 @@ async function releases(check) {
       const selected=list.find(r=>r.tag_name===promotion.tag&&!r.draft&&!r.prerelease);
       if (!selected) throw Error('Accepted release is absent: '+edition.id);
       edition.release_tag=selected.tag_name;edition.release=selected.html_url;
-      const current=promotion.assets.map(spec=>{
+      const promotedAsset=spec=>{
         const asset=selected.assets.find(a=>a.name===spec.name);
         if (!asset || asset.digest!=='sha256:'+spec.sha256 || asset.size!==spec.bytes) throw Error('Accepted release asset changed: '+spec.name);
         return {...spec,url:asset.browser_download_url};
-      });
+      };
+      const current=promotion.assets.map(promotedAsset);
+      for (const spec of promotion.supplementary_assets || []) {
+        const replacement=promotedAsset(spec);
+        for (const group of edition.supplementary_downloads || []) {
+          group.downloads=group.downloads.map(asset=>asset.name===spec.name?replacement:asset);
+        }
+      }
       edition.ordered_downloads=current;
       edition.readers=current.filter(a=>['PDF','EPUB','HTML'].includes(a.format));
       edition.source_archive=current.find(a=>a.format==='ZIP');
@@ -164,7 +171,11 @@ async function releases(check) {
       edition.status=edition.status.filter(s=>s!=='full-epub-pending');
       edition.epub_coverage_note=promotion.epub_coverage_note;
       if (promotion.remove_limitation) edition.limitations=edition.limitations.filter(t=>t!==promotion.remove_limitation);
-      edition.evidence.current_format_readback='evidence/CURRENT_JV_GU_FORMATS_20261113.json';
+      if (!/^evidence\/[A-Za-z0-9_-]+\.json$/.test(promotion.readback || '')) throw Error('Promotion requires its exact readback: '+edition.id);
+      edition.evidence.current_format_readback=promotion.readback;
+      if (promotion.profiles) edition.profiles=promotion.profiles;
+      if (promotion.coverage_basis) edition.coverage_basis=promotion.coverage_basis;
+      if (promotion.evidence) Object.assign(edition.evidence,promotion.evidence);
       if (promotion.historical_doi_label) edition.ui_labels.doi=promotion.historical_doi_label;
     }
     const selection=selectRelease(edition,list);

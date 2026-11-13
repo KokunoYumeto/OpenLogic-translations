@@ -297,7 +297,7 @@ check(marathi194.ordered_downloads.slice(0,4).map(item => item.format).join(",")
 check(marathi194.ordered_downloads.every(item => /[\u0900-\u097f]/.test(item.download_label || '')), "Every Marathi download label, including HTML-ZIP, must be localized");
 for (const item of marathi194.ordered_downloads) check(marathi194Evidence.files.some(file => file.url === item.url && file.bytes === item.bytes && file.sha256 === item.sha256), "Marathi194 download must match readback");
 check(marathi194Evidence.full_semantic_reaudit === false && marathi194Evidence.packaging_observations.length === 2, "Marathi194 bounded evidence must retain its limitations");
-const marathi722 = catalogue.editions.find(item => item.id === "openlogic-mr-deva-in");
+const marathi722 = JSON.parse(await read("evidence/MARATHI_V11_CATALOGUE_SNAPSHOT_20261113.json")); // Historical v1.1 checks remain bound to their actual files.
 const marathi722Audit = JSON.parse(await read(marathi722.evidence.public_readback));
 check(["source_units_translated","standalone_reader_units","pdf_reader_units","html_reader_units","zenodo_reader_units"].every(k=>marathi722[k]===722), "Marathi complete PDF/HTML/source scope");
 check(marathi722Audit.files.length===110 && marathi722Audit.files.every(f=>f.match && f.anonymous), "Marathi v1.1 needs16 GitHub and94 Zenodo exact anonymous matches");
@@ -311,6 +311,18 @@ for (const f of [...marathi722.ordered_downloads,...marathi722.supplementary_dow
 }
 check(marathi722.readers.find(f=>f.format==="EPUB")?.source_units===722 && marathi722.epub_reader_units===722 && marathi722Audit.epub.complete_available && marathi722Audit.epub.reading_documents===98, "Marathi complete EPUB722 must be the current reader");
 check(marathi722.supplementary_downloads[1].downloads[0].source_units===194, "Historical EPUB194 access retained");
+const marathiCurrent = catalogue.editions.find(item => item.id === "openlogic-mr-deva-in");
+const marathiCurrentBytes = JSON.parse(await read(marathiCurrent.evidence.current_format_readback));
+check(marathiCurrent.release_tag === "complete-v1.4" && marathiCurrentBytes.assets.length === 8, "Current Marathi release requires its own eight-asset receipt");
+check(marathiCurrent.ordered_downloads.map(f=>f.format).join(",") === "PDF,TEX,ZIP,EPUB" && marathiCurrent.readers[0].pages === 957, "Current Marathi reader and editable-source order");
+check(marathiCurrent.standalone_reader_units === 722 && marathiCurrent.epub_reader_units === 722 && marathiCurrentBytes.scope.epub_content_documents === 98, "Current Marathi cumulative reader scope");
+const marathiPrimaryAndHtml=[...marathiCurrent.ordered_downloads,...marathiCurrent.supplementary_downloads[0].downloads.filter(f=>f.format==='HTML-ZIP')];
+for (const f of marathiPrimaryAndHtml) {
+  check(marathiCurrentBytes.assets.some(a=>a.name===f.name && a.url===f.url && a.bytes===f.bytes && a.sha256===f.sha256), "Current Marathi file differs from anonymous readback");
+  check(/[\u0900-\u097f]/.test(f.download_label), "Current Marathi download labels remain localized");
+}
+check(marathiCurrentBytes.bounded_format_comparison.term_reference==='16.5.1' && marathiCurrentBytes.bounded_format_comparison.html_and_epub_proof_text_equal, "Marathi corrected numbering specimen is required");
+check(marathiCurrent.supplementary_downloads[1].downloads[0].source_units===194 && !marathiCurrent.evidence.complete_linguistic_certification, "Historical access and linguistic limitations remain explicit");
 check(marathi722Audit.canon.empty_direct_passage_rows===5 && marathi722Audit.canon.retrospective_contexts===101 && !marathi722.evidence.complete_linguistic_certification && !marathi722Audit.pdf.whole_pdf_visual_certification, "Marathi scoped retrospective evidence and audit limits");
 check(marathi722.version_doi==="10.5281/zenodo.23044506" && marathi722.current_local_configured_reader.public_release_sync_verified, "Marathi current record and sync");
 const marathiGuide = await read(marathi722.evidence.manager_public_readback);

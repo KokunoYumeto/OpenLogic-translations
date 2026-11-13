@@ -92,6 +92,14 @@
         ],
         "additionalProperties": false
       }
+    },
+    "driver_policy": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.toml$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
     }
   },
   "required": [
@@ -102,7 +110,8 @@
     "drivers",
     "book_units",
     "imports_lock",
-    "credits"
+    "credits",
+    "source_id"
   ],
   "additionalProperties": false
 }

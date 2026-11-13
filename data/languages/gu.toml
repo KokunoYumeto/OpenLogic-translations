@@ -1,0 +1,43 @@
+schema_version = 1
+locale = "gu"
+engine = "lualatex"
+script = "Gujr"
+babel = "gujarati"
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/blob/d8d9a34cc7f38ab53fb014ac2a6f8fc5aa56fb4c/textbooks/slc/book/slc.tex", "https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/blob/d8d9a34cc7f38ab53fb014ac2a6f8fc5aa56fb4c/textbooks/slc/book/slc-screen.tex"]
+
+[preamble]
+before_class = ["gu-before-class.tex"]
+before_olp = ["gu-before-olp.tex", "common-before-olp.tex"]
+after_olp = ["common-after-olp.tex", "gu-after-olp.tex"]
+
+[layout]
+portrait_width = 0.29
+emergency_stretch = "2em"
+
+[strings]
+summary = "સારાંશ"
+figure = "આકૃતિ"
+biographies = "તર્કશાસ્ત્રીઓનાં જીવનચરિત્રો"
+glossary = "પરિભાષાકોશ"
+initial = "પ્રારંભ"
+issue = "મુદ્દો"
+
+[fonts.main]
+file = "NotoSansGujarati-Regular.ttf"
+bold = "NotoSansGujarati-Bold.ttf"
+renderer = "HarfBuzz"
+script = "Gujarati"
+license = "fonts/OFL.txt"
+
+[fonts.sans]
+file = "NotoSansGujarati-Regular.ttf"
+bold = "NotoSansGujarati-Bold.ttf"
+license = "fonts/OFL.txt"
+
+[fonts.mono]
+file = "NotoSansGujarati-Regular.ttf"
+bold = "NotoSansGujarati-Bold.ttf"
+license = "fonts/OFL.txt"
+
+[fonts.math]
+name = "newtxmath"

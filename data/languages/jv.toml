@@ -1,0 +1,33 @@
+schema_version = 1
+locale = "jv"
+engine = "pdflatex"
+script = "Latn"
+babel = "javanese"
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/blob/2880142dad280fa0d5a7675be190b28f2e300952/textbooks/slc/book/slc.tex", "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/blob/2880142dad280fa0d5a7675be190b28f2e300952/textbooks/slc/book/slc-screen.tex", "https://github.com/OpenLogicProject/OpenLogic/blob/9620cc73f9c8e0ad003c514a5d3748f29611c4c0/sty/open-logic-book.cls", "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/blob/a56163e19864f50f2da5197b56ba4c561b5e9b15/textbooks/slc/book/slc-screen.tex"]
+
+[preamble]
+before_class = ["jv-before-class.tex"]
+before_olp = ["jv-before-olp.tex", "common-before-olp.tex"]
+after_olp = ["common-after-olp.tex", "jv-after-olp.tex"]
+
+[layout]
+portrait_width = 0.245
+emergency_stretch = "3em"
+table_column_separation = "4pt"
+
+[strings]
+summary = "Ringkesan"
+figure = "Gambar"
+biographies = "Babad Para Ahli Logika"
+glossary = "Glosarium"
+initial = "wiwit"
+
+[fonts.main]
+name = "Baskervaldx"
+
+[fonts.sans]
+name = "helvet"
+scale = 0.92
+
+[fonts.math]
+name = "newtxmath"

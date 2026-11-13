@@ -1,0 +1,6 @@
+\newcommand*{\ollangid}{@@locale@@}
+\newcommand*{\ollanguage}{@@babel@@}
+\PassOptionsToPackage{provide=*}{babel}
+\NewDocumentCommand\slcterm{O{} m m m m}{%
+  \newglossaryentry{#2}{sort={#3},name={#4},plural={#4},
+    symbol={#1},description={#5}}}

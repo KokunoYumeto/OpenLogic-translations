@@ -158,6 +158,7 @@ def main(argv=None):
     e=edition.add_parser('validate');e.add_argument('--repo',required=True);e.add_argument('--metadata-dir')
     e=edition.add_parser('import-manifest');e.add_argument('--repo',required=True);e.add_argument('--adapter',required=True);e.add_argument('--out')
     fetch=sub.add_parser('fetch');fetch.add_argument('--repo',required=True);fetch.add_argument('--metadata-dir')
+    drivers=sub.add_parser('drivers');drivers.add_argument('--repo',required=True);drivers.add_argument('--metadata-dir');drivers.add_argument('--out',required=True);drivers.add_argument('--check',action='store_true');drivers.add_argument('--book',default='sets-logic-computation')
     a=p.parse_args(argv)
     try:
         if a.command=='units':registry(a.check)
@@ -165,6 +166,9 @@ def main(argv=None):
             if not a.check and not all([a.from_ref,a.to_ref,a.out]):raise ValueError('plan requires --from, --to and --out, or --check FOLDER')
             plan(a.from_ref,a.to_ref,a.check or a.out,bool(a.check))
         elif a.command=='sync':verify_vendored(a.repo,a.dir,a.commit)
+        elif a.command=='drivers':
+            from .drivers import drivers_command
+            drivers_command(a.repo,a.metadata_dir,CACHE,a.out,a.check,a.book)
         elif a.command=='fetch':
             from .cache import fetch_edition
             fetch_edition(a.repo,a.metadata_dir,CACHE)

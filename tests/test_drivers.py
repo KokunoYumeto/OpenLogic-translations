@@ -63,6 +63,23 @@ class DriverTests(unittest.TestCase):
         pattern=r'\\olimport[^\n]+'
         self.assertEqual(re.findall(pattern,source),re.findall(pattern,outputs['slc.tex'].decode()))
 
+    def test_bengali_native_policy_does_not_replace_other_locales(self):
+        bn,bn_report=self.generate('bn');jv,jv_report=self.generate('jv');gu,gu_report=self.generate('gu')
+        self.assertEqual(bn_report['policy'],'books/sets-logic-computation-bn-drivers.toml')
+        self.assertEqual(jv_report['policy'],gu_report['policy'])
+        self.assertEqual(jv_report['policy'],'books/sets-logic-computation-drivers.toml')
+        self.assertIn(b'../../../../sty/open-logic-book',bn['slc-screen.tex'])
+        self.assertIn(b'\\quad',bn['slc-screen.tex'])
+        self.assertIn(b'\\AddToHook{begindocument/end}',bn['olpkit-after-olp.tex'])
+        self.assertIn(b'{684106}',bn['olpkit-after-olp.tex'])
+        self.assertEqual(bn_report['untranslated_driver_labels'],0)
+        self.assertEqual(jv['slc-screen.tex'],gu['slc-screen.tex'])
+
+    def test_locale_policy_path_cannot_escape_book_data(self):
+        p=self.data/'books/sets-logic-computation.toml'
+        p.write_text(p.read_text().replace('sets-logic-computation-bn-drivers.toml','../../private.toml'))
+        with self.assertRaisesRegex(ValueError,'book:'):self.generate('bn')
+
     def test_upstream_change_requires_explicit_policy_review(self):
         sources={**self.sources,'slc.tex':self.sources['slc.tex']+b'\\chapter{New reader text}\n'}
         with self.assertRaisesRegex(ValueError,'upstream driver changed'):

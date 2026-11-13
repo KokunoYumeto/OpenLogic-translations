@@ -13,6 +13,7 @@ from .cache import SourceCache,run_git,relative_path
 from .process import TeXSlot,run_job,MEMORY_LIMIT,TEX_MUTEX
 from .recorder import read_inputs,content_inputs,load_imports,compare_imports,input_hashes
 from .schemas import ROOT,validate_schema
+from .importlock import select_lock,write_lock
 
 
 GATES=('G-UNITS','G-STRUCT','G-NOTE','G-TOKEN','G-ORTHO','G-ALONE','G-IMPORT','G-LOG',
@@ -208,15 +209,11 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
         report=reference_tree(cache_root,olp_pin,source);engine='pdflatex';expected=None
     else:
         if not repo:raise ValueError('translation build requires --repo')
-        report=assemble_command(repo,ref,edition_ref,metadata_dir,cache_root,source,product)
         edition=tomllib.loads((GitSnapshot(repo,edition_ref or ref).read_many(['olp-edition.toml'])['olp-edition.toml']
                               if not metadata_dir else (Path(metadata_dir)/'olp-edition.toml').read_bytes()).decode('utf-8-sig'))
         engine=edition['engine'];olp_pin=edition['pins']['olp']['commit']
-        lock_meta=json.loads((lock_dir/'imports.json').read_text())
-        if lock_meta['pins']!={s:edition['pins'][s]['commit'] for s in lock_meta['pins']}:
-            raise ValueError('imports.lock belongs to different source pins; build the English reference')
-        if digest((lock_dir/'imports.lock').read_bytes())!=lock_meta['lock_sha256']:raise ValueError('imports.lock hash differs')
-        expected=load_imports(lock_dir/'imports.lock')
+        _,expected,_=select_lock(lock_dir,{s:edition['pins'][s]['commit'] for s in ('olp','slc','portraits','photos')})
+        report=assemble_command(repo,ref,edition_ref,metadata_dir,cache_root,source,product)
     bare=SourceCache(cache_root).locations('olp',olp_pin)[0]
     epoch=int(run_git(bare,'show','-s','--format=%ct',olp_pin).stdout.decode().strip())
     result=compile_book(source,report,engine,epoch,output,expected,english)
@@ -233,9 +230,5 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
         body=''.join(uid+'\t'+path+'\n' for uid,path in rows).encode()
         meta={'schema':'olpkit.imports.v1','pins':report['pins'],'lock_sha256':digest(body),
               'units':len(rows),'recorder_sha256':result['recorder_sha256'],'reference_pdf_sha256':result['pdf']['sha256']}
-        lock_dir.mkdir(parents=True,exist_ok=True)
-        for name,b in [('imports.lock',body),('imports.json',json_bytes(meta))]:
-            path=lock_dir/name
-            if path.exists() and path.read_bytes()!=b:raise ValueError('existing import lock differs; preserve it for explicit source-sync review')
-            path.write_bytes(b)
+        write_lock(lock_dir,body,meta)
     return 75 if result['status']=='slot_occupied' else 0

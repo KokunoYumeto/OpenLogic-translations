@@ -1,0 +1,130 @@
+schema_version = 1
+source_commit = "6178f32f61645f3b62ef621b4c5a88f8e67778ad"
+
+[[files]]
+path = "slc.tex"
+sha256 = "5c4728eac32f6d35f5b8f49c90c100780c34c5007ae2d76e37782d93cbdf2089"
+
+[[files.transforms]]
+id = "summary-file"
+before = "include/summary-\\thechapter}\n"
+after = "include/summary-\\thechapter.tex}\n"
+matches = 1
+kind = "path"
+reason = "Test the explicit translated summary filename."
+
+[[files.transforms]]
+id = "summary"
+before = "\\section*{Summary}\\addcontentsline{toc}{section}{Summary}"
+after = "\\section*{\\olpBookSummary}\\addcontentsline{toc}{section}{\\olpBookSummary}"
+matches = 1
+kind = "label"
+reason = "Use the accepted Bengali summary label."
+
+[[files.transforms]]
+id = "figure"
+before = "\\def\\figurename{Fig.}"
+after = "\\def\\figurename{\\olpBookFigure}"
+matches = 1
+kind = "label"
+reason = "Use the accepted Bengali figure label."
+
+[[files.transforms]]
+id = "biographies"
+before = "\\chapter{Biographies}"
+after = "\\chapter{\\olpBookBiographies}"
+matches = 1
+kind = "label"
+reason = "Use the accepted Bengali biographies label."
+
+[[files.transforms]]
+id = "glossary"
+before = "\\printglossaries"
+after = "\\printglossary[title={\\olpBookGlossary},toctitle={\\olpBookGlossary}]"
+matches = 1
+kind = "label"
+reason = "Use the accepted Bengali glossary heading and contents entry."
+
+[[files.transforms]]
+id = "bib-style"
+before = "\\bibliographystyle{\\olpath/bib/natbib-oup}"
+after = "\\bibliographystyle{natbib-oup}"
+matches = 1
+kind = "path"
+reason = "Use the pinned patched BibTeX style on BSTINPUTS."
+
+[[files.transforms]]
+id = "bib-database"
+before = "\\bibliography{\\olpath/bib/open-logic.bib}"
+after = "\\bibliography{\\olpath/bib/open-logic}"
+matches = 1
+kind = "path"
+reason = "Use the native localized bibliography database."
+
+[[files.transforms]]
+id = "about"
+before = "\\olimport*{\\olpath/content/open-logic-about}"
+after = "\\olimport*{\\olpath/locale/\\ollangid/content/open-logic-about}"
+matches = 1
+kind = "about"
+reason = "Read the existing Bengali About text."
+
+[[files]]
+path = "slc-screen.tex"
+sha256 = "2a8f06a3a2e39493a64339c431797e9a579ada8a40dd93467db04942ab177c7e"
+
+[[files.transforms]]
+id = "class-path"
+before = "\\documentclass[screen]{../../sty/open-logic-book}"
+after = "\\input{olpkit-before-class}\n\\documentclass[screen]{../../../../sty/open-logic-book}"
+matches = 1
+kind = "preamble"
+reason = "Use the pinned OLP class relative to the Bengali course."
+
+[[files.transforms]]
+id = "screen-options"
+before = "\n\n\\definecolor{OLPcolor}{RGB}{248,154,14}\n\\definecolor{OLPdkcolor}{RGB}{104,65,6}\n\\definecolor{OLPltcolor}{RGB}{248,203,137}\n\n\\usepackage[nonumberlist,toc,style=index]{glossaries}\n\\makeglossaries\n\n"
+after = "\n\n"
+matches = 1
+kind = "preamble"
+reason = "The Bengali preamble loads native font, cover colors and glossaries options in their original relative order."
+
+[[files.transforms]]
+id = "source-root"
+before = "\\newcommand{\\olpath}{../..}"
+after = "\\newcommand{\\olpath}{../../../..}"
+matches = 1
+kind = "path"
+reason = "Resolve the shared source root from the assembled course."
+
+[[files.transforms]]
+id = "path-comment"
+before = "% courses/sets-logic-computation/, so the main directory is two\n% levels up."
+after = "% locale/bn/courses/sets-logic-computation/, four levels below the source root."
+matches = 1
+kind = "path"
+reason = "Document the assembled course directory."
+
+[[files.transforms]]
+id = "before-olp"
+before = "\\input{\\olpath/sty/open-logic.sty}"
+after = "\\input{olpkit-before-olp}\n\\input{\\olpath/sty/open-logic.sty}"
+matches = 1
+kind = "preamble"
+reason = "Set the Bengali locale and native XeLaTeX shaping before loading Open Logic."
+
+[[files.transforms]]
+id = "after-olp"
+before = "\\loadglsentries{include/glossary}"
+after = "\\input{olpkit-after-olp}\n\\input{include/glossary-adapter}\n\\loadglsentries{include/glossary}"
+matches = 1
+kind = "preamble"
+reason = "Retain native deferral, glossary and running-head setup."
+
+[[files.transforms]]
+id = "native-cover"
+before = "\\OLPscreencover{\\hfill\\hspace{.29\\textwidth}\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/cantor-circle.pdf}\\hfill{}\n\n\\hfill{}\n\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/goedel-circle.pdf}\n\\hfil\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/turing-circle.pdf}\\hfil{}\n\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/skolem-circle.pdf}\n\\hfill{}\n\n\\hfill{}\n\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/noether-circle.pdf}\\hspace{.29\\textwidth}\\hfill{}\n}"
+after = "\\OLPscreencover{%\n  \\centering\n  \\includegraphics[width=\\olpCoverPortraitWidth\\textwidth]{\\olpath/assets/portraits/cantor-circle.pdf}\\quad\n  \\includegraphics[width=\\olpCoverPortraitWidth\\textwidth]{\\olpath/assets/portraits/goedel-circle.pdf}\\quad\n  \\includegraphics[width=\\olpCoverPortraitWidth\\textwidth]{\\olpath/assets/portraits/turing-circle.pdf}\\par\\medskip\n  \\includegraphics[width=\\olpCoverPortraitWidth\\textwidth]{\\olpath/assets/portraits/skolem-circle.pdf}\\quad\n  \\includegraphics[width=\\olpCoverPortraitWidth\\textwidth]{\\olpath/assets/portraits/noether-circle.pdf}\\par\n}"
+matches = 1
+kind = "layout"
+reason = "Keep the accepted Bengali cover’s centered three-plus-two portrait grid."

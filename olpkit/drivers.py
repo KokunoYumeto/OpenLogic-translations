@@ -55,7 +55,8 @@ def generate_drivers(edition, source_files, book_id='sets-logic-computation', da
         raise ValueError('invalid book identifier')
     book = read_toml(data_root/'books'/(book_id+'.toml'))
     validate_schema('book',book)
-    policy_path = data_root/'books'/book['driver_policy']
+    policy_name=book.get('driver_policies',{}).get(edition['locale'],book['driver_policy'])
+    policy_path = data_root/'books'/policy_name
     policy = read_toml(policy_path)
     validate_schema('driver-policy',policy)
     if policy['source_commit']!=book['commit'] or edition['pins'][book['source_id']]['commit']!=book['commit']:
@@ -114,7 +115,7 @@ def generate_drivers(edition, source_files, book_id='sets-logic-computation', da
                   '% Localized settings are loaded from the accompanying preamble files.\n').encode()
         outputs[name] = header+result
     report = {'schema':'olpkit.drivers.v1','book':book_id,'book_pin':book['commit'],'locale':edition['locale'],
-              'language_data_sha256':digest(language_bytes),'policy_sha256':digest(policy_path.read_bytes()),
+              'language_data_sha256':digest(language_bytes),'policy':'books/'+policy_name,'policy_sha256':digest(policy_path.read_bytes()),
               'templates':templates,'evidence':language['evidence'],'transformations':transformations,
               'untranslated_driver_labels':0,'rendered_equivalence':'not checked by generation',
               'outputs':{name:{'bytes':len(data),'sha256':digest(data)} for name,data in sorted(outputs.items())}}

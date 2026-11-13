@@ -97,6 +97,11 @@
       "type": "string",
       "pattern": "^[a-z0-9-]+\\.toml$"
     },
+    "driver_policies": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z][a-z0-9-]*$"},
+      "additionalProperties": {"type": "string", "pattern": "^[a-z0-9-]+\\.toml$"}
+    },
     "source_id": {
       "type": "string",
       "pattern": "^[a-z0-9-]+$"

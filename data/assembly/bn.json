@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "locale": "bn",
+  "product": "slc-screen-pdf",
+  "book": "sets-logic-computation",
+  "source_id": "slc",
+  "manifest": "courses/sets-logic-computation/MANIFEST.json",
+  "manifest_pins": {
+    "olp": "olp",
+    "slc": "slc",
+    "portraits": "portrait_assets",
+    "photos": "photo_assets"
+  },
+  "upstream_include": [
+    "content/*",
+    "sty/*",
+    "include/*",
+    "assets/*",
+    "open-logic-*.sty",
+    "LICENSE.md",
+    "bib/natbib-oup.bst",
+    "locale/LOCALIZATION.md"
+  ],
+  "assets": [
+    {
+      "source": "portraits",
+      "to": "assets/portraits",
+      "include": [
+        "*-circle.pdf",
+        "LICENSE.md"
+      ]
+    },
+    {
+      "source": "photos",
+      "to": "assets/photos",
+      "include": [
+        "*-credit.tex",
+        "*-large.png",
+        "*-small.png",
+        "README.md"
+      ]
+    },
+    {
+      "source": "slc",
+      "to": "locale/bn/courses/sets-logic-computation",
+      "include": [
+        "illustrations/*Chapter.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/LICENSE.md",
+      "to": "locale/{locale}/courses/{book}/LICENSE.md"
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/slc-config.sty",
+      "to": "locale/{locale}/courses/{book}/slc-config.sty"
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/slc-envs.sty",
+      "to": "locale/{locale}/courses/{book}/slc-envs.sty"
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/slc-metadata.tex",
+      "to": "locale/{locale}/courses/{book}/slc-metadata.tex"
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/assets/tex/nowidow/nowidow.sty",
+      "to": "locale/{locale}/courses/{book}/nowidow.sty"
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/assets/tex/nowidow/nowidow.dtx",
+      "to": "locale/{locale}/courses/{book}/nowidow.dtx"
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/assets/tex/nowidow/nowidow.ins",
+      "to": "locale/{locale}/courses/{book}/nowidow.ins"
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/assets/tex/nowidow/README",
+      "to": "licenses/nowidow/README"
+    },
+    {
+      "source": "edition",
+      "from": "bn-Beng-IN/open-logic-locale.sty",
+      "to": "locale/{locale}/open-logic-locale.sty"
+    },
+    {
+      "source": "edition",
+      "from": "bn-Beng-IN/open-logic-config.sty",
+      "to": "locale/{locale}/open-logic-config.sty"
+    },
+    {
+      "source": "edition",
+      "from": "bn-Beng-IN/bib/open-logic.bib",
+      "to": "bib/open-logic.bib"
+    },
+    {
+      "source": "edition",
+      "from": "fonts/NotoSerifBengali-Regular.ttf",
+      "to": "fonts/NotoSerifBengali-Regular.ttf"
+    },
+    {
+      "source": "edition",
+      "from": "fonts/NotoSerifBengali-Bold.ttf",
+      "to": "fonts/NotoSerifBengali-Bold.ttf"
+    },
+    {
+      "source": "edition",
+      "from": "fonts/Noto-fonts-LICENSE.txt",
+      "to": "fonts/Noto-fonts-LICENSE.txt"
+    }
+  ],
+  "trees": [
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/include",
+      "to": "locale/{locale}/courses/{book}/include",
+      "include": [
+        "*.tex"
+      ]
+    },
+    {
+      "source": "book",
+      "from": "courses/sets-logic-computation/printtest",
+      "to": "locale/{locale}/courses/{book}/printtest",
+      "include": [
+        "*.tex"
+      ]
+    },
+    {
+      "source": "edition",
+      "from": "bn-Beng-IN/photocredits",
+      "to": "locale/{locale}/photocredits",
+      "include": [
+        "*.tex"
+      ]
+    }
+  ],
+  "required_book_files": [
+    "slc-config.sty",
+    "slc-envs.sty",
+    "slc-metadata.tex",
+    "include/preface.tex",
+    "include/glossary.tex",
+    "include/summary-1.tex",
+    "include/summary-2.tex",
+    "include/summary-3.tex",
+    "include/summary-4.tex",
+    "include/summary-6.tex",
+    "include/summary-7.tex",
+    "include/summary-8.tex",
+    "include/summary-10.tex",
+    "include/summary-11.tex",
+    "include/summary-12.tex",
+    "include/summary-14.tex",
+    "include/summary-15.tex",
+    "include/glossary-adapter.tex",
+    "nowidow.sty"
+  ],
+  "legacy_overlays": []
+}

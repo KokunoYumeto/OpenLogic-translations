@@ -1,0 +1,27 @@
+\newcommand*{\ollangid}{bn}
+\newcommand*{\ollanguage}{bengali}
+\usepackage{fontspec}
+\setmainfont{@@fonts.main.name@@}
+\setsansfont{@@fonts.sans.name@@}
+\setmonofont{@@fonts.mono.name@@}
+\newfontfamily\latinfont{@@fonts.main.name@@}
+% Character classes follow the accepted Bengali OpenLogic edition.
+\newfontfamily\bengalifont{@@fonts.main.file@@}[
+  Path=../../../../fonts/,Script=Bengali,Language=Bengali,
+  BoldFont=@@fonts.main.bold@@,
+  ItalicFont=@@fonts.main.file@@,BoldItalicFont=@@fonts.main.bold@@,
+  ItalicFeatures={FakeSlant=0.15},BoldItalicFeatures={FakeSlant=0.15},
+  SmallCapsFont=@@fonts.main.file@@]
+\usepackage[Bengali,DevanagariDanDa,BasicLatin,GeneralPunctuation]{ucharclasses}
+\XeTeXcharclass"200C=\BengaliClass
+\XeTeXcharclass"200D=\BengaliClass
+\XeTeXgenerateactualtext=1
+% A character run can end outside a TeX group; do not open groups in hooks.
+\setTransitionsFor{Bengali}{\bengalifont}{\latinfont}
+\setTransitionsFor{DevanagariDanDa}{\bengalifont}{\latinfont}
+\errorcontextlines=40
+\definecolor{OLPcolor}{RGB}{151,86,7}
+\definecolor{OLPdkcolor}{RGB}{104,65,6}
+\definecolor{OLPltcolor}{RGB}{248,203,137}
+\usepackage[nonumberlist,toc,style=index]{glossaries}
+\makeglossaries

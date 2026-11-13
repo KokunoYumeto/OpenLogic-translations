@@ -170,7 +170,11 @@ def main(argv=None):
             return pdf_command(a.action,a.first,a.second,a.out,a.first_build,a.second_build)
         elif a.command=='units':registry(a.check)
         elif a.command=='sync' and a.action=='plan':
-            if not a.check and not all([a.from_ref,a.to_ref,a.out]):raise ValueError('plan requires --from, --to and --out, or --check FOLDER')
+            if not a.check and not all([a.from_ref,a.to_ref]):raise ValueError('plan requires --from and --to, or --check FOLDER')
+            if not a.check and not a.out:
+                record,_=delta(a.from_ref,a.to_ref)
+                if record['files']:raise ValueError('a nonempty sync plan requires --out')
+                print('0 changed files');return 0
             plan(a.from_ref,a.to_ref,a.check or a.out,bool(a.check))
         elif a.command=='sync' and a.action=='edition':
             from .syncedition import edition_command

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "olpkit"
+version = "0.1.0"
+description = "Pinned source and publication tools for Open Logic editions"
+requires-python = ">=3.11"
+
+[project.scripts]
+olpkit = "olpkit.cli:main"
+
+[tool.setuptools]
+packages = ["olpkit"]

@@ -120,6 +120,7 @@ if (accessible.currentness_checked?.speech_repair_successor_published === true) 
 check(catalogue.editions.every(item => item.id && item.name && item.language_tag), "every edition needs id, name, and language tag");
 const french = catalogue.editions.find(item => item.id === "openlogic-fr");
 const punjabi = catalogue.editions.find(item => item.id === "openlogic-pnb-arab-pk");
+const currentLinkBytes = JSON.parse(await read("evidence/BASELINE_LINK_BYTES_20261113.json"));
 if (punjabi?.release_tag === "v0.2.0") {
   check(punjabi.standalone_reader_units === 7 && punjabi.source_units_translated === 26, "Punjabi reader7/source26 scope must remain distinct");
   check(punjabi.ordered_downloads?.[0]?.format === "PDF" && punjabi.ordered_downloads?.[1]?.format === "TEX" && punjabi.ordered_downloads?.[2]?.format === "ZIP", "Punjabi needs PDF, direct cumulative LaTeX, then full source ZIP");
@@ -128,7 +129,7 @@ if (punjabi?.release_tag === "v0.2.0") {
   const intake = JSON.parse(await read(punjabi.evidence.public_readback));
   const punjabiFiles = intake.files.filter(file => file.lane === "pnb-Arab-PK");
   check(punjabiFiles.length === 13 && punjabiFiles.every(file => file.matches), "Punjabi intake needs eleven Zenodo files and two GitHub masters verified");
-  for (const item of punjabi.ordered_downloads) check(intake.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes), "Punjabi download not in public receipt");
+  for (const item of punjabi.ordered_downloads) check(currentLinkBytes.files.some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches && file.anonymous), "Punjabi download not in current public receipt");
   check(script.includes("orderedDownloads.forEach"), "Renderer must preserve edition download order");
 }
 check(french?.language_tag === "fr", "French catalogue entry missing");
@@ -220,7 +221,8 @@ for (const [id, units] of [["openlogic-fr",111],["openlogic-gu-gujr-in",270]]) {
 }
 check(frGuSources.french.direct_tex_unique_embedded_sources === 51 && frGuSources.french.external_content_imports === 0, "French cumulative LaTeX must contain the51-unit body");
 check(french.direct_cumulative_source.sha256 === french.ordered_downloads[1].sha256, "French direct-source metadata must describe the current release");
-const gujaratiCurrent = catalogue.editions.find(item => item.id === "openlogic-gu-gujr-in");
+// Preserve the tests of the historically inspected source package at its exact edition.
+const gujaratiCurrent = JSON.parse(await read("evidence/GUJARATI_V101_CATALOGUE.json"));
 check(gujaratiCurrent.source_units_translated === 722 && gujaratiCurrent.standalone_reader_units === 722 && gujaratiCurrent.readers[0].pages === 960, "Gujarati full reader requires722 units and960 pages");
 check(gujaratiCurrent.version_doi === "10.5281/zenodo.23030256" && gujaratiCurrent.release_tag === "full-edition-v1.0.1", "Gujarati current lineage matches intake");
 check(gujaratiCurrent.ordered_downloads.map(x=>x.format).join(",") === "PDF,TEX,ZIP", "Gujarati keeps PDF/direct LaTeX/source ZIP order");
@@ -250,14 +252,14 @@ check(gu270Checks.status === 'PASS' && gu270Checks.inventory_entries === 1612 &&
 check(gu270Canon.segment_id === 'OLP-0273-B023' && gu270Canon.canon.length === 3 && gu270Canon.canon.every(x => x.passage_matches_original_html), 'Gujarati bounded canon replay must match the actual scholarly originals');
 const jv = catalogue.editions.find(item => item.id === "openlogic-jv-latn-id");
 check(jv.release_tag === "v0.3.0" && jv.source_units_translated === 722 && jv.standalone_reader_units === 722, "Javanese current reader must cover 722 source units");
-check(jv.ordered_downloads.map(item => item.format).join(",") === "PDF,ZIP", "Javanese must expose only the two available current release formats");
+check(jv.ordered_downloads.map(item => item.format).join(",") === "PDF,TEX,ZIP,EPUB", "Javanese current formats require the reader and its editable sources");
 const jvPdf = jv.ordered_downloads[0];
-const jvZip = jv.ordered_downloads[1];
+const jvZip = jv.ordered_downloads.find(item => item.format === "ZIP");
 check(jvPdf.pages === 967 && jvPdf.bytes === 5846641 && jvPdf.sha256 === "a73918e5a25fc11d749effce7ad31a6ecaffa696accf381a5963b4bcb9f0463d", "Javanese PDF must match the verified v0.3.0 download");
 check(jvZip.bytes === 7091846 && jvZip.sha256 === "f499e715382677b64fcbd2449ef6f025a6f6e61fb4426b937c273b3f063c9338" && jvZip.source_files === 1514, "Javanese source archive must match the verified v0.3.0 package");
 check(jv.evidence.package_manifest_entries_replayed === 1513 && jv.evidence.paired_unit_hashes_replayed === 1444 && !jv.evidence.manager_full_semantic_rereview, "Javanese package verification must not imply full semantic certification");
-check(!jv.readers.some(item => item.format === "EPUB") && !jv.direct_cumulative_source, "Do not advertise missing current Javanese EPUB or direct cumulative LaTeX");
-check(jv.epub_coverage_note.includes("722") && jv.epub_coverage_note.includes("24") && jv.limitations.some(item => item.includes(".tex")), "Current format gaps must remain explicit");
+check(jv.readers.some(item => item.format === "EPUB" && item.source_units === 722) && jv.direct_cumulative_source?.source_units === 722, "Current Javanese EPUB and direct cumulative LaTeX must be exposed");
+check(jv.epub_coverage_note.includes("722") && jv.epub_coverage_note.includes("24") && !jv.status.includes("full-epub-pending"), "Full EPUB must remain distinct from historical partial downloads");
 const jvHistorical = jv.supplementary_downloads[0].downloads;
 check(jvHistorical.map(item => item.format).join(",") === "PDF,TEX,ZIP,EPUB" && jvHistorical.every(item => item.url.includes("/v0.2.0/")), "Javanese historical downloads must stay available separately");
 check(jvHistorical.find(item => item.format === "EPUB").source_units === 24, "The historical Javanese EPUB is a 24-unit edition");
@@ -329,7 +331,7 @@ check(telugu276.source_packaging_status === "pdf-epub-direct-LaTeX-and-complete-
 check(telugu276.ordered_downloads.slice(0,4).map(x=>x.format).join(",") === "PDF,TEX,ZIP,EPUB", "Telugu download order");
 for (const file of telugu276.ordered_downloads) check(teluguRepair.files.some(item => item.url === file.url && item.bytes === file.bytes && item.sha256 === file.sha256 && item.matches), "Telugu download must match current anonymous readback");
 const psSource = JSON.parse(await read("evidence/PASHTO_SOURCE247_MANAGER_READBACK_20260920.json"));
-const psEdition = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
+const psEdition = JSON.parse(await read("evidence/PASHTO_BEFORE_COMPLETE_CATALOGUE_20261113.json")); // Historical checks retain their exact source edition.
 check(psSource.source_files_verified === 722 && psSource.target_files_verified === 247 && psSource.failures === 0 && psSource.new_batch_exact_block_checks === 376, "Pashto source checkpoint requires frozen-source, target and actual new-batch block checks");
 check(psEdition.previous_v051_release_snapshot.source_progress.archive_sha256 === psSource.archive.sha256 && psEdition.previous_v051_release_snapshot.source_progress.commit === psSource.commit && psSource.reader_units === 82 && psSource.reader_files_changed === false, "Retain the historical Pashto source247/reader82 distinction");
 const psV070 = JSON.parse(await read("evidence/PASHTO_V070_MANAGER_AUDIT_20260927.json"));
@@ -425,7 +427,7 @@ check(ps546Evidence.failures.length === 0 && ps546Evidence.source_units === 546 
 const ps536Evidence = JSON.parse(await read("evidence/PASHTO536_MANAGER_AUDIT_20260929.json"));
 check(ps536Evidence.failures.length === 0 && ps536Evidence.accepted_draft_units === 536 && ps536Evidence.frozen_files === 722 && ps536Evidence.aligned_blocks === 7990 && ps536Evidence.canon_use_rows === 4977 && ps536Evidence.staged_unaccepted_units === 5 && ps536Evidence.delta_since520.units === 16 && ps536Evidence.unchanged_previous_targets === 519 && ps536Evidence.predicativity_repair_verified_exact_two_words, "Pashto536 source checkpoint must retain exact scope and predecessor bytes");
 check(ps520Evidence.failures.length === 0 && ps520Evidence.accepted_draft_units === 520 && ps520Evidence.frozen_files === 722 && ps520Evidence.aligned_blocks === 7817 && ps520Evidence.canon_hash_bound_changed_blocks === 4882 && ps520Evidence.unaccepted_staged_units === 5 && ps520Evidence.rule_label_repair.manager_read_full_diff_and_macro_definition, "Pashto520 needs current public identity and concrete label-repair evidence");
-const ps500 = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
+const ps500 = psEdition; // Historical source checkpoints are not the new complete reader.
 // Follow the current source checkpoint, not a hard-coded historical counter.
 const psCurrentSourceEvidence = JSON.parse(await read(ps500.public_source_checkpoint.evidence));
 const psDigits = value => String(value).replace(/\d/g, digit => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
@@ -450,10 +452,10 @@ check(ps500.previous_source_checkpoint_595.commit === ps595Evidence.commit && ps
 check(ps500.independent_reaudit.owner_reviewed_units===psCurrentSourceEvidence.whole_reaudit.owner_reviewed_units && ps500.independent_reaudit.pending_units===psCurrentSourceEvidence.whole_reaudit.pending_units && ps500.independent_reaudit.reviewed_ids.length===ps500.independent_reaudit.owner_reviewed_units, "Pashto current review counts must agree");
 check(ps500.public_source_checkpoint.commit === psCurrentSourceEvidence.commit && ps500.source_progress.archive_sha256 === psCurrentSourceEvidence.archive.sha256 && ps500.source_progress.archive_bytes === psCurrentSourceEvidence.archive.bytes, "Pashto current public source identity");
 check(ps500.supplementary_downloads[0].downloads[0].url === psCurrentSourceEvidence.archive.url && !ps595Evidence.whole_corpus_translation_certified, "Pashto source ZIP needs a usable download and scoped claims");
-check((await read("README.md")).includes(ps500.reader_guide.split("/").pop()) && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Pashto README must not foreground superseded reader defects");
+check((await read(ps500.reader_guide)).includes('lang="ps-Arab-PK"') && !(await read("README.md")).includes("**پښتو (پاکستان): ۳۹۳"), "Historical Pashto guide stays available without foregrounding superseded defects");
 check(ps500.reader_guide === `evidence/PASHTO${psCurrentSourceEvidence.source_units}_REVIEW.ps.html` && (await read(ps500.reader_guide)).includes('lang="ps-Arab-PK" dir="rtl"') && ps500.status.includes("bounded-terminology-repair-verified") && !ps500.status.includes("terminology-repair-pending"), "Pashto must expose its native guide and verified repair status");
 for (const [id, sources, units, epubUnits] of [["openlogic-ps-arab-pk",psCurrentSourceEvidence.source_units,321,321],["openlogic-bn-beng-in",722,722,722]]) {
-  const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : catalogue.editions.find(item => item.id === id);
+  const edition = id === "openlogic-bn-beng-in" ? bnBeforeComplete : psEdition;
   check(edition.source_units_translated === sources && edition.standalone_reader_units === units, `${id}: source and reader scope must stay distinct`);
   check(edition.readers.some(item => item.format === "EPUB" && item.source_units === epubUnits), `${id}: format-specific EPUB scope missing`);
   for (const item of edition.ordered_downloads) check([...newDelivery.files,...bengaliRepair.files,...psCurrent.files,...psV070.files,...psV071.files,...bnFullReader.files,...bnFullEpub.files].some(file => file.url === item.url && file.sha256 === item.sha256 && file.bytes === item.bytes && file.matches), `${id}: public download not verified`);
@@ -502,7 +504,7 @@ for (const [lane, units, segments] of [['bn',106,1123],['te',50,677]]) {
 }
 const taBeforeComplete = JSON.parse(await read("evidence/TAMIL_BEFORE_COMPLETE_20260928.json"));
 for (const [id, lane] of [["openlogic-bn-beng-in","bn"],["openlogic-ta-taml-in","ta"],["openlogic-te-telu-in","te"],["openlogic-ps-arab-pk","ps"]]) {
-  const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : catalogue.editions.find(item => item.id === id);
+  const edition = lane === "ta" ? taBeforeComplete : lane === "bn" ? bnBeforeComplete : lane === "te" ? teBeforeComplete : psEdition;
   const source = lane === 'ps' ? psCurrentSourceEvidence : lane === 'te' ? telugu410 : lane === 'bn' ? bn722 : currentSources.checkpoints.find(item => item.lane === lane);
   check(source.failures.length === 0 && source.frozen_sources_verified === 722 && source.targets_verified === edition.source_units_translated, `${id}: source progress requires verified frozen sources and mapped targets`);
   check(source.commit === edition.public_source_checkpoint.commit && (lane === "bn" ? source.reader_units === 299 && edition.html_reader_units === 722 : source.reader_units === edition.standalone_reader_units) && source.full_semantic_reaudit === false, `${id}: preserve historical source checkpoint scope and separately verify newer readers`);
@@ -729,6 +731,19 @@ check(currentGu.ordered_downloads.filter(item => ["PDF", "EPUB"].includes(item.f
 check(currentReadme.includes("Bengali, Telugu and Marathi now have complete 722-unit EPUBs.") && !currentReadme.includes("Javanese, Marathi, Pashto and Punjabi"), "EPUB summary must not call the full Marathi reader partial");
 check(currentReadme.includes("https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/review/") && !currentReadme.includes("పూర్తి నిర్ణయాల తెలుగు సమీక్షా వివరణలు ఇంకా సిద్ధమవుతున్నాయి") && !currentReadme.includes("రెండు నమ్మకస్థాయి అసంగతతల సవరణ ఇంకా అవసరం"), "Telugu README must link the completed native review and retire resolved findings");
 check(ps500.status.includes(`partial-source-${ps500.source_units_translated}/722`), "Pashto source status tag must agree with its verified count");
+const currentFormats = JSON.parse(await read("evidence/CURRENT_JV_GU_FORMATS_20261113.json"));
+for (const id of ["openlogic-jv-latn-id", "openlogic-gu-gujr-in"]) {
+  const edition = catalogue.editions.find(item => item.id === id);
+  check(edition.ordered_downloads.map(x=>x.format).join(",") === "PDF,TEX,ZIP,EPUB", id + ": complete format order");
+  for (const item of edition.ordered_downloads) check(currentFormats.files.some(f=>f.url===item.url && f.sha256===item.sha256 && f.bytes===item.bytes && f.matches && f.anonymous), id + ": current download must match anonymous bytes");
+  check(edition.epub_reader_units === 722 && !edition.status.includes("full-epub-pending"), id + ": full EPUB availability");
+}
+const textbooks = JSON.parse(await read("catalogue/textbooks.json"));
+const pashtoComplete = catalogue.editions.find(item => item.id === "openlogic-ps-arab-pk");
+check(pashtoComplete.release_tag === "v1.0.0" && pashtoComplete.standalone_reader_units === 722 && pashtoComplete.source_units_translated === 722, "Current Pashto catalogue retains complete reader scope");
+for (const item of pashtoComplete.ordered_downloads) check(currentLinkBytes.files.some(f=>f.url===item.url && f.sha256===item.sha256 && f.bytes===item.bytes && f.matches && f.anonymous), "Current Pashto download must match its anonymous receipt");
+check(textbooks.textbooks.length === 4 && textbooks.textbooks.every(t=>t.pdf.pages>0 && t.pdf.bytes>0 && /^[a-f0-9]{64}$/.test(t.pdf.sha256)), "Four pinned textbook PDF records required");
+check(html.includes('id="textbooks"') && currentReadme.includes('<!-- textbooks:begin -->'), "Textbooks need visible separate entry points");
 const result = {
   status: failures.length ? "FAIL" : "PASS",
   failures,

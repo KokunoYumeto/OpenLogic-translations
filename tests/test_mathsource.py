@@ -34,6 +34,14 @@ class SourceMathTests(unittest.TestCase):
         self.assertEqual(compact,r'$\exists\mathexclaimx\,\forally\,\varphi(x,y)$')
         self.assertNotIn('IfNoValue',text)
 
+    def test_native_one_branch_optional_and_boolean_programs(self):
+        c=self.converter()
+        c.configure(r'\RenewDocumentCommand\Intro{m o}{\ensuremath{{#1}\mathrm{I}\IfValueT{#2}{_{#2}}}}'
+                    r'\NewDocumentCommand\choice{s o}{\IfBooleanT{#1}{+}\IfBooleanF{#1}{-}'
+                    r'\IfNoValueT{#2}{N}\IfNoValueF{#2}{V}\IfValueF{#2}{0}}','book')
+        text,_=c.expand(r'$\Intro{\land}+\Intro{\lor}[2]+\choice+\choice*[x]$','body')
+        self.assertEqual(text,r'$\ensuremath{{\land}\mathrm{I}}+\ensuremath{{\lor}\mathrm{I}_{2}}+-N0++V$')
+
     def test_intertext_returns_to_text_mode_and_restores_alignment_math(self):
         c=self.converter()
         source=r'\begin{align*}!A&=!B\\\intertext{Prose! $!A$ and \ensuremath{!B}.}!B&=!A\end{align*}'

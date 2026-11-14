@@ -4,6 +4,18 @@ from olpkit.bookcontext import BookInputs,source_caption
 
 
 class BookContextIntegrityTests(unittest.TestCase):
+    def test_text_witness_newlines_are_bound_to_the_projection_hash(self):
+        with tempfile.TemporaryDirectory() as td:
+            p=Path(td);data=b'first\r\nsecond\n';(p/'projection.tex').write_bytes(data)
+            (p/'ASSEMBLY.json').write_text(json.dumps({'locale':'xx','book_directory':'book','files':{}}))
+            profile={'locale':'xx','witnesses':{'projection':{'path':str(p/'projection.tex'),'sha256':hashlib.sha256(data).hexdigest()}}}
+            obj=BookInputs(p,profile)
+            self.assertEqual(obj.witness_text('projection',hashlib.sha256(data).hexdigest()),data.decode())
+            normalized=data.replace(b'\r\n',b'\n')
+            self.assertEqual(obj.witness_text('projection',hashlib.sha256(normalized).hexdigest()),normalized.decode())
+            with self.assertRaisesRegex(ValueError,'recorded projection'):
+                obj.witness_text('projection','0'*64)
+
     def test_native_caption_spellings_and_ambiguity(self):
         self.assertEqual(source_caption(r'\setlocalecaption{gujarati}{proof}{સાબિતી}','gujarati','proof'),'સાબિતી')
         self.assertEqual(source_caption(r'\addto\captionsjavanese{\renewcommand{\proofname}{Bukti}}','javanese','proof'),'Bukti')

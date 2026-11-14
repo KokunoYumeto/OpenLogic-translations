@@ -34,6 +34,21 @@ def token(text, pos):
     return text[pos:end], end, pos
 
 
+def definition_target(text, pos):
+    """Read a literal macro target, including an expanded constant csname.
+
+    Dynamic control-sequence construction is deliberately not evaluated.
+    """
+    value,end,start=token(text,pos)
+    if value != r'\csname': return value,end,start
+    stop=text.find(r'\endcsname',end)
+    if stop<0: raise ValueError('unclosed definition target csname')
+    name=re.sub(r'\s+','',text[end:stop])
+    if not re.fullmatch(r'[A-Za-z@]+',name):
+        raise ValueError('dynamic definition target csname requires explicit support')
+    return '\\'+name,stop+len(r'\endcsname'),start
+
+
 def names(value):
     result = [s.strip() for s in value.split(',') if s.strip()]
     if not result or any(not re.fullmatch(r'[A-Za-z][A-Za-z0-9@_-]*', s) for s in result):
@@ -48,10 +63,13 @@ class SelectionState:
     item_enabled: bool = True
     problem_enabled: bool = True
     context: dict = field(default_factory=dict)
+    booleans: dict = field(default_factory=dict)
+    input_aliases: dict = field(default_factory=dict)
+    layout_conditions: dict = field(default_factory=dict)
 
     def copy(self):
         return SelectionState(dict(self.tags), set(self.excluded), self.item_enabled, self.problem_enabled,
-                              dict(self.context))
+                              dict(self.context),dict(self.booleans),dict(self.input_aliases),dict(self.layout_conditions))
 
     def values(self, value):
         keys = names(value)
@@ -67,14 +85,14 @@ def definition_end(text, start, command_end, name):
     if text[pos:pos+1] == '*':
         pos = skip_space(text, pos + 1)
     if name in ('def', 'gdef', 'edef', 'xdef'):
-        _, pos, _ = token(text, pos)
+        _, pos, _ = definition_target(text, pos)
         while pos < len(text) and text[pos] != '{':
             pos += 1
         _, pos = group(text, pos)
         return pos
     if name in ('newcommand', 'renewcommand', 'providecommand', 'DeclareRobustCommand',
                 'newenvironment', 'renewenvironment', 'provideenvironment'):
-        _, pos, _ = token(text, pos)
+        _, pos, _ = definition_target(text, pos)
         for _ in range(2):
             pos = skip_space(text, pos)
             if text[pos:pos+1] == '[':
@@ -86,7 +104,7 @@ def definition_end(text, start, command_end, name):
     if name in ('DeclareDocumentCommand', 'NewDocumentCommand', 'RenewDocumentCommand',
                 'ProvideDocumentCommand', 'DeclareDocumentMacro', 'DeclareDocumentEnvironment',
                 'NewDocumentEnvironment', 'RenewDocumentEnvironment'):
-        _, pos, _ = token(text, pos)
+        _, pos, _ = definition_target(text, pos)
         count = 1 if name == 'DeclareDocumentMacro' else 3 if name.endswith('Environment') else 2
         for _ in range(count):
             _, pos, _ = token(text, pos)
@@ -114,6 +132,31 @@ def conditional_end(text, pos):
             depth -= 1
             if depth == 0: return pos
     raise ValueError('unclosed primitive conditional')
+
+
+def boolean_branches(text,pos,known):
+    """Locate the branches of a declared newif; retain nested primitive scopes."""
+    begin=pos;depth=1;otherwise=None;otherwise_end=None
+    while pos<len(text):
+        m=COMMAND.search(text,pos)
+        if not m:break
+        name=m[1];pos=m.end()
+        opaque=definition_end(text,m.start(),pos,name)
+        if opaque is not None:pos=opaque;continue
+        if name=='string':
+            at=skip_space(text,pos)
+            if at>=len(text):raise ValueError('string without a following token')
+            pos=COMMAND.match(text,at).end() if text[at]=='\\' else at+1
+            continue
+        if name in PRIMITIVE_IF or name in known:depth+=1
+        elif name=='else' and depth==1:
+            if otherwise is not None:raise ValueError('duplicate newif else')
+            otherwise,otherwise_end=m.start(),pos
+        elif name=='fi':
+            depth-=1
+            if depth==0:
+                return (begin,otherwise if otherwise is not None else m.start()),(otherwise_end if otherwise_end is not None else m.start(),m.start()),pos
+    raise ValueError('unclosed declared boolean conditional')
 
 
 def environment_end(text, pos, name):
@@ -183,7 +226,13 @@ class Selector:
                 raise ValueError(f'{source}:{self.inputs[source][:location].count(chr(10))+1}: '
                                  f'{error}; {text[start:start+100]!r}') from error
             if opaque is not None:
-                out.append(text[start:opaque]); pos = opaque; continue
+                handled=None if self.handler is None else self.handler(name,text,pos,state,source)
+                if handled is None:out.append(text[start:opaque])
+                else:
+                    replacement,end=handled
+                    if end!=opaque:raise ValueError('book definition handler boundary differs')
+                    out.append(replacement)
+                pos = opaque; continue
             if name == 'string':
                 # TeX quotes exactly one following token. A printed command
                 # such as \texttt{\string\iftag} must not execute selection.
@@ -192,6 +241,22 @@ class Selector:
                 quoted = COMMAND.match(text, at) if text[at] == '\\' else None
                 end = quoted.end() if quoted else at + 1
                 out.append(text[start:end]); pos = end; continue
+            if name=='newif':
+                target,end,_=token(text,pos)
+                if not re.fullmatch(r'\\if[A-Za-z@]+',target):raise ValueError('unsupported newif target')
+                key=target[3:]
+                if key in state.booleans:raise ValueError('duplicate newif declaration')
+                state.booleans[key]=False;event('newif',start,end,boolean=key,value=False)
+                pos=end;continue
+            assignment=re.fullmatch(r'(.+)(true|false)',name)
+            if assignment and assignment[1] in state.booleans:
+                key=assignment[1];state.booleans[key]=assignment[2]=='true'
+                event('boolean_assignment',start,pos,boolean=key,value=state.booleans[key]);continue
+            if name.startswith('if') and name[2:] in state.booleans:
+                yes,no,end=boolean_branches(text,pos,{'if'+key for key in state.booleans})
+                chosen=state.booleans[name[2:]];begin,stop=yes if chosen else no
+                event('boolean_choice',start,end,boolean=name[2:],selected=chosen)
+                out.append(self._walk(text[begin:stop],origins[begin:stop],state,source));pos=end;continue
             if name in PRIMITIVE_IF:
                 end = conditional_end(text,pos)
                 retained = text[start:end]

@@ -6,7 +6,7 @@ This stage executes no TeX and writes no files.
 """
 import hashlib,json,re,subprocess
 from pathlib import Path
-from .bookprojection import BookProjection
+from .bookprojection import BookProjection,source_input_name
 from .importlock import select_lock
 from .schemas import ROOT
 from .texttokens import TextTokens
@@ -41,8 +41,8 @@ class BookInputs:
     def text(self,name):return self.bytes(name).decode('utf-8-sig')
 
     def resolve(self,value,parent):
-        if not value.startswith(r'\olpath/'):raise ValueError('unresolved source-root expression')
-        name=value.removeprefix(r'\olpath/');return name,self.text(name)
+        name=source_input_name(value,self.book,self.locale,self.assembly['files'])
+        return name,self.text(name)
 
     def witness(self,key):
         row=self.profile['witnesses'][key];data=Path(row['path']).read_bytes()
@@ -51,10 +51,16 @@ class BookInputs:
 
     def witness_json(self,key):return json.loads(self.witness(key))
 
-    def witness_text(self,key):
-        # The native receipts hash Python's text-mode projections. Verify the
-        # actual file bytes first, then apply the same CRLF-to-LF text decoding.
-        return self.witness(key).decode('utf-8-sig').replace('\r\n','\n')
+    def witness_text(self,key,expected_sha256=None):
+        # Verify exact file bytes first. A supplied projection hash determines
+        # whether the producer used exact newlines or text-mode LF decoding.
+        text=self.witness(key).decode('utf-8-sig')
+        normalized=text.replace('\r\n','\n')
+        if expected_sha256 is not None:
+            for candidate in (text,normalized):
+                if sha(candidate.encode())==expected_sha256:return candidate
+            raise ValueError('native text witness differs from its recorded projection: '+key)
+        return normalized
 
     def package(self,name):
         row=self.profile['packages'][name]
@@ -87,7 +93,7 @@ def build_context(source,profile):
     pins={k:v['commit'] for k,v in a['sources'].items()}
     _,imports,lock=select_lock(ROOT/'data/books'/profile['book'],pins)
     prior=inputs.witness_json('projection_receipt')
-    original=inputs.witness_text('projection_source')
+    original=inputs.witness_text('projection_source',prior['projected_sha256'])
     if sha(original.encode())!=prior['projected_sha256']:
         raise ValueError('native projection receipt does not bind its source')
     for name,row in prior['inputs'].items():
@@ -103,7 +109,7 @@ def build_context(source,profile):
     tokens.configure_native(inputs.text('sty/open-logic-tokenize.sty'),'sty/open-logic-tokenize.sty')
     for name in profile['notation_configuration']:tokens.configure(inputs.text(name),name)
     text,token_receipt=tokens.expand(projected,'book-projection.tex')
-    if unmark(text)!=inputs.witness_text('token_source'):
+    if unmark(text)!=inputs.witness_text('token_source',sha(unmark(text).encode())):
         raise ValueError('resolved text differs from the native-bound token witness')
     names=inputs.witness_json('names');reconciliation=inputs.witness_json('reconciliation')
     native_aux=inputs.witness_text('aux');labels=read_aux(native_aux)

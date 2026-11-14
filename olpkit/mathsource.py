@@ -92,15 +92,20 @@ def program(body,args):
             out.append(value);pos+=2;continue
         if body[pos]=='\\':
             m=COMMAND.match(body,pos);name=m[1];pos=m.end()
-            if name in ('IfBooleanTF','IfNoValueTF','IfValueTF'):
+            conditional=re.fullmatch(r'(IfBoolean|IfNoValue|IfValue)(TF|T|F)',name)
+            if conditional:
                 parameter,pos,_=token(body,pos)
-                yes,pos,_=token(body,pos);no,pos,_=token(body,pos)
+                branch,pos,_=token(body,pos)
+                kind,form=conditional.groups()
+                if form=='TF':yes=branch;no,pos,_=token(body,pos)
+                elif form=='T':yes,no=branch,''
+                else:yes,no='',branch
                 if not re.fullmatch(r'#[1-9]',parameter.strip()):raise ValueError('unsupported xparse condition')
                 value=args[int(parameter.strip()[1])-1]
-                if name=='IfBooleanTF':
+                if kind=='IfBoolean':
                     if not isinstance(value,bool):raise ValueError('nonboolean source condition')
                     chosen=value
-                else:chosen=(value is None) if name=='IfNoValueTF' else (value is not None)
+                else:chosen=(value is None) if kind=='IfNoValue' else (value is not None)
                 out.append(program(yes if chosen else no,args));continue
             if name.startswith('If') or name in PRIMITIVE_IF:
                 raise ValueError('unsupported conditional in source notation: '+name)

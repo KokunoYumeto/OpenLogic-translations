@@ -3,13 +3,18 @@ from pathlib import Path
 import unittest
 
 from olpkit.assembly import digest
-from olpkit.bookprojection import BookProjection
+from olpkit.bookprojection import BookProjection,layout_only_hook
 
 
 DEFER = r'\renewenvironment{probdeferredtag}[2]{\begin{probd}}{\end{probd}}'
 
 
 class BookProjectionTests(unittest.TestCase):
+    def test_layout_hook_recognition_never_swallows_text_or_imports(self):
+        self.assertTrue(layout_only_hook(r'\ifdefstring{\theolsection}{ccs}{\Needspace{7\baselineskip}}{}'))
+        for body in ('Mathematics',r'\input{content}',r'\ifdefstring{\theolsection}{ccs}{A theorem}{}'):
+            self.assertFalse(layout_only_hook(body))
+
     def fixture(self, folder, entry, contents, extra=None):
         files = {'sty/open-logic-defer.sty':DEFER, 'sty/open-logic-selective.sty':'',
                  'sty/open-logic-referencing.sty':'', 'config.tex':r'\tagtrue{p,tagTrue}\excludeenv{editorial}',
@@ -81,6 +86,46 @@ class BookProjectionTests(unittest.TestCase):
             text,receipt=BookProjection(root,a,imports).project('book.tex',['config.tex'])
             self.assertIn('Kept by native style',text)
             self.assertEqual(receipt['deferred_exercises'][0]['native_ignored_probtag_argument'],'notp')
+
+    def test_summary_filename_captures_counter_and_boolean_excludes_appendix(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            entry=(r'\newif\ifsummary\summarytrue'
+                   r'\preto\OLEndChapterHook{\ifsummary\edef\summaryFile{include/summary-\number\value{chapter}.tex}'
+                   r'\IfFileExists{\summaryFile}{\input{\summaryFile}}{}\fi}'
+                   r'\mainmatter\olimport*[one]{a}\summaryfalse\appendix\olimport*[two]{b}')
+            units={'content/one/a.tex':r'\chapter{First}Text\OLEndChapterHook',
+                   'content/two/b.tex':r'\chapter{Appendix}Appendix text\OLEndChapterHook'}
+            a,imports=self.fixture(root,entry,units,{'locale/xx/book/include/summary-1.tex':'THE SUMMARY'})
+            text,receipt=BookProjection(root,a,imports).project('book.tex',['config.tex'])
+            self.assertEqual(text.count('THE SUMMARY'),1)
+            self.assertLess(text.index('THE SUMMARY'),text.index('Appendix text'))
+            self.assertNotIn('ifsummary',text);self.assertNotIn('summaryFile',text)
+            choices=[row for row in receipt['selection_events'] if row['kind']=='boolean_choice']
+            self.assertEqual([row['selected'] for row in choices],[True,False])
+
+    def test_nested_book_configuration_controls_import_selection(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            a,imports=self.fixture(root,r'\iftag{p}{\olimport*[one]{a}}{\olimport*[one]{absent}}',
+                {'content/one/a.tex':'Selected'},
+                {'config.tex':r'\tagfalse{p}\input{include/choice.sty}',
+                 'locale/xx/book/include/choice.sty':r'\tagtrue{p}'})
+            text,receipt=BookProjection(root,a,imports).project('book.tex',['config.tex'])
+            self.assertIn('Selected',text)
+            self.assertIn('locale/xx/book/include/choice.sty',receipt['inputs'])
+
+    def test_source_defined_section_condition_can_guard_only_page_spacing(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            config=(r'\newcommand*{\WhenSection}[2]{\edef\SectionID{\theolpart:\theolchapter:\theolsection}'
+                    r'\ifdefstring{\SectionID}{#1}{#2}{}}'
+                    r'\appto\BeforeSection{\WhenSection{his:bio:gen}{\Needspace{4\baselineskip}}}')
+            a,imports=self.fixture(root,'Body',{}, {'config.tex':config})
+            text,receipt=BookProjection(root,a,imports).project('book.tex',['config.tex'])
+            self.assertEqual(text,'Body')
+            self.assertEqual(len(receipt['layout_only_hooks']),1)
+            self.assertIn('WhenSection',receipt['layout_only_hooks'][0]['condition_helpers'])
 
     def test_changed_missing_out_of_scope_and_english_inputs_fail(self):
         for case in ('changed','missing','outside_lock','english','missing_lock_member'):

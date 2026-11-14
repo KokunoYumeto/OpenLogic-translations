@@ -60,6 +60,18 @@ class TextTokenTests(unittest.TestCase):
             self.assertIn('\\'+use['name'],source[loc['char_start']:loc['char_end']])
             self.assertEqual(use['call_chain'][0]['source'],'<body>')
 
+    def test_constant_csname_native_token_override(self):
+        c=self.catalog()
+        source=(r'\expandafter\RenewDocumentCommand\csname @printtoken\endcsname {t^ ta m !ts}'
+                r'{\IfBooleanTF{#1}{\IfBooleanTF{#4}{\printtoken{P}{#3}}{\printtoken{S}{#3}}}'
+                r'{\IfBooleanTF{#4}{\printtoken{p}{#3}}{\printtoken{s}{#3}}}}')
+        c.configure(source,'locale')
+        text,receipt=c.expand(r'!!a{object}|!!^a{object}s|!!{object} s')
+        self.assertEqual(text,'object|Objects|object s')
+        self.assertTrue(all(x['renderer']['source']=='locale' for x in receipt['occurrences']))
+        with self.assertRaisesRegex(ValueError,'dynamic definition target'):
+            c.configure(r'\expandafter\RenewDocumentCommand\csname \computed\endcsname{m}{#1}','dynamic')
+
     def test_empty_article_override_obeys_group_scope_and_rejects_other_primitives(self):
         text,_=self.catalog().expand(r'{\renewcommand{\article}[1]{}!!a{object}}!!a{object}')
         self.assertTrue(text.endswith('~object}an~object'))

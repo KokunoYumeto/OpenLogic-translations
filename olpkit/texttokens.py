@@ -9,7 +9,7 @@ from dataclasses import dataclass
 import re
 
 from .macrophases import COMMAND, digest, group, mask_comments, skip_space
-from .selective import (definition_end, token, conditional_end, PRIMITIVE_IF,
+from .selective import (definition_end, definition_target, token, conditional_end, PRIMITIVE_IF,
                         environment_end, explicit_group_end)
 
 
@@ -56,7 +56,7 @@ def definition(text, start, command_end, name, origin):
         return None
     pos = skip_space(text, command_end)
     if text[pos:pos+1] == '*': pos = skip_space(text, pos+1)
-    target, pos, _ = token(text, pos)
+    target, pos, _ = definition_target(text, pos)
     if not re.fullmatch(r'\\[A-Za-z@]+', target): return end, None, None
     spec = ''
     if name in ('newcommand', 'renewcommand', 'providecommand', 'DeclareRobustCommand'):

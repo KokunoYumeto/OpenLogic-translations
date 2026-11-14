@@ -83,6 +83,12 @@ class SelectionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unevaluated primitive'):
             self.run_source(r'\ifdefined\unknown\tagtrue{p}\fi')
 
+    def test_constant_csname_definition_body_is_opaque(self):
+        source=r'\expandafter\RenewDocumentCommand\csname @helper\endcsname{m}{\tagfalse{p}}\iftag{p}{yes}{no}'
+        text,state,_=self.run_source(source,p=True)
+        self.assertEqual(text,source.replace(r'\iftag{p}{yes}{no}','yes'))
+        self.assertTrue(state.tags['p'])
+
     def test_import_callback_observes_position_not_final_assignments(self):
         observed=[]
         def handler(name,text,pos,state,source):
@@ -91,6 +97,18 @@ class SelectionTests(unittest.TestCase):
         selector=Selector(handler)
         text=selector.project(r'\tagtrue{p}\load\tagfalse{p}\load',SelectionState())
         self.assertEqual(observed,[True,False]); self.assertEqual(text,'loadedloaded')
+
+    def test_declared_booleans_execute_branches_in_scope(self):
+        source=(r'\newif\ifsummary\summarytrue\ifsummary yes\else no\fi'
+                r'{\summaryfalse\ifsummary no\else local\fi}'
+                r'\ifsummary outer\else no\fi'
+                r'\newif\ifother\ifsummary\ifother no\else nested\fi\fi')
+        text,state,_=self.run_source(source)
+        self.assertNotIn('no',text)
+        self.assertIn('yes',text);self.assertIn('local',text);self.assertIn('outer',text);self.assertIn('nested',text)
+        self.assertTrue(state.booleans['summary']);self.assertFalse(state.booleans['other'])
+        with self.assertRaisesRegex(ValueError,'unclosed declared boolean'):
+            self.run_source(r'\newif\ifsummary\ifsummary missing')
 
 
 if __name__ == '__main__': unittest.main()

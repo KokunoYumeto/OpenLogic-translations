@@ -11,9 +11,45 @@ import re
 from .assembly import digest, json_bytes
 from .build import verify_assembly
 from .cache import relative_path
-from .macrophases import group, skip_space, mask_comments
+from .macrophases import COMMAND, group, skip_space, mask_comments
 from .selective import SelectionState, Selector, token
 from .sourceexport import ABOUT
+
+
+def source_input_name(value,book,locale,files):
+    """Resolve the native book working directory and explicit OLP-root inputs."""
+    value=value.replace(r'\ollangid',locale)
+    if value.startswith(r'\olpath/'):
+        name=value.removeprefix(r'\olpath/')
+    else:name=posixpath.join(book,value)
+    if '\\' in name:raise ValueError('unresolved source input expression: '+value)
+    name=posixpath.normpath(name);relative_path(name)
+    if name not in files and not PurePosixPath(name).suffix:name+='.tex'
+    return name
+
+
+def layout_only_hook(text,condition_helpers=()):
+    """Recognize page-space requests, including source-identifier conditions."""
+    pos=0
+    while skip_space(text,pos)<len(text):
+        pos=skip_space(text,pos);m=COMMAND.match(text,pos)
+        if not m:return False
+        pos=m.end()
+        if m[1]=='Needspace':
+            value,pos=group(text,pos)
+            if not re.fullmatch(r'[0-9.]+\\baselineskip',value.strip()):return False
+        elif m[1]=='ifdefstring':
+            target,pos=group(text,pos);identifier,pos=group(text,pos)
+            yes,pos=group(text,pos);no,pos=group(text,pos)
+            if target not in (r'\theolpart',r'\theolchapter',r'\theolsection'):return False
+            if not re.fullmatch(r'[A-Za-z0-9_-]+',identifier):return False
+            if not layout_only_hook(yes,condition_helpers) or not layout_only_hook(no,condition_helpers):return False
+        elif m[1] in condition_helpers:
+            identifier,pos=group(text,pos);body,pos=group(text,pos)
+            if not re.fullmatch(r'[A-Za-z0-9_:-]+',identifier):return False
+            if not layout_only_hook(body,condition_helpers):return False
+        else:return False
+    return True
 
 
 def body_only(text):
@@ -48,6 +84,7 @@ class BookProjection:
         self.defer = False; self.problems = []; self.deferred_records = []; self.flushes = []
         self.configuration = False
         self.mark_units = mark_units
+        self.layout_hooks = []
 
     def read(self, path):
         relative_path(path)
@@ -81,7 +118,9 @@ class BookProjection:
             return chr(64 + self.chapter)
         return str(self.chapter)
 
-    def book_path(self, value):
+    def book_path(self, value, state=None):
+        if state is not None and value in state.input_aliases:value=state.input_aliases[value]
+        value=re.sub(r'\\number\s*\\value\s*\{chapter\}',str(self.chapter),value)
         value = value.replace(r'\thechapter', self.chapter_label())
         if '\\' in value: raise ValueError('unresolved book input: ' + value)
         path = posixpath.normpath(posixpath.join(self.book,value))
@@ -95,12 +134,46 @@ class BookProjection:
         if name in ('preto','appto'):
             hook, p, _ = token(text,pos); value,end = group(text,p)
             if hook not in ('\\' + n for n in self.hooks):
+                if self.configuration and layout_only_hook(value,state.layout_conditions):
+                    self.layout_hooks.append({'source':source,'hook':hook,'body':value,'body_sha256':digest(value.encode()),
+                                              'condition_helpers':dict(state.layout_conditions)})
+                    return '',end
                 raise ValueError('unsupported executable book hook: ' + hook)
             record = (value, source)
             if name == 'preto': self.hooks[hook[1:]].insert(0,record)
             else: self.hooks[hook[1:]].append(record)
             return '',end
         if self.configuration:
+            if name=='newcommand':
+                p=skip_space(text,pos)
+                if text[p:p+1]=='*':p+=1
+                target,p,_=token(text,p);p=skip_space(text,p)
+                if text[p:p+1]=='[':
+                    arity,p=group(text,p,'[',']');p=skip_space(text,p)
+                    if arity!='2' or text[p:p+1]!='{':return None
+                    body,end=group(text,p)
+                    compact=re.sub(r'\s+','',body)
+                    pattern=(r'\\edef\\([A-Za-z@]+)\{\\theolpart:\\theolchapter:\\theolsection\}'
+                             r'\\ifdefstring\{\\\1\}\{#1\}\{#2\}\{\}')
+                    if arity=='2' and re.fullmatch(pattern,compact) and re.fullmatch(r'\\[A-Za-z@]+',target):
+                        state.layout_conditions[target[1:]]={'source':source,'body_sha256':digest(body.encode())}
+                        return '',end
+            # Kernel styles are supplied explicitly by the caller. Follow the
+            # edition/book's own nested configuration from its native cwd.
+            if name=='input' and not source.startswith('sty/'):
+                value,end=group(text,pos)
+                path=source_input_name(value,self.book,self.locale,self.assembly['files'])
+                self.expand(path,state)
+                return '',end
+            return None
+        if name=='edef':
+            target,p,_=token(text,pos);value,end=group(text,p)
+            if re.fullmatch(r'\\[A-Za-z@]+',target) and '/' in value and value.endswith('.tex'):
+                # Source-authored filenames may capture the current chapter.
+                # No arbitrary eager macro expansion or filesystem lookup.
+                path=self.book_path(value,state)
+                state.input_aliases[target]=path.removeprefix(self.book+'/')
+                return '',end
             return None
         if name == 'olimport':
             p = pos; star = text[p:p+1] == '*'
@@ -141,7 +214,7 @@ class BookProjection:
             return expanded,p
         if name in ('input','include'):
             value,end = group(text,pos)
-            expanded=self.expand(self.book_path(value),state)
+            expanded=self.expand(self.book_path(value,state),state)
             # TeX reads the file after tokenizing the surrounding control words.
             # Serializing its bytes must not fuse \textbf + Gedhene into a new
             # command, or a final imported command with following source text.
@@ -153,7 +226,7 @@ class BookProjection:
             return expanded,end
         if name == 'IfFileExists':
             value,p = group(text,pos); yes,p = group(text,p); no,end = group(text,p)
-            path = self.book_path(value); chosen = path in self.assembly['files']
+            path = self.book_path(value,state); chosen = path in self.assembly['files']
             return self.snippet(yes if chosen else no,state,source,'file-choice'),end
         if name in ('mainmatter','appendix'):
             if self.problems: raise ValueError('unflushed exercises at matter boundary')
@@ -242,6 +315,7 @@ class BookProjection:
             'initial_selection':initial,
             'inputs':self.inputs,'unit_order':self.order,'unique_units':len(seen),'unit_occurrences':len(self.order),
             'selection_events':self.selector.events,'snippets':self.snippets,'deferred_exercises':self.deferred_records,
+            'layout_only_hooks':self.layout_hooks,
             'unit_markers':self.mark_units,
             'exercise_flushes':self.flushes,'projected_sha256':digest(output.encode()),'tex_runs':0,
             'reader_complete':False,'remaining':['tokens and mathematical macros','PDF numbering and cross-references',

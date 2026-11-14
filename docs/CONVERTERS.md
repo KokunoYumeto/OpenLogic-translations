@@ -74,4 +74,25 @@ The retained Arabic source archive is 35,148,175 bytes, SHA-256 `81f8a0865b19a9b
 
 The assembled Javanese SLC replay covers all 176 recorded imports, its preface, all 12 summary files and 144 deferred exercises. The ordered exercise numbers agree with the existing English reference auxiliary file at the same four source pins. This does not substitute for the final translated-PDF number check. Native `probtag` currently discards its tag argument; the projection preserves that behavior instead of silently dropping exercises. A native blank-line argument in `main-operator.tex` is treated as a paragraph token, so the following table is retained. No translation files are edited.
 
-The next acceptance work is token and mathematical-macro expansion, PDF-derived references, front matter, glossary, bibliography, credits and figures, followed by actual HTML/EPUB rendering and accessible formula speech. The original five acceptance criteria and all book-unit requirements remain open. Repeating the closed archive or packaging checks does not advance that boundary.
+`olpkit.texttokens` now expands the projected text from the actual native token
+package and ordered edition/book configuration. The native package is bound to
+its inspected SHA-256; the xparse branch is selected from an existing native
+build's package-version evidence. Token forms, articles, uppercase alternatives,
+plural/passive suffix behavior and helper bodies come from source, rather than
+language literals in Python. Definitions remain opaque until invoked; groups
+restore local assignments. Unsupported token-bearing execution fails explicitly.
+This bounded token interpreter does not execute arbitrary TeX or replace the
+mathematical-macro conversion stage.
+
+The Javanese SLC replay expands 2,347 occurrences from 117 used definitions, all
+in its Javanese configuration or book override files. Each occurrence records
+its exact projected-source range and the defining source locations/hashes.
+An independent splice of only those ranges reproduces the output exactly:
+surrounding source and mathematics remain byte-for-byte unchanged. This is a
+conversion check, not a new translation or a claim of expert linguistic review.
+
+The next acceptance work is mathematical-macro expansion, PDF-derived references,
+front matter, glossary, bibliography, credits and figures, followed by actual
+HTML/EPUB rendering and accessible formula speech. The original five acceptance
+criteria and all book-unit requirements remain open. Repeating closed archive or
+packaging checks does not advance that boundary.

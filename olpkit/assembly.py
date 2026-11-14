@@ -202,7 +202,7 @@ def write_assembly(tree, report, folder, check=False):
 
 
 def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
-                     product='slc-screen-pdf', check=False, data_root=None):
+                     product='slc-screen-pdf', check=False, data_root=None, book_ledger=None):
     data_root = Path(data_root) if data_root else ROOT/'data'
     book_snapshot = GitSnapshot(repo,ref)
     edition_snapshot = GitSnapshot(repo,edition_ref or ref)
@@ -239,10 +239,20 @@ def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
         sources[source] = (folder,receipt)
         source_receipts[source] = {'commit':pin['commit'],
                                   'manifest_sha256':digest(cache.locations(source,pin['commit'])[2].read_bytes())}
-    manifest = json.loads(book_snapshot.read_many([profile['manifest']])[profile['manifest']])
-    for source,field in profile['manifest_pins'].items():
-        if manifest['sources'][field]['commit']!=edition['pins'][source]['commit']:
-            raise ValueError('book and edition pins differ: '+source)
+    book = tomllib.loads((data_root/'books'/(profile['book']+'.toml')).read_text(encoding='utf-8'))
+    book_layer = None
+    if 'book_contract' in profile:
+        from .booklayer import load_book_layer
+        folder,receipt = sources[profile['source_id']]
+        source_files = {name:(folder/name).read_bytes() for name in receipt['files']}
+        book_layer = load_book_layer(book_snapshot,profile,book,edition,source_files,book_ledger)
+    else:
+        if book_ledger is not None:
+            raise ValueError('--book-ledger requires a native book contract')
+        manifest = json.loads(book_snapshot.read_many([profile['manifest']])[profile['manifest']])
+        for source,field in profile['manifest_pins'].items():
+            if manifest['sources'][field]['commit']!=edition['pins'][source]['commit']:
+                raise ValueError('book and edition pins differ: '+source)
     tree = AssemblyTree()
     olp_folder,olp_receipt = sources['olp']
     english = {name:(olp_folder/name).read_bytes() for name in olp_receipt['files']}
@@ -302,7 +312,6 @@ def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
             destination = rule['to'].replace('{locale}',edition['locale']).replace('{book}',profile['book'])+'/'+relative
             tree.add(destination,body,{'source':rule['source'],'commit':snapshot.commit,'path':name})
     slc_folder,_ = sources[profile['source_id']]
-    book = tomllib.loads((data_root/'books'/(profile['book']+'.toml')).read_text(encoding='utf-8'))
     driver_sources = {name:(slc_folder/name).read_bytes() for name in book['drivers']}
     drivers,driver_report = generate_drivers(edition,driver_sources,profile['book'],data_root)
     for name,body in drivers.items():
@@ -310,6 +319,9 @@ def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
     for name in profile['required_book_files']:
         if book_prefix+'/'+name not in tree.files:
             raise ValueError('translated book input absent: '+name)
+    if book_layer:
+        from .booklayer import check_assembled_book_layer
+        check_assembled_book_layer(book_layer,tree.files,book_prefix)
     obligations = []
     for name in profile['legacy_overlays']:
         if name in book_snapshot.entries:
@@ -330,6 +342,9 @@ def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
               'native_reader_equivalence':'not checked; assembly is not a rendered release',
               'network_fetches':0,'tex_runs':0}
     if 'driver' in profile:report['driver']=profile['driver']
+    if book_layer:
+        report['book_layer']=book_layer
+        report['implementation_sha256']['booklayer.py']=digest((Path(__file__).parent/'booklayer.py').read_bytes())
     write_assembly(tree,report,out,check)
     print(f'assembled {len(tree.files)} files; {len(unit_receipts)} units; '
           f'{report["english_fill_count"]} English fill-ins; {len(shims)} shims; '

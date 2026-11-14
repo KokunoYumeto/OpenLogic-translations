@@ -134,5 +134,18 @@ class DriverTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'named child'):
             write_drivers(outputs,report,ROOT)
 
+    def test_book_preamble_override_changes_only_that_book_policy(self):
+        original,_=self.generate('mr')
+        path=self.data/'books/sets-logic-computation-mr-drivers.toml'
+        path.write_text(path.read_text(encoding='utf-8')+'\n[preamble]\nafter_olp = ["fixture-book.tex"]\n',encoding='utf-8')
+        (self.data/'preambles/fixture-book.tex').write_bytes(b'% Different book; same language.\n')
+        changed,report=self.generate('mr')
+        self.assertEqual(changed['olpkit-after-olp.tex'],b'% Different book; same language.\n')
+        self.assertEqual(original['olpkit-before-olp.tex'],changed['olpkit-before-olp.tex'])
+        self.assertEqual(original['slc.tex'],changed['slc.tex'])
+        self.assertTrue(any(r['path']=='preambles/fixture-book.tex' for r in report['templates']))
+        path.write_text(path.read_text(encoding='utf-8').replace('fixture-book.tex','../private.tex'),encoding='utf-8')
+        with self.assertRaisesRegex(ValueError,'driver-policy'):self.generate('mr')
+
 
 if __name__=='__main__':unittest.main()

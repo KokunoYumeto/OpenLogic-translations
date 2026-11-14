@@ -80,7 +80,8 @@ def generate_drivers(edition, source_files, book_id='sets-logic-computation', da
     templates = []
     for phase in ('before_class','before_olp','after_olp'):
         parts = []
-        for filename in language['preamble'][phase]:
+        for filename in policy.get('preamble',{}).get(phase,language['preamble'][phase]):
+            relative_path(filename)
             template = (data_root/'preambles'/filename).read_bytes()
             parts.append(render_template(template.decode('utf-8'),values))
             templates.append({'path':'preambles/'+filename,'sha256':digest(template)})

@@ -292,7 +292,7 @@ def reference_tree(cache_root,olp_pin,out,check=False,product='slc-screen-pdf'):
     write_assembly(tree,report,out,check);return report
 
 
-def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False):
+def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False,book_ledger=None):
     product_data,book=load_build_product(product)
     if not out:raise ValueError('build requires an explicit named --out directory')
     output=Path(out).resolve();boundary=(ROOT.parent/'out').resolve()
@@ -309,7 +309,7 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
                               if not metadata_dir else (Path(metadata_dir)/'olp-edition.toml').read_bytes()).decode('utf-8-sig'))
         engine=edition['engine'];olp_pin=edition['pins']['olp']['commit']
         _,expected,_=select_lock(lock_dir,{s:edition['pins'][s]['commit'] for s in ('olp',book['source_id'],'portraits','photos')})
-        report=assemble_command(repo,ref,edition_ref,metadata_dir,cache_root,source,product,check=resume)
+        report=assemble_command(repo,ref,edition_ref,metadata_dir,cache_root,source,product,check=resume,book_ledger=book_ledger)
     if build_job(report)+'.tex'!=product_data.get('driver','slc-screen.tex'):
         raise ValueError('assembled driver differs from requested build product')
     bare=SourceCache(cache_root).locations('olp',olp_pin)[0]

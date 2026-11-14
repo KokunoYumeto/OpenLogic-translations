@@ -27,6 +27,9 @@
       "type": "string",
       "minLength": 1
     },
+    "book_contract": {
+      "type": "string", "minLength": 1
+    },
     "manifest_pins": {
       "type": "object",
       "additionalProperties": {
@@ -195,13 +198,15 @@
     "product",
     "book",
     "source_id",
-    "manifest",
-    "manifest_pins",
     "upstream_include",
     "assets",
     "files",
     "trees",
     "required_book_files",
     "legacy_overlays"
+  ],
+  "oneOf": [
+    {"required": ["manifest", "manifest_pins"], "not": {"required": ["book_contract"]}},
+    {"required": ["book_contract"], "not": {"anyOf": [{"required": ["manifest"]}, {"required": ["manifest_pins"]}]}}
   ]
 }

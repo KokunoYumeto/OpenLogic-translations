@@ -151,6 +151,7 @@ def main(argv=None):
     drivers=sub.add_parser('drivers');drivers.add_argument('--repo',required=True);drivers.add_argument('--metadata-dir');drivers.add_argument('--out',required=True);drivers.add_argument('--check',action='store_true');drivers.add_argument('--book',default='sets-logic-computation')
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin');build.add_argument('--resume',action='store_true')
+    assembly.add_argument('--book-ledger');build.add_argument('--book-ledger')
     export=sub.add_parser('export');export.add_argument('--source',required=True);export.add_argument('--product',choices=['cumulative-tex','source-zip','html','epub','accessible'],required=True);export.add_argument('--out',required=True);export.add_argument('--profile');export.add_argument('--build');export.add_argument('--credits');export.add_argument('--instructions');export.add_argument('--check-numbers',action='store_true');export.add_argument('--check-speech',action='store_true')
     figures=sub.add_parser('figures');figures.add_argument('--source',required=True);figures.add_argument('--context',required=True);figures.add_argument('--profile',required=True);figures.add_argument('--out',required=True);figures.add_argument('--resume',action='store_true')
     pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
@@ -195,10 +196,10 @@ def main(argv=None):
             drivers_command(a.repo,a.metadata_dir,CACHE,a.out,a.check,a.book)
         elif a.command=='assemble':
             from .assembly import assemble_command
-            assemble_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.check)
+            assemble_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.check,book_ledger=a.book_ledger)
         elif a.command=='build':
             from .build import build_command
-            return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin,a.resume)
+            return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin,a.resume,book_ledger=a.book_ledger)
         elif a.command=='lint' and a.action in ('units','tokens'):
             from .unitlint import lint_units
             return lint_units(a.repo,a.ref,CACHE,a.out,a.english,a.olp_pin,a.scope,a.check,a.action=='tokens')

@@ -1,6 +1,15 @@
 {
   "type": "object",
   "properties": {
+    "preamble": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "before_class": {"$ref": "#/$defs/templates"},
+        "before_olp": {"$ref": "#/$defs/templates"},
+        "after_olp": {"$ref": "#/$defs/templates"}
+      }
+    },
     "schema_version": {
       "const": 1
     },
@@ -83,5 +92,11 @@
     "files"
   ],
   "additionalProperties": false,
-  "$schema": "https://json-schema.org/draft/2020-12/schema"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "templates": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z0-9-]+\\.tex$"}
+    }
+  }
 }

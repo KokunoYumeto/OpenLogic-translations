@@ -152,6 +152,7 @@ def main(argv=None):
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin');build.add_argument('--resume',action='store_true')
     export=sub.add_parser('export');export.add_argument('--source',required=True);export.add_argument('--product',choices=['cumulative-tex','source-zip','html','epub','accessible'],required=True);export.add_argument('--out',required=True);export.add_argument('--profile');export.add_argument('--build');export.add_argument('--credits');export.add_argument('--instructions');export.add_argument('--check-numbers',action='store_true');export.add_argument('--check-speech',action='store_true')
+    figures=sub.add_parser('figures');figures.add_argument('--source',required=True);figures.add_argument('--context',required=True);figures.add_argument('--profile',required=True);figures.add_argument('--out',required=True);figures.add_argument('--resume',action='store_true')
     pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
     for action in ('compare','links','glyphs'):
         q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
@@ -159,7 +160,10 @@ def main(argv=None):
     q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')
     a=p.parse_args(argv)
     try:
-        if a.command=='export':
+        if a.command=='figures':
+            from .nativefigures import figures_command
+            return figures_command(a.source,a.context,a.profile,a.out,resume=a.resume)
+        elif a.command=='export':
             if a.product in ('html','epub','accessible'):
                 from .webexport import export_web
                 return export_web(a.source,a.product,a.out,a.profile,check_numbers=a.check_numbers,check_speech=a.check_speech)

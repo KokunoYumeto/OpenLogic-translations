@@ -75,6 +75,46 @@ def extract_tikz(text):
 PREVIEW_BACKENDS = {'pdflatex': 'pdftex', 'xelatex': 'xetex'}
 
 
+def figures_command(source, context_path, profile_path, output, *, resume=False):
+    """Run the same source-bound native exporter for any configured edition."""
+    folder=Path(source).resolve()
+    profile_bytes=Path(profile_path).read_bytes()
+    profile=json.loads(profile_bytes)
+    if profile.get('schema')!='olpkit.native-figure-profile.v1':
+        raise ValueError('unsupported native figure profile')
+    context_bytes=Path(context_path).read_bytes()
+    if sha(context_bytes)!=profile['context_sha256']:
+        raise ValueError('native figure context changed')
+    assembly_bytes=(folder/'ASSEMBLY.json').read_bytes()
+    if sha(assembly_bytes)!=profile['assembly_sha256']:
+        raise ValueError('native figure assembly changed')
+    assembly=json.loads(assembly_bytes)
+    driver=profile['driver']
+    if driver not in assembly['files']:
+        raise ValueError('native figure driver is not an assembled input')
+    witnesses=[]
+    for row in profile['witnesses']:
+        path=Path(row['path']);data=path.read_bytes()
+        if sha(data)!=row['sha256']:
+            raise ValueError('native figure witness changed: '+path.name)
+        witnesses.append({'path':str(path),'sha256':sha(data),'bytes':len(data)})
+    if not witnesses or not profile.get('configuration_evidence'):
+        raise ValueError('native figure configuration evidence is required')
+    environments=profile['environments']
+    # Validate before preparing an output folder, including unknown environments.
+    text=context_bytes.decode('utf-8-sig')
+    extract_native_figures(text,environments)
+    epoch=profile['source_date_epoch']
+    if type(epoch) is not int or epoch<0:
+        raise ValueError('invalid native figure source date epoch')
+    evidence={**profile['configuration_evidence'],'profile_sha256':sha(profile_bytes),
+              'context_input_sha256':sha(context_bytes),'verified_witnesses':witnesses}
+    result=export_native_figures(folder,assembly,text,driver,output,epoch=epoch,
+        context_evidence=evidence,engine=profile['engine'],resume=resume,environments=tuple(environments))
+    print(json.dumps({key:result.get(key) for key in ('status','tex_runs','mutex_acquired','pdf','error')}))
+    return 0 if result['status']=='vectors_exported_pending_visual_and_semantic_checks' else 2
+
+
 def export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence,
                           engine='pdflatex', resume=False, environments=('tikzpicture',)):
     """Serialize one output directory; resume only a proven unstarted attempt."""

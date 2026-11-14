@@ -5,7 +5,7 @@ from pathlib import Path
 
 from lxml import html, etree
 
-from olpkit.figurebinding import prepare_figures, bind_figures, inspect_svg
+from olpkit.figurebinding import prepare_figures, bind_figures, inspect_svg, attach_long_descriptions
 from olpkit.nativefigures import sha
 
 
@@ -92,6 +92,28 @@ class FigureBindingTests(unittest.TestCase):
         self.assertEqual(self.bind(doc,r)['bound'],1)
         for body in [b'<image/>',b'<script/>',b'<use href="https://example.org/x"/>',b'<path onclick="x"/>']:
             with self.assertRaises(ValueError):inspect_svg(self.svg.replace(b'<path d="M0 0 L1 1"/>',body))
+
+    def test_visible_long_description_keeps_prose_and_never_interprets_html(self):
+        _,r=self.prepared();h=sha(self.picture.encode())
+        doc=html.fromstring('<div><p>Before OLPNATIVEFIG000001 after.</p></div>')
+        self.bind(doc,r,descriptions={h:'State q₀.'})
+        data={h:{'source_sha256':h,'occurrence_indices':[1],'alt_text':'State q₀.',
+                 'long_description':'A < B & C.\n\nFrom 0 to 1.\nFrom 1 to 0.'}}
+        result=attach_long_descriptions(doc,r,data,labels={'description_link':'Read description','descriptions_heading':'Descriptions'},figure_label='Figure')
+        self.assertEqual(result['occurrences'],1)
+        self.assertEqual(doc.xpath('./p')[0].text_content(),'Before  Read description after.')
+        self.assertEqual(doc.xpath('.//section/section/p/text()'),['A < B & C.'])
+        self.assertEqual(doc.xpath('.//section/section/ul/li/text()'),['From 0 to 1.','From 1 to 0.'])
+        self.assertEqual(doc.xpath('.//img/@aria-details'),['olp-diagram-description-1'])
+        self.assertEqual(doc.xpath('.//h3/a/@href'),['#olp-native-figure-1'])
+        with self.assertRaisesRegex(ValueError,'already attached'):
+            attach_long_descriptions(doc,r,data,labels={'description_link':'Read','descriptions_heading':'Descriptions'},figure_label='Figure')
+
+    def test_incomplete_long_description_never_silently_passes(self):
+        _,r=self.prepared();h=sha(self.picture.encode())
+        doc=html.fromstring('<div>OLPNATIVEFIG000001</div>');self.bind(doc,r,descriptions={h:'State.'})
+        with self.assertRaisesRegex(ValueError,'coverage'):
+            attach_long_descriptions(doc,r,{},labels={'description_link':'Read','descriptions_heading':'Descriptions'},figure_label='Figure')
 
 
 if __name__ == '__main__': unittest.main()

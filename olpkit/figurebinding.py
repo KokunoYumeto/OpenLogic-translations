@@ -190,3 +190,56 @@ def bind_figures(document, receipt, *, asset_prefix, fallback_alt, descriptions=
         raise ValueError('rendered native figure occurrence order differs')
     return {'bound': len(bound), 'order': order, 'missing': missing,
             'descriptions_pending': pending, 'reader_complete': False}
+
+
+def attach_long_descriptions(document, receipt, descriptions, *, labels, figure_label):
+    """Add source-bound descriptions with visible links and return links.
+
+    Keep the original mathematical paragraphs intact. Full descriptions live in
+    one separately headed section; no JavaScript or hidden-only text is needed.
+    Labels and prose are supplied by the language owner, never translated here.
+    """
+    from lxml import etree
+    if document.tag not in ('div','body','main','article'):
+        raise ValueError('diagram descriptions require a book container')
+    if set(labels)!={'description_link','descriptions_heading'} or not figure_label.strip():
+        raise ValueError('localized diagram navigation labels required')
+    if any(not isinstance(v,str) or not v.strip() for v in labels.values()):
+        raise ValueError('empty diagram navigation label')
+    hashes={r['source_sha256'] for r in receipt['markers'].values()}
+    if set(descriptions)!=hashes:raise ValueError('diagram description source coverage differs')
+    if document.xpath('//*[@id="olp-diagram-descriptions"]'):
+        raise ValueError('diagram descriptions already attached')
+    pairs=[]
+    for row in receipt['markers'].values():
+        desc=descriptions[row['source_sha256']]
+        if desc.get('source_sha256')!=row['source_sha256'] or row['index'] not in desc.get('occurrence_indices',[]):
+            raise ValueError('diagram description source/occurrence mismatch')
+        if any(not isinstance(desc.get(k),str) or not desc[k].strip() for k in ('alt_text','long_description')):
+            raise ValueError('complete diagram alt and long description required')
+        figure_id='olp-native-figure-'+str(row['index'])
+        nodes=document.xpath('//*[@id=$id]',id=figure_id)
+        if len(nodes)!=1:raise ValueError('rendered diagram occurrence missing/duplicate')
+        imgs=nodes[0].xpath('./img')
+        if len(imgs)!=1 or imgs[0].get('alt')!=desc['alt_text']:
+            raise ValueError('rendered diagram alt differs from owner text')
+        pairs.append((row,desc,nodes[0],imgs[0],figure_id))
+    section=etree.Element('section',id='olp-diagram-descriptions',attrib={'class':'olp-diagram-descriptions','aria-labelledby':'olp-diagram-descriptions-heading'})
+    etree.SubElement(section,'h2',id='olp-diagram-descriptions-heading').text=labels['descriptions_heading']
+    for row,desc,node,img,figure_id in pairs:
+        target='olp-diagram-description-'+str(row['index'])
+        img.set('aria-details',target)
+        img.tail=(img.tail or '')+' '
+        etree.SubElement(node,'a',href='#'+target,attrib={'class':'olp-diagram-description-link'}).text=labels['description_link']
+        entry=etree.SubElement(section,'section',id=target,attrib={'aria-labelledby':target+'-heading'})
+        heading=etree.SubElement(entry,'h3',id=target+'-heading')
+        etree.SubElement(heading,'a',href='#'+figure_id).text=figure_label+' '+str(row['index'])
+        for paragraph in re.split(r'\n\s*\n',desc['long_description']):
+            lines=paragraph.splitlines()
+            if len(lines)==1:etree.SubElement(entry,'p').text=lines[0]
+            else:
+                listing=etree.SubElement(entry,'ul')
+                for line in lines:etree.SubElement(listing,'li').text=line
+    document.append(section)
+    return {'occurrences':len(pairs),'unique_descriptions':len(hashes),'visible_navigation':True,
+            'full_accessibility_acceptance':False}

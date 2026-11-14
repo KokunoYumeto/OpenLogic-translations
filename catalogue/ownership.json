@@ -1,212 +1,991 @@
 {
-  "schema": "openlogic-production-ownership/1",
-  "snapshot_date": "2026-09-07",
-  "scope": "Existing complete-edition assignments, verified source handoff, explicitly bounded partial releases and newly commissioned zero-coverage register pairs; no new full-edition completion is claimed.",
-  "commission_basis": {
-    "snapshot": "compute-v3-2026-09-01",
-    "interpretation": "Historical planning order used to commission eight lanes. The current allocation study establishes no live global rank; assignments continue without being represented as empirical rank claims.",
-    "state_snapshot_observed_utc": "2026-09-05T02:05:46Z",
-    "state_snapshot_sha256": "97cef2ea91d6128f1ae5d8394e95b433545e9cf9639a4ab84e9f642735f6a4a2",
-    "state_snapshot_role": "Bounded observation of an active research task; not a final immutable state.",
-    "actionable_findings": "../evidence/ADJACENT_COMPUTE_ACTIONABLE_FINDINGS_20260905.json"
-  },
-  "source_authority": {
-    "repository": "https://github.com/OpenLogicProject/OpenLogic",
-    "revision": "9620cc73f9c8e0ad003c514a5d3748f29611c4c0",
-    "tracked_content_tex": 722,
-    "raw_source_manifest_sha256": "5a6fef5c16c15a5b2f90f874c268512cfd6ed2e846bdfa850a67304a4c05a155"
-  },
-  "existing_owner_split": [
+  "schema": "openlogic.edition-routing.v2",
+  "editions": [
     {
-      "edition": "Arabic",
-      "owner_task_id": "01a06749-ba43-7f83-8546-af3f8cb46dec"
+      "id": "openlogic-en-frozen-722",
+      "name": "English — complete frozen-source reader",
+      "language_tag": "en",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-translations",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-translations/releases/tag/en-olp-0722-frozen-20260905",
+      "release_tag": "en-olp-0722-frozen-20260905",
+      "version_doi": "10.5281/zenodo.22385786",
+      "concept_doi": "10.5281/zenodo.22385785",
+      "source_units_translated": null,
+      "standalone_reader_units": 722,
+      "profiles": [
+        "one coherent reader containing the ordinary 642-unit graph and all 80 retained source units"
+      ],
+      "status": [
+        "verified-standalone-722",
+        "verified-source-preservation-722"
+      ],
+      "limitations": [
+        "independent preservation assembly, not an official Open Logic Project release",
+        "the 80 retained units keep their upstream alternative, experimental, draft or unfinished status",
+        "fixed-layout PDF; no PDF/UA claim",
+        "coverage and rendering verification is not a new linguistic or editorial certification of the English source"
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/ENGLISH_722_READER_PUBLIC_READBACK_20260905.json",
+        "manager_public_readback_sha256": "c00c1009c02f4603e52dc88f37db1df45043fe6d3c7c82bed385a987b0eddead",
+        "latest_zenodo_record": "https://zenodo.org/records/22385786",
+        "anonymous_github_assets_verified": 5,
+        "anonymous_zenodo_files_verified": 5,
+        "source_hashes_verified": 722,
+        "overlay_hashes_verified": 722,
+        "body_roundtrips_verified": 722,
+        "deterministic_builds": 2,
+        "bookmarks": 904,
+        "internal_links": 3190,
+        "broken_internal_links": 0,
+        "visually_inspected_pages": 215
+      }
     },
     {
-      "edition": "Iranian Persian and separately specified conceptual Inter-Farsi",
-      "owner_task_id": "01a06cb0-a69e-7650-873a-2af9d8c4b1de"
-    }
-  ],
-  "new_editions": [
-    {
-      "language_tag": "fr",
-      "owner_task_id": "01a07d6d-aedb-7b00-b3bd-a623b19b5f82",
-      "state": "first-complete-chapter-published-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-fr",
-      "release": "https://github.com/KokunoYumeto/OpenLogic-fr/releases/tag/v0.1.0-ensembles",
-      "version_doi": "10.5281/zenodo.22650158",
-      "published_source_units": 7,
-      "public_reader_units": 7,
-      "public_reader_pages": 11,
-      "completion_verified": false,
-      "evidence": "evidence/FRENCH_FIRST_CHAPTER_MANAGER_VERIFICATION_20260907.json",
-      "commission_basis": "Explicit user priority: French is the principal missing-language gap. No new global-rank claim is made."
-    },
-    {
-      "language_tag": "pnb-Arab-PK",
-      "shortlist_rank": 3,
-      "owner_task_id": "01a06ccc-f516-7d22-b2b4-f3d42c10b7fb",
-      "state": "partial-seven-chapter-published-presentation-patch-in-progress-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK/releases/tag/v0.1.0",
-      "public_reader_units": 7,
-      "published_release_source_units": 21,
-      "public_source_checkpoint_units": 70,
-      "public_source_checkpoint_commit": "4f6b511df6769982961a320ea8afb1e91aa5b91a",
-      "evidence": "evidence/PUNJABI_PUBLIC_READBACK_20260904.json",
-      "source_checkpoint_evidence": "evidence/PUNJABI_SOURCE70_MANAGER_AUDIT_20260905.json"
-    },
-    {
-      "language_tag": "bn-Beng-IN",
-      "shortlist_rank": 4,
-      "owner_task_id": "01a06ccd-16bd-7573-8c04-f1093c74a168",
-      "state": "partial-chapter-published-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN/releases/tag/v0.2.0-sets-relations",
-      "public_reader_units": null,
-      "evidence": "evidence/CUMULATIVE_PUBLIC_READBACK_20260904.json",
-      "published_release_source_units": 18,
-      "public_source_checkpoint_units": 147,
-      "public_source_checkpoint_commit": "2a4f7523207381d17699541f71a8f7c5f2e34ce3",
-      "source_checkpoint_evidence": "evidence/BENGALI_SOURCE147_MANAGER_AUDIT_20260905.json"
-    },
-    {
-      "language_tag": "mr-Deva-IN",
-      "shortlist_rank": 5,
-      "owner_task_id": "01a06ccd-37ac-77c0-9f86-c33e28ce6b04",
-      "state": "partial-chapter-published-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/seven-chapters-v0.5",
-      "public_reader_units": 59,
-      "evidence": "evidence/MARATHI_SEVEN_CHAPTERS_V05_MANAGER_AUDIT_20260906.json",
-      "published_release_source_units": 59,
-      "public_source_checkpoint_units": 59,
-      "public_source_checkpoint_commit": "7665d1fd5e0cea08f32ecd2375697bc88e8736b3",
-      "source_checkpoint_evidence": "evidence/MARATHI_SEVEN_CHAPTERS_V05_MANAGER_AUDIT_20260906.json"
-    },
-    {
-      "language_tag": "te-Telu-IN",
-      "shortlist_rank": 6,
-      "owner_task_id": "01a06ccd-9f2e-7632-884d-4adb1ff55268",
-      "state": "partial-chapter-published-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v0.2.0-sets-html",
-      "public_reader_units": 7,
-      "published_source_units": 23,
-      "evidence": "evidence/TELUGU_V020_PUBLIC_READBACK_20260904.json"
-    },
-    {
-      "language_tag": "ta-Taml-IN",
-      "shortlist_rank": 7,
-      "owner_task_id": "01a06cce-2a3c-7d63-a91d-446cd33e90dd",
-      "state": "partial-chapter-published-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-ta-Taml-IN",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/OpenLogic-ta-Taml-IN/releases/tag/v0.1.0-sets",
-      "public_reader_units": 7,
-      "published_source_units": 51,
-      "public_source_checkpoint_commit": "d5c72f0e92d650cf89c4195fc9b030b3114de234",
-      "evidence": "evidence/TAMIL_SOURCE51_PUBLIC_READBACK_20260904.json"
-    },
-    {
-      "language_tag": "jv-Latn-ID",
-      "shortlist_rank": 8,
-      "owner_task_id": "01a06cce-4ce6-7942-911a-6dc573cb59ad",
-      "state": "partial-chapter-published-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.1.2",
-      "public_reader_units": 24,
-      "translated_units_supporting_reader": 26,
-      "published_release_source_units": 48,
-      "public_source_checkpoint_units": 118,
-      "public_source_checkpoint_commit": "bf8172c7585986612b181aa5d5a6d72fea90f108",
-      "evidence": "evidence/JAVANESE_V012_MANAGER_VERIFICATION_20260905.json",
-      "source_checkpoint_evidence": "evidence/JAVANESE_SOURCE118_MANAGER_AUDIT_20260905.json"
-    },
-    {
-      "language_tag": "gu-Gujr-IN",
-      "shortlist_rank": 9,
-      "owner_task_id": "01a06cce-71c8-7d33-87ca-cb727cb5482c",
-      "state": "partial-chapter-published-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/releases/tag/sets-relations-v0.2.0",
-      "public_reader_units": 16,
-      "evidence": "evidence/CUMULATIVE_PUBLIC_READBACK_20260904.json",
-      "published_release_source_units": 16,
-      "public_source_checkpoint_units": 37,
-      "public_source_checkpoint_commit": "f88d1985d945ed5c30e76ceb3c7214c8d14509da",
-      "source_checkpoint_evidence": "evidence/GUJARATI_SOURCE37_PUBLIC_READBACK_20260904.json"
-    },
-    {
-      "language_tag": "ps-Arab-PK",
-      "shortlist_rank": 10,
-      "owner_task_id": "01a06cce-91ec-7961-8a8a-795833b61d90",
-      "state": "partial-proof-systems-reader-v0.4.1-manager-verified-full-edition-active",
-      "repository": "https://github.com/KokunoYumeto/openlogic-ps-Arab-PK",
-      "accepted_translation_units": null,
-      "completion_verified": false,
-      "release": "https://github.com/KokunoYumeto/openlogic-ps-Arab-PK/releases/tag/v0.4.1-proof-systems-reference-repair",
-      "public_reader_units": 70,
-      "public_reader_pages": 108,
-      "evidence": "evidence/PASHTO_V041_PUBLIC_PACKAGE_AND_VISUAL_AUDIT.json",
-      "published_source_units": 131,
-      "reader_defect": null,
-      "provenance_note": "Generic embedded PUBLICATION_VERIFIED.json remains historical v0.4.0 evidence; normalize it in the next substantive source package without a metadata-only release."
-    }
-  ],
-  "commissioned_register_pairs": [
-    {
-      "pair_id": "openlogic-nl-dual-register",
-      "language": "Nederlands",
+      "id": "openlogic-nl-standard",
+      "name": "Nederlands — wetenschappelijk register",
+      "language_tag": "nl",
       "metadata_language": "nl-NL",
-      "language_tags": [
-        "nl",
-        "nl-x-gewoon"
-      ],
-      "outputs": [
-        "wetenschappelijk Nederlands",
-        "gewone mensentaal voor volwassenen, met behoud van de wiskundige inhoud"
-      ],
-      "owner_task_id": "01a073b1-f464-7510-9d99-8f1e58a64d51",
-      "owner_setup_state": "established",
-      "updated_utc": "2026-09-28",
-      "state": "partial-readers-published-full-edition-incomplete",
       "repository": "https://github.com/KokunoYumeto/OpenLogic-nl",
       "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.5.0-paired-192-of-722-readers",
+      "release_tag": "v0.5.0-paired-192-of-722-readers",
       "version_doi": "10.5281/zenodo.23001164",
-      "source_units_translated_each": 192,
-      "published_source_units_each": 192,
-      "public_reader_units_each": 192,
-      "total_source_units": 722,
-      "completion_verified": false,
-      "status_label": "Twee gepubliceerde leesuitgaven: elk 192 van 722 eenheden",
-      "coverage_note": "Deze aantallen beschrijven de gepubliceerde leesuitgaven, niet de latere lokale werkteksten. EPUB, online lezer, rechtstreekse LaTeX en volledige bron-ZIP zijn beschikbaar voor beide registers. Dit is geen volledige taalkundige certificering of menselijke beoordeling.",
-      "evidence": "evidence/DUTCH_READERS192_PUBLIC_20260927.json",
-      "commission_evidence": "evidence/DUTCH_DUAL_REGISTER_COMMISSION_20260906.json",
-      "catalogue_correction_disclosure": "Correctie van eigenaarschap en publicatiegegevens: OpenAI Codex — GPT-6 Astra, Ultra-inspanning. Deze correctie verandert geen vertaling of reader; de toeschrijving van het eerdere vertaal- en publicatiewerk staat bij de uitgave."
+      "concept_doi": "10.5281/zenodo.22969983",
+      "source_units_translated": 192,
+      "standalone_reader_units": 192,
+      "profiles": [
+        "192 corresponderende broneenheden in twee registers",
+        "Beide registers gebruiken dezelfde Engelse bron; geen samenvatting of kinderversie."
+      ],
+      "status": [
+        "partial",
+        "public-reader-192/722",
+        "audit-needed"
+      ],
+      "limitations": [
+        "192 van 722 eenheden; 530 eenheden ontbreken nog. De laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
+        "EPUB en online lezer zijn gepubliceerd en bytegewijs geverifieerd. Er is geen PDF in deze tussenuitgave.",
+        "Brede formules kunnen binnen hun eigen regel horizontaal worden verschoven.",
+        "Het Nederlandstalige keuze- en beoordelingsregister bevat 643 regels; dit is geen menselijke beoordeling of volledige taalkundige certificering.",
+        "Vertaling en eerdere controles: OpenAI Codex. De huidige eigenaar gebruikt GPT-5.6 Sol, Ultra-inspanning; de exacte historische model- en inspanningsinstelling van ieder ouder tekstgedeelte is niet afzonderlijk bewezen. Samenstelling van deze reader, EPUB-conversie, redactionele correcties, deterministische bouwcontroles, verpakking en publicatie: OpenAI Codex — GPT-5.6 Sol, Ultra-inspanning. Geen menselijke redactie, beoordeling of goedkeuring wordt geclaimd."
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/DUTCH_READERS192_PUBLIC_20260927.json",
+        "latest_zenodo_record": "https://zenodo.org/records/23001164",
+        "public_source_commit": "86c63310314b4a67a099ce6b99f29d19d215f225",
+        "public_reader_commit": "86c63310314b4a67a099ce6b99f29d19d215f225",
+        "target_files_replayed_per_register": 192,
+        "review_entries": 643,
+        "full_linguistic_certification": false,
+        "previous_reader_public_readback": "evidence/DUTCH_READERS160_PUBLIC_20260927.json",
+        "previous_source_public_readback": "evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json"
+      }
+    },
+    {
+      "id": "openlogic-nl-gewone-mensentaal",
+      "name": "Nederlands — gewone mensentaal",
+      "language_tag": "nl-x-gewoon",
+      "metadata_language": "nl-NL",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-nl",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-nl/releases/tag/v0.5.0-paired-192-of-722-readers",
+      "release_tag": "v0.5.0-paired-192-of-722-readers",
+      "version_doi": "10.5281/zenodo.23001164",
+      "concept_doi": "10.5281/zenodo.22969983",
+      "source_units_translated": 192,
+      "standalone_reader_units": 192,
+      "profiles": [
+        "192 corresponderende broneenheden in twee registers",
+        "Beide registers gebruiken dezelfde Engelse bron; geen samenvatting of kinderversie."
+      ],
+      "status": [
+        "partial",
+        "public-reader-192/722",
+        "audit-needed"
+      ],
+      "limitations": [
+        "192 van 722 eenheden; 530 eenheden ontbreken nog. De laatste hoofdstukgrens kan midden in een hoofdstuk vallen.",
+        "EPUB en online lezer zijn gepubliceerd en bytegewijs geverifieerd. Er is geen PDF in deze tussenuitgave.",
+        "Brede formules kunnen binnen hun eigen regel horizontaal worden verschoven.",
+        "Het Nederlandstalige keuze- en beoordelingsregister bevat 643 regels; dit is geen menselijke beoordeling of volledige taalkundige certificering.",
+        "Vertaling en eerdere controles: OpenAI Codex. De huidige eigenaar gebruikt GPT-5.6 Sol, Ultra-inspanning; de exacte historische model- en inspanningsinstelling van ieder ouder tekstgedeelte is niet afzonderlijk bewezen. Samenstelling van deze reader, EPUB-conversie, redactionele correcties, deterministische bouwcontroles, verpakking en publicatie: OpenAI Codex — GPT-5.6 Sol, Ultra-inspanning. Geen menselijke redactie, beoordeling of goedkeuring wordt geclaimd."
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/DUTCH_READERS192_PUBLIC_20260927.json",
+        "latest_zenodo_record": "https://zenodo.org/records/23001164",
+        "public_source_commit": "86c63310314b4a67a099ce6b99f29d19d215f225",
+        "public_reader_commit": "86c63310314b4a67a099ce6b99f29d19d215f225",
+        "target_files_replayed_per_register": 192,
+        "review_entries": 643,
+        "full_linguistic_certification": false,
+        "previous_reader_public_readback": "evidence/DUTCH_READERS160_PUBLIC_20260927.json",
+        "previous_source_public_readback": "evidence/DUTCH_PAIRED160_SOURCE_PUBLIC_20260926.json"
+      }
+    },
+    {
+      "id": "openlogic-fr",
+      "name": "Français",
+      "language_tag": "fr",
+      "metadata_language": "fr",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-fr",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-fr/releases/tag/v0.11.0-first-order-introduction",
+      "release_tag": "v0.11.0-first-order-introduction",
+      "version_doi": "10.5281/zenodo.22866000",
+      "concept_doi": "10.5281/zenodo.22650157",
+      "source_units_translated": 132,
+      "standalone_reader_units": 111,
+      "profiles": [
+        "Treize chapitres et 98 sections : des ensembles à la logique du premier ordre ; livre PDF/EPUB de 111 unités et 132 unités traduites dans les sources"
+      ],
+      "status": [
+        "partial",
+        "reader-release-111/722",
+        "source-drafts-132/722",
+        "epub-published"
+      ],
+      "limitations": [
+        "Édition partielle : 132 unités traduites dans les sources, 111 dans le livre publié ; 611 unités restent hors du livre.",
+        "Les 21 unités traduites non intégrées au livre restent accessibles dans les sources ; elles ne comptent pas dans sa couverture.",
+        "Les fichiers publiés ont été vérifiés ; les corrections et réexamens locaux ultérieurs ne sont pas présentés comme déjà publiés.",
+        "Aucune nouvelle certification linguistique intégrale ou validation humaine indépendante n’est revendiquée.",
+        "Le PDF n’est pas balisé. L’EPUB contient du MathML et des schémas décrits ; leur restitution dépend du logiciel de lecture.",
+        "La livraison historique signale une traduction assistée par IA sans préciser ici son modèle et son niveau d’effort ; cette attribution reste à compléter avec des preuves.",
+        "Actualisation de cette fiche et vérification des fichiers : OpenAI Codex — GPT-6 Astra, effort Ultra. Il ne s’agit pas d’une nouvelle traduction."
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/FRENCH_READER111_MANAGER_INTAKE_20261001.json",
+        "manager_full_semantic_rereview": false,
+        "prior_audit": {
+          "manager_public_readback": "evidence/FRENCH_GUJARATI_PUBLIC_DELIVERY_20260919.json",
+          "manager_full_semantic_rereview": false,
+          "prior_audit": {
+            "manager_public_readback": "evidence/FRENCH_FUNCTIONS_MANAGER_VERIFICATION_20260908.json",
+            "manager_replayed_source_manifest_units": 722,
+            "manager_replayed_translation_units": 23,
+            "manager_replayed_aligned_segments": 396,
+            "translated_text_blocks_with_canon_links": 277,
+            "documented_editorial_choices": 249,
+            "manager_visual_pages_inspected": 31,
+            "manager_full_semantic_rereview": false,
+            "canon_and_choices": "https://github.com/KokunoYumeto/OpenLogic-fr/tree/v0.3.0-ensembles-relations-fonctions/review",
+            "scope": "Exact source/alignment replay, canon-reference linkage, 31-page contact-sheet visual inspection, public-byte identity and reader-to-hub link. Saved independent Functions review covers 87 contextual choices with parent verification of 174 exact source/target spans and concrete findings against primary canon. One inherited uniqueness-reference overclaim and targeted evidence-record repairs are reported to the owner, not claimed as integrated. No whole-edition expert certification is claimed."
+          },
+          "scope": "Eight anonymous downloads matched. Cumulative LaTeX covers 51 native content paths with no external body imports; styles/assets remain in the ZIP. Owner EPUBCheck, reproduction and visual results remain owner-attributed.",
+          "source_package_checks": "evidence/FRENCH_GUJARATI_SOURCE_PACKAGE_CHECKS_20260919.json"
+        },
+        "scope": "Vérification anonyme des fichiers publics, des sources et des alignements, des liens vers les passages du canon, de la reconstruction exacte du LaTeX cumulatif et de la structure EPUB. Ce contrôle ne constitue ni une révision sémantique intégrale ni une certification d’accessibilité.",
+        "source_package_checks": "evidence/FRENCH_READER111_MANAGER_INTAKE_20261001.json",
+        "previous_public_readback": "evidence/FRENCH_READER74_MANAGER_INTAKE_20260920.json"
+      }
+    },
+    {
+      "id": "openlogic-ar",
+      "name": "العربية — ثلاث طبعات كاملة",
+      "language_tag": "ar",
+      "metadata_language": "ar",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-ar",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-ar/releases/tag/ar-openlogic-current-msa-and-review-20260930",
+      "release_tag": "ar-openlogic-current-msa-and-review-20260930",
+      "version_doi": "10.5281/zenodo.23062351",
+      "concept_doi": "10.5281/zenodo.21921850",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "profiles": [
+        "الفصحى المعاصرة: النص نفسه بالترميز الدولي أو بأرقام المشرق العربية الشرقية.",
+        "الصياغة التراثية سجلّ لغوي مستقل، وليست تبديلًا للأرقام وحدها.",
+        "تضم كل نسخة EPUB الوحدات المصدرية الـ٧٢٢ في كتاب واحد."
+      ],
+      "status": [
+        "verified-standalone-722",
+        "classical-fixed-name-repair-verified",
+        "msa-quantifier-corrected-pdfs-verified",
+        "msa-quantifier-corrected-epubs-verified"
+      ],
+      "limitations": [
+        "صُحّح اتجاه الأسماء اللاتينية وخرائط Unicode في PDF التراثي الصادر في ٢٨ سبتمبر. طابقت الملفات على GitHub وZenodo، وفُحصت مواضع len وVal وPA وCut وG1c وG3c بصريًا في الصفحات ٣٣ و٤٠٤ و١٠٤٤. تبقى النسخة السابقة محفوظة مع خللها الموثق؛ ولا يُدّعى تدقيق لغوي شامل جديد.",
+        "هذه فحوص تغطية ومصادر وروابط وإعادة بناء؛ لا تثبت صحة كل اختيار لغوي.",
+        "إيصالات الناشر تسجل EPUBCheck 5.3.0 وAce 1.4.6؛ لم يُعَد تشغيل الأداتين في فحص الفهرس هذا.",
+        "تُنسب الترجمة والتصحيحات الموروثة في مصادر هذه النسخة إلى OpenAI Codex — GPT-5.6 Sol، بمستوى جهد Ultra. أُنجز استكمال تحويل الطبعات الثلاث إلى EPUB، وتجميعها والتحقق الآلي منها وإعداد حزم مصادرها، بواسطة OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra. وأُعيد فحص إعادة البناء وصُحِّح هذا البيان بواسطة OpenAI Codex — GPT-6.1 Sol، بمستوى جهد Ultra. لا يُقدَّم هذا التصحيح بوصفه إعادة ترجمة للمتن، ولم تقع مراجعة بشرية شاملة.",
+        "تحديث الفهرس والتحقق من الحزم: OpenAI Codex — GPT-6 Astra، بمستوى جهد Ultra.",
+        "ملفات PDF غير موسومة؛ لا يُدَّعى امتثالها لمعيار PDF/UA. تختلف تواريخ بناء PDF وEPUB، وتبقى المصادر المطابقة لكل بناء متاحة.",
+        "دليل المراجعة مكتمل: ١٠٩٥ سجلًا مميزًا مع بطاقات مرتبطة، لا ١٠٩٥ موافقة بشرية. التعليلات اللاحقة لا تُنسب بأثر رجعي إلى المترجم الأول.",
+        "الفهرس العربي والتعليلات اللاحقة والتدقيق المعجمي: OpenAI Codex — GPT-6 Sol، بمستوى جهد Ultra، وفق بيان ناشر الطبعة.",
+        "تصحيح أسماء الدوال وخرائط Unicode: OpenAI Codex — GPT-6 Astra، Ultra؛ وتصحيح الأسماء الثابتة الإضافية والتجميع والنشر: OpenAI Codex — GPT-6 Sol، Ultra، وفق سجل ناشر الطبعة.",
+        "تضم نسختا PDF وEPUB المعياريتان تصحيحي شروط المكمّمات، مع ملف LaTeX كامل ومصدر مطابق لكل نسخة. ثبتت مطابقة إعادة بناء EPUB بايتًا ببايت وحفظ الصيغ السابقة ومعرّفات الروابط. بقيت الطبعة التراثية بلا تغيير في هذه الدفعة.",
+        "يعرض PDF المشرق أرقام الصيغ بالأشكال العربية الهندية، وتبقى أرقام الصفحات والفصول بالأشكال الدولية؛ لا يُدّعى تحويل كل رقم في الكتاب.",
+        "تصحيح شروط المكمّمات وإعادة بناء القارئين المعياريين ونقل التصحيحين إلى EPUB: OpenAI Codex — GPT-6.1 Sol، جهد Ultra. فُحص القسم المصحح والهامش بصريًا؛ لا تدقيق لغوي شامل جديد."
+      ],
+      "evidence": {
+        "qa_sha256": "88073781f39253101b483c8490ebd0f5ce01d69522fbbb0c2d0542189a645099",
+        "public_manifest_sha256": "3e1bd7b76e69992ecbf386364261c1aa279f9e8dae377612b6131389660902a3",
+        "public_manifest_github_zenodo_byte_equal": true,
+        "manager_public_readback": "evidence/ARABIC_CURRENT_MSA_PUBLIC_20260930.json",
+        "manager_public_readback_sha256": "2df312fa80bef38d7efaca408117781457faae0a672526b78f89544e1991dedb",
+        "previous_manager_public_readback": "evidence/ARABIC_EPUB_PROVENANCE_20260930.json",
+        "latest_zenodo_record": "https://zenodo.org/records/23062351",
+        "legacy_pdf_public_readback": "evidence/ARABIC_DUAL_R2_PUBLIC_READBACK_20260905.json",
+        "legacy_pdf_public_readback_sha256": "d62f01ab708c0ad489429768e2df51149145d0f3970730bad1dbedd941d437da",
+        "package_checks": "evidence/ARABIC_COMPLETE_EPUB_PACKAGE_CHECKS_20260926.json",
+        "metadata_choices": "evidence/ARABIC_HUB_METADATA_CHOICES_20260926.jsonl",
+        "independent_epub_source_units_each": 722,
+        "full_linguistic_certification": false,
+        "current_readers_and_review": "evidence/ARABIC_READERS_REVIEW_PUBLIC_20260927.json",
+        "classical_repair": "evidence/AR_CLASSICAL_REPAIR_20260928.json",
+        "classical_repair_sha256": "84b5e2b37c103f7cc8577a9b1880bda78d5807c13dac1a43ec4c0e8b8ae6f6bf",
+        "epub_provenance_correction": "evidence/ARABIC_EPUB_PROVENANCE_20260930.json",
+        "review_corrections": "evidence/ARABIC_REVIEW_CORRECTIONS_20260930.json",
+        "readable_review": "evidence/ARABIC_READABLE_REVIEW_20260930.json",
+        "function_definitions_review": "evidence/ARABIC_FUNCTION_REVIEW_20260930.json",
+        "context_proof_review": "evidence/ARABIC_CONTEXT_PROOF_REVIEW_20260930.json",
+        "current_msa_pdf": "evidence/ARABIC_CURRENT_MSA_PUBLIC_20260930.json",
+        "corrected_epubs": "evidence/ARABIC_CORRECTED_EPUB_PUBLIC_20260930.json"
+      }
+    },
+    {
+      "id": "openlogic-fa-ir",
+      "name": "فارسی ایرانی",
+      "language_tag": "fa-IR",
+      "metadata_language": "fa-IR",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-fa-ir",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-fa-ir/releases/tag/fa-ir-olp-0722-complete-r11-20261001",
+      "release_tag": "fa-ir-olp-0722-complete-r11-20261001",
+      "version_doi": "10.5281/zenodo.23087813",
+      "concept_doi": "10.5281/zenodo.21921852",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "profiles": [
+        "خوانشگر فارسی با متن کاملِ ۷۲۲ واحد: PDF بازنگری R11 با ۱٬۱۹۷ صفحه، و EPUB و HTML همگام با R11؛ هر قالب LaTeX مستقیم و ZIP کاملِ منبع دارد.",
+        "برگردان، تصحیح، ویرایش و آماده‌سازیِ این تبار: OpenAI Codex، مدل‌های GPT-5.6 Sol، GPT-6 Astra و GPT-6 Sol، همگی با سطح تلاش Ultra. بازبینی اصلاحی، وارسی، بسته‌بندی و فرادادهٔ R11: GPT-5.6 Sol، Ultra. تطبیق عمومی و به‌روزرسانی این فهرست: GPT-6 Astra، Ultra. بازبینی، تأیید یا نویسندگیِ انسانی ادعا نمی‌شود. همگام‌سازیِ EPUB/HTML با R11، اصلاحِ ابزارِ تبدیل و آزمون‌های آن: GPT-6 Astra، Ultra؛ ترجمهٔ تازه نیست."
+      ],
+      "status": [
+        "published-source-722-reader-722",
+        "verified-complete-reader"
+      ],
+      "limitations": [
+        "پوشش هر ۷۲۲ واحد تأیید شده است؛ این به معنی پایان بررسی همهٔ انتخاب‌های ترجمه بر پایهٔ منابع علمی فارسی نیست.",
+        "PDF ثابت‌صفحه و بدون برچسب‌های ساختاری است؛ انطباق با PDF/UA یا کپی‌کردن بی‌خطای فرمول‌ها ادعا نمی‌شود.",
+        "EPUB و HTML از MathML و SVG استفاده می‌کنند؛ پشتیبانی نرم‌افزارهای مطالعه یکسان نیست و تأیید همهٔ دستگاه‌ها یا دسترس‌پذیری کامل ادعا نمی‌شود.",
+        "PDF و EPUB/HTML هرکدام LaTeX مستقیم و ZIP منبعِ مربوط به خود را دارند. LaTeX مستقیمِ EPUB/HTML جریانِ تبدیل است و راه‌اندازِ مستقلِ PDF نیست.",
+        "فایل‌های اصلاح‌شده و خوانشگر کامل مرورگر از GitHub بدون ورود به حساب دریافت و از نظر اندازه و SHA-256 تطبیق داده شدند. آینهٔ Zenodo هنوز این اصلاح‌ها را ندارد. سه فایل PDF و منابع تاریخی R11 در هر دو آینه حفظ شده‌اند.",
+        "دو نمونهٔ فارسی و لاتین فقط OLP-0005 را پوشش می‌دهند. چهار نمونهٔ جداگانهٔ Inter-Farsi نیز تک‌واحدی‌اند؛ هیچ‌کدام ویرایش کاملِ لاتین یا Inter-Farsi نیست."
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/PERSIAN_R11_PUBLIC_MANAGER_AUDIT_20261002.json",
+        "mirror_public_readback": "evidence/PERSIAN_R11_PUBLIC_MANAGER_AUDIT_20261002.json",
+        "anonymous_github_assets_verified": 3,
+        "anonymous_zenodo_files_verified": 3,
+        "manager_pdf_pages_newly_reviewed": 0,
+        "manager_canon_pages_newly_read": 0,
+        "complete_linguistic_certification": false,
+        "zenodo_record": "https://zenodo.org/records/23087813",
+        "retained_sample_readback": "evidence/PERSIAN_FULL_REFLOWABLE_MANAGER_AUDIT_20260920.json",
+        "retained_sample_mirror": "evidence/PERSIAN_ZENODO_MIRROR_20260926.json",
+        "previous_r9_snapshot": "evidence/PERSIAN_BEFORE_R10_20260929.json",
+        "retained_reflowable_readback": "evidence/PERSIAN_R10_PUBLIC_MANAGER_AUDIT_20260929.json",
+        "previous_r10_snapshot": "evidence/PERSIAN_BEFORE_R11_20261002.json",
+        "reflowable_readback": "evidence/PERSIAN_R11_REFLOWABLE_PUBLIC_20261014.json",
+        "reflowable_zenodo_mirrored": false,
+        "corrected_reflowable_readback": "evidence/PERSIAN_SEQUENT_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "corrected_reflowable_zenodo_mirrored": false,
+        "previous_corrected_reflowable_readback": "evidence/PERSIAN_CANON_REFLOWABLE_PUBLIC_20261014.json",
+        "functions_choice_ledger": "evidence/PERSIAN_FUNCTIONS_CHOICES_20261015.public.json",
+        "previous_reviewed_reflowable_readback": "evidence/PERSIAN_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "previous_size_reviewed_reflowable_readback": "evidence/PERSIAN_SIZE_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "alternate_size_choice_ledger": "evidence/ALTERNATE_SIZE_0038_0040.public.json",
+        "previous_chapter_reviewed_reflowable_readback": "evidence/PERSIAN_CHAPTER_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "arithmetic_tail_choice_ledger": "evidence/ARITHMETIZATION_0046_0048.public.json",
+        "previous_arithmetic_reviewed_reflowable_readback": "evidence/PERSIAN_ARITHMETIC_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "infinite_tail_choice_ledger": "evidence/INFINITE_0052_0054.public.json",
+        "previous_infinite_reviewed_reflowable_readback": "evidence/PERSIAN_INFINITE_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "propositional_tail_choice_ledger": "evidence/PROPOSITIONAL_0060_0062.public.json",
+        "previous_propositional_reviewed_reflowable_readback": "evidence/PERSIAN_PROPOSITIONAL_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "proofsystems_tail_choice_ledger": "evidence/PROOF_SYSTEMS_0063_0068.public.json",
+        "previous_proofsystems_reviewed_reflowable_readback": "evidence/PERSIAN_PROOFSYSTEMS_REVIEWED_REFLOWABLE_PUBLIC_20261015.json",
+        "sequent_tail_choice_ledger": "evidence/SEQUENT_TAIL_0079_0083.public.json"
+      }
+    },
+    {
+      "id": "openlogic-hi",
+      "name": "Hindi",
+      "language_tag": "hi-Deva-IN",
+      "repository": "https://github.com/KokunoYumeto/open-logic-hi",
+      "release": "https://github.com/KokunoYumeto/open-logic-hi/releases/tag/HI-OLP-PUB-0007",
+      "release_tag": "HI-OLP-PUB-0007",
+      "version_doi": "10.5281/zenodo.22308568",
+      "concept_doi": "10.5281/zenodo.21920511",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "status": [
+        "published-source-722-reader-722",
+        "verified-complete-reader"
+      ],
+      "limitations": [
+        "not human- or peer-reviewed",
+        "not PDF/UA certified",
+        "release acceptance records 28 visually reviewed pages, not all 975",
+        "manager audit does not independently certify whole-corpus linguistic quality"
+      ],
+      "evidence": {
+        "github_and_zenodo_anonymous_readback": true,
+        "manager_audit": "evidence/HINDI_PUB0007_AND_RECIPROCAL_LINK_AUDIT_20260905.json",
+        "manager_audit_sha256": "390e7bac9a101790da7b44339b34d025dbe6e453844ad6371efd018960d33792",
+        "source_paths_in_accepted_build_log": 722,
+        "source_paths_in_fls": 722,
+        "source_paths_absent": 0,
+        "release_assets_verified": 6
+      }
+    },
+    {
+      "id": "openlogic-id",
+      "name": "Bahasa Indonesia",
+      "language_tag": "id-Latn-ID",
+      "metadata_language": "id",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-id",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-id/releases/tag/id-olp-0722-20260814",
+      "release_tag": "id-olp-0722-20260814",
+      "version_doi": "10.5281/zenodo.23375685",
+      "concept_doi": "10.5281/zenodo.21932786",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "profiles": [
+        "Naskah utama: OpenAI 5.6 Sol, Ultra mode; model/upaya pelengkap tidak tercatat. Ekspor HTML/EPUB dan pengemasan: OpenAI Codex — GPT-6 Astra, Ultra. Bukan penelaahan manusia."
+      ],
+      "status": [
+        "published-source-722-reader-722",
+        "verified-complete-reader"
+      ],
+      "limitations": [
+        "401 unit akhir tidak memiliki kuitansi penelaahan independen setara yang dipertahankan.",
+        "PDF warisan belum bertag; tiga font matematika Type 3 tidak memiliki ToUnicode.",
+        "Pengemasan sumber bukan sertifikasi kebahasaan seluruh korpus atau PDF/UA.",
+        "Identitas revisi teknis masih tercetak pada bagian pembuka PDF historis; PDF tidak diubah dalam pengemasan ini.",
+        "HTML/EPUB mencakup dua koreksi Cauchy; bukan audit kanon baru atas seluruh pilihan bahasa. Dukungan MathML bergantung pada aplikasi."
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/INDONESIAN_SOURCE_PRESERVATION_20261014.json",
+        "standalone_reader_qa_sha256": "c3b872029babb13822835edae90c08bfce52d6d799c8e6de07e3765d9fe6bc47",
+        "latest_zenodo_record": "https://zenodo.org/records/23375685",
+        "anonymous_github_and_zenodo_reader_match": true,
+        "ordered_component_pages_and_text_verified": 1255,
+        "accepted_translation_files_changed": 0,
+        "source_preservation_readback": "evidence/INDONESIAN_SOURCE_PRESERVATION_20261014.json",
+        "source_preservation_zenodo_mirrored": true,
+        "retained_reader_readback": "evidence/INDONESIAN_STANDALONE_722_MANAGER_READBACK_20260905.json",
+        "reflowable_readback": "evidence/INDONESIAN_REFLOWABLE_20261014.json",
+        "reflowable_zenodo_mirrored": true,
+        "zenodo_anonymous_all_files_verified": true
+      }
+    },
+    {
+      "id": "openlogic-zh-hans-cn",
+      "name": "Mainland Simplified Chinese",
+      "language_tag": "zh-Hans-CN",
+      "repository": "https://github.com/KokunoYumeto/open-logic-zh-hans-cn",
+      "release": "https://github.com/KokunoYumeto/open-logic-zh-hans-cn/releases/tag/ZH-OLP-PUB-0005",
+      "release_tag": "ZH-OLP-PUB-0005",
+      "version_doi": "10.5281/zenodo.22379030",
+      "concept_doi": "10.5281/zenodo.21987817",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "status": [
+        "published-source-722-reader-722",
+        "verified-complete-reader",
+        "package-repair-pending"
+      ],
+      "limitations": [
+        "untagged PDF",
+        "eight legacy mathematical-font rows lack ToUnicode; formula extraction is not certified",
+        "AI-produced Chinese translation without human Chinese review",
+        "manager replay verifies public bytes, source identities, assembly and sampled layout, not whole-corpus Chinese linguistic quality",
+        "two translated-target hashes in the packaged UNITS.jsonl are stale after disclosed line-break edits; the actual files match the newer release QA hashes",
+        "source revision identifiers remain on both title pages and must move to technical provenance",
+        "the sanitized evidence archive retains two generic absolute machine-path patterns but no local username or credential value"
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/CHINESE_PUB0005_MANAGER_AUDIT_20260905.json",
+        "manager_public_readback_sha256": "02e3d47348655cd70c0741f48410945b5ec6cf19dfeb9a75fae7670c6515def2",
+        "latest_zenodo_record": "https://zenodo.org/records/22379030",
+        "anonymous_github_assets_verified": 8,
+        "anonymous_zenodo_files_verified": 13,
+        "common_assets_cross_mirror_exact": 8,
+        "source_files_present": 722,
+        "translated_target_files_present": 722,
+        "source_hashes_matching_manifest": 722,
+        "target_hashes_matching_packaged_manifest": 720,
+        "content_streams_equal_to_inputs": 859,
+        "visual_pages_reviewed": 7
+      }
+    },
+    {
+      "id": "openlogic-tr",
+      "name": "Türkçe",
+      "language_tag": "tr",
+      "metadata_language": "tr",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-tr",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-tr/releases/tag/tr-olp-0722-reader-frontmatter-correction-20260905",
+      "release_tag": "tr-olp-0722-reader-frontmatter-correction-20260905",
+      "version_doi": "10.5281/zenodo.22368314",
+      "concept_doi": "10.5281/zenodo.21921844",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "profiles": [
+        "Latin harfleriyle Türkçe. Ana metnin 642 birimi ve 80 ek ya da alternatif birim, aynı PDF içinde yer alır."
+      ],
+      "status": [
+        "published-source-722-reader-722",
+        "verified-complete-reader"
+      ],
+      "limitations": [
+        "722 birimin bulunması, bütün çeviri tercihlerinin bağımsız dil incelemesinden geçtiği anlamına gelmez; insan uzman onayı iddia edilmez.",
+        "Sabit sayfa düzenli PDF. Bu yayında EPUB veya ayrı indirilebilir, tek dosyalık birleştirilmiş LaTeX yoktur. Modüler kaynakların derlenmesi için iki kaynak ZIP birlikte kullanılır.",
+        "Kaynak eserin taslak ve tamamlanmamış bölümleri aynı statüdedir.",
+        "Çeviri kaydındaki model: OpenAI 5.6 Sol, Ultra mode; yapay zekâ çevirisi. Bu katalog metninin düzenlenmesi: OpenAI Codex — GPT-6 Astra, Ultra."
+      ],
+      "evidence": {
+        "source_closure_sha256": "4f0dfaa58c38b54c00180de30ae09507d0df9fbea1e0ed6729db7e2fa77aac2f",
+        "source_import_manifest_sha256": "560d650f61ede3881ff16328fb85c02cf99ef68024c731fde970bd0ec8b117eb",
+        "final_qa_sha256": "11abb5164a85946377b85c95707d5d8896b4320887f7b329f52df044f0552554",
+        "visual_qa_sha256": "64e608a1968e1f865317df1b3d93d02ab189c3d92f683d1c7d62ac6891cb7dc1",
+        "github_and_zenodo_anonymous_readback": true,
+        "manager_audit": "evidence/TURKISH_COMPLETE_READER_MANAGER_AUDIT_20260905.json",
+        "manager_audit_sha256": "241f8dec67ca98c72f47212dbc2758c462108931104c6503dda80d753e2b730a",
+        "historical_reader_scope": "2026-09-04 PDF; 6,200,006 bytes. Historical QA is not a fresh linguistic audit of the current edition."
+      }
+    },
+    {
+      "id": "openlogic-es",
+      "name": "Español",
+      "language_tag": "es",
+      "metadata_language": "es",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-es",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-es/releases/tag/v2026-09-25-reader722-r2",
+      "release_tag": "v2026-09-25-reader722-r2",
+      "version_doi": "10.5281/zenodo.22951064",
+      "concept_doi": "10.5281/zenodo.21997720",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "status": [
+        "verified-standalone-722",
+        "audit-needed"
+      ],
+      "limitations": [
+        "El lector completo y sus fuentes están publicados en GitHub y Zenodo; los bytes descargados anónimamente coinciden con los artefactos verificados.",
+        "La cobertura 722/722 es estructural. La revisión lingüística y del canon sigue en curso; no se afirma revisión humana.",
+        "El modelo y esfuerzo de todos los fragmentos históricos no están establecidos. Empaquetado y comprobación de identidad: OpenAI Codex — GPT-6 Astra, Ultra effort.",
+        "Etiquetas de esta ficha y corrección del enlace de verificación: OpenAI Codex — GPT-6 Astra, esfuerzo Ultra. No se modifica la traducción ni se afirma una nueva revisión lingüística."
+      ],
+      "evidence": {
+        "workflow_state_sha256": "f2a940018eb87b959112b71ee8435d23c24469925728cbfddb8af15717b4afd0",
+        "fresh_reconciliation": "evidence/ROMANCE_MIRROR_AUDIT.json",
+        "local_reader_closure": "evidence/ROMANCE_READERS_722_LOCAL_INTAKE_20260920.json",
+        "public_reader_delivery": "evidence/ROMANCE_READERS_PUBLIC_20260925.json"
+      }
+    },
+    {
+      "id": "openlogic-pt-br",
+      "name": "Português brasileiro",
+      "language_tag": "pt-BR",
+      "metadata_language": "pt-BR",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-pt-BR",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-pt-BR/releases/tag/v2026-09-25-reader722-r2",
+      "release_tag": "v2026-09-25-reader722-r2",
+      "version_doi": "10.5281/zenodo.22951065",
+      "concept_doi": "10.5281/zenodo.21973104",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "status": [
+        "verified-standalone-722",
+        "audit-needed"
+      ],
+      "limitations": [
+        "O leitor completo e suas fontes estão publicados no GitHub e no Zenodo; os bytes baixados anonimamente correspondem aos artefatos verificados.",
+        "A cobertura 722/722 é estrutural. A revisão linguística e do cânone continua em andamento; não se afirma revisão humana.",
+        "O modelo e esforço de todos os trechos históricos não estão estabelecidos. Empacotamento e verificação de identidade: OpenAI Codex — GPT-6 Astra, Ultra effort.",
+        "Rótulos desta ficha e correção do link de verificação: OpenAI Codex — GPT-6 Astra, esforço Ultra. A tradução não foi alterada e não se afirma uma nova revisão linguística."
+      ],
+      "evidence": {
+        "workflow_state_sha256": "f2a940018eb87b959112b71ee8435d23c24469925728cbfddb8af15717b4afd0",
+        "fresh_reconciliation": "evidence/ROMANCE_MIRROR_AUDIT.json",
+        "local_reader_closure": "evidence/ROMANCE_READERS_722_LOCAL_INTAKE_20260920.json",
+        "public_reader_delivery": "evidence/ROMANCE_READERS_PUBLIC_20260925.json"
+      }
+    },
+    {
+      "id": "openlogic-interturkic",
+      "name": "Canon-first Inter-Turkic",
+      "language_tag": "art-x-interturkic",
+      "repository": "https://github.com/KokunoYumeto/canon-first-turkic-interlanguage-openlogic",
+      "release": "https://github.com/KokunoYumeto/canon-first-turkic-interlanguage-openlogic/releases/tag/v2.2.0",
+      "release_tag": "v2.2.0",
+      "version_doi": "10.5281/zenodo.22167937",
+      "concept_doi": "10.5281/zenodo.22104592",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "status": [
+        "published-constructed-722"
+      ],
+      "limitations": [
+        "constructed research register, not a natural language or official pan-Turkic standard",
+        "not every linguistic choice is canon-closed"
+      ]
+    },
+    {
+      "id": "openlogic-isv",
+      "name": "Interslavic",
+      "language_tag": "isv",
+      "repository": "https://github.com/KokunoYumeto/modern-latex-manuscripts/tree/gh-pages/open-logic-interslavic",
+      "release_tag": null,
+      "source_units_translated": 182,
+      "status": [
+        "partial"
+      ],
+      "limitations": [
+        "540 units pending",
+        "public HTML is a bounded prefix",
+        "QA PDF is not a finished public book"
+      ],
+      "evidence": {
+        "checkpoint": "OLP-0182",
+        "source_token_coverage_percent": 27.7,
+        "public_readme_sha256": "b92ad2055192534e1186ccc2f6985c52149fd75374e6749cd9300c51572b081a",
+        "historical_checkpoint_readme_sha256": "8b1d90f508fdd8b07bbf0b28e60a859d4a123d2bf5246b6471e2fc73b67eb9b5",
+        "readme_change": "Central catalogue backlink added; current README was anonymously hash-verified. Historical R2 manifest retains its original README identity."
+      }
+    },
+    {
+      "id": "openlogic-interfarsi",
+      "name": "Conceptual Inter-Farsi",
+      "language_tag": "art-x-interfarsi",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-fa-ir",
+      "release_tag": null,
+      "source_units_translated": null,
+      "profiles": [
+        "Perso-Arabic native surface",
+        "Tajik Cyrillic native surface",
+        "Latin-script deterministic access companion"
+      ],
+      "status": [
+        "scaffold"
+      ],
+      "limitations": [
+        "active source/sidecar recovery",
+        "Latin is an access-script projection, not a third language translation",
+        "no complete public edition claim"
+      ]
+    },
+    {
+      "id": "openlogic-romance-interlanguage",
+      "name": "Romance interlanguage",
+      "language_tag": "art-x-romance",
+      "repository": null,
+      "profiles": [
+        "Local provisional 722-file standalone reader; source-critical canon admission 55/722"
+      ],
+      "status": [
+        "scaffold"
+      ],
+      "limitations": [
+        "A 1,131-page provisional standalone PDF contains all 722 source units locally; 55 units are canon-admitted and 667 remain pending.",
+        "No public reader download yet: cumulative-source assembly/full-source packaging and the reflowable EPUB are unfinished.",
+        "Structural reader coverage is not a claim of 722 accepted translations or a full semantic audit.",
+        "Next reader refresh must move the source hash off the cover and localize generated English chapter/bibliography labels."
+      ],
+      "evidence": {
+        "workflow_state_sha256": "f2a940018eb87b959112b71ee8435d23c24469925728cbfddb8af15717b4afd0",
+        "claim_boundary_sha256": "6619244b302444bfcf60e2638deb8dc9f7ce8b7fe263049ae74a089d68c6ee21",
+        "local_reader_intake": "evidence/ROMANCE_READER_722_LOCAL_20260920.json"
+      }
+    },
+    {
+      "id": "openlogic-pnb-arab-pk",
+      "name": "Punjabi (Pakistan, Shahmukhi)",
+      "language_tag": "pnb-Arab-PK",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-pnb-Arab-PK/releases/tag/v0.2.0",
+      "release_tag": "v0.2.0",
+      "version_doi": "10.5281/zenodo.22848334",
+      "concept_doi": "10.5281/zenodo.22308436",
+      "source_units_translated": 26,
+      "standalone_reader_units": 7,
+      "profiles": [
+        "Complete Sets chapter in Naskh (12 pages)",
+        "Complete Sets chapter in Nastaliq (17 pages)",
+        "Reflowable Sets EPUB: seven source units",
+        "26 source units rechecked with provisional terminology; 74 historical draft units"
+      ],
+      "status": [
+        "partial",
+        "reader-release-7/722",
+        "epub-published"
+      ],
+      "limitations": [
+        "Whole 722-unit edition unfinished; reading downloads cover only the seven-unit Sets chapter.",
+        "26 source units have recorded provisional repairs; the remaining 48 of 74 historical draft units are not accepted by that checkpoint.",
+        "Specialist terms remain provisional; community technical usage is not peer-reviewed disciplinary convention.",
+        "PDFs are not tagged; EPUB MathML support varies by reading system.",
+        "Zenodo 0.2.1 is a source-packaging update: the seven-unit PDFs and EPUB are unchanged; both complete cumulative LaTeX masters are now direct downloads."
+      ],
+      "evidence": {
+        "public_readback": "evidence/PUBLIC_READER_DELIVERIES_20260919.json",
+        "source_checkpoint_commit": "4c407d7ba0e16909a5f7a2d4cff5e84737f31d66",
+        "manager_anonymous_checkpoint_paths_matched": 149,
+        "manager_frozen_upstream_files_matched": 722,
+        "manager_anonymous_release_assets_matched": 11,
+        "source_choice_groups": 438,
+        "source_formal_invariants": 152,
+        "source_provisional_choices": 286,
+        "independent_full_semantic_certification": false,
+        "scope": "Anonymous byte/manifest replay and cumulative-source package inspection. Prior source/canon sample OLP-0023-B007; not whole-corpus linguistic or human accessibility certification.",
+        "previous_public_readback": "evidence/PUNJABI_SETS_EPUB_SOURCE26_INTAKE_20260915.json",
+        "direct_master_zip_identity_verified": true
+      }
+    },
+    {
+      "id": "openlogic-jv-latn-id",
+      "name": "Basa Jawa (aksara Latin)",
+      "language_tag": "jv-Latn-ID",
+      "metadata_language": "jv-Latn-ID",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.3.1",
+      "release_tag": "v0.3.1",
+      "version_doi": null,
+      "concept_doi": null,
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "epub_reader_units": 722,
+      "profiles": [
+        "Ngoko tinulis kanggo andharan akademis.",
+        "Teori himpunan, logika, teori modèl, komputabilitas lan teori bukti."
+      ],
+      "status": [
+        "published-reader-722/722",
+        "source-722/722"
+      ],
+      "limitations": [
+        "Sawetara pérangan menehi sketsa bukti. Watesan kasebut diterangaké ing wacan.",
+        "Istilah teknis isih sauntara yen durung ana bukti panganggone ing pustaka Jawa sing cocog. Pamriksa conto ora mbuktekake yen kabeh ukara wis bener.",
+        "Miturut cathetan panyusun, ekstraksi tèks PDF kelangan padanan Unicode kanggo 21 kedadeyan lambang matématika lawas, sanajan lambangé katon cetha ing kaca.",
+        "Cathetan pilihan lan pandhuan ngasilaké PDF saka sumber isih ngemot pérangan basa Inggris."
+      ],
+      "evidence": {
+        "release_commit": "cc70af9214db927c6d1607dea70dbfbf89bd9caf",
+        "manager_public_readback": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.3.1",
+        "source_manifest": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/blob/cc70af9214db927c6d1607dea70dbfbf89bd9caf/SOURCE-MANIFEST.json",
+        "source_revision": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+        "manager_full_semantic_rereview": false,
+        "anonymous_download_hashes_matched": true,
+        "paired_unit_hashes_replayed": 1444,
+        "current_format_readback": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/download/v0.3.1/release.json",
+        "historical_source_evidence": {
+          "public_readback": "evidence/PUBLIC_READER_DELIVERIES_20260919.json",
+          "release_commit": "1f4933db2686c835bd9f66a9aea088d055b9f975",
+          "manager_full_semantic_rereview": false,
+          "scope": "Six public assets matched; full build, diagram, EPUBCheck/runtime and canon-revalidation claims remain owner-attributed.",
+          "manager_public_readback": "evidence/JAVANESE161_SOURCE_REVIEW_20260930.html",
+          "source_checkpoint_readback": "evidence/JAVANESE161_SOURCE_PUBLIC_INTAKE_20260930.json",
+          "current_source_commit": "44e2574159af00143564d7afb3db79a8725763d9",
+          "source_provenance_revalidation_complete": false,
+          "model_attribution_correction_verified": true,
+          "retained_source722_readback": "evidence/JAVANESE722_MANAGER_AUDIT_20260929.json"
+        },
+        "previous_complete_release": {
+          "release": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.3.0",
+          "release_tag": "v0.3.0",
+          "release_date": "2026-11-12T19:49:17Z",
+          "version_doi": null,
+          "previous_public_release": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.2.0",
+          "release_manifest": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/download/v0.3.0/release.json",
+          "evidence": {
+            "release_commit": "6130c9168e24426d0c1ea26b2c815fa2ee0ec34b",
+            "manager_public_readback": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/releases/tag/v0.3.0",
+            "source_manifest": "https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/blob/6130c9168e24426d0c1ea26b2c815fa2ee0ec34b/SOURCE-MANIFEST.json",
+            "manager_full_semantic_rereview": false,
+            "owner_reported_reaudit_units": 722,
+            "owner_reported_recorded_choices": 7183,
+            "anonymous_download_hashes_matched": true,
+            "package_manifest_entries_replayed": 1513,
+            "paired_unit_hashes_replayed": 1444,
+            "current_format_readback": "evidence/CURRENT_JV_GU_FORMATS_20261113.json"
+          }
+        }
+      }
+    },
+    {
+      "id": "openlogic-gu-gujr-in",
+      "name": "ગુજરાતી",
+      "language_tag": "gu-Gujr-IN",
+      "metadata_language": "gu-IN",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/releases/tag/full-edition-v1.2.0",
+      "release_tag": "full-edition-v1.2.0",
+      "version_doi": "10.5281/zenodo.23030256",
+      "concept_doi": "10.5281/zenodo.22308101",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "epub_reader_units": 722,
+      "profiles": [
+        "સંપૂર્ણ ગુજરાતી આવૃત્તિ"
+      ],
+      "status": [
+        "complete-source-722/722",
+        "reader-release-722/722",
+        "direct-cumulative-LaTeX-published"
+      ],
+      "limitations": [
+        "સંપૂર્ણ PDF, EPUB અને સંપાદનીય સ્રોતમાં 722 એકમો છે. હાલની HTML ફાઇલ સ્રોત-સૂચિ છે.",
+        "સ્વતંત્ર માનવીય ભાષાકીય પ્રમાણન ઉપલબ્ધ નથી.",
+        "મૂળ પાઠની વૈકલ્પિક રજૂઆતો અને અધૂરા ભાગો તેમના ગણિતીય સંદર્ભ સાથે સમાવાયા છે.",
+        "6732 ખંડોના સ્રોત/ભાષાંતર હૅશ અને પ્રમાણ-અવતરણોની કડીઓ મળ્યાં. માત્ર આ બંધનો મળવાથી દરેક શબ્દપ્રયોગ યોગ્ય છે એવું પ્રમાણિત થતું નથી.",
+        "ઐતિહાસિક સમીક્ષાના નમૂનામાં OLP-0576-B004નો ગણિતીય અર્થ, સૂત્રો અને સંદર્ભો તપાસ્યાં છે. ક્રમવાચક અને ક્રમ-એકરૂપ જેવા વિશિષ્ટ શબ્દો માટે પ્રમાણની મર્યાદા છે.",
+        "અગાઉની 960 પાનાંની આવૃત્તિમાં ત્રણ પાનાંની દૃષ્ટિચકાસણી અને 133 નમૂના-પાનાંની પ્રકાશન-ચકાસણી અલગ નોંધાયેલી છે. તે આવૃત્તિના PDFના ટેક્સ્ટ-નિષ્કર્ષણ અને સુગમતા સ્તરમાં કેટલાક ગુજરાતી જોડાક્ષરોની મર્યાદા છે.",
+        "અગાઉની આવૃત્તિનો AI-અનુવાદ અને સંપાદન OpenAI Codexના GPT-5.6 Sol અને GPT-6 Sol (Ultra effort) વડે થયાં છે. મર્યાદિત ઐતિહાસિક તપાસ OpenAI Codexના GPT-6 Astra (Ultra effort) વડે થઈ છે. સ્વતંત્ર માનવીય ભાષાકીય પ્રમાણન ઉપલબ્ધ નથી.",
+        "Zenodoના DOI અગાઉના પ્રકાશનોની ઐતિહાસિક ઓળખ છે. આવૃત્તિ 10.5281/zenodo.23030256 ગુજરાતી v1.0.1ની છે અને 10.5281/zenodo.22308101 તે પ્રકાશનશ્રેણીની સંકલ્પ ઓળખ છે."
+      ],
+      "evidence": {
+        "public_readback": "evidence/GUJARATI722_MANAGER_INTAKE_20260930.json",
+        "source_package_checks": "evidence/GUJARATI722_MANAGER_INTAKE_20260930.json",
+        "canon_sample": "evidence/GUJARATI722_CANON_SAMPLE_20260930.json",
+        "manager_anonymous_release_assets_verified": 3,
+        "manager_anonymous_zenodo_assets_verified": 3,
+        "manager_full_semantic_rereview": false,
+        "manager_readback_scope": "બંને જાહેર સંગ્રહોમાંથી PDF, સીધી LaTeX અને સ્રોત ZIPની છ ડાઉનલોડની બાઇટ્સ અને હૅશ ફરી સરખાવ્યા. પૅકેજના 2829 સભ્યો, 722 મૂળ અને 722 ગુજરાતી ફાઇલો તથા 6732 હાલના ખંડ-બંધનો ચકાસ્યાં; આખા ભાષાંતરની સ્વતંત્ર ભાષાકીય સમીક્ષા નથી.",
+        "prior_manager_readbacks": [
+          "evidence/CUMULATIVE_PUBLIC_READBACK_20260904.json",
+          "evidence/GUJARATI_SOURCE37_PUBLIC_READBACK_20260904.json",
+          "evidence/GUJARATI_ZENODO_READBACK_20260904.json",
+          "evidence/GUJARATI_COMPLETENESS_V070_MANAGER_READBACK_20260912.json",
+          "evidence/GUJARATI_FIRST_ORDER_INTRODUCTION_V080_MANAGER_READBACK_20260912.json",
+          "evidence/GUJARATI_FIRST_ORDER_SYNTAX_V090_MANAGER_READBACK_20260912.json",
+          "evidence/FRENCH_GUJARATI_PUBLIC_DELIVERY_20260919.json",
+          "evidence/GUJARATI_FULLTEXT_PUBLIC_READBACK_20260919.json",
+          "evidence/GUJARATI_FULLTEXT_SOURCE_CHECKS_20260919.json",
+          "evidence/GUJARATI_MODELS_THEORIES_PUBLIC_READBACK_20260920.json",
+          "evidence/GUJARATI_MODELS_THEORIES_PACKAGE_CHECKS_20260920.json",
+          "evidence/GUJARATI_BEYOND_PUBLIC_READBACK_20260920.json",
+          "evidence/GUJARATI_BEYOND_PACKAGE_CHECKS_20260920.json",
+          "evidence/GUJARATI199_PUBLIC_READBACK_20260921.json",
+          "evidence/GUJARATI199_SOURCE_PACKAGE_CHECKS_20260921.json",
+          "evidence/GUJARATI270_PUBLIC_READBACK_20260927.json",
+          "evidence/GUJARATI270_PACKAGE_CHECKS_20260927.json",
+          "evidence/GUJARATI270_CANON_SAMPLE_20260927.json"
+        ],
+        "current_format_readback": "evidence/CURRENT_JV_GU_FORMATS_20261113.json",
+        "release_manifest": "https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/releases/download/full-edition-v1.2.0/release.json",
+        "previous_format_readback": "evidence/CURRENT_JV_GU_FORMATS_20261113.json"
+      }
+    },
+    {
+      "id": "openlogic-mr-deva-in",
+      "name": "मराठी",
+      "language_tag": "mr-Deva-IN",
+      "metadata_language": "mr-IN",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/complete-v1.5",
+      "release_tag": "complete-v1.5",
+      "version_doi": "10.5281/zenodo.23044506",
+      "concept_doi": "10.5281/zenodo.22307960",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "epub_reader_units": 722,
+      "profiles": [
+        "पूर्ण स्रोत, PDF, ऑफलाइन HTML आणि EPUB: ७२२/७२२ एकके. PDF मध्ये ९५३ पाने आणि EPUB मध्ये ९८ वाचनभाग आहेत.",
+        "यंत्रानुवाद: OpenAI Codex — GPT-5.6 Sol आणि GPT-6 Sol. दुरुस्ती, पुनरावलोकन आणि PDF, HTML व EPUB ची अक्षरजुळणी: GPT-6.1 Sol. सर्व मॉडेलांसाठी Ultra तर्कप्रयत्न वापरला गेला."
+      ],
+      "status": [
+        "published-reader722/722",
+        "published-epub722/722",
+        "audit-needed"
+      ],
+      "limitations": [
+        "१०१ संदर्भखंडांची पूर्वलक्षी तपासणी नोंदली आहे: ९६ ठिकाणी मर्यादित थेट शब्दसाक्ष; पाच स्रोताधीन खंडांसाठी संबंधित मराठी साक्ष नाही. ही साक्ष मूळ भाषांतराच्या वेळी वापरल्याचा दावा नाही.",
+        "अवकाश भरणारा वक्र या संपूर्ण विशेष संज्ञेची स्वतंत्र साक्ष अद्याप नाही. पुनरावलोकनातील पुराव्यांच्या मर्यादा जतन आहेत.",
+        "अधिक तपशीलवार ऐतिहासिक पुनरावलोकन २८१/७२२ एककांपुरते आहे; पूर्ण भाषिक किंवा मानवी प्रमाणनाचा दावा नाही.",
+        "व्यवस्थापकाने नवे मुखपृष्ठ आणि स्रोत-पॅकेज तपासले; सर्व पानांची दृश्य तपासणी किंवा नवे TeX संकलन केलेले नाही.",
+        "EPUB मधील MathML चे प्रदर्शन वाचन-प्रणालीनुसार बदलू शकते."
+      ],
+      "evidence": {
+        "public_readback": "evidence/MARATHI_T15_COMPLETE_PUBLIC_READBACK_20261114.json",
+        "manager_public_readback": "evidence/MARATHI722_V11_REVIEW_20260929.html",
+        "previous_release_snapshot": "evidence/MARATHI_BEFORE_COMPLETE_20260929.json",
+        "release_manifest": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/download/complete-v1.5/RELEASE_MANIFEST.json",
+        "release_manifest_sha256": "7cbc4589e2ff13fdab6a5b9f6eaecec8edc212cc69ff38867314afd427b9c738",
+        "complete_linguistic_certification": false,
+        "manager_fresh_tex_build": false,
+        "previous_complete_v10_snapshot": "evidence/MARATHI_BEFORE_V11_20260929.json",
+        "current_format_readback": "evidence/MARATHI_T15_COMPLETE_PUBLIC_READBACK_20261114.json",
+        "previous_complete_v14_readback": "evidence/MARATHI_V14_PUBLIC_READBACK_20261113.json",
+        "previous_complete_v14_release": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/complete-v1.4",
+        "historical_complete_v11_review": "evidence/MARATHI722_V11_REVIEW_20260929.html",
+        "historical_complete_v11_readback": "evidence/MARATHI722_V11_MANAGER_AUDIT_20260929.json"
+      }
+    },
+    {
+      "id": "openlogic-bn-beng-in",
+      "name": "বাংলা (ভারত)",
+      "language_tag": "bn-Beng-IN",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN/releases/tag/v1.0.1-corrected-edition",
+      "release_tag": "v1.0.1-corrected-edition",
+      "version_doi": "10.5281/zenodo.23018795",
+      "concept_doi": "10.5281/zenodo.22848704",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "epub_reader_units": 722,
+      "profiles": [
+        "ওপেন লজিক প্রকল্পের স্থির মূলের ৭২২টি বিষয়বস্তু-এককের ভারতীয় বাংলা সংস্করণ। ৮৯১-পৃষ্ঠার PDF, নেটিভ MathML-সহ HTML, পুনঃপ্রবাহযোগ্য EPUB, সম্মিলিত সম্পাদনযোগ্য LaTeX ও পূর্ণ উৎস ZIP পাওয়া যায়।",
+        "মূল রচনা ওপেন লজিক প্রকল্পের লেখক ও অবদানকারীদের। ভারতীয় বাংলা পাঠ OpenAI Codex-এর এআই অনুবাদ। পূর্ববর্তী অনুবাদ ও পর্যালোচনায় GPT-5.6 Sol ও GPT-6 Sol ব্যবহৃত হয়েছে। প্রকাশিত সংশোধন ও পুনঃপর্যালোচনায় GPT-6.1 Sol ব্যবহৃত হয়েছে। নথিভুক্ত প্রচেষ্টা-স্তর Ultra।"
+      ],
+      "status": [
+        "verified-standalone-722",
+        "published",
+        "audit-needed"
+      ],
+      "limitations": [
+        "পরিসর ৭২২টি বিষয়বস্তু-একক। স্বাধীন মানব-পর্যালোচনা বা সম্পূর্ণ প্রমাণ-সহায়ক যাচাই নথিভুক্ত নেই।",
+        "GPT-6.1 Sol-এর প্রকাশিত সংশোধনে ৩৩৬টি প্রভাবিত একক মূলের সঙ্গে সম্পূর্ণ তুলনা করা হয়েছে। PDF-এর ২৭টি ও HTML-এর ২৩টি নির্বাচিত দৃশ্য পরীক্ষা করা হয়েছে।",
+        "স্বজ্ঞাবাদী ট্যাবলোর স্থির উৎস নিজেই খসড়া। পূর্ণতা ও প্রতিমডেল নিষ্কাশনের অংশগুলি সেই উৎসে নেই।",
+        "ক্যাননের উদ্ধৃতি মেলা ও পরিভাষার সমর্থন পৃথক। উদ্ধৃত NSOU পাঠ সসীম সেটের অঙ্কবাচক সংখ্যা সমর্থন করে। ট্রান্সফাইনাইট পরিভাষার সাক্ষ্য সীমিত।"
+      ],
+      "evidence": {
+        "public_readback": "evidence/PASHTO_BENGALI_PUBLIC_DELIVERY_20260919.json",
+        "manager_full_semantic_rereview": false,
+        "scope": "সংশোধিত GitHub প্রকাশনার সাতটি ফাইল, ৭২২টি উৎস-এককের পরিসর এবং অনলাইন HTML-এর বাইট যাচাই করা হয়েছে। ভাষাগত পর্যালোচনার পরিসর পৃথকভাবে উল্লেখ করা হয়েছে।",
+        "source_repair_readback": "evidence/BENGALI_SOURCE_REPAIR_20260919.json",
+        "direct_tex_unit_markers": 722,
+        "direct_tex_external_body_imports": 0,
+        "source_archive_units": 722,
+        "source_checkpoint_readback": "evidence/BN722_PUBLIC_SOURCE_20260928.json",
+        "bounded_canon_replay": "evidence/BN599_MR270_SOURCE_CHECK_20260927.json",
+        "previous_source_checkpoint_readback": "evidence/BN599_MR270_SOURCE_CHECK_20260927.json",
+        "previous_bounded_canon_replay": "evidence/BN_TE_CHANGED_SEGMENTS_20260926.json",
+        "public_reader_delivery": "https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-bn-Beng-IN/312089afdf73374d678f1d95f65bf1dbe9b5ba4a/evidence/PUBLIC_READBACK_CORRECTED_GITHUB_2026-10-01.json",
+        "public_reader_byte_receipt": "https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-bn-Beng-IN/312089afdf73374d678f1d95f65bf1dbe9b5ba4a/evidence/PUBLIC_READBACK_CORRECTED_GITHUB_2026-10-01.json",
+        "metadata_choices": "evidence/BN722_COMPLETE_METADATA_CHOICES_20260928.json",
+        "previous_html_reader_delivery": "evidence/BN722_HTML_READER_PUBLIC_20260928.json",
+        "previous_epub_reader_delivery": "evidence/BN722_EPUB_HUB_CHECK_20260928.md",
+        "metadata_repair_readback": "https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-bn-Beng-IN/d157ee93b950a84f92901795a5c81c796c126fe4/evidence/PUBLIC_READBACK_ZENODO_BENGALI_METADATA_2026-09-28.json"
+      }
+    },
+    {
+      "id": "openlogic-ps-arab-pk",
+      "name": "پښتو (پاکستان)",
+      "language_tag": "ps-Arab-PK",
+      "metadata_language": "ps-Arab-PK",
+      "repository": "https://github.com/KokunoYumeto/openlogic-ps-Arab-PK",
+      "release": "https://github.com/KokunoYumeto/openlogic-ps-Arab-PK/releases/tag/v1.0.0",
+      "release_tag": "v1.0.0",
+      "concept_doi": "10.5281/zenodo.22307197",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "profiles": [
+        "دا د اوپن لاجک د ټولو ۷۲۲ سرچينه‌يي واحدونو سمه شوې، په مصنوعي ځيرکتيا ژباړل شوې بڼه ده۔ متن په عربي ليکدود کښې د پاکستانۍ پښتو کارونه راخلي۔ موضوعات ئې سټونه، اړيکې او تابعې، د ثبوت لارې، د قضيو او لومړۍ درجې منطق، مدل تيوري، محاسبه کېدنه، د ټيورينګ ماشينونه، ناتکميلي، د دويمې درجې او ناکلاسيک منطقونه، سټ نظريه، ثبوت تيوري، لامبدا حساب او د منطق او سټ نظريې تاريخ دے۔ تعريفونه، بېلګې، تمرينونه، ثبوتونه، شکلونه او سرچينې ورسره دي۔",
+        "پښتو ژباړه او سمونونه اوپن اې‌آی کوډېکس جوړ کړي دي۔ GPT-5.6 Sol د ۱ تر ۳۱۱، GPT-6 Sol د ۳۱۲ تر ۶۰۸ او GPT-6.1 Sol د ۶۰۹ تر ۷۲۲ واحدونو ژباړه کړې ده۔ GPT-6.1 Sol پخوانی متن هم کتلے او سم کړے دے۔ په هر پړاو کښې Ultra استدلال کارول شوے دے۔"
+      ],
+      "status": [
+        "verified-standalone-722",
+        "epub-published"
+      ],
+      "limitations": [
+        "د پاکستان علمي نثر او مرجع ګرامر لوستل شوي؛ افغان رياضي متنونه يوازې سيمه‌ييزې پرتله‌ييزې سرچينې دي۔ ځينې تخصصي اصطلاحګانې لا لنډمهالې دي۔"
+      ]
+    },
+    {
+      "id": "openlogic-ta-taml-in",
+      "name": "தமிழ் (இந்தியா)",
+      "language_tag": "ta-Taml-IN",
+      "metadata_language": "ta-IN",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-ta-Taml-IN",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-ta-Taml-IN/releases/tag/v1.1.1-complete-722",
+      "release_tag": "v1.1.1-complete-722",
+      "version_doi": "10.5281/zenodo.23025099",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "epub_reader_units": 722,
+      "profiles": [
+        "இந்தியத் தமிழ்; முதன்மைப் பகுதியும் இணைப்பும் கொண்ட முழு நூல்"
+      ],
+      "status": [
+        "complete-source-722/722",
+        "verified-standalone-722",
+        "pdf-navigation-repair-verified"
+      ],
+      "limitations": [
+        "ஒரே நூலில் முதன்மைப் பகுதியின் 695 அலகுகளும் இணைப்பின் 27 அலகுகளும் உள்ளன. இணைப்பு கூடுதல் மொழிபெயர்ப்பாக மீண்டும் எண்ணப்படவில்லை.",
+        "PDF உள்ளடக்க இணைப்புகளும் பக்கக் குறியீடுகளும் திருத்தப்பட்டன. 1,227 பக்கங்களின் உள்ளடக்கம் மாறவில்லை; 2,823 இணைப்புகளும் 718 மூலப் பக்கக் குறியீடுகளும் சரிபார்க்கப்பட்டன.",
+        "வெளியிடப்பட்ட கூறுகளிலிருந்து PDF மற்றும் EPUB மீளமைப்பு பதிப்பாளரால் சரிபார்க்கப்பட்டது. புதிய TeX அல்லது TeX4ht கட்டமைப்பு இந்தச் சுற்றில் மீண்டும் இயக்கப்படவில்லை. முழு உரையுள்ள LaTeX வேறு பக்க அமைப்பை உருவாக்கலாம்; வெளியீட்டு PDF இரண்டு கூறுகளிலிருந்து இணைக்கப்படுகிறது.",
+        "PDF உரை எடுப்பில் குறி வரிசை மற்றும் இடைவெளி வரம்புகள் உள்ளன. கணிதத்தைத் திருத்த அல்லது மீண்டும் பயன்படுத்த LaTeX மூலத்தைப் பயன்படுத்துக. முழுமையான PDF அணுகல் குறியிடல் கூறப்படவில்லை.",
+        "சுயாதீன மனித அல்லது தாய்மொழி நிபுணர் ஒப்புதல் கூறப்படவில்லை. கோப்பு மற்றும் அமைப்புச் சரிபார்ப்பு முழு மொழிபெயர்ப்பின் பொருள் துல்லியத்திற்கான சான்றல்ல.",
+        "தமிழாக்கமும் திருத்தங்களும்: OpenAI Codex — முதல் 570 அலகுகள் GPT-5.6 Sol, Ultra; மீதமுள்ள 152 அலகுகள் மற்றும் பின்னைய திருத்தங்கள் GPT-6 Sol, Ultra. இத்திட்டப் பட்டியலின் திருத்தமும் வரையறுக்கப்பட்ட சரிபார்ப்பும்: GPT-6 Astra, Ultra. சுயாதீனமான மனித அல்லது தாய்மொழி நிபுணர் ஒப்புதல் கிடைத்ததாகக் கூறப்படவில்லை."
+      ],
+      "evidence": {
+        "manager_public_readback": "evidence/TAMIL722_UNIFIED_REVIEW_20260929.html",
+        "public_readback": "evidence/TAMIL722_UNIFIED_AUDIT_20260929.json",
+        "manager_anonymous_assets_verified": 20,
+        "manager_source_archive_files_verified": 1574,
+        "manager_frozen_sources_verified": 722,
+        "manager_target_files_verified": 722,
+        "manager_direct_tex_archive_matches": 3,
+        "manager_full_semantic_reaudit": false,
+        "canon_use_and_qa": "மூலத் தொகுப்பில் மொழிபெயர்ப்புத் தேர்வுகளும் கானன் பயன்பாட்டுப் பதிவுகளும் உள்ளன; இது சுயாதீன நிபுணர் மதிப்புரை அல்ல."
+      }
+    },
+    {
+      "id": "openlogic-te-telu-in",
+      "name": "తెలుగు",
+      "language_tag": "te-Telu-IN",
+      "repository": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN",
+      "release": "https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v1.0.1-full-olp0722",
+      "release_tag": "v1.0.1-full-olp0722",
+      "version_doi": "10.5281/zenodo.23019353",
+      "concept_doi": "10.5281/zenodo.22307937",
+      "source_units_translated": 722,
+      "standalone_reader_units": 722,
+      "epub_reader_units": 722,
+      "profiles": [
+        "తెలుగు లిపిలో పూర్తి 722-విభాగాల PDF, EPUB, ఆఫ్‌లైన్ HTML; అంతర్జాతీయ గణిత సంకేతాలు.",
+        "ఒకే ఫైలు LaTeXలో మొత్తం అనువాద పాఠ్యం ఉంది. అది PDF నిర్మాణ డ్రైవర్ కాదు: PDFను పూర్తి HTML నుంచి రూపొందించారు; మూల ZIPలో ఆ పద్ధతికి అవసరమైన ఫైళ్లు ఉన్నాయి.",
+        "చారిత్రక 276-విభాగాల నమోదు: OpenAI Codex — GPT-5.6 Sol, Ultra effort. తరువాతి పని, మూల అనుబంధం: GPT-6 Sol, Ultra effort. నమోదు లేని చారిత్రక దశలకు నమూనాను ఊహించలేదు. ఈ సూచిక, పరిమిత తనిఖీ: GPT-6 Astra, Ultra effort. స్వతంత్ర మానవ సమీక్షను ప్రకటించడం లేదు."
+      ],
+      "status": [
+        "verified-standalone-722",
+        "published",
+        "audit-needed"
+      ],
+      "limitations": [
+        "722 విభాగాల పాఠక రూపాలు పూర్తి. నిర్మాణ తనిఖీ 10,611 అనుసంధానిత ఖండాలకు వర్తిస్తుంది; అది ప్రతి అనువాద నిర్ణయం భాషాపరంగా నిర్దోషమని నిరూపించదు.",
+        "నేరుగా పొందగల LaTeX మూలసంగ్రహం, 3,328 ఫైళ్ల పునర్నిర్మాణ ZIP వేర్వేరు అవసరాలకు. ప్రచురిత PDF పూర్తి HTML నుంచి ముద్రించబడింది; బ్రౌజర్, అక్షరరూపాల సంచికలు మారితే పుటల అమరిక మారవచ్చు.",
+        "పూర్తి HTML ఆఫ్‌లైన్ ZIPగా ఉంది: విప్పి index.html తెరవండి. ఇక్కడ కలిపిన పాత ఆన్‌లైన్ HTML లింకు 23 విభాగాలకే పరిమితం.",
+        "స్థిర మూలంలోని నాలుగు క్రాస్-రిఫరెన్సులు ఇంకా పరిష్కరించలేదు. ప్రకటించిన మూల లోపాలు, తాత్కాలిక పదజాలం, ప్రామాణిక గ్రంథాలతో అనుసంధానంపై చారిత్రక పరిమితులు సమీక్షకు అందుబాటులో ఉన్నాయి.",
+        "1,117 నిర్ణయాలు, 2,446 అమలు స్థానాలు 23 చదవదగిన వెబ్ పుటల్లో ఉన్నాయి; 70 అధిక ప్రాధాన్య నిర్ణయాలకు రెండు పుటలు ఉన్నాయి. మూల Markdown/JSON ఫైళ్లూ అందుబాటులో ఉన్నాయి. తొలి 80 పదజాల నిర్ణయాల కారణాలు, పర్యాయ కారణాలు, ఆధార పరిమితులు తెలుగులో ఉన్నాయి. ఇది మొత్తం అనువాదానికి కొత్త భాషా ధ్రువీకరణ కాదు. పాత విడుదల ZIPలలో పూర్వపు సమీక్షా నమోదులే ఉన్నాయి.",
+        "ఈ పరిమిత తనిఖీలో రెండు PDF పుటలు చూశాం; అన్ని పుటల కొత్త దృశ్య లేదా భాషా సమీక్ష కాదు. పూర్వపు 276-విభాగాల సంచికలు చరిత్రగా నిలిచాయి."
+      ],
+      "evidence": {
+        "public_readback": "evidence/TE722_COMPLETE_SOURCE_MANAGER_20260928.json",
+        "source_checkpoint_readback": "evidence/TE722_COMPLETE_SOURCE_MANAGER_20260928.json",
+        "manager_anonymous_release_assets_verified": 16,
+        "manager_anonymous_pages_files_verified": 1,
+        "manager_segment_records_replayed": 396,
+        "manager_canon_passages_actually_cited_and_resolved": 14,
+        "tagged_readme_hub_backlink_verified": true,
+        "manager_full_semantic_rereview": false,
+        "zenodo_record": "https://zenodo.org/records/23019353",
+        "previous_public_readback": "evidence/TELUGU_EPUB_DELIVERY_MANAGER_READBACK_20260912.json",
+        "manager_readback_scope": "కొత్త మూల ఫైళ్ల నాలుగు అనామక డౌన్‌లోడ్లు సరిపోలాయి; పూర్వపు పాఠక రూపాల 16 బైట్-తనిఖీలు రక్షించాం. 28 పూర్వపు Zenodo ఫైళ్ల పేర్లు, పరిమాణాలు, చెక్‌సమ్‌లు మారలేదు. 722 మూల/అనువాద జంటలు, సంగ్రహించిన శరీరాలు తనిఖీ చేశాం.",
+        "previous_276_intake": "evidence/TELUGU_READER276_MANAGER_INTAKE_20260920.json",
+        "bounded_repair_readback": "evidence/TELUGU_BOUNDED_REPAIR_READBACK_20260920.json",
+        "bounded_canon_replay": "evidence/BN_TE_CHANGED_SEGMENTS_20260926.json",
+        "previous_zenodo_record": "https://zenodo.org/records/22309234",
+        "zenodo_mirror_readback": "evidence/TE276_ZENODO_MIRROR_PUBLIC_20260926.json",
+        "manager_anonymous_zenodo_files_verified": 20,
+        "public_reader_delivery": "evidence/TE722_COMPLETE_SOURCE_MANAGER_20260928.json",
+        "manager_public_readback": "evidence/TE722_COMPLETE_SOURCE_MANAGER_20260928.json",
+        "previous_source_checkpoint_readback": "evidence/TE410_PUBLIC_SOURCE_MIRROR_20260926.json",
+        "metadata_choices": "evidence/TE722_HUB_METADATA_CHOICES_20260928.json",
+        "review_localization_status": "identified-localization-defects-closed",
+        "review_localization_check": "evidence/TE_REVIEW_LOCALIZATION_CLOSURE_20260928.json",
+        "review_web_access_status": "paginated-native-review-public-verified",
+        "review_web_check": "evidence/TE_REVIEW_WEB_CLOSURE_20260928.json",
+        "confidence_reconciliation_verified": true
+      }
     }
-  ],
-  "additional_unassigned_candidates": [
-    "bn-Beng-BD",
-    "vi-Latn-VN",
-    "la-Latn"
-  ],
-  "rules": [
-    "Each owner has isolated production/state paths and the same verified 722-file source boundary.",
-    "Per-segment native-canon use is required; discovery links or dictionaries alone do not certify all technical senses.",
-    "A complete edition requires one standalone reader, source alignment, formula/citation/script/semantic/build/visual QA and anonymous public-byte verification.",
-    "Recovered OpenStax/Levin/Hefferon packages remain with existing Indonesian book owners; these are distinct OpenLogic commissions."
   ]
 }

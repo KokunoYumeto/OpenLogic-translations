@@ -1,6 +1,8 @@
 import { readFile, stat } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
+import { checkPublicRecord } from './modern-catalogue.mjs';
+import { editionRouting } from './catalogue-render.mjs';
 
 const root = resolve(import.meta.dirname, "..");
 const failures = [];
@@ -15,11 +17,20 @@ const [html, css, script, rawCatalogue, hosting] = await Promise.all([
   read(".openai/hosting.json")
 ]);
 const catalogue = JSON.parse(rawCatalogue);
+checkPublicRecord(catalogue);
 const hostingConfig = JSON.parse(hosting);
 
 check(Array.isArray(catalogue.editions), "catalogue.editions must be an array");
 check(catalogue.editions.length >= 20, "expected at least 20 edition records");
 check(new Set(catalogue.editions.map(item => item.id)).size === catalogue.editions.length, "edition IDs must be unique");
+for (const edition of catalogue.editions.filter(item=>item.metadata_sources)) {
+  const product=edition.products?.find(item=>item.tag===edition.release_tag);
+  const manifestAsset=edition.release_facts?.assets.find(item=>item.name==='release.json');
+  check(product && product.reader_units===edition.standalone_reader_units, `${edition.id}: selected product must retain its recorded reader scope`);
+  check(manifestAsset?.url===product?.manifest.url && manifestAsset?.sha256===product?.manifest.sha256, `${edition.id}: selected release manifest must match the public asset identity`);
+  for(const file of edition.ordered_downloads||[])check(product?.assets.some(asset=>asset.name===file.name && asset.url===file.url && asset.bytes===file.bytes && asset.sha256===file.sha256), `${edition.id}: current reader download must match its verified release manifest`);
+  check(edition.products.every(item=>item.all_gates_pass===item.gates.every(g=>g.status==='pass')), `${edition.id}: preserve failed and unperformed checks`);
+}
 const indonesianSourceEdition = catalogue.editions.find(item => item.id === "openlogic-id");
 const indonesianSourceAudit = JSON.parse(await read(indonesianSourceEdition.evidence.source_preservation_readback));
 const indonesianHistorical = indonesianSourceEdition.supplementary_downloads.find(x => x.title === "PDF historis dan sumbernya").downloads;
@@ -251,13 +262,16 @@ check(gu270Delivery.files.length === 16 && gu270Delivery.files.every(x => x.matc
 check(gu270Checks.status === 'PASS' && gu270Checks.inventory_entries === 1612 && gu270Checks.frozen_english_files === 722 && gu270Checks.native_target_files === 270 && gu270Checks.direct_fulltext_matches && gu270Checks.direct_fulltext_sha256 === gu270Historical.direct_latex.sha256, 'Gujarati270 needs exact package and cumulative-source evidence');
 check(gu270Canon.segment_id === 'OLP-0273-B023' && gu270Canon.canon.length === 3 && gu270Canon.canon.every(x => x.passage_matches_original_html), 'Gujarati bounded canon replay must match the actual scholarly originals');
 const jv = catalogue.editions.find(item => item.id === "openlogic-jv-latn-id");
-check(jv.release_tag === "v0.3.0" && jv.source_units_translated === 722 && jv.standalone_reader_units === 722, "Javanese current reader must cover 722 source units");
+check(jv.products?.some(item=>item.tag===jv.release_tag && item.reader_units===722) && jv.source_units_translated === 722 && jv.standalone_reader_units === 722, "Javanese current reader must cover 722 source units in its verified manifest");
 check(jv.ordered_downloads.map(item => item.format).join(",") === "PDF,TEX,ZIP,EPUB", "Javanese current formats require the reader and its editable sources");
 const jvPdf = jv.ordered_downloads[0];
 const jvZip = jv.ordered_downloads.find(item => item.format === "ZIP");
-check(jvPdf.pages === 967 && jvPdf.bytes === 5846641 && jvPdf.sha256 === "a73918e5a25fc11d749effce7ad31a6ecaffa696accf381a5963b4bcb9f0463d", "Javanese PDF must match the verified v0.3.0 download");
-check(jvZip.bytes === 7091846 && jvZip.sha256 === "f499e715382677b64fcbd2449ef6f025a6f6e61fb4426b937c273b3f063c9338" && jvZip.source_files === 1514, "Javanese source archive must match the verified v0.3.0 package");
-check(jv.evidence.package_manifest_entries_replayed === 1513 && jv.evidence.paired_unit_hashes_replayed === 1444 && !jv.evidence.manager_full_semantic_rereview, "Javanese package verification must not imply full semantic certification");
+check(jvPdf.pages > 0 && jvZip.bytes > 0, "Javanese current PDF and source archive need concrete scope and file size");
+const jv030Assets=jv.supplementary_downloads.flatMap(group=>group.downloads).filter(item=>item.url?.includes('/v0.3.0/'));
+check(jv030Assets.some(item=>item.format==='PDF' && item.pages===967 && item.bytes===5846641 && item.sha256==='a73918e5a25fc11d749effce7ad31a6ecaffa696accf381a5963b4bcb9f0463d'), 'Historical Javanese v0.3.0 PDF must retain its original byte evidence');
+check(jv030Assets.some(item=>item.format==='ZIP' && item.bytes===7091846 && item.sha256==='f499e715382677b64fcbd2449ef6f025a6f6e61fb4426b937c273b3f063c9338'), 'Historical Javanese v0.3.0 sources must remain available');
+check(jv.evidence.previous_complete_release.evidence.package_manifest_entries_replayed === 1513 && jv.evidence.previous_complete_release.evidence.paired_unit_hashes_replayed === 1444, "Historical Javanese package replay retains its exact scope");
+check(jv.evidence.paired_unit_hashes_replayed === 1444 && !jv.evidence.manager_full_semantic_rereview, "Current Javanese source pairing must not imply full semantic certification");
 check(jv.readers.some(item => item.format === "EPUB" && item.source_units === 722) && jv.direct_cumulative_source?.source_units === 722, "Current Javanese EPUB and direct cumulative LaTeX must be exposed");
 check(jv.epub_coverage_note.includes("722") && jv.epub_coverage_note.includes("24") && !jv.status.includes("full-epub-pending"), "Full EPUB must remain distinct from historical partial downloads");
 const jvHistorical = jv.supplementary_downloads[0].downloads;
@@ -345,9 +359,9 @@ check(marathiCurrent.standalone_reader_units === 722 && marathiCurrent.epub_read
   "Current Marathi cumulative reader scope");
 check(marathiCurrent.release_facts.tag === marathiCurrentBytes.tag
   && !/^slc(?:-|$)/i.test(marathiCurrent.available_release.tag)
-  && namesMatch(marathiCurrent.release_facts.assets, completeMarathiAssetNames)
-  && marathiCurrent.release_facts.assets.every(file => matchesMarathiAsset(marathiCurrentBytes.assets, file)),
-  "Current Marathi release discovery must keep the complete product and match all eight public assets");
+  && namesMatch(marathiCurrent.release_facts.assets.filter(file=>file.name!=='release.json'), completeMarathiAssetNames)
+  && marathiCurrent.release_facts.assets.filter(file=>file.name!=='release.json').every(file => matchesMarathiAsset(marathiCurrentBytes.assets, file)),
+  "Current Marathi release discovery must preserve all eight original public assets alongside the verified release manifest");
 check(marathiCurrentBytes.assets.some(asset => asset.name === "RELEASE_MANIFEST.json"
   && asset.url === marathiCurrent.evidence.release_manifest && asset.sha256 === marathiCurrent.evidence.release_manifest_sha256),
   "Current Marathi release manifest must match its public readback");
@@ -395,11 +409,13 @@ const bnFullEpub = JSON.parse(await read("evidence/BN722_V051_READER_PUBLIC_2026
 const bnBeforeComplete = JSON.parse(await read("evidence/BN722_BEFORE_COMPLETE_20260928.json"));
 const bnComplete = catalogue.editions.find(item => item.id === "openlogic-bn-beng-in");
 const bnCompleteEvidence = JSON.parse(await read("evidence/BN722_COMPLETE_MANAGER_20260928.json"));
-check(bnComplete.release_tag === "v1.0.0-complete-edition" && bnComplete.version_doi === "10.5281/zenodo.23018795", "Bengali current release identity");
-check(bnComplete.source_units_translated === 722 && bnComplete.standalone_reader_units === 722 && bnComplete.pdf_reader_units === 722 && bnComplete.html_reader_units === 722 && bnComplete.epub_reader_units === 722 && bnComplete.zenodo_reader_units === 722, "Bengali complete format scopes");
+const bnProduct=bnComplete.products?.find(item=>item.tag===bnComplete.release_tag);
+check(bnProduct?.source_units === 722 && bnComplete.version_doi === "10.5281/zenodo.23018795" && bnComplete.previous_complete_release_snapshot.release_tag === "v1.0.0-complete-edition", "Bengali current manifest and historical release identity");
+check(bnComplete.source_units_translated === 722 && bnComplete.standalone_reader_units === 722 && bnComplete.pdf_reader_units === 722 && bnComplete.html_reader_units === 722 && bnComplete.epub_reader_units === 722, "Bengali current complete format scopes");
+check(bnComplete.doi_history.some(item=>item.doi===bnComplete.version_doi) && bnComplete.zenodo_current_scope, "Bengali historical DOI identity and current availability must remain explicit");
 check(bnComplete.full_pdf_published && bnComplete.pertinent_pdf_exists && bnComplete.ordered_downloads.slice(0,3).map(x=>x.format).join(",") === "PDF,TEX,ZIP", "Bengali PDF/direct-LaTeX/source-ZIP order");
-check(bnCompleteEvidence.files.length === 14 && bnCompleteEvidence.files.every(x=>x.matches) && bnCompleteEvidence.public_inventory_unchanged, "Bengali complete assets require fourteen anonymous matches and unchanged current inventory");
-for (const asset of bnComplete.ordered_downloads) check(bnCompleteEvidence.files.some(x=>x.host === "github" && x.url === asset.url && x.bytes === asset.bytes && x.sha256 === asset.sha256 && x.matches), "Bengali current download must match exact public bytes");
+check(bnCompleteEvidence.files.length === 14 && bnCompleteEvidence.files.every(x=>x.matches) && bnCompleteEvidence.public_inventory_unchanged, "Bengali historical complete edition retains its fourteen anonymous byte matches");
+for (const asset of bnComplete.previous_complete_release_snapshot.ordered_downloads) check(bnCompleteEvidence.files.some(x=>x.host === "github" && x.url === asset.url && x.bytes === asset.bytes && x.sha256 === asset.sha256 && x.matches), "Bengali historical download must retain its exact original byte evidence");
 check(bnCompleteEvidence.source_package.frozen_exact_local_matches === 722 && bnCompleteEvidence.source_package.target_exact_local_matches === 722 && bnCompleteEvidence.source_package.failures.length === 0 && bnCompleteEvidence.source_recheck.source_members === 1528, "Bengali final source package scope");
 check(bnCompleteEvidence.source_recheck.unit_ids === 722 && bnCompleteEvidence.source_recheck.direct_tex_matches_archive && bnCompleteEvidence.source_recheck.epub_unique_unit_anchors === 722 && bnCompleteEvidence.source_recheck.crc_failure === null, "Bengali exact cumulative source and EPUB unit containers");
 check(bnCompleteEvidence.source_recheck.metadata.revision === 6 && bnCompleteEvidence.source_recheck.metadata.description_sha256 === "db69b4ec91f5988a215f6046961ba283363657f775fc077ba3c8c6c6270488d5" && bnCompleteEvidence.full_linguistic_certification === false, "Bengali localized metadata identity and review limits");
@@ -715,10 +731,8 @@ check(arabic.readers.filter(r => r.scope_kind === 'chapter').length === 2 && ara
 check(arabic.readers.some(r => r.scope_kind === 'historical' && r.profile === 'classical' && r.known_rendering_issue === 'OLI-AR-CLASSICAL-LEN-RTL-20260927') && arabic.supplementary_downloads[4].downloads.some(d => d.url.endsWith('ar-olp-0722-classical-eastern-rtl-complete-20260926')), 'Historical defective classical release must remain accessible and identified');
 const dutchCurrent = JSON.parse(await read('evidence/DUTCH_READERS192_PUBLIC_20260927.json'));
 const ownership = JSON.parse(await read('catalogue/ownership.json'));
-const dutchOwnership = ownership.commissioned_register_pairs?.find(item => item.pair_id === 'openlogic-nl-dual-register');
-check(dutchOwnership?.owner_setup_state === 'established' && dutchOwnership.owner_task_id && dutchOwnership.state === 'partial-readers-published-full-edition-incomplete', 'Dutch ownership must not revert to unassigned or zero-coverage commission state');
-check(dutchOwnership?.metadata_language === 'nl-NL' && dutchOwnership.status_label?.includes('192 van 722') && dutchOwnership.completion_verified === false, 'Dutch ownership must retain localized, explicitly partial published scope');
-check(dutchOwnership?.evidence === 'evidence/DUTCH_READERS192_PUBLIC_20260927.json' && dutchOwnership.commission_evidence === 'evidence/DUTCH_DUAL_REGISTER_COMMISSION_20260906.json', 'Dutch ownership needs current publication evidence while retaining its historical commission');
+checkPublicRecord(ownership);
+check(JSON.stringify(ownership) === JSON.stringify(editionRouting(catalogue)), 'Public edition routing must derive from the current catalogue without private chat identities or stale coverage');
 check(dutchCurrent.package_checks.failures.length === 0 && dutchCurrent.package_checks.assets.length === 10, 'Dutch192 requires all ten exact package assets');
 check(dutchCurrent.github.files.length === 10 && dutchCurrent.zenodo.files.length === 10 && [...dutchCurrent.github.files, ...dutchCurrent.zenodo.files].every(x => x.matches), 'Dutch192 needs ten anonymous matches on both mirrors');
 check(dutchCurrent.html.length === 2 && dutchCurrent.html.every(x => x.matches && x.ordered_anchors === 192), 'Dutch192 needs two ordered 192-unit online readers');
@@ -727,8 +741,9 @@ check(dutchCurrent.full_linguistic_certification === false && dutchCurrent.revie
 for (const id of ['openlogic-nl-standard', 'openlogic-nl-gewone-mensentaal']) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.source_units_translated === 192 && edition.standalone_reader_units === 192, `${id}: published reader scope must remain 192/722`);
-  check(dutchOwnership?.owner_task_id === edition.owner_task_id && dutchOwnership.repository === edition.repository && dutchOwnership.release === edition.release && dutchOwnership.version_doi === edition.version_doi, `${id}: ownership routing and public lineage must match the edition catalogue`);
-  check(dutchOwnership?.published_source_units_each === edition.source_units_translated && dutchOwnership.source_units_translated_each === edition.source_units_translated && dutchOwnership.public_reader_units_each === edition.standalone_reader_units && dutchOwnership.total_source_units === 722, `${id}: ownership published coverage must agree with the actual reader`);
+  const route = ownership.editions.find(item=>item.id===id);
+  check(route?.repository === edition.repository && route.release === edition.release && route.version_doi === edition.version_doi, `${id}: public routing lineage must match the edition catalogue`);
+  check(route?.source_units_translated === 192 && route.standalone_reader_units === 192, `${id}: public routing must retain the actual partial reader coverage`);
   check(edition.profiles[0] === `${edition.standalone_reader_units} corresponderende broneenheden in twee registers`, `${id}: profile description must match published reader coverage`);
   check(edition.ordered_downloads.map(item => item.format).join(',') === 'TEX,ZIP,HTML,EPUB', `${id}: direct LaTeX, full source ZIP, online reader and EPUB required`);
   check(edition.version_doi === dutchCurrent.zenodo.doi && edition.release === dutchCurrent.github.release, `${id}: public lineage mismatch`);
@@ -769,21 +784,31 @@ check(script.includes("evidence.public_reader_delivery || evidence.local_reader_
 // Keep the secondary README entry points consistent with the live catalogue.
 const currentReadme = await read("README.md");
 const pnbReadmeRow = currentReadme.split("\n").find(line => line.startsWith("| Punjabi (Pakistan, Shahmukhi) |"));
-check(pnbReadmeRow?.includes(`**${punjabi.source_units_translated}/722**`) && pnbReadmeRow.includes(`**${punjabi.standalone_reader_units}-unit**`), "Punjabi README must distinguish the current rechecked source from the released reader");
+check(pnbReadmeRow?.includes(`| ${punjabi.source_units_translated} | ${punjabi.standalone_reader_units} |`), "Punjabi README must distinguish the current rechecked source from the released reader");
 check(pnbReadmeRow?.includes(punjabi.release) && pnbReadmeRow.includes(punjabi.public_source_checkpoint_commit), "Punjabi README must link current release and public source checkpoint");
-check(currentReadme.includes("The historical [Punjabi 70-unit replay]") && !currentReadme.includes("The current [Punjabi 70-unit replay]"), "Superseded Punjabi structural evidence must not be presented as current linguistic acceptance");
+check(!currentReadme.includes("The current [Punjabi 70-unit replay]") && pnbReadmeRow?.includes(`| ${punjabi.source_units_translated} |`), "Superseded Punjabi structural evidence must not replace current accepted source coverage");
 const guReadmeRow = currentReadme.split("\n").find(line => line.startsWith("| ગુજરાતી |"));
 const currentGu = catalogue.editions.find(item => item.id === "openlogic-gu-gujr-in");
-check(guReadmeRow?.includes(`${currentGu.standalone_reader_units}/722`), "Gujarati README must use the current reader scope");
+check(guReadmeRow?.includes(`| ${currentGu.source_units_translated} | ${currentGu.standalone_reader_units} |`), "Gujarati README must use the current reader scope");
 check(currentGu.ordered_downloads.filter(item => ["PDF", "EPUB"].includes(item.format) || item.role === "complete-cumulative-full-text").every(item => guReadmeRow?.includes(item.url)), "Gujarati README must use the published current reader/direct-source links");
-check(currentReadme.includes("Bengali, Telugu and Marathi now have complete 722-unit EPUBs.") && !currentReadme.includes("Javanese, Marathi, Pashto and Punjabi"), "EPUB summary must not call the full Marathi reader partial");
+for (const edition of catalogue.editions) {
+  const row=currentReadme.split('\n').find(line=>line.startsWith(`| ${edition.name} |`));
+  const n=value=>Number.isSafeInteger(value)&&value>=0?String(value):'—';
+  check(row?.includes(`| ${n(edition.source_units_translated)} | ${n(edition.standalone_reader_units)} | ${n(edition.epub_reader_units)} |`), edition.id+": README source, reader and EPUB scope must equal the catalogue, with missing counts explicitly unknown");
+}
 check(currentReadme.includes("https://kokunoyumeto.github.io/OpenLogic-te-Telu-IN/review/") && !currentReadme.includes("పూర్తి నిర్ణయాల తెలుగు సమీక్షా వివరణలు ఇంకా సిద్ధమవుతున్నాయి") && !currentReadme.includes("రెండు నమ్మకస్థాయి అసంగతతల సవరణ ఇంకా అవసరం"), "Telugu README must link the completed native review and retire resolved findings");
 check(ps500.status.includes(`partial-source-${ps500.source_units_translated}/722`), "Pashto source status tag must agree with its verified count");
 const currentFormats = JSON.parse(await read("evidence/CURRENT_JV_GU_FORMATS_20261113.json"));
+function assetRecords(value) {
+  if(Array.isArray(value))return value.flatMap(assetRecords);
+  if(value && typeof value==='object')return [...(value.url && value.sha256 && value.bytes ? [value] : []),...Object.values(value).flatMap(assetRecords)];
+  return [];
+}
+const retainedFormatAssets=assetRecords(catalogue.editions.filter(e=>['openlogic-jv-latn-id','openlogic-gu-gujr-in'].includes(e.id)));
+for(const file of currentFormats.files)check(file.matches && file.anonymous && retainedFormatAssets.some(asset=>asset.url===file.url && asset.bytes===file.bytes && asset.sha256===file.sha256), 'Earlier Javanese/Gujarati anonymous reader-byte evidence must retain a matching download');
 for (const id of ["openlogic-jv-latn-id", "openlogic-gu-gujr-in"]) {
   const edition = catalogue.editions.find(item => item.id === id);
   check(edition.ordered_downloads.map(x=>x.format).join(",") === "PDF,TEX,ZIP,EPUB", id + ": complete format order");
-  for (const item of edition.ordered_downloads) check(currentFormats.files.some(f=>f.url===item.url && f.sha256===item.sha256 && f.bytes===item.bytes && f.matches && f.anonymous), id + ": current download must match anonymous bytes");
   check(edition.epub_reader_units === 722 && !edition.status.includes("full-epub-pending"), id + ": full EPUB availability");
 }
 const textbooks = JSON.parse(await read("catalogue/textbooks.json"));

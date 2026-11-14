@@ -1,0 +1,40 @@
+name: Catalogue check
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'registry.toml'
+      - 'catalogue/**'
+      - 'scripts/**'
+      - 'templates/**'
+      - 'README.md'
+      - 'index*.html'
+      - 'package.json'
+      - '.github/workflows/catalogue-check.yml'
+permissions:
+  contents: read
+concurrency:
+  group: catalogue-check
+  cancel-in-progress: true
+jobs:
+  catalogue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - run: node scripts/generate-catalogue.mjs all --check
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: node scripts/generate-catalogue.mjs migration --check
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: npm run check

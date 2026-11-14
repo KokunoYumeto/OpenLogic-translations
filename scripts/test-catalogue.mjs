@@ -1,8 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { selectRelease, textbookReleaseAssets } from './generate-catalogue.mjs';
+import { selectRelease, textbookReleaseAssets, gitHubFailureStatus } from './generate-catalogue.mjs';
 
 const release=(tag,date='2026-11-13T00:00:00Z',extra={})=>({tag_name:tag,published_at:date,draft:false,prerelease:false,...extra});
+test('authenticated HTTP failures are distinguished from an unavailable gh executable',()=>{
+  assert.equal(gitHubFailureStatus({stdout:'{"status":"404","message":"Not Found"}'}),404);
+  assert.equal(gitHubFailureStatus({stderr:'gh: Forbidden (HTTP 403)'}),403);
+  assert.equal(gitHubFailureStatus({stderr:'gh: Unauthorized (HTTP 401)'}),401);
+  assert.equal(gitHubFailureStatus({code:'ENOENT'}),null);
+  assert.equal(gitHubFailureStatus({stdout:'not JSON',stderr:'connection reset'}),null);
+});
 test('English preservation cannot become the accessibility product',()=>{
   const old=release('frozen','2026-09-05T00:00:00Z');
   const result=selectRelease({id:'openlogic-en-frozen-722',release_tag:'frozen'},[release('accessible'),old]);
@@ -21,7 +28,7 @@ test('Inter-Farsi cannot inherit an Iranian Persian reader release',()=>{
 });
 test('Later ordinary releases are discoverable without overwriting accepted coverage',()=>{
   const earlier=release('v1','2026-09-01T00:00:00Z');const later=release('v2');
-  const result=selectRelease({id:'openlogic-fr',release_tag:'v1'},[earlier,later,release('draft',undefined,{draft:true})]);
+  const result=selectRelease({id:'openlogic-fr',release_tag:'v1'},[earlier,later,release('draft',undefined,{draft:true})],{discovery:'latest'});
   assert.equal(result.accepted,earlier);assert.equal(result.available,later);
 });
 test('Missing accepted release stays absent rather than silently falling back',()=>{
@@ -31,7 +38,7 @@ test('Missing accepted release stays absent rather than silently falling back',(
 test('A textbook release cannot replace the full OpenLogic edition',()=>{
   const complete=release('complete-v1.4','2026-11-13T00:00:00Z');
   const textbook=release('slc-2026-11-14','2026-11-14T00:00:00Z');
-  const result=selectRelease({id:'openlogic-mr-deva-in',release_tag:'complete-v1.4'},[textbook,complete]);
+  const result=selectRelease({id:'openlogic-mr-deva-in',release_tag:'complete-v1.4'},[textbook,complete],{discovery:'latest'});
   assert.equal(result.accepted,complete);assert.equal(result.available,complete);
 });
 

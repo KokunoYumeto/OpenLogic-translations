@@ -171,3 +171,26 @@ route retains these definitions, placement options and every editable diagram.
 The figure inventory includes diagrams outside the math-warning list. Native
 figure assets, source-matched references, remaining operators/tables, book
 matter and all four languages' complete export acceptance remain open.
+
+Native-figure attempts can resume the existing prepared batch only when the
+previous receipt proves that no engine ran. Source, preamble, configuration,
+individual figure bytes and batch bytes must match; a per-directory lock
+serializes invocation. The original receipt is retained. This avoids another
+assembly copy and does not authorize mutex polling or restarting a live build.
+
+Partial-function overlays are represented by U+21F8, whose vertical stroke
+crosses the arrow shaft, preserving the mathematical distinction from mapsto.
+Original TeX remains in the annotation. Small arrays use the edition's native
+font-size ratio, retain intentional blank rows/cells and suppress only the
+spurious final row Pandoc otherwise adds for a terminal row delimiter. The
+native Javanese reader has 10pt table type against 10.95pt body type; its
+observed PDF sizes corroborate the source font settings. Other configurations
+must supply their own size data.
+
+`olpkit.tabular` parses supported source table columns, spans, rows and rules
+before Pandoc. Unhandled specifications fail. This is necessary because the
+unmodified reader prints cline ranges in cells and displaces state labels in
+the transition table. The adapter retains every cell's TeX, renders invisible
+width material as MathML mphantom, checks the rendered row/cell/span counts and
+applies borders from the original rules. Header semantics, visual layout and
+complete product acceptance remain separate requirements.

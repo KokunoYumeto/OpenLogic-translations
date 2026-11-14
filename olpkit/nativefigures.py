@@ -59,7 +59,23 @@ def extract_tikz(text):
     return rows
 
 
-def export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence):
+def export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, resume=False):
+    """Serialize one output directory; resume only a proven unstarted attempt."""
+    output = Path(output).resolve()
+    output.mkdir(parents=True, exist_ok=True)
+    lock = output / '.olpkit-native-figures.lock'
+    try:
+        with lock.open('xb') as stream: stream.write(str(os.getpid()).encode())
+    except FileExistsError:
+        raise ValueError('another invocation owns this figure directory; do not restart it') from None
+    try:
+        return _export_native_figures(folder, assembly, source, driver, output,
+                                      epoch=epoch, context_evidence=context_evidence, resume=resume)
+    finally:
+        lock.unlink()
+
+
+def _export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, resume):
     """Export exact active TikZ under a caller-verified native configuration.
 
     context_evidence must identify the actual applied configuration and local
@@ -78,7 +94,10 @@ def export_native_figures(folder, assembly, source, driver, output, *, epoch, co
     if not figures: raise ValueError('no active TikZ figures')
     output.mkdir(parents=True, exist_ok=True)
     receipt_path = output / 'NATIVE_FIGURES.json'
-    if receipt_path.exists(): raise ValueError('preserve existing figure attempt; do not overwrite its receipt')
+    if receipt_path.exists() and not resume:
+        raise ValueError('preserve existing figure attempt; resume only an unstarted occupied slot')
+    if resume and not receipt_path.is_file():
+        raise ValueError('resume requires the previous occupied-slot receipt')
     preamble = original.split(r'\begin{document}', 1)[0]
     job = 'native-figures'
     batch = (preamble + '\n' + r'\usepackage[active,tightpage,pdftex]{preview}' + '\n' +
@@ -86,19 +105,57 @@ def export_native_figures(folder, assembly, source, driver, output, *, epoch, co
              r'\begin{document}' + '\n' + '\n\n'.join(row['source_tex'] for row in figures) +
              '\n' + r'\end{document}' + '\n')
     tex = output / (job + '.tex')
-    tex.write_bytes(batch.encode('utf-8'))
+    prepared = {tex.name: batch.encode('utf-8')}
     for row in figures:
         name = f'figure-{row["index"]:03d}.tex'
-        (output / name).write_bytes(row['source_tex'].encode('utf-8'))
+        prepared[name] = row['source_tex'].encode('utf-8')
         row['source_file'] = name
         del row['source_tex']
     result = {'schema': 'olpkit.native-figures.v1', 'status': 'prepared',
               'source_sha256': sha(source.encode('utf-8')), 'driver': driver,
               'driver_sha256': sha(native_driver.read_bytes()), 'preamble_sha256': sha(preamble.encode('utf-8')),
-              'batch_sha256': sha(tex.read_bytes()), 'configuration_evidence': context_evidence,
+              'batch_sha256': sha(prepared[tex.name]), 'configuration_evidence': context_evidence,
+              'source_date_epoch': epoch,
+              'assembly_sha256': sha(json.dumps(assembly, sort_keys=True).encode('utf-8')),
               'figures': figures, 'mutex': TEX_MUTEX, 'mutex_acquired': False,
               'memory_limit_bytes': MEMORY_LIMIT, 'commands': [], 'tex_runs': 0,
               'visual_qa': 'pending', 'accessibility_descriptions': 'pending', 'publishable': False}
+    if resume:
+        original_receipt = receipt_path.read_bytes()
+        previous = json.loads(original_receipt)
+        if (previous.get('schema') != result['schema'] or previous.get('status') != 'slot_occupied'
+                or previous.get('commands') != [] or previous.get('mutex_acquired') is not False
+                or previous.get('tex_runs') != 0 or previous.get('pdf')):
+            raise ValueError('resume requires an occupied-slot receipt with zero engine commands')
+        for key in ('source_sha256', 'driver', 'driver_sha256', 'preamble_sha256',
+                    'batch_sha256', 'configuration_evidence', 'figures', 'mutex', 'memory_limit_bytes'):
+            if previous.get(key) != result[key]:
+                raise ValueError('prepared figure identity changed: '+key)
+        # Older zero-command receipts precede these fields: neither setting has
+        # been applied by an engine. All recorded source/configuration identities
+        # and the live assembly are still verified before adoption.
+        for key in ('source_date_epoch', 'assembly_sha256'):
+            if key in previous and previous[key] != result[key]:
+                raise ValueError('prepared figure identity changed: '+key)
+        for name, data in prepared.items():
+            if not (output / name).is_file() or (output / name).read_bytes() != data:
+                raise ValueError('prepared figure bytes changed: '+name)
+        if any((output / (job+suffix)).exists() for suffix in ('.pdf', '.log', '.fls')) or (output / 'pdflatex.txt').exists() or list(output.glob('figure-*.svg')):
+            raise ValueError('engine/vector output contradicts unstarted figure receipt')
+        history = output / 'attempts'
+        history.mkdir(exist_ok=True)
+        archived = history / ('NATIVE_FIGURES-'+sha(original_receipt)+'.json')
+        if archived.exists() and archived.read_bytes() != original_receipt:
+            raise ValueError('figure attempt archive identity differs')
+        if receipt_path.read_bytes() != original_receipt:
+            raise ValueError('figure receipt changed during resume')
+        archived.write_bytes(original_receipt)
+        result['resumed_from'] = {'file': str(archived.relative_to(output)), 'sha256': sha(original_receipt)}
+    else:
+        for name, data in prepared.items():
+            if (output / name).exists():
+                raise ValueError('unrecorded prepared figure file exists: '+name)
+        for name, data in prepared.items(): (output / name).write_bytes(data)
     def save(): receipt_path.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     save()
     try:

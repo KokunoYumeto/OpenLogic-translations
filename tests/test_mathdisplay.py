@@ -46,12 +46,21 @@ class DisplayTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'reserved'):
             DisplayAdapter().prepare('OLPDISPLAY000000', 'fixture')
 
+    def test_small_array_requires_actual_font_and_supported_columns(self):
+        source = r'$\small\begin{array}{@{}cc@{}}a&b\end{array}$'
+        with self.assertRaisesRegex(ValueError, 'native edition data'):
+            DisplayAdapter().prepare(source, 'fixture')
+        with self.assertRaisesRegex(ValueError, 'column specification'):
+            DisplayAdapter(math_font_sizes={'small':'91.3242%'}).prepare(source.replace('@{}cc@{}','p{3cm}c'),'fixture')
+        with self.assertRaisesRegex(ValueError, 'continues beyond'):
+            DisplayAdapter(math_font_sizes={'small':'91.3242%'}).prepare(source[:-1]+'x$', 'fixture')
+
 
 @unittest.skipUnless(shutil.which('pandoc'), 'Pandoc required')
 class PandocDisplayTests(unittest.TestCase):
-    def render(self, source):
+    def render(self, source, **options):
         from lxml import html
-        prepared, receipt = DisplayAdapter().prepare(source, 'fixture')
+        prepared, receipt = DisplayAdapter(**options).prepare(source, 'fixture')
         result = subprocess.run(['pandoc', '-f', 'latex', '-t', 'html5', '--mathml'],
                                 input=prepared, encoding='utf-8', capture_output=True, check=True)
         self.assertNotIn('[WARNING]', result.stderr)
@@ -92,6 +101,25 @@ class PandocDisplayTests(unittest.TestCase):
         _, receipt = DisplayAdapter().prepare(r'$\nicefrac12$', 'fixture')
         with self.assertRaisesRegex(ValueError, 'unconverted display markers'):
             bind_mathml(html.fromstring('<p>Missing equation</p>'), receipt)
+
+    def test_partial_function_arrow_keeps_stroke_in_shaft_and_source_annotation(self):
+        source = r'$f\colon A\mathrel{\ooalign{\hfil$\mapstochar\mkern 5mu$\hfil\cr$\to$}}B$'
+        doc, _ = self.render(source)
+        self.assertIn('\u21f8', doc.xpath('//mo/text()'))
+        self.assertNotIn('\u21a6', doc.xpath('//mo/text()'))
+        self.assertEqual(doc.xpath('//annotation')[0].text, source[1:-1])
+
+    def test_small_array_keeps_columns_blank_cells_blank_row_and_font_size(self):
+        source = r'$\small\begin{array}{@{}c c c@{}}\mathbf1&\mathbf2&\mathbf3\\\\(0,0)&&(0,1)\\\end{array}$'
+        doc, receipt = self.render(source, math_font_sizes={'small':'91.3242%'})
+        self.assertEqual(doc.xpath('//mstyle/@mathsize'), ['91.3242%'])
+        rows = doc.xpath('//mtable/mtr')
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(len(rows[0]), 3)
+        self.assertEqual(len(rows[2]), 3)
+        self.assertEqual(''.join(rows[1].itertext()), '')
+        self.assertEqual(''.join(rows[2][1].itertext()), '')
+        self.assertEqual(doc.xpath('//annotation')[0].text, source[1:-1])
 
 
 if __name__ == '__main__': unittest.main()

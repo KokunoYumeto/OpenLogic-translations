@@ -10,20 +10,24 @@ import re
 from .macrophases import COMMAND, digest, group, mask_comments
 from .selective import definition_end, environment_end, token
 from .proofmath import parse_proof, parse_proof_region
+from .tabular import parse_tabular, bind_tables
 
 
 PREFIX = 'OLPDISPLAY'
 MARKER = re.compile(r'\\overset\{\\text\{(OLPDISPLAY\d{6})\}\}')
 DOUBLE_BAR = re.compile(r'\\mathrel\s*\{\|\|\}\s*\\joinrel\s*\\Relbar(?![A-Za-z@])')
+PARTIAL_ARROW = r'\ooalign{\hfil$\mapstochar\mkern5mu$\hfil\cr$\to$}'
 MATH_ENVS = re.compile(r'(?:equation|align|alignat|gather|multline|displaymath|math)\*?')
 OPAQUE = {'verbatim', 'Verbatim', 'lstlisting', 'minted', 'tikzpicture'}
 
 
 class DisplayAdapter:
-    def __init__(self, *, proof_label_styles=None):
+    def __init__(self, *, proof_label_styles=None, math_font_sizes=None):
         self.markers = {}
         self.events = []
+        self.tables = []
         self.proof_label_styles = proof_label_styles or {}
+        self.math_font_sizes = math_font_sizes or {}
 
     def mark(self, kind, body, original, start, end):
         key = PREFIX + str(len(self.markers)).zfill(6)
@@ -146,8 +150,51 @@ class DisplayAdapter:
                                     'char_end': offset+end, **proof})
                 pos = end
                 continue
+            if name == '[':
+                table_start = re.match(r'\s*\\centering\s*(?=\\begin\{tabular\})',text[pos:])
+                if table_start:
+                    at=pos+table_start.end()
+                    _, table_body=group(text,at+len(r'\begin'))
+                    _,end=environment_end(text,table_body,'tabular')
+                    closing=re.match(r'\s*\\\]',text[end:])
+                    if not closing: raise ValueError('other content in display table')
+                    normalized,record=parse_tabular(text[at:end])
+                    marker='OLPSOURCETABLE'+str(len(self.tables)).zfill(6)
+                    record.update({'marker':marker,'char_start':offset+start,'char_end':offset+end+closing.end()})
+                    self.tables.append(record)
+                    out.extend(('\n\n',marker+'START\n\n',normalized,'\n\n'+marker+'END\n\n'))
+                    pos=end+closing.end();continue
             if name in ('[', '('): math = True; out.append(match[0]); continue
             if name in (']', ')'): math = False; out.append(match[0]); continue
+            if math and name == 'small':
+                opening = re.match(r'\s*\\begin\s*\{array\}', text[pos:])
+                if opening:
+                    if 'small' not in self.math_font_sizes:
+                        raise ValueError('small-array font size requires native edition data')
+                    columns, body_start = group(text, pos+opening.end())
+                    trimmed = re.fullmatch(r'@\{\}([clr\s]+)@\{\}', columns)
+                    if not trimmed: raise ValueError('unsupported small-array column specification')
+                    stop, end = environment_end(text, body_start, 'array')
+                    if not re.match(r'\s*(?:\\\]|\$|\})',text[end:]):
+                        raise ValueError('small size continues beyond the supported array scope')
+                    body = self.walk(text[body_start:stop], math=True, offset=offset+body_start)
+                    # Pandoc treats a terminal row delimiter as another empty
+                    # row, unlike TeX. Remove that delimiter only; intentional
+                    # empty rows between delimiters remain in their positions.
+                    body = re.sub(r'\\\\\s*$', '', body, count=1)
+                    rendered = r'\begin{array}{'+trimmed[1]+'}'+body+r'\end{array}'
+                    out.append(self.mark('small-array', rendered, text[start:end], offset+start, offset+end))
+                    self.markers[PREFIX+str(len(self.markers)-1).zfill(6)]['mathsize'] = self.math_font_sizes['small']
+                    pos = end
+                    continue
+            if math and name == 'mathrel':
+                value, end, _ = token(text, pos)
+                if re.sub(r'\s+', '', value) == PARTIAL_ARROW:
+                    # U+21F8 has the source's vertical stroke in the arrow shaft,
+                    # unlike mapsto (a bar at the tail). Keep the original TeX.
+                    out.append(self.mark('partial-function-arrow', r'\to', text[start:end], offset+start, offset+end))
+                    pos = end
+                    continue
             if name in ('text', 'mbox', 'textrm') and math:
                 value, end, at = token(text, pos)
                 pieces = []
@@ -200,12 +247,14 @@ class DisplayAdapter:
         return ''.join(out)
 
     def prepare(self, text, source):
-        if PREFIX in text: raise ValueError('reserved display marker in source')
-        if self.markers or self.events: raise ValueError('use a fresh adapter per document')
+        if PREFIX in text or 'OLPSOURCETABLE' in text: raise ValueError('reserved display marker in source')
+        if self.markers or self.events or self.tables: raise ValueError('use a fresh adapter per document')
         output = self.walk(mask_comments(text))
         return output, {'schema': 'olpkit.math-display.v1', 'source': source,
                         'input_sha256': digest(text), 'output_sha256': digest(output),
                         'proof_label_styles': self.proof_label_styles,
+                        'math_font_sizes': self.math_font_sizes,
+                        'tables': self.tables,
                         'markers': self.markers, 'events': self.events,
                         'reader_complete': False}
 
@@ -261,6 +310,13 @@ def bind_mathml(document, receipt, *, strict=True):
             base.append(element(node, 'mo', '||', stretchy='false', lspace='0.277778em', rspace='0em'))
             base.append(element(node, 'mspace', width='-0.166667em'))
             base.append(element(node, 'mo', '=', stretchy='false', lspace='0em', rspace='0.277778em'))
+        elif kind == 'partial-function-arrow':
+            base = element(node, 'mo', '\u21f8', stretchy='false', lspace='0.277778em', rspace='0.277778em')
+        elif kind == 'small-array':
+            if local(base) != 'mtable': raise ValueError('small array did not render as a table')
+            styled = element(node, 'mstyle', mathsize=markers[key]['mathsize'])
+            styled.append(base)
+            base = styled
         elif kind.startswith('proof-line-'):
             fraction = next((item for item in base.iter() if local(item) == 'mfrac'), None)
             if fraction is None or len(fraction) != 2: raise ValueError('proof rule has no fraction structure')
@@ -288,4 +344,5 @@ def bind_mathml(document, receipt, *, strict=True):
             node.text = restore_annotations(node.text or '', markers)
     unbound = sorted(set(markers)-set(bound))
     if strict and unbound: raise ValueError('unconverted display markers: '+', '.join(unbound))
-    return {'bound': len(bound), 'unbound': unbound, 'reader_complete': False}
+    tables=bind_tables(document,receipt.get('tables',[]))
+    return {'bound': len(bound), 'unbound': unbound, 'tables':tables, 'reader_complete': False}

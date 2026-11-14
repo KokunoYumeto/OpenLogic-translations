@@ -27,6 +27,24 @@ def language():
             'evidence': ['Synthetic Helvetica x/H fixture.']}}
 
 
+def contextual_fixture(path):
+    import fitz
+    import reportlab
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+    pdfmetrics.registerFont(TTFont('ScaleVera', str(Path(reportlab.__file__).parent/'fonts/Vera.ttf')))
+    c=canvas.Canvas(str(path),pagesize=(300,200));c.setFont('ScaleVera',12)
+    c.drawString(50,140,'xxxxx');c.drawString(120,140,'HHHHH');c.save()
+    s={'schema_version':1,'locale':'fixture','pdf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'page':1}
+    with fitz.open(path) as doc:
+        for name,text in [('latin','xxxxx'),('reference','HHHHH')]:
+            run=next(r for r in doc[0].get_texttrace() if ''.join(chr(c[0]) for c in r['chars'])==text)
+            char=run['chars'][2];box=list(char[3]);box[1]-=.25;box[3]+=.25
+            s[name]={'glyph':text[2],'font':run['font'],'box':box,
+                     'context':{'text':text,'index':2,'glyph_id':char[1]}}
+    return s
+
+
 class ScaleTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(); self.addCleanup(self.temp.cleanup)
@@ -112,6 +130,29 @@ class ScaleTests(unittest.TestCase):
         self.assertEqual(scale_command(*args), 0)
         self.assertTrue((self.root/'out/REPORT.json').is_file())
         with self.assertRaisesRegex(ValueError, 'preserve'): scale_command(*args)
+
+    def test_contextual_glyph_matches_embedded_outline(self):
+        s=contextual_fixture(self.pdf);r=inspect_scale(self.pdf,s,language())
+        self.assertEqual(r['status'],'pass')
+        for m in r['measurements'].values():
+            self.assertLess(abs(m['ink_height_pt']-m['outline_height_pt']),.1)
+            self.assertEqual(len(m['embedded_font_sha256']),64)
+
+    def test_context_rejects_wrong_form_or_crop(self):
+        for change in ['form','crop']:
+            s=contextual_fixture(self.pdf)
+            if change=='form':s['reference']['context']['glyph_id']+=1
+            else:s['reference']['box'][0]+=.5
+            r=inspect_scale(self.pdf,s,language())
+            self.assertEqual(r['status'],'fail')
+            self.assertEqual(r['issues'][0]['kind'],'context_not_isolated')
+
+    def test_context_rejects_edge_and_mixed_run(self):
+        for change in ['edge','mixed']:
+            s=contextual_fixture(self.pdf)
+            if change=='edge':s['reference']['context']['index']=0
+            else:s['reference']['context']['text']='HHxHH'
+            with self.assertRaises(ValueError):inspect_scale(self.pdf,s,language())
 
 
 if __name__ == '__main__': unittest.main()

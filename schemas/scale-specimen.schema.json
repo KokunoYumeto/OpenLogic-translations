@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "locale", "pdf_sha256", "page", "latin", "reference"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "locale": {"type": "string", "minLength": 1},
+    "pdf_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "page": {"type": "integer", "minimum": 1},
+    "latin": {"allOf": [{"$ref": "#/$defs/cell"}, {"properties": {"glyph": {"const": "x"}}}]},
+    "reference": {"$ref": "#/$defs/cell"}
+  },
+  "$defs": {
+    "cell": {
+      "type": "object", "additionalProperties": false,
+      "required": ["glyph", "font", "box"],
+      "properties": {
+        "glyph": {"type": "string", "minLength": 1, "maxLength": 1},
+        "font": {"type": "string", "minLength": 1},
+        "box": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number"}}
+      }
+    }
+  }
+}

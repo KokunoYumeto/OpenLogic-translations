@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["reference_glyph", "minimum", "maximum", "decision_date", "rationale", "evidence"],
+  "properties": {
+    "reference_glyph": {"type": "string", "minLength": 1, "maxLength": 1},
+    "minimum": {"type": "number", "exclusiveMinimum": 0},
+    "maximum": {"type": "number", "exclusiveMinimum": 0},
+    "decision_date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "rationale": {"type": "string", "minLength": 1},
+    "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+  }
+}

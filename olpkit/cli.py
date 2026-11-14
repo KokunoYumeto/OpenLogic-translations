@@ -159,6 +159,7 @@ def main(argv=None):
         q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
     check=sub.add_parser('check').add_subparsers(dest='action',required=True)
     q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')
+    q=check.add_parser('scale');q.add_argument('--pdf',required=True);q.add_argument('--specimen',required=True);q.add_argument('--language-data',required=True);q.add_argument('--out',required=True)
     a=p.parse_args(argv)
     try:
         if a.command=='figures':
@@ -172,6 +173,9 @@ def main(argv=None):
             from .sourceexport import export_command
             return export_command(a.source,a.product,a.out,a.profile,a.build,a.credits,a.instructions)
         elif a.command=='check':
+            if a.action=='scale':
+                from .pdfscale import scale_command
+                return scale_command(a.pdf,a.specimen,a.language_data,a.out)
             from .credits import credits_command
             return credits_command(a.source,a.policy,a.out,a.pdf,a.build)
         elif a.command=='pdf':

@@ -36,7 +36,7 @@ def native_theorems(text):
         if fields[inner:].strip() or kind not in KINDS:
             raise ValueError('unsupported native theorem fields')
         # TeX may protect individual digits in braces; no macros are guessed.
-        if not re.fullmatch(r'[0-9A-Z.{}]+', number):
+        if not re.fullmatch(r'[\dA-Z.{}]+', number):
             raise ValueError('unsupported native theorem number')
         rows.append({'kind':kind, 'name_tex':name, 'number':number.replace('{','').replace('}',''),
                      'title_tex':title, 'page':page, 'native_anchor':anchor})

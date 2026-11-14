@@ -32,6 +32,13 @@ class ProofTests(unittest.TestCase):
         self.assertIn(r'\text{Prose }{A}', math)
         self.assertIn(r'{\mathrm{Cut}}', math)
 
+    def test_label_reassignment_matches_native_box_replacement(self):
+        source=r'\Axiom$A$\RightLabel{old}\RightLabel{current}\UnaryInf$B$\DisplayProof'
+        math,_,record=parse_proof(source)
+        self.assertNotIn('old',math);self.assertIn('current',math)
+        self.assertEqual(record['label_assignments'][1]['replaces'],'old')
+        self.assertEqual(record['steps'][1]['labels'],{'right':'current'})
+
     @unittest.skipUnless(shutil.which('pandoc'), 'Pandoc required')
     def test_native_cut_renders_two_premises_one_rule_and_exact_annotation(self):
         from lxml import html

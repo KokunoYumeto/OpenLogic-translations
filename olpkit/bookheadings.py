@@ -13,7 +13,7 @@ def read_contents(text, *, language_wrapper=None):
         m=re.match(r'\\(partnumberline|chapternumberline|numberline)\b',title)
         if m:
             number,end=group(title,m.end());title=title[end:]
-            if not re.fullmatch(r'[A-Za-z0-9.]+',number):raise ValueError('unsupported native heading number')
+            if not re.fullmatch(r'[A-Za-z\d.]+',number):raise ValueError('unsupported native heading number')
         if language_wrapper and title.startswith('\\'+language_wrapper):
             unwrapped,end=group(title,len(language_wrapper)+1)
             if title[end:].strip():raise ValueError('additional content after native language wrapper')

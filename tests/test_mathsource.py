@@ -28,6 +28,16 @@ class SourceMathTests(unittest.TestCase):
         self.assertEqual(len(receipt['formula_shorthands']),2)
         self.assertEqual(receipt['declarations'][receipt['calls'][0]['definition']]['origin']['source'],'book')
 
+    def test_defined_branch_requires_native_declaration_and_keeps_scope(self):
+        c=self.converter();c.configure(r'\newcommand{\Known}{K}','book')
+        text,receipt=c.expand(r'$\ifdefined\Known\Known+!A\else lost\fi$','body')
+        self.assertEqual(text,r'$K+\varphi $')
+        self.assertEqual(receipt['source_conditionals'][0]['target'],'Known')
+        with self.assertRaisesRegex(ValueError,'source declaration'):
+            self.converter().expand(r'\ifdefined\Unknown yes\else no\fi','unknown')
+        with self.assertRaisesRegex(ValueError,'source declaration'):
+            self.converter().expand(r'{\newcommand{\Local}{L}}\ifdefined\Local yes\fi','scoped')
+
     def test_optional_quantifiers_uniqueness_and_nested_matrix(self):
         text,_=self.converter().expand(r'$\lexists![x][\lforall[y][!A(x,y)]]$','body')
         compact=''.join(text.split())

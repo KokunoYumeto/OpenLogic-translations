@@ -9,7 +9,7 @@ from dataclasses import dataclass,field
 import re
 
 from .macrophases import COMMAND,digest,group,mask_comments,skip_space
-from .selective import token,definition_end,environment_end,explicit_group_end,PRIMITIVE_IF,conditional_end
+from .selective import token,definition_end,environment_end,explicit_group_end,PRIMITIVE_IF,conditional_end,boolean_branches
 from .texttokens import Definition,definition
 
 
@@ -129,7 +129,7 @@ class MathState:
 class SourceMath:
     def __init__(self,*,resolver=None):
         self.resolver=resolver;self.state=MathState();self.inputs={};self.declarations=[]
-        self.calls=[];self.shorthands=[];self.modes={};self.read_stack=[];self.fonts=[]
+        self.calls=[];self.shorthands=[];self.modes={};self.read_stack=[];self.fonts=[];self.conditionals=[]
 
     def record_input(self,source,text):
         row={'sha256':digest(text),'characters':len(text)}
@@ -289,6 +289,15 @@ class SourceMath:
             if name in ('ensuremath','text','mbox','textrm','intertext','shortintertext'):
                 value,end,at=token(text,pos);nested=state.copy();nested.math=name=='ensuremath'
                 out.extend((m[0]+'{',child(at,at+len(value),nested),'}'));pos=end;continue
+            if name=='ifdefined':
+                target,at,_=token(text,pos)
+                key=target.removeprefix('\\');declaration=state.macros.get(key)
+                if not declaration or declaration[2]:
+                    raise ValueError('ifdefined target needs a source declaration: '+target)
+                yes,no,end=boolean_branches(text,at,{})
+                self.conditionals.append({'call':loc(start,end),'target':key,'defined':True,
+                                          'definition':declaration[1],'selected_range':list(yes)})
+                out.append(child(*yes,childstate=state));pos=end;continue
             if name in PRIMITIVE_IF:
                 end=conditional_end(text,pos)
                 if depth and chain:raise ValueError('unevaluated conditional in notation expansion: '+name)
@@ -347,5 +356,5 @@ class SourceMath:
         result=self._walk(mask_comments(text),self.state.copy(),source,text)
         return result,{'schema':'olpkit.source-notation.v1','inputs':self.inputs,'declarations':self.declarations,
             'calls':self.calls,'formula_shorthands':self.shorthands,'font_declarations':self.fonts,
-            'configured_formula_mode':self.state.alphabet_origin,'output_sha256':digest(result),
+            'configured_formula_mode':self.state.alphabet_origin,'source_conditionals':self.conditionals,'output_sha256':digest(result),
             'arbitrary_tex_execution':False,'reader_complete':False}

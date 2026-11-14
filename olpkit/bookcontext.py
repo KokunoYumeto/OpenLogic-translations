@@ -17,6 +17,7 @@ from .bibliography import read_citation_labels,read_bibliography,bibliography_te
 from .references import References,read_aux
 from .mathdisplay import DisplayAdapter
 from .macrophases import mask_comments
+from .bookinsertions import glossary_insertion,insert_glossary,insert_bibliography,literal_definitions,bibliography_helpers
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -120,16 +121,22 @@ def build_context(source,profile):
     if sha((inputs.root/'ASSEMBLY.json').read_bytes())!=reconciliation['inputs']['assembly_sha256']:
         raise ValueError('assembly differs from native reconciliation')
 
-    helper=inputs.text(profile['glossary']['definition_source'])
-    hit=_one(r'\\NewDocumentCommand\\slcterm',helper,'glossary declaration')
-    _,name,definition=parse_definition(helper,hit.start(),hit.start()+len(r'\NewDocumentCommand'),
-        'NewDocumentCommand',{'source':profile['glossary']['definition_source']})
-    if name!='slcterm' or re.sub(r'\s+','',definition.spec)!='O{}mmmm':raise ValueError('unsupported glossary declaration')
+    helper='';definition_body=None
+    if profile['glossary'].get('definition_source'):
+        helper=inputs.text(profile['glossary']['definition_source'])
+        hit=_one(r'\\NewDocumentCommand\\slcterm',helper,'glossary declaration')
+        _,name,definition=parse_definition(helper,hit.start(),hit.start()+len(r'\NewDocumentCommand'),
+            'NewDocumentCommand',{'source':profile['glossary']['definition_source']})
+        if name!='slcterm' or re.sub(r'\s+','',definition.spec)!='O{}mmmm':raise ValueError('unsupported glossary declaration')
+        definition_body=definition.body
     glossary_source=inputs.text(profile['glossary']['source'])
-    entries=read_entries(glossary_source,slcterm_definition=definition.body)
+    entries=read_entries(glossary_source,slcterm_definition=definition_body)
     order=native_order(inputs.witness_text('gls'))
     shim=inputs.text(profile['prose_definition_source'])
-    title=_one(r'\\newcommand\*\{\\olpBookGlossary\}\{([^{}]+)\}',shim,'glossary title')[1]
+    title_rows=list(re.finditer(r'\\newcommand\*\{\\olpBookGlossary\}\{([^{}]+)\}',mask_comments(shim)))
+    if len(title_rows)>1:raise ValueError('native glossary title ambiguous')
+    insertion=glossary_insertion(text,title_rows[0][1] if title_rows else None)
+    title=insertion['title']
     package=inputs.package('glossaries.sty')
     if br'\newcommand{\glssentencecase}[1]{\makefirstuc{#1}}' not in package:
         raise ValueError('native glossary case rule changed')
@@ -142,9 +149,8 @@ def build_context(source,profile):
         evidence={'source_sha256':sha(glossary_source.encode()),'native_gls_sha256':sha(inputs.witness('gls')),
                   'helper_sha256':sha(helper.encode()),'sentence_case_package_sha256':sha(package)})
     glossary,glossary_tokens=tokens.expand(glossary,'book-glossary.tex')
-    if text.count(r'\printglossaries')!=1 or text.count(r'\glsaddall')!=1:
-        raise ValueError('native glossary insertion differs')
-    text=text.replace(r'\printglossaries',glossary).replace(r'\glsaddall','')
+    text=insert_glossary(text,insertion,glossary)
+    glossary_receipt['insertion']=insertion
 
     locale=inputs.text(profile['locale_source']);babel=profile['babel']
     credits_title=_one(r'\\setlocalecaption\{'+re.escape(babel)+r'\}\{photocredits\}\{([^{}]+)\}',locale,'photo credit title')[1]
@@ -171,16 +177,14 @@ def build_context(source,profile):
     bibliography=read_bibliography(bbl,citation_labels,evidence=citation_evidence)
     token_config=inputs.text(profile['token_base_source'])
     bibtitle=source_caption(token_config,babel,'bib')
-    command=r'\bibliography{\olpath/'+profile['bibliography_source']+'}'
-    style_command=r'\bibliographystyle{\olpath/'+profile['bibliography_style'].removesuffix('.bst')+'}'
-    if text.count(command)!=1 or text.count(style_command)!=1:raise ValueError('bibliography source insertion differs')
-    text=text.replace(command,bibliography_tex(bibliography,bibtitle)).replace(style_command,'')
+    text,bibliography['insertion']=insert_bibliography(text,bibliography_tex(bibliography,bibtitle),
+        source=profile['bibliography_source'],style=profile['bibliography_style'])
     text,citations=expand_citations(text,citation_labels,
         style={'open':'(','close':')','separator':';','author_year':',','year_separator':',','note_separator':', '},evidence=citation_evidence)
-    if r'\def\natexlab#1{#1}' not in bbl or r'\def\urlprefix{URL }' not in bbl:
-        raise ValueError('native bibliography helper definitions differ')
     definitions='\n'.join(re.findall(r'\\newcommand\*\{\\olpBook\w+\}\{[^{}]+\}',shim))
-    definitions+='\n'+r'\newcommand{\natexlab}[1]{#1}\newcommand{\urlprefix}{URL }\newcommand{\newblock}{ }'
+    definitions+='\n'+bibliography_helpers(bbl)
+    for row in profile.get('prose_macro_sources',[]):
+        definitions+='\n'+literal_definitions(inputs.text(row['source']),row['names'])
     references=References(labels,names['names'],evidence=reconciliation,pair_conjunction=names['pair_conjunction'],parenthesized_types=('enumi','enumii'))
     text,reference_receipt=references.prepare(text,'book-with-front-back-matter.tex')
     if reference_receipt['references_without_source_anchor']:raise ValueError('reference target absent from selected book')

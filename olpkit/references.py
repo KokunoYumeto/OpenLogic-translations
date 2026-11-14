@@ -40,7 +40,9 @@ def read_aux(text):
 
 def plain_number(value):
     value=value.replace('{','').replace('}','')
-    if not re.fullmatch(r'[A-Za-z0-9.()\-]+',value):
+    # Decimal digits in the native script are reader text, not TeX commands.
+    # Preserve them exactly; do not transliterate the edition's numbering.
+    if not re.fullmatch(r'[A-Za-z\d.()\-]+',value):
         raise ValueError('reference number requires explicit TeX rendering: '+value)
     return value
 

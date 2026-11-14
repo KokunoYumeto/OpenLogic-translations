@@ -4,9 +4,9 @@ from olpkit.bookphotos import prepare_photos,credit_rows,bind_photos
 
 
 class BookPhotoTests(unittest.TestCase):
-    def prepare(self,credit='Credit with '+r'\href{https://example.org}{original attribution}.',native_credit=None):
+    def prepare(self,credit='Credit with '+r'\href{https://example.org}{original attribution}.',native_credit=None,number='C.1'):
         text=r'Before \olphoto{example-person}{Example Person} after.\photocredits'
-        labels={'photo-example-person':{'kind':'figure','number_tex':'C.1','page':'8'}}
+        labels={'photo-example-person':{'kind':'figure','number_tex':number,'page':'8'}}
         pcr='Example Person, '+r'\cpageref {photo-example-person}: '+(credit if native_credit is None else native_credit)+r'\par'
         read=lambda name:credit.encode() if name.endswith('.tex') else b'\x89PNG\r\n\x1a\nfixture'
         return prepare_photos(text,labels,pcr,read=read,localized_credit_directory='locale/xx/photocredits',figure_label='Figure',credits_title='Photo credits',page_label='page',width_percent=45,evidence={'native':'fixture'})
@@ -17,6 +17,11 @@ class BookPhotoTests(unittest.TestCase):
         self.assertIn(r'\href{https://example.org}{original attribution}',text)
         self.assertIn(r'page~\pageref{photo-example-person}',text)
         self.assertEqual(r['photos'][0]['asset_sha256'],hashlib.sha256(b'\x89PNG\r\n\x1a\nfixture').hexdigest())
+
+    def test_native_script_photo_number_is_not_transliterated(self):
+        text,receipt=self.prepare(number='C.१')
+        self.assertIn('Figure C.१: Example Person',text)
+        self.assertEqual(receipt['photos'][0]['number_tex'],'C.१')
 
     def test_duplicate_or_missing_native_credits_fail(self):
         row=r'Person, \cpageref{photo-x}: Credit.\par'

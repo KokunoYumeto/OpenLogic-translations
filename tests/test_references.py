@@ -2,7 +2,7 @@ import shutil
 import subprocess
 import unittest
 
-from olpkit.references import read_aux, References, bind_references
+from olpkit.references import read_aux, References, bind_references, plain_number
 
 
 def label(number='2.3',kind='thm',counter='3',prefix='2'):
@@ -16,6 +16,14 @@ def adapter(labels,**kwargs):
 
 
 class ReferenceTests(unittest.TestCase):
+    def test_native_decimal_scripts_survive_cross_reference_rendering(self):
+        for value in ('१.१','۲.۳','٣.٤','A.१२'):
+            self.assertEqual(plain_number(value),value)
+        for value in (r'\arabic{chapter}','1/2','Ⅳ','१ पाठ'):
+            with self.assertRaises(ValueError):plain_number(value)
+        _,receipt=adapter({'x':label('१.१')}).prepare(r'\cref{x}','fixture')
+        self.assertEqual(receipt['calls'][0]['pieces'][0]['text'],'Teorema १.१')
+
     def test_aux_balanced_fields_and_native_number_consistency(self):
         rows=read_aux(r'\newlabel{x}{{7.{13}}{99}{A {nested} title}{thm.1}{}}'+'\n'+
                       r'\newlabel{x@cref}{{[thm][13][7]7.{13}}{[1][98][]99}{}{}{}}')

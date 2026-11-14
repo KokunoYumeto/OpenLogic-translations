@@ -85,6 +85,7 @@ def parse_proof(text, start=0, *, require_display=True, decorate=None, label_sty
     bottom_align = False
     prefix = ''
     steps = []
+    label_assignments = []
     while True:
         pos = skip_space(text, pos)
         if pos == len(text):
@@ -99,8 +100,13 @@ def parse_proof(text, start=0, *, require_display=True, decorate=None, label_sty
         if name == 'DisplayProof': break
         if name in ('RightLabel', 'LeftLabel'):
             side = 'right' if name == 'RightLabel' else 'left'
-            if side in labels: raise ValueError('unconsumed inference label')
-            labels[side], pos, _ = token(text, pos)
+            value, pos, _ = token(text, pos)
+            # Bussproofs globally replaces the pending side's label box.
+            # Preserve overwritten source assignments in the receipt and
+            # original formula annotation; only the last box is printed.
+            label_assignments.append({'side':side,'value':value,'replaces':labels.get(side),
+                                      'char_start':begin,'char_end':pos})
+            labels[side] = value
             continue
         if name in ('doubleLine', 'noLine', 'singleLine'):
             line = {'doubleLine':'double', 'noLine':'none', 'singleLine':'single'}[name]
@@ -137,7 +143,7 @@ def parse_proof(text, start=0, *, require_display=True, decorate=None, label_sty
     bound = (lambda kind, body: decorate(kind, body, start, pos)) if decorate else None
     return prefix+render(stack[0], bound, label_styles), pos, {'steps': steps, 'axioms': sum(not row['arity'] for row in steps),
                                                       'inferences': sum(bool(row['arity']) for row in steps),
-                                                      'bottom_align': bottom_align}
+                                                      'bottom_align': bottom_align,'label_assignments':label_assignments}
 
 
 def parse_proof_region(text, *, decorate=None, label_styles=None):

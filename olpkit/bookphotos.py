@@ -57,7 +57,7 @@ def prepare_photos(text, labels, pcr, *, read, localized_credit_directory,
         large=read(base+'-large.png');small=read(base+'-small.png')
         if not large or not small.startswith(b'\x89PNG\r\n\x1a\n'):raise ValueError('native photograph is absent/not PNG')
         number=native['number_tex']
-        if not re.fullmatch(r'[A-Za-z0-9.]+',number):raise ValueError('unsupported native photo number')
+        if not re.fullmatch(r'[A-Za-z\d.]+',number):raise ValueError('unsupported native photo number')
         output='assets/photos/'+name+'.png'
         credit_id='olp-photo-credit-'+name
         replacement='\n\n'+r'\begin{olpbookphoto}'+ '\n'+r'\label{'+key+'}\n'+r'\includegraphics{'+output+'}\n'+r'\begin{olpbookphotocaption}'+figure_label+' '+number+': '+caption+'. '+r'\hyperlink{'+credit_id+'}{'+credits_title+'}'+r'\end{olpbookphotocaption}'+'\n'+r'\end{olpbookphoto}'+'\n\n'

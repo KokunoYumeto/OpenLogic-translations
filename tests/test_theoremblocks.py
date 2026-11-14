@@ -18,6 +18,12 @@ class TheoremBlockTests(unittest.TestCase):
         self.assertIn('content',prepared)
         self.assertEqual(receipt['records'][0]['source_sha256'],rows[0]['source_sha256'])
 
+    def test_native_script_number_is_preserved_in_theorem_heading(self):
+        n=self.native(number='१.{१२}')
+        prepared,receipt=prepare_theorems(r'\begin{defn}[Title]content\end{defn}',n,{'defn':'व्याख्या'},evidence={'native':'fixture'},proof_symbol=r'\Box')
+        self.assertIn('व्याख्या १.१२',prepared)
+        self.assertEqual(n[0]['number'],'१.१२')
+
     def test_mismatched_native_title_and_kind_fail(self):
         source=r'\begin{defn}[Different]content\end{defn}'
         with self.assertRaisesRegex(ValueError,'title differs'):reconcile_theorem_source(source,self.native())

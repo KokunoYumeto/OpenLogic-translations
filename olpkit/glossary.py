@@ -55,7 +55,7 @@ def read_entries(text, *, slcterm_definition=None):
         if not key or key in entries:raise ValueError('missing or duplicate glossary key')
         if not fields.get('name') or not fields.get('description'):
             raise ValueError('glossary name/definition missing')
-        unsupported=set(fields)-{'name','sort','plural','symbol','description'}
+        unsupported=set(fields)-{'name','text','sort','plural','symbol','description'}
         if unsupported:raise ValueError('unsupported glossary fields: '+', '.join(sorted(unsupported)))
         entries[key]={'key':key,**fields,'source_start':start,'source_end':pos,
                       'source_sha256':digest(text[start:pos]),
@@ -84,7 +84,7 @@ def expand_links(text, entries, *, sentence_case=None):
             continue
         key,end=group(code,pos)
         if key not in entries:raise ValueError('unknown glossary reference: '+key)
-        field='plural' if m[1].lower()=='glspl' else 'name'
+        field='plural' if m[1].lower()=='glspl' else ('text' if 'text' in entries[key] else 'name')
         if field not in entries[key]:raise ValueError('native plural is not explicitly established: '+key)
         label=entries[key][field]
         if m[1].startswith('G'):

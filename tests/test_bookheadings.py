@@ -4,6 +4,10 @@ from olpkit.bookheadings import read_contents,bind_headings
 
 
 class NativeHeadingTests(unittest.TestCase):
+    def test_native_decimal_numbering_is_preserved_in_contents(self):
+        rows=read_contents(r'\contentsline{chapter}{\chapternumberline{१}प्रकरण}{१}{ch}',language_wrapper='bbl@ensure@marathi')
+        self.assertEqual(rows[0]['number'],'१')
+
     def rows(self):
         text='\n'.join([r'\contentsline{chapter}{Preface}{i}{pre}',
                         r'\contentsline{part}{\partnumberline{I}Part}{1}{part}',

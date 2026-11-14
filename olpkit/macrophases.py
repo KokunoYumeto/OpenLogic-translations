@@ -9,7 +9,9 @@ import hashlib
 import re
 
 
-COMMAND = re.compile(r'\\([A-Za-z@]+|[^\n])')
+# A backslash followed by an end-of-line is a TeX control-space token.
+# Authored credits use it (for example after "Ms."); keep its exact source.
+COMMAND = re.compile(r'\\([A-Za-z@]+|[\s\S])')
 NAME = re.compile(r'\\[A-Za-z@]+')
 
 

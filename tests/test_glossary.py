@@ -22,6 +22,14 @@ class GlossaryTests(unittest.TestCase):
         self.assertEqual(entries['x']['description'],r'Nested {a,b}, plus $x$.')
         self.assertIn('{Xes}',expand_links(r'\glspl{x}',entries)[0])
 
+    def test_native_link_text_can_differ_from_glossary_heading(self):
+        entries=read_entries(r'\newglossaryentry{x}{name={प्रांत (फलनाचा)},text={प्रांत},description={Definition.}}')
+        value,links=expand_links(r'\gls{x}',entries)
+        self.assertEqual(links[0]['label_tex'],'प्रांत')
+        text,receipt=glossary_tex(entries,['x'],'Title',evidence={'native':'fixture'})
+        self.assertIn('प्रांत (फलनाचा)',text)
+        self.assertEqual(receipt['entries']['x']['text'],'प्रांत')
+
     def test_missing_plural_is_not_an_english_guess(self):
         entries=read_entries(r'\newglossaryentry{x}{name={X},description={Definition.}}')
         with self.assertRaisesRegex(ValueError,'plural'):expand_links(r'\glspl{x}',entries)

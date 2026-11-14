@@ -6,6 +6,7 @@ border colours are not evidence of readable text contrast.
 """
 from collections import Counter
 import difflib
+from decimal import Decimal, ROUND_HALF_UP
 import hashlib
 import json
 from pathlib import Path
@@ -140,7 +141,14 @@ def split_citations(links,chars):
     return found
 
 
-def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None):
+def serialized_link_rgb(color):
+    # The xcolor HTML conversion used by this XeLaTeX profile emits RGB
+    # components rounded to three decimal places in the PDF content stream.
+    return tuple(float((Decimal(int(color[i:i+2],16))/255).quantize(
+        Decimal('0.001'),rounding=ROUND_HALF_UP)) for i in (0,2,4))
+
+
+def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None,*,xdvipdfmx=False):
     from pypdf import PdfReader
     import pdfplumber
     if minimum_contrast < 7:
@@ -180,12 +188,14 @@ def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None):
                 ink=[c for c in chars if c['text'].strip() and contains(link['rect'],c)]
                 if not ink:
                     unknown.append({'page':number,'index':link['index'],'reason':'link has no extractable painted text'})
-                measured=[]
+                measured=[]; paints=set()
                 for c in ink:
                     try: paint=rgb(c.get('non_stroking_color'))
                     except (ValueError,TypeError):
                         unknown.append({'page':number,'index':link['index'],'reason':'unsupported text colour'});continue
-                    colours[tuple(round(x,6) for x in paint)]+=1
+                    serialized=tuple(round(x,6) for x in paint)
+                    colours[serialized]+=1
+                    paints.add(serialized)
                     measured.append(contrast(paint))
                 # Unpainted PDF paper is white. A coloured filled object/image
                 # behind a link requires a rendered measurement, not this gate.
@@ -200,23 +210,42 @@ def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None):
                 if measured and min(measured)<minimum_contrast:
                     issues.append({'page':number,'index':link['index'],'rule':'contrast','minimum':min(measured)})
                 observations.append({'page':number,**link,'text':''.join(c['text'] for c in ink),
-                                     'minimum_contrast':min(measured) if measured else None})
+                                     'minimum_contrast':min(measured) if measured else None,
+                                     'text_rgb':sorted(paints)})
                 citation_count += int(link['destination'].startswith('cite.'))
             issues.extend({'page':number,'rule':'split-citation',**x} for x in split_citations(links,chars))
             geometry.close()
             if progress and number%50==0:progress(number)
     if len(colours)>1:issues.append({'rule':'multiple-link-text-colours','count':len(colours)})
     if expected_rgb is not None:
+        serialized=serialized_link_rgb(expected_color) if xdvipdfmx else None
         for actual in colours:
-            if any(abs(a-b)>0.0001 for a,b in zip(actual,expected_rgb)):
+            if actual==serialized:
+                continue
+            if xdvipdfmx:
+                matches = actual==tuple(round(value,6) for value in expected_rgb)
+            else:
+                matches = all(abs(a-b)<=0.0001 for a,b in zip(actual,expected_rgb))
+            if not matches:
                 issues.append({'rule':'declared-link-colour-overridden','expected_rgb':list(expected_rgb),'actual_rgb':list(actual)})
+    measurements=[]
+    if xdvipdfmx and unknown:
+        try:
+            from .linkpaint import measure_unresolved
+        except ModuleNotFoundError as error:
+            if error.name!='fitz':
+                raise
+        else:
+            unknown, paint_issues, measurements = measure_unresolved(path,observations,unknown,minimum_contrast)
+            issues.extend(paint_issues)
     return {'schema':'olpkit.pdf-links.v1','artifact':file_record(path),'pages':len(pdf.pages),
             'status':'fail' if issues else ('incomplete' if unknown else ('pass' if observations else 'not_applicable')),
             'minimum_required_contrast':minimum_contrast,'link_areas':len(observations),
             'expected_colour':expected_color,
             'citation_areas':citation_count,'text_colours':[{'rgb':list(k),'characters':v,'contrast_white':contrast(k)} for k,v in colours.items()],
             'issues':issues,'unmeasured':unknown,'observations':observations,
-            'limits':['Background accepted only for unpainted white paper or white vector fill; other overlaps require rendering.',
+            'background_measurements':measurements,
+            'limits':['Non-white fills and non-text links require supported paint-order and raster evidence.',
                       'Citation split candidates require source-context adjudication when distinct mentions share a destination.',
                       'This gate does not certify link destinations exist, reading order, semantic fidelity, table layout or font scale.']}
 

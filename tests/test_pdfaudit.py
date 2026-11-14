@@ -15,8 +15,11 @@ from olpkit.pdfaudit import compare_pdfs, contrast, digest, inspect_links, rgb, 
 BLUE=(11/255,60/255,111/255)
 
 
-def fixture(path,text='Example',colour=BLUE,split=False,extra_page=False):
+def fixture(path,text='Example',colour=BLUE,split=False,extra_page=False,background=None):
     output=io.BytesIO();c=canvas.Canvas(output,pagesize=(612,792))
+    if background is not None:
+        c.setFillColorRGB(*background)
+        c.rect(15,690,150,35,stroke=0,fill=1)
     c.setFont('Helvetica',12);c.setFillColorRGB(*colour)
     c.drawString(20,700,text)
     width=stringWidth(text,'Helvetica',12)
@@ -152,6 +155,44 @@ class PDFAuditTests(unittest.TestCase):
         self.assertIn('declared-link-colour-overridden',[i['rule'] for i in report['issues']])
         fixture(pdf)
         self.assertEqual(inspect_links(pdf,expected_color='0B3C6F')['status'],'pass')
+
+
+    def test_xelatex_rgb_accepts_exact_serialization(self):
+        path=self.root/'serial.pdf'
+        fixture(path,colour=(.408,.255,.024))
+        self.assertEqual(inspect_links(path,expected_color='684106')['status'],'fail')
+        self.assertEqual(inspect_links(path,expected_color='684106',xdvipdfmx=True)['status'],'pass')
+        fixture(path,colour=(.409,.255,.024))
+        report=inspect_links(path,expected_color='684106',xdvipdfmx=True)
+        self.assertEqual(report['status'],'fail')
+        self.assertIn('declared-link-colour-overridden',[i['rule'] for i in report['issues']])
+
+    def test_xelatex_flat_fill_uses_actual_background(self):
+        path=self.root/'boxed.pdf'
+        fill=(.973,.796,.537)
+        fixture(path,colour=(.408,.255,.024),background=fill)
+        report=inspect_links(path,expected_color='684106',xdvipdfmx=True)
+        self.assertEqual(report['status'],'fail',report)
+        self.assertEqual(len(report['background_measurements']),1)
+        self.assertEqual(report['unmeasured'],[])
+        self.assertAlmostEqual(report['issues'][0]['minimum'],5.9174,delta=.08)
+        fixture(path,colour=(.325,.2,0),background=fill)
+        report=inspect_links(path,expected_color='533300',xdvipdfmx=True)
+        self.assertEqual(report['status'],'pass',report)
+        self.assertGreater(report['background_measurements'][0]['minimum_contrast'],7)
+
+    def test_xelatex_keeps_image_backing_unmeasured(self):
+        from PIL import Image
+        path=self.root/'image.pdf';fixture(path)
+        out=io.BytesIO();c=canvas.Canvas(out,pagesize=(612,792))
+        c.drawInlineImage(Image.new('RGB',(30,20),'yellow'),0,680,100,60)
+        c.setFont('Helvetica',12);c.setFillColorRGB(*BLUE);c.drawString(20,700,'Example');c.save()
+        writer=PdfWriter();writer.append(PdfReader(io.BytesIO(out.getvalue())))
+        writer.add_annotation(0,PdfReader(path).pages[0]['/Annots'][0].get_object())
+        with path.open('wb') as f:writer.write(f)
+        report=inspect_links(path,xdvipdfmx=True)
+        self.assertEqual(report['status'],'incomplete')
+        self.assertEqual(report['background_measurements'],[])
 
 
 if __name__=='__main__':unittest.main()

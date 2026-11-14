@@ -52,13 +52,14 @@ def verify_assembly(folder,report):
             raise ValueError('assembled input changed: '+name)
 
 
-def record_pdf_links(output,result,minimum_contrast=7,expected_color=None):
+def record_pdf_links(output,result,minimum_contrast=7,expected_color=None,*,xdvipdfmx=False):
     """Inspect the built PDF after the TeX slot has been released."""
     from .pdfaudit import inspect_links
     output=Path(output).resolve();pdf=(output/result['pdf']['path']).resolve()
     if not pdf.is_relative_to(output) or digest(pdf.read_bytes())!=result['pdf']['sha256']:
         raise ValueError('PDF bytes changed before link inspection')
-    links=inspect_links(pdf,minimum_contrast,progress=lambda n:print(f'PDF links: inspected page {n}',flush=True),expected_color=expected_color)
+    links=inspect_links(pdf,minimum_contrast,progress=lambda n:print(f'PDF links: inspected page {n}',flush=True),
+                        expected_color=expected_color,xdvipdfmx=xdvipdfmx)
     payload=json_bytes(links);path=output/'G-LINK.json';path.write_bytes(payload)
     result['gates']['G-LINK']={'status':links['status'],'report':path.name,'sha256':digest(payload),
                              'link_areas':links['link_areas'],'citation_areas':links['citation_areas'],
@@ -262,7 +263,8 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
     result=compile_book(source,report,engine,epoch,output,expected,english,resume)
     if not english and result.get('pdf'):
         language=tomllib.loads((ROOT/'data/languages'/(report['locale']+'.toml')).read_text(encoding='utf-8'))
-        links_ok=record_pdf_links(output,result,language['links']['minimum_contrast'],language['links']['color'])
+        links_ok=record_pdf_links(output,result,language['links']['minimum_contrast'],language['links']['color'],
+                                  xdvipdfmx=engine=='xelatex')
         credits_ok=record_pdf_credits(output,result,ROOT/'data/credits'/('slc-'+report['locale']+'.json'))
         if not links_ok or not credits_ok:
             print('PDF link/credit acceptance incomplete; inspect recorded gate results',flush=True)

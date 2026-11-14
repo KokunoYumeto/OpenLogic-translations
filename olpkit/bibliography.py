@@ -146,7 +146,7 @@ def bind_bibliography(document, record, citations):
     if [n.get('id') for n in nodes]!=expected:raise ValueError('bibliography anchor coverage/order differs')
     lists=document.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," olpbibliography ")]')
     if len(lists)!=1:raise ValueError('complete bibliography container missing')
-    entries=lists[0].xpath('./*[contains(concat(" ",normalize-space(@class)," ")," olpbibentry ")]')
+    entries=lists[0].xpath('./*[contains(concat(" ",normalize-space(@class)," ")," olpbibentry ")]|./ol[@class="olp-bibliography-list"]/*')
     if len(entries)!=len(expected):raise ValueError('bibliography entry count differs')
     for container,node in zip(entries,nodes):
         if node not in container.iterdescendants() or not ''.join(container.itertext()).strip():
@@ -168,7 +168,12 @@ def bind_bibliography(document, record, citations):
     if len(consumed)!=len(links) or set(consumed)!=set(links):
         raise ValueError('citation link outside its source occurrence')
     lists[0].set('role','doc-bibliography')
-    for container in entries:container.set('role','doc-biblioentry')
+    if not lists[0].findall('ol'):
+        from lxml import etree
+        ordered=etree.SubElement(lists[0],'ol',attrib={'class':'olp-bibliography-list','role':'list'})
+        for container in entries:ordered.append(container)
+    for container in entries:
+        container.tag='li';container.attrib.pop('role',None)
     for link in links:link.set('role','doc-biblioref')
     return {'entries':len(entries),'citation_calls':len(citations['calls']),'citation_links':len(links),
             'rendered_call_order':[n.get('id') for n in rendered_calls],'reader_complete':False}

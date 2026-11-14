@@ -58,6 +58,20 @@ class BookProjectionTests(unittest.TestCase):
             self.assertLess(text.index('first'),text.index('second'))
             self.assertEqual([r['path'] for r in receipt['unit_order']],list(a['units'][n]['path'] for n in range(2)))
 
+    def test_unit_anchors_follow_nested_execution_without_changing_source(self):
+        import re
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            a,imports=self.fixture(root,r'\olimport*[one]{a}',{
+                'content/one/a.tex':r'Before\olimport{b}After',
+                'content/one/b.tex':r'Nested $x^2$.'})
+            plain,_=BookProjection(root,a,imports).project('book.tex',['config.tex'])
+            marked,receipt=BookProjection(root,a,imports,mark_units=True).project('book.tex',['config.tex'])
+            ids=re.findall(r'\\hypertarget\{(olp-unit-\d+)\}\{\}',marked)
+            self.assertEqual(ids,[r['html_id'] for r in receipt['unit_order']])
+            self.assertEqual(ids,['olp-unit-000001','olp-unit-000002'])
+            self.assertEqual(re.sub(r'\\hypertarget\{olp-unit-\d+\}\{\}','',marked),plain)
+
     def test_probtag_matches_native_discarded_argument(self):
         with tempfile.TemporaryDirectory() as td:
             root=Path(td)

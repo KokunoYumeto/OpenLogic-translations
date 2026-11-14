@@ -38,6 +38,7 @@ class ReflowPackageTests(unittest.TestCase):
             first_doc=etree.fromstring(archive.read('OEBPS/chapter-001.xhtml'))
             self.assertEqual(first_doc.xpath('string(.//*[local-name()="annotation"])'),'x^2')
             self.assertIn('chapter-002.xhtml#second',first_doc.xpath('.//@href'))
+            self.assertIn('nav.xhtml',first_doc.xpath('.//@href'))
             self.assertIn(b'Original credit retained.',archive.read('OEBPS/credits.xhtml'))
 
     def test_rtl_language_and_spine_come_only_from_data(self):
@@ -81,6 +82,27 @@ class ReflowPackageTests(unittest.TestCase):
             self.run_package(supplement=self.supplement.replace(b'dir="ltr"',b'dir="rtl"'))
         profile=deepcopy(self.profile);profile['css']="@font-face{src:url('../fonts/missing.ttf')}"
         with self.assertRaisesRegex(ValueError,'CSS resource'):self.run_package(profile=profile)
+
+    def test_native_nested_contents_and_in_book_credits_remain_in_order(self):
+        profile=deepcopy(self.profile);profile['required_supplements']=[]
+        profile['required_credit_ids']=['source-credits']
+        source=self.html.replace(b'<nav id="TOC">',b'<div class="front"><nav id="TOC">')
+        source=source.replace(b'</nav>',b'</nav>Preserved after contents.</div><div id="source-credits">Exact native credit.</div>')
+        data,receipt=package_html(source,profile,['OLP-0001','OLP-0002'],{}, {})
+        self.assertTrue(receipt['visible_text_preserved'])
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            opening=archive.read('OEBPS/chapter-001.xhtml')
+            self.assertIn(b'Preserved after contents.',opening)
+            self.assertIn(b'Exact native credit.',opening)
+        with self.assertRaisesRegex(ValueError,'in-book credit'):
+            package_html(source.replace(b'Exact native credit.',b''),profile,['OLP-0001','OLP-0002'],{}, {})
+
+    def test_explicit_decorative_art_does_not_acquire_a_spoken_caption(self):
+        source=self.html.replace(b'Retained proof.',b'<img src="assets/art.png" role="presentation" alt=""/>Retained proof.')
+        output,_=self.run_package(source,assets={'assets/art.png':b'fixture-png'})
+        with zipfile.ZipFile(io.BytesIO(output)) as archive:
+            doc=etree.fromstring(archive.read('OEBPS/chapter-002.xhtml'))
+            self.assertEqual(doc.xpath('.//*[local-name()="img"]/@alt'),[''])
 
     def test_source_scripts_and_unregistered_links_are_rejected(self):
         with self.assertRaisesRegex(ValueError,'scripts or unbound'):

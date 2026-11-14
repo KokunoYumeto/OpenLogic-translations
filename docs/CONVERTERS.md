@@ -1,6 +1,6 @@
 # HTML and EPUB converter selection
 
-This is an implementation review in progress. No common converter has yet passed all five T13 selection criteria. Repository filenames and old successful EPUBs do not establish which program produced the current edition.
+The shared implementation uses the inspected Gujarati packaging and macro-precedence code, together with source-bound import/tag/token handling. The current Javanese SLC HTML/EPUB replay preserves all 176 imports, native headings/caption numbers, credits and annotated MathML; its EPUB passes EPUBCheck 5.3.0. This is still a private integration candidate: nine external diagrams, formula speech, rendered-reader inspection and the other three languages remain before T14 acceptance. Historical converter observations below describe the exact inspected versions, not current release certification.
 
 The 13 November read-only inventory covers every repository or explicit subtree named in the hub catalogue, at exact observed Git commits. The private inventory records the full tree response, truncation status, selected source blobs, Git blob identities, SHA-256 values and source locations. Twenty-seven selected source files have been retrieved and byte-verified. These source inspections neither execute the converters nor certify their output.
 

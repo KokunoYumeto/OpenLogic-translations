@@ -72,7 +72,8 @@ def package_html(source_bytes, profile, expected_units, assets, supplements):
     if moment.year<1980:raise ValueError('ZIP timestamp precedes 1980')
     if len(expected_units)!=len(set(expected_units)) or not expected_units:
         raise ValueError('unit order must be a nonempty unique list')
-    if not profile['required_supplements'] or not set(profile['required_supplements']).issubset(supplements):
+    credit_ids=profile.get('required_credit_ids',[])
+    if (not profile['required_supplements'] and not credit_ids) or not set(profile['required_supplements']).issubset(supplements):
         raise ValueError('required localized credit/notice documents absent')
     parser=html.HTMLParser(encoding='utf-8',huge_tree=True)
     source=html.document_fromstring(source_bytes,parser=parser)
@@ -81,9 +82,21 @@ def package_html(source_bytes, profile, expected_units, assets, supplements):
     if source.xpath('.//script|.//svg'):raise ValueError('scripts or unbound inline vectors are not package inputs')
     body=source.find('body')
     if body is None or (body.text or '').strip():raise ValueError('body content must have explicit block elements')
-    navs=body.xpath('./nav[@id="TOC"]')
+    for ident in credit_ids:
+        credits=body.xpath('.//*[@id=$id]',id=ident)
+        if len(credits)!=1 or not text_without_annotations(credits[0]):
+            raise ValueError('required in-book credit/notice absent or empty')
+    navs=body.xpath('.//nav[@id="TOC"]')
     if len(navs)!=1:raise ValueError('one source table of contents is required')
-    nav=navs[0];body.remove(nav)
+    nav=navs[0]
+    # Native book front matter may contain the contents inside a page wrapper.
+    # Preserve its following text while separating the EPUB navigation document.
+    parent=nav.getparent();previous=nav.getprevious()
+    if nav.tail:
+        if previous is None:parent.text=(parent.text or '')+nav.tail
+        else:previous.tail=(previous.tail or '')+nav.tail
+        nav.tail=None
+    parent.remove(nav)
     visible=text_without_annotations(body)
     input_math=nav.xpath('.//math')+body.xpath('.//math')
     for math in input_math:
@@ -146,7 +159,8 @@ def package_html(source_bytes, profile, expected_units, assets, supplements):
             if mapped is None and original in assets:mapped=original
             if mapped not in assets:raise ValueError('unregistered image resource')
             image.set('src',mapped)
-            if not image.get('alt'):
+            decorative=image.get('role')=='presentation' and image.get('alt')==''
+            if not image.get('alt') and not decorative:
                 figures=image.xpath('ancestor::*[local-name()="figure"]')
                 captions=figures[-1].xpath('.//*[local-name()="figcaption"]') if figures else []
                 alt=text_without_annotations(captions[0]) if captions else profile['image_descriptions'].get(original)
@@ -169,6 +183,11 @@ def package_html(source_bytes, profile, expected_units, assets, supplements):
         first=next((i for i,(a,b) in enumerate(zip(expected_math,actual_math)) if a!=b),None)
         raise ValueError(f'MathML structure or annotation changed: {len(expected_math)} input, '
                          f'{len(actual_math)} output formulas; first mismatch {first}')
+    # A non-linear navigation document must also be reachable by an ordinary
+    # link. Keep that localized navigation affordance outside the retained
+    # mathematical text; do not prepend it to a source heading or change titles.
+    contents_link=etree.SubElement(docs[0][2],'{'+XHTML+'}p',attrib={'class':'olp-contents-link'})
+    etree.SubElement(contents_link,'{'+XHTML+'}a',href='nav.xhtml').text=profile['navigation_title']
     files['styles/reader.css']=profile['css'].encode('utf-8')
     for url in re.findall(r'url\(\s*[\'\"]?([^\)\'\"]+)',profile['css']):
         member=posixpath.normpath(posixpath.join('styles',unquote(url.strip())))
@@ -214,5 +233,6 @@ def package_html(source_bytes, profile, expected_units, assets, supplements):
     return output,{'source_html_sha256':digest(source_bytes),'profile_sha256':digest(json.dumps(profile,ensure_ascii=False,sort_keys=True).encode()),
                    'epub_sha256':digest(output),'epub_bytes':len(output),'unit_order':expected_units,
                    'mathml_formulas':len(expected_math),'visible_text_preserved':True,'mathml_structure_preserved':True,
+                   'added_navigation_links':[{'destination':'nav.xhtml','text':profile['navigation_title']}],
                    'assets':{n:digest(b) for n,b in assets.items()},'supplements':{n:digest(b) for n,b in supplements.items()},
                    'release_ready':False,'remaining':'Input/source binding, numbering, credits, visual inspection and EPUBCheck are external gates.'}

@@ -63,6 +63,8 @@ class BibliographyTests(unittest.TestCase):
         report=bind_bibliography(doc,record,calls)
         self.assertEqual(report['rendered_call_order'],['olp-citation-000002','olp-citation-000001'])
         self.assertEqual(report['citation_links'],2)
+        self.assertEqual(len(doc.xpath('//ol[@class="olp-bibliography-list"]/li')),4)
+        self.assertFalse(doc.xpath('//*[@role="doc-biblioentry"]'))
         doc.xpath('//span[@id="olp-citation-000001"]/a')[0].set('href','#'+self.labels['b']['anchor'])
         with self.assertRaisesRegex(ValueError,'destination'):bind_bibliography(doc,record,calls)
 

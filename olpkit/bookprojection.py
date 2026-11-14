@@ -30,7 +30,7 @@ def body_only(text):
 
 
 class BookProjection:
-    def __init__(self, source, assembly, imports):
+    def __init__(self, source, assembly, imports, *, mark_units=False):
         self.source = Path(source).resolve()
         self.assembly = assembly
         verify_assembly(self.source, assembly)
@@ -47,6 +47,7 @@ class BookProjection:
         self.chapter = 0; self.appendix = False
         self.defer = False; self.problems = []; self.deferred_records = []; self.flushes = []
         self.configuration = False
+        self.mark_units = mark_units
 
     def read(self, path):
         relative_path(path)
@@ -129,7 +130,15 @@ class BookProjection:
             path = 'locale/' + self.locale + '/' + target
             self.order.append({'unit':unit['id'],'path':target,'assembled_path':path,
                                'sha256':self.assembly['files'][path]['sha256'],'section':section})
-            return self.expand(path,state.copy(),section),p
+            row = self.order[-1]
+            if self.mark_units:
+                # Identify the actual executed import, including repeated imports.
+                # Empty inline anchors add no prose or mathematical content.
+                row['html_id'] = 'olp-unit-' + str(len(self.order)).zfill(6)
+            expanded = self.expand(path,state.copy(),section)
+            if self.mark_units:
+                expanded = r'\hypertarget{' + row['html_id'] + '}{}' + expanded
+            return expanded,p
         if name in ('input','include'):
             value,end = group(text,pos)
             expanded=self.expand(self.book_path(value),state)
@@ -233,6 +242,7 @@ class BookProjection:
             'initial_selection':initial,
             'inputs':self.inputs,'unit_order':self.order,'unique_units':len(seen),'unit_occurrences':len(self.order),
             'selection_events':self.selector.events,'snippets':self.snippets,'deferred_exercises':self.deferred_records,
+            'unit_markers':self.mark_units,
             'exercise_flushes':self.flushes,'projected_sha256':digest(output.encode()),'tex_runs':0,
             'reader_complete':False,'remaining':['tokens and mathematical macros','PDF numbering and cross-references',
                 'front matter, glossary, bibliography and photo credits','figures and HTML/EPUB conversion']}

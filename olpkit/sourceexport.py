@@ -12,7 +12,7 @@ import re
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
 from .assembly import digest, json_bytes
-from .build import verify_assembly
+from .build import build_job, verify_assembly
 from .cache import relative_path
 from .importlock import select_lock
 from .schemas import ROOT
@@ -138,6 +138,8 @@ def cumulative(source, assembly, imports, profile):
         raise ValueError('empty import scope')
     driver = profile['driver']
     relative_path(driver)
+    if driver != build_job(assembly) + '.tex':
+        raise ValueError('export driver differs from the assembled native book')
     book_files = sorted(p[len(book)+1:] for p in assembly['files'] if p.startswith(book + '/')
                         and any(len(PurePosixPath(p[len(book)+1:]).parts)==len(pattern.split('/'))
                                 and fnmatchcase(p[len(book)+1:],pattern) for pattern in profile['text_patterns']))
@@ -219,7 +221,7 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
     pdf=(build_path.parent/build['pdf']['path']).resolve()
     if not pdf.is_relative_to(build_path.parent) or digest(pdf.read_bytes())!=build['pdf']['sha256']:
         raise ValueError('source ZIP PDF witness differs')
-    book=assembly['book_directory'];job=Path(book)/'slc-screen'
+    book=assembly['book_directory'];job=Path(book)/build_job(assembly)
     fls=source/job.with_suffix('.fls')
     if digest(fls.read_bytes())!=build['recorder_sha256']:
         raise ValueError('source ZIP recorder witness differs')
@@ -282,7 +284,7 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
     if 'BUILD.md' in files:raise ValueError('BUILD.md conflicts with recorded input')
     files['BUILD.md']=instructions
     files[book+'/'+cumulative_name]=cumulative_body
-    original_xmp=book+'/slc-screen.xmpdata'
+    original_xmp=job.with_suffix('.xmpdata').as_posix()
     if original_xmp in files:files[book+'/'+Path(cumulative_name).with_suffix('.xmpdata').name]=files[original_xmp]
     files['SOURCE-SHA256SUMS.txt']=''.join(digest(body)+'  '+name+'\n' for name,body in sorted(files.items())).encode('utf-8')
     return deterministic_zip(files), {'members':len(files),'member_reasons':reasons,

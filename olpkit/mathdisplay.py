@@ -32,10 +32,13 @@ class DisplayAdapter:
         self.math_font_sizes = math_font_sizes or {}
         self.native_references = native_references
 
-    def alignment_part(self, text, *, numbered, offset):
+    def alignment_part(self, text, *, numbered, offset, environment='align'):
         if not numbered:
             return r'\begin{align*}'+self.walk(text,math=True,offset=offset)+r'\end{align*}'
         _, record = numbered_rows(text, self.native_references)
+        if environment=='equation' and len(record['rows'])!=1:
+            raise ValueError('equation environment contains more than one outer row')
+        record['environment']=environment
         # Adapt each original row separately so nested annotation offsets still
         # refer to the unmodified source, even after removing number controls.
         pieces=[]
@@ -43,11 +46,12 @@ class DisplayAdapter:
             original=row['source_tex']
             # Whitespace masking preserves offsets for all nested decorations.
             masked=original
-            for a,b in reversed(row['suppression_spans']):
+            for a,b in reversed(row['control_spans']):
                 masked=masked[:a]+''.join('\n' if c=='\n' else ' ' for c in masked[a:b])+masked[b:]
             pieces.append(self.walk(masked,math=True,offset=offset+row['char_start']))
             if i+1<len(record['rows']):pieces.append(row['separator'])
-        rendered=r'\begin{aligned}'+''.join(pieces)+r'\end{aligned}'
+        inner='aligned' if environment=='align' else 'gathered'
+        rendered=r'\begin{'+inner+'}'+''.join(pieces)+r'\end{'+inner+'}'
         marked=self.mark('numbered-alignment',rendered,text,offset,offset+len(text))
         self.markers[PREFIX+str(len(self.markers)-1).zfill(6)]['alignment']=record
         return r'\['+marked+r'\]'
@@ -159,6 +163,13 @@ class DisplayAdapter:
                                             'char_end': offset+end, 'original_sha256': digest(text[start:end]),
                                             'original_tex': text[start:end], 'numbered':env=='align',
                                             'prose_segments': records})
+                    elif env in ('align','equation','gather'):
+                        out.append(self.alignment_part(body,numbered=True,offset=offset+body_start,environment=env))
+                        self.events.append({'kind':'native-numbered-display','environment':env,
+                            'char_start':offset+start,'char_end':offset+end,
+                            'original_tex':text[start:end],'original_sha256':digest(text[start:end])})
+                    elif env in ('multline','alignat','eqnarray'):
+                        raise ValueError('numbered '+env+' needs explicit native row/label layout support')
                     else:
                         out.extend((text[start:body_start], self.walk(body, math=math or bool(MATH_ENVS.fullmatch(env)), offset=offset+body_start), text[stop:end]))
                 pos = end
@@ -190,6 +201,8 @@ class DisplayAdapter:
                     pos=end+closing.end();continue
             if name in ('[', '('): math = True; out.append(match[0]); continue
             if name in (']', ')'): math = False; out.append(match[0]); continue
+            if math and name == 'tag':
+                raise ValueError('unbound explicit math tag requires native equation-label support')
             if name == 'ensuremath':
                 value, end, at = token(text, pos)
                 # The argument enters math mode even in a prose/list label.
@@ -400,7 +413,12 @@ def bind_mathml(document, receipt, *, strict=True):
                 cell=element(node_row,'mtd',columnalign='right')
                 if source_row['number'] is not None:
                     cell.set('data-equation-label',source_row['label'])
-                    cell.append(element(cell,'mtext','('+source_row['number']+')'))
+                    number=source_row['number']
+                    label=element(cell,'mrow')
+                    if source_row['label_parentheses']:label.append(element(label,'mo','(',stretchy='false'))
+                    label.append(element(label,'mtext',number,mathvariant=source_row['label_mathvariant']))
+                    if source_row['label_parentheses']:label.append(element(label,'mo',')',stretchy='false'))
+                    cell.append(label)
                 node_row.append(cell)
         elif kind.startswith('proof-line-'):
             fraction = next((item for item in base.iter() if local(item) == 'mfrac'), None)

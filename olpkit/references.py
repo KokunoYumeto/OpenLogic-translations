@@ -47,6 +47,30 @@ def plain_number(value):
     return value
 
 
+def literal_tag(text):
+    """Read a literal label and its authored text style, never execute tag TeX."""
+    text=text.strip()
+    while text.startswith('{'):
+        inner,end=group(text,0)
+        if end!=len(text):break
+        text=inner.strip()
+    style='normal'
+    if text.startswith('\\'):
+        command=COMMAND.match(text)
+        styles={'textit':'italic','mathit':'italic','textbf':'bold','mathbf':'bold',
+                'textrm':'normal','mathrm':'normal','textnormal':'normal','text':'normal','mbox':'normal'}
+        if command[1] not in styles:
+            raise ValueError('unsupported native equation tag style')
+        body,end,_=token(text,command.end())
+        if text[end:].strip():raise ValueError('content outside native equation tag style')
+        nested=literal_tag(body)
+        if nested['mathvariant']!='normal':raise ValueError('nested native equation tag styles require reconciliation')
+        text=nested['text'];style=styles[command[1]]
+    if not text or re.search(r'[\\{}$\n\r]',text):
+        raise ValueError('native equation tag needs literal text')
+    return {'text':text,'mathvariant':style}
+
+
 class References:
     def __init__(self, labels, names, *, evidence, pair_conjunction, sort_pairs=True,
                  parenthesized_types=('enumi',)):
@@ -89,15 +113,23 @@ class References:
         pieces=[]
         for index,(key,row) in enumerate(rows):
             if index:pieces.append({'text':self.pair_conjunction})
-            number=plain_number(row['page'] if name=='pageref' else row['number_tex'])
+            raw=row['page'] if name=='pageref' else row['number_tex']
+            tag=literal_tag(raw) if name!='pageref' and row.get('kind')=='equation' and '\\' in raw else None
+            number=tag['text'] if tag else plain_number(raw)
             prefix=''
+            parenthesized=name=='eqref'
             if clever:
                 kind=row['kind']
-                if kind in self.parenthesized_types:number='('+number+')'
+                if kind in self.parenthesized_types:parenthesized=True
                 elif index==0 or not same:
                     if kind not in self.names:raise ValueError('localized native reference name missing: '+kind)
                     prefix=self.names[kind][1 if same and len(rows)>1 else 0]+' '
-            pieces.append({'text':prefix+number,'key':key,'linked':linked})
+            rendered='('+number+')' if parenthesized else number
+            piece={'text':prefix+rendered,'key':key,'linked':linked}
+            if tag:
+                piece['runs']=[{'text':prefix+('(' if parenthesized else ''),'mathvariant':'normal'},
+                               tag,{'text':')' if parenthesized else '','mathvariant':'normal'}]
+            pieces.append(piece)
         self.calls.append({'command':name,'keys':keys,'rendered_keys':[key for key,_ in rows],
                            'pieces':pieces,'char_start':start,'char_end':end})
         return self.mark({'kind':'reference','pieces':pieces,'keys':keys},original,start,end)
@@ -187,7 +219,7 @@ class References:
                 key=':'.join(state[x] for x in NAMESPACE)+':'+value if name=='ollabel' else value
                 rendered=self.anchor(key,text[start:end],offset+start,offset+end)
                 out.append(rendered[6:-1] if state.get('_text_box') else rendered);pos=end;continue
-            if name in ('olref','Olref','cref','Cref','ref','pageref'):
+            if name in ('olref','Olref','cref','Cref','ref','pageref','eqref'):
                 p=skip_space(text,pos);linked=True
                 if text[p:p+1]=='*' and name not in ('olref','Olref'):linked=False;p+=1
                 options=[]
@@ -236,6 +268,16 @@ def bind_references(document,receipt):
                 result.append(node)
             else:
                 for piece in row['pieces']:
+                    if piece.get('runs'):
+                        node=etree.Element('mrow' if math else ('a' if piece.get('linked') else 'span'))
+                        if piece.get('linked'):node.set('href','#'+piece['key'])
+                        for run in piece['runs']:
+                            if not run['text']:continue
+                            child=etree.SubElement(node,'mtext' if math else 'span');child.text=run['text']
+                            style=run['mathvariant']
+                            if math:child.set('mathvariant',style)
+                            elif style!='normal':child.set('style','font-style:italic' if style=='italic' else 'font-weight:bold')
+                        result.append(node);continue
                     if not piece.get('linked'):
                         result.append(piece['text']);continue
                     node=etree.Element('mtext' if math else 'a',href='#'+piece['key'])
@@ -253,7 +295,7 @@ def bind_references(document,receipt):
                     child=etree.Element(namespace+'mtext');child.text=item
                 else:
                     child=item
-                    child.tag=namespace+child.tag
+                    for descendant in child.iter():descendant.tag=namespace+descendant.tag
                 row.append(child)
             node.getparent().replace(node,row)
             node=row

@@ -12,7 +12,8 @@ from olpkit.bookcontext import display_inventory
 def referenced(source):
     labels = {
         'one': {'number_tex':'११.३', 'kind':'equation', 'destination':'equation.11.3', 'page':'41'},
-        'two': {'number_tex':'११.७', 'kind':'equation', 'destination':'equation.11.7', 'page':'42'}}
+        'two': {'number_tex':'११.७', 'kind':'equation', 'destination':'equation.11.7', 'page':'42'},
+        'tagged': {'number_tex':r'{\textit {Tr}}','kind':'equation','destination':'AMS.1','page':'43'}}
     return References(labels, {}, pair_conjunction=' and ', evidence={
         'inputs': {'native_pdf_sha256':'a'*64, 'aux_sha256':'b'*64, 'assembly_sha256':'c'*64}}
     ).prepare(source,'numbered-alignment-fixture')
@@ -55,7 +56,8 @@ class NumberedAlignmentTests(unittest.TestCase):
             (r'a&=b\label{one}\label{two}','exactly one'),
             (r'a&=b\notag\nonumber','repeated'),
             (r'a&={b\notag}\label{one}','grouped'),
-            (r'a&=b\tag{3}\label{one}','tag-style')]:
+            (r'a&=b\tag{3}\label{one}','differs from native'),
+            (r'a&=b\tag{3}\tag{4}\label{one}','conflicting')]:
             text, refs = referenced(source)
             with self.subTest(source=source),self.assertRaisesRegex(ValueError,message):
                 numbered_rows(text,refs)
@@ -66,6 +68,15 @@ class NumberedAlignmentTests(unittest.TestCase):
         rows=[r for m in record['markers'].values() if m['kind']=='numbered-alignment' for r in m['alignment']['rows']]
         self.assertEqual([r['number'] for r in rows],[None,'११.७'])
         self.assertFalse(record['reader_complete'])
+
+    def test_unbound_numbered_or_explicitly_tagged_math_cannot_pass_through(self):
+        for source in [r'\begin{equation}a=b\end{equation}',
+                       r'\begin{align}a&=b\end{align}',
+                       r'\begin{align*}a&=b\tag{X}\end{align*}',
+                       r'\[a=b\tag{X}\]',
+                       r'\begin{multline}a+b\\c+d\end{multline}']:
+            with self.subTest(source=source),self.assertRaisesRegex(ValueError,'native|PDF-derived'):
+                DisplayAdapter().prepare(source,'fixture')
 
 
 @unittest.skipUnless(shutil.which('pandoc'),'Pandoc required')
@@ -89,7 +100,7 @@ class NumberedAlignmentRenderTests(unittest.TestCase):
                 r'Q&\vdash B\nonumber\intertext{Second reason with $x<y$.}'
                 r'Q&\vdash C\notag\intertext{Conclusion.}Q&\vdash D\label{one}\end{align}')
         doc,receipt,result,text=self.render(source)
-        self.assertEqual(doc.xpath('//mtd[@data-equation-label]/mtext/text()'),['(११.३)'])
+        self.assertEqual([''.join(n.itertext()) for n in doc.xpath('//mtd[@data-equation-label]')],['(११.३)'])
         self.assertEqual(len(doc.xpath('//mtable[@data-native-numbering]/mtr')),4)
         self.assertEqual(len(doc.xpath('//*[@id="one"]')),1)
         self.assertEqual(result['native_equation_numbers'],[{'label':'one','number':'११.३'}])
@@ -105,11 +116,40 @@ class NumberedAlignmentRenderTests(unittest.TestCase):
         source=(r'\begin{align}a&=\nicefrac12\label{one}\\b&=c\notag'
                 r'\intertext{Next step.}d&=\nicefrac34\label{two}\end{align}')
         doc,receipt,result,text=self.render(source)
-        self.assertEqual(doc.xpath('//mtd[@data-equation-label]/mtext/text()'),['(११.३)','(११.७)'])
+        self.assertEqual([''.join(n.itertext()) for n in doc.xpath('//mtd[@data-equation-label]')],['(११.३)','(११.७)'])
         self.assertEqual(len(doc.xpath('//mfrac[@bevelled="true"]')),2)
         for row in receipt['markers'].values():
             self.assertEqual(text[row['char_start']:row['char_end']],row['original_tex'])
         self.assertEqual(len(doc.xpath('//mtable[@data-native-numbering]/mtr')),3)
+
+    def test_ordinary_equation_and_alignment_keep_numbers_and_equation_references(self):
+        source=(r'\begin{equation}a=b\label{one}\end{equation}'
+                r'By \eqref{one}, we get \begin{align}b&=c\label{two}\\'
+                r'&\text{from \eqref{one}}\notag\end{align}')
+        doc,receipt,result,text=self.render(source)
+        self.assertEqual([''.join(n.itertext()) for n in doc.xpath('//mtd[@data-equation-label]')],['(११.३)','(११.७)'])
+        self.assertEqual(doc.xpath('//a[@href="#one"]/text()'),['(११.३)'])
+        self.assertEqual(doc.xpath('//mtext[@href="#one"]/text()'),['(११.३)'])
+        self.assertEqual([e['environment'] for e in receipt['events'] if e['kind']=='native-numbered-display'],['equation','align'])
+        self.assertEqual(len(result['native_equation_numbers']),2)
+
+    def test_literal_italic_tag_and_both_reference_modes_preserve_style(self):
+        source=(r'\begin{equation}T\vdash A\label{tagged}\tag{\textit{Tr}}\end{equation}'
+                r'See \eqref{tagged} and $\text{by \eqref{tagged}}$.')
+        doc,receipt,result,text=self.render(source)
+        self.assertEqual([''.join(n.itertext()) for n in doc.xpath('//mtd[@data-equation-label]')],['(Tr)'])
+        self.assertEqual(doc.xpath('//mtd[@data-equation-label]//mtext[@mathvariant="italic"]/text()'),['Tr'])
+        self.assertEqual(doc.xpath('//a[@href="#tagged"]/span[@style="font-style:italic"]/text()'),['Tr'])
+        self.assertEqual(doc.xpath('//mrow[@href="#tagged"]/mtext[@mathvariant="italic"]/text()'),['Tr'])
+        self.assertEqual(result['native_equation_numbers'],[{'label':'tagged','number':'Tr'}])
+
+    def test_starred_explicit_tag_keeps_its_unparenthesized_display(self):
+        doc,_,_,_=self.render(r'\begin{equation}a=b\label{tagged}\tag*{\textit{Tr}}\end{equation}')
+        self.assertEqual([''.join(n.itertext()) for n in doc.xpath('//mtd[@data-equation-label]')],['Tr'])
+
+    def test_gather_rows_keep_each_native_number(self):
+        doc,_,_,_=self.render(r'\begin{gather}a=b\label{one}\\c=d\label{two}\end{gather}')
+        self.assertEqual([''.join(n.itertext()) for n in doc.xpath('//mtd[@data-equation-label]')],['(११.३)','(११.७)'])
 
     def test_converted_row_loss_fails_binding(self):
         from lxml import html

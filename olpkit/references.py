@@ -65,7 +65,9 @@ class References:
         if key not in self.labels:raise ValueError('source anchor absent from native aux: '+key)
         if key in self.anchors:raise ValueError('duplicate executed source anchor: '+key)
         self.anchors.append(key)
-        return self.mark({'kind':'anchor','key':key},original,start,end)
+        native={k:v for k,v in self.labels[key].items()
+                if k in ('number_tex','kind','destination','page','line','cref_line')}
+        return self.mark({'kind':'anchor','key':key,'native_label':native},original,start,end)
 
     def reference(self,keys,name,original,start,end,linked=True):
         if not 1<=len(keys)<=2:raise ValueError('reference lists beyond pairs need native format support')

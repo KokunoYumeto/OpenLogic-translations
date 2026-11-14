@@ -23,7 +23,7 @@ from .nativefigures import extract_native_figures
 def sha(data):return hashlib.sha256(data).hexdigest()
 
 
-def display_inventory(text,settings):
+def display_inventory(text,settings,*,native_references=None):
     """Inspect ordinary displays while retaining native objects for later binding.
 
     This is only context analysis. The returned book math source is untouched;
@@ -36,7 +36,8 @@ def display_inventory(text,settings):
         start,end=row['char_start'],row['char_end']
         masked=masked[:start]+''.join('\n' if c=='\n' else ' ' for c in text[start:end])+masked[end:]
     _,report=DisplayAdapter(proof_label_styles=settings['proof_label_styles'],
-                           math_font_sizes=settings['math_font_sizes']).prepare(masked,'book-math-context.tex')
+                           math_font_sizes=settings['math_font_sizes'],
+                           native_references=native_references).prepare(masked,'book-math-context.tex')
     report['source_before_native_deferral_sha256']=sha(text.encode())
     report['deferred_native_figures']=[{k:v for k,v in row.items() if k!='source_tex'} for row in native]
     return report
@@ -217,7 +218,7 @@ def build_context(source,profile):
     for name in profile['notation_configuration']:notation.configure(inputs.text(name),name)
     math,notation_receipt=notation.expand(text,'book-with-references.tex')
     display_settings=inputs.witness_json('display_settings')
-    display=display_inventory(math,display_settings)
+    display=display_inventory(math,display_settings,native_references=reference_receipt)
     return {'math_source':math,'projected_source':projected,'prose_macro_definitions':definitions,'projection':projection,'tokens':token_receipt,
         'glossary':glossary_receipt,'glossary_tokens':glossary_tokens,'references':reference_receipt,
         'bibliography':bibliography,'citations':citations,'photos':photos,'notation':notation_receipt,'display':display,

@@ -12,6 +12,7 @@ from .macrophases import COMMAND, digest, group, mask_comments
 from .selective import definition_end, environment_end, token
 from .proofmath import parse_proof, parse_proof_region
 from .tabular import parse_tabular, bind_tables
+from .alignmentnumbers import numbered_rows
 
 
 PREFIX = 'OLPDISPLAY'
@@ -23,12 +24,33 @@ OPAQUE = {'verbatim', 'Verbatim', 'lstlisting', 'minted', 'tikzpicture'}
 
 
 class DisplayAdapter:
-    def __init__(self, *, proof_label_styles=None, math_font_sizes=None):
+    def __init__(self, *, proof_label_styles=None, math_font_sizes=None, native_references=None):
         self.markers = {}
         self.events = []
         self.tables = []
         self.proof_label_styles = proof_label_styles or {}
         self.math_font_sizes = math_font_sizes or {}
+        self.native_references = native_references
+
+    def alignment_part(self, text, *, numbered, offset):
+        if not numbered:
+            return r'\begin{align*}'+self.walk(text,math=True,offset=offset)+r'\end{align*}'
+        _, record = numbered_rows(text, self.native_references)
+        # Adapt each original row separately so nested annotation offsets still
+        # refer to the unmodified source, even after removing number controls.
+        pieces=[]
+        for i,row in enumerate(record['rows']):
+            original=row['source_tex']
+            # Whitespace masking preserves offsets for all nested decorations.
+            masked=original
+            for a,b in reversed(row['suppression_spans']):
+                masked=masked[:a]+''.join('\n' if c=='\n' else ' ' for c in masked[a:b])+masked[b:]
+            pieces.append(self.walk(masked,math=True,offset=offset+row['char_start']))
+            if i+1<len(record['rows']):pieces.append(row['separator'])
+        rendered=r'\begin{aligned}'+''.join(pieces)+r'\end{aligned}'
+        marked=self.mark('numbered-alignment',rendered,text,offset,offset+len(text))
+        self.markers[PREFIX+str(len(self.markers)-1).zfill(6)]['alignment']=record
+        return r'\['+marked+r'\]'
 
     def mark(self, kind, body, original, start, end):
         key = PREFIX + str(len(self.markers)).zfill(6)
@@ -118,8 +140,6 @@ class DisplayAdapter:
                     body = text[body_start:stop]
                     chunks = list(self.intertexts(body)) if env in ('align', 'align*') else []
                     if chunks:
-                        if env != 'align*':
-                            raise ValueError('numbered intertext needs PDF-derived row numbers before splitting')
                         cursor = 0
                         records = []
                         for a, b, at, prose, command in chunks:
@@ -127,16 +147,17 @@ class DisplayAdapter:
                                 raise ValueError('shortintertext spacing needs explicit support')
                             before = body[cursor:a]
                             if before.strip():
-                                out.extend((r'\begin{align*}', self.walk(before, math=True, offset=offset+body_start+cursor), r'\end{align*}'))
+                                out.append(self.alignment_part(before,numbered=env=='align',offset=offset+body_start+cursor))
                             out.extend(('\n\n', self.walk(prose, math=False, offset=offset+body_start+at), '\n\n'))
                             records.append({'prose': prose, 'char_start': offset+body_start+at,
                                             'char_end': offset+body_start+at+len(prose)})
                             cursor = b
                         after = body[cursor:]
                         if after.strip():
-                            out.extend((r'\begin{align*}', self.walk(after, math=True, offset=offset+body_start+cursor), r'\end{align*}'))
+                            out.append(self.alignment_part(after,numbered=env=='align',offset=offset+body_start+cursor))
                         self.events.append({'kind': 'intertext', 'char_start': offset+start,
                                             'char_end': offset+end, 'original_sha256': digest(text[start:end]),
+                                            'original_tex': text[start:end], 'numbered':env=='align',
                                             'prose_segments': records})
                     else:
                         out.extend((text[start:body_start], self.walk(body, math=math or bool(MATH_ENVS.fullmatch(env)), offset=offset+body_start), text[stop:end]))
@@ -370,6 +391,17 @@ def bind_mathml(document, receipt, *, strict=True):
         elif kind == 'fixed-width-math':
             padded=element(node,'mpadded',width=markers[key]['width'],lspace='0em')
             padded.append(base);base=padded
+        elif kind == 'numbered-alignment':
+            rows=markers[key]['alignment']['rows']
+            if local(base)!='mtable' or len(base)!=len(rows) or any(local(r)!='mtr' for r in base):
+                raise ValueError('native numbered alignment rows differ after MathML conversion')
+            base.set('data-native-numbering','true')
+            for node_row,source_row in zip(base,rows):
+                cell=element(node_row,'mtd',columnalign='right')
+                if source_row['number'] is not None:
+                    cell.set('data-equation-label',source_row['label'])
+                    cell.append(element(cell,'mtext','('+source_row['number']+')'))
+                node_row.append(cell)
         elif kind.startswith('proof-line-'):
             fraction = next((item for item in base.iter() if local(item) == 'mfrac'), None)
             if fraction is None or len(fraction) != 2: raise ValueError('proof rule has no fraction structure')
@@ -398,4 +430,8 @@ def bind_mathml(document, receipt, *, strict=True):
     unbound = sorted(set(markers)-set(bound))
     if strict and unbound: raise ValueError('unconverted display markers: '+', '.join(unbound))
     tables=bind_tables(document,receipt.get('tables',[]))
-    return {'bound': len(bound), 'unbound': unbound, 'tables':tables, 'reader_complete': False}
+    numbers=[{'label':r['label'],'number':r['number']}
+             for m in markers.values() if m['kind']=='numbered-alignment'
+             for r in m['alignment']['rows'] if r['number'] is not None]
+    return {'bound': len(bound), 'unbound': unbound, 'tables':tables,
+            'native_equation_numbers':numbers,'reader_complete': False}

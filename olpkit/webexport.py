@@ -110,10 +110,12 @@ def export_web(source,product,out,profile_path,*,check_numbers=False,check_speec
             (out/'EXPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
             raise ValueError('EPUBCheck diagnostics remain; no release acceptance')
     heading_numbers=sum(bool(row['number']) for row in book_report['headings']['headings'])
-    count=heading_numbers+len(book_report['captions']['captions'])+body_report['bindings']['theorems']['numbered']
-    report['native_numbers']={'matched':count,'total':count,'scope':'Visible heading, caption and theorem numbers; all native reference destinations are checked separately.'}
+    equations=body_report['bindings']['display']['native_equation_numbers']
+    count=heading_numbers+len(book_report['captions']['captions'])+body_report['bindings']['theorems']['numbered']+len(equations)
+    report['native_numbers']={'matched':count,'total':count,'intertext_equations':equations,
+        'scope':'Visible heading, caption, theorem and bound intertext-equation numbers; all native reference destinations are checked separately.'}
     (out/'EXPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    if check_numbers:print(f'{count} of {count} numbers equal the PDF (headings, captions and theorem/exercise blocks)')
+    if check_numbers:print(f'{count} of {count} numbers equal the PDF (headings, captions, theorem/exercise blocks and bound intertext equations)')
     if check_speech:print(f'formulas: {speech_report["formula_occurrences"]}; with spoken text: {speech_report["with_spoken_text"]}')
     print(f"{html_report['units']} source imports; {html_report['mathml_formulas']} annotated formulas; private {product} export")
     return 0

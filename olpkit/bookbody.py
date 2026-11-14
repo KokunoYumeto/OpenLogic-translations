@@ -88,7 +88,8 @@ def build_body(inputs,context,profile,output):
                   'native_pdf_sha256':sha(inputs.witness('pdf')),'names_source_sha256':sha(token_config.encode()),
                   'book_class_sha256':sha(book_class.encode())},proof_symbol=symbol)
     prepared,display=DisplayAdapter(proof_label_styles=context['display']['proof_label_styles'],
-        math_font_sizes=context['display']['math_font_sizes']).prepare(prepared,'book-body.tex')
+        math_font_sizes=context['display']['math_font_sizes'],
+        native_references=context['references']).prepare(prepared,'book-body.tex')
     notation=SourceMath(resolver=inputs.resolve)
     notation.formula_library(inputs.text('sty/open-logic-formulas.sty'),'sty/open-logic-formulas.sty')
     for name in profile['notation_configuration']:notation.configure(inputs.text(name),name)

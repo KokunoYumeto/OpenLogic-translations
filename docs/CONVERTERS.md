@@ -225,3 +225,36 @@ The projection also protects control-word boundaries when expanding `input`:
 an imported word immediately after `let` must not become part of the preceding
 command name. Use the textbook's actual environment configuration, including
 its exclusions, rather than the default corpus environment file.
+
+## Native diagrams and theorem blocks
+
+`figurebinding` verifies the complete ordered diagram inventory against the
+native batch, including repeated source bodies. It checks every editable TikZ
+file and SVG by hash before substitution. Figure-only math displays become
+vector images; a display with additional mathematics fails rather than losing
+that mathematics. Prose between diagrams and occurrence order are preserved.
+The library has no localized labels: the caller supplies the source's figure
+name and substantive descriptions. A generic label is permitted in a private
+diagnostic preview only; missing descriptions remain an accessibility gate.
+
+The Javanese batch now has 19 native vector assets, produced in one successful
+guarded pdfLaTeX invocation. All were inspected after independent SVG rendering
+as well as in the native PDF batch. The actual source configuration retains
+the blank and stroke symbols, transition labels, initial-state text, isolated
+vertices, loops and all tree branches. These assets total 390,881 bytes. The
+complete SLC body replay now has no unconverted math nodes or Pandoc warnings;
+this alone does not establish complete book or accessibility acceptance.
+
+`theoremblocks` reads the native ntheorem contents stream and reconciles its
+ordered types and titles against the actual native projected source. It then
+uses those numbers with the current source's full titles and localized names.
+It prevents Pandoc from dropping custom theorem headings or supplying its
+English proof label. Each block's source span and native witness are recorded.
+The end-of-proof symbol is supplied from the actual class configuration.
+
+For Javanese SLC, all 663 blocks reconcile: 524 numbered theorem-like blocks
+and exercises, and 139 unnumbered proof headings. The proof counter stored in
+the native auxiliary stream is deliberately not printed. A custom proof title
+and its cross-reference are retained. Full book headings, front/back matter,
+credits, descriptions, speech and complete HTML/EPUB visual acceptance remain
+open; the intermediate body is not a release artifact.

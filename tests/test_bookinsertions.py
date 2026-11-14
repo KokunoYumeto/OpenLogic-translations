@@ -1,8 +1,29 @@
 import unittest
-from olpkit.bookinsertions import glossary_insertion,insert_glossary,insert_bibliography,literal_definitions,bibliography_helpers
+from olpkit.bookinsertions import glossary_insertion,insert_glossary,insert_bibliography,literal_definitions,bibliography_helpers,absent_glossary,bibliography_sources
 
 
 class NativeBookInsertionTests(unittest.TestCase):
+    def test_absent_native_glossary_cannot_hide_glossary_content(self):
+        text='Full theorem and proof.\n% '+r'\printglossaries'+'\n'+r'\newcommand{\unused}{\gls{x}}'
+        receipt=absent_glossary(text)
+        self.assertEqual(receipt['status'],'absent')
+        for command in [r'\printglossaries',r'\gls{x}',r'\Glspl{x}',r'\newglossaryentry{x}{name=X}',r'\glsentrytext{x}']:
+            with self.subTest(command=command),self.assertRaisesRegex(ValueError,'source uses glossary commands'):
+                absent_glossary(text+'\n'+command)
+
+    def test_multiple_bibliographies_preserve_exact_native_order_and_paths(self):
+        book='locale/mr/courses/intermediate-logic'
+        sources=['bib/open-logic.bib',book+'/il.bib']
+        text='before'+r'\bibliographystyle{natbib-oup}\bibliography{\olpath/bib/open-logic,il}'+'after'
+        result,receipt=insert_bibliography(text,'BOTH DATABASES',source=sources,style='bib/natbib-oup.bst',book_directory=book)
+        self.assertEqual(result,'beforeBOTH DATABASESafter')
+        self.assertEqual(receipt[1]['source'],sources)
+        for changed in [sources[::-1],sources[:1],['bib/open-logic.bib','other/il.bib']]:
+            with self.subTest(sources=changed),self.assertRaisesRegex(ValueError,'bound native input'):
+                insert_bibliography(text,'BODY',source=changed,style='bib/natbib-oup.bst',book_directory=book)
+        for bad in [[],sources+sources[:1],['../private.bib'],['bib/open-logic']]:
+            with self.subTest(bad=bad),self.assertRaises(ValueError):bibliography_sources(bad)
+
     def test_glossary_uses_native_title_and_preserves_adjacent_content(self):
         text=r'first\glsaddall\printglossary[style=index,title={शब्दसूची},toctitle={शब्दसूची}]last'
         ins=glossary_insertion(text)

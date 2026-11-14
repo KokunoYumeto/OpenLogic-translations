@@ -6,6 +6,20 @@ DEFINITION=r'\newglossaryentry{#2}{sort={#3},name={#4},plural={#4},symbol={#1},d
 
 
 class GlossaryTests(unittest.TestCase):
+    def test_native_book_without_glossary_does_not_add_a_list_or_accept_dangling_links(self):
+        from lxml import html
+        from olpkit.bookinsertions import absent_glossary
+        receipt=absent_glossary('The complete native text.')
+        doc=html.fromstring('<article><p>The complete native text.</p></article>')
+        before=html.tostring(doc)
+        result=bind_glossary(doc,receipt)
+        self.assertEqual(result['status'],'absent');self.assertEqual(result['entries'],0)
+        self.assertEqual(html.tostring(doc),before)
+        for bad in ['<article><span id="olp-glossary-x"/></article>',
+                    '<article><a href="#olp-glossary-x">Term</a></article>']:
+            with self.assertRaisesRegex(ValueError,'reader contains glossary content'):
+                bind_glossary(html.fromstring(bad),receipt)
+
     def test_native_mapping_order_and_all_definition_text(self):
         source=r'\slcterm[\ensuremath{A\subseteq B}]{set}{himpunan}{himpunan}{Definition, with $A$.}\slcterm{rel}{relasi}{relasi}{See \glspl{set}.}'
         entries=read_entries(source,slcterm_definition=DEFINITION)

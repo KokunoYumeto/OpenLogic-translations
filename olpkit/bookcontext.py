@@ -7,8 +7,7 @@ This stage executes no TeX and writes no files.
 import hashlib,json,re,subprocess
 from pathlib import Path
 from .bookprojection import BookProjection,source_input_name
-from .importlock import select_lock
-from .schemas import ROOT
+from .sourceexport import export_import_lock
 from .texttokens import TextTokens
 from .mathsource import SourceMath,parse_definition
 from .glossary import read_entries,native_order,glossary_tex
@@ -17,7 +16,7 @@ from .bibliography import read_citation_labels,read_bibliography,bibliography_te
 from .references import References,read_aux
 from .mathdisplay import DisplayAdapter
 from .macrophases import mask_comments
-from .bookinsertions import glossary_insertion,insert_glossary,insert_bibliography,literal_definitions,bibliography_helpers
+from .bookinsertions import glossary_insertion,insert_glossary,insert_bibliography,literal_definitions,bibliography_helpers,absent_glossary,bibliography_sources
 from .nativefigures import extract_native_figures
 
 
@@ -111,8 +110,7 @@ def source_caption(text,language,name):
 
 def build_context(source,profile):
     inputs=BookInputs(source,profile);a=inputs.assembly;b=inputs.book
-    pins={k:v['commit'] for k,v in a['sources'].items()}
-    _,imports,lock=select_lock(ROOT/'data/books'/profile['book'],pins)
+    _,imports,lock=export_import_lock(a,profile)
     prior=inputs.witness_json('projection_receipt')
     original=inputs.witness_text('projection_source',prior['projected_sha256'])
     if sha(original.encode())!=prior['projected_sha256']:
@@ -141,36 +139,40 @@ def build_context(source,profile):
     if sha((inputs.root/'ASSEMBLY.json').read_bytes())!=reconciliation['inputs']['assembly_sha256']:
         raise ValueError('assembly differs from native reconciliation')
 
-    helper='';definition_body=None
-    if profile['glossary'].get('definition_source'):
-        helper=inputs.text(profile['glossary']['definition_source'])
-        hit=_one(r'\\NewDocumentCommand\\slcterm',helper,'glossary declaration')
-        _,name,definition=parse_definition(helper,hit.start(),hit.start()+len(r'\NewDocumentCommand'),
-            'NewDocumentCommand',{'source':profile['glossary']['definition_source']})
-        if name!='slcterm' or re.sub(r'\s+','',definition.spec)!='O{}mmmm':raise ValueError('unsupported glossary declaration')
-        definition_body=definition.body
-    glossary_source=inputs.text(profile['glossary']['source'])
-    entries=read_entries(glossary_source,slcterm_definition=definition_body)
-    order=native_order(inputs.witness_text('gls'))
     shim=inputs.text(profile['prose_definition_source'])
-    title_rows=list(re.finditer(r'\\newcommand\*\{\\olpBookGlossary\}\{([^{}]+)\}',mask_comments(shim)))
-    if len(title_rows)>1:raise ValueError('native glossary title ambiguous')
-    insertion=glossary_insertion(text,title_rows[0][1] if title_rows else None)
-    title=insertion['title']
-    package=inputs.package('glossaries.sty')
-    if br'\newcommand{\glssentencecase}[1]{\makefirstuc{#1}}' not in package:
-        raise ValueError('native glossary case rule changed')
-    def sentence_case(value):
-        first=value[:1]
-        if not first or not (re.fullmatch('[a-zA-Z]',first) or first.upper()==first):
-            raise ValueError('locale-specific initial case requires an explicit native rule')
-        return first.upper()+value[1:]
-    glossary,glossary_receipt=glossary_tex(entries,order,title,sentence_case=sentence_case,
-        evidence={'source_sha256':sha(glossary_source.encode()),'native_gls_sha256':sha(inputs.witness('gls')),
-                  'helper_sha256':sha(helper.encode()),'sentence_case_package_sha256':sha(package)})
-    glossary,glossary_tokens=tokens.expand(glossary,'book-glossary.tex')
-    text=insert_glossary(text,insertion,glossary)
-    glossary_receipt['insertion']=insertion
+    if profile['glossary'] is None:
+        glossary_receipt=absent_glossary(text)
+        _,glossary_tokens=tokens.expand('','book-without-glossary.tex')
+    else:
+        helper='';definition_body=None
+        if profile['glossary'].get('definition_source'):
+            helper=inputs.text(profile['glossary']['definition_source'])
+            hit=_one(r'\\NewDocumentCommand\\slcterm',helper,'glossary declaration')
+            _,name,definition=parse_definition(helper,hit.start(),hit.start()+len(r'\NewDocumentCommand'),
+                'NewDocumentCommand',{'source':profile['glossary']['definition_source']})
+            if name!='slcterm' or re.sub(r'\s+','',definition.spec)!='O{}mmmm':raise ValueError('unsupported glossary declaration')
+            definition_body=definition.body
+        glossary_source=inputs.text(profile['glossary']['source'])
+        entries=read_entries(glossary_source,slcterm_definition=definition_body)
+        order=native_order(inputs.witness_text('gls'))
+        title_rows=list(re.finditer(r'\\newcommand\*\{\\olpBookGlossary\}\{([^{}]+)\}',mask_comments(shim)))
+        if len(title_rows)>1:raise ValueError('native glossary title ambiguous')
+        insertion=glossary_insertion(text,title_rows[0][1] if title_rows else None)
+        title=insertion['title']
+        package=inputs.package('glossaries.sty')
+        if br'\newcommand{\glssentencecase}[1]{\makefirstuc{#1}}' not in package:
+            raise ValueError('native glossary case rule changed')
+        def sentence_case(value):
+            first=value[:1]
+            if not first or not (re.fullmatch('[a-zA-Z]',first) or first.upper()==first):
+                raise ValueError('locale-specific initial case requires an explicit native rule')
+            return first.upper()+value[1:]
+        glossary,glossary_receipt=glossary_tex(entries,order,title,sentence_case=sentence_case,
+            evidence={'source_sha256':sha(glossary_source.encode()),'native_gls_sha256':sha(inputs.witness('gls')),
+                      'helper_sha256':sha(helper.encode()),'sentence_case_package_sha256':sha(package)})
+        glossary,glossary_tokens=tokens.expand(glossary,'book-glossary.tex')
+        text=insert_glossary(text,insertion,glossary)
+        glossary_receipt['insertion']=insertion
 
     locale=inputs.text(profile['locale_source']);babel=profile['babel']
     credits_title=_one(r'\\setlocalecaption\{'+re.escape(babel)+r'\}\{photocredits\}\{([^{}]+)\}',locale,'photo credit title')[1]
@@ -190,15 +192,17 @@ def build_context(source,profile):
         if signature not in package:raise ValueError('native citation punctuation changed')
     if r'\setcitestyle{authoryear}' not in inputs.text('sty/open-logic.sty'):
         raise ValueError('native author-year citation style absent')
+    database_sources=bibliography_sources(profile['bibliography_source'])
+    database_hashes={n:sha(inputs.bytes(n)) for n in database_sources}
     bbl=inputs.witness_text('bbl');citation_labels=read_citation_labels(native_aux)
     citation_evidence={'native_aux_sha256':sha(native_aux.encode()),'native_bbl_sha256':sha(bbl.encode()),
-        'package_sha256':sha(package),'actual_bib_sha256':sha(inputs.bytes(profile['bibliography_source'])),
+        'package_sha256':sha(package),'actual_bib_sha256':next(iter(database_hashes.values())) if isinstance(profile['bibliography_source'],str) else database_hashes,
         'actual_bst_sha256':sha(inputs.bytes(profile['bibliography_style']))}
     bibliography=read_bibliography(bbl,citation_labels,evidence=citation_evidence)
     token_config=inputs.text(profile['token_base_source'])
     bibtitle=source_caption(token_config,babel,'bib')
     text,bibliography['insertion']=insert_bibliography(text,bibliography_tex(bibliography,bibtitle),
-        source=profile['bibliography_source'],style=profile['bibliography_style'])
+        source=profile['bibliography_source'],style=profile['bibliography_style'],book_directory=b)
     text,citations=expand_citations(text,citation_labels,
         style={'open':'(','close':')','separator':';','author_year':',','year_separator':',','note_separator':', '},evidence=citation_evidence)
     definitions='\n'.join(re.findall(r'\\newcommand\*\{\\olpBook\w+\}\{[^{}]+\}',shim))

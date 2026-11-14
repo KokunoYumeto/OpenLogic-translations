@@ -3,6 +3,7 @@ import re
 from .macrophases import COMMAND, group, mask_comments, skip_space, digest
 from .selective import definition_end, environment_end, token
 from .glossary import entry_fields
+from .cache import relative_path
 
 
 def calls(text, names):
@@ -48,7 +49,32 @@ def insert_glossary(text, insertion, rendered):
     return text
 
 
-def insert_bibliography(text, rendered, *, source, style):
+def absent_glossary(text):
+    """An explicit absent profile may not suppress executed glossary content."""
+    names={m[1] for m in COMMAND.finditer(mask_comments(text))
+           if m[1].startswith(('gls','Gls','GLS','printgloss','loadgls','newgloss','makegloss','setgloss'))}
+    if calls(text,names):
+        raise ValueError('glossary declared absent but native source uses glossary commands')
+    return {'schema':'olpkit.glossary.v1','status':'absent','order':[],'entries':{},'links':[],
+            'native_evidence':{'explicit_profile':None,'projected_source_sha256':digest(text)},
+            'reader_complete':False}
+
+
+def bibliography_sources(source):
+    rows=[source] if isinstance(source,str) else source
+    if not isinstance(rows,list) or not rows or any(not isinstance(n,str) for n in rows):
+        raise ValueError('bibliography requires an ordered source list')
+    if len(rows)!=len(set(rows)):
+        raise ValueError('duplicate bibliography source')
+    for name in rows:
+        relative_path(name)
+        if not name.endswith('.bib'):raise ValueError('bibliography input must name an exact bib file')
+    return rows
+
+
+def insert_bibliography(text, rendered, *, source, style, book_directory=None):
+    databases=bibliography_sources(source)
+    if book_directory is not None:relative_path(book_directory)
     rows=calls(text,{'bibliography','bibliographystyle'})
     if len(rows)!=2 or {r[0] for r in rows}!={'bibliography','bibliographystyle'}:
         raise ValueError('bibliography source insertion differs')
@@ -59,10 +85,17 @@ def insert_bibliography(text, rendered, *, source, style):
         # The profile binds the actual native BibTeX inputs. Accept their
         # explicit OLP path (with/without suffix), and the native style search
         # spelling; never infer a different database from its basename.
-        allowed={r'\olpath/'+expected,r'\olpath/'+expected.removesuffix(suffix)}
-        if name=='bibliographystyle':
-            allowed.update({expected.rsplit('/',1)[-1],expected.rsplit('/',1)[-1].removesuffix(suffix)})
-        if value not in allowed:raise ValueError('bibliography command does not name the bound native input')
+        configured=databases if name=='bibliography' else [style]
+        actual=[v.strip() for v in value.split(',')]
+        if len(actual)!=len(configured):raise ValueError('bibliography command does not name the bound native input')
+        for literal,path in zip(actual,configured):
+            allowed={r'\olpath/'+path,r'\olpath/'+path.removesuffix(suffix)}
+            if name=='bibliographystyle':
+                allowed.update({path.rsplit('/',1)[-1],path.rsplit('/',1)[-1].removesuffix(suffix)})
+            elif book_directory and path.startswith(book_directory+'/'):
+                local=path[len(book_directory)+1:]
+                allowed.update({local,local.removesuffix(suffix)})
+            if literal not in allowed:raise ValueError('bibliography command does not name the bound native input')
         edits.append((start,end,rendered if name=='bibliography' else ''))
         evidence.append({'command':text[start:end],'source':expected,'source_start':start,'source_end':end})
     for start,end,value in sorted(edits,reverse=True):text=text[:start]+value+text[end:]

@@ -125,6 +125,10 @@ def bind_glossary(document, receipt):
     """Check the complete emitted list and make each term the link target."""
     expected=[receipt['entries'][key]['anchor'] for key in receipt['order']]
     nodes=document.xpath('//*[@id[starts-with(.,"olp-glossary-")]]')
+    if receipt.get('status')=='absent':
+        if receipt['entries'] or receipt['order'] or receipt['links'] or nodes or document.xpath('//a[starts-with(@href,"#olp-glossary-")]'):
+            raise ValueError('glossary declared absent but reader contains glossary content')
+        return {'status':'absent','entries':0,'links':0,'native_order_complete':True}
     if [n.get('id') for n in nodes]!=expected:
         raise ValueError('glossary anchor order/coverage differs from the native book')
     pairs=[];lists=[]

@@ -34,6 +34,18 @@ class SourceMathTests(unittest.TestCase):
         self.assertEqual(compact,r'$\exists\mathexclaimx\,\forally\,\varphi(x,y)$')
         self.assertNotIn('IfNoValue',text)
 
+    def test_intertext_returns_to_text_mode_and_restores_alignment_math(self):
+        c=self.converter()
+        source=r'\begin{align*}!A&=!B\\\intertext{Prose! $!A$ and \ensuremath{!B}.}!B&=!A\end{align*}'
+        text,receipt=c.expand(source,'intertext')
+        self.assertEqual(text,r'\begin{align*}\varphi &=\psi \\\intertext{Prose! $\varphi $ and \ensuremath{\psi }.}\psi &=\varphi \end{align*}')
+        self.assertEqual(len(receipt['formula_shorthands']),6)
+
+    def test_text_box_nested_math_does_not_invert_outer_math_mode(self):
+        c=self.converter()
+        text,_=c.expand(r'$!A+\textrm{Keep prose! $!B$}+!B$','nested-text')
+        self.assertEqual(text,r'$\varphi +\textrm{Keep prose! $\psi $}+\psi $')
+
     def test_negation_and_optional_assignment_from_source(self):
         c=self.converter();c.configure(r'\DeclareDocumentCommand\Sat{t{/} m m o}{'
             r'\IfNoValueTF{#4}{#2}{#2,#4}\IfBooleanTF{#1}{\nvDash}{\vDash}#3}','sat')

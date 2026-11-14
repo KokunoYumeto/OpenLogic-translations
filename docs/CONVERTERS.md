@@ -114,3 +114,26 @@ PDF-derived references, front matter, glossary, bibliography, credits, full
 HTML/EPUB assembly and accessible formula speech. The original five acceptance
 criteria and all book-unit requirements remain open. Repeating closed archive or
 packaging checks does not advance that boundary.
+
+`olpkit.mathdisplay` now adapts the Gujarati producer's balanced `intertext`
+splitting and nested text/math conversion. It preserves the actual prose and
+source formulas, with no language literals. Numbered alignments cannot be split
+without PDF-derived numbering. Source-mode handling was also repaired: an
+`intertext` argument is text containing its own inline math, not continuation
+of the enclosing display's math mode.
+
+Marked expressions retain their input TeX in MathML annotations. The binding
+stage restores bevelled fractions and explicit multline row alignment. The
+source's double-bar turnstile remains two vertical bars joined to an equals
+sign with the native `joinrel` spacing. The recovered producer's substitution
+with `Vdash` loses a horizontal bar and is not reused. Unresolved markers fail
+strict binding; a diagnostic mode reports them without allowing publication.
+
+The full Javanese replay now expands 4,097 formula shorthands and renders 10,298
+MathML expressions, each with a nonempty TeX annotation. Fourteen intertext
+blocks and 45 text/math spans are recorded. Unconverted expressions fall from
+69 to 33; three markers are inside displays still awaiting actual reference
+binding. Partial-function overlays, three small arrays, native diagrams, a
+proof tree and a transition table also remain. This is not a completed reader
+or visual-equivalence claim. The original replay and its failure evidence are
+retained; no translation source or published edition was changed.

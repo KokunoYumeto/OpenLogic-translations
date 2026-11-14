@@ -263,7 +263,7 @@ class SourceMath:
                 out.extend((text[start:p],child(p,stop,nested),text[stop:end]));pos=end;continue
             if name in ('[','('):state.math=True;out.append(m[0]);continue
             if name in (']',')'):state.math=False;out.append(m[0]);continue
-            if name in ('ensuremath','text','mbox'):
+            if name in ('ensuremath','text','mbox','textrm','intertext','shortintertext'):
                 value,end,at=token(text,pos);nested=state.copy();nested.math=name=='ensuremath'
                 out.extend((m[0]+'{',child(at,at+len(value),nested),'}'));pos=end;continue
             if name in PRIMITIVE_IF:

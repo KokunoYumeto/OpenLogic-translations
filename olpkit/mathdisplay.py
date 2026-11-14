@@ -9,6 +9,7 @@ import re
 
 from .macrophases import COMMAND, digest, group, mask_comments
 from .selective import definition_end, environment_end, token
+from .proofmath import parse_proof, parse_proof_region
 
 
 PREFIX = 'OLPDISPLAY'
@@ -19,9 +20,10 @@ OPAQUE = {'verbatim', 'Verbatim', 'lstlisting', 'minted', 'tikzpicture'}
 
 
 class DisplayAdapter:
-    def __init__(self):
+    def __init__(self, *, proof_label_styles=None):
         self.markers = {}
         self.events = []
+        self.proof_label_styles = proof_label_styles or {}
 
     def mark(self, kind, body, original, start, end):
         key = PREFIX + str(len(self.markers)).zfill(6)
@@ -93,7 +95,17 @@ class DisplayAdapter:
             if name == 'begin':
                 env, body_start = group(text, pos)
                 stop, end = environment_end(text, body_start, env)
-                if env in OPAQUE:
+                if env == 'prooftree':
+                    inner = text[body_start:stop]
+                    body, used, proof = parse_proof_region(inner,
+                        label_styles=self.proof_label_styles,
+                        decorate=lambda kind, body, a, b: self.mark(kind, body, inner[a:b], offset+body_start+a, offset+body_start+b))
+                    if text[body_start+used:stop].strip(): raise ValueError('unconsumed prooftree body')
+                    marked = self.mark('inference-proof', body, text[start:end], offset+start, offset+end)
+                    out.append(marked if math else r'\['+marked+r'\]')
+                    self.events.append({'kind': 'inference-proof', 'char_start': offset+start,
+                                        'char_end': offset+end, **proof})
+                elif env in OPAQUE:
                     out.append(text[start:end])
                 else:
                     body = text[body_start:stop]
@@ -121,6 +133,17 @@ class DisplayAdapter:
                                             'prose_segments': records})
                     else:
                         out.extend((text[start:body_start], self.walk(body, math=math or bool(MATH_ENVS.fullmatch(env)), offset=offset+body_start), text[stop:end]))
+                pos = end
+                continue
+            if name in ('Axiom', 'AxiomC'):
+                body, end, proof = parse_proof(text, start, label_styles=self.proof_label_styles,
+                    decorate=lambda kind, body, a, b: self.mark(kind, body, text[a:b], offset+a, offset+b))
+                # The proof renderer emits only standard math and text commands.
+                # Its exact source is retained by the outer annotation marker.
+                marked = self.mark('inference-proof', body, text[start:end], offset+start, offset+end)
+                out.append(marked if math else r'\['+marked+r'\]')
+                self.events.append({'kind': 'inference-proof', 'char_start': offset+start,
+                                    'char_end': offset+end, **proof})
                 pos = end
                 continue
             if name in ('[', '('): math = True; out.append(match[0]); continue
@@ -182,6 +205,7 @@ class DisplayAdapter:
         output = self.walk(mask_comments(text))
         return output, {'schema': 'olpkit.math-display.v1', 'source': source,
                         'input_sha256': digest(text), 'output_sha256': digest(output),
+                        'proof_label_styles': self.proof_label_styles,
                         'markers': self.markers, 'events': self.events,
                         'reader_complete': False}
 
@@ -237,7 +261,24 @@ def bind_mathml(document, receipt, *, strict=True):
             base.append(element(node, 'mo', '||', stretchy='false', lspace='0.277778em', rspace='0em'))
             base.append(element(node, 'mspace', width='-0.166667em'))
             base.append(element(node, 'mo', '=', stretchy='false', lspace='0em', rspace='0.277778em'))
-        elif kind not in ('ordinary-exclamation', 'nested-text-math'):
+        elif kind.startswith('proof-line-'):
+            fraction = next((item for item in base.iter() if local(item) == 'mfrac'), None)
+            if fraction is None or len(fraction) != 2: raise ValueError('proof rule has no fraction structure')
+            style = kind.removeprefix('proof-line-')
+            if style == 'none':
+                fraction.set('linethickness', '0')
+            elif style in ('double', 'deduce'):
+                table = element(node, 'mtable', columnspacing='0em', rowspacing='0.1em', columnalign='center')
+                if style == 'double': table.set('rowlines', 'solid solid')
+                middle = element(node, 'mo', '⋮') if style == 'deduce' else element(node, 'mspace', height='0.1em', width='0em')
+                for cell_content in (fraction[0], middle, fraction[1]):
+                    row = element(node, 'mtr'); cell = element(node, 'mtd')
+                    cell.append(cell_content); row.append(cell); table.append(row)
+                parent = fraction.getparent()
+                if fraction is base: base = table
+                else: parent.replace(fraction, table)
+            else: raise ValueError('unsupported proof line: '+style)
+        elif kind not in ('ordinary-exclamation', 'nested-text-math', 'inference-proof'):
             raise ValueError('unknown display marker kind: '+kind)
         base.tail = node.tail
         node.getparent().replace(node, base)

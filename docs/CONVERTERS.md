@@ -137,3 +137,37 @@ binding. Partial-function overlays, three small arrays, native diagrams, a
 proof tree and a transition table also remain. This is not a completed reader
 or visual-equivalence claim. The original replay and its failure evidence are
 retained; no translation source or published edition was changed.
+
+`olpkit.proofmath` replaces the recovered proof template's permissive command
+search with an inference-stack parser that consumes every command. The source
+has multiple trees inside some `prooftree` environments; stopping at the first
+`DisplayProof` would lose the later trees. Both discharge and rule labels are
+retained. Dotted deductions, double rules and absent rules remain distinct in
+MathML. Source-mode handling also distinguishes native dollar-delimited proof
+arguments from surrounding display math. Label-size mappings are supplied from
+the actual memoir/newtxmath configuration, rather than assumed for every book.
+
+The new full Javanese replay covers 165 proof regions containing 176 trees,
+264 axioms/premises and 408 inference steps. An independent source command scan
+maps every live proof command to exactly one rendered region, and the original
+proof text remains in annotations. These are structural and source-binding
+checks: native baseline alignment, tight premise spacing and actual rendered
+proof appearance still need visual comparison. There are 32 remaining math
+fallbacks; warning counts alone did not reveal the earlier loss of proof
+structure and are not a completeness gate.
+
+`olpkit.nativefigures` adapts the Gujarati native-vector manifest route to the
+assembled book. It extracts active TikZ outside definitions/verbatim, prepares
+one batch using the actual book preamble, and binds vector exports to source
+and recorder hashes. It uses the shared TeX mutex and capped process runner;
+an occupied slot returns without starting an engine or copying the source tree.
+For SLC, 19 diagrams are prepared. The first attempt found the slot occupied;
+no native PDF/SVG or visual acceptance is claimed yet.
+
+Reusing the recovered Turing renderer unchanged would be wrong here: its
+fixed blank/stroke symbols are `0`/`1`, whereas the SLC book configuration uses
+`\sqcup`/`I`, and the native edition sets its own initial-state text. The native
+route retains these definitions, placement options and every editable diagram.
+The figure inventory includes diagrams outside the math-warning list. Native
+figure assets, source-matched references, remaining operators/tables, book
+matter and all four languages' complete export acceptance remain open.

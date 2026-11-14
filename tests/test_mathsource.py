@@ -46,6 +46,18 @@ class SourceMathTests(unittest.TestCase):
         text,_=c.expand(r'$!A+\textrm{Keep prose! $!B$}+!B$','nested-text')
         self.assertEqual(text,r'$\varphi +\textrm{Keep prose! $\psi $}+\psi $')
 
+    def test_proof_formula_and_label_contexts_inside_a_display(self):
+        c=self.converter()
+        source=r'\[\Axiom$!A$\AxiomC{Text! $!B$}\RightLabel{Rule! $!A$}\BinaryInf$!B$\DisplayProof\]'
+        text,receipt=c.expand(source,'proof')
+        self.assertEqual(text,r'\[\Axiom$\varphi $\AxiomC{Text! $\psi $}\RightLabel{Rule! $\varphi $}\BinaryInf$\psi $\DisplayProof\]')
+        self.assertEqual(len(receipt['formula_shorthands']),4)
+
+    def test_proof_math_argument_nested_text_does_not_end_at_its_inline_math(self):
+        c=self.converter()
+        text,_=c.expand(r'\[\Axiom$!A\text{where $!B$}$\DisplayProof\]','proof-nested')
+        self.assertEqual(text,r'\[\Axiom$\varphi \text{where $\psi $}$\DisplayProof\]')
+
     def test_negation_and_optional_assignment_from_source(self):
         c=self.converter();c.configure(r'\DeclareDocumentCommand\Sat{t{/} m m o}{'
             r'\IfNoValueTF{#4}{#2}{#2,#4}\IfBooleanTF{#1}{\nvDash}{\vDash}#3}','sat')

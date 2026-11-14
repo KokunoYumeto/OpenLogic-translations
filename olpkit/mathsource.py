@@ -263,6 +263,24 @@ class SourceMath:
                 out.extend((text[start:p],child(p,stop,nested),text[stop:end]));pos=end;continue
             if name in ('[','('):state.math=True;out.append(m[0]);continue
             if name in (']',')'):state.math=False;out.append(m[0]);continue
+            if re.fullmatch(r'(?:Axiom|Deduce|UnaryInf|BinaryInf|TrinaryInf|QuaternaryInf|QuinaryInf)C?',name):
+                nested=state.copy()
+                if name.endswith('C'):
+                    value,end,at=token(text,pos);nested.math=False
+                    out.extend((m[0]+'{',child(at,at+len(value),nested),'}'));pos=end;continue
+                p=skip_space(text,pos)
+                if text[p:p+1]!='$':raise ValueError('Bussproofs formula needs a dollar-delimited argument')
+                end=p+1
+                while end<len(text) and text[end]!='$':
+                    if text[end]=='{':_,end=group(text,end)
+                    elif text[end]=='\\':end=COMMAND.match(text,end).end()
+                    else:end+=1
+                if end==len(text):raise ValueError('unclosed Bussproofs math argument')
+                nested.math=True
+                out.extend((text[start:p+1],child(p+1,end,nested),'$'));pos=end+1;continue
+            if name in ('RightLabel','LeftLabel'):
+                value,end,at=token(text,pos);nested=state.copy();nested.math=False
+                out.extend((m[0]+'{',child(at,at+len(value),nested),'}'));pos=end;continue
             if name in ('ensuremath','text','mbox','textrm','intertext','shortintertext'):
                 value,end,at=token(text,pos);nested=state.copy();nested.math=name=='ensuremath'
                 out.extend((m[0]+'{',child(at,at+len(value),nested),'}'));pos=end;continue

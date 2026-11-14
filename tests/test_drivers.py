@@ -74,6 +74,8 @@ class DriverTests(unittest.TestCase):
         self.assertIn(b'{482D04}',bn['olpkit-after-olp.tex'])
         self.assertEqual(bn_report['untranslated_driver_labels'],0)
         self.assertIn(b'pdf:mapfile fonts/bn-slc-newtx-unicode.map',bn['olpkit-before-olp.tex'])
+        self.assertIn(b'\\newfontfamily\\latinfont{Latin Modern Roman}[Ligatures=TeX]',bn['olpkit-before-olp.tex'])
+        self.assertIn(b'Language=Bengali,Ligatures=TeX,',bn['olpkit-before-olp.tex'])
         language=tomllib.loads((self.data/'languages/bn.toml').read_text(encoding='utf-8'))
         self.assertNotIn('bn-math-tounicode.tex',language['preamble']['before_olp'])
         self.assertEqual(jv['slc-screen.tex'],gu['slc-screen.tex'])

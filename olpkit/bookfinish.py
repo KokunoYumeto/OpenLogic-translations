@@ -3,8 +3,8 @@ from pathlib import Path
 import re,subprocess,collections
 from urllib.parse import unquote
 from lxml import html
-from .bookcontext import sha,_one,source_caption
-from .bookfront import native_frontmatter
+from .bookcontext import sha,source_caption
+from .bookfront import native_frontmatter,native_cover_width
 from .bookart import bind_book_art
 from .bookheadings import read_contents,bind_headings
 from .bookcaptions import bind_captions
@@ -41,10 +41,11 @@ def finish_book(inputs,body_bytes,profile,output):
         if sha(data)!=native_manifest['files'][name]['sha256']:raise ValueError('native artwork differs')
         return inputs.root/name,sha(data)
     after=inputs.text(profile['prose_definition_source'])
-    width=float(_one(r'\\newcommand\*\{\\olpCoverPortraitWidth\}\{([0-9.]+)\}',after,'cover portrait width')[1])*100
+    width,cover_layout=native_cover_width(inputs.text(f['driver']),
+        {profile['prose_definition_source']:after})
     art=bind_book_art(doc,resolve=resolve_art,output=output,cover_width_percent=width,
         evidence={'native_manifest_sha256':sha(inputs.witness('native_source_manifest')),
-                  'cover_width_source_sha256':sha(after.encode()),'asset_mode':f['asset_version']},
+                  'cover_layout':cover_layout,'asset_mode':f['asset_version']},
         rasterize_pdf_hashes=f['decorative_raster_hashes'])
     toc=inputs.witness_text('toc');rows=read_contents(toc,language_wrapper='bbl@ensure@'+profile['babel'])
     notation=SourceMath(resolver=inputs.resolve)

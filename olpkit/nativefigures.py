@@ -59,8 +59,14 @@ def extract_tikz(text):
     return rows
 
 
-def export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, resume=False):
+PREVIEW_BACKENDS = {'pdflatex': 'pdftex', 'xelatex': 'xetex'}
+
+
+def export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence,
+                          engine='pdflatex', resume=False):
     """Serialize one output directory; resume only a proven unstarted attempt."""
+    if engine not in PREVIEW_BACKENDS:
+        raise ValueError('unsupported native figure engine: '+engine)
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
     lock = output / '.olpkit-native-figures.lock'
@@ -70,12 +76,13 @@ def export_native_figures(folder, assembly, source, driver, output, *, epoch, co
         raise ValueError('another invocation owns this figure directory; do not restart it') from None
     try:
         return _export_native_figures(folder, assembly, source, driver, output,
-                                      epoch=epoch, context_evidence=context_evidence, resume=resume)
+                                      epoch=epoch, context_evidence=context_evidence,
+                                      engine=engine, resume=resume)
     finally:
         lock.unlink()
 
 
-def _export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, resume):
+def _export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, engine, resume):
     """Export exact active TikZ under a caller-verified native configuration.
 
     context_evidence must identify the actual applied configuration and local
@@ -100,7 +107,8 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
         raise ValueError('resume requires the previous occupied-slot receipt')
     preamble = original.split(r'\begin{document}', 1)[0]
     job = 'native-figures'
-    batch = (preamble + '\n' + r'\usepackage[active,tightpage,pdftex]{preview}' + '\n' +
+    backend = PREVIEW_BACKENDS[engine]
+    batch = (preamble + '\n' + r'\usepackage[active,tightpage,' + backend + r']{preview}' + '\n' +
              r'\PreviewEnvironment{tikzpicture}' + '\n' + r'\setlength\PreviewBorder{2pt}' + '\n' +
              r'\begin{document}' + '\n' + '\n\n'.join(row['source_tex'] for row in figures) +
              '\n' + r'\end{document}' + '\n')
@@ -116,6 +124,7 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
               'driver_sha256': sha(native_driver.read_bytes()), 'preamble_sha256': sha(preamble.encode('utf-8')),
               'batch_sha256': sha(prepared[tex.name]), 'configuration_evidence': context_evidence,
               'source_date_epoch': epoch,
+              'engine': engine, 'preview_backend': backend,
               'assembly_sha256': sha(json.dumps(assembly, sort_keys=True).encode('utf-8')),
               'figures': figures, 'mutex': TEX_MUTEX, 'mutex_acquired': False,
               'memory_limit_bytes': MEMORY_LIMIT, 'commands': [], 'tex_runs': 0,
@@ -127,6 +136,10 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
                 or previous.get('commands') != [] or previous.get('mutex_acquired') is not False
                 or previous.get('tex_runs') != 0 or previous.get('pdf')):
             raise ValueError('resume requires an occupied-slot receipt with zero engine commands')
+        # Receipts written before engine selection used pdfLaTeX exclusively.
+        for key, legacy in (('engine', 'pdflatex'), ('preview_backend', 'pdftex')):
+            if previous.get(key, legacy) != result[key]:
+                raise ValueError('prepared figure identity changed: '+key)
         for key in ('source_sha256', 'driver', 'driver_sha256', 'preamble_sha256',
                     'batch_sha256', 'configuration_evidence', 'figures', 'mutex', 'memory_limit_bytes'):
             if previous.get(key) != result[key]:
@@ -140,7 +153,9 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
         for name, data in prepared.items():
             if not (output / name).is_file() or (output / name).read_bytes() != data:
                 raise ValueError('prepared figure bytes changed: '+name)
-        if any((output / (job+suffix)).exists() for suffix in ('.pdf', '.log', '.fls')) or (output / 'pdflatex.txt').exists() or list(output.glob('figure-*.svg')):
+        if (any((output / (job+suffix)).exists() for suffix in ('.pdf', '.log', '.fls', '.xdv'))
+                or any((output / (name+'.txt')).exists() for name in PREVIEW_BACKENDS)
+                or list(output.glob('figure-*.svg'))):
             raise ValueError('engine/vector output contradicts unstarted figure receipt')
         history = output / 'attempts'
         history.mkdir(exist_ok=True)
@@ -165,17 +180,18 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
             if not slot.acquired:
                 result['status'] = 'slot_occupied'
                 return result
-            executable = shutil.which('pdflatex')
-            if not executable: raise ValueError('native pdfLaTeX executable absent')
+            executable = shutil.which(engine)
+            if not executable: raise ValueError('native '+engine+' executable absent')
             env = {**os.environ, 'SOURCE_DATE_EPOCH': str(epoch), 'FORCE_SOURCE_DATE': '1',
                    'openin_any': 'a', 'openout_any': 'p'}
             args = [executable, '--disable-installer', '-no-shell-escape', '-interaction=nonstopmode',
                     '-halt-on-error', '-file-line-error', '-recorder', '-jobname='+job,
                     '-output-directory='+output.as_posix(), r'\tracinglostchars=3\input{'+tex.as_posix()+'}']
             result['tex_runs'] = 1
-            command = run_job(args, native_driver.parent, output / 'pdflatex.txt', env=env, timeout=180)
-            result['commands'].append({'tool': 'pdflatex', **command})
-            if command['exit_code'] or command['timed_out']: raise ValueError('native figure batch failed; see pdflatex.txt')
+            command = run_job(args, native_driver.parent, output / (engine+'.txt'), env=env, timeout=180)
+            result['commands'].append({'tool': engine, **command})
+            if command['exit_code'] or command['timed_out']:
+                raise ValueError('native figure batch failed; see '+engine+'.txt')
         from pypdf import PdfReader
         pdf = output / (job + '.pdf')
         reader = PdfReader(pdf)

@@ -1,6 +1,43 @@
 """Project native OLP book front matter without retyping its scholarly credits."""
 import re
+from decimal import Decimal
 from .macrophases import COMMAND,group,skip_space,mask_comments,digest
+from .bookinsertions import calls,literal_definitions
+from .glossary import entry_fields
+
+
+def native_cover_width(driver, definition_sources):
+    """Read the width actually applied to each native cover portrait."""
+    covers=calls(driver,{'OLPscreencover'})
+    if len(covers)!=1:raise ValueError('native screen-cover call missing/ambiguous')
+    code=mask_comments(driver)
+    artwork,_=group(code,covers[0][2]);rows=[];definitions={}
+    number=r'(?:\d+(?:\.\d*)?|\.\d+)'
+    for _,start,at in calls(artwork,{'includegraphics'}):
+        at=skip_space(artwork,at);options={}
+        if artwork[at:at+1]=='[':
+            value,at=group(artwork,at,'[',']');options=entry_fields(value)
+        path,end=group(artwork,at)
+        if '/portraits/' not in path:continue
+        value=options.get('width','')
+        m=re.fullmatch(r'\s*('+number+r'|\\[A-Za-z@]+)\s*\\textwidth\s*',value)
+        if not m:raise ValueError('unsupported native cover portrait width')
+        factor=m[1]
+        if factor.startswith('\\'):
+            name=factor[1:]
+            declaration=literal_definitions('\n'.join(definition_sources.values()),{name})
+            body,_=group(declaration,len(r'\newcommand{')+len(factor)+1)
+            if not re.fullmatch(number,body.strip()):
+                raise ValueError('native cover width is not a literal decimal')
+            definitions[name]=declaration;factor=body.strip()
+        width=Decimal(factor)*100
+        if not 0<width<=100:raise ValueError('native cover width outside text area')
+        rows.append({'source_reference':path,'source_command':artwork[start:end],
+                     'width_tex':value,'width_percent':float(width)})
+    if not rows or len({r['width_percent'] for r in rows})!=1:
+        raise ValueError('missing or differing native cover portrait widths')
+    return rows[0]['width_percent'],{'driver_sha256':digest(driver),'portraits':rows,
+        'definitions':definitions,'definition_sources':{n:digest(t) for n,t in definition_sources.items()}}
 
 
 def native_frontmatter(class_source, metadata, locale, cover_text, driver, *, language, evidence):

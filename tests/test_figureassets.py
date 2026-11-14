@@ -1,10 +1,23 @@
 import unittest,tempfile
 from pathlib import Path
-from olpkit.figureassets import expand_external_figures,combine_exports
+from olpkit.figureassets import expand_external_figures,combine_exports,initial_asset_width
 from olpkit.nativefigures import sha
 
 
 class ExternalFigureTests(unittest.TestCase):
+    def test_book_begin_document_width_supersedes_style_default(self):
+        width,evidence=initial_asset_width(
+            r'\AtBeginDocument{\setlength{\olphotowidth}{.45\textwidth}}',
+            r'\setlength{\olphotowidth}{.4\textwidth}')
+        self.assertEqual(width,45)
+        self.assertEqual(evidence['begin_document_width_command'],r'\setlength{\olphotowidth}{.45\textwidth}')
+
+    def test_absent_or_ambiguous_initial_width_is_not_guessed(self):
+        hook=r'\AtBeginDocument{\setlength{\olphotowidth}{.45\textwidth}}'
+        for source in ('',hook+hook,r'\newcommand{\unused}{'+hook+'}'):
+            with self.assertRaisesRegex(ValueError,'missing/ambiguous'):
+                initial_asset_width(source,r'\setlength{\olphotowidth}{.4\textwidth}')
+
     def run_source(self,text):
         assets={'assets/a.tikz':b'\\begin{tikzpicture}A\\end{tikzpicture}',
                 'assets/b.tikz':b'\\begin{tikzpicture}B\\end{tikzpicture}'}

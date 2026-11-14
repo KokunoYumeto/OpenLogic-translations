@@ -96,5 +96,62 @@ class NativeFigureResumeTests(unittest.TestCase):
         self.assertEqual((self.output / '.olpkit-native-figures.lock').read_text(), 'owner')
         self.assertEqual(self.slot.call_count, 1)
 
+    def test_xelatex_selects_its_native_preview_backend_and_resumes(self):
+        first = self.export(engine='xelatex')
+        self.assertEqual(first['engine'], 'xelatex')
+        self.assertEqual(first['preview_backend'], 'xetex')
+        self.assertIn(r'\usepackage[active,tightpage,xetex]{preview}',
+                      (self.output / 'native-figures.tex').read_text())
+        self.export(engine='xelatex', resume=True)
+        self.engine.assert_not_called()
+        with self.assertRaisesRegex(ValueError, 'identity changed: engine'):
+            self.export(engine='pdflatex', resume=True)
+        self.assertEqual(self.slot.call_count, 2)
+
+    def test_legacy_receipt_is_pdftex_only(self):
+        self.export()
+        path = self.output / 'NATIVE_FIGURES.json'
+        old = json.loads(path.read_bytes())
+        del old['engine'], old['preview_backend']
+        path.write_text(json.dumps(old))
+        with self.assertRaisesRegex(ValueError, 'identity changed: engine'):
+            self.export(engine='xelatex', resume=True)
+        self.export(resume=True)
+        self.engine.assert_not_called()
+
+    def test_xelatex_command_remains_one_guarded_resource_bounded_job(self):
+        self.slot.return_value.__enter__.return_value.acquired = True
+        self.engine.return_value = {'exit_code': 1, 'timed_out': False}
+        with patch('olpkit.nativefigures.shutil.which', return_value='xelatex.exe') as which:
+            with self.assertRaisesRegex(ValueError, 'see xelatex.txt'):
+                self.export(engine='xelatex')
+            which.assert_called_once_with('xelatex')
+        self.engine.assert_called_once()
+        args, kwargs = self.engine.call_args
+        self.assertEqual(args[0][0], 'xelatex.exe')
+        self.assertIn('-no-shell-escape', args[0])
+        self.assertEqual(args[2].name, 'xelatex.txt')
+        self.assertEqual(kwargs['timeout'], 180)
+        result = json.loads((self.output / 'NATIVE_FIGURES.json').read_bytes())
+        self.assertEqual(result['commands'][0]['tool'], 'xelatex')
+        self.assertEqual(result['tex_runs'], 1)
+        self.assertTrue(result['mutex_acquired'])
+
+    def test_xdv_or_engine_transcript_prevents_resume(self):
+        self.export(engine='xelatex')
+        for name in ('native-figures.xdv', 'xelatex.txt'):
+            stray = self.output / name
+            stray.write_bytes(b'partial')
+            with self.assertRaisesRegex(ValueError, 'contradicts'):
+                self.export(engine='xelatex', resume=True)
+            stray.unlink()
+        self.assertEqual(self.slot.call_count, 1)
+
+    def test_unknown_engine_fails_before_output_or_slot(self):
+        with self.assertRaisesRegex(ValueError, 'unsupported native figure engine'):
+            self.export(engine='unrecognized')
+        self.assertFalse(self.output.exists())
+        self.slot.assert_not_called()
+
 
 if __name__ == '__main__': unittest.main()

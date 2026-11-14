@@ -4,7 +4,7 @@ import json,re,subprocess,shutil,collections
 from urllib.parse import unquote
 from lxml import html
 from .bookcontext import sha,_one,source_caption
-from .figureassets import expand_external_figures,combine_exports
+from .figureassets import expand_external_figures,combine_exports,initial_asset_width
 from .figurebinding import prepare_figures,bind_figures,attach_long_descriptions
 from .theoremblocks import native_theorems,reconcile_theorem_source,prepare_theorems,bind_theorems
 from .mathsource import SourceMath
@@ -18,10 +18,10 @@ from .bookphotos import bind_photos
 def build_body(inputs,context,profile,output):
     output=Path(output);output.mkdir(parents=True,exist_ok=True)
     style=inputs.text('sty/open-logic.sty')
-    default_width=_one(r'\\setlength\{\\olphotowidth\}\{(\.\d+)\\textwidth\}',style,'external figure width')
+    default_width,width_evidence=initial_asset_width(inputs.text('sty/open-logic-book.cls'),style)
     math,external=expand_external_figures(context['math_source'],read=inputs.bytes,
-        default_width_percent=float(default_width[1])*100,
-        evidence={'style_sha256':sha(style.encode()),'assembly_sha256':sha((inputs.root/'ASSEMBLY.json').read_bytes())})
+        default_width_percent=default_width,
+        evidence={**width_evidence,'assembly_sha256':sha((inputs.root/'ASSEMBLY.json').read_bytes())})
     exports=[]
     for row in profile['figure_exports']:
         directory=Path(row['directory']);data=(directory/'NATIVE_FIGURES.json').read_bytes()

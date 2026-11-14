@@ -4,6 +4,25 @@ from pathlib import PurePosixPath,Path
 from .macrophases import COMMAND,group,mask_comments,skip_space
 from .selective import definition_end
 from .nativefigures import extract_tikz,sha
+from .bookinsertions import calls
+
+
+def initial_asset_width(class_source, style_source):
+    """Apply the book's begin-document width, not the earlier style default."""
+    code=mask_comments(class_source);assignments=[]
+    for _,_,at in calls(class_source,{'AtBeginDocument'}):
+        hook,_=group(code,at)
+        for _,start,end in calls(hook,{'setlength'}):
+            name,end=group(hook,end);value,stop=group(hook,end)
+            if name==r'\olphotowidth':assignments.append((hook[start:stop],value))
+    if len(assignments)!=1:raise ValueError('native begin-document asset width missing/ambiguous')
+    command,value=assignments[0]
+    m=re.fullmatch(r'\s*(\d*(?:\.\d+)?)\s*\\textwidth\s*',value)
+    if not m or not m[1]:raise ValueError('unsupported native initial asset width')
+    width=float(m[1])*100
+    if not 0<width<=100:raise ValueError('native initial asset width outside text area')
+    return width,{'book_class_sha256':sha(class_source.encode()),
+                  'style_sha256':sha(style_source.encode()),'begin_document_width_command':command}
 
 
 def expand_external_figures(text, *, read, default_width_percent, evidence):

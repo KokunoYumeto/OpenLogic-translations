@@ -36,8 +36,37 @@ def extracted_text(path):
     return run.stdout, run.stderr.decode('utf-8', errors='replace')
 
 
+def _winansi_type1_gid_mapper(font):
+    """Resolve only independently confirmed ASCII slots of embedded Type1C.
+
+    The PDF encoding can override the font program's encoding. Require both
+    to agree with the Adobe ASCII glyph name; do not infer a mapping from a
+    font name or accept an Encoding dictionary with unexamined Differences.
+    Unknown bytes deliberately break the exact painted-sequence comparison.
+    """
+    import io
+    from fontTools.agl import UV2AGL
+    from fontTools.cffLib import CFFFontSet
+    if font.get('/Subtype')!='/Type1' or font.get('/Encoding')!='/WinAnsiEncoding':
+        return None
+    descriptor=font.get('/FontDescriptor')
+    descriptor=descriptor.get_object() if descriptor is not None else {}
+    stream=descriptor.get('/FontFile3')
+    stream=stream.get_object() if stream is not None else None
+    if stream is None or stream.get('/Subtype')!='/Type1C':return None
+    cff=CFFFontSet();cff.decompile(io.BytesIO(stream.get_data()),None)
+    if len(cff.topDictIndex)!=1:return None
+    embedded=cff.topDictIndex[0];encoding=embedded.Encoding
+    if not isinstance(encoding,list) or len(encoding)!=256:return None
+    glyph_ids={name:index for index,name in enumerate(embedded.charset)}
+    positions={code:glyph_ids[name] for code,name in enumerate(encoding)
+        if 0x20<=code<=0x7e and UV2AGL.get(code)==name and glyph_ids.get(name,0)>0}
+    if not positions:return None
+    return lambda code:positions.get(code,-1)
+
+
 def _actualtext_glyph_coverage(page, trace, font_cache=None):
-    """Match marked-content replacements to exact Type0 glyph occurrences.
+    """Match marked-content replacements to exact painted glyph occurrences.
 
     A font-level whitelist would hide an unmarked bad occurrence elsewhere.
     Match the complete per-font glyph sequence before accepting any coverage.
@@ -68,28 +97,33 @@ def _actualtext_glyph_coverage(page, trace, font_cache=None):
         if identity in font_cache:return font_cache[identity]
         def font_name(value):return re.sub(r'^/[A-Z]{6}\+','',str(value)).lstrip('/')
         name=font_name(obj.get('/BaseFont',''))
+        type1_mapper=_winansi_type1_gid_mapper(obj)
+        if type1_mapper is not None:
+            result=name,type1_mapper,1
+            font_cache[identity]=result
+            return result
         if obj.get('/Subtype')!='/Type0' or obj.get('/Encoding') not in ('/Identity-H','/Identity-V'):
-            return name,None
+            return name,None,0
         child=obj['/DescendantFonts'][0].get_object()
         if child.get('/Subtype')=='/CIDFontType0':
             from fontTools.cffLib import CFFFontSet
             descriptor=resolved(child.get('/FontDescriptor',{}))
             stream=resolved(descriptor.get('/FontFile3'))
-            if stream is None or stream.get('/Subtype')!='/CIDFontType0C':return name,None
+            if stream is None or stream.get('/Subtype')!='/CIDFontType0C':return name,None,0
             cff=CFFFontSet();cff.decompile(io.BytesIO(stream.get_data()),None)
-            if len(cff.topDictIndex)!=1:return name,None
+            if len(cff.topDictIndex)!=1:return name,None,0
             charset=cff.topDictIndex[0].charset
             cid_to_gid={0:0}
             for gid,charname in enumerate(charset[1:],1):
-                if not re.fullmatch(r'cid\d+',charname):return name,None
+                if not re.fullmatch(r'cid\d+',charname):return name,None,0
                 cid_to_gid[int(charname[3:])]=gid
             name=font_name('/'+cff.fontNames[0])
             # MuPDF traces CID-keyed CFF fonts with their CID, not the charset
             # array offset. Still require that the actual font contains the CID.
-            result=name,lambda code:code if code in cid_to_gid else 0
+            result=name,(lambda code:code if code in cid_to_gid else 0),2
             font_cache[identity]=result
             return result
-        if child.get('/Subtype')!='/CIDFontType2':return name,None
+        if child.get('/Subtype')!='/CIDFontType2':return name,None,0
         descriptor=resolved(child.get('/FontDescriptor',{}))
         if '/FontFile2' in descriptor:
             from fontTools.ttLib import TTFont
@@ -98,10 +132,10 @@ def _actualtext_glyph_coverage(page, trace, font_cache=None):
                 if postscript:name=font_name('/'+postscript)
         mapping=child.get('/CIDToGIDMap','/Identity')
         if hasattr(mapping,'get_object'):mapping=mapping.get_object()
-        if mapping=='/Identity':result=name,lambda code:code
+        if mapping=='/Identity':result=name,(lambda code:code),2
         else:
             data=mapping.get_data()
-            result=name,lambda code:int.from_bytes(data[2*code:2*code+2],'big') if 2*code+2<=len(data) else 0
+            result=name,(lambda code:int.from_bytes(data[2*code:2*code+2],'big') if 2*code+2<=len(data) else 0),2
         font_cache[identity]=result
         return result
     def walk(stream,res,marks,font=None,depth=0):
@@ -136,7 +170,7 @@ def _actualtext_glyph_coverage(page, trace, font_cache=None):
                 if len(local_marks)<=len(marks):raise ValueError('unbalanced PDF marked content')
                 local_marks.pop()
             elif op in (b'Tj',b'TJ',b"'",b'"') and font:
-                name,mapper=font
+                name,mapper,width=font
                 replacement=next((m for m in local_marks if m is not None),None)
                 if replacement is not None:marked_fonts.add(name)
                 if mapper is None:
@@ -146,9 +180,9 @@ def _actualtext_glyph_coverage(page, trace, font_cache=None):
                 for item in strings:
                     if not isinstance(item,(ByteStringObject,TextStringObject)):continue
                     b=text_bytes(item)
-                    if len(b)%2:raise ValueError('odd Identity-H/V glyph string')
-                    for i in range(0,len(b),2):
-                        gid=mapper(int.from_bytes(b[i:i+2],'big'))
+                    if len(b)%width:raise ValueError('misaligned PDF glyph string')
+                    for i in range(0,len(b),width):
+                        gid=mapper(int.from_bytes(b[i:i+width],'big'))
                         records.setdefault(name,[]).append((gid,replacement))
             elif op==b'Do':
                 obj=resolved(res.get('/XObject',{})).get(args[0])

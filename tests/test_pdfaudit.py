@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 from pypdf import PdfReader, PdfWriter
-from pypdf.generic import DictionaryObject, NameObject, TextStringObject, ArrayObject, FloatObject, DecodedStreamObject
+from pypdf.generic import DictionaryObject, NameObject, TextStringObject, ArrayObject, FloatObject, DecodedStreamObject, NumberObject
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 
@@ -101,6 +101,61 @@ def actualtext_fixture(path,*,unmarked=False,notdef=False,nested_form=False,repl
     with path.open('wb') as stream:writer.write(stream)
 
 
+def mixed_actualtext_fixture(path,*,unmarked_bad=False,encoding_mismatch=False,pdf_differences=False):
+    """Two embedded font types share a trace name, with different glyph IDs.
+
+    The Type0 occurrence has ActualText; the later Type1 occurrence does not.
+    The font is generated in memory so the regression needs no TeX or fixture
+    copied from a published book.
+    """
+    import fitz
+    from fontTools.fontBuilder import FontBuilder
+    from fontTools.pens.t2CharStringPen import T2CharStringPen
+    actualtext_fixture(path)
+    with fitz.open(path) as doc:name=doc[0].get_texttrace()[0]['font']
+    builder=FontBuilder(1000,isTTF=False);builder.setupGlyphOrder(['.notdef','A','B'])
+    strings={}
+    for glyph in ['.notdef','A','B']:
+        pen=T2CharStringPen(600,None)
+        if glyph!='.notdef':
+            pen.moveTo((50,0));pen.lineTo((300,700));pen.lineTo((550,0));pen.closePath()
+        strings[glyph]=pen.getCharString()
+    builder.setupCFF(name,{'FullName':name,'FamilyName':name,'Weight':'Regular'},strings,{})
+    encoding=['.notdef']*256
+    encoding[65],encoding[66]=('B','A') if encoding_mismatch else ('A','B')
+    builder.font['CFF '].cff.topDictIndex[0].Encoding=encoding
+    fontdata=builder.font['CFF '].compile(builder.font)
+    writer=PdfWriter();writer.append(PdfReader(path));page=writer.pages[0]
+    program=DecodedStreamObject();program.set_data(fontdata)
+    program[NameObject('/Subtype')]=NameObject('/Type1C')
+    descriptor=DictionaryObject({NameObject('/Type'):NameObject('/FontDescriptor'),
+        NameObject('/FontName'):NameObject('/'+name),NameObject('/Flags'):NumberObject(32),
+        NameObject('/FontBBox'):ArrayObject([NumberObject(x) for x in (0,0,600,700)]),
+        NameObject('/ItalicAngle'):NumberObject(0),NameObject('/Ascent'):NumberObject(700),
+        NameObject('/Descent'):NumberObject(0),NameObject('/CapHeight'):NumberObject(700),
+        NameObject('/StemV'):NumberObject(80),NameObject('/FontFile3'):writer._add_object(program)})
+    pdf_encoding=NameObject('/WinAnsiEncoding')
+    if pdf_differences:
+        pdf_encoding=DictionaryObject({NameObject('/BaseEncoding'):pdf_encoding,
+            NameObject('/Differences'):ArrayObject([NumberObject(65),NameObject('/B')])})
+    font=DictionaryObject({NameObject('/Type'):NameObject('/Font'),NameObject('/Subtype'):NameObject('/Type1'),
+        NameObject('/BaseFont'):NameObject('/'+name),NameObject('/FirstChar'):NumberObject(65),
+        NameObject('/LastChar'):NumberObject(66),NameObject('/Widths'):ArrayObject([NumberObject(600)]*2),
+        NameObject('/Encoding'):pdf_encoding,NameObject('/FontDescriptor'):writer._add_object(descriptor)})
+    mapping=DecodedStreamObject()
+    mapping.set_data(('/CIDInit /ProcSet findresource begin 12 dict begin begincmap '
+        '/CIDSystemInfo << /Registry (Test) /Ordering (Test) /Supplement 0 >> def '
+        '/CMapName /MixedRegression def /CMapType 2 def '
+        '1 begincodespacerange <00> <FF> endcodespacerange '
+        f'1 beginbfchar <41> <{"FFFD" if unmarked_bad else "0041"}> endbfchar '
+        'endcmap CMapName currentdict /CMap defineresource pop end end').encode())
+    font[NameObject('/ToUnicode')]=writer._add_object(mapping)
+    page['/Resources']['/Font'][NameObject('/Simple')]=writer._add_object(font)
+    raw=page.get_contents().get_data()+b' BT /Simple 12 Tf 72 680 Td <41> Tj ET'
+    content=DecodedStreamObject();content.set_data(raw);page[NameObject('/Contents')]=writer._add_object(content)
+    with path.open('wb') as stream:writer.write(stream)
+
+
 class PDFAuditTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
@@ -175,6 +230,39 @@ class PDFAuditTests(unittest.TestCase):
         report=inspect_glyphs(p)
         self.assertEqual(report['status'],'incomplete')
         self.assertEqual(report['private_use_glyphs'],1)
+
+    def test_same_name_type1_and_type0_keep_exact_painted_sequence(self):
+        import fitz
+        p=self.root/'mixed.pdf';mixed_actualtext_fixture(p)
+        with fitz.open(p) as doc:
+            spans=doc[0].get_texttrace()
+            self.assertEqual(len({s['font'] for s in spans}),1)
+            self.assertEqual(sum(len(s['chars']) for s in spans),2)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'pass',report)
+        self.assertEqual(report['actualtext']['covered_glyph_occurrences'],1)
+        self.assertEqual(report['actualtext']['unmeasured'],[])
+
+    def test_same_name_simple_unmarked_bad_glyph_is_not_excused(self):
+        p=self.root/'mixed-bad.pdf';mixed_actualtext_fixture(p,unmarked_bad=True)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'fail',report)
+        self.assertEqual(report['unmapped_trace_glyphs'],1)
+        self.assertEqual(report['actualtext']['covered_glyph_occurrences'],1)
+
+    def test_type1_pdf_encoding_differences_are_not_guessed(self):
+        p=self.root/'mixed-differences.pdf';mixed_actualtext_fixture(p,pdf_differences=True)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'incomplete',report)
+        self.assertTrue(report['actualtext']['unmeasured'])
+        self.assertEqual(report['actualtext']['covered_glyph_occurrences'],0)
+
+    def test_type1_embedded_encoding_disagreement_is_not_guessed(self):
+        p=self.root/'mixed-encoding.pdf';mixed_actualtext_fixture(p,encoding_mismatch=True)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'incomplete',report)
+        self.assertTrue(report['actualtext']['unmeasured'])
+        self.assertEqual(report['actualtext']['covered_glyph_occurrences'],0)
 
     def test_build_binds_actual_glyph_failure_and_refuses_changed_bytes(self):
         from olpkit.build import record_pdf_glyphs

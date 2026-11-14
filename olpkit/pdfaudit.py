@@ -412,6 +412,7 @@ def serialized_link_rgb(color):
 def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None,*,xdvipdfmx=False):
     from pypdf import PdfReader
     import pdfplumber
+    import fitz
     if minimum_contrast < 7:
         raise ValueError('link contrast acceptance cannot be below 7:1')
     expected_rgb=None
@@ -421,9 +422,10 @@ def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None,*,xd
         expected_rgb=tuple(int(expected_color[i:i+2],16)/255 for i in (0,2,4))
     pdf = PdfReader(path)
     observations=[]; issues=[]; unknown=[]; colours=Counter(); citation_count=0
-    with pdfplumber.open(path) as parsed:
+    with pdfplumber.open(path) as parsed, fitz.open(path) as painted:
         if len(parsed.pages)!=len(pdf.pages):
             raise ValueError('PDF parsers disagree on page coverage')
+        if len(painted)!=len(pdf.pages):raise ValueError('paint trace page coverage differs')
         for number,(page,geometry) in enumerate(zip(pdf.pages,parsed.pages),1):
             links=[]
             if int(page.get('/Rotate',0)) % 360 or list(page.mediabox)[:2] != [0,0] or page.cropbox != page.mediabox:
@@ -445,12 +447,26 @@ def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None,*,xd
             if not links:
                 geometry.close();continue
             chars=geometry.chars
+            paint_chars=[]
+            if xdvipdfmx:
+                # PDFMiner's font-descriptor boxes can include a superscript
+                # from the next line in this link. Use actual painted glyph
+                # trace geometry, also used by the background/raster check.
+                for span in painted[number-1].get_texttrace():
+                    for code,gid,origin,box in span['chars']:
+                        if gid<0 or not chr(code).strip():continue
+                        paint_chars.append({'text':chr(code),'x0':box[0],'top':box[1],
+                            'x1':box[2],'bottom':box[3],'non_stroking_color':span['color'],
+                            'opaque_fill':span.get('type')==0 and span.get('opacity')==1})
             for link in links:
                 ink=[c for c in chars if c['text'].strip() and contains(link['rect'],c)]
-                if not ink:
+                colour_ink=([c for c in paint_chars if contains(link['rect'],c)] if xdvipdfmx else ink)
+                if not colour_ink:
                     unknown.append({'page':number,'index':link['index'],'reason':'link has no extractable painted text'})
                 measured=[]; paints=set()
-                for c in ink:
+                for c in colour_ink:
+                    if xdvipdfmx and not c['opaque_fill']:
+                        unknown.append({'page':number,'index':link['index'],'reason':'linked text paint is not an opaque fill'});continue
                     try: paint=rgb(c.get('non_stroking_color'))
                     except (ValueError,TypeError):
                         unknown.append({'page':number,'index':link['index'],'reason':'unsupported text colour'});continue
@@ -507,6 +523,7 @@ def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None,*,xd
             'issues':issues,'unmeasured':unknown,'observations':observations,
             'background_measurements':measurements,
             'limits':['Non-white fills and non-text links require supported paint-order and raster evidence.',
+                      'XeLaTeX link colours use painted-glyph trace geometry; nearby extracted text is diagnostic, not an exact link-content transcription.',
                       'Citation split candidates require source-context adjudication when distinct mentions share a destination.',
                       'This gate does not certify link destinations exist, reading order, semantic fidelity, table layout or font scale.']}
 

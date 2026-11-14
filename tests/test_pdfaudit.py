@@ -156,6 +156,22 @@ def mixed_actualtext_fixture(path,*,unmarked_bad=False,encoding_mismatch=False,p
     with path.open('wb') as stream:writer.write(stream)
 
 
+def neighbouring_superscript_fixture(path,*,inside=False):
+    output=io.BytesIO();c=canvas.Canvas(output,pagesize=(612,792))
+    c.setFont('Helvetica',12);c.setFillColorRGB(*BLUE);c.drawString(72,700,'Target')
+    c.setFont('Helvetica',6);c.setFillColorRGB(0,0,0)
+    c.drawString(80,692 if inside else 690,"'")
+    c.save();writer=PdfWriter();writer.append(PdfReader(io.BytesIO(output.getvalue())))
+    # A real metric discrepancy: PDFMiner puts the lower prime's centre at
+    # y=100.242, while the rendered glyph trace puts it at y=100.306.
+    annotation=DictionaryObject({NameObject('/Type'):NameObject('/Annot'),NameObject('/Subtype'):NameObject('/Link'),
+        NameObject('/Rect'):ArrayObject([FloatObject(x) for x in (72,691.73,110,710)]),
+        NameObject('/Border'):ArrayObject([FloatObject(0)]*3),
+        NameObject('/A'):DictionaryObject({NameObject('/S'):NameObject('/URI'),NameObject('/URI'):TextStringObject('https://example.org/')})})
+    writer.add_annotation(0,annotation)
+    with path.open('wb') as stream:writer.write(stream)
+
+
 class PDFAuditTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
@@ -263,6 +279,27 @@ class PDFAuditTests(unittest.TestCase):
         self.assertEqual(report['status'],'incomplete',report)
         self.assertTrue(report['actualtext']['unmeasured'])
         self.assertEqual(report['actualtext']['covered_glyph_occurrences'],0)
+
+    def test_xelatex_link_uses_painted_geometry_for_neighbouring_superscript(self):
+        p=self.root/'neighbour.pdf';neighbouring_superscript_fixture(p)
+        coarse=inspect_links(p,expected_color='0B3C6F')
+        self.assertEqual(coarse['status'],'fail')
+        precise=inspect_links(p,expected_color='0B3C6F',xdvipdfmx=True)
+        self.assertEqual(precise['status'],'pass',precise)
+        self.assertEqual(len(precise['text_colours']),1)
+
+    def test_xelatex_link_keeps_a_real_wrong_colour_inside_the_area(self):
+        p=self.root/'inside.pdf';neighbouring_superscript_fixture(p,inside=True)
+        report=inspect_links(p,expected_color='0B3C6F',xdvipdfmx=True)
+        self.assertEqual(report['status'],'fail')
+        self.assertTrue(any(x['rule']=='declared-link-colour-overridden' for x in report['issues']))
+
+    def test_bengali_link_colour_passes_on_the_observed_theorem_background(self):
+        import tomllib
+        from olpkit.schemas import ROOT
+        profile=tomllib.loads((ROOT/'data/languages/bn.toml').read_text(encoding='utf-8'))
+        value=profile['links']['color'];colour=tuple(int(value[i:i+2],16)/255 for i in (0,2,4))
+        self.assertGreaterEqual(contrast(colour,(.973,.796,.537)),7)
 
     def test_build_binds_actual_glyph_failure_and_refuses_changed_bytes(self):
         from olpkit.build import record_pdf_glyphs

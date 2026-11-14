@@ -9,6 +9,7 @@ from .pdfaudit import contrast, rgb
 WHITE = (1.0, 1.0, 1.0)
 BLACK = (0.0, 0.0, 0.0)
 LOGO_URI = 'http://openlogicproject.org/'
+LOGO_URIS = {LOGO_URI, 'https://openlogicproject.org/'}
 LOGO_FORM_SHA256 = 'a9d96c1fe3bd78f60652124e75d29a385d931ac3299e46d45ec0aedb167610d9'
 UNKNOWN_FILL = 'non-white vector fill overlaps link background'
 UNKNOWN_NO_TEXT = 'link has no extractable painted text'
@@ -81,7 +82,7 @@ def flat_fill_link(page,rect,paint_rgb):
 
 
 def vector_logo(pdf,page,rect,destination):
-    if destination!=LOGO_URI:
+    if destination not in LOGO_URIS:
         raise ValueError('no evidence-bound vector-link policy for this destination')
     forms = [xref for xref,_,parent,_ in page.get_xobjects() if not parent
              and sha256(pdf.xref_stream(xref)).hexdigest()==LOGO_FORM_SHA256]

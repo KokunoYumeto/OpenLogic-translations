@@ -71,7 +71,7 @@ class DriverTests(unittest.TestCase):
         self.assertIn(b'../../../../sty/open-logic-book',bn['slc-screen.tex'])
         self.assertIn(b'\\quad',bn['slc-screen.tex'])
         self.assertIn(b'\\AddToHook{begindocument/end}',bn['olpkit-after-olp.tex'])
-        self.assertIn(b'{684106}',bn['olpkit-after-olp.tex'])
+        self.assertIn(b'{482D04}',bn['olpkit-after-olp.tex'])
         self.assertEqual(bn_report['untranslated_driver_labels'],0)
         self.assertIn(b'pdf:mapfile fonts/bn-slc-newtx-unicode.map',bn['olpkit-before-olp.tex'])
         language=tomllib.loads((self.data/'languages/bn.toml').read_text(encoding='utf-8'))

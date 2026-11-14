@@ -166,6 +166,13 @@ class DisplayAdapter:
                     pos=end+closing.end();continue
             if name in ('[', '('): math = True; out.append(match[0]); continue
             if name in (']', ')'): math = False; out.append(match[0]); continue
+            if name == 'ensuremath':
+                value, end, at = token(text, pos)
+                # The argument enters math mode even in a prose/list label.
+                # Keep that mode local, just as TeX does, and retain its wrapper.
+                out.extend((r'\ensuremath{', self.walk(value, math=True, offset=offset+at), '}'))
+                pos = end
+                continue
             if math and name == 'small':
                 opening = re.match(r'\s*\\begin\s*\{array\}', text[pos:])
                 if opening:

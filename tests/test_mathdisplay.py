@@ -109,6 +109,22 @@ class PandocDisplayTests(unittest.TestCase):
         self.assertNotIn('\u21a6', doc.xpath('//mo/text()'))
         self.assertEqual(doc.xpath('//annotation')[0].text, source[1:-1])
 
+    def test_glossary_symbol_ensuremath_enters_math_locally(self):
+        arrow = '\\mathrel{\\ooalign{\\hfil$\\mapstochar\\mkern\n        5mu$\\hfil\\cr$\\to$}}'
+        symbol = r'f\colon A'+arrow+' B'
+        source = r'\begin{description}\item[{function (\ensuremath{'+symbol+r'})}]Definition.\end{description}'
+        doc, receipt = self.render(source)
+        self.assertEqual(doc.xpath('//dt//mo[text()="\u21f8"]/text()'), ['\u21f8'])
+        # Pandoc normalizes TeX annotation whitespace; the source receipt also
+        # retains the exact multiline input and its character range.
+        mark = next(r for r in receipt['markers'].values() if r['kind']=='partial-function-arrow')
+        self.assertEqual(mark['original_tex'], arrow)
+        self.assertEqual(source[mark['char_start']:mark['char_end']], arrow)
+        self.assertIn(arrow, doc.xpath('//annotation')[0].text)
+        prepared, local = DisplayAdapter().prepare(r'\ensuremath{'+arrow+'}'+arrow, 'fixture')
+        self.assertEqual(len(local['markers']), 1)
+        self.assertTrue(prepared.endswith(arrow))
+
     def test_small_array_keeps_columns_blank_cells_blank_row_and_font_size(self):
         source = r'$\small\begin{array}{@{}c c c@{}}\mathbf1&\mathbf2&\mathbf3\\\\(0,0)&&(0,1)\\\end{array}$'
         doc, receipt = self.render(source, math_font_sizes={'small':'91.3242%'})

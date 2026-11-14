@@ -5,10 +5,28 @@ from pathlib import Path
 import tempfile
 from unittest.mock import patch
 
-from olpkit.nativefigures import extract_tikz, export_native_figures
+from olpkit.nativefigures import extract_tikz,extract_native_figures, export_native_figures
 
 
 class NativeFigureTests(unittest.TestCase):
+    def test_tableau_branches_justifications_and_closures_are_exact_source(self):
+        tableau=r'\begin{oltableau}[A, just={Hypothesis}[B, close][C[D, close]]]\end{oltableau}'
+        tikz=r'\begin{tikzpicture}\node{x};\end{tikzpicture}'
+        source='Before'+tikz+'Middle'+tableau+'After'
+        rows=extract_native_figures(source)
+        self.assertEqual([r['environment'] for r in rows],['tikzpicture','oltableau'])
+        self.assertEqual([r['source_tex'] for r in rows],[tikz,tableau])
+        self.assertEqual(len(extract_tikz(source)),1)
+        self.assertNotIn('environment',extract_tikz(source)[0])
+        self.assertEqual(extract_native_figures(source,('oltableau',))[0]['index'],1)
+        for row in rows:self.assertEqual(source[row['char_start']:row['char_end']],row['source_tex'])
+
+    def test_tableaux_in_definitions_comments_or_verbatim_are_not_executed(self):
+        tableau=r'\begin{oltableau}[A,close]\end{oltableau}'
+        source=r'\newcommand{\unused}{'+tableau+'}\n% '+tableau+'\n'+r'\begin{verbatim}'+tableau+r'\end{verbatim}'+tableau
+        self.assertEqual([r['source_tex'] for r in extract_native_figures(source)],[tableau])
+        with self.assertRaisesRegex(ValueError,'unsupported native'):
+            extract_native_figures(tableau,('document',))
     def test_only_live_diagrams_are_extracted_with_exact_offsets(self):
         picture = r'\begin{tikzpicture}\node{$q_0$};\end{tikzpicture}'
         source = (r'\newcommand{\unused}{'+picture+'}\n' +
@@ -60,6 +78,18 @@ class NativeFigureResumeTests(unittest.TestCase):
         self.assertEqual((self.output / result['resumed_from']['file']).read_bytes(), receipt)
         self.assertEqual({p.name: p.read_bytes() for p in self.output.glob('*.tex')}, prepared)
         self.assertEqual(self.slot.call_count, 2)
+        self.engine.assert_not_called()
+
+    def test_tableau_preview_is_separate_and_cannot_resume_as_tikz(self):
+        self.picture=r'\begin{oltableau}[A,just={Given}[B,close][C]]\end{oltableau}'
+        result=self.export(environments=('oltableau',))
+        self.assertEqual(result['environments'],['oltableau'])
+        tex=(self.output/'native-figures.tex').read_text()
+        self.assertIn(r'\PreviewEnvironment{oltableau}',tex)
+        self.assertNotIn(r'\PreviewEnvironment{tikzpicture}',tex)
+        self.assertIn(self.picture,tex)
+        self.picture=r'\begin{tikzpicture}\node{x};\end{tikzpicture}'
+        with self.assertRaisesRegex(ValueError,'environments changed'):self.export(resume=True)
         self.engine.assert_not_called()
 
     def test_changed_source_or_prepared_bytes_cannot_acquire_slot(self):

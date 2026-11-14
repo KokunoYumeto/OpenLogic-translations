@@ -9,7 +9,7 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
 
-from .nativefigures import extract_tikz, sha
+from .nativefigures import extract_native_figures, sha
 
 
 PREFIX = 'OLPNATIVEFIG'
@@ -65,7 +65,7 @@ def prepare_figures(text, source, exported, assets):
     if (exported.get('schema') != 'olpkit.native-figures.v1' or
             exported.get('status') != 'vectors_exported_pending_visual_and_semantic_checks'):
         raise ValueError('native figures have no successful vector export')
-    actual = extract_tikz(text)
+    actual = extract_native_figures(text)
     expected = exported['figures']
     if len(actual) != len(expected):
         raise ValueError('native figure occurrence count differs')

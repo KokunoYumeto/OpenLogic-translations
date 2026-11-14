@@ -23,8 +23,14 @@ from .selective import definition_end, environment_end
 def sha(data): return hashlib.sha256(data).hexdigest()
 
 
-def extract_tikz(text):
+NATIVE_ENVIRONMENTS = ('tikzpicture', 'oltableau')
+
+
+def extract_native_figures(text, environments=NATIVE_ENVIRONMENTS):
     """Keep definition bodies/verbatim opaque and exact active source slices."""
+    if (not environments or len(set(environments))!=len(environments)
+            or not set(environments)<=set(NATIVE_ENVIRONMENTS)):
+        raise ValueError('unsupported native figure environments')
     code = mask_comments(text)
     rows = []
     pos = 0
@@ -48,22 +54,29 @@ def extract_tikz(text):
             continue
         if match[1] != 'begin': continue
         env, at = group(code, pos)
-        if env not in ('tikzpicture', 'verbatim', 'Verbatim', 'lstlisting', 'minted'): continue
+        if env not in (*environments, 'verbatim', 'Verbatim', 'lstlisting', 'minted'): continue
         _, end = environment_end(code, at, env)
-        if env == 'tikzpicture':
+        if env in environments:
             source = text[start:end]
             rows.append({'index': len(rows)+1, 'char_start': start, 'char_end': end,
                          'line': text[:start].count('\n')+1,
-                         'source_sha256': sha(source.encode('utf-8')), 'source_tex': source})
+                         'source_sha256': sha(source.encode('utf-8')), 'source_tex': source,
+                         'environment':env})
         pos = end
     return rows
+
+
+def extract_tikz(text):
+    """Preserve the exact historical TikZ-only extraction contract."""
+    return [{k:v for k,v in row.items() if k!='environment'}
+            for row in extract_native_figures(text,('tikzpicture',))]
 
 
 PREVIEW_BACKENDS = {'pdflatex': 'pdftex', 'xelatex': 'xetex'}
 
 
 def export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence,
-                          engine='pdflatex', resume=False):
+                          engine='pdflatex', resume=False, environments=('tikzpicture',)):
     """Serialize one output directory; resume only a proven unstarted attempt."""
     if engine not in PREVIEW_BACKENDS:
         raise ValueError('unsupported native figure engine: '+engine)
@@ -77,13 +90,13 @@ def export_native_figures(folder, assembly, source, driver, output, *, epoch, co
     try:
         return _export_native_figures(folder, assembly, source, driver, output,
                                       epoch=epoch, context_evidence=context_evidence,
-                                      engine=engine, resume=resume)
+                                      engine=engine, resume=resume,environments=environments)
     finally:
         lock.unlink()
 
 
-def _export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, engine, resume):
-    """Export exact active TikZ under a caller-verified native configuration.
+def _export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, engine, resume,environments=('tikzpicture',)):
+    """Export exact active native figures under a verified book configuration.
 
     context_evidence must identify the actual applied configuration and local
     definition comparison. Arbitrary unit-local macro execution is not inferred.
@@ -97,8 +110,8 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
     verify_assembly(folder, assembly)
     original = native_driver.read_text(encoding='utf-8-sig')
     if original.count(r'\begin{document}') != 1: raise ValueError('ambiguous native book preamble')
-    figures = extract_tikz(source)
-    if not figures: raise ValueError('no active TikZ figures')
+    figures = extract_tikz(source) if tuple(environments)==('tikzpicture',) else extract_native_figures(source,environments)
+    if not figures: raise ValueError('no active native figures in selected environments')
     output.mkdir(parents=True, exist_ok=True)
     receipt_path = output / 'NATIVE_FIGURES.json'
     if receipt_path.exists() and not resume:
@@ -109,7 +122,7 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
     job = 'native-figures'
     backend = PREVIEW_BACKENDS[engine]
     batch = (preamble + '\n' + r'\usepackage[active,tightpage,' + backend + r']{preview}' + '\n' +
-             r'\PreviewEnvironment{tikzpicture}' + '\n' + r'\setlength\PreviewBorder{2pt}' + '\n' +
+             '\n'.join(r'\PreviewEnvironment{'+env+'}' for env in environments) + '\n' + r'\setlength\PreviewBorder{2pt}' + '\n' +
              r'\begin{document}' + '\n' + '\n\n'.join(row['source_tex'] for row in figures) +
              '\n' + r'\end{document}' + '\n')
     tex = output / (job + '.tex')
@@ -129,9 +142,12 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
               'figures': figures, 'mutex': TEX_MUTEX, 'mutex_acquired': False,
               'memory_limit_bytes': MEMORY_LIMIT, 'commands': [], 'tex_runs': 0,
               'visual_qa': 'pending', 'accessibility_descriptions': 'pending', 'publishable': False}
+    if tuple(environments)!=('tikzpicture',):result['environments']=list(environments)
     if resume:
         original_receipt = receipt_path.read_bytes()
         previous = json.loads(original_receipt)
+        if previous.get('environments',['tikzpicture'])!=list(environments):
+            raise ValueError('prepared native figure environments changed')
         if (previous.get('schema') != result['schema'] or previous.get('status') != 'slot_occupied'
                 or previous.get('commands') != [] or previous.get('mutex_acquired') is not False
                 or previous.get('tex_runs') != 0 or previous.get('pdf')):

@@ -44,12 +44,20 @@ class ExternalFigureTests(unittest.TestCase):
         result,r=self.run_source(r'\begin{tikzpicture}A\end{tikzpicture}\olasset{assets/a.tikz}')
         self.assertEqual(r['figures'][0]['index'],2)
 
+    def test_tableau_shifts_global_occurrence_without_stealing_external_width(self):
+        result,r=self.run_source(r'\begin{oltableau}[A,close]\end{oltableau}\olasset{assets/a.tikz}')
+        self.assertEqual(r['figures'][0]['index'],2)
+        self.assertEqual(r['figures'][0]['width_percent'],40)
+
     def test_combining_native_exports_reuses_exact_bytes_and_rejects_changed_context(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);exports=[];sources=[]
             svg=b'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10" viewBox="0 0 20 10"><path d="M0 0L1 1"/></svg>'
             for label in ['A','B']:
-                folder=root/label;folder.mkdir();source=r'\begin{tikzpicture}'+label+r'\end{tikzpicture}';sources.append(source)
+                folder=root/label;folder.mkdir()
+                source=(r'\begin{tikzpicture}A\end{tikzpicture}' if label=='A' else
+                        r'\begin{oltableau}[B,just={Given}[C,close][D]]\end{oltableau}')
+                sources.append(source)
                 (folder/'figure-001.tex').write_text(source,encoding='utf-8');(folder/'figure-001.svg').write_bytes(svg)
                 record={'status':'vectors_exported_pending_visual_and_semantic_checks',
                         'driver_sha256':'same','preamble_sha256':'same','assembly_sha256':'same',

@@ -48,6 +48,21 @@ class FigureBindingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'asset hash'):
             self.prepared()
 
+    def test_tableau_must_have_its_own_exact_vector_and_localized_description(self):
+        tableau=r'\begin{oltableau}[A,just={Given}[B,close][C]]\end{oltableau}'
+        with self.assertRaisesRegex(ValueError,'source/order'):
+            self.prepared(tableau)
+        (self.root/'figure-001.tex').write_text(tableau,encoding='utf-8')
+        self.exported['figures'][0]['source_sha256']=sha(tableau.encode())
+        prepared,receipt=self.prepared('Before '+tableau+' After')
+        self.assertIn('Before ',prepared);self.assertIn(' After',prepared)
+        self.assertEqual(receipt['markers']['OLPNATIVEFIG000001']['environment'],'oltableau')
+        doc=html.fromstring('<p>Before OLPNATIVEFIG000001 After</p>')
+        report=self.bind(doc,receipt,descriptions={sha(tableau.encode()):'Tableau with two branches'})
+        self.assertEqual(report['descriptions_pending'],[])
+        self.assertEqual(doc.text_content(),'Before  After')
+        self.assertEqual(doc.xpath('.//img/@alt'),['Tableau with two branches'])
+
     def test_external_relative_width_and_centering_are_preserved(self):
         self.exported['figures'][0]['width_percent']=80
         _,r=self.prepared()

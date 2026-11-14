@@ -3,7 +3,7 @@ import re,json,collections
 from pathlib import PurePosixPath,Path
 from .macrophases import COMMAND,group,mask_comments,skip_space
 from .selective import definition_end
-from .nativefigures import extract_tikz,sha
+from .nativefigures import extract_tikz,extract_native_figures,sha
 from .bookinsertions import calls
 
 
@@ -63,7 +63,7 @@ def expand_external_figures(text, *, read, default_width_percent, evidence):
         delta+=len(figure['source_tex'])-(end-start)
     pieces.append(text[last:]);result=''.join(pieces)
     # Bind locations after expansion, including intervening inline figures.
-    expanded={f['char_start']:f for f in extract_tikz(result)}
+    expanded={f['char_start']:f for f in extract_native_figures(result)}
     for row in rows:
         actual=expanded.get(row['expanded_start'])
         if not actual or actual['source_sha256']!=row['source_sha256']:
@@ -89,7 +89,7 @@ def combine_exports(text, exports, output, *, external):
         for row in record['figures']:available[row['source_sha256']].append((Path(folder),row))
     widths={r['index']:r['width_percent'] for r in external['figures']}
     rows=[]
-    for actual in extract_tikz(text):
+    for actual in extract_native_figures(text):
         queue=available[actual['source_sha256']]
         if not queue:raise ValueError('no exported vector for source figure')
         folder,native=queue.pop(0);index=actual['index']

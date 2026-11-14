@@ -5,11 +5,11 @@ import tempfile
 import unittest
 
 from pypdf import PdfReader, PdfWriter
-from pypdf.generic import DictionaryObject, NameObject, TextStringObject, ArrayObject, FloatObject
+from pypdf.generic import DictionaryObject, NameObject, TextStringObject, ArrayObject, FloatObject, DecodedStreamObject
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.pdfmetrics import stringWidth
 
-from olpkit.pdfaudit import compare_pdfs, contrast, digest, inspect_links, rgb, split_citations
+from olpkit.pdfaudit import compare_pdfs, contrast, digest, inspect_links, inspect_glyphs, rgb, split_citations
 
 
 BLUE=(11/255,60/255,111/255)
@@ -50,10 +50,142 @@ def receipt(folder,pdf,pid):
     path=folder/'BUILD.json';path.write_text(json.dumps(result));return path
 
 
+def mapped_glyph_fixture(path,codepoint):
+    """A real PDF whose ordinary extractor may mask the malformed font map."""
+    fixture(path,text='A')
+    writer=PdfWriter();writer.append(PdfReader(path))
+    mapping=DecodedStreamObject()
+    mapping.set_data(('/CIDInit /ProcSet findresource begin 12 dict begin begincmap '
+        '/CIDSystemInfo << /Registry (Test) /Ordering (Test) /Supplement 0 >> def '
+        '/CMapName /GlyphRegression def /CMapType 2 def '
+        '1 begincodespacerange <00> <FF> endcodespacerange '
+        f'1 beginbfchar <41> <{codepoint:04X}> endbfchar '
+        'endcmap CMapName currentdict /CMap defineresource pop end end').encode())
+    writer.pages[0]['/Resources']['/Font']['/F1'].get_object()[NameObject('/ToUnicode')]=writer._add_object(mapping)
+    with path.open('wb') as stream:writer.write(stream)
+
+
+def actualtext_fixture(path,*,unmarked=False,notdef=False,nested_form=False,replacement='A'):
+    """Real embedded Type0 font; the same missing map can be marked or unmarked."""
+    import fitz
+    import reportlab
+    fontpath=Path(reportlab.__file__).parent/'fonts/Vera.ttf'
+    font=fitz.Font(fontfile=str(fontpath));gid=0 if notdef else font.has_glyph(ord('A'))
+    with fitz.open() as doc:
+        page=doc.new_page();page.insert_font(fontname='TestFont',fontfile=str(fontpath))
+        page.insert_text((72,72),'A',fontname='TestFont')
+        writer=PdfWriter();writer.append(PdfReader(io.BytesIO(doc.tobytes())))
+    page=writer.pages[0]
+    mapping=DecodedStreamObject()
+    mapping.set_data(('/CIDInit /ProcSet findresource begin 12 dict begin begincmap '
+        '/CIDSystemInfo << /Registry (Test) /Ordering (Test) /Supplement 0 >> def '
+        '/CMapName /ActualTextRegression def /CMapType 2 def '
+        '1 begincodespacerange <0000> <FFFF> endcodespacerange '
+        f'1 beginbfchar <{gid:04X}> <FFFD> endbfchar '
+        'endcmap CMapName currentdict /CMap defineresource pop end end').encode())
+    page['/Resources']['/Font']['/TestFont'].get_object()[NameObject('/ToUnicode')]=writer._add_object(mapping)
+    actual=(b'\xfe\xff'+replacement.encode('utf-16-be')).hex()
+    text=f'BT /TestFont 12 Tf 72 720 Td <{gid:04X}> Tj ET'
+    raw=f'/Span << /ActualText <{actual}> >> BDC {text} EMC'
+    if unmarked:raw+=f' BT /TestFont 12 Tf 72 680 Td <{gid:04X}> Tj ET'
+    content=DecodedStreamObject();content.set_data(raw.encode())
+    if nested_form:
+        content[NameObject('/Type')]=NameObject('/XObject')
+        content[NameObject('/Subtype')]=NameObject('/Form')
+        content[NameObject('/BBox')]=ArrayObject([FloatObject(x) for x in (0,0,600,800)])
+        content[NameObject('/Resources')]=page['/Resources']
+        page[NameObject('/Resources')]=DictionaryObject({NameObject('/XObject'):DictionaryObject({NameObject('/Fm'):writer._add_object(content)})})
+        wrapper=DecodedStreamObject();wrapper.set_data(b'q /Fm Do Q')
+        page[NameObject('/Contents')]=writer._add_object(wrapper)
+    else:page[NameObject('/Contents')]=writer._add_object(content)
+    with path.open('wb') as stream:writer.write(stream)
+
+
 class PDFAuditTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
     def tearDown(self):self.temp.cleanup()
+
+    def test_actual_glyph_trace_rejects_replacement_hidden_by_text_fallback(self):
+        import fitz
+        p=self.root/'fallback.pdf';mapped_glyph_fixture(p,0xfffd)
+        with fitz.open(p) as doc:self.assertEqual(doc[0].get_text().strip(),'A')
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'fail')
+        self.assertEqual(report['unmapped_trace_glyphs'],1)
+        self.assertEqual(report['issues'][0]['font'],'Helvetica')
+        self.assertTrue(report['issues'][0]['examples'][0]['bbox'])
+
+    def test_poppler_exposes_control_hidden_by_mupdf_fallback(self):
+        p=self.root/'control.pdf';mapped_glyph_fixture(p,6)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'fail')
+        self.assertEqual(report['poppler_invalid_characters'],1)
+
+    def test_private_use_is_not_silently_accepted(self):
+        p=self.root/'private.pdf';mapped_glyph_fixture(p,0xe123)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'incomplete')
+        self.assertEqual(report['private_use_glyphs'],1)
+
+    def test_square_is_not_automatically_a_missing_glyph(self):
+        p=self.root/'square.pdf';mapped_glyph_fixture(p,0x25a1)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'pass')
+        self.assertEqual(report['square_codepoints'],{'U+25A1':1})
+
+    def test_ordinary_pdf_encoding_passes_without_visual_quality_claim(self):
+        p=self.root/'plain.pdf';fixture(p)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'pass')
+        self.assertEqual(report['pages'],1)
+        self.assertTrue(report['limits'])
+
+    def test_exact_actualtext_covers_a_marked_glyph(self):
+        p=self.root/'actual.pdf';actualtext_fixture(p)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'pass',report)
+        self.assertEqual(report['actualtext']['covered_glyph_occurrences'],1)
+
+    def test_actualtext_does_not_whitelist_same_font_outside_span(self):
+        p=self.root/'unmarked.pdf';actualtext_fixture(p,unmarked=True)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'fail')
+        self.assertEqual(report['unmapped_trace_glyphs'],1)
+        self.assertEqual(report['actualtext']['covered_glyph_occurrences'],1)
+
+    def test_actualtext_cannot_excuse_painted_notdef(self):
+        p=self.root/'notdef.pdf';actualtext_fixture(p,notdef=True)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'fail')
+        self.assertTrue(any(x['rule']=='notdef-glyph' for x in report['issues']))
+
+    def test_actualtext_inside_form_is_matched(self):
+        p=self.root/'form.pdf';actualtext_fixture(p,nested_form=True)
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'pass',report)
+        self.assertEqual(report['actualtext']['covered_glyph_occurrences'],1)
+
+    def test_actualtext_invalid_character_is_not_a_waiver(self):
+        p=self.root/'invalid.pdf';actualtext_fixture(p,replacement='\ufffd')
+        with self.assertRaisesRegex(ValueError,'ActualText contains an invalid character'):inspect_glyphs(p)
+
+    def test_actualtext_private_use_remains_unresolved(self):
+        p=self.root/'actual-private.pdf';actualtext_fixture(p,replacement='\ue123')
+        report=inspect_glyphs(p)
+        self.assertEqual(report['status'],'incomplete')
+        self.assertEqual(report['private_use_glyphs'],1)
+
+    def test_build_binds_actual_glyph_failure_and_refuses_changed_bytes(self):
+        from olpkit.build import record_pdf_glyphs
+        p=self.root/'book.pdf';mapped_glyph_fixture(p,0xfffd)
+        result={'pdf':{'path':p.name,'sha256':digest(p.read_bytes())},'gates':{'G-LOG':{'status':'pass'}},'release_ready':False}
+        self.assertFalse(record_pdf_glyphs(self.root,result))
+        stored=json.loads((self.root/'BUILD.json').read_text())
+        self.assertEqual(stored['gates']['G-GLYPH']['unmapped_trace_glyphs'],1)
+        self.assertEqual(stored['gates']['G-GLYPH']['status'],'fail')
+        p.write_bytes(p.read_bytes()+b'changed')
+        with self.assertRaisesRegex(ValueError,'PDF bytes changed'):record_pdf_glyphs(self.root,result)
 
     def test_contrast_black_white_and_blue(self):
         self.assertEqual(contrast((0,0,0)),21)

@@ -52,6 +52,27 @@ def verify_assembly(folder,report):
             raise ValueError('assembled input changed: '+name)
 
 
+def record_pdf_glyphs(output,result):
+    """Bind actual encoded-glyph inspection to the completed build's PDF."""
+    from .pdfaudit import inspect_glyphs
+    output=Path(output).resolve();pdf=(output/result['pdf']['path']).resolve()
+    if not pdf.is_relative_to(output) or digest(pdf.read_bytes())!=result['pdf']['sha256']:
+        raise ValueError('PDF bytes changed before glyph inspection')
+    report=inspect_glyphs(pdf);payload=json_bytes(report);path=output/'G-GLYPH.json'
+    path.write_bytes(payload)
+    status=report['status']
+    if status=='pass' and result['gates'].get('G-LOG',{}).get('status')!='pass':status='partial'
+    result['gates']['G-GLYPH']={'status':status,'report':path.name,'sha256':digest(payload),
+        'unmapped_trace_glyphs':report['unmapped_trace_glyphs'],
+        'notdef_glyphs':report['notdef_glyphs'],
+        'poppler_invalid_characters':report['poppler_invalid_characters'],
+        'private_use_glyphs':report['private_use_glyphs'],
+        'scope':'Actual PDF encoding plus existing build-log gate; source/visual glyph meaning remains a separate check.'}
+    result['release_ready']=False
+    (output/'BUILD.json').write_bytes(json_bytes(result))
+    return status=='pass'
+
+
 def record_pdf_links(output,result,minimum_contrast=7,expected_color=None,*,xdvipdfmx=False):
     """Inspect the built PDF after the TeX slot has been released."""
     from .pdfaudit import inspect_links
@@ -263,11 +284,12 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
     result=compile_book(source,report,engine,epoch,output,expected,english,resume)
     if not english and result.get('pdf'):
         language=tomllib.loads((ROOT/'data/languages'/(report['locale']+'.toml')).read_text(encoding='utf-8'))
+        glyphs_ok=record_pdf_glyphs(output,result)
         links_ok=record_pdf_links(output,result,language['links']['minimum_contrast'],language['links']['color'],
                                   xdvipdfmx=engine=='xelatex')
         credits_ok=record_pdf_credits(output,result,ROOT/'data/credits'/('slc-'+report['locale']+'.json'))
-        if not links_ok or not credits_ok:
-            print('PDF link/credit acceptance incomplete; inspect recorded gate results',flush=True)
+        if not glyphs_ok or not links_ok or not credits_ok:
+            print('PDF glyph/link/credit acceptance incomplete; inspect recorded gate results',flush=True)
             return 1
     if english and result['status']=='reference_compiled':
         registry=dict(line.split('\t')[::-1] for line in (ROOT/'data/units/olp-units.tsv').read_text().splitlines()[1:])

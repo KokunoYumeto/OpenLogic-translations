@@ -153,7 +153,7 @@ def main(argv=None):
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin');build.add_argument('--resume',action='store_true')
     export=sub.add_parser('export');export.add_argument('--source',required=True);export.add_argument('--product',choices=['cumulative-tex','source-zip','html','epub','accessible'],required=True);export.add_argument('--out',required=True);export.add_argument('--profile');export.add_argument('--build');export.add_argument('--credits');export.add_argument('--instructions');export.add_argument('--check-numbers',action='store_true');export.add_argument('--check-speech',action='store_true')
     pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
-    for action in ('compare','links'):
+    for action in ('compare','links','glyphs'):
         q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
     check=sub.add_parser('check').add_subparsers(dest='action',required=True)
     q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')

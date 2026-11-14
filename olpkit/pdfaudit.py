@@ -36,6 +36,233 @@ def extracted_text(path):
     return run.stdout, run.stderr.decode('utf-8', errors='replace')
 
 
+def _actualtext_glyph_coverage(page, trace, font_cache=None):
+    """Match marked-content replacements to exact Type0 glyph occurrences.
+
+    A font-level whitelist would hide an unmarked bad occurrence elsewhere.
+    Match the complete per-font glyph sequence before accepting any coverage.
+    Unsupported fonts or a sequence mismatch remain explicitly unresolved.
+    """
+    from pypdf.generic import ByteStringObject, TextStringObject
+    import io
+    font_cache={} if font_cache is None else font_cache
+    def resolved(value):
+        return value.get_object() if hasattr(value,'get_object') else value
+    resources=page.get('/Resources',{})
+    if hasattr(resources,'get_object'):resources=resources.get_object()
+    content=page.get_contents()
+    if content is None:return {},[],0
+    raw=content.get_data()
+    if b'ActualText' not in raw and not resources.get('/Properties') and not resources.get('/XObject'):
+        return {},[],0
+    records={};marked_fonts=set();unsupported=set();replacements=0
+    def text_bytes(value):
+        if isinstance(value,ByteStringObject):return bytes(value)
+        if isinstance(value,TextStringObject):return value.original_bytes
+        raise ValueError('unsupported PDF text operand in ActualText audit')
+    def font_info(res,key):
+        obj=resolved(res.get('/Font',{})).get(key)
+        if obj is None:return None
+        obj=resolved(obj)
+        identity=id(obj)
+        if identity in font_cache:return font_cache[identity]
+        def font_name(value):return re.sub(r'^/[A-Z]{6}\+','',str(value)).lstrip('/')
+        name=font_name(obj.get('/BaseFont',''))
+        if obj.get('/Subtype')!='/Type0' or obj.get('/Encoding') not in ('/Identity-H','/Identity-V'):
+            return name,None
+        child=obj['/DescendantFonts'][0].get_object()
+        if child.get('/Subtype')=='/CIDFontType0':
+            from fontTools.cffLib import CFFFontSet
+            descriptor=resolved(child.get('/FontDescriptor',{}))
+            stream=resolved(descriptor.get('/FontFile3'))
+            if stream is None or stream.get('/Subtype')!='/CIDFontType0C':return name,None
+            cff=CFFFontSet();cff.decompile(io.BytesIO(stream.get_data()),None)
+            if len(cff.topDictIndex)!=1:return name,None
+            charset=cff.topDictIndex[0].charset
+            cid_to_gid={0:0}
+            for gid,charname in enumerate(charset[1:],1):
+                if not re.fullmatch(r'cid\d+',charname):return name,None
+                cid_to_gid[int(charname[3:])]=gid
+            name=font_name('/'+cff.fontNames[0])
+            # MuPDF traces CID-keyed CFF fonts with their CID, not the charset
+            # array offset. Still require that the actual font contains the CID.
+            result=name,lambda code:code if code in cid_to_gid else 0
+            font_cache[identity]=result
+            return result
+        if child.get('/Subtype')!='/CIDFontType2':return name,None
+        descriptor=resolved(child.get('/FontDescriptor',{}))
+        if '/FontFile2' in descriptor:
+            from fontTools.ttLib import TTFont
+            with TTFont(io.BytesIO(resolved(descriptor['/FontFile2']).get_data()),lazy=True) as ttf:
+                postscript=ttf['name'].getDebugName(6) if 'name' in ttf else None
+                if postscript:name=font_name('/'+postscript)
+        mapping=child.get('/CIDToGIDMap','/Identity')
+        if hasattr(mapping,'get_object'):mapping=mapping.get_object()
+        if mapping=='/Identity':result=name,lambda code:code
+        else:
+            data=mapping.get_data()
+            result=name,lambda code:int.from_bytes(data[2*code:2*code+2],'big') if 2*code+2<=len(data) else 0
+        font_cache[identity]=result
+        return result
+    def walk(stream,res,marks,font=None,depth=0):
+        nonlocal replacements
+        if depth>16:raise ValueError('nested PDF form depth exceeds glyph-audit bound')
+        stack=[];local_marks=list(marks)
+        for args,op in stream.operations:
+            if op==b'q':stack.append(font)
+            elif op==b'Q':font=stack.pop() if stack else None
+            elif op==b'Tf':font=font_info(res,args[0])
+            elif op in (b'BMC',b'BDC'):
+                replacement=None
+                if op==b'BDC':
+                    prop=args[1]
+                    if not hasattr(prop,'get'):
+                        prop=resolved(res.get('/Properties',{})).get(prop,{})
+                    if hasattr(prop,'get_object'):prop=prop.get_object()
+                    if '/ActualText' in prop:
+                        value=prop['/ActualText']
+                        replacement=str(value) if isinstance(value,TextStringObject) else None
+                        if isinstance(value,ByteStringObject):
+                            b=bytes(value)
+                            if b.startswith(b'\xfe\xff'):replacement=b[2:].decode('utf-16-be')
+                        if replacement is None:raise ValueError('ActualText is not a decoded PDF string')
+                        if any((ord(c)<32 and c not in '\t\r\n') or 0x7f<=ord(c)<=0x9f or
+                               c=='\ufffd' or (ord(c)&0xffff) in (0xfffe,0xffff) or
+                               0xfdd0<=ord(c)<=0xfdef for c in replacement):
+                            raise ValueError('ActualText contains an invalid character')
+                        replacements+=1
+                local_marks.append(replacement)
+            elif op==b'EMC':
+                if len(local_marks)<=len(marks):raise ValueError('unbalanced PDF marked content')
+                local_marks.pop()
+            elif op in (b'Tj',b'TJ',b"'",b'"') and font:
+                name,mapper=font
+                replacement=next((m for m in local_marks if m is not None),None)
+                if replacement is not None:marked_fonts.add(name)
+                if mapper is None:
+                    if replacement is not None:unsupported.add(name)
+                    continue
+                strings=args[0] if op==b'TJ' else [args[-1]]
+                for item in strings:
+                    if not isinstance(item,(ByteStringObject,TextStringObject)):continue
+                    b=text_bytes(item)
+                    if len(b)%2:raise ValueError('odd Identity-H/V glyph string')
+                    for i in range(0,len(b),2):
+                        gid=mapper(int.from_bytes(b[i:i+2],'big'))
+                        records.setdefault(name,[]).append((gid,replacement))
+            elif op==b'Do':
+                obj=resolved(res.get('/XObject',{})).get(args[0])
+                if obj is None:continue
+                obj=obj.get_object()
+                if obj.get('/Subtype')=='/Form':
+                    from pypdf.generic import ContentStream
+                    child_res=obj.get('/Resources',res)
+                    if hasattr(child_res,'get_object'):child_res=child_res.get_object()
+                    walk(ContentStream(obj,page.pdf),child_res,local_marks,font,depth+1)
+        if len(local_marks)!=len(marks):raise ValueError('unclosed PDF marked content')
+    walk(content,resources,[])
+    observed={}
+    for span in trace:
+        for code,gid,origin,bbox in span['chars']:
+            if gid>=0:observed.setdefault(span['font'],[]).append(gid)
+    matched={};unknown=[]
+    for name in marked_fonts:
+        expected=records.get(name,[])
+        if name in unsupported or [r[0] for r in expected]!=observed.get(name,[]):
+            unknown.append({'font':name,'reason':'ActualText glyph sequence is unsupported or differs',
+                'encoded_glyphs':len(expected),'observed_glyphs':len(observed.get(name,[]))})
+        else:matched[name]=expected
+    return matched,unknown,replacements
+
+
+def inspect_glyphs(path):
+    """Inspect encoded glyphs, including failures hidden by word-extractor fallback.
+
+    MuPDF's text trace can expose an unmapped glyph as U+FFFD even when its
+    ordinary text extractor guesses a plausible ASCII character. Poppler is
+    checked separately because the two extractors expose different controls.
+    Private-use values are unresolved evidence, never automatically a pass.
+    """
+    import fitz
+    from pypdf import PdfReader
+    artifact=file_record(path)
+    groups={};private={};squares=Counter();fonts=Counter();painted=0
+    reader=PdfReader(path);actualtext_unknown=[];covered=0;replacement_spans=0;font_cache={}
+    def add(store,rule,page,font,code,glyph_id,position=None,context=None):
+        key=(rule,font,code,glyph_id)
+        row=store.setdefault(key,{'rule':rule,'font':font,'unicode':f'U+{code:04X}',
+            'glyph_id':glyph_id,'occurrences':0,'pages':{},'examples':[]})
+        row['occurrences']+=1
+        row['pages'][page]=row['pages'].get(page,0)+1
+        # Counts cover all occurrences. Positions are bounded diagnostic examples.
+        if len(row['examples'])<6:
+            row['examples'].append({'page':page,**({'bbox':list(position)} if position else {}),
+                                    **({'context':context} if context is not None else {})})
+    def control(code):
+        return (code<32 and code not in (9,10,13)) or 0x7f<=code<=0x9f
+    def private_use(code):
+        return 0xe000<=code<=0xf8ff or 0xf0000<=code<=0xffffd or 0x100000<=code<=0x10fffd
+    with fitz.open(path) as doc:
+        pages=len(doc)
+        for number,page in enumerate(doc,1):
+            trace=page.get_texttrace()
+            coverage,unknown,spans=_actualtext_glyph_coverage(reader.pages[number-1],trace,font_cache)
+            actualtext_unknown.extend({'page':number,**x} for x in unknown)
+            replacement_spans+=spans
+            unresolved_fonts={x['font'] for x in unknown};positions=Counter()
+            for span in trace:
+                font=span['font']
+                for code,gid,origin,bbox in span['chars']:
+                    painted+=1;fonts[font]+=1
+                    replacement=None
+                    if gid>=0:
+                        if font in coverage:replacement=coverage[font][positions[font]][1]
+                        positions[font]+=1
+                    if gid==0:
+                        add(groups,'notdef-glyph',number,font,code,gid,bbox)
+                        continue
+                    if replacement is not None:
+                        covered+=1
+                        for char in replacement:
+                            if private_use(ord(char)):
+                                add(private,'actualtext-private-use-needs-source-review',number,font,ord(char),gid,bbox)
+                        continue
+                    if font in unresolved_fonts:
+                        continue
+                    if code==0xfffd or (code&0xffff) in (0xfffe,0xffff) or 0xfdd0<=code<=0xfdef:
+                        add(groups,'unmapped-or-invalid-glyph',number,font,code,gid,bbox)
+                    elif control(code):
+                        add(groups,'control-glyph',number,font,code,gid,bbox)
+                    elif private_use(code):
+                        add(private,'private-use-needs-source-review',number,font,code,gid,bbox)
+                    if code in (0x25a0,0x25a1):squares[f'U+{code:04X}']+=1
+    raw,warnings=extracted_text(path)
+    for number,page in enumerate(raw.decode('utf-8').split('\f'),1):
+        for i,char in enumerate(page):
+            code=ord(char)
+            if control(code) or code==0xfffd:
+                add(groups,'poppler-invalid-character',number,None,code,None,
+                    context=page[max(0,i-40):i+41])
+    if file_record(path)!=artifact:raise ValueError('PDF bytes changed during glyph inspection')
+    issues=list(groups.values());unmeasured=list(private.values())
+    return {'schema':'olpkit.pdf-glyphs.v1','artifact':artifact,'pages':pages,
+        'status':'fail' if issues else ('incomplete' if unmeasured or warnings or actualtext_unknown else 'pass'),
+        'painted_glyphs_inspected':painted,'font_glyph_counts':dict(fonts),
+        'unmapped_trace_glyphs':sum(x['occurrences'] for x in issues if x['rule']=='unmapped-or-invalid-glyph'),
+        'notdef_glyphs':sum(x['occurrences'] for x in issues if x['rule']=='notdef-glyph'),
+        'trace_control_glyphs':sum(x['occurrences'] for x in issues if x['rule']=='control-glyph'),
+        'poppler_invalid_characters':sum(x['occurrences'] for x in issues if x['rule']=='poppler-invalid-character'),
+        'private_use_glyphs':sum(x['occurrences'] for x in unmeasured),
+        'issues':issues,'unmeasured':unmeasured,'extraction_warnings':warnings,
+        'actualtext':{'spans':replacement_spans,'covered_glyph_occurrences':covered,'unmeasured':actualtext_unknown},
+        'poppler_text_sha256':digest(raw),'square_codepoints':dict(squares),
+        'limits':['Complete glyph counts and per-page counts; at most six position/context examples per group.',
+                  'Legitimate square codepoints are not missing glyphs; proof-end classification requires source context.',
+                  'This checks extractable encoding, not the intended mathematical meaning or every rendered glyph shape.',
+                  'ActualText coverage is accepted only after exact marked-content/per-font glyph-sequence matching; its semantic accuracy still requires source comparison.',
+                  'Private-use mappings and unsupported ActualText sequences remain unresolved, not automatically waived.']}
+
+
 def compare_pdfs(first, second, first_build=None, second_build=None):
     from pypdf import PdfReader
     paths = [Path(first).resolve(), Path(second).resolve()]
@@ -259,9 +486,13 @@ def pdf_command(action,first,second,out,first_build=None,second_build=None):
         report,texts=compare_pdfs(first,second,first_build,second_build)
         for n,text in enumerate(texts,1):(folder/f'text-{n}.txt').write_bytes(text)
         ok=report['status']=='equal'
+    elif action=='glyphs':
+        report=inspect_glyphs(first)
+        ok=report['status']=='pass'
     else:
         report=inspect_links(first,progress=lambda page:print(f'PDF links: inspected page {page}',flush=True))
         ok=report['status']=='pass'
     (folder/'REPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(json.dumps({k:report[k] for k in ('status','pages','link_areas','citation_areas','text_equal','pages_equal') if k in report}))
+    print(json.dumps({k:report[k] for k in ('status','pages','link_areas','citation_areas','text_equal','pages_equal',
+        'unmapped_trace_glyphs','poppler_invalid_characters','private_use_glyphs') if k in report}))
     return int(not ok)

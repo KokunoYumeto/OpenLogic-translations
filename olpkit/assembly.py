@@ -201,8 +201,9 @@ def write_assembly(tree, report, folder, check=False):
         target.write_bytes(body)
 
 
-def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
-                     product='slc-screen-pdf', check=False, data_root=None, book_ledger=None):
+def prepare_assembly(repo, ref, edition_ref, metadata_dir, cache_root,
+                     product='slc-screen-pdf', data_root=None, book_ledger=None):
+    """Resolve the exact assembly in memory, without copying a source tree."""
     data_root = Path(data_root) if data_root else ROOT/'data'
     book_snapshot = GitSnapshot(repo,ref)
     edition_snapshot = GitSnapshot(repo,edition_ref or ref)
@@ -345,7 +346,15 @@ def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
     if book_layer:
         report['book_layer']=book_layer
         report['implementation_sha256']['booklayer.py']=digest((Path(__file__).parent/'booklayer.py').read_bytes())
+    return tree,report
+
+
+def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
+                     product='slc-screen-pdf', check=False, data_root=None, book_ledger=None):
+    tree,report=prepare_assembly(repo,ref,edition_ref,metadata_dir,cache_root,
+                                product,data_root,book_ledger)
     write_assembly(tree,report,out,check)
+    unit_receipts=report['units'];shims=report['shims'];obligations=report['unreconciled_legacy_inputs']
     print(f'assembled {len(tree.files)} files; {len(unit_receipts)} units; '
           f'{report["english_fill_count"]} English fill-ins; {len(shims)} shims; '
           f'{len(obligations)} legacy inputs still require source reconciliation')

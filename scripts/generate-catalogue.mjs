@@ -1,8 +1,9 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdtemp, unlink, rmdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { resolve } from 'node:path';
+import { resolve, join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -63,7 +64,65 @@ const pilots = [
   { id:'mr', tag:'mr-Deva-IN', name:'मराठी', repo:'OpenLogic-mr-Deva-IN' },
 ];
 
-async function textbook(pilot) {
+export function textbookReleaseAssets(release, id) {
+  if (release.draft || release.prerelease) throw Error('Textbook release is not public');
+  const result = {};
+  for (const [role, pattern] of Object.entries({pdf:`^slc-screen-${id}\\.pdf$`,single_file_latex:`^slc-screen-${id}\\.tex$`,source_zip:`^slc-source-${id}\\.zip$`})) {
+    const matches=release.assets.filter(a=>new RegExp(pattern).test(a.name));
+    if(matches.length!==1)throw Error(`Textbook ${role} must identify one asset`);
+    const asset=matches[0];
+    if(!/^sha256:[0-9a-f]{64}$/.test(asset.digest||''))throw Error('Missing textbook asset digest: '+asset.name);
+    result[role]={url:asset.browser_download_url,name:asset.name,bytes:asset.size,sha256:asset.digest.slice(7)};
+  }
+  return result;
+}
+
+async function pdfPages(data) {
+  const directory=await mkdtemp(join(tmpdir(),'olp-hub-pdf-'));
+  const filename=join(directory,'reader.pdf');
+  try {
+    await writeFile(filename,data);
+    const {stdout}=await exec('pdfinfo',[filename],{maxBuffer:1024*1024});
+    const pages=Number(stdout.match(/^Pages:\s+(\d+)\s*$/m)?.[1]);
+    if(!Number.isSafeInteger(pages)||pages<1)throw Error('Could not read textbook page count');
+    return pages;
+  } finally {
+    await unlink(filename).catch(error=>{if(error.code!=='ENOENT')throw error;});
+    await rmdir(directory);
+  }
+}
+
+async function publishedTextbook(pilot, selection) {
+  const repository='KokunoYumeto/'+pilot.repo;
+  if(!/^[0-9a-f]{40}$/.test(selection.ref)||!/^courses\/[a-z0-9-]+$/.test(selection.path))throw Error('Invalid textbook source identity');
+  const release=await api(`repos/${repository}/releases/tags/${encodeURIComponent(selection.release_tag)}`);
+  const tagCommit=(await api(`repos/${repository}/commits/${encodeURIComponent(selection.release_tag)}`)).sha;
+  if(tagCommit!==selection.ref)throw Error('Textbook tag no longer matches its selected source');
+  const raw=file=>`https://raw.githubusercontent.com/${repository}/${selection.ref}/${selection.path}/${file}`;
+  const manifestBytes=await bytes(raw('MANIFEST.json'));
+  const manifest=parse(manifestBytes.toString('utf8'));
+  const assets=textbookReleaseAssets(release,pilot.id);
+  for(const [role,asset] of Object.entries(assets)) {
+    const data=await bytes(asset.url);
+    if(data.length!==asset.bytes||hash(data)!==asset.sha256)throw Error('Textbook release bytes differ: '+asset.name);
+    if(role==='pdf')asset.pages=await pdfPages(data);
+  }
+  const editionBytes=await bytes(`https://raw.githubusercontent.com/${repository}/${selection.ref}/olp-edition.toml`);
+  const engineName=editionBytes.toString('utf8').match(/^engine\s*=\s*"([a-z]+)"\s*$/m)?.[1];
+  const engine={xelatex:'XeLaTeX',lualatex:'LuaLaTeX',pdflatex:'pdfLaTeX'}[engineName];
+  if(!engine)throw Error('Missing textbook engine declaration');
+  return {book:'sets-logic-computation',title:manifest.title,original_title:'Sets, Logic, Computation',
+    language_tag:pilot.tag,language_name:pilot.name,repository:`https://github.com/${repository}`,
+    branch:null,ref:selection.ref,path:selection.path,state:'published',release:release.html_url,release_tag:release.tag_name,
+    ...assets,engine,olp_commit:(manifest.sources.open_logic||manifest.sources.olp).commit,slc_commit:manifest.sources.slc.commit,
+    epub:null,html:null,manifest:{url:raw('MANIFEST.json'),sha256:hash(manifestBytes)},
+    edition_metadata:{url:`https://raw.githubusercontent.com/${repository}/${selection.ref}/olp-edition.toml`,sha256:hash(editionBytes)},
+    authors:['Richard Zach','Open Logic Project contributors'],translation:manifest.translation,
+    rights:{text:'CC BY 4.0',portraits:'Matthew Leadbeater, CC BY-NC 4.0',photographs:'Individual terms and credits in each source package',fonts:'Individual font licences in each source package'}};
+}
+
+async function textbook(pilot, selection) {
+  if(selection)return publishedTextbook(pilot,selection);
   const repository = 'KokunoYumeto/' + pilot.repo;
   const ref = (await api(`repos/${repository}/commits/textbook-slc`)).sha;
   const directory = await api(`repos/${repository}/contents/textbooks/slc?ref=${ref}`);
@@ -109,8 +168,9 @@ function bookLinks(t, html=false) {
 }
 
 async function textbooks(check) {
+  const selection=parse(await read('catalogue/textbook-selection.json'));
   const records=[];
-  for (const pilot of pilots) records.push(await textbook(pilot));
+  for (const pilot of pilots) records.push(await textbook(pilot,selection[pilot.id]));
   const catalogue={schema:'openlogic.textbooks.v1',textbooks:records};
   const md='## Textbooks\n\n*Sets, Logic, Computation* by Richard Zach uses a selected sequence of Open Logic sections, with its own preface, chapter summaries and glossary. These AI-translated textbook editions follow the book’s chapter plan; the full source collections are listed separately.\n\n| Language | Textbook | Downloads | PDF pages |\n| --- | --- | --- | ---: |\n'+records.map(t=>`| ${t.language_name} · SLC | ${t.title} | ${bookLinks(t)} | ${t.pdf.pages} |`).join('\n')+'\n\nText: CC BY 4.0. Portraits: Matthew Leadbeater, CC BY-NC 4.0. Photographs and fonts retain their individual terms. The linked editions identify the models responsible for their AI translation; no human linguistic review is implied. [Edition and source details](catalogue/textbooks.json).';
   const files={'catalogue/textbooks.json':json(catalogue),'README.md':block(await read('README.md'),'textbooks',md,'## ')};
@@ -125,7 +185,8 @@ async function textbooks(check) {
 }
 
 export function selectRelease(edition, releases) {
-  const published=releases.filter(r=>!r.draft&&!r.prerelease).sort((a,b)=>Date.parse(b.published_at)-Date.parse(a.published_at));
+  // A selected textbook is a separate product, not a replacement for 722-unit readers.
+  const published=releases.filter(r=>!r.draft&&!r.prerelease&&!/^slc(?:-|$)/i.test(r.tag_name)).sort((a,b)=>Date.parse(b.published_at)-Date.parse(a.published_at));
   const tag=edition.release_tag || edition.release?.split('/releases/tag/')[1];
   const accepted=published.find(r=>r.tag_name===tag) || null;
   // These repositories hold several distinct works, readers, reviews or constructed languages.

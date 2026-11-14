@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { selectRelease } from './generate-catalogue.mjs';
+import { selectRelease, textbookReleaseAssets } from './generate-catalogue.mjs';
 
 const release=(tag,date='2026-11-13T00:00:00Z',extra={})=>({tag_name:tag,published_at:date,draft:false,prerelease:false,...extra});
 test('English preservation cannot become the accessibility product',()=>{
@@ -26,4 +26,22 @@ test('Later ordinary releases are discoverable without overwriting accepted cove
 });
 test('Missing accepted release stays absent rather than silently falling back',()=>{
   assert.equal(selectRelease({id:'openlogic-gu-gujr-in',release_tag:'missing'},[release('other')]).accepted,null);
+});
+
+test('A textbook release cannot replace the full OpenLogic edition',()=>{
+  const complete=release('complete-v1.4','2026-11-13T00:00:00Z');
+  const textbook=release('slc-2026-11-14','2026-11-14T00:00:00Z');
+  const result=selectRelease({id:'openlogic-mr-deva-in',release_tag:'complete-v1.4'},[textbook,complete]);
+  assert.equal(result.accepted,complete);assert.equal(result.available,complete);
+});
+
+test('Published textbook requires PDF, direct LaTeX and full source ZIP with digests',()=>{
+  const files=['slc-screen-mr.pdf','slc-screen-mr.tex','slc-source-mr.zip'];
+  const assets=files.map(name=>({name,size:123,digest:'sha256:'+'a'.repeat(64),browser_download_url:'https://example.invalid/'+name}));
+  const record={draft:false,prerelease:false,assets};
+  assert.equal(textbookReleaseAssets(record,'mr').single_file_latex.name,files[1]);
+  assert.throws(()=>textbookReleaseAssets({...record,assets:assets.slice(0,2)},'mr'),/source_zip/);
+  assert.throws(()=>textbookReleaseAssets({...record,assets:[...assets,assets[0]]},'mr'),/pdf/);
+  assert.throws(()=>textbookReleaseAssets({...record,draft:true},'mr'),/not public/);
+  assert.throws(()=>textbookReleaseAssets({...record,assets:assets.map(a=>({...a,digest:null}))},'mr'),/digest/);
 });

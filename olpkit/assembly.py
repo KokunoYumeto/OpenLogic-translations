@@ -220,7 +220,10 @@ def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
     validate_schema('olp-edition',edition)
     if product not in edition['products']:
         raise ValueError('product is not declared by the edition')
-    profile_path = data_root/'assembly'/(edition['locale']+'.json')
+    # Products may have distinct book layers for the same language. Keep the
+    # established single-product profiles as an exact backwards-compatible fallback.
+    profile_path = data_root/'assembly'/edition['locale']/(product+'.json')
+    if not profile_path.is_file():profile_path = data_root/'assembly'/(edition['locale']+'.json')
     profile_bytes = profile_path.read_bytes()
     profile = json.loads(profile_bytes)
     validate_schema('assembly-profile',profile)
@@ -326,6 +329,7 @@ def assemble_command(repo, ref, edition_ref, metadata_dir, cache_root, out,
                                        for name in ('assembly.py','cache.py','drivers.py','shims.py','schemas.py')},
               'native_reader_equivalence':'not checked; assembly is not a rendered release',
               'network_fetches':0,'tex_runs':0}
+    if 'driver' in profile:report['driver']=profile['driver']
     write_assembly(tree,report,out,check)
     print(f'assembled {len(tree.files)} files; {len(unit_receipts)} units; '
           f'{report["english_fill_count"]} English fill-ins; {len(shims)} shims; '

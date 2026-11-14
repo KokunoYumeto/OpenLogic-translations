@@ -2,17 +2,36 @@
 import json
 from pathlib import Path
 import re
+import tomllib
 
 from .assembly import digest, json_bytes
 from .recorder import load_imports
+from .schemas import ROOT,validate_schema
 
 
-SOURCES = {'olp', 'slc', 'photos', 'portraits'}
+COMMON_SOURCES = {'olp', 'photos', 'portraits'}
+
+
+def registered_book_sources():
+    sources=tomllib.loads((ROOT/'data/sources.toml').read_text(encoding='utf-8'))
+    books=set()
+    for path in sorted((ROOT/'data/books').glob('*.toml')):
+        book=tomllib.loads(path.read_text(encoding='utf-8'))
+        if 'source_id' not in book:continue  # Driver policies are separate contracts.
+        validate_schema('book',book)
+        source=book['source_id']
+        if source not in sources or sources[source]['repository']!=book['repository']:
+            raise ValueError('book source is not registered: '+source)
+        books.add(source)
+    return books
 
 
 def pin_key(pins):
-    if set(pins) != SOURCES or any(not isinstance(v, str) or not re.fullmatch(r'[0-9a-f]{40}', v) for v in pins.values()):
-        raise ValueError('import lock requires the four exact source pins')
+    if (not isinstance(pins,dict) or not COMMON_SOURCES<=set(pins)
+            or len(set(pins)-COMMON_SOURCES)!=1
+            or not (set(pins)-COMMON_SOURCES)<=registered_book_sources()
+            or any(not isinstance(v,str) or not re.fullmatch(r'[0-9a-f]{40}',v) for v in pins.values())):
+        raise ValueError('import lock requires exact OLP, photo, portrait and one registered book pin')
     return digest(json_bytes(pins))
 
 

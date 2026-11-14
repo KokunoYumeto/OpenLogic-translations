@@ -13,11 +13,41 @@ from .cache import SourceCache,run_git,relative_path
 from .process import TeXSlot,run_job,MEMORY_LIMIT,TEX_MUTEX
 from .recorder import read_inputs,content_inputs,load_imports,compare_imports,input_hashes
 from .schemas import ROOT,validate_schema
-from .importlock import select_lock,write_lock
+from .importlock import select_lock,write_lock,pin_key
 
 
 GATES=('G-UNITS','G-STRUCT','G-NOTE','G-TOKEN','G-ORTHO','G-ALONE','G-IMPORT','G-LOG',
        'G-BOX','G-GLYPH','G-TABLE','G-SCALE','G-LINK','G-CREDIT','G-SAME','G-EPUB','G-HUB')
+
+
+def load_build_product(product,data_root=None):
+    """Resolve a registered book rather than assuming every textbook is SLC."""
+    if not re.fullmatch(r'[a-z][a-z0-9-]*',product):raise ValueError('invalid build product')
+    data_root=Path(data_root) if data_root else ROOT/'data'
+    path=data_root/'build-products'/(product+'.json')
+    if not path.is_file():raise ValueError('build product not yet implemented: '+product)
+    data=json.loads(path.read_text(encoding='utf-8'));validate_schema('build-product',data)
+    book=tomllib.loads((data_root/'books'/(data['book']+'.toml')).read_text(encoding='utf-8'))
+    validate_schema('book',book)
+    if book['id']!=data['book']:raise ValueError('build book identity differs')
+    source=book['source_id'];required={source,'photos','portraits'}
+    registered=tomllib.loads((data_root/'sources.toml').read_text(encoding='utf-8'))
+    if (source not in registered or registered[source]['repository']!=book['repository']
+            or set(data['reference_pins'])!=required
+            or data['reference_pins'][source]!=book['commit']):
+        raise ValueError('build product source pins differ from its registered book')
+    mounts={'olp':'',source:'courses/'+book['id'],'photos':'assets/photos','portraits':'assets/portraits'}
+    if data['reference_mounts']!=mounts:raise ValueError('build product mounts differ from its sources')
+    driver=data.get('driver','slc-screen.tex')
+    if driver not in book['drivers']:raise ValueError('build driver is not declared by the book')
+    return data,book
+
+
+def build_job(report):
+    driver=report.get('driver','slc-screen.tex')
+    if not isinstance(driver,str) or not re.fullmatch(r'[a-z][a-z0-9-]*\.tex',driver):
+        raise ValueError('invalid native book driver')
+    return driver[:-4]
 
 
 def log_checks(text):
@@ -155,7 +185,7 @@ def _compile_book(folder,report,engine,epoch,output,expected=None,reference=Fals
     """Compile once per validated input batch; every tool stays under the slot."""
     folder=Path(folder).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
     verify_assembly(folder,report)
-    book=folder/report['book_directory'];job='slc-screen';driver=book/(job+'.tex')
+    book=folder/report['book_directory'];job=build_job(report);driver=book/(job+'.tex')
     if not driver.is_file():raise ValueError('book driver absent')
     result={'schema':'olpkit.build.v1','status':'not_started','engine':engine,'source_date_epoch':epoch,
             'memory_limit_bytes':MEMORY_LIMIT,'mutex':TEX_MUTEX,'mutex_acquired':False,'commands':[],
@@ -241,9 +271,9 @@ def _compile_book(folder,report,engine,epoch,output,expected=None,reference=Fals
     finally:save()
 
 
-def reference_tree(cache_root,olp_pin,out,check=False):
-    data=json.loads((ROOT/'data/build-products/slc-screen-pdf.json').read_text())
-    validate_schema('build-product',data)
+def reference_tree(cache_root,olp_pin,out,check=False,product='slc-screen-pdf'):
+    data,_=load_build_product(product)
+    pin_key({'olp':olp_pin,**data['reference_pins']})
     cache=SourceCache(cache_root);tree=AssemblyTree();sources={}
     for source,pin in {'olp':olp_pin,**data['reference_pins']}.items():
         source_folder,record=cache.require(source,pin);sources[source]=pin
@@ -258,27 +288,30 @@ def reference_tree(cache_root,olp_pin,out,check=False):
         tree.add('courses/'+data['book']+'/'+Path(name).name,body,{'source':'package-witness','commit':snap.commit,'path':name})
     report={'schema':'olpkit.reference-assembly.v1','book_directory':'courses/'+data['book'],
             'pins':sources,'files':tree.origins,'unreconciled_legacy_inputs':[]}
+    if 'driver' in data:report['driver']=data['driver']
     write_assembly(tree,report,out,check);return report
 
 
 def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False):
-    if product!='slc-screen-pdf':raise ValueError('build product not yet implemented: '+product)
+    product_data,book=load_build_product(product)
     if not out:raise ValueError('build requires an explicit named --out directory')
     output=Path(out).resolve();boundary=(ROOT.parent/'out').resolve()
     if output==boundary or not output.is_relative_to(boundary):raise ValueError('build output escapes named builder outputs')
     if output.exists() and not resume:raise ValueError('build output already exists; preserve it or resume an unstarted build')
     if resume and not output.is_dir():raise ValueError('resume requires an existing prepared build directory')
-    source=output/'source';lock_dir=ROOT/'data/books/sets-logic-computation'
+    source=output/'source';lock_dir=ROOT/'data/books'/book['id']
     if english:
         if not olp_pin:raise ValueError('English reference requires an explicit full --olp-pin')
-        report=reference_tree(cache_root,olp_pin,source,resume);engine='pdflatex';expected=None
+        report=reference_tree(cache_root,olp_pin,source,resume,product);engine='pdflatex';expected=None
     else:
         if not repo:raise ValueError('translation build requires --repo')
         edition=tomllib.loads((GitSnapshot(repo,edition_ref or ref).read_many(['olp-edition.toml'])['olp-edition.toml']
                               if not metadata_dir else (Path(metadata_dir)/'olp-edition.toml').read_bytes()).decode('utf-8-sig'))
         engine=edition['engine'];olp_pin=edition['pins']['olp']['commit']
-        _,expected,_=select_lock(lock_dir,{s:edition['pins'][s]['commit'] for s in ('olp','slc','portraits','photos')})
+        _,expected,_=select_lock(lock_dir,{s:edition['pins'][s]['commit'] for s in ('olp',book['source_id'],'portraits','photos')})
         report=assemble_command(repo,ref,edition_ref,metadata_dir,cache_root,source,product,check=resume)
+    if build_job(report)+'.tex'!=product_data.get('driver','slc-screen.tex'):
+        raise ValueError('assembled driver differs from requested build product')
     bare=SourceCache(cache_root).locations('olp',olp_pin)[0]
     epoch=int(run_git(bare,'show','-s','--format=%ct',olp_pin).stdout.decode().strip())
     result=compile_book(source,report,engine,epoch,output,expected,english,resume)
@@ -287,7 +320,7 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
         glyphs_ok=record_pdf_glyphs(output,result)
         links_ok=record_pdf_links(output,result,language['links']['minimum_contrast'],language['links']['color'],
                                   xdvipdfmx=engine=='xelatex')
-        credits_ok=record_pdf_credits(output,result,ROOT/'data/credits'/('slc-'+report['locale']+'.json'))
+        credits_ok=record_pdf_credits(output,result,ROOT/'data/credits'/(book['source_id']+'-'+report['locale']+'.json'))
         if not glyphs_ok or not links_ok or not credits_ok:
             print('PDF glyph/link/credit acceptance incomplete; inspect recorded gate results',flush=True)
             return 1

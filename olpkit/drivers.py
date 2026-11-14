@@ -55,7 +55,8 @@ def generate_drivers(edition, source_files, book_id='sets-logic-computation', da
         raise ValueError('invalid book identifier')
     book = read_toml(data_root/'books'/(book_id+'.toml'))
     validate_schema('book',book)
-    policy_name=book.get('driver_policies',{}).get(edition['locale'],book['driver_policy'])
+    policy_name=book.get('driver_policies',{}).get(edition['locale'],book.get('driver_policy'))
+    if not policy_name:raise ValueError('localized driver policy is not yet recorded for '+book_id)
     policy_path = data_root/'books'/policy_name
     policy = read_toml(policy_path)
     validate_schema('driver-policy',policy)

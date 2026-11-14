@@ -171,6 +171,24 @@
             "commit"
           ],
           "additionalProperties": false
+        },
+        "il": {
+          "type": "object",
+          "properties": {
+            "repository": {
+              "type": "string",
+              "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+$"
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          },
+          "required": [
+            "repository",
+            "commit"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -540,7 +558,10 @@
               "pattern": "^[a-f0-9]{64}$"
             }
           },
-          "required": ["path", "sha256"],
+          "required": [
+            "path",
+            "sha256"
+          ],
           "additionalProperties": false
         }
       },

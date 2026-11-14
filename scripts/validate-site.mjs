@@ -313,15 +313,51 @@ check(marathi722.readers.find(f=>f.format==="EPUB")?.source_units===722 && marat
 check(marathi722.supplementary_downloads[1].downloads[0].source_units===194, "Historical EPUB194 access retained");
 const marathiCurrent = catalogue.editions.find(item => item.id === "openlogic-mr-deva-in");
 const marathiCurrentBytes = JSON.parse(await read(marathiCurrent.evidence.current_format_readback));
-check(marathiCurrent.release_tag === "complete-v1.4" && marathiCurrentBytes.assets.length === 8, "Current Marathi release requires its own eight-asset receipt");
-check(marathiCurrent.ordered_downloads.map(f=>f.format).join(",") === "PDF,TEX,ZIP,EPUB" && marathiCurrent.readers[0].pages === 957, "Current Marathi reader and editable-source order");
-check(marathiCurrent.standalone_reader_units === 722 && marathiCurrent.epub_reader_units === 722 && marathiCurrentBytes.scope.epub_content_documents === 98, "Current Marathi cumulative reader scope");
-const marathiPrimaryAndHtml=[...marathiCurrent.ordered_downloads,...marathiCurrent.supplementary_downloads[0].downloads.filter(f=>f.format==='HTML-ZIP')];
+const marathiV14 = JSON.parse(await read("evidence/MARATHI_V14_PUBLIC_READBACK_20261113.json"));
+const matchesMarathiAsset = (assets, file) => assets.some(asset =>
+  asset.name === file.name && asset.url === file.url && asset.bytes === file.bytes && asset.sha256 === file.sha256);
+const completeMarathiAssetNames = [
+  "01-openlogic-mr-complete.pdf", "02-openlogic-mr-complete.tex", "03-openlogic-mr-complete-editable-sources.zip",
+  "04-openlogic-mr-complete-html.zip", "06-openlogic-mr-complete.epub", "RELEASE_MANIFEST.json",
+  "SHA256SUMS.txt", "SOURCE_PACKAGE_README.md"
+];
+const namesMatch = (assets, names) => assets.map(asset => asset.name).sort().join(",") === [...names].sort().join(",");
+const marathiUpstream = "1e960beff9ed7835bf3e3f1335e21af3439cd107";
+check(marathiV14.release === `${marathiCurrent.repository}/releases/tag/complete-v1.4`
+  && namesMatch(marathiV14.assets, completeMarathiAssetNames)
+  && marathiV14.scope.source_units === 722 && marathiV14.scope.pdf_pages === 957
+  && marathiV14.scope.epub_content_documents === 98 && marathiV14.scope.epub_mathml_expressions === 40124,
+  "Historical Marathi v1.4 scope stays bound to its own receipt");
+check(marathiV14.bounded_format_comparison.term_reference === "16.5.1"
+  && marathiV14.bounded_format_comparison.html_and_epub_proof_text_equal,
+  "Preserve the historical Marathi v1.4 corrected numbering specimen");
+check(marathiCurrentBytes.mode === "public" && marathiCurrentBytes.tag === "complete-v1.5"
+  && marathiCurrent.release_tag === marathiCurrentBytes.tag && marathiCurrent.release === marathiCurrentBytes.release
+  && /^[0-9a-f]{40}$/.test(marathiCurrentBytes.commit) && marathiCurrentBytes.upstream_revision === marathiUpstream
+  && namesMatch(marathiCurrentBytes.assets, completeMarathiAssetNames),
+  "Current Marathi release requires its own exact T15 public readback");
+check(marathiCurrent.ordered_downloads.map(file => file.format).join(",") === "PDF,TEX,ZIP,EPUB"
+  && marathiCurrent.readers[0].pages === 953 && marathiCurrentBytes.scope.pdf_pages === 953,
+  "Current Marathi reader and editable-source order");
+check(marathiCurrent.standalone_reader_units === 722 && marathiCurrent.epub_reader_units === 722
+  && marathiCurrentBytes.scope.source_units === 722 && marathiCurrentBytes.scope.epub_content_documents === 98
+  && marathiCurrentBytes.scope.epub_mathml_expressions === 40085,
+  "Current Marathi cumulative reader scope");
+check(marathiCurrent.release_facts.tag === marathiCurrentBytes.tag
+  && !/^slc(?:-|$)/i.test(marathiCurrent.available_release.tag)
+  && namesMatch(marathiCurrent.release_facts.assets, completeMarathiAssetNames)
+  && marathiCurrent.release_facts.assets.every(file => matchesMarathiAsset(marathiCurrentBytes.assets, file)),
+  "Current Marathi release discovery must keep the complete product and match all eight public assets");
+check(marathiCurrentBytes.assets.some(asset => asset.name === "RELEASE_MANIFEST.json"
+  && asset.url === marathiCurrent.evidence.release_manifest && asset.sha256 === marathiCurrent.evidence.release_manifest_sha256),
+  "Current Marathi release manifest must match its public readback");
+const marathiHtmlDownloads = marathiCurrent.supplementary_downloads[0].downloads.filter(file => file.format === "HTML-ZIP");
+check(marathiHtmlDownloads.length === 1, "Current Marathi offline HTML ZIP must remain available");
+const marathiPrimaryAndHtml = [...marathiCurrent.ordered_downloads, ...marathiHtmlDownloads];
 for (const f of marathiPrimaryAndHtml) {
-  check(marathiCurrentBytes.assets.some(a=>a.name===f.name && a.url===f.url && a.bytes===f.bytes && a.sha256===f.sha256), "Current Marathi file differs from anonymous readback");
+  check(matchesMarathiAsset(marathiCurrentBytes.assets, f), "Current Marathi file differs from anonymous readback");
   check(/[\u0900-\u097f]/.test(f.download_label), "Current Marathi download labels remain localized");
 }
-check(marathiCurrentBytes.bounded_format_comparison.term_reference==='16.5.1' && marathiCurrentBytes.bounded_format_comparison.html_and_epub_proof_text_equal, "Marathi corrected numbering specimen is required");
 check(marathiCurrent.supplementary_downloads[1].downloads[0].source_units===194 && !marathiCurrent.evidence.complete_linguistic_certification, "Historical access and linguistic limitations remain explicit");
 check(marathi722Audit.canon.empty_direct_passage_rows===5 && marathi722Audit.canon.retrospective_contexts===101 && !marathi722.evidence.complete_linguistic_certification && !marathi722Audit.pdf.whole_pdf_visual_certification, "Marathi scoped retrospective evidence and audit limits");
 check(marathi722.version_doi==="10.5281/zenodo.23044506" && marathi722.current_local_configured_reader.public_release_sync_verified, "Marathi current record and sync");
@@ -755,6 +791,47 @@ const pashtoComplete = catalogue.editions.find(item => item.id === "openlogic-ps
 check(pashtoComplete.release_tag === "v1.0.0" && pashtoComplete.standalone_reader_units === 722 && pashtoComplete.source_units_translated === 722, "Current Pashto catalogue retains complete reader scope");
 for (const item of pashtoComplete.ordered_downloads) check(currentLinkBytes.files.some(f=>f.url===item.url && f.sha256===item.sha256 && f.bytes===item.bytes && f.matches && f.anonymous), "Current Pashto download must match its anonymous receipt");
 check(textbooks.textbooks.length === 4 && textbooks.textbooks.every(t=>t.pdf.pages>0 && t.pdf.bytes>0 && /^[a-f0-9]{64}$/.test(t.pdf.sha256)), "Four pinned textbook PDF records required");
+const marathiTextbook = textbooks.textbooks.find(item => item.language_tag === "mr-Deva-IN");
+const marathiTextbookSelection = JSON.parse(await read("catalogue/textbook-selection.json")).mr;
+const marathiSLCRelease = "slc-2026-11-14";
+const marathiSLCR2 = "slc-2026-11-14-sync-r2";
+check([marathiSLCRelease, marathiSLCR2].includes(marathiTextbookSelection?.release_tag),
+  "Marathi textbook selection must retain the verified release or select the verified r2 successor");
+check(marathiTextbook.release_tag === marathiTextbookSelection?.release_tag
+  && marathiTextbook.ref === marathiTextbookSelection?.ref
+  && marathiTextbook.path === marathiTextbookSelection?.path,
+  "Marathi textbook catalogue must match its selected tag, source commit and course path");
+if (marathiTextbookSelection?.release_tag === marathiSLCR2 || marathiTextbook.release_tag === marathiSLCR2) {
+  const receiptPath = "evidence/MARATHI_T15_SLC_R2_PUBLIC_READBACK_20261114.json";
+  const marathiTextbookBytes = await read(receiptPath).then(JSON.parse, error => {
+    if (error.code === "ENOENT") return null;
+    throw error;
+  });
+  check(marathiTextbookBytes !== null, "Marathi SLC r2 requires its exact anonymous public receipt");
+  if (marathiTextbookBytes) {
+    check(marathiTextbookBytes.mode === "public" && marathiTextbookBytes.tag === marathiSLCR2
+      && marathiTextbookBytes.release === `${marathiTextbook.repository}/releases/tag/${marathiSLCR2}`
+      && marathiTextbook.release === marathiTextbookBytes.release && marathiTextbook.state === "published"
+      && /^[0-9a-f]{40}$/.test(marathiTextbookBytes.commit) && marathiTextbook.ref === marathiTextbookBytes.commit
+      && marathiTextbookBytes.upstream_revision === marathiUpstream && marathiTextbook.olp_commit === marathiUpstream
+      && marathiTextbook.slc_commit === marathiTextbookBytes.scope.english_slc_commit,
+      "Marathi SLC r2 requires its separate release tag, source commit and pins");
+    check(marathiTextbook.pdf.pages === 451 && marathiTextbookBytes.scope.pdf_pages === 451
+      && marathiTextbookBytes.scope.source_units === 176
+      && marathiTextbook.engine === "XeLaTeX" && marathiTextbookBytes.scope.engine === marathiTextbook.engine,
+      "Marathi SLC r2 preserves the 176-unit, 451-page XeLaTeX reader");
+    check(namesMatch(marathiTextbookBytes.assets, ["slc-screen-mr.pdf", "slc-screen-mr.tex", "slc-source-mr.zip", "SHA256SUMS.txt"])
+      && [marathiTextbook.pdf, marathiTextbook.single_file_latex, marathiTextbook.source_zip]
+        .every(file => matchesMarathiAsset(marathiTextbookBytes.assets, file)),
+      "Marathi SLC r2 textbook downloads must match the anonymous release receipt");
+    check([marathiTextbook.manifest, marathiTextbook.edition_metadata].every(file =>
+      marathiTextbookBytes.tagged_source_metadata.some(asset => asset.url === file.url && asset.sha256 === file.sha256)),
+      "Marathi SLC r2 manifest and edition metadata must match the verified tag commit");
+    check(marathiTextbookBytes.citation_check?.split_citation_links === 0
+      && marathiTextbookBytes.citation_check?.pdf_sha256 === marathiTextbook.pdf.sha256,
+      "Marathi SLC r2 requires zero split citation links on the exact public PDF");
+  }
+}
 check(html.includes('id="textbooks"') && currentReadme.includes('<!-- textbooks:begin -->'), "Textbooks need visible separate entry points");
 const result = {
   status: failures.length ? "FAIL" : "PASS",

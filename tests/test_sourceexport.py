@@ -4,15 +4,28 @@ from pathlib import Path
 import tempfile
 import unittest
 from zipfile import ZipFile
+from unittest.mock import patch
 
 from olpkit.assembly import digest, json_bytes
 from olpkit.recorder import input_hashes, read_inputs
 from olpkit.sourceexport import (book_name, code_lines, cumulative, deterministic_zip,
-                                embed, retarget_book_inputs, retarget_imports, source_package)
+                                embed, export_import_lock, retarget_book_inputs, retarget_imports, source_package)
 from olpkit.schemas import ROOT
 
 
 class SourceExportTests(unittest.TestCase):
+    def test_book_import_lock_does_not_confuse_reused_book_assets_with_native_text(self):
+        sources={k:{'commit':str(i)*40} for i,k in enumerate(['olp','photos','portraits','slc','il'],1)}
+        assembly={'product':'il-screen-pdf','sources':sources}
+        with patch('olpkit.sourceexport.select_lock',return_value=('folder',[],{})) as select:
+            export_import_lock(assembly,{'book':'intermediate-logic'})
+            root,pins=select.call_args.args
+            self.assertEqual(root.name,'intermediate-logic')
+            self.assertEqual(pins,{k:sources[k]['commit'] for k in ['olp','il','photos','portraits']})
+            self.assertEqual(len(assembly['sources']),5)
+        with self.assertRaisesRegex(ValueError,'different native book'):
+            export_import_lock(assembly,{'book':'sets-logic-computation'})
+
     def test_conditional_missing_import_is_preserved_as_error_not_omitted(self):
         excluded=set();modules={'content/a/one.tex':'one.tex'}
         text=r'\iftag{x}{\olimport{one}[chapter]}{\olimport{other}}'

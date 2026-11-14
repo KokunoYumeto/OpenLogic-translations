@@ -12,7 +12,7 @@ import re
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
 from .assembly import digest, json_bytes
-from .build import build_job, verify_assembly
+from .build import build_job, load_build_product, verify_assembly
 from .cache import relative_path
 from .importlock import select_lock
 from .schemas import ROOT
@@ -294,6 +294,16 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
         'clean_archive_rebuild':'pending','cumulative_rebuild':'pending'}
 
 
+def export_import_lock(assembly, profile):
+    """Bind imports to the native book, retaining other assets in the assembly."""
+    _, book = load_build_product(assembly['product'])
+    if profile['book'] != book['id']:
+        raise ValueError('export profile belongs to a different native book')
+    required = ('olp', book['source_id'], 'photos', 'portraits')
+    pins = {name:assembly['sources'][name]['commit'] for name in required}
+    return select_lock(ROOT/'data/books'/book['id'], pins)
+
+
 def export_command(source, product, out, profile_path=None, build_path=None, credit_path=None, instructions_path=None):
     source=Path(source).resolve();out=Path(out).resolve()
     boundary=(ROOT.parent/'out').resolve()
@@ -304,8 +314,7 @@ def export_command(source, product, out, profile_path=None, build_path=None, cre
     locale_profile=default_profile.with_stem(f"{default_profile.stem}-{assembly['locale']}")
     profile_path=Path(profile_path) if profile_path else locale_profile if locale_profile.is_file() else default_profile
     profile=json.loads(profile_path.read_text(encoding='utf-8'))
-    pins={k:v['commit'] for k,v in assembly['sources'].items()}
-    _, imports, lock=select_lock(ROOT/'data/books'/profile['book'], pins)
+    _, imports, lock=export_import_lock(assembly, profile)
     body,report=cumulative(source,assembly,imports,profile)
     filename=profile['stem']+'-'+assembly['locale']+'.tex'
     relative_path(filename)

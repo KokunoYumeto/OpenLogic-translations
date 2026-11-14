@@ -49,6 +49,13 @@ class SelectionTests(unittest.TestCase):
             p=False, tagTrue=True)
         self.assertEqual(text, r'before\begin{proof}visible\end{proof}after\begin{prob}kept\end{prob}')
 
+    def test_quoted_selection_command_does_not_execute(self):
+        source=r'\texttt{\string\iftag} \string\tagfalse{p}\iftag{p}{yes}{no}'
+        text,state,_=self.run_source(source,p=True)
+        self.assertEqual(text,r'\texttt{\string\iftag} \string\tagfalse{p}yes')
+        self.assertTrue(state.tags['p'])
+        with self.assertRaisesRegex(ValueError,'following token'):self.run_source(r'\string')
+
     def test_tagblock_and_nested_enumerations(self):
         text, _, _ = self.run_source(r'\begin{tagblock}{p}hidden\end{tagblock}'
             r'\begin{tagenumerate}{p,q}\tagitem{q}{outer}{}'

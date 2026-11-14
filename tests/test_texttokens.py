@@ -46,6 +46,28 @@ class TextTokenTests(unittest.TestCase):
         self.assertEqual({r['provenance'][0]['source'] for r in used},{'book'})
         self.assertTrue(any(r['provenance'][0]['char_start']>0 for r in used))
 
+    def test_source_defined_empty_articles_preserve_separator_and_provenance(self):
+        c=self.catalog()
+        source=r'\renewcommand{\article}[1]{}\renewcommand{\Article}[1]{}'
+        c.configure(source,'locale')
+        text,receipt=c.expand(r'!!a{object}|!!^a{object}|\article{unknown}')
+        self.assertEqual(text,'~object|~object|')
+        uses=receipt['article_override_uses']
+        self.assertEqual([u['name'] for u in uses],['article','Article','article'])
+        for use in uses:
+            loc=use['definition']
+            self.assertEqual(loc['source'],'locale')
+            self.assertIn('\\'+use['name'],source[loc['char_start']:loc['char_end']])
+            self.assertEqual(use['call_chain'][0]['source'],'<body>')
+
+    def test_empty_article_override_obeys_group_scope_and_rejects_other_primitives(self):
+        text,_=self.catalog().expand(r'{\renewcommand{\article}[1]{}!!a{object}}!!a{object}')
+        self.assertTrue(text.endswith('~object}an~object'))
+        for override in (r'\renewcommand{\article}[2]{}',r'\gdef\article#1{}',
+                         r'\renewcommand{\printtoken}[2]{}'):
+            with self.subTest(override=override),self.assertRaisesRegex(ValueError,'primitive override'):
+                self.catalog().configure(override,'invalid')
+
     def test_local_scope_and_unused_helper_are_not_global_definitions(self):
         c=self.catalog()
         text,_=c.expand(r'!!{object}{\definetoken{s}{object}{local}!!{object}}!!{object}'
@@ -86,6 +108,12 @@ class TextTokenTests(unittest.TestCase):
         output,receipt=self.catalog().expand(text)
         self.assertEqual(output,text)
         self.assertEqual(receipt['occurrences'],[])
+
+    def test_string_quoted_commands_are_not_definitions_or_token_calls(self):
+        text=r'\texttt{\string\newcommand}|\string\article|\string\definetoken|!!{object}'
+        output,receipt=self.catalog().expand(text)
+        self.assertEqual(output,text.replace('!!{object}','object'))
+        self.assertEqual(len(receipt['occurrences']),1)
 
     def test_adjacent_plural_and_passive_flags_follow_authored_spec(self):
         c=self.catalog()

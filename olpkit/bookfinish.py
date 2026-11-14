@@ -3,7 +3,7 @@ from pathlib import Path
 import re,subprocess,collections
 from urllib.parse import unquote
 from lxml import html
-from .bookcontext import sha,_one
+from .bookcontext import sha,_one,source_caption
 from .bookfront import native_frontmatter
 from .bookart import bind_book_art
 from .bookheadings import read_contents,bind_headings
@@ -59,8 +59,8 @@ def finish_book(inputs,body_bytes,profile,output):
     config=inputs.text(profile['token_base_source']);env=inputs.text('sty/open-logic-book-envs.sty')
     if r'\newenvironment{reading}{\paragraph{\readingname}\par}{}' not in env:
         raise ValueError('native reading heading changed')
-    problems=_one(r'\\setlocalecaption\{'+re.escape(profile['babel'])+r'\}\{problems\}\{([^{}]+)\}',config,'exercise heading')[1]
-    contents=_one(r'\\renewcommand\{\\contentsname\}\{([^{}]+)\}',config,'contents heading')[1]
+    problems=source_caption(config,profile['babel'],'problems')
+    contents=source_caption(config,profile['babel'],'contents')
     headings=bind_headings(doc,rows,rendered,reading_title=front['captions']['readingname'],
         problems_title=problems,contents_title=contents,evidence={'native_toc_sha256':sha(toc.encode()),
         'native_reading_environment_sha256':sha(env.encode()),'locale_config_sha256':sha(config.encode())})

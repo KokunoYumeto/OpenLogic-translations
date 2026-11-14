@@ -184,6 +184,14 @@ class Selector:
                                  f'{error}; {text[start:start+100]!r}') from error
             if opaque is not None:
                 out.append(text[start:opaque]); pos = opaque; continue
+            if name == 'string':
+                # TeX quotes exactly one following token. A printed command
+                # such as \texttt{\string\iftag} must not execute selection.
+                at = skip_space(text, pos)
+                if at >= len(text): raise ValueError('string without a following token')
+                quoted = COMMAND.match(text, at) if text[at] == '\\' else None
+                end = quoted.end() if quoted else at + 1
+                out.append(text[start:end]); pos = end; continue
             if name in PRIMITIVE_IF:
                 end = conditional_end(text,pos)
                 retained = text[start:end]

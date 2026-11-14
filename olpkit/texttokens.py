@@ -114,6 +114,7 @@ class TextTokens:
         self.resolver = resolver
         self.forms = {}; self.macros = {}; self.definitions = []; self.occurrences = []
         self.inputs = {}; self.read_stack = []; self.intrinsic_origins = {}
+        self.article_override_uses = []
 
     def location(self, source, text, start, end):
         return {'source':source, 'input_sha256':self.inputs[source]['sha256'], 'char_start':start,
@@ -150,6 +151,13 @@ class TextTokens:
 
     def _invoke(self, name, args, chain, trace, depth=0):
         if depth > 40: raise ValueError('recursive token macro')
+        if name in ('article', 'Article') and name in self.macros:
+            # Some languages explicitly suppress the upstream English article.
+            # Only the inspected, empty one-argument override is admitted here.
+            macro = self.macros[name]
+            self.article_override_uses.append({'name':name, 'argument':args[0],
+                'definition':macro.origin, 'call_chain':chain})
+            return ''
         if name in ('definetoken','definetokenuc'):
             switch, term, value = args
             if name == 'definetokenuc': value = upper_first(value)
@@ -231,6 +239,11 @@ class TextTokens:
             elif code[pos]=='}': raise ValueError('unmatched token group')
             else:
                 out.append(code[pos]);pos+=1;continue
+            if name == 'string':
+                at=skip_space(code,pos)
+                if at >= len(code): raise ValueError('string without a following token')
+                end=COMMAND.match(code,at).end() if code[at]=='\\' else at+1
+                out.append(code[start:end]);pos=end;continue
             try:
                 parsed=definition(code,start,pos,name,origin(start,pos))
             except ValueError as error:
@@ -241,8 +254,13 @@ class TextTokens:
                     macro=Definition(macro.spec,macro.body,origin(start,end))
                     relevant=(target in ('settexttoken','@printtoken','tokenformat') or OPERATIONS.search(macro.body))
                     if target in INTRINSICS:
-                        if not native: raise ValueError('token primitive override needs explicit support: '+target)
-                        self.intrinsic_origins[target]=macro.origin
+                        if native:
+                            self.intrinsic_origins[target]=macro.origin
+                        elif (target in ('article', 'Article') and macro.spec == 'm'
+                              and not macro.body.strip() and name not in ('gdef','xdef')):
+                            self.macros[target]=macro
+                        else:
+                            raise ValueError('token primitive override needs explicit support: '+target)
                     elif relevant:
                         if name in ('gdef','xdef'):
                             raise ValueError('global token helper definition needs explicit support')
@@ -326,6 +344,7 @@ class TextTokens:
         output=self._walk(mask_comments(text),text,source)
         return output, {'schema':'olpkit.text-tokens.v1','inputs':dict(self.inputs),
             'modern_xparse':self.modern_xparse,'intrinsic_definitions':self.intrinsic_origins,
+            'article_override_uses':self.article_override_uses,
             'definitions':self.definitions,'occurrences':self.occurrences,
             'output_sha256':digest(output),'arbitrary_tex_execution':False,
             'reader_complete':False}

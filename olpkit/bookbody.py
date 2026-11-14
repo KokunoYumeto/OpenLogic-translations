@@ -3,7 +3,7 @@ from pathlib import Path
 import json,re,subprocess,shutil,collections
 from urllib.parse import unquote
 from lxml import html
-from .bookcontext import sha,_one
+from .bookcontext import sha,_one,source_caption
 from .figureassets import expand_external_figures,combine_exports
 from .figurebinding import prepare_figures,bind_figures,attach_long_descriptions
 from .theoremblocks import native_theorems,reconcile_theorem_source,prepare_theorems,bind_theorems
@@ -37,7 +37,7 @@ def build_body(inputs,context,profile,output):
     reconcile_theorem_source(context['projected_source'],native_records)
     name_record=inputs.witness_json('names');names={k:v[0] for k,v in name_record['names'].items()}
     token_config=inputs.text(profile['token_base_source'])
-    names['proof']=_one(r'\\renewcommand\{\\proofname\}\{([^{}]+)\}',token_config,'proof label')[1]
+    names['proof']=source_caption(token_config,profile['babel'],'proof')
     book_class=inputs.text('sty/open-logic-book.cls')
     symbol=_one(r'\\gdef\\proofSymbol\{\\ensuremath\{([^{}]+)\}\}',book_class,'proof symbol')[1]
     prepared,theorems=prepare_theorems(prepared,native_records,names,

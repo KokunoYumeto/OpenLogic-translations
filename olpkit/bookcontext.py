@@ -16,6 +16,7 @@ from .bookphotos import prepare_photos
 from .bibliography import read_citation_labels,read_bibliography,bibliography_tex,expand_citations
 from .references import References,read_aux
 from .mathdisplay import DisplayAdapter
+from .macrophases import mask_comments
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -67,6 +68,18 @@ def _one(pattern,text,what):
     rows=list(re.finditer(pattern,text))
     if len(rows)!=1:raise ValueError('native '+what+' missing or ambiguous')
     return rows[0]
+
+
+def source_caption(text,language,name):
+    """Read one literal native label from either supported Babel spelling.
+
+    Ambiguous or computed definitions require explicit reconciliation; this is
+    not a TeX interpreter and does not choose between competing definitions.
+    """
+    pattern=(r'\\setlocalecaption\{'+re.escape(language)+r'\}\{'+re.escape(name)+r'\}\{([^{}]+)\}'
+             r'|\\renewcommand\{\\'+re.escape(name)+r'name\}\{([^{}]+)\}')
+    row=_one(pattern,mask_comments(text),name+' caption')
+    return next(value for value in row.groups() if value is not None)
 
 
 def build_context(source,profile):
@@ -151,7 +164,7 @@ def build_context(source,profile):
         'actual_bst_sha256':sha(inputs.bytes(profile['bibliography_style']))}
     bibliography=read_bibliography(bbl,citation_labels,evidence=citation_evidence)
     token_config=inputs.text(profile['token_base_source'])
-    bibtitle=_one(r'\\renewcommand\{\\bibname\}\{([^{}]+)\}',token_config,'bibliography title')[1]
+    bibtitle=source_caption(token_config,babel,'bib')
     command=r'\bibliography{\olpath/'+profile['bibliography_source']+'}'
     style_command=r'\bibliographystyle{\olpath/'+profile['bibliography_style'].removesuffix('.bst')+'}'
     if text.count(command)!=1 or text.count(style_command)!=1:raise ValueError('bibliography source insertion differs')

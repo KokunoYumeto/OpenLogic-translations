@@ -44,6 +44,7 @@ class TheoremBlockTests(unittest.TestCase):
         result=bind_theorems(doc,receipt)
         self.assertEqual(result['numbered'],1)
         self.assertEqual(doc.xpath('.//div/@data-native-number'),['1.1'])
+        self.assertEqual(doc.xpath('.//div/@id'),['olp-native-theorem-000001'])
         self.assertEqual(doc.xpath('.//div/p[2]/text()'),['body'])
         with self.assertRaisesRegex(ValueError,'count'):bind_theorems(html.fromstring('<article/>'),receipt)
 

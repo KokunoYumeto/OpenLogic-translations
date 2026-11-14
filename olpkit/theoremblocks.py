@@ -152,7 +152,9 @@ def bind_theorems(document,receipt):
         head=block[0];head.text=None
         head.set('class','olp-theorem-heading')
         block.set('class',row['kind']+' olp-theorem')
-        block.set('id','olp-native-'+row['native']['native_anchor'])
+        # Native hyperref destinations may contain '*', unsuitable for some
+        # EPUB consumers. Preserve that identity in the receipt, not the ID.
+        block.set('id','olp-native-theorem-'+row['marker'].removeprefix(PREFIX))
         if row['visible_number']:block.set('data-native-number',row['visible_number'])
         if row['kind']=='proof':
             final=block[-1]

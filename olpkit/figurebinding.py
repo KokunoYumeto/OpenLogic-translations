@@ -86,6 +86,11 @@ def prepare_figures(text, source, exported, assets):
         markers[key] = {**row, 'asset': native['asset'], 'source_file': native['source_file'],
                         'svg_sha256': native['svg_sha256'], 'svg_bytes': len(vector),
                         'width_pt': native['width'], 'height_pt': native['height']}
+        if 'width_percent' in native:
+            value=native['width_percent']
+            if not isinstance(value,(int,float)) or not 0<value<=100:
+                raise ValueError('invalid native relative figure width')
+            markers[key]['width_percent']=value
         pieces.extend((text[pos:row['char_start']], r'\mbox{'+key+'}'))
         pos = row['char_end']
     pieces.append(text[pos:])
@@ -132,9 +137,12 @@ def bind_figures(document, receipt, *, asset_prefix, fallback_alt, descriptions=
         span = etree.Element('span', {'class': 'olp-native-figure',
                                     'id': 'olp-native-figure-'+str(row['index']),
                                     'data-source-sha256': row['source_sha256']})
+        if 'width_percent' in row:
+            span.set('style','display:block;text-align:center')
+        width=str(row['width_percent'])+'%' if 'width_percent' in row else row['width_pt']+'pt'
         etree.SubElement(span, 'img', src=asset_prefix.rstrip('/')+'/'+row['asset'],
                          alt=alt or fallback_alt,
-                         style='width:'+row['width_pt']+'pt;max-width:100%;height:auto;vertical-align:middle')
+                         style='width:'+width+';max-width:100%;height:auto;vertical-align:middle')
         bound.append(key)
         return span
 

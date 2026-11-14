@@ -48,6 +48,14 @@ class FigureBindingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'asset hash'):
             self.prepared()
 
+    def test_external_relative_width_and_centering_are_preserved(self):
+        self.exported['figures'][0]['width_percent']=80
+        _,r=self.prepared()
+        doc=html.fromstring('<p>OLPNATIVEFIG000001</p>')
+        self.bind(doc,r)
+        self.assertIn('width:80%;',doc.xpath('.//img/@style')[0])
+        self.assertIn('text-align:center',doc.xpath('.//span/@style')[0])
+
     def test_source_count_and_path_escape_are_rejected(self):
         with self.assertRaisesRegex(ValueError,'occurrence count'):
             self.prepared('no diagram')

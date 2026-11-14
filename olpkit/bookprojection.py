@@ -121,7 +121,10 @@ class BookProjection:
     def book_path(self, value, state=None):
         if state is not None and value in state.input_aliases:value=state.input_aliases[value]
         value=re.sub(r'\\number\s*\\value\s*\{chapter\}',str(self.chapter),value)
-        value = value.replace(r'\thechapter', self.chapter_label())
+        # A literal input can itself introduce the first appendix chapter.
+        # Do not evaluate \Alph{chapter} at zero unless the path uses it.
+        if r'\thechapter' in value:
+            value = value.replace(r'\thechapter', self.chapter_label())
         if '\\' in value: raise ValueError('unresolved book input: ' + value)
         path = posixpath.normpath(posixpath.join(self.book,value))
         if not path.endswith('.tex'): path += '.tex'

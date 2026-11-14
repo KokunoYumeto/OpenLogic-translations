@@ -10,6 +10,22 @@ DEFER = r'\renewenvironment{probdeferredtag}[2]{\begin{probd}}{\end{probd}}'
 
 
 class BookProjectionTests(unittest.TestCase):
+    def test_literal_input_can_introduce_first_appendix_chapter(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            a,imports=self.fixture(root,r'\appendix\input{derivations}',{},
+                {'locale/xx/book/derivations.tex':r'\chapter{Derivations}Complete text.'})
+            reader=BookProjection(root,a,imports)
+            text,_=reader.project('book.tex',['config.tex'])
+            self.assertIn(r'\chapter{Derivations}Complete text.',text)
+            self.assertEqual(reader.chapter_label(),'A')
+            self.assertEqual(reader.book_path(r'include/summary-\thechapter'),
+                             'locale/xx/book/include/summary-A.tex')
+            reader.chapter=0
+            self.assertEqual(reader.book_path('literal'),'locale/xx/book/literal.tex')
+            with self.assertRaisesRegex(ValueError,'appendix counter'):
+                reader.book_path(r'include/summary-\thechapter')
+
     def test_layout_hook_recognition_never_swallows_text_or_imports(self):
         self.assertTrue(layout_only_hook(r'\ifdefstring{\theolsection}{ccs}{\Needspace{7\baselineskip}}{}'))
         for body in ('Mathematics',r'\input{content}',r'\ifdefstring{\theolsection}{ccs}{A theorem}{}'):

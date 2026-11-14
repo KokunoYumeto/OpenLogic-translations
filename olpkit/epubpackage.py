@@ -188,8 +188,9 @@ def package_html(source_bytes, profile, expected_units, assets, supplements):
     # mathematical text; do not prepend it to a source heading or change titles.
     contents_link=etree.SubElement(docs[0][2],'{'+XHTML+'}p',attrib={'class':'olp-contents-link'})
     etree.SubElement(contents_link,'{'+XHTML+'}a',href='nav.xhtml').text=profile['navigation_title']
-    files['styles/reader.css']=profile['css'].encode('utf-8')
-    for url in re.findall(r'url\(\s*[\'\"]?([^\)\'\"]+)',profile['css']):
+    css=profile.get('epub_css',profile['css'])
+    files['styles/reader.css']=css.encode('utf-8')
+    for url in re.findall(r'url\(\s*[\'\"]?([^\)\'\"]+)',css):
         member=posixpath.normpath(posixpath.join('styles',unquote(url.strip())))
         if member not in assets:raise ValueError('CSS resource is not in the asset inventory')
     for name,node in documents.items():

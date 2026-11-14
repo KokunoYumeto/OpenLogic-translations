@@ -9,6 +9,7 @@ from .htmlpackage import reader_html
 from .epubpackage import package_html
 from .xhtml import text_without_annotations
 from .formulaspeech import bind_speech
+from .webfonts import bind_web_fonts
 
 
 def export_web(source,product,out,profile_path,*,check_numbers=False,check_speech=False):
@@ -55,7 +56,16 @@ def export_web(source,product,out,profile_path,*,check_numbers=False,check_speec
         'opening_title':meta['OLPbooktitle'],'notes_title':front['captions']['bibname'],
         'unit_prefix':'olp-unit-','css':inputs.witness_text('css'),'resource_map':{},'image_descriptions':{},
         'required_supplements':[],'required_credit_ids':credit_ids}
-    assets={}
+    font_config=profile.get('web_fonts')
+    if font_config and font_config['script']!=script['script']:
+        raise ValueError('font coverage script differs from edition')
+    assets,font_css,epub_font_css,font_report=bind_web_fonts(doc,font_config,inputs.bytes)
+    if font_report:
+        ep['epub_css']=ep['css']+'\n'+epub_font_css
+        ep['css']+='\n'+font_css
+        ep['required_credit_ids'].append(font_report['licence_html_id'])
+        for name,data in assets.items():
+            target=out/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
     for name in sorted(set(doc.xpath('//img/@src'))):
         p=(out/name).resolve()
         if not p.is_relative_to(out):raise ValueError('reader resource escapes output')
@@ -81,7 +91,7 @@ def export_web(source,product,out,profile_path,*,check_numbers=False,check_speec
         'profile_sha256':sha(profile_path.read_bytes()),'assembly_sha256':sha((source/'ASSEMBLY.json').read_bytes()),
         'projection':context['projection'],'body':body_report,'book':book_report,'html':html_report,
         'source_inputs':context['inputs']|inputs.inputs,'all_credit_profile_strings_retained':True,
-        'products':products,'release_ready':False,'remaining':['Formula speech','Visual reader inspection','Source/reader package and public readback integration']}
+        'products':products,'fonts':font_report,'release_ready':False,'remaining':['Formula speech','Visual reader inspection','Source/reader package and public readback integration']}
     if speech_report:
         report['speech']=speech_report
         report['remaining']=['Assistive-technology testing','Visual reader inspection','Source/reader package and public readback integration']

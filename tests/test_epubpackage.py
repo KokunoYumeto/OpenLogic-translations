@@ -83,6 +83,17 @@ class ReflowPackageTests(unittest.TestCase):
         profile=deepcopy(self.profile);profile['css']="@font-face{src:url('../fonts/missing.ttf')}"
         with self.assertRaisesRegex(ValueError,'CSS resource'):self.run_package(profile=profile)
 
+    def test_fonts_use_css_location_and_retain_exact_registered_bytes(self):
+        profile=deepcopy(self.profile)
+        profile['css']='@font-face{src:url("assets/font.ttf")}'
+        profile['epub_css']='@font-face{src:url("../assets/font.ttf")}'
+        data=b'font-fixture'
+        output,_=self.run_package(profile=profile,assets={'assets/font.ttf':data})
+        with zipfile.ZipFile(io.BytesIO(output)) as archive:
+            self.assertEqual(archive.read('OEBPS/assets/font.ttf'),data)
+            self.assertEqual(archive.read('OEBPS/styles/reader.css').decode(),profile['epub_css'])
+            self.assertIn(b'media-type="font/ttf"',archive.read('OEBPS/package.opf'))
+
     def test_native_nested_contents_and_in_book_credits_remain_in_order(self):
         profile=deepcopy(self.profile);profile['required_supplements']=[]
         profile['required_credit_ids']=['source-credits']

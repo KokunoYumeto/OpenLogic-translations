@@ -23,7 +23,8 @@ def finish_book(inputs,body_bytes,profile,output):
         return data.decode('utf-8-sig')
     projection,definitions,front=native_frontmatter(same_native('sty/open-logic-book.cls'),
         same_native(f['metadata']),same_native(profile['locale_source']),same_native(f['cover_text']),
-        inputs.text(f['driver']),language=profile['babel'],evidence={'source_inputs':dict(inputs.inputs)})
+        inputs.text(f['driver']),language=profile['babel'],evidence={'source_inputs':dict(inputs.inputs)},
+        style_source=same_native('sty/open-logic.sty'))
     definitions=re.sub(r'(\[width=)(\.\d+cm\])',r'\g<1>0\2',definitions)
     def pandoc(text):
         run=subprocess.run(['pandoc','-f','latex','-t','html5','--mathml'],input=text,

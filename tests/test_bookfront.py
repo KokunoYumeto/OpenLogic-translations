@@ -1,8 +1,32 @@
 import unittest
-from olpkit.bookfront import native_frontmatter,native_cover_width
+from olpkit.bookfront import native_frontmatter,native_cover_width,native_definitions,apply_front_patches
 
 
 class BookFrontTests(unittest.TestCase):
+    def test_native_parameterized_licence_wrapper_is_retained(self):
+        definition=r'\newcommand*{\oluselicense}[2]{Human author #2. \ollicensetext{#1}{#2}{\licensename}}'
+        source=r'\newcommand{\unused}{\newcommand{\oluselicense}{wrong}}'+definition
+        self.assertEqual(native_definitions(source,{'oluselicense'}),definition)
+        with self.assertRaisesRegex(ValueError,'missing'):
+            native_definitions('',{'oluselicense'})
+        with self.assertRaisesRegex(ValueError,'ambiguous'):
+            native_definitions(definition+definition,{'oluselicense'})
+
+    def test_front_formatting_patch_and_cover_geometry_are_distinguished(self):
+        body=r'Title \textsc{\OLPbookversion}'
+        metadata=(r'\patchcmd{\OLPfrontmatter}{\textsc{\OLPbookversion}}{\textbf{\OLPbookversion}}{}{\PackageError{x}{failed}{}}'
+                  r'\patchcmd{\OLPscreencover}{\vspace*{1cm}}{\vspace*{.2cm}}{}{}')
+        changed,rows=apply_front_patches(body,metadata)
+        self.assertEqual(changed,r'Title \textbf{\OLPbookversion}')
+        self.assertEqual(len(rows),2)
+        self.assertIn('reflowed',rows[1]['disposition'])
+        with self.assertRaisesRegex(ValueError,'target absent'):
+            apply_front_patches('different',metadata)
+
+    def test_unrecognized_front_patch_is_not_silently_lost(self):
+        with self.assertRaisesRegex(ValueError,'unsupported'):
+            apply_front_patches('text',r'\patchcmd{\another}{text}{new}{}{}')
+
     def prepare(self,metadata_extra=''):
         cls=r'\newcommand{\OLPfrontmatter}{Title\newpage Editor, \emph{University}.\newpage Author\newpage Full licence and credits.\newpage\tableofcontents*}'
         metadata=r'\setOLPbooktitle[Cover\\Title]{Full title}\setOLPbooksubtitle{Subtitle}\setOLPauthor{Author}\setOLPbookversion{Version}{xx}\setOLPsourcelink{https://example.org/source}\setOLPauthorlink{https://example.org/author}'+metadata_extra

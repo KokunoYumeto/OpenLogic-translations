@@ -4,6 +4,48 @@ from decimal import Decimal
 from .macrophases import COMMAND,group,skip_space,mask_comments,digest
 from .bookinsertions import calls,literal_definitions
 from .glossary import entry_fields
+from .selective import definition_end,token
+
+
+def native_definitions(text, names):
+    """Copy actual command declarations, including parameters, without executing TeX."""
+    wanted=set(names);found={};code=mask_comments(text);pos=0
+    while pos<len(code):
+        if code[pos]!='\\':pos+=1;continue
+        start=pos;m=COMMAND.match(code,pos);pos=m.end()
+        end=definition_end(code,start,pos,m[1])
+        if end is None:continue
+        at=skip_space(code,pos)
+        if code[at:at+1]=='*':at+=1
+        target,_,_=token(code,at);name=target.removeprefix('\\')
+        if name in wanted:
+            if name in found:raise ValueError('ambiguous native front definition: '+name)
+            found[name]=text[start:end]
+        pos=end
+    if set(found)!=wanted:raise ValueError('native front definition missing: '+', '.join(sorted(wanted-set(found))))
+    return '\n'.join(found.values())
+
+
+def apply_front_patches(body,metadata):
+    rows=[];code=mask_comments(metadata)
+    for _,start,at in calls(metadata,{'patchcmd'}):
+        args=[]
+        for _ in range(5):value,at=group(code,at);args.append(value)
+        target,search,replacement,success,failure=args
+        if target==r'\OLPfrontmatter':
+            if success.strip():raise ValueError('unsupported native front-patch success action')
+            if not search or search not in body:raise ValueError('native front patch target absent')
+            body=body.replace(search,replacement,1)
+            disposition='applied first literal match, as in native patchcmd'
+        elif target==r'\OLPscreencover':
+            # Reflowable covers retain content; fixed-page vertical spacing has
+            # no corresponding dimension. Record the exact native command.
+            if not re.fullmatch(r'\\vspace\*?\{[.\d]+cm\}',search) or not re.fullmatch(r'\\vspace\*?\{[.\d]+cm\}',replacement):
+                raise ValueError('unsupported native cover patch')
+            disposition='fixed-page cover vertical spacing; reflowed cover retains all content'
+        else:raise ValueError('unsupported native metadata patch target: '+target)
+        rows.append({'command':metadata[start:at],'target':target,'disposition':disposition})
+    return body,rows
 
 
 def native_cover_width(driver, definition_sources):
@@ -40,13 +82,14 @@ def native_cover_width(driver, definition_sources):
         'definitions':definitions,'definition_sources':{n:digest(t) for n,t in definition_sources.items()}}
 
 
-def native_frontmatter(class_source, metadata, locale, cover_text, driver, *, language, evidence):
+def native_frontmatter(class_source, metadata, locale, cover_text, driver, *, language, evidence, style_source=''):
     if not evidence:raise ValueError('native front-matter provenance required')
     pattern=r'\\newcommand\s*\{\\OLPfrontmatter\}'
     matches=list(re.finditer(pattern,mask_comments(class_source)))
     if len(matches)!=1:raise ValueError('native front-matter definition missing/ambiguous')
     at=matches[0].end();_,end=group(mask_comments(class_source),at)
     start=skip_space(class_source,at)+1;body=class_source[start:end-1]
+    body,patches=apply_front_patches(body,metadata)
     metadata_names={'setOLPbooktitle':('OLPbooktitle','optional'),
                     'setOLPbooksubtitle':('OLPbooksubtitle','optional'),
                     'setOLPauthor':('OLPauthor','optional'),
@@ -89,11 +132,14 @@ def native_frontmatter(class_source, metadata, locale, cover_text, driver, *, la
     # Pagination/positioning has no text equivalent in reflowable output.
     # Consume native bookmark arguments explicitly instead of leaking them.
     definitions+='\n'+r'\newcommand{\currentpdfbookmark}[2]{}'
+    if calls(body,{'oluselicense'}):
+        definitions+='\n'+native_definitions(style_source,{'ollicensefont','oluselicense'})
     definitions+='\n'+cover_text
     return cover+'\n'+front,definitions,{
         'schema':'olpkit.book-front.v1','class_sha256':digest(class_source),
         'metadata_sha256':digest(metadata),'locale_sha256':digest(locale),
         'cover_text_sha256':digest(cover_text),'driver_sha256':digest(driver),
+        'style_sha256':digest(style_source),'native_metadata_patches':patches,
         'native_frontmatter_body_sha256':digest(body),'native_frontmatter_pages':len(pages),
         'metadata':values,'captions':captions,'native_evidence':evidence,
         'projection_sha256':digest(cover+'\n'+front),'definitions_sha256':digest(definitions),

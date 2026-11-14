@@ -1,0 +1,117 @@
+schema_version = 1
+source_commit = "910f42b283dc756cc3847a920b48a16f8c154cbe"
+
+[preamble]
+after_olp = ["mr-il-after-olp.tex", "common-links.tex"]
+
+[[files]]
+path = "il.tex"
+sha256 = "fa0ef612bfe281bcc66b75a2016c9ba640d633e21858b261a5dfc9a5c4f0155a"
+
+[[files.transforms]]
+id = "numbered-summaries"
+before = "\\preto\\OLEndChapterHook{\\IfFileExists{include/summary-\\thechapter}\n        {\\section*{Summary}\\addcontentsline{toc}{section}{Summary}\n        \\let\\emph\\textbf\\input{include/summary-\\thechapter}\\let\\emph\\textit}{}}"
+after = "\\newif\\ifslcChapterSummaries\n\\slcChapterSummariestrue\n\\preto\\OLEndChapterHook{%\n  \\ifslcChapterSummaries\n  \\edef\\slcSummaryFile{include/summary-\\number\\value{chapter}.tex}%\n  \\IfFileExists{\\slcSummaryFile}{%\n    \\section*{सारांश}\\addcontentsline{toc}{section}{सारांश}%\n    {\\let\\emph\\textbf\\input{\\slcSummaryFile}}}{}%\n  \\fi\n}"
+kind = "preamble"
+reason = "Use ASCII chapter numbers for the Marathi summary filenames and scope them to the numbered chapters."
+matches = 1
+
+[[files.transforms]]
+id = "appendix-summaries"
+before = "\\appendix"
+after = "\\slcChapterSummariesfalse\n\\appendix"
+kind = "layout"
+reason = "Keep summaries out of the appendices."
+matches = 1
+
+[[files.transforms]]
+id = "figure-label"
+before = "\\def\\figurename{Fig.}\n"
+after = ""
+kind = "label"
+reason = "Use the Marathi figure label supplied by the locale."
+matches = 1
+
+[[files.transforms]]
+id = "biographies"
+before = "\\chapter{Biographies}"
+after = "\\chapter{चरित्रे}"
+kind = "label"
+reason = "Use the Marathi heading for biographies."
+matches = 1
+
+[[files.transforms]]
+id = "bib-style"
+before = "\\bibliographystyle{\\olpath/bib/natbib-oup}"
+after = "\\bibliographystyle{natbib-oup}"
+kind = "path"
+reason = "Read the patched bibliography style from the source tree through BSTINPUTS."
+matches = 1
+
+[[files.transforms]]
+id = "about"
+before = "\\olimport*{\\olpath/content/open-logic-about}"
+after = "{% The two-line Marathi heading leaves less room for the About text.\n\\addtolength{\\beforechapskip}{-\\baselineskip}%\n\\addtolength{\\afterchapskip}{-\\baselineskip}%\n\\AddToHookNext{cmd/memchapstarinfo/after}{\\markboth{ओपन लॉजिक प्रकल्पाविषयी}{ओपन लॉजिक प्रकल्पाविषयी}}%\n\\olimport*{\\olpath/locale/\\ollangid/content/open-logic-about}\\par}"
+kind = "about"
+reason = "Keep the accepted Marathi About placement and import its canonical text."
+matches = 1
+
+[[files.transforms]]
+id = "book-heading-1"
+before = "\\part{Incompleteness}\\label{incompleteness}"
+after = "\\part{अपूर्णता}\\label{incompleteness}"
+matches = 1
+kind = "label"
+reason = "Exact accepted Marathi heading reused with owner source-context and canon evidence; labels and imports remain unchanged."
+
+[[files.transforms]]
+id = "book-heading-2"
+before = "\\chapter{Models of Arithmetic}\\label{mod:chap}"
+after = "\\chapter{अंकगणिताची प्रतिमाने}\\label{mod:chap}"
+matches = 1
+kind = "label"
+reason = "Exact accepted Marathi heading reused with owner source-context and canon evidence; labels and imports remain unchanged."
+
+[[files.transforms]]
+id = "bib-db"
+before = "\\bibliography{\\olpath/bib/open-logic.bib,il.bib}"
+after = "\\bibliography{\\olpath/bib/open-logic,il}"
+matches = 1
+kind = "path"
+reason = "Portable BibTeX database stems; retain both OLP and IL bibliographies."
+
+[[files]]
+path = "il-screen.tex"
+sha256 = "33e3f7a1621abb7b9a1460ed23f5ce211025ad163479f94c38c5fbb0dc8dc3c6"
+
+[[files.transforms]]
+id = "class-and-fonts"
+before = "\\documentclass[screen]{../../sty/open-logic-book}"
+after = "\\input{olpkit-before-class}\n\\documentclass[screen]{../../../../sty/open-logic-book}\n\\input{locale/mr/config/slc-fonts}"
+matches = 1
+kind = "preamble"
+reason = "Common Marathi font resources and correct modular assembly path; native cover and colours retained."
+
+[[files.transforms]]
+id = "root-path"
+before = "\\newcommand{\\olpath}{../../}"
+after = "\\newcommand{\\olpath}{../../../..}"
+matches = 1
+kind = "path"
+reason = "Locale/book directory is four levels below the shared OLP tree."
+
+[[files.transforms]]
+id = "locale-before-olp"
+before = "\\input{\\olpath/sty/open-logic.sty}"
+after = "\\input{olpkit-before-olp}\n\\input{\\olpath/sty/open-logic.sty}"
+matches = 1
+kind = "preamble"
+reason = "Set the actual edition locale before OLP selects content and localized definitions."
+
+[[files.transforms]]
+id = "book-after-olp"
+before = "\\input{\\olpath/sty/open-logic-defer.sty}"
+after = "\\input{\\olpath/sty/open-logic-defer.sty}\n\\input{olpkit-after-olp}"
+matches = 1
+kind = "preamble"
+reason = "Load the IL-specific localized credits, shared bibliography/navigation/layout and common link policy after native metadata and deferred exercises."

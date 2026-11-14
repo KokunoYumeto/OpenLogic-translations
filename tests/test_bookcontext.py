@@ -1,9 +1,22 @@
 import json,tempfile,unittest,hashlib
 from pathlib import Path
-from olpkit.bookcontext import BookInputs,source_caption
+from olpkit.bookcontext import BookInputs,source_caption,display_inventory
 
 
 class BookContextIntegrityTests(unittest.TestCase):
+    def test_native_tableau_is_deferred_in_context_but_not_dropped_from_conversion(self):
+        from olpkit.mathdisplay import DisplayAdapter
+        tableau=r'\begin{oltableau}[A,just={Given}[B,close][C]]\end{oltableau}'
+        text='Before\n'+tableau+'\nAfter $x=y$'
+        result=display_inventory(text,{'proof_label_styles':{},'math_font_sizes':{}})
+        row,=result['deferred_native_figures']
+        self.assertEqual(row['source_sha256'],hashlib.sha256(tableau.encode()).hexdigest())
+        self.assertEqual(text[row['char_start']:row['char_end']],tableau)
+        self.assertEqual(row['line'],2)
+        self.assertEqual(result['source_before_native_deferral_sha256'],hashlib.sha256(text.encode()).hexdigest())
+        with self.assertRaisesRegex(ValueError,'complete tree renderer'):
+            DisplayAdapter().prepare(text,'unbound-render-input')
+
     def test_text_witness_newlines_are_bound_to_the_projection_hash(self):
         with tempfile.TemporaryDirectory() as td:
             p=Path(td);data=b'first\r\nsecond\n';(p/'projection.tex').write_bytes(data)

@@ -86,19 +86,28 @@ def combine_exports(text, exports, output, *, external):
         identity=current
         evidence.append({'receipt_sha256':sha(json.dumps(record,sort_keys=True).encode()),
                          'source_sha256':record['source_sha256'],'configuration':record['configuration_evidence']})
-        for row in record['figures']:available[row['source_sha256']].append((Path(folder),row))
+        for row in record['figures']:
+            original=checked_asset(folder,row['source_file'],row['source_sha256'])
+            # TeX treats CRLF and LF as the same line boundary. Preserve the
+            # engine's exact witness, but match the converter's LF source.
+            normalized=original.replace(b'\r\n',b'\n')
+            if b'\r' in normalized:raise ValueError('unsupported native source line ending')
+            available[sha(normalized)].append((Path(folder),row,original,normalized))
     widths={r['index']:r['width_percent'] for r in external['figures']}
     rows=[]
     for actual in extract_native_figures(text):
         queue=available[actual['source_sha256']]
-        if not queue:raise ValueError('no exported vector for source figure')
-        folder,native=queue.pop(0);index=actual['index']
-        original=checked_asset(folder,native['source_file'],actual['source_sha256'])
+        if not queue:raise ValueError('no exported vector for source figure: '+actual['environment']+' occurrence '+str(actual['index'])+' sha256 '+actual['source_sha256'])
+        folder,native,rendered_source,original=queue.pop(0);index=actual['index']
         if original.decode('utf-8')!=actual['source_tex']:raise ValueError('native source differs')
         vector=checked_asset(folder,native['asset'],native['svg_sha256']);inspect_svg(vector)
         row={k:v for k,v in native.items() if k not in ('index','source_file','asset','source_tex')}
         row.update({'index':index,'asset':f'figure-{index:03d}.svg','source_file':f'figure-{index:03d}.tex',
                     'origin_index':native['index'],'origin_directory':str(folder)})
+        if rendered_source!=original:
+            row['source_sha256']=sha(original)
+            row['source_normalization']={'kind':'CRLF-to-LF only','native_source_sha256':sha(rendered_source),
+                                         'matched_source_sha256':sha(original),'native_source_file':native['source_file']}
         if index in widths:row['width_percent']=widths[index]
         for key,data in [('asset',vector),('source_file',original)]:
             target=output/row[key]

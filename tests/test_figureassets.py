@@ -49,6 +49,26 @@ class ExternalFigureTests(unittest.TestCase):
         self.assertEqual(r['figures'][0]['index'],2)
         self.assertEqual(r['figures'][0]['width_percent'],40)
 
+    def test_native_crlf_witness_is_retained_when_converter_uses_lf(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'native';folder.mkdir()
+            source=b'\\begin{oltableau}\r\n[A[B,close][C]]\r\n\\end{oltableau}'
+            vector=b'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10" viewBox="0 0 20 10"><path d="M0 0L1 1"/></svg>'
+            (folder/'figure-001.tex').write_bytes(source);(folder/'figure-001.svg').write_bytes(vector)
+            record={'status':'vectors_exported_pending_visual_and_semantic_checks',
+                'driver_sha256':'same','preamble_sha256':'same','assembly_sha256':'same',
+                'source_sha256':'whole','configuration_evidence':{'source':'native'},'figures':[
+                    {'index':1,'source_sha256':sha(source),'source_file':'figure-001.tex',
+                     'asset':'figure-001.svg','svg_sha256':sha(vector)}]}
+            expected=source.replace(b'\r\n',b'\n')
+            result=combine_exports(expected.decode(),[(folder,record)],root/'combined',external={'figures':[]})
+            row,=result['figures']
+            self.assertEqual(row['source_sha256'],sha(expected))
+            self.assertEqual(row['source_normalization']['native_source_sha256'],sha(source))
+            self.assertEqual((folder/'figure-001.tex').read_bytes(),source)
+            self.assertEqual((root/'combined/figure-001.svg').read_bytes(),vector)
+            self.assertEqual((root/'combined/figure-001.tex').read_bytes(),expected)
+
     def test_combining_native_exports_reuses_exact_bytes_and_rejects_changed_context(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);exports=[];sources=[]

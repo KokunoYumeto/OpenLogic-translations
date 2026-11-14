@@ -18,9 +18,29 @@ from .references import References,read_aux
 from .mathdisplay import DisplayAdapter
 from .macrophases import mask_comments
 from .bookinsertions import glossary_insertion,insert_glossary,insert_bibliography,literal_definitions,bibliography_helpers
+from .nativefigures import extract_native_figures
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
+
+
+def display_inventory(text,settings):
+    """Inspect ordinary displays while retaining native objects for later binding.
+
+    This is only context analysis. The returned book math source is untouched;
+    build_body must bind every native vector before its strict display pass.
+    Spaces preserve original offsets and line numbers in this inspection copy.
+    """
+    native=extract_native_figures(text)
+    masked=text
+    for row in reversed(native):
+        start,end=row['char_start'],row['char_end']
+        masked=masked[:start]+''.join('\n' if c=='\n' else ' ' for c in text[start:end])+masked[end:]
+    _,report=DisplayAdapter(proof_label_styles=settings['proof_label_styles'],
+                           math_font_sizes=settings['math_font_sizes']).prepare(masked,'book-math-context.tex')
+    report['source_before_native_deferral_sha256']=sha(text.encode())
+    report['deferred_native_figures']=[{k:v for k,v in row.items() if k!='source_tex'} for row in native]
+    return report
 
 
 class BookInputs:
@@ -193,7 +213,7 @@ def build_context(source,profile):
     for name in profile['notation_configuration']:notation.configure(inputs.text(name),name)
     math,notation_receipt=notation.expand(text,'book-with-references.tex')
     display_settings=inputs.witness_json('display_settings')
-    _,display=DisplayAdapter(proof_label_styles=display_settings['proof_label_styles'],math_font_sizes=display_settings['math_font_sizes']).prepare(math,'book-math-context.tex')
+    display=display_inventory(math,display_settings)
     return {'math_source':math,'projected_source':projected,'prose_macro_definitions':definitions,'projection':projection,'tokens':token_receipt,
         'glossary':glossary_receipt,'glossary_tokens':glossary_tokens,'references':reference_receipt,
         'bibliography':bibliography,'citations':citations,'photos':photos,'notation':notation_receipt,'display':display,

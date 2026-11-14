@@ -91,8 +91,26 @@ An independent splice of only those ranges reproduces the output exactly:
 surrounding source and mathematics remain byte-for-byte unchanged. This is a
 conversion check, not a new translation or a claim of expert linguistic review.
 
-The next acceptance work is mathematical-macro expansion, PDF-derived references,
-front matter, glossary, bibliography, credits and figures, followed by actual
-HTML/EPUB rendering and accessible formula speech. The original five acceptance
+`olpkit.mathsource` adapts the source-declaration and balanced-argument approach
+of the Gujarati producer. It evaluates the authored xparse choices, mandatory
+and optional arguments, captured aliases and first-token formatting. Formula
+alphabets are read from the native style and selected by the actual configuration
+calls. In SLC, the book's Latin formula letters therefore supersede the default
+Greek letters. The older converter's hardcoded Greek mapping cannot be reused
+unchanged for this book. Macro definitions and calls have source locators and
+hashes. Unsupported eager/global definitions and conditional execution fail.
+
+The complete Javanese projection expands 10,674 source macro calls and 4,090
+formula shorthands. A private Pandoc probe renders 10,200 MathML expressions with
+TeX annotations. It still emits 69 warnings: native figures/proofs, compound
+operators and display constructs need their conversion stages. It is not a
+publishable reader. Source-declared font weight and shape have MathML equivalents;
+this does not certify identical font faces or glyph geometry. The probe also
+exposed and fixed two control-sequence joins caused by removing active formula
+shorthand characters; focused regressions retain TeX token boundaries.
+
+The next acceptance work is the remaining display/proof/figure conversion,
+PDF-derived references, front matter, glossary, bibliography, credits, full
+HTML/EPUB assembly and accessible formula speech. The original five acceptance
 criteria and all book-unit requirements remain open. Repeating closed archive or
 packaging checks does not advance that boundary.

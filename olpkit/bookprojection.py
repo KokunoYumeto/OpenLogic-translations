@@ -132,7 +132,16 @@ class BookProjection:
             return self.expand(path,state.copy(),section),p
         if name in ('input','include'):
             value,end = group(text,pos)
-            return self.expand(self.book_path(value),state),end
+            expanded=self.expand(self.book_path(value),state)
+            # TeX reads the file after tokenizing the surrounding control words.
+            # Serializing its bytes must not fuse \textbf + Gedhene into a new
+            # command, or a final imported command with following source text.
+            start=pos-len(name)-1
+            if re.search(r'\\[A-Za-z@]+$',text[:start]) and re.match(r'[A-Za-z@]',expanded):
+                expanded=' '+expanded
+            if re.search(r'\\[A-Za-z@]+$',expanded) and re.match(r'[A-Za-z@]',text[end:]):
+                expanded+=' '
+            return expanded,end
         if name == 'IfFileExists':
             value,p = group(text,pos); yes,p = group(text,p); no,end = group(text,p)
             path = self.book_path(value); chosen = path in self.assembly['files']

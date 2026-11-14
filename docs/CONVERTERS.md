@@ -194,3 +194,34 @@ the transition table. The adapter retains every cell's TeX, renders invisible
 width material as MathML mphantom, checks the rendered row/cell/span counts and
 applies borders from the original rules. Header semantics, visual layout and
 complete product acceptance remain separate requirements.
+# Native textbook references
+
+`olpkit.references` resolves executed OLP labels and relative references using
+the auxiliary file from the corresponding translated textbook. The caller
+must reconcile that witness with the actual assembly; an English or full-corpus
+auxiliary file is not an acceptable substitute. The adapter records the aux
+identity, source spans, scoped namespaces, selected `oliflabeldef` branches,
+reference names and ordered targets. Missing native labels, unsupported list
+formats and unknown localized type names fail explicitly.
+
+Imports, explicit groups, environments and deferred exercise context assignments
+retain their native reference scope. Definitions and `let` assignments are not
+executed as displayed text. The DOM binding supplies links in prose and MathML,
+keeps stable destination IDs, and restores original reference commands in the
+TeX annotations. It runs after display binding. A source anchor is not a claim
+that the theorem's complete visual presentation has been accepted.
+
+The Javanese SLC replay reconciles all 176 imported units and 144 exercises with
+the existing translated native source. Its 250 reference calls, 370 body
+anchors and 3,391 counter events agree. Explicit source-defined text and font
+shims, bibliography path normalization and whitespace account for the source
+differences. Nine native photo-credit labels belong to front/back matter still
+outside this body binding. The probe has 266 links with unique, existing targets;
+the two reference-bearing equation fallbacks now render. Native TikZ conversion,
+full front/back matter, visual and accessibility checks and complete EPUB
+acceptance remain required.
+
+The projection also protects control-word boundaries when expanding `input`:
+an imported word immediately after `let` must not become part of the preceding
+command name. Use the textbook's actual environment configuration, including
+its exclusions, rather than the default corpus environment file.

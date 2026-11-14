@@ -89,5 +89,14 @@ class BookProjectionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'unflushed'):
                 BookProjection(root,a,imports).project('book.tex',['config.tex'])
 
+    def test_import_expansion_preserves_control_word_boundaries(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            entry=r'\let\emph\textbf\input{summary}\input{last}x'
+            a,imports=self.fixture(root,entry,{},
+                {'locale/xx/book/summary.tex':'Gedhene', 'locale/xx/book/last.tex':r'\alpha'})
+            text,_=BookProjection(root,a,imports).project('book.tex',['config.tex'])
+            self.assertEqual(text,r'\let\emph\textbf Gedhene\alpha x')
+
 
 if __name__ == '__main__': unittest.main()

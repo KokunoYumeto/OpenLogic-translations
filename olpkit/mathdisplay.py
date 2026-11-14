@@ -6,6 +6,7 @@ Unsupported diagrams, references and table layout remain explicit failures.
 Markers preserve exact input TeX when a MathML layout repair is necessary.
 """
 import re
+from decimal import Decimal
 
 from .macrophases import COMMAND, digest, group, mask_comments
 from .selective import definition_end, environment_end, token
@@ -99,6 +100,8 @@ class DisplayAdapter:
             if name == 'begin':
                 env, body_start = group(text, pos)
                 stop, end = environment_end(text, body_start, env)
+                if env == 'oltableau':
+                    raise ValueError('native OLP tableau requires a complete tree renderer; Pandoc would silently omit it')
                 if env == 'prooftree':
                     inner = text[body_start:stop]
                     body, used, proof = parse_proof_region(inner,
@@ -173,6 +176,36 @@ class DisplayAdapter:
                 out.extend((r'\ensuremath{', self.walk(value, math=True, offset=offset+at), '}'))
                 pos = end
                 continue
+            if math and name == 'setlength':
+                register,p=group(text,pos);length,p=group(text,p)
+                opening=re.match(r'\s*\\begin\s*\{array\}',text[p:])
+                if register==r'\arraycolsep' and opening:
+                    dimension=re.fullmatch(r'\s*(\d+(?:\.\d+)?)pt\s*',length)
+                    if not dimension:raise ValueError('array spacing requires an explicit point length')
+                    columns,body_start=group(text,p+opening.end())
+                    trimmed=re.fullmatch(r'@\{\}([clr\s]+)@\{\}',columns)
+                    if not trimmed:raise ValueError('unsupported spaced-array column specification')
+                    stop,end=environment_end(text,body_start,'array')
+                    if not re.match(r'\s*(?:\\\]|\$|\})',text[end:]):
+                        raise ValueError('array spacing continues beyond the supported array scope')
+                    body=self.walk(text[body_start:stop],math=True,offset=offset+body_start)
+                    body=re.sub(r'\\\\\s*$','',body,count=1)
+                    rendered=r'\begin{array}{'+trimmed[1]+'}'+body+r'\end{array}'
+                    out.append(self.mark('spaced-array',rendered,text[start:end],offset+start,offset+end))
+                    # CSS/MathML pt is 1/72 inch; TeX pt is 1/72.27 inch.
+                    width=Decimal(dimension[1])*2*Decimal(72)/Decimal('72.27')
+                    self.markers[PREFIX+str(len(self.markers)-1).zfill(6)]['columnspacing']=format(width.quantize(Decimal('.000001')),'f')+'pt'
+                    pos=end;continue
+            if math and name == 'hbox':
+                width=re.match(r'\s*to\s*((?:\d+(?:\.\d*)?|\.\d+)(?:em|ex|pt))\s*',text[pos:])
+                if width:
+                    body,end,at=token(text,pos+width.end())
+                    content=re.fullmatch(r'(\s*\\ensuremath[\s\S]+?)\\hfil\s*',body)
+                    if not content:raise ValueError('fixed-width math box needs known left-aligned mathematical content')
+                    rendered=self.walk(content[1],math=True,offset=offset+at)
+                    out.append(self.mark('fixed-width-math',rendered,text[start:end],offset+start,offset+end))
+                    self.markers[PREFIX+str(len(self.markers)-1).zfill(6)]['width']=width[1]
+                    pos=end;continue
             if math and name == 'small':
                 opening = re.match(r'\s*\\begin\s*\{array\}', text[pos:])
                 if opening:
@@ -219,7 +252,14 @@ class DisplayAdapter:
                     while i < len(value) and value[i] != '$':
                         i = COMMAND.match(value, i).end() if value[i] == '\\' else i+1
                     if i == len(value): raise ValueError('unclosed nested inline math')
-                    if value[prior:opening]: pieces.append('\\'+name+'{'+value[prior:opening]+'}')
+                    if value[prior:opening]:
+                        prose=value[prior:opening]
+                        # TeX's italic-correction command is a font-engine
+                        # operation at this text/math boundary, not prose.
+                        # Keep it in the original annotation, and let the web
+                        # font engine space the text and following math glyph.
+                        prose=re.sub(r'\\/\s*$',lambda m:m[0][2:],prose)
+                        pieces.append('\\'+name+'{'+prose+'}')
                     # Braces keep scripts on the nested math from binding to preceding text.
                     pieces.append('{'+self.walk(value[opening+1:i], math=True, offset=offset+at+opening+1)+'}')
                     prior = i+1
@@ -324,6 +364,12 @@ def bind_mathml(document, receipt, *, strict=True):
             styled = element(node, 'mstyle', mathsize=markers[key]['mathsize'])
             styled.append(base)
             base = styled
+        elif kind == 'spaced-array':
+            if local(base)!='mtable':raise ValueError('spaced array did not render as a table')
+            base.set('columnspacing',markers[key]['columnspacing'])
+        elif kind == 'fixed-width-math':
+            padded=element(node,'mpadded',width=markers[key]['width'],lspace='0em')
+            padded.append(base);base=padded
         elif kind.startswith('proof-line-'):
             fraction = next((item for item in base.iter() if local(item) == 'mfrac'), None)
             if fraction is None or len(fraction) != 2: raise ValueError('proof rule has no fraction structure')

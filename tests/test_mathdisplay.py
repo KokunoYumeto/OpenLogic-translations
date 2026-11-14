@@ -6,6 +6,11 @@ from olpkit.mathdisplay import DisplayAdapter, bind_mathml, restore_annotations
 
 
 class DisplayTests(unittest.TestCase):
+    def test_native_tableau_cannot_be_silently_omitted(self):
+        source=r'Before\begin{oltableau}[A, just={Hypothesis}[B, close]]\end{oltableau}After'
+        with self.assertRaisesRegex(ValueError,'complete tree renderer'):
+            DisplayAdapter().prepare(source,'fixture')
+
     def test_intertext_preserves_every_prose_and_math_piece_in_order(self):
         source = r'Before\begin{align*}a&=b\\\intertext{Prose {nested} $c$.}d&=e\\\intertext{Next.}f&=g\end{align*}After'
         result, receipt = DisplayAdapter().prepare(source, 'fixture')
@@ -69,6 +74,30 @@ class PandocDisplayTests(unittest.TestCase):
         self.assertEqual(binding['unbound'], [])
         self.assertNotIn('OLPDISPLAY', html.tostring(doc, encoding='unicode'))
         return doc, receipt
+
+    def test_explicit_array_spacing_preserves_cells_and_source(self):
+        source=r'$\setlength{\arraycolsep}{3pt}\begin{array}{@{}c c@{}}a&b\\\\c&d\\\end{array}$'
+        doc,_=self.render(source)
+        self.assertEqual(doc.xpath('//mtable/@columnspacing'),['5.977584pt'])
+        self.assertEqual(doc.xpath('//mi/text()'),['a','b','c','d'])
+        self.assertEqual(len(doc.xpath('//mtr')),3)
+        self.assertEqual(doc.xpath('//annotation')[0].text,source[1:-1])
+
+    def test_fixed_width_truth_sign_retains_width_math_and_annotation(self):
+        source=r'$\ensuremath{\hbox to.8em{\ensuremath{\mathbb{T}}\hfil} A}$'
+        doc,_=self.render(source)
+        self.assertEqual(doc.xpath('//mpadded/@width'),['.8em'])
+        self.assertIn('A',''.join(doc.xpath('//mi/text()')))
+        self.assertTrue(any('T' in ''.join(n.itertext()) or '𝕋' in ''.join(n.itertext()) for n in doc.xpath('//mpadded')))
+        self.assertEqual(doc.xpath('//annotation')[0].text,source[1:-1])
+
+    def test_marathi_condition_keeps_words_math_and_original_italic_correction(self):
+        source=r'$\begin{cases}1 & \text{जर\/ $n$ अविभाज्य असेल तर}\\0&\text{अन्यथा.}\end{cases}$'
+        doc,_=self.render(source)
+        text=''.join(doc.xpath('//mtext/text()'))
+        for word in ['जर','अविभाज्य असेल तर','अन्यथा.']:self.assertIn(word,text)
+        self.assertEqual(doc.xpath('//mi/text()'),['n'])
+        self.assertEqual(doc.xpath('//annotation')[0].text,source[1:-1])
 
     def test_bevelled_nested_fractions_and_annotations(self):
         source = r'$\nicefrac{a}{1+\nicefrac12}$'

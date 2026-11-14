@@ -13,6 +13,49 @@ from .references import bind_references
 from .glossary import bind_glossary
 from .bibliography import bind_bibliography
 from .bookphotos import bind_photos
+from .selective import explicit_group_end
+from .macrophases import COMMAND,mask_comments
+
+
+def pandoc_import_scopes(text):
+    """Use one group notation for synthetic import wrappers, retaining their bodies.
+
+    Pandoc misparses an explicit begin/endgroup nested in a brace-scoped chapter.
+    Only identified document imports already inside native brace groups are
+    adapted; authored math, macro arguments and inner scopes remain unchanged.
+    """
+    pattern=r'\\hypertarget\{(olp-unit-\d+)\}\{\}(\\begingroup)\\def\\ol@sectioncs\{[A-Za-z]+\}'
+    edits=[];rows=[];code=mask_comments(text);pos=0;depth=0
+    for hit in re.finditer(pattern,text):
+        start,end=hit.span(2);stop,finish=explicit_group_end(text,end)
+        # Leave ordinary explicit import scopes alone: some of their bodies
+        # contain further explicit layout scopes. The failing case is a native
+        # brace wrapper surrounding an imported document block.
+        while pos<hit.start():
+            if code[pos]=='\\':
+                command=COMMAND.match(code,pos);pos=command.end()
+                if command[1] in ('verb','Verb'):
+                    if code[pos:pos+1]=='*':pos+=1
+                    delimiter=code[pos:pos+1];close=code.find(delimiter,pos+1)
+                    if not delimiter or close<0:raise ValueError('unclosed verbatim before import')
+                    pos=close+1
+                elif command[1]=='string':
+                    literal=COMMAND.match(code,pos)
+                    pos=literal.end() if literal else pos+1
+                continue
+            if code[pos]=='{':depth+=1
+            elif code[pos]=='}':depth-=1
+            pos+=1
+        if depth<=0:continue
+        edits.extend([(start,end,'{'),(stop,finish,'}')])
+        rows.append({'unit':hit[1],'start':start,'end':finish,
+                     'unchanged_body_sha256':sha(text[end:stop].encode())})
+    edits.sort()
+    if any(a[1]>b[0] for a,b in zip(edits,edits[1:])):raise ValueError('overlapping import scope adaptation')
+    result=text
+    for start,end,replacement in reversed(edits):result=result[:start]+replacement+result[end:]
+    return result,{'input_sha256':sha(text.encode()),'output_sha256':sha(result.encode()),
+                  'imports':rows,'scope':'Synthetic document import group notation only; no source prose or mathematical edits.'}
 
 
 def build_body(inputs,context,profile,output):
@@ -50,12 +93,13 @@ def build_body(inputs,context,profile,output):
     notation.formula_library(inputs.text('sty/open-logic-formulas.sty'),'sty/open-logic-formulas.sty')
     for name in profile['notation_configuration']:notation.configure(inputs.text(name),name)
     fonts,font_records=notation.font_preamble()
+    prepared,scope_report=pandoc_import_scopes(prepared)
     command=[shutil.which('pandoc'),'-f','latex','-t','html5','--mathml']
     run=subprocess.run(command,input=fonts+'\n'+context['prose_macro_definitions']+'\n'+prepared,
         capture_output=True,encoding='utf-8',timeout=90)
     if run.returncode or run.stderr:raise ValueError('body conversion has diagnostics: '+run.stderr[:1000])
     doc=html.fromstring(run.stdout)
-    bindings={'display':bind_mathml(doc,display),'references':bind_references(doc,context['references']),
+    bindings={'import_scopes':scope_report,'display':bind_mathml(doc,display),'references':bind_references(doc,context['references']),
         'theorems':bind_theorems(doc,theorems),'glossary':bind_glossary(doc,context['glossary']),
         'bibliography':bind_bibliography(doc,context['bibliography'],context['citations']),
         'photographs':bind_photos(doc,context['photos'])}

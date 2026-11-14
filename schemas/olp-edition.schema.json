@@ -526,6 +526,22 @@
         "license": {
           "type": "string",
           "minLength": 1
+        },
+        "catalogue": {
+          "type": "object",
+          "description": "Edition-owned public catalogue data, bound to this contract by SHA-256; relative links retain their declared hub base.",
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^(?!/)(?!.*\\.\\.)(?!.*[\\\\:]).+\\.json$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": ["path", "sha256"],
+          "additionalProperties": false
         }
       },
       "required": [],

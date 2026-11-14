@@ -168,7 +168,7 @@ These links identify the published release for each work and language. The langu
 | বাংলা (ভারত) | [v1.0.1-corrected-edition](https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN/releases/tag/v1.0.1-corrected-edition) | 2026-10-01 |
 | پښتو (پاکستان) | [v1.0.0](https://github.com/KokunoYumeto/openlogic-ps-Arab-PK/releases/tag/v1.0.0) | 2026-11-13 |
 | தமிழ் (இந்தியா) | [v1.1.1-complete-722](https://github.com/KokunoYumeto/OpenLogic-ta-Taml-IN/releases/tag/v1.1.1-complete-722) | 2026-09-28 |
-| తెలుగు | [v1.0.1-full-olp0722](https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v1.0.1-full-olp0722) | 2026-09-28 |
+| తెలుగు | [v1.0.5-full-olp0722](https://github.com/KokunoYumeto/OpenLogic-te-Telu-IN/releases/tag/v1.0.5-full-olp0722) | 2026-11-14 |
 
 [Download filenames, sizes and source-provided checksums](catalogue/releases.json).
 <!-- releases:end -->

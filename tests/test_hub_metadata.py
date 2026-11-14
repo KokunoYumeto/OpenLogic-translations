@@ -1,5 +1,5 @@
 import unittest
-from olpkit.schemas import validator
+from olpkit.schemas import validator, validate_schema
 
 
 class HubMetadataSchemaTests(unittest.TestCase):
@@ -24,3 +24,22 @@ class HubMetadataSchemaTests(unittest.TestCase):
         for path in ['../catalogue.json','/catalogue.json','C:/catalogue.json',
                      r'publication\catalogue.json','https://example.invalid/catalogue.json','catalogue.py']:
             with self.subTest(path=path):self.assertTrue(self.errors({'catalogue':{'path':path,'sha256':'a'*64}}))
+
+    def release(self):
+        return {'schema_version':1,'edition':'test','product_group':'complete','tag':'v1','commit':'a'*40,
+                'pins':{'olp':{'repository':'https://github.com/OpenLogicProject/OpenLogic','commit':'b'*40}},
+                'source_units':26,'reader_units':7,'assets':[],'gates':[],
+                'attribution':'Fixture; not a production claim','license':'Fixture',
+                'unit_ledger':{'path':'units.jsonl','sha256':'c'*64},'engine':'xelatex','tool_versions':{'xelatex':'fixture version'}}
+
+    def test_release_requires_ledger_and_environment_as_designed(self):
+        data=self.release();validate_schema('release',data)
+        for key in ['unit_ledger','engine','tool_versions']:
+            bad=dict(data);bad.pop(key)
+            with self.subTest(key=key),self.assertRaises(ValueError):validate_schema('release',bad)
+
+    def test_release_ledger_is_a_safe_exact_identity(self):
+        for patch in [{'unit_ledger':{'path':'../units.jsonl','sha256':'c'*64}},
+                      {'unit_ledger':{'path':'units.jsonl','sha256':'bad'}},
+                      {'engine':'guessed-engine'},{'tool_versions':{}}]:
+            with self.subTest(patch=patch),self.assertRaises(ValueError):validate_schema('release',{**self.release(),**patch})

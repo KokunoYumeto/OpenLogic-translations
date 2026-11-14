@@ -194,6 +194,40 @@
     "license": {
       "type": "string",
       "minLength": 1
+    },
+    "unit_ledger": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*\\.\\.)(?!.*[\\\\:]).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "engine": {
+      "enum": [
+        "pdflatex",
+        "xelatex",
+        "lualatex",
+        "none"
+      ]
+    },
+    "tool_versions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   },
   "required": [
@@ -208,7 +242,10 @@
     "assets",
     "gates",
     "attribution",
-    "license"
+    "license",
+    "unit_ledger",
+    "engine",
+    "tool_versions"
   ],
   "additionalProperties": false
 }

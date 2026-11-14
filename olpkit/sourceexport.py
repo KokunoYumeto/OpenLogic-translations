@@ -22,6 +22,9 @@ from .structure import without_comments
 IMPORT = re.compile(r'\\olimport(\*)?[ \t]*(?:\[([^][]*)\][ \t]*)?\{([^{}\n]+)\}(?:\[([^][]*)\])?')
 BOOK_INPUT = re.compile(r'(\\(?:input|include|loadglsentries|IfFileExists)\s*\{)([^{}]*)(\})')
 ABOUT = r'\olpath/locale/\ollangid/content/open-logic-about'
+NUMBERED_SUMMARY = re.compile(
+    r'(\\edef\s*\\slcSummaryFile\s*\{)include/summary-(\\number\s*\\value\{chapter\}\.tex)(\})'
+)
 DISPATCH = r'''\makeatletter
 \NewDocumentCommand \olpkitEmbeddedImport {m O{section}}{%
   \begingroup
@@ -98,7 +101,13 @@ def retarget_book_inputs(text, names):
         elif name.startswith('include/'):
             raise ValueError('book input was not embedded: ' + name)
         return left + name + right
-    return code_lines(text, lambda line: BOOK_INPUT.sub(replace, line))
+    def retarget_line(line):
+        def summary_path(match):
+            if not any(re.fullmatch(r'include/summary-\d+\.tex', name) for name in names):
+                raise ValueError('numbered summary inputs were not embedded')
+            return match[1] + 'olpkit-book-include-summary-' + match[2] + match[3]
+        return NUMBERED_SUMMARY.sub(summary_path, BOOK_INPUT.sub(replace, line))
+    return code_lines(text, retarget_line)
 
 
 def embed(name, text):

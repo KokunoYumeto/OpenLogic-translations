@@ -1,0 +1,43 @@
+schema_version = 1
+locale = "mr"
+engine = "xelatex"
+script = "Deva"
+babel = "marathi"
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/slc-screen.tex", "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/config/slc-fonts.tex"]
+
+[preamble]
+before_class = []
+before_olp = ["mr-before-olp.tex"]
+after_olp = ["mr-after-olp.tex", "common-links.tex"]
+
+[layout]
+portrait_width = 0.29
+portrait_spacing = 0.29
+emergency_stretch = "3em"
+
+[strings]
+summary = "सारांश"
+figure = "आकृती"
+biographies = "चरित्रे"
+glossary = "शब्दसूची"
+initial = "प्रारंभ"
+
+[fonts.main]
+file = "OLMarathiSerif-Regular.ttf"
+bold = "OLMarathiSerif-Bold.ttf"
+script = "Devanagari"
+language = "Marathi"
+license = "fonts/OFL.txt"
+
+[fonts.sans]
+file = "OLMarathiSerif-Regular.ttf"
+bold = "OLMarathiSerif-Bold.ttf"
+license = "fonts/OFL.txt"
+
+[fonts.math]
+name = "newtxmath"
+
+[links]
+single = true
+color = "533300"
+minimum_contrast = 7

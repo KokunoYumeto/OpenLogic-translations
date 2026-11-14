@@ -1,0 +1,90 @@
+schema_version = 1
+source_commit = "6178f32f61645f3b62ef621b4c5a88f8e67778ad"
+
+[[files]]
+path = "slc.tex"
+sha256 = "5c4728eac32f6d35f5b8f49c90c100780c34c5007ae2d76e37782d93cbdf2089"
+
+[[files.transforms]]
+id = "numbered-summaries"
+before = "\\preto\\OLEndChapterHook{\\IfFileExists{include/summary-\\thechapter}\n        {\\section*{Summary}\\addcontentsline{toc}{section}{Summary}\n        \\let\\emph\\textbf\\input{include/summary-\\thechapter}\\let\\emph\\textit}{}}"
+after = "\\newif\\ifslcChapterSummaries\n\\slcChapterSummariestrue\n\\preto\\OLEndChapterHook{%\n  \\ifslcChapterSummaries\n  \\edef\\slcSummaryFile{include/summary-\\number\\value{chapter}.tex}%\n  \\IfFileExists{\\slcSummaryFile}{%\n    \\section*{सारांश}\\addcontentsline{toc}{section}{सारांश}%\n    {\\let\\emph\\textbf\\input{\\slcSummaryFile}}}{}%\n  \\fi\n}"
+kind = "preamble"
+reason = "Use ASCII chapter numbers for the Marathi summary filenames and scope them to the numbered chapters."
+matches = 1
+
+[[files.transforms]]
+id = "appendix-summaries"
+before = "\\appendix"
+after = "\\slcChapterSummariesfalse\n\\appendix"
+kind = "layout"
+reason = "Keep summaries out of the appendices."
+matches = 1
+
+[[files.transforms]]
+id = "figure-label"
+before = "\\def\\figurename{Fig.}\n"
+after = ""
+kind = "label"
+reason = "Use the Marathi figure label supplied by the locale."
+matches = 1
+
+[[files.transforms]]
+id = "biographies"
+before = "\\chapter{Biographies}"
+after = "\\chapter{चरित्रे}"
+kind = "label"
+reason = "Use the Marathi heading for biographies."
+matches = 1
+
+[[files.transforms]]
+id = "glossary"
+before = "\\printglossaries"
+after = "\\printglossary[style=index,title=शब्दसूची,toctitle=शब्दसूची]"
+kind = "label"
+reason = "Keep the Marathi glossary label and index style."
+matches = 1
+
+[[files.transforms]]
+id = "bib-style"
+before = "\\bibliographystyle{\\olpath/bib/natbib-oup}"
+after = "\\bibliographystyle{natbib-oup}"
+kind = "path"
+reason = "Read the patched bibliography style from the source tree through BSTINPUTS."
+matches = 1
+
+[[files.transforms]]
+id = "bib-db"
+before = "\\bibliography{\\olpath/bib/open-logic.bib}"
+after = "\\bibliography{\\olpath/bib/open-logic}"
+kind = "path"
+reason = "Read the Marathi bibliography with the portable BibTeX filename."
+matches = 1
+
+[[files.transforms]]
+id = "about"
+before = "\\olimport*{\\olpath/content/open-logic-about}"
+after = "{% The two-line Marathi heading leaves less room for the About text.\n\\addtolength{\\beforechapskip}{-\\baselineskip}%\n\\addtolength{\\afterchapskip}{-\\baselineskip}%\n\\AddToHookNext{cmd/memchapstarinfo/after}{\\markboth{ओपन लॉजिक प्रकल्पाविषयी}{ओपन लॉजिक प्रकल्पाविषयी}}%\n\\olimport*{\\olpath/locale/\\ollangid/content/open-logic-about}\\par}"
+kind = "about"
+reason = "Keep the accepted Marathi About placement and import its canonical text."
+matches = 1
+
+[[files]]
+path = "slc-screen.tex"
+sha256 = "2a8f06a3a2e39493a64339c431797e9a579ada8a40dd93467db04942ab177c7e"
+
+[[files.transforms]]
+id = "screen-preamble"
+before = "\\documentclass[screen]{../../sty/open-logic-book}\n\n\\usepackage[all]{nowidow}\n\n\\definecolor{OLPcolor}{RGB}{248,154,14}\n\\definecolor{OLPdkcolor}{RGB}{104,65,6}\n\\definecolor{OLPltcolor}{RGB}{248,203,137}\n\n\\usepackage[nonumberlist,toc,style=index]{glossaries}\n\\makeglossaries\n\n\\def\\oljobname{slc}\n\n% \\olpath has to point to the location of the OLP main\n% directory/folder. We're compiling from subdirectory\n% courses/sets-logic-computation/, so the main directory is two\n% levels up.\n\n\\newcommand{\\olpath}{../..}\n\n% load all the Open Logic definitions. This will also load the\n% local definitions in open-logic-sample-config.sty\n\n\\input{\\olpath/sty/open-logic.sty}\n\n\\input{slc-metadata}\n\n% we want all the problems deferred to the very end\n\n\\input{\\olpath/sty/open-logic-defer.sty}\n\n% load glossary entries\n\n\\loadglsentries{include/glossary}\n\n% end preamble"
+after = "\\input{olpkit-before-class}\n\\documentclass[screen]{../../../../sty/open-logic-book}\n\n\\usepackage[all]{nowidow}\n\\input{locale/mr/config/slc-fonts}\n\n\\definecolor{OLPcolor}{RGB}{248,154,14}\n\\definecolor{OLPdkcolor}{RGB}{104,65,6}\n\\definecolor{OLPltcolor}{RGB}{248,203,137}\n\n\\def\\oljobname{slc}\n\\newcommand{\\olpath}{../../../..}\n\\input{olpkit-before-olp}\n\\input{\\olpath/sty/open-logic.sty}\n\\input{olpkit-after-olp}"
+kind = "preamble"
+reason = "Load the native Marathi font, metadata, glossary, deferred exercises, and navigation in their accepted order."
+matches = 1
+
+[[files.transforms]]
+id = "portrait-grid"
+before = "\\OLPscreencover{\\hfill\\hspace{.29\\textwidth}\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/cantor-circle.pdf}\\hfill{}\n\n\\hfill{}\n\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/goedel-circle.pdf}\n\\hfil\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/turing-circle.pdf}\\hfil{}\n\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/skolem-circle.pdf}\n\\hfill{}\n\n\\hfill{}\n\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/noether-circle.pdf}\\hspace{.29\\textwidth}\\hfill{}\n}"
+after = "\\OLPscreencover{%\n  \\hfill\\hspace{.29\\textwidth}\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/cantor-circle.pdf}\\hfill{}\n\n  \\hfill{}\n  \\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/goedel-circle.pdf}\n  \\hfil\\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/turing-circle.pdf}\\hfil{}\n  \\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/skolem-circle.pdf}\n  \\hfill{}\n\n  \\hfill{}\n  \\includegraphics[width=.29\\textwidth]{\\olpath/assets/portraits/noether-circle.pdf}\\hspace{.29\\textwidth}\\hfill{}\n}"
+kind = "layout"
+reason = "Use the accepted screen cover portrait grid and widths."
+matches = 1

@@ -41,6 +41,16 @@ class SourceExportTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'not embedded'):
             retarget_book_inputs(r'\input{include/forgotten}',names)
 
+    def test_summary_filename_constructor_is_retargeted(self):
+        names = {p:book_name(p) for p in ('include/summary-1.tex', 'include/summary-15.tex')}
+        assignment = r'\edef\slcSummaryFile{include/summary-\number\value{chapter}.tex}'
+        source = '% ' + assignment + '\n' + assignment + r'\IfFileExists{\slcSummaryFile}{}{}'
+        changed = retarget_book_inputs(source, names)
+        self.assertEqual(changed, '% ' + assignment + '\n' + assignment.replace(
+            'include/summary-', 'olpkit-book-include-summary-') + r'\IfFileExists{\slcSummaryFile}{}{}')
+        with self.assertRaisesRegex(ValueError,'numbered summary inputs were not embedded'):
+            retarget_book_inputs(assignment, {})
+
     def test_embed_does_not_expand_formula_or_rewrite_whitespace(self):
         original='  $\\forall x\\,P(x)$\n\n'
         result=embed('unit.tex',original)

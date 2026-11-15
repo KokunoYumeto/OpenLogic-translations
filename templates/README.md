@@ -1,6 +1,6 @@
 # Open Logic translations
 
-[Choose a language](https://kokunoyumeto.github.io/OpenLogic-translations/) · [Open Logic Project](https://openlogicproject.org/) · [Original sources](https://github.com/OpenLogicProject/OpenLogic)
+[Choose a language](https://kokunoyumeto.github.io/OpenLogic-translations/) · [Open Logic Project](https://openlogicproject.org/) · [Original sources](https://github.com/OpenLogicProject/OpenLogic) · [Maintain an edition](MAINTAINING.md)
 
 Translations of the Open Logic Project’s open-source mathematical logic texts, together with textbook editions that select and arrange those texts for a course. The original mathematics belongs to the Open Logic Project authors and contributors. Individual editions identify their human sources, AI translation authorship, licences and limits of review.
 

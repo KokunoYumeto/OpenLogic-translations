@@ -1,0 +1,86 @@
+# Maintaining an Open Logic edition
+
+Start here when the English sources change. The [Open Logic Project](https://github.com/OpenLogicProject/OpenLogic) supplies the mathematics. This hub lists language editions in `registry.toml`. Each edition repository owns its translations, scholarly terminology, reader formats and releases. A textbook such as *Sets, Logic, Computation* selects units from that content and adds its own preface, summaries, glossary, driver and credits. A change in one unit can affect the full reader and several textbooks.
+
+## Find the changes
+
+Install Git and Python 3.11 or newer. In the commands below, use the Python interpreter that reports that version. The planner uses the standard library. A public clone suffices for preparing and verifying packets.
+
+```sh
+git clone --filter=blob:none https://github.com/KokunoYumeto/OpenLogic-translations.git
+cd OpenLogic-translations
+python maintain.py plan --out ../olp-packets
+```
+
+Use a new output directory for each run. Use `--edition mr` for Marathi or pass an edition ID from the registry. Omit `--to` to use current upstream master. For an inventory without the target files, add `--summary-only`. The optional `--cache` names a reusable directory for upstream Git objects.
+
+The Marathi acceptance case has fixed English and Marathi starting points. This lets the exercise be repeated after either project advances.
+
+```sh
+python maintain.py plan --edition mr --edition-commit c5bd5d8e74a89bd4efda2f495551ee85520c296a --to a216aa641a823b861974b5612579aacbf59fd015 --out ../marathi-packets
+python maintain.py verify-packet --packet ../marathi-packets/openlogic-mr-deva-in
+```
+
+Open `summary.json` first. Each edition directory contains `edition.json`. Read its `pin_evidence`, `issues`, and the issues on individual units. A shared catalogue freeze is a lead to investigate. Establish the edition's actual starting commit from its published sources before editing. The frozen English reference deliberately retains its original pin. Several registers or scripts can share a repository. Use the content tree and spelling rules belonging to the product you are updating.
+
+Each unit directory contains the English `before.tex` and `after.tex` where present, the Git diff, and the current target where located. `unit.json` records the file identities and term matches. The edition directory includes the available terminology, spelling rules, canon passage index and canon source index. The shared `upstream/<old-commit>/files.json` describes changes to styles, images, drivers and other non-unit files. Its blob files retain the original bytes. `verify-packet` replays the original pins, detects changed or missing files, and works even after the edition advances. Keep translations and new notes outside that original packet.
+
+## Translate the delta
+
+1. Clone the repository in `edition.json` and check out its recorded edition commit on a work branch. If its default branch has moved, generate a new packet against that head before merging. A `/tree/<branch>/<path>` URL identifies the edition's subdirectory in that branch.
+2. Read the entire source passage on both sides and the current target. Identify what changed mathematically. A language edition may already contain the correction. Keep that reading if it still agrees with the new source. Record additions, moves, retirements and changes to build inputs separately. Assign a stable identity to a new unit and check dependent imports and cross-references.
+3. For each changed passage consult the cited scholarship in the target language. Follow passage IDs to their source, edition and page. The automatically matched terms are suggestions based on changed English lines. For example, the Marathi entry for *set* points to MR-P001 and MR-P007. Read the relevant passages before choosing a rendering. When the packet lacks a resource, locate it in the edition's source release or obtain an appropriate scholarly source and record the exact passage. Keep the original term record and any conflicting evidence.
+4. Edit the canonical translated unit. Preserve the proof, quantifier scope, OLP feature switches, symbols, citations, identifiers and labels. Check each conditional branch, including alternatives absent from one printed textbook. Record segment ID, source and target hashes, actual consulted passages, reason, difficult alternatives and editorial confidence in the edition's choice ledger. Record a mathematical correction, a wording change and an already-correct target distinctly. Keep suggested expansions outside the translated text.
+5. Update the edition's source files, unit ledger and source pin together. Retain historical authorship and passage evidence. Preserve per-file human credits such as Pedro Lima's in Brazilian Portuguese. Identify each model that translated, corrected or typeset the work and its actual effort. Use the edition's language for its reader-facing metadata.
+
+## Build and check
+
+Use the published edition's product profile and fonts. For modular editions install the editable builder from this same checkout. The PDF tools require Poppler (`pdftotext`, `pdfinfo`, `pdftoppm`). Install the edition's TeX distribution with its specified packages and engine. EPUB validation also uses EPUBCheck. The hub generator uses Node.js 22 and the GitHub CLI. The builder manual documents product names, font notices, pinned source inputs and the available commands. [Builder manual](olpkit/README.md)
+
+| SLC edition | TeX engine | Fonts to reproduce its typesetting |
+| --- | --- | --- |
+| Javanese, Latin script | pdfLaTeX | Baskervaldx, Helvetica via helvet, newtxmath and the native book's Type 1 packages |
+| Gujarati | LuaLaTeX | The edition's regular and bold Noto Sans Gujarati, with newtxmath |
+| Marathi, Devanagari | XeLaTeX | OLMarathiSerif regular and bold from the edition, with newtxmath |
+| Bengali | XeLaTeX | Check the selected product's driver. The registered profile specifies Noto Serif Bengali, Latin Modern and newtxmath. A STIX edition must carry its own font files and notices. |
+
+For other scripts inspect the edition's release source ZIP, actual TeX driver and embedded PDF fonts. In Arabic-script editions check RTL prose, LTR formulas and proof cells, glyph shaping, punctuation and the source square at the end of a proof. A script name alone does not determine the engine, typeface or notation. Carry the exact font files, redistribution notices and version in the source package.
+
+For example, with the Marathi repository checked out beside the hub, the modular commands for fetching and checking its sources are:
+
+```sh
+python -m pip install -e "./olpkit[pdf,epub]"
+olpkit fetch --repo ../OpenLogic-mr-Deva-IN
+olpkit edition validate --repo ../OpenLogic-mr-Deva-IN
+```
+
+For a migrated textbook, select the immutable commit carrying the book layer with `--ref` and the immutable commit carrying shared units with `--edition-ref`. Use the same commit for both when both layers are present there. The CLI syntax is `olpkit build --repo EDITION --ref BOOK_COMMIT --edition-ref EDITION_COMMIT --product slc-screen-pdf --out out/slc`. A complete corpus release also needs its own full-reader build. The Marathi source tree provides `tools/prepare_complete.py` and its guarded build script. Consult the release's editable source and build instructions for the exact product. The published native builder currently provides a Windows capped TeX runner. Cross-platform packet planning and verification require no TeX installation.
+
+Compare the new English and translated structure, formulas, citations, references, coverage, Unicode and target-language spelling. Build serially with a bounded process tree. Check the actual PDF: extract the text page by page, inspect glyphs, proof trees, table alignment, scale and links, and compare a second clean build. Count overfull boxes and repair protrusions above about 2 pt through layout. Render and inspect every page that showed an overflow above 10 pt and a spread of pages across the book. Check the final HTML/EPUB numbering and destinations against the PDF, math alternatives and local navigation. Run EPUBCheck on the final EPUB. Preserve the mathematical wording during layout repairs.
+
+## Publish and regenerate the hub
+
+Use the existing edition repository and a new release tag at the verified edition commit. The release includes the cumulative PDF, its directly downloadable complete editable TeX, and a ZIP containing its modular sources, fonts, notices and build instructions. Include the checked HTML and EPUB for each product that offers them. Inspect the archive file list and its reproducibility. Use a reader-facing description in the edition language, including the original human credits, actual AI models and efforts, format and scope. Keep working packets and private choice records out of reader downloads. Preserve previous public tags and files. Publish to GitHub with Zenodo deposition disabled; leave upstream issues, branches and pull requests alone.
+
+For an authenticated maintainer, the GitHub CLI accepts an explicit file allowlist. Replace the capitals with the edition's actual values and list every accepted asset:
+
+```sh
+gh release create TAG PDF TEX SOURCE_ZIP EPUB HTML_ZIP --repo OWNER/EDITION --verify-tag --title "EDITION TITLE" --notes-file PUBLIC_DESCRIPTION.md
+gh release view TAG --repo OWNER/EDITION --json url,tagName,assets
+```
+
+First push the audited edition commit and its new tag. Verify that the public tag resolves to that commit. Retrieve each asset without credentials and compare its filename, byte length and SHA-256 with the staged file. Update the edition's published catalogue metadata and release selection to identify those exact downloads. Back at the hub, regenerate and test:
+
+```sh
+node scripts/generate-catalogue.mjs all
+node scripts/generate-catalogue.mjs all --check
+npm run check
+```
+
+Inspect the generated reader links and commit the corresponding hub files. Verify the public hub and direct downloads after the push. A packet, a successful compilation and a release are three separate outcomes. The complete Marathi fresh-clone release exercise still needs a public release receipt. Legacy editions with missing pins, resource indexes or product profiles need those inputs before they can complete an unattended release.
+
+## Daily notification
+
+The hub checks upstream master at 05:41 UTC daily. A new commit range produces an issue here with the changed files and the editions' individual source comparisons. Closing the issue retains its marker and prevents a repeat for the same revision. On a workstation with the GitHub CLI, preview the next notice with `python maintain.py watch --out ../olp-advisory`. The scheduled workflow supplies its own hub-scoped token.
+
+Maintenance tooling produced by OpenAI Codex — GPT-6 Astra, Ultra effort. Translation and source authorship belong to the contributors identified in each edition.

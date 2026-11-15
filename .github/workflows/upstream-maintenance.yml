@@ -1,0 +1,27 @@
+name: Upstream source changes
+on:
+  schedule:
+    - cron: '41 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: upstream-source-advisory
+  cancel-in-progress: false
+jobs:
+  check:
+    if: github.repository == 'KokunoYumeto/OpenLogic-translations'
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare upstream and notify the translations hub
+        run: python maintain.py watch --publish --out "$RUNNER_TEMP/openlogic-issue"
+        env:
+          GH_TOKEN: ${{ github.token }}

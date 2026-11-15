@@ -52,3 +52,14 @@ test('Published textbook requires PDF, direct LaTeX and full source ZIP with dig
   assert.throws(()=>textbookReleaseAssets({...record,draft:true},'mr'),/not public/);
   assert.throws(()=>textbookReleaseAssets({...record,assets:assets.map(a=>({...a,digest:null}))},'mr'),/digest/);
 });
+
+test('A verified textbook manifest supplies its HTML and EPUB and identifies its source ZIP',()=>{
+  const assets=['PDF','TEX','ZIP','EPUB','HTML'].map(format=>({format,name:'book-'+format,bytes:23,
+    sha256:'a'.repeat(64),url:'https://example.invalid/book-'+format}));
+  const record={draft:false,prerelease:false};
+  const files=textbookReleaseAssets(record,'mr',{assets});
+  assert.equal(files.epub.url,assets[3].url);
+  assert.equal(files.html.sha256,assets[4].sha256);
+  assert.equal(files.source_zip.name,assets[2].name);
+  assert.throws(()=>textbookReleaseAssets(record,'mr',{assets:[...assets,assets[2]]}),/source_zip/);
+});

@@ -820,8 +820,13 @@ const marathiTextbook = textbooks.textbooks.find(item => item.language_tag === "
 const marathiTextbookSelection = JSON.parse(await read("catalogue/textbook-selection.json")).mr;
 const marathiSLCRelease = "slc-2026-11-14";
 const marathiSLCR2 = "slc-2026-11-14-sync-r2";
-check([marathiSLCRelease, marathiSLCR2].includes(marathiTextbookSelection?.release_tag),
-  "Marathi textbook selection must retain the verified release or select the verified r2 successor");
+const marathiPublication = marathiTextbook.release_manifest;
+check([marathiSLCRelease, marathiSLCR2].includes(marathiTextbookSelection?.release_tag)
+  || (marathiPublication?.commit === marathiTextbook.ref && marathiPublication.reader_units > 0
+    && marathiPublication.source_units >= marathiPublication.reader_units
+    && /^[0-9a-f]{64}$/.test(marathiPublication.sha256)
+    && marathiPublication.url === marathiTextbook.repository + "/releases/download/" + marathiTextbookSelection?.release_tag + "/release.json"),
+  "Selected Marathi textbook must have a verified public release and a matching source commit");
 check(marathiTextbook.release_tag === marathiTextbookSelection?.release_tag
   && marathiTextbook.ref === marathiTextbookSelection?.ref
   && marathiTextbook.path === marathiTextbookSelection?.path,

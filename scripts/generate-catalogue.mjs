@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { loadCatalogueSources, parseToml } from './catalogue-sources.mjs';
 import { editionTable, fillTemplate, editionRouting } from './catalogue-render.mjs';
-import { inspectModernSource } from './modern-catalogue.mjs';
+import { inspectModernSource, verifyReleaseManifest } from './modern-catalogue.mjs';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const exec = promisify(execFile);
@@ -90,9 +90,19 @@ function repositoryPath(url) {
   return parts.join('/');
 }
 
-export function textbookReleaseAssets(release, id) {
+export function textbookReleaseAssets(release, id, manifest=null) {
   if (release.draft || release.prerelease) throw Error('Textbook release is not public');
   const result = {};
+  if(manifest) {
+    for(const [role,format] of Object.entries({pdf:'PDF',single_file_latex:'TEX',source_zip:'ZIP',epub:'EPUB',html:'HTML'})) {
+      const matches=manifest.assets.filter(a=>a.format===format);
+      if(!matches.length && ['epub','html'].includes(role))continue;
+      if(matches.length!==1)throw Error(`Textbook ${role} must identify one released asset`);
+      const {name,bytes,sha256,url}=matches[0];
+      result[role]={url,name,bytes,sha256};
+    }
+    return result;
+  }
   for (const [role, pattern] of Object.entries({pdf:`^slc-screen-${id}\\.pdf$`,single_file_latex:`^slc-screen-${id}\\.tex$`,source_zip:`^slc-source-${id}\\.zip$`})) {
     const matches=release.assets.filter(a=>new RegExp(pattern).test(a.name));
     if(matches.length!==1)throw Error(`Textbook ${role} must identify one asset`);
@@ -127,7 +137,20 @@ async function publishedTextbook(pilot, selection) {
   const raw=file=>`https://raw.githubusercontent.com/${repository}/${selection.ref}/${selection.path}/${file}`;
   const manifestBytes=await bytes(raw('MANIFEST.json'));
   const manifest=parse(manifestBytes.toString('utf8'));
-  const assets=textbookReleaseAssets(release,pilot.id);
+  let publication=null, releaseManifest=null;
+  const receipt=release.assets.find(a=>a.name==='release.json');
+  if(receipt) {
+    const body=await bytes(receipt.browser_download_url);
+    if(body.length!==receipt.size||'sha256:'+hash(body)!==receipt.digest)throw Error('Textbook release manifest changed');
+    publication=parse(body.toString('utf8'));
+    const checked=verifyReleaseManifest(publication,release,{locale:pilot.id},tagCommit);
+    if(checked.group!=='slc-screen-pdf'||!checked.all_gates_pass)throw Error('Textbook release gates or product differ');
+    if(publication.pins.olp.commit!==(manifest.sources.open_logic||manifest.sources.olp).commit
+      || publication.pins.slc.commit!==manifest.sources.slc.commit)throw Error('Textbook release source pins differ');
+    releaseManifest={url:receipt.browser_download_url,sha256:hash(body),commit:tagCommit,
+      reader_units:publication.reader_units,source_units:publication.source_units,attribution:publication.attribution};
+  }
+  const assets=textbookReleaseAssets(release,pilot.id,publication);
   for(const [role,asset] of Object.entries(assets)) {
     const data=await bytes(asset.url);
     if(data.length!==asset.bytes||hash(data)!==asset.sha256)throw Error('Textbook release bytes differ: '+asset.name);
@@ -141,7 +164,7 @@ async function publishedTextbook(pilot, selection) {
     language_tag:pilot.language_tag,language_name:pilot.name,repository:`https://github.com/${repository}`,
     branch:null,ref:selection.ref,path:selection.path,state:'published',release:release.html_url,release_tag:release.tag_name,
     ...assets,engine,olp_commit:(manifest.sources.open_logic||manifest.sources.olp).commit,slc_commit:manifest.sources.slc.commit,
-    epub:null,html:null,manifest:{url:raw('MANIFEST.json'),sha256:hash(manifestBytes)},
+    epub:assets.epub??null,html:assets.html??null,...(releaseManifest?{release_manifest:releaseManifest}:{}),manifest:{url:raw('MANIFEST.json'),sha256:hash(manifestBytes)},
     edition_metadata:{url:`https://raw.githubusercontent.com/${repository}/${selection.ref}/olp-edition.toml`,sha256:hash(editionBytes)},
     authors:['Richard Zach','Open Logic Project contributors'],translation:manifest.translation,
     rights:{text:'CC BY 4.0',portraits:'Matthew Leadbeater, CC BY-NC 4.0',photographs:'Individual terms and credits in each source package',fonts:'Individual font licences in each source package'}};

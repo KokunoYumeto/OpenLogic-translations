@@ -1,0 +1,11 @@
+id = "bn-sty-open-logic-sty-01"
+path = "sty/open-logic.sty"
+before = "  \\RequirePackage[english,\\ollanguage]{babel}\n"
+after = "  \\RequirePackage[english]{babel}\n  \\babelprovide[import]{\\ollanguage}\n"
+reason = "Use the pilot Babel import route for the script language and retain the source begin-document language selection."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN/blob/5ce49d98d5a06a94e68b6d838dd6df60442f6220/textbooks/slc/source/sty/open-logic.sty"]
+
+[[conditions]]
+locale = "bn"
+engine = "xelatex"
+script = "Beng"

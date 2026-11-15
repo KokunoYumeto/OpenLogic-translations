@@ -1,0 +1,11 @@
+id = "bn-sty-open-logic-book-cls-02"
+path = "sty/open-logic-book.cls"
+before = "    \\usepackage[osf]{Baskervaldx}\n"
+after = "    % The Unicode screen driver provides the text fonts.\n"
+reason = "The pilot Unicode driver supplies text fonts; avoid loading a conflicting legacy Roman text font."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-bn-Beng-IN/blob/5ce49d98d5a06a94e68b6d838dd6df60442f6220/textbooks/slc/source/sty/open-logic-book.cls"]
+
+[[conditions]]
+locale = "bn"
+engine = "xelatex"
+script = "Beng"

@@ -1,0 +1,20 @@
+\newcommand*{\slcbiband}{ও}
+\newcommand*{\slcbibetal}{প্রমুখ}
+\renewcommand*{\OLUnLocalizedHook}[1]{%
+  \PackageError{slc-bn}{A native module is missing its Bengali locale identifier}{}}
+\setlength{\emergencystretch}{@@layout.emergency_stretch@@}
+\setlength{\headheight}{19pt}
+\linespread{1.12}
+\hypersetup{pdflang={bn-IN},pdfsubject={অধিযুক্তিবিদ্যার একটি উন্মুক্ত ভূমিকা},
+  pdfkeywords={সেটতত্ত্ব, যুক্তিবিদ্যা, গণনসাধ্যতা, টুরিং যন্ত্র}}
+\AtBeginDocument{%
+  \makeoddhead{OLPpage}{\footnotesize\sffamily\color{OLPdkcolor}%
+    \parbox[b]{.82\textwidth}{\raggedright\leftmark}}{}{\sffamily\bfseries\thepage}%
+  \makeevenhead{OLPpage}{\footnotesize\sffamily\color{OLPdkcolor}%
+    \parbox[b]{.82\textwidth}{\raggedright\leftmark}}{}{\sffamily\bfseries\thepage}%
+}
+\newcommand*{\olpBookSummary}{@@strings.summary@@}
+\newcommand*{\olpBookFigure}{@@strings.figure@@}
+\newcommand*{\olpBookBiographies}{@@strings.biographies@@}
+\newcommand*{\olpBookGlossary}{@@strings.glossary@@}
+\newcommand*{\olpCoverPortraitWidth}{@@layout.portrait_width@@}

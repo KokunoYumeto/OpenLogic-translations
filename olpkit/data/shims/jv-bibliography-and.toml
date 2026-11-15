@@ -1,0 +1,11 @@
+id = "jv-bibliography-and"
+path = "bib/natbib-oup.bst"
+before = "FUNCTION {bbl.and}\n{ \"and\"}"
+after = "FUNCTION {bbl.and}\n{ \"lan\"}"
+reason = "Preserve the pilot bibliography conjunction, outside translated content units."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-jv-Latn-ID/blob/2880142dad280fa0d5a7675be190b28f2e300952/textbooks/slc/prepare.py"]
+
+[[conditions]]
+locale = "jv"
+engine = "pdflatex"
+script = "Latn"

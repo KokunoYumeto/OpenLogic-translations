@@ -1,0 +1,9 @@
+\definecolor{olpkitlink}{HTML}{@@links.color@@}
+% The OLP class assigns allcolors in its begin-document hook. Apply the
+% declared reader colour after that hook without changing heading colours.
+\AddToHook{begindocument/end}{\hypersetup{colorlinks=true,allcolors=olpkitlink}}
+\makeatletter
+% Keep natbib's separator inside the existing citation link. Each key
+% retains its own destination, including citations with several keys.
+\renewcommand*\hyper@natlinkbreak[2]{#1}
+\makeatother

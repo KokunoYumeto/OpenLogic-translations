@@ -1,0 +1,90 @@
+schema_version = 1
+source_commit = "6178f32f61645f3b62ef621b4c5a88f8e67778ad"
+
+[[files]]
+path = "slc.tex"
+sha256 = "5c4728eac32f6d35f5b8f49c90c100780c34c5007ae2d76e37782d93cbdf2089"
+
+[[files.transforms]]
+id = "summary"
+before = "\\section*{Summary}\\addcontentsline{toc}{section}{Summary}"
+after = "\\section*{\\olpBookSummary}\\addcontentsline{toc}{section}{\\olpBookSummary}"
+matches = 1
+kind = "label"
+reason = "Use the locale summary heading in the body and contents."
+
+[[files.transforms]]
+id = "figure"
+before = "\\def\\figurename{Fig.}"
+after = "\\def\\figurename{\\olpBookFigure}"
+matches = 1
+kind = "label"
+reason = "Use the locale figure label."
+
+[[files.transforms]]
+id = "biographies"
+before = "\\chapter{Biographies}"
+after = "\\chapter{\\olpBookBiographies}"
+matches = 1
+kind = "label"
+reason = "Use the locale biographies heading."
+
+[[files.transforms]]
+id = "about"
+before = "\\olimport*{\\olpath/content/open-logic-about}"
+after = "\\olimport*{\\olpath/locale/\\ollangid/content/open-logic-about}"
+matches = 1
+kind = "about"
+reason = "Read the localized About unit through the same source identity."
+
+[[files]]
+path = "slc-screen.tex"
+sha256 = "2a8f06a3a2e39493a64339c431797e9a579ada8a40dd93467db04942ab177c7e"
+
+[[files.transforms]]
+id = "class-path"
+before = "\\documentclass[screen]{../../sty/open-logic-book}"
+after = "\\input{olpkit-before-class}\n\\documentclass[screen]{../../../../sty/open-logic-book}"
+matches = 1
+kind = "preamble"
+reason = "Before-class preamble and class path from locale/id/courses/book."
+
+[[files.transforms]]
+id = "source-root"
+before = "\\newcommand{\\olpath}{../..}"
+after = "\\newcommand{\\olpath}{../../../..}"
+matches = 1
+kind = "path"
+reason = "Four directory levels from the locale textbook to the source root."
+
+[[files.transforms]]
+id = "path-comment"
+before = "% courses/sets-logic-computation/, so the main directory is two\n% levels up."
+after = "% locale/id/courses/sets-logic-computation/, so the main directory is four\n% levels up."
+matches = 1
+kind = "path"
+reason = "Keep the original driver path comment accurate."
+
+[[files.transforms]]
+id = "olp-preambles"
+before = "\\input{\\olpath/sty/open-logic.sty}"
+after = "\\input{olpkit-before-olp}\n\\input{\\olpath/sty/open-logic.sty}\n\\input{olpkit-after-olp}"
+matches = 1
+kind = "preamble"
+reason = "Place locale configuration immediately before and after the OLP style."
+
+[[files.transforms]]
+id = "cover-portrait-width"
+before = "width=.29\\textwidth"
+after = "width=\\olpCoverPortraitWidth\\textwidth"
+matches = 5
+kind = "layout"
+reason = "Preserve each native pilot's accepted portrait width as language data."
+
+[[files.transforms]]
+id = "cover-portrait-spacing"
+before = "\\hspace{.29\\textwidth}"
+after = "\\hspace{\\olpCoverPortraitSpacing\\textwidth}"
+matches = 2
+kind = "layout"
+reason = "The accepted Gujarati cover retains its spacing while reducing portrait width."

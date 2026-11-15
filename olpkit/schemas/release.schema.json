@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "edition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_group": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tag": {
+      "type": "string",
+      "minLength": 1
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "pins": {
+      "type": "object",
+      "properties": {
+        "olp": {
+          "type": "object",
+          "properties": {
+            "repository": {
+              "type": "string",
+              "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+$"
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          },
+          "required": [
+            "repository",
+            "commit"
+          ],
+          "additionalProperties": false
+        },
+        "slc": {
+          "type": "object",
+          "properties": {
+            "repository": {
+              "type": "string",
+              "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+$"
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          },
+          "required": [
+            "repository",
+            "commit"
+          ],
+          "additionalProperties": false
+        },
+        "portraits": {
+          "type": "object",
+          "properties": {
+            "repository": {
+              "type": "string",
+              "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+$"
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          },
+          "required": [
+            "repository",
+            "commit"
+          ],
+          "additionalProperties": false
+        },
+        "photos": {
+          "type": "object",
+          "properties": {
+            "repository": {
+              "type": "string",
+              "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+$"
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            }
+          },
+          "required": [
+            "repository",
+            "commit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "olp"
+      ],
+      "additionalProperties": false
+    },
+    "source_units": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reader_units": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^(?!/)(?!.*\\.\\.)(?!.*[\\\\:]).+$"
+          },
+          "format": {
+            "enum": [
+              "PDF",
+              "TEX",
+              "ZIP",
+              "EPUB",
+              "HTML"
+            ]
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_for": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "name",
+          "format",
+          "bytes",
+          "sha256",
+          "url"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "not-run"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "scope"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit_ledger": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*\\.\\.)(?!.*[\\\\:]).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "engine": {
+      "enum": [
+        "pdflatex",
+        "xelatex",
+        "lualatex",
+        "none"
+      ]
+    },
+    "tool_versions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "edition",
+    "product_group",
+    "tag",
+    "commit",
+    "pins",
+    "source_units",
+    "reader_units",
+    "assets",
+    "gates",
+    "attribution",
+    "license",
+    "unit_ledger",
+    "engine",
+    "tool_versions"
+  ],
+  "additionalProperties": false
+}

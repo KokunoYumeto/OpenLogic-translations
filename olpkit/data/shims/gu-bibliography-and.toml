@@ -1,0 +1,11 @@
+id = "gu-bibliography-and"
+path = "bib/natbib-oup.bst"
+before = "FUNCTION {bbl.and}\n{ \"and\"}"
+after = "FUNCTION {bbl.and}\n{ \"અને\"}"
+reason = "Preserve the pilot bibliography conjunction, outside translated content units."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/blob/d8d9a34cc7f38ab53fb014ac2a6f8fc5aa56fb4c/textbooks/slc/prepare.py"]
+
+[[conditions]]
+locale = "gu"
+engine = "lualatex"
+script = "Gujr"

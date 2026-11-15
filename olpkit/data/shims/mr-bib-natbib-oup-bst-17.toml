@@ -1,0 +1,11 @@
+id = "mr-bib-natbib-oup-bst-17"
+path = "bib/natbib-oup.bst"
+before = "  \"\\expandafter\\ifx\\csname urlprefix\\endcsname\\relax\\def\\urlprefix{URL }\\fi\"\n"
+after = "  \"\\expandafter\\ifx\\csname urlprefix\\endcsname\\relax\\def\\urlprefix{\\slcbiburl\\space}\\fi\"\n"
+reason = "Use the pilot localized URL prefix macro without altering the cited URL."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/open-logic/bib/natbib-oup.bst"]
+
+[[conditions]]
+locale = "mr"
+engine = "xelatex"
+script = "Deva"

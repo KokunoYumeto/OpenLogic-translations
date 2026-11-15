@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "drivers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(?!/)(?!.*\\.\\.)(?!.*[\\\\:]).+$"
+      }
+    },
+    "book_units": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "imports_lock": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*\\.\\.)(?!.*[\\\\:]).+$"
+    },
+    "strings": {
+      "type": "object",
+      "properties": {
+        "chapter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "appendix": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "biographies": {
+          "type": "string",
+          "minLength": 1
+        },
+        "glossary": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "credits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "name",
+          "role",
+          "license",
+          "source"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "driver_policy": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.toml$"
+    },
+    "driver_policies": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z][a-z0-9-]*$"},
+      "additionalProperties": {"type": "string", "pattern": "^[a-z0-9-]+\\.toml$"}
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "repository",
+    "commit",
+    "drivers",
+    "book_units",
+    "imports_lock",
+    "credits",
+    "source_id"
+  ],
+  "additionalProperties": false
+}

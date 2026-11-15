@@ -1,0 +1,579 @@
+{
+  "schema_version": 1,
+  "locale": "mr",
+  "product": "il-screen-pdf",
+  "pins": {
+    "il": "910f42b283dc756cc3847a920b48a16f8c154cbe",
+    "olp": "1e960beff9ed7835bf3e3f1335e21af3439cd107",
+    "photos": "81c1990df896568410b452fea68b81cbb6ce46fa",
+    "portraits": "1a92d54a0bf964d35b5300f45f1830749c462544",
+    "slc": "6178f32f61645f3b62ef621b4c5a88f8e67778ad"
+  },
+  "components": [
+    {
+      "id": "olp",
+      "category": "original-text",
+      "state": "specified",
+      "reason": "The Open Logic Text licence and named contributors.",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "bb5e0179a1e9bdb55634a4303784cf73c297a1dcee27b92cd546bf398075531c",
+          "witness": "https://github.com/OpenLogicProject/OpenLogic/blob/1e960beff9ed7835bf3e3f1335e21af3439cd107/LICENSE.md"
+        }
+      ],
+      "reader_checks": [
+        {
+          "id": "olp-contributors",
+          "all_of": [
+            "Open Logic Project",
+            "Richard Zach",
+            "Aldo Antonelli",
+            "Andrew Arana",
+            "Jeremy Avigad",
+            "Tim Button",
+            "Walter Dean",
+            "Benedict Eastaugh",
+            "Gillian Russell",
+            "Nicole Wyatt",
+            "Audrey Yap",
+            "Samara Burns",
+            "Dana Hägg",
+            "Zesen Qian"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "il",
+      "category": "book",
+      "state": "specified",
+      "reason": "Hallett and Zach native IL metadata and localized book contract; the actual native CC BY 4.0 notice is retained.",
+      "files": [
+        {
+          "path": "locale/mr/courses/intermediate-logic/book.toml",
+          "sha256": "3645076b4469c9d324ce7347e158c89e6883a40bdacae4cd0b71bf41b337babf",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f48091dea07e7379a6368c8b4d81b186d5e8192f/courses/intermediate-logic/book.toml"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/il-metadata.tex",
+          "sha256": "1283e4a720a51e0b9cb505b134d77b196cf59d9fad3f9299b99a2a3595546ccb",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f48091dea07e7379a6368c8b4d81b186d5e8192f/courses/intermediate-logic/il-metadata.tex"
+        }
+      ],
+      "reader_checks": [
+        {
+          "id": "il-authors-and-text-license",
+          "all_of": [
+            "Michael Hallett",
+            "Richard Zach",
+            "मध्यम स्तरावरील तर्कशास्त्र",
+            "CC BY 4.0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-translation",
+      "category": "translation",
+      "state": "specified",
+      "reason": "The native Marathi frontmatter distinguishes inherited AI translation, current book translation, and the actual shared builder/typesetting model.",
+      "files": [
+        {
+          "path": "locale/mr/courses/intermediate-logic/il-frontmatter.tex",
+          "sha256": "5524b62bede04359f4b082cd35dc23b0e8582bd19d14fb92fa479606a33c3686",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f01eda6d6fc9308a11f4d18709afa98a71438871/courses/intermediate-logic/il-frontmatter.tex"
+        }
+      ],
+      "reader_checks": [
+        {
+          "id": "il-ai-credit",
+          "all_of": [
+            "OpenAI Codex",
+            "GPT-5.6 Sol",
+            "GPT-6 Sol",
+            "GPT-6.1 Sol",
+            "Ultra",
+            "मराठी यंत्रानुवाद"
+          ]
+        },
+        {
+          "id": "il-typesetting-credit",
+          "all_of": [
+            "OpenAI Codex",
+            "GPT-6 Astra",
+            "Ultra",
+            "अक्षरजुळणी"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "leadbeater-portraits",
+      "category": "portraits",
+      "state": "specified",
+      "reason": "Matthew Leadbeater’s cover and chapter portraits retain the CC BY-NC 4.0 terms and credited source.",
+      "files": [
+        {
+          "path": "assets/portraits/LICENSE.md",
+          "sha256": "b81f750dff1e0e95f740a119dcae0f70bcb79b5888554c544f9956dcacf187f4",
+          "witness": "https://github.com/OpenLogicProject/portraits/blob/1a92d54a0bf964d35b5300f45f1830749c462544/LICENSE.md"
+        },
+        {
+          "path": "assets/portraits/README.md",
+          "sha256": "519b9325566f44d69e40a2f580cefe707e044330aaa0f2835cf2ee62e7cf4aca",
+          "witness": "https://github.com/OpenLogicProject/portraits/blob/1a92d54a0bf964d35b5300f45f1830749c462544/README.md"
+        }
+      ],
+      "reader_checks": [
+        {
+          "id": "portrait-credit",
+          "all_of": [
+            "Matthew Leadbeater",
+            "Open Logic Portraits",
+            "CC BY-NC 4.0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "individual-photographs",
+      "category": "photographs",
+      "state": "specified",
+      "reason": "Retain the nine original and translated individual photo credits and the collection’s use terms.",
+      "files": [
+        {
+          "path": "assets/photos/README.md",
+          "sha256": "8c24a313830fe66d4bf010c26f0e5e8fd149ace67d036bff0030e20de52393c1",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/README.md"
+        },
+        {
+          "path": "assets/photos/cantor-georg/cantor-georg-credit.tex",
+          "sha256": "56bf0d795187692806afcfbb1232e01159b6ecb92c0e092713b5879d9fd3ae44",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/cantor-georg/cantor-georg-credit.tex"
+        },
+        {
+          "path": "assets/photos/church-alonzo/church-alonzo-credit.tex",
+          "sha256": "b1f035bc45c7b40b7ee9c602ff82c07586e50dd1aa8a3339171e5fc9e8d7870e",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/church-alonzo/church-alonzo-credit.tex"
+        },
+        {
+          "path": "assets/photos/gentzen-gerhard/gentzen-gerhard-credit.tex",
+          "sha256": "913f32e3c521c3e72a7016725f6dd87b4845d4e8a69356f49189af1245482f6d",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/gentzen-gerhard/gentzen-gerhard-credit.tex"
+        },
+        {
+          "path": "assets/photos/goedel-kurt/goedel-kurt-credit.tex",
+          "sha256": "c90a039e10829f9d85e0a17d985f411a5bf8efd0e7861bc1103f63becb7321a9",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/goedel-kurt/goedel-kurt-credit.tex"
+        },
+        {
+          "path": "assets/photos/noether-emmy/noether-emmy-credit.tex",
+          "sha256": "0d73a266dd1d12e6afe7c970a86c3d5f939652610348ff0c50eba2f5df9777b0",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/noether-emmy/noether-emmy-credit.tex"
+        },
+        {
+          "path": "assets/photos/russell-bertrand/russell-bertrand-credit.tex",
+          "sha256": "e3a94c92dd793a7af81d0605c67a9f62596fa5fa6761c93e518ed5eb4a0687c0",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/russell-bertrand/russell-bertrand-credit.tex"
+        },
+        {
+          "path": "assets/photos/tarski-alfred/tarski-alfred-credit.tex",
+          "sha256": "f33a0851891e4d4e4690aad4757225f70395d3014d07c441189a1d3b71bafede",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/tarski-alfred/tarski-alfred-credit.tex"
+        },
+        {
+          "path": "assets/photos/turing-alan/turing-alan-credit.tex",
+          "sha256": "07a38ecb47dfd20f6a62d2bb9318e024deb3804fe7d249ba0f8fb2c5f80f9928",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/turing-alan/turing-alan-credit.tex"
+        },
+        {
+          "path": "assets/photos/zermelo-ernst/zermelo-ernst-credit.tex",
+          "sha256": "b996e8f70e635feee7289d541b4d6389d72ae0baa295e91a4572090ad0713616",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/zermelo-ernst/zermelo-ernst-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/cantor-georg-credit.tex",
+          "sha256": "fd1b574739dd9fa7ed68fd92f5bcdcdc35b401ac16679821c666368bea3ab571",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/cantor-georg-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/church-alonzo-credit.tex",
+          "sha256": "2cd4931676031b2ce5caffe5263990494f74caaaef250e7f8ffeed929e938d3b",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/church-alonzo-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/gentzen-gerhard-credit.tex",
+          "sha256": "1e050c74164c4902b5b7de57126979d201fcac23767e7a9ed94001fdb024df6f",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/gentzen-gerhard-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/goedel-kurt-credit.tex",
+          "sha256": "d48cdbc337a73f163537caef4a37e550b19d6906f993092dfce6523e92656aee",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/goedel-kurt-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/noether-emmy-credit.tex",
+          "sha256": "850b36245223bd8cad5b85052b3adc604569951e6ae5c3d05b9f1796348749a6",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/noether-emmy-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/russell-bertrand-credit.tex",
+          "sha256": "d01c9a356f357fdc6c65d0100435359e359f18e6113eb159f494ea04612e4a52",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/russell-bertrand-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/tarski-alfred-credit.tex",
+          "sha256": "8797df382883bb7dd8d834e0354bea14f736badc43e0bce43aa62e46564aadb1",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/tarski-alfred-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/turing-alan-credit.tex",
+          "sha256": "8ca24ede81d07c47a25ca675c6d1b21ac54adbc56e419213cd7f8077d309b349",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/turing-alan-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/zermelo-ernst-credit.tex",
+          "sha256": "960b165cb3ae8f79c0e93d43f22c3b13b44e4d662736114c679a8da39d5ba5e5",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/locale/mr/photocredits/zermelo-ernst-credit.tex"
+        },
+        {
+          "path": "assets/photos/peter-rozsa/peter-rozsa-credit.tex",
+          "sha256": "9fb907bd93ee8e63621afd2d1a0952d984a0cd58df6472c053425c9f6639e54d",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/peter-rozsa/peter-rozsa-credit.tex"
+        },
+        {
+          "path": "assets/photos/robinson-julia/robinson-julia-credit.tex",
+          "sha256": "a8599b564fbb2f75ad2c71968e6ba7eb7138beb1ab82b042f821f7888a4dd79c",
+          "witness": "https://github.com/OpenLogicProject/photos/blob/81c1990df896568410b452fea68b81cbb6ce46fa/robinson-julia/robinson-julia-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/peter-rozsa-credit.tex",
+          "sha256": "3eb1a4649f82869a0ace989b6f421be1017b28c199cb609b6335319e3328fa1b",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/93f5330d2ab60b880685f9972a2804516059350b/courses/sets-logic-computation/locale/photocredits/peter-rozsa-credit.tex"
+        },
+        {
+          "path": "locale/mr/photocredits/robinson-julia-credit.tex",
+          "sha256": "36f717f90b1731e446eb839cbabc8013e0f447c4f3b65ff4d564bae89633021f",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/93f5330d2ab60b880685f9972a2804516059350b/courses/sets-logic-computation/locale/photocredits/robinson-julia-credit.tex"
+        }
+      ],
+      "reader_checks": [
+        {
+          "id": "cantor-credit",
+          "all_of": [
+            "छायाचित्रांचे श्रेय",
+            "गेऑर्ग कँटर",
+            "Otto Zeth",
+            "Nr. 3 Bild 102"
+          ]
+        },
+        {
+          "id": "church-credit",
+          "all_of": [
+            "ॲलोन्झो चर्च",
+            "Alonzo Church Papers",
+            "© Princeton University"
+          ]
+        },
+        {
+          "id": "gentzen-credit",
+          "all_of": [
+            "गरहार्ड गेंटझेन",
+            "Ekhart Mentzler-Trott"
+          ]
+        },
+        {
+          "id": "goedel-credit",
+          "all_of": [
+            "कुर्ट गोडेल",
+            "Shelby White and Leon Levy Archives Center",
+            "Kurt Gödel Papers"
+          ]
+        },
+        {
+          "id": "goedel-terms",
+          "all_of": [
+            "Box 14b, #110000",
+            "Archives Center",
+            "परवानगी आवश्यक आहे"
+          ]
+        },
+        {
+          "id": "noether-credit",
+          "all_of": [
+            "एमी नोएथर",
+            "Joel Fuller",
+            "Cod. Ms. D. Hilbert 754, Bl. 14"
+          ]
+        },
+        {
+          "id": "russell-credit",
+          "all_of": [
+            "बर्ट्रंड रसेल",
+            "McMaster University Library",
+            "Russell Archives, Box 2, f. 4"
+          ]
+        },
+        {
+          "id": "tarski-credit",
+          "all_of": [
+            "ॲल्फ्रेड टार्स्की",
+            "Bancroft Library",
+            "Banc MSS 84/49"
+          ]
+        },
+        {
+          "id": "turing-credit",
+          "all_of": [
+            "ॲलन ट्यूरिंग",
+            "Elliott & Fry",
+            "NPG x82217",
+            "BY-NC-ND 3.0"
+          ]
+        },
+        {
+          "id": "zermelo-credit",
+          "all_of": [
+            "एर्न्स्ट झर्मेलो",
+            "Göttingen",
+            "Cod. Ms. D. Hilbert 754, Bl. 6 Nr. 25"
+          ]
+        },
+        {
+          "id": "peter-credit",
+          "all_of": [
+            "Béla Andrásfai"
+          ]
+        },
+        {
+          "id": "robinson-credit-and-permission",
+          "all_of": [
+            "Julia Robinson",
+            "Neil D. Reid",
+            "non-commercial OLP-derived materials",
+            "Permission is required for any other use."
+          ]
+        },
+        {
+          "id": "peter-localized-credit",
+          "all_of": [
+            "रोझा पेटर",
+            "Béla Andrásfai",
+            "तारीख अज्ञात"
+          ]
+        },
+        {
+          "id": "robinson-localized-permission",
+          "all_of": [
+            "ज्युलिया रॉबिन्सन",
+            "Neil D. Reid",
+            "अव्यावसायिक",
+            "इतर कोणत्याही वापरासाठी परवानगी आवश्यक"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "devanagari-fonts",
+      "category": "fonts",
+      "state": "specified",
+      "reason": "The three bundled Marathi font binaries retain the original OFL notice and font provenance.",
+      "files": [
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/NotoSerifDevanagari.ttf",
+          "sha256": "1191e07bfeb062d80e252eb85b0eafdfbda1e350707a2a60628668e8f677dbbb",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/fonts/NotoSerifDevanagari.ttf"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/OLMarathiSerif-Bold.ttf",
+          "sha256": "513598ac8428fb679f24ad0c2d0140eac1376474975908e1a349aeb7ea1e6d44",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/fonts/OLMarathiSerif-Bold.ttf"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/OLMarathiSerif-Regular.ttf",
+          "sha256": "3dd8a67190d899ce79faa97703113f81c636117126dd2577c30deca8ec791453",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/fonts/OLMarathiSerif-Regular.ttf"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/OFL.txt",
+          "sha256": "a216f6f8d85c7228093e0ee5e258d9d377e6671f68acb4db1930b29583d0f331",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/fonts/OFL.txt"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/MANIFEST.json",
+          "sha256": "b0474d51712a21cfa6cde4eaaa7a83db2cc8fee58f0f53920698f9f691c659a3",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/fonts/MANIFEST.json"
+        }
+      ],
+      "reader_checks": [
+        {
+          "id": "marathi-font-colophon",
+          "all_of": [
+            "XeLaTeX",
+            "OL Marathi Serif",
+            "Noto Serif Devanagari"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "installed-fonts",
+      "category": "fonts",
+      "state": "specified",
+      "reason": "Preserve the exact notices for the TeX-installed fonts and the course’s STIX Two Math-derived Type 1 font programs. The derived programs are distributed under SIL OFL 1.1.",
+      "files": [
+        {
+          "path": "locale/mr/courses/intermediate-logic/FONT-CREDITS.md",
+          "sha256": "c4b7525bffe863bf245f521fbc53b665b729dc5bffc2e32804956217e6ee2ff4",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/FONT-CREDITS.md"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/Baskervaldx-NOTICE.txt",
+          "sha256": "74d9aa36af078672f9d0c82edafe7c4935411fb171defc232cd825d8e491d5ee",
+          "witness": "https://ctan.math.illinois.edu/fonts/baskervaldx/doc/NOTICE.txt"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/GPL-2.0.txt",
+          "sha256": "32b1062f7da84967e7019d01ab805935caa7ab7321a7ced0e30ebe75e5df1670",
+          "witness": "https://tug.ctan.org/fonts/urw/base35/COPYING"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/GUST-FONT-LICENSE.txt",
+          "sha256": "49ea6cb9257bbee0a3979c48a774cd221550ac1c20c95549efe45fc99cc18050",
+          "witness": "https://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/LPPL-1.3c.txt",
+          "sha256": "5f05fcf6ef25a6c31bccd2df7c0c46b23107bbeb2ce5cdba74efb5cc357f4dbb",
+          "witness": "https://tug.ctan.org/macros/latex/contrib/xellipsis/lppl.txt"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/STIX_Font_License_2010.txt",
+          "sha256": "dca4874677776fbccd50b83f5c2a395f8292a04eaea73fba66abfb0caced19d4",
+          "witness": "https://ctan.math.illinois.edu/fonts/stix/doc/STIX_Font_License_2010.txt"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/TX-FONTS-COPYRIGHT.txt",
+          "sha256": "339ed0e30e6fe614a7a677f1c77e6d0736a7822b23c2a43cc046fac43bb80d63",
+          "witness": "https://ctan.math.illinois.edu/fonts/txfonts/COPYRIGHT"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/URW-PALLADIO-NOTICE.txt",
+          "sha256": "b0199b93ec7030f437c3c2cf5039789c11ba52e21ea064223448fc2553b4f707",
+          "witness": "https://ctan.math.illinois.edu/fonts/urw/base35/pfb/uplbi8a.pfb"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/SLCMathTrialNewTXMI.pfb",
+          "sha256": "1c12f708dc5bd58250c73c405d1382f1428c70a78d94b62045caa97015c366a2",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/SLCMathTrialNewTXMI.pfb"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/SLCMathTrialtxexas.pfb",
+          "sha256": "e836bc5aec7249eed5acfeccefecf503f7e2ea9978dd984a3547a7992b3eb811",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/SLCMathTrialtxexas.pfb"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/SLCMathTrialtxexs.pfb",
+          "sha256": "9b5da16a6643826ded37561b9b530c27140c2e5c1976a97c6ea19325954cab46",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/SLCMathTrialtxexs.pfb"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/SLCMathTrialtxmiaX.pfb",
+          "sha256": "20fd6a693cd6b40d43707b51e278d9e8e91be1da7b6b4d7905c9ef72bfa0be2c",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/SLCMathTrialtxmiaX.pfb"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/SLCMathTrialtxsym.pfb",
+          "sha256": "d05dc854c53b49888ebf93db462c1d912ccce174d7f57ae527dff2cea2c3bacc",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/SLCMathTrialtxsym.pfb"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/SLCMathTrialtxsys.pfb",
+          "sha256": "a0fe3a588f80e3f63c5efb455a3c5ef41ec4e9de9a81cae94207ebdff4c5736b",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/SLCMathTrialtxsys.pfb"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/font-notices/STIX-Two-Math-OFL.txt",
+          "sha256": "bec17cee6412788db45fd2644b301afbc99cc5d372ddd3345dc4a7bfdefb9f04",
+          "witness": "https://github.com/stipub/stixfonts"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/SLC-MATH-RESOURCES.json",
+          "sha256": "01409a762071e74521f814950da74764bba984ed9190ff8ea5da16a08f352773",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/SLC-MATH-RESOURCES.json"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-math-trial-NewTXMI-tape-marker.cmap",
+          "sha256": "a89f52a75916e47c8f23dbd0069e1f3308d9e48c65a99cc47b0848ae13a90298",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-math-trial-NewTXMI-tape-marker.cmap"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-math-trial-txexas.cmap",
+          "sha256": "130c67dadbca225683d858fc12e23551912c07ec17ce233c8f2e52229d7d6f69",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-math-trial-txexas.cmap"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-math-trial-txexs.cmap",
+          "sha256": "2faa99326279e8c91b5adca608a7012b5d81e7847aec8eee78a2c65ffdc473d8",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-math-trial-txexs.cmap"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-math-trial-txmiaX.cmap",
+          "sha256": "43c772fefd2d66d1acbc81a44732726eaf2989516d45ff8b4cf7f8e12c2c0c41",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-math-trial-txmiaX.cmap"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-math-trial-txsym.cmap",
+          "sha256": "d9bf546be4509967593933ced3fd830eb29bdfd76096b2a54cb887481dd188f4",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-math-trial-txsym.cmap"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-math-trial-txsys.cmap",
+          "sha256": "3d78d37cab0422e859461a704a0d4de4a14abeb64510dc99415c1c31ef0ffb5f",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-math-trial-txsys.cmap"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-newtx-unicode.map",
+          "sha256": "b8ba12b7f405b62b0432a6d59084e4c7f02b51ba981578e268e8aee8fb3c55a3",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-newtx-unicode.map"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/fonts/slc-txsyc.cmap",
+          "sha256": "989a78eb8a34b59f220d653e34d6597babac09596442e6a04c7f827fe8a6d111",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/9212d7571845850ff15c8b5c02828ee40f2a665a/courses/sets-logic-computation/fonts/slc-txsyc.cmap"
+        }
+      ],
+      "reader_checks": []
+    },
+    {
+      "id": "nowidow",
+      "category": "bundled-packages",
+      "state": "specified",
+      "reason": "Preserve the vendored nowidow package and its source notices.",
+      "files": [
+        {
+          "path": "locale/mr/courses/intermediate-logic/README",
+          "sha256": "a399642de1c6904a742ccc0ab314c859b0b01d522dc5329194d6d9d4f4e0686e",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/vendor/nowidow/README"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/nowidow.sty",
+          "sha256": "510a3f62dc3ce70fd256ae720251ecc871cffc397198e7cc98815c4213e5a83a",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/vendor/nowidow/nowidow.sty"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/nowidow.dtx",
+          "sha256": "a7899d2a640abbba93a02b3d9da4bf55206293a922962aeb752eea87aee9b7d9",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/vendor/nowidow/nowidow.dtx"
+        },
+        {
+          "path": "locale/mr/courses/intermediate-logic/nowidow.ins",
+          "sha256": "a52f243af2240761d63dc15c3260e1a7b97860695dca758fb085e15fe15f763c",
+          "witness": "https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/vendor/nowidow/nowidow.ins"
+        }
+      ],
+      "reader_checks": []
+    }
+  ]
+}

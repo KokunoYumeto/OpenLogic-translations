@@ -1,0 +1,11 @@
+id = "mr-bib-natbib-oup-bst-05"
+path = "bib/natbib-oup.bst"
+before = "FUNCTION {bbl.editor}\n{ \"ed.\" }\n"
+after = "FUNCTION {bbl.editor}\n{ \"{\\slcbibeditor}\" }\n"
+reason = "Preserve the pilot bibliography label macro for bbl.editor. Bibliographic source entries are unchanged."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/open-logic/bib/natbib-oup.bst"]
+
+[[conditions]]
+locale = "mr"
+engine = "xelatex"
+script = "Deva"

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["book", "reference_pins", "reference_mounts", "reference_dependency"],
+  "properties": {
+    "book": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"},
+    "driver": {"type": "string", "pattern": "^[a-z][a-z0-9-]*\\.tex$"},
+    "reference_pins": {
+      "type": "object", "additionalProperties": {"$ref": "#/$defs/commit"},
+      "required": ["portraits", "photos"], "minProperties": 3, "maxProperties": 3,
+      "propertyNames": {"pattern": "^[a-z][a-z0-9-]*$"}
+    },
+    "reference_mounts": {
+      "type": "object", "additionalProperties": {"$ref": "#/$defs/path"},
+      "required": ["olp", "portraits", "photos"], "minProperties": 4, "maxProperties": 4,
+      "propertyNames": {"pattern": "^[a-z][a-z0-9-]*$"},
+      "properties": {
+        "olp": {"const": ""}
+      }
+    },
+    "reference_dependency": {
+      "type": "object", "additionalProperties": false,
+      "required": ["repository", "commit", "files"],
+      "properties": {
+        "repository": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+        "commit": {"$ref": "#/$defs/commit"},
+        "files": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/path"}}
+      }
+    }
+  },
+  "$defs": {
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "path": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*[\\\\:]).+$"}
+  }
+}

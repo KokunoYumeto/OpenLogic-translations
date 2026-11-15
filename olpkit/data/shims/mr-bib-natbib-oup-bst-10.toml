@@ -1,0 +1,11 @@
+id = "mr-bib-natbib-oup-bst-10"
+path = "bib/natbib-oup.bst"
+before = "FUNCTION {bbl.number}\n{ \"no.\" }\n"
+after = "FUNCTION {bbl.number}\n{ \"{\\slcbibnumber}\" }\n"
+reason = "Preserve the pilot bibliography label macro for bbl.number. Bibliographic source entries are unchanged."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/open-logic/bib/natbib-oup.bst"]
+
+[[conditions]]
+locale = "mr"
+engine = "xelatex"
+script = "Deva"

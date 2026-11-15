@@ -395,6 +395,10 @@ def watch(args):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     commands=parser.add_subparsers(dest="command",required=True)
+    release=commands.add_parser("release",help="stage a verified textbook or publish it and check the public downloads")
+    release.add_argument("--job",required=True,type=Path,help="release metadata and input paths")
+    release.add_argument("--out",required=True,type=Path,help="directory for release assets and verified download receipt")
+    release.add_argument("--publish",action="store_true")
     plan=commands.add_parser("plan",help="fetch exact sources and prepare one packet per registered edition")
     plan.add_argument("--edition",help="registry ID or locale; omitted selects all")
     plan.add_argument("--edition-commit",help="replay a packet from one immutable edition commit")
@@ -410,6 +414,10 @@ def main():
     check.add_argument("--cache",type=Path,default=Path(".olp-maintenance/cache"))
     check.add_argument("--publish",action="store_true",help="open the advisory in the translations hub")
     args=parser.parse_args()
+    if args.command=="release":
+        sys.path.insert(0,str(HUB/"olpkit"))
+        from olpkit.syncrelease import publish
+        return publish(args.job,args.out,args.publish)
     if args.command=="watch":
         watch(args)
         return 0

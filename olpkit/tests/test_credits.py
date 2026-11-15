@@ -82,7 +82,8 @@ class CreditTests(unittest.TestCase):
         self.assertEqual(stored['gates']['G-CREDIT']['status'],'pass')
         self.assertFalse(stored['release_ready'])
         self.assertFalse(record_pdf_credits(self.root,result,self.root/'missing.json'))
-        self.assertEqual(result['gates']['G-CREDIT']['status'],'not_implemented')
+        self.assertEqual(result['gates']['G-CREDIT']['status'],'incomplete')
+        self.assertIn('policy',result['gates']['G-CREDIT']['reason'])
 
 
 if __name__=='__main__':unittest.main()

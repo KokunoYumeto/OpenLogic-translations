@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 import re
 import tomllib
-import unicodedata
+from .orthography import inspect_orthography
 
 from .assembly import GitSnapshot,assemble_units,digest,json_bytes
 from .cache import SourceCache,relative_path
@@ -65,14 +65,13 @@ def unit_findings(source,target,locale,orthography=None,english=False):
     for key in KEEP:
         if tokens_a[key]!=tokens_b[key]:add('token:'+key,tokens_a[key],tokens_b[key])
     if a['footnotes']!=b['footnotes']:add('footnotes',a['footnotes'],b['footnotes'])
-    code=without_comments(tr)
-    for rule in (orthography or {}).get('rules',[]):
-        if rule['kind']=='forbidden_literal':
-            hits=[{'line':code.count('\n',0,m.start())+1,'text':m.group()}
-                  for m in re.finditer(re.escape(rule['literal']),code)]
-            if hits:add('orthography:'+rule['id'],[],hits)
-        elif rule['kind']=='nfc' and unicodedata.normalize('NFC',code)!=code:
-            add('orthography:'+rule['id'],'NFC','non-NFC text')
+    note_commands = CONTRACT['notes']['commands']
+    notes = [Counter(m[1] for m in COMMAND.finditer(without_comments(text)) if m[1] in note_commands)
+             for text in (en, tr)]
+    if notes[0] != notes[1]:
+        add('note-commands', dict(notes[0]), dict(notes[1]))
+    for rule, source, target in inspect_orthography(tr, orthography):
+        add(rule, source, target)
     return findings,{'source':tokens_a,'target':tokens_b}
 
 
@@ -131,7 +130,8 @@ def write_reports(folder,locale,report,check=False):
         for name,b in outputs.items():(folder/name).write_bytes(b)
 
 
-def lint_units(repo,ref,cache_root,out,english=False,olp_pin=None,scope=None,check=False,tokens_only=False):
+def lint_units(repo,ref,cache_root,out,english=False,olp_pin=None,scope=None,check=False,tokens_only=False,
+               *,metadata_dir=None,contract_hashes=None):
     registry=dict(line.split('\t')[::-1] for line in (ROOT/'data/units/olp-units.tsv').read_text().splitlines()[1:])
     cache=SourceCache(cache_root);snap=None;orthography=None;exceptions=None
     if english:
@@ -139,7 +139,20 @@ def lint_units(repo,ref,cache_root,out,english=False,olp_pin=None,scope=None,che
         locale='en';pin=olp_pin or '9620cc73f9c8e0ad003c514a5d3748f29611c4c0'
     else:
         if not repo:raise ValueError('translation lint requires --repo')
-        snap=GitSnapshot(repo,ref);contract=snap.read_many(['olp-edition.toml','units.jsonl'])
+        snap=GitSnapshot(repo,ref)
+        names=['olp-edition.toml','units.jsonl']
+        if metadata_dir:
+            root=Path(metadata_dir).resolve()
+            contract={}
+            for name in names:
+                member=root/name
+                if member.is_symlink() or not member.resolve().is_relative_to(root):
+                    raise ValueError('linked edition contract')
+                contract[name]=member.read_bytes()
+        else:
+            contract=snap.read_many(names)
+        if contract_hashes is not None and {n:digest(raw) for n,raw in contract.items()}!=contract_hashes:
+            raise ValueError('unit lint contract differs from the built assembly')
         edition=tomllib.loads(contract['olp-edition.toml'].decode('utf-8-sig'));validate_schema('olp-edition',edition)
         locale=edition['locale'];pin=edition['pins']['olp']['commit']
         for name in ['lang/orthography.json','lang/lint-exceptions.tsv']:

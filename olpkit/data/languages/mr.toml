@@ -41,3 +41,29 @@ name = "newtxmath"
 single = true
 color = "533300"
 minimum_contrast = 7
+
+[tables]
+math = "ltr"
+text = "ltr"
+token_files = ["locale/mr/open-logic-config.sty", "locale/mr/courses/sets-logic-computation/locale/mr/locale/slc-token-overrides.sty"]
+proof_labels = [
+  {command="Intro", english="Intro", target="प्र.", path="locale/mr/open-logic-config.sty", sha256="7764c74815c10cd1a11304695e3b734ae0caf975e378850f4c7c98ca94d388d0"},
+  {command="Elim", english="Elim", target="वि.", path="locale/mr/open-logic-config.sty", sha256="7764c74815c10cd1a11304695e3b734ae0caf975e378850f4c7c98ca94d388d0"},
+  {command="LeftR", english="L", target="डा.", path="locale/mr/open-logic-config.sty", sha256="7764c74815c10cd1a11304695e3b734ae0caf975e378850f4c7c98ca94d388d0"},
+  {command="RightR", english="R", target="उ.", path="locale/mr/open-logic-config.sty", sha256="7764c74815c10cd1a11304695e3b734ae0caf975e378850f4c7c98ca94d388d0"}
+]
+
+# Both fonts draw the tape-end marker as a right-pointing open triangle.
+# The Marathi ToUnicode map assigns the matching character to the painted glyph.
+[[tables.symbol_mappings]]
+command = "TMendtape"
+english = {text="⊲", font="NewTXMI", gid=37, program_sha256="3590810ea6b102b00bd5db55da721b16216db309d6d8141089be42519d1ae83a"}
+target = {text="▷", font="SLCMathTrialNewTXMI", gid=37, program_sha256="c4790a8936841a00da59b37042538b93c8c0bb1be45759500f8bb26fe479ac4c"}
+
+[scale]
+reference_glyph = "क"
+minimum = 0.82
+maximum = 0.89
+decision_date = "2026-11-15"
+rationale = "A line of the published Marathi SLC (PDF page 5) uses OLMarathiSerif-Regular for x and क. Resetting those same font objects, glyph IDs and sizes with space between them gives an ink-height ratio of 0.85526. The limits allow two measurements' raster uncertainty."
+evidence = ["https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/download/slc-2026-11-14-sync-r2/slc-screen-mr.pdf"]

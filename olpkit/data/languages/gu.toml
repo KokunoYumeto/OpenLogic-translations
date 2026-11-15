@@ -48,3 +48,20 @@ name = "newtxmath"
 single = true
 color = "0B3C6F"
 minimum_contrast = 7
+
+[tables]
+math = "ltr"
+text = "ltr"
+token_files = ["locale/gu/gu-reader-tokens.sty"]
+proof_labels = [
+  {command="Intro", english="Intro", target="I", path="locale/gu/courses/sets-logic-computation/slc-config.sty", sha256="46a644c72b6c7055184b1a30531a314709b677215e8fc68044ba7017633ff3ab"},
+  {command="Elim", english="Elim", target="E", path="locale/gu/courses/sets-logic-computation/slc-config.sty", sha256="46a644c72b6c7055184b1a30531a314709b677215e8fc68044ba7017633ff3ab"}
+]
+
+[scale]
+reference_glyph = "ક"
+minimum = 0.84
+maximum = 0.91
+decision_date = "2026-11-15"
+rationale = "Body-text reproduction against x and ક in the published 299-page SLC, PDF page 52. The measured ink ratio was 0.87444. The limits allow the published two-edge raster uncertainty on each measurement, rounded outwards to hundredths."
+evidence = ["https://raw.githubusercontent.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/dcf9b9eca8a24759bea53ef17bac00239592a64a/textbooks/slc/slc-screen-gu.pdf"]

@@ -118,6 +118,21 @@ def embed(name, text):
     return '\\begin{filecontents*}[overwrite]{' + name + '}\n' + text + ('' if text.endswith('\n') else '\n') + '\\end{filecontents*}\n'
 
 
+def public_unit_bytes(path, body, private_comments):
+    """Keep the comment's TeX line ending, removing only an identified review record."""
+    if not private_comments or not re.fullmatch(r"locale/[^/]+/content/.+\.tex", path):
+        return body
+    approved = set(private_comments.get(path, ()))
+    def redact(match):
+        comment = match[2]
+        if digest(comment) in approved:
+            return match[1] + b"%"
+        if re.match(rb"%READERNOTE\{(?:SOL6-A|OL(?:FOL|INC|CMP|SIZ|AXD|COM|FUN|NOTE)-|MR(?:ARITH|SIZ|PL)-)\d+\b", comment):
+            raise ValueError("Unreviewed internal note in export input: " + path)
+        return match[0]
+    return re.sub(rb"(?m)^([ \t]*)(%READERNOTE\{[^\r\n]*)", redact, body)
+
+
 def cumulative(source, assembly, imports, profile):
     source = Path(source).resolve()
     verify_assembly(source, assembly)
@@ -153,7 +168,8 @@ def cumulative(source, assembly, imports, profile):
         relative_path(path)
         if path not in assembly['files']:
             raise ValueError('unrecorded source input: ' + path)
-        return (source/path).read_bytes().decode('utf-8-sig')
+        body = public_unit_bytes(path, (source/path).read_bytes(), profile.get('private_comment_sha256'))
+        return body.decode('utf-8-sig')
     def record(path, name, original, transformed):
         sections.append(embed(name, transformed))
         evidence.append({'path':path, 'embedded':name, 'source_sha256':assembly['files'][path]['sha256'],
@@ -169,6 +185,20 @@ def cumulative(source, assembly, imports, profile):
         record(actual, name, text, retarget_book_inputs(changed, names))
     original = read(book + '/' + driver)
     rendered = retarget_book_inputs(retarget_imports(original, '', modules, excluded), names)
+    # A package can open book files through its own configuration. Redirect these
+    # inputs at the kernel level so the cumulative file remains editable there.
+    indirect = profile.get('package_book_inputs', [])
+    if indirect:
+        substitutions = [r'\makeatletter']
+        for path in indirect:
+            relative_path(path)
+            if path not in names or not re.fullmatch(r'[A-Za-z0-9_./-]+', path):
+                raise ValueError('unknown embedded package input: ' + path)
+            basename = PurePosixPath(path).name
+            if sum(PurePosixPath(n).name == basename for n in names) != 1:
+                raise ValueError('ambiguous LaTeX file substitution: ' + basename)
+            substitutions.append(r'\declare@file@substitution{' + path + '}{' + names[path] + '}')
+        sections.append('\n'.join([*substitutions, r'\makeatother']))
     anchor = r'\begin{document}'
     if without_comments(rendered).count(anchor) != 1:
         raise ValueError('screen driver must have one document start')
@@ -176,6 +206,7 @@ def cumulative(source, assembly, imports, profile):
     sections.append(rendered)
     data = '\n'.join(sections).encode('utf-8')
     return data, {'units':len(modules), 'book_files':len(names), 'embedded':evidence,
+                  'package_book_input_lookups':[book + '/' + n for n in indirect],
                   'conditional_imports_outside_lock':[{'source':s,'target':t} for s,t in sorted(excluded)],
                   'driver':book + '/' + driver, 'driver_source_sha256':digest(original.encode('utf-8')),
                   'tex_runs':0, 'rendered_equivalence':'pending clean cumulative rebuild'}
@@ -200,7 +231,7 @@ def deterministic_zip(files):
     return data
 
 
-def source_package(source, assembly, build_path, policy, instructions, cumulative_body, cumulative_name, driver_inputs=()):
+def source_package(source, assembly, build_path, policy, instructions, cumulative_body, cumulative_name, driver_inputs=(), private_comments=None):
     """Use recorded source inputs plus explicit attribution and BibTeX dependencies."""
     from .credits import inspect_credits
     from .recorder import read_inputs, input_hashes
@@ -237,6 +268,7 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
         if not p.is_relative_to(source):raise ValueError('archive source escapes tree')
         body=p.read_bytes()
         if expected and digest(body)!=expected:raise ValueError('archive source changed: '+name)
+        body = public_unit_bytes(name, body, private_comments)
         if name in files and files[name]!=body:raise ValueError('archive member collision')
         files[name]=body;reasons.setdefault(name,[]).append(reason)
     for row in build['recorder_inputs']:
@@ -264,6 +296,13 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
             raise ValueError('recorded source unit missing from ZIP: '+unit)
     for component in policy['components']:
         for notice in component.get('files',[]):add(notice['path'],'component notice',notice['sha256'])
+        if 'font_manifest' in component:
+            from .credits import font_notices
+            for name,body in font_notices(component['font_manifest'],build).items():
+                if name in files and files[name]!=body:
+                    raise ValueError('font licence archive member collision: '+name)
+                files[name]=body
+                reasons.setdefault(name,[]).append('native font licence')
     aux=(source/job.with_suffix('.aux')).read_text(encoding='utf-8')
     for kind,names in re.findall(r'\\(bibdata|bibstyle)\{([^}]+)\}',aux):
         suffix='.bib' if kind=='bibdata' else '.bst'
@@ -281,6 +320,11 @@ def source_package(source, assembly, build_path, policy, instructions, cumulativ
             if len(candidates)!=1:raise ValueError('unresolved bibliography dependency: '+name)
             path=candidates[0];add(path,'BibTeX input',assembly['files'][path]['sha256'])
     if not instructions.strip():raise ValueError('localized build instructions are required')
+    if b'@SOURCE_DATE_EPOCH@' in instructions:
+        epoch = build.get('source_date_epoch')
+        if type(epoch) is not int or epoch < 0:
+            raise ValueError('dated package instructions require the recorded build epoch')
+        instructions = instructions.replace(b'@SOURCE_DATE_EPOCH@', str(epoch).encode('ascii'))
     if 'BUILD.md' in files:raise ValueError('BUILD.md conflicts with recorded input')
     files['BUILD.md']=instructions
     files[book+'/'+cumulative_name]=cumulative_body
@@ -325,7 +369,7 @@ def export_command(source, product, out, profile_path=None, build_path=None, cre
         policy=json.loads(Path(credit_path).read_text(encoding='utf-8'))
         packed,package_report=source_package(
             source,assembly,build_path,policy,Path(instructions_path).read_bytes(),body,filename,
-            profile.get('driver_inputs',())
+            profile.get('driver_inputs',()), profile.get('private_comment_sha256')
         )
         outputs[profile['stem']+'-'+assembly['locale']+'-source.zip']=packed
         report['package']=package_report

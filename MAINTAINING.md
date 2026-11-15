@@ -62,14 +62,16 @@ Compare the new English and translated structure, formulas, citations, reference
 
 Use the existing edition repository and a new release tag at the verified edition commit. The release includes the cumulative PDF, its directly downloadable complete editable TeX, and a ZIP containing its modular sources, fonts, notices and build instructions. Include the checked HTML and EPUB for each product that offers them. Inspect the archive file list and its reproducibility. Use a reader-facing description in the edition language, including the original human credits, actual AI models and efforts, format and scope. Keep working packets and private choice records out of reader downloads. Preserve previous public tags and files. Publish to GitHub with Zenodo deposition disabled; leave upstream issues, branches and pull requests alone.
 
-For an authenticated maintainer, the GitHub CLI accepts an explicit file allowlist. Replace the capitals with the edition's actual values and list every accepted asset:
+For a migrated textbook, complete `olpkit sync accept`, build the native and accessible readers, cold-build both editable PDF entry points, and run `olpkit sync verify`. Package the editable web source with `olpkit package-web-source`. Extract that ZIP and follow its localized README to reproduce the HTML, offline HTML ZIP and EPUB. The exact commands and source inputs are in the [synchronization guide](olpkit/docs/SYNC_PACKETS.md).
+
+Use the [Marathi release job](olpkit/data/releases/slc-mr-job.json) as a schema example. Paths resolve from the job file. Supply the actual edition checkout, native build receipt, product verification, direct TeX, native PDF source ZIP, combined web/PDF source ZIP and cold-built readers. Set the release tag, localized title, description file, scholarly credits, component licences, gate scopes and tool versions for the new edition.
 
 ```sh
-gh release create TAG PDF TEX SOURCE_ZIP EPUB HTML_ZIP --repo OWNER/EDITION --verify-tag --title "EDITION TITLE" --notes-file PUBLIC_DESCRIPTION.md
-gh release view TAG --repo OWNER/EDITION --json url,tagName,assets
+python maintain.py release --job release-job.json --out release-assets
+python maintain.py release --job release-job.json --out release-assets --publish
 ```
 
-First push the audited edition commit and its new tag. Verify that the public tag resolves to that commit. Retrieve each asset without credentials and compare its filename, byte length and SHA-256 with the staged file. Update the edition's published catalogue metadata and release selection to identify those exact downloads. Back at the hub, regenerate and test:
+The first command stages the PDF, LaTeX, complete editable source ZIP, offline HTML ZIP, EPUB and machine-readable manifest. The second uses the authenticated GitHub CLI for the selected edition, checks its webhooks, creates or resumes its release, then downloads each published asset anonymously. Keep `PUBLIC-READBACK.json` with the edition's maintenance evidence. Update the edition's catalogue and its digest in `olp-edition.toml`, then push the edition's default branch. Regenerate and test the hub:
 
 ```sh
 node scripts/generate-catalogue.mjs all
@@ -77,7 +79,7 @@ node scripts/generate-catalogue.mjs all --check
 npm run check
 ```
 
-Inspect the generated reader links and commit the corresponding hub files. Verify the public hub and direct downloads after the push. A packet, a successful compilation and a release are three separate outcomes. The complete Marathi fresh-clone release exercise still needs a public release receipt. Legacy editions with missing pins, resource indexes or product profiles need those inputs before they can complete an unattended release.
+Inspect the generated reader links and commit the corresponding hub files. Verify the public hub and direct downloads after the push. The Marathi textbook for the fixed upstream comparison is published with its 176 imported units, five downloads and release manifest. [Marathi textbook release](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/slc-2026-11-15). Legacy editions with missing pins, resource indexes or product profiles need those inputs before they can complete an unattended release.
 
 ## Daily notification
 

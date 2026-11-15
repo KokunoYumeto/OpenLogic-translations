@@ -72,10 +72,12 @@ def _cell(text, masked, start, end, column, env):
         pos=_optional(content,pos); _,pos=group(content,pos)
         if content[pos:].strip(): raise ValueError('content outside multirow')
     proofs = [start + m.start() for m in re.finditer(r'\\DisplayProof\b', code)]
+    mathematical = (env == 'array' or bool(proofs) or bool(re.fullmatch(
+        r'(?:\s*(?:\$[^$]+\$|\\\(.+?\\\)|[0-9.,+−=()-]+)\s*)+', content, re.S)))
     return {'char_start':start, 'char_end':end, 'source_tex':source,
             'sha256':sha(source), 'column':column, 'column_span':span, 'row_span':row_span,
             'proof_terminators':proofs,
-            'required_math_direction':'ltr' if env == 'array' or proofs else None,
+            'required_math_direction':'ltr' if mathematical else None,
             'implicit':False}
 
 
@@ -112,6 +114,16 @@ def _shape(text, masked, start, stop, env, spec):
         hit = COMMAND.match(masked,pos)
         if hit is None: raise ValueError('trailing backslash')
         name = hit[1]; end = hit.end()
+        if name == 'iftag':
+            _, arg = group(masked, end)
+            yes, arg = group(masked, arg)
+            no, arg = group(masked, arg)
+            # Optional truth constants stay inside this cell under either tag.
+            # Arbitrary branches can expand to alignment or row separators.
+            if all(re.fullmatch(r'\s*(?:\$\\l(?:true|false)\$\s*,?)?\s*', branch)
+                   for branch in (yes, no)):
+                pos = arg
+                continue
         if name in ('iftag','iftoggle','ifboolexpr'):
             raise ValueError('native tag/condition projection required before table shape')
         if name == 'begin':

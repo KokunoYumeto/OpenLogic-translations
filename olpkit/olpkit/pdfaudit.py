@@ -506,7 +506,7 @@ def inspect_links(path,minimum_contrast=7,progress=None,expected_color=None,*,xd
             if not matches:
                 issues.append({'rule':'declared-link-colour-overridden','expected_rgb':list(expected_rgb),'actual_rgb':list(actual)})
     measurements=[]
-    if xdvipdfmx and unknown:
+    if unknown:
         try:
             from .linkpaint import measure_unresolved
         except ModuleNotFoundError as error:

@@ -5,5 +5,7 @@
 *.jpg binary
 # Verbatim upstream test witnesses retain exact bytes, including source whitespace.
 tests/fixtures/slc/*.tex -text -whitespace
+# Font notices are verified against their original file bytes.
+data/font-notices/** -text -whitespace
 # The source pin receipt validates the exact recorder-generated lock bytes.
 data/books/sets-logic-computation/pins/88a39df84033445add7a452fba0a2e750f84cca02cf2d31432fcfce4ecf1caa7/imports.lock -text -diff

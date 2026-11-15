@@ -1,0 +1,9 @@
+[PDF वाचा](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/download/slc-2026-11-15/slc-screen-mr.pdf) · [EPUB डाउनलोड करा](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/download/slc-2026-11-15/slc-screen-mr.epub) · [ऑफलाइन HTML](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/download/slc-2026-11-15/slc-screen-mr-html.zip)
+
+संच, फलने आणि संबंध यांपासून हे पुस्तक प्रथमक्रम तर्कशास्त्र, नैसर्गिक निगमन, संपूर्णता प्रमेय, ट्यूरिंग यंत्रे आणि अनिर्णेयता यांपर्यंत जाते. मराठी पाठ्यपुस्तकात Open Logic Project चे १७६ स्रोतविभाग, प्रकरणांचे सारांश, उदाहरणे, सरावप्रश्न आणि संज्ञाकोश आहेत. PDF मध्ये ४५१ पाने आहेत. HTML आणि EPUB मध्ये सूत्रांसाठी MathML आणि मराठी श्राव्य वाचन दिले आहे.
+
+[संपादनयोग्य एकत्रित LaTeX](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/download/slc-2026-11-15/slc-screen-mr.tex) · [विभागवार स्रोत आणि PDF, HTML व EPUB तयार करण्याची साधने](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/download/slc-2026-11-15/slc-screen-mr-source.zip)
+
+Richard Zach हे मूळ पाठ्यपुस्तकाचे लेखक आहेत. मूळ विभागांचे श्रेय Open Logic Project आणि त्याच्या योगदानकर्त्यांना आहे. प्रथमक्रम तर्कशास्त्रापलीकडील प्रकरणात Jeremy Avigad यांच्या टिपणांचा आधार घेतला आहे. व्यक्तिचित्रे Matthew Leadbeater यांची आहेत. OpenAI Codex ने मूळ विभागांचे मराठी भाषांतर GPT-5.6 Sol आणि GPT-6 Sol (दोन्ही Ultra) वापरून केले. पाठ्यपुस्तकासाठीचा अनुवाद, संपादन, अक्षरजुळणी व सूत्रांचे श्राव्य वाचन GPT-6.1 Sol (Ultra) वापरून केले. स्रोताशी तुलना करून केलेल्या नव्या दुरुस्त्या, अक्षरजुळणी, बदललेल्या सूत्रांचे वाचन व इलेक्ट्रॉनिक आवृत्तीची बांधणी GPT-6 Astra (Ultra) वापरून केली.
+
+पाठ्यपुस्तकाचा मजकूर व त्याचे रूपांतर CC BY 4.0 अंतर्गत आहेत. व्यक्तिचित्रांसाठी CC BY-NC 4.0 लागू आहे. छायाचित्रे व मुद्राक्षरे यांना त्यांचे स्वतंत्र परवाने लागू आहेत. मूळ श्रेयनिर्देश व परवान्यांच्या प्रती संपादनयोग्य स्रोतसंचात आहेत.

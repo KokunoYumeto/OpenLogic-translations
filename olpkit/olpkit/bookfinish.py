@@ -76,12 +76,10 @@ def finish_book(inputs,body_bytes,profile,output):
     caption_doc=pandoc(fonts+'\n'+captions)
     rendered_captions=caption_doc.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," olpnativecaption ")]')
     if len(rendered_captions)!=len(caption_rows):raise ValueError('caption title rendering incomplete')
-    nameref=inputs.package('nameref.sty')
-    if br'\def\NR@strip@period#1.\@empty#2\@nil{#1}' not in nameref:
-        raise ValueError('native caption terminal-period elision rule changed')
+    nameref=inputs.package_declarations('nameref.sty')
     caption_report=bind_captions(doc,aux,{key:title for (key,row),title in zip(caption_rows,rendered_captions)},
         names={'figure':front['captions']['figurename'],'table':front['captions']['tablename']},
-        evidence={'native_aux_sha256':sha(inputs.witness('aux')),'nameref_source_sha256':sha(nameref)},
+        evidence={'native_aux_sha256':sha(inputs.witness('aux')),'nameref_source_sha256':nameref['source_sha256']},
         native_aux_drops_terminal_period=True)
     ids=collections.Counter(doc.xpath('//@id'))
     for href in doc.xpath('//@href[starts-with(.,"#")]'):

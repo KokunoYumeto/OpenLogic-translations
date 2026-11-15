@@ -14,6 +14,16 @@ from olpkit.schemas import ROOT
 
 
 class SourceExportTests(unittest.TestCase):
+    def test_only_reviewed_comment_is_removed_and_line_breaks_survive(self):
+        from olpkit.sourceexport import public_unit_bytes
+        path = "locale/mr/content/test.tex"
+        comment = b"%READERNOTE{OLFOL-024. Internal decision.}"
+        raw = b"A\r\n  " + comment + b"\r\n%READERNOTE{Original author's note.}\r\nB"
+        allowed = {path: [digest(comment)]}
+        self.assertEqual(public_unit_bytes(path, raw, allowed),
+                         b"A\r\n  %\r\n%READERNOTE{Original author's note.}\r\nB")
+        with self.assertRaisesRegex(ValueError, "Unreviewed"):
+            public_unit_bytes(path, raw.replace(b"024", b"025"), allowed)
     def test_book_import_lock_does_not_confuse_reused_book_assets_with_native_text(self):
         sources={k:{'commit':str(i)*40} for i,k in enumerate(['olp','photos','portraits','slc','il'],1)}
         assembly={'product':'il-screen-pdf','sources':sources}
@@ -136,7 +146,7 @@ class SourceExportTests(unittest.TestCase):
             inputs.extend(book+'/'+name for name in generated)
             fls.write_text(''.join('INPUT '+str(source/n)+'\n' for n in inputs))
             (output/'reader.pdf').write_bytes(b'PDF fixture')
-            build={'status':'compiled_pending_remaining_gates','commands':[{'exit_code':0,'timed_out':False}],
+            build={'status':'compiled_pending_remaining_gates','commands':[{'exit_code':0,'timed_out':False}], 'source_date_epoch':123456789,
                    'assembly_sha256':digest(json_bytes(assembly)),'build_tree':'source',
                    'gates':{g:{'status':'pass'} for g in ['G-IMPORT','G-UNITS','G-LOG','G-BOX']},
                    'pdf':{'path':'reader.pdf','sha256':digest(b'PDF fixture')},'recorder_sha256':digest(fls.read_bytes()),
@@ -149,13 +159,14 @@ class SourceExportTests(unittest.TestCase):
                         'files':[{'path':'LICENSE.md','sha256':digest(texts['LICENSE.md']),'witness':'https://example.org/notice'}],
                         'reader_checks':[]} for c in categories]}
             data,report=source_package(
-                source,assembly,receipt,policy,b'Build instructions',b'All text','cumulative.tex',
+                source,assembly,receipt,policy,b'Build at @SOURCE_DATE_EPOCH@',b'All text','cumulative.tex',
                 driver_inputs=['fonts/symbol.cmap']
             )
             with self.assertRaisesRegex(ValueError,'unrecorded PDF driver input'):
                 source_package(source,assembly,receipt,policy,b'Build instructions',b'All text','cumulative.tex',
                                driver_inputs=['fonts/missing.cmap'])
             with ZipFile(io.BytesIO(data)) as z:
+                self.assertEqual(z.read('BUILD.md'), b'Build at 123456789')
                 self.assertIn('bib/refs.bib',z.namelist());self.assertIn('bib/style.bst',z.namelist())
                 self.assertEqual(z.read('LICENSE.md'),texts['LICENSE.md'])
                 self.assertNotIn('PRIVATE.txt',z.namelist())

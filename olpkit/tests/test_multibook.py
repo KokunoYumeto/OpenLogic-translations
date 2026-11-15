@@ -83,15 +83,18 @@ class MultiBookTests(unittest.TestCase):
             content={data['driver']:il_bytes,'includeonly.tex':b''} if source=='il' else {'witness.txt':source.encode()}
             for name,body in content.items():(folder/name).write_bytes(body)
             return folder,{'files':content}
-        with patch('olpkit.build.SourceCache') as cache,patch('olpkit.build.GitSnapshot') as snapshot:
+        with patch('olpkit.build.SourceCache') as cache, patch('olpkit.build.GitSnapshot', side_effect=AssertionError('unexpected edition checkout')):
             cache.return_value.require.side_effect=require
-            snapshot.return_value.commit='c'*40
-            snapshot.return_value.read_many.return_value={'nowidow.sty':b'package'}
             output=self.root/'assembled'
             report=reference_tree(self.root/'cache','a'*40,output,product='il-screen-pdf')
         self.assertEqual(report['driver'],'il-screen.tex')
         self.assertEqual(report['book_directory'],'courses/intermediate-logic')
         self.assertEqual((output/report['book_directory']/report['driver']).read_bytes(),il_bytes)
+        for path in data['reference_dependency']['files']:
+            name = report['book_directory'] + '/' + Path(path).name
+            body = (output / name).read_bytes()
+            self.assertIn(b'LaTeX Project Public License', body)
+            self.assertEqual(report['files'][name]['sha256'], digest(body))
         self.assertEqual(set(report['pins']),{'olp','il','photos','portraits'})
         self.assertFalse((output/'courses/sets-logic-computation').exists())
 

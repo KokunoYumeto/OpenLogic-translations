@@ -1,3 +1,20 @@
 \AtBeginDocument{%
   \emergencystretch=@@layout.emergency_stretch@@
   \setlength{\tabcolsep}{@@layout.table_column_separation@@}}
+
+% Preserve the space allocated to Cantor's first array while lifting its
+% painted bottom row clear of the type block.
+\RequirePackage{trimclip}
+\newsavebox{\olpCantorArray}
+\newif\ifolpFirstCantorArray
+\AddToHook{file/zig-zag.tex/before}{\global\olpFirstCantorArraytrue}
+\AddToHook{file/zig-zag.tex/after}{\global\olpFirstCantorArrayfalse}
+\AddToHook{env/array/before}{%
+  \ifolpFirstCantorArray
+    \global\olpFirstCantorArrayfalse
+    \AddToHookNext{env/array/after}{%
+      \)\end{lrbox}%
+      \raisebox{2.5pt}[\ht\olpCantorArray][\dp\olpCantorArray]{%
+        \clipbox{0pt 3.25pt 0pt 0pt}{\usebox{\olpCantorArray}}}}%
+    \begin{lrbox}{\olpCantorArray}\(\displaystyle
+  \fi}

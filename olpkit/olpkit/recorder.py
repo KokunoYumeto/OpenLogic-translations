@@ -29,8 +29,12 @@ def content_inputs(inputs,root,locale=None):
 
 
 def load_imports(path):
+    return parse_imports(Path(path).read_text(encoding='utf-8'))
+
+
+def parse_imports(text):
     records=[]
-    for line in Path(path).read_text(encoding='utf-8').splitlines():
+    for line in text.splitlines():
         uid,name=line.split('\t')
         if not re.fullmatch(r'OLP-\d{4}',uid) or not name.startswith('content/'):
             raise ValueError('invalid import identity')

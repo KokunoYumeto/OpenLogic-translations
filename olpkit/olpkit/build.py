@@ -13,6 +13,7 @@ from .cache import SourceCache,run_git,relative_path
 from .process import TeXSlot,run_job,MEMORY_LIMIT,TEX_MUTEX
 from .recorder import read_inputs,content_inputs,load_imports,compare_imports,input_hashes
 from .schemas import ROOT,validate_schema
+from .edition import git_blob
 from .importlock import select_lock,write_lock,pin_key
 
 
@@ -125,7 +126,7 @@ def record_pdf_credits(output,result,policy_path):
     from .credits import inspect_credits
     output=Path(output).resolve();policy_path=Path(policy_path)
     if not policy_path.is_file():
-        result['gates']['G-CREDIT']={'status':'not_implemented','reason':'Component credit policy not configured.'}
+        result['gates']['G-CREDIT']={'status':'incomplete','reason':'Component credit policy not configured.'}
         (output/'BUILD.json').write_bytes(json_bytes(result))
         return False
     policy=json.loads(policy_path.read_text(encoding='utf-8'))
@@ -181,6 +182,51 @@ def compile_book(folder,report,engine,epoch,output,expected=None,reference=False
         lock.unlink()
 
 
+def settle_tex(folder, book, job, engine, epoch, output, result, save):
+    """Compile an existing driver inside the caller's TeX slot, with bounded child jobs."""
+    if engine not in ('xelatex', 'pdflatex', 'lualatex') or not re.fullmatch(r'[a-z][a-z0-9-]*', job):
+        raise ValueError('unexpected native engine or driver name')
+    env={**os.environ,'SOURCE_DATE_EPOCH':str(epoch),'FORCE_SOURCE_DATE':'1',
+         'BSTINPUTS':str(folder/'bib')+os.pathsep,'openin_any':'a','openout_any':'p'}
+    # Restrict tool side effects to this staging tree; installer and shell escape stay off.
+    deadline=time.monotonic()+1200
+    def invoke(tool,args):
+        executable=shutil.which(tool)
+        if not executable:raise ValueError('build executable absent: '+tool)
+        remaining=deadline-time.monotonic()
+        if remaining<=0:raise ValueError('whole build exceeded twenty minutes')
+        number=len(result['commands'])+1;log=output/(f'{number:02d}-'+tool+'.txt')
+        command=run_job([executable,*args],book,log,env=env,timeout=min(240,remaining))
+        result['commands'].append({'tool':tool,'arguments':args,'log':log.name,**command});save()
+        print(json.dumps({'tool':tool,'step':number,'exit':command['exit_code'],'seconds':command['seconds']}),flush=True)
+        if command['timed_out'] or command['exit_code']!=0:raise ValueError(tool+' failed; inspect '+log.name)
+        return log.read_text(encoding='utf-8',errors='replace')
+    version=invoke(engine,['--version']);result['engine_version']=version.splitlines()[0]
+    options=['--disable-installer'] if 'MiKTeX' in version else []
+    args=options+['-no-shell-escape','-interaction=nonstopmode','-halt-on-error','-file-line-error',
+                  '-recorder','-jobname='+job,r'\tracinglostchars=3\input{'+job+'.tex}']
+    bib_key=index_key=None;settled=False
+    for number in range(1,8):
+        before=auxiliary_hashes(book,job)
+        invoke(engine,args);result['passes']=number
+        checks=log_checks((book/(job+'.log')).read_text(encoding='utf-8',errors='replace'))
+        if any(x in checks['issues'] for x in ('missing_character','undefined_token','unmarked_import','tex_error')):
+            raise ValueError('deterministic TeX defect: '+', '.join(checks['issues']))
+        ran_aux=False
+        aux=(book/(job+'.aux')).read_text(encoding='utf-8',errors='replace')
+        key=bibliography_key(aux)
+        if '\\bibdata' in aux and key!=bib_key:
+            invoke('bibtex',options+[job]);bib_key=key;ran_aux=True
+        glo=book/(job+'.glo')
+        if glo.is_file() and glo.stat().st_size and digest(glo.read_bytes())!=index_key:
+            invoke('makeindex',['-s',job+'.ist','-t',job+'.glg','-o',job+'.gls',job+'.glo'])
+            index_key=digest(glo.read_bytes());ran_aux=True
+        if not checks['issues'] and not ran_aux and before==auxiliary_hashes(book,job):
+            settled=True;break
+    if not settled:raise ValueError('build did not settle within seven TeX passes')
+    return checks
+
+
 def _compile_book(folder,report,engine,epoch,output,expected=None,reference=False):
     """Compile once per validated input batch; every tool stays under the slot."""
     folder=Path(folder).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
@@ -203,44 +249,7 @@ def _compile_book(folder,report,engine,epoch,output,expected=None,reference=Fals
             result['mutex_acquired']=slot.acquired;result['mutex_abandoned']=slot.abandoned
             if not slot.acquired:
                 result['status']='slot_occupied';print('TeX slot occupied; no engine started',flush=True);return result
-            env={**os.environ,'SOURCE_DATE_EPOCH':str(epoch),'FORCE_SOURCE_DATE':'1',
-                 'BSTINPUTS':str(folder/'bib')+os.pathsep,'openin_any':'a','openout_any':'p'}
-            # Restrict tool side effects to this staging tree; installer and shell escape stay off.
-            deadline=time.monotonic()+1200
-            def invoke(tool,args):
-                executable=shutil.which(tool)
-                if not executable:raise ValueError('build executable absent: '+tool)
-                remaining=deadline-time.monotonic()
-                if remaining<=0:raise ValueError('whole build exceeded twenty minutes')
-                number=len(result['commands'])+1;log=output/(f'{number:02d}-'+tool+'.txt')
-                command=run_job([executable,*args],book,log,env=env,timeout=min(240,remaining))
-                result['commands'].append({'tool':tool,'arguments':args,'log':log.name,**command});save()
-                print(json.dumps({'tool':tool,'step':number,'exit':command['exit_code'],'seconds':command['seconds']}),flush=True)
-                if command['timed_out'] or command['exit_code']!=0:raise ValueError(tool+' failed; inspect '+log.name)
-                return log.read_text(encoding='utf-8',errors='replace')
-            version=invoke(engine,['--version']);result['engine_version']=version.splitlines()[0]
-            options=['--disable-installer'] if 'MiKTeX' in version else []
-            args=options+['-no-shell-escape','-interaction=nonstopmode','-halt-on-error','-file-line-error',
-                          '-recorder','-jobname='+job,r'\tracinglostchars=3\input{'+job+'.tex}']
-            bib_key=index_key=None;settled=False
-            for number in range(1,8):
-                before=auxiliary_hashes(book,job)
-                invoke(engine,args);result['passes']=number
-                checks=log_checks((book/(job+'.log')).read_text(encoding='utf-8',errors='replace'))
-                if any(x in checks['issues'] for x in ('missing_character','undefined_token','unmarked_import','tex_error')):
-                    raise ValueError('deterministic TeX defect: '+', '.join(checks['issues']))
-                ran_aux=False
-                aux=(book/(job+'.aux')).read_text(encoding='utf-8',errors='replace')
-                key=bibliography_key(aux)
-                if '\\bibdata' in aux and key!=bib_key:
-                    invoke('bibtex',options+[job]);bib_key=key;ran_aux=True
-                glo=book/(job+'.glo')
-                if glo.is_file() and glo.stat().st_size and digest(glo.read_bytes())!=index_key:
-                    invoke('makeindex',['-s',job+'.ist','-t',job+'.glg','-o',job+'.gls',job+'.glo'])
-                    index_key=digest(glo.read_bytes());ran_aux=True
-                if not checks['issues'] and not ran_aux and before==auxiliary_hashes(book,job):
-                    settled=True;break
-            if not settled:raise ValueError('build did not settle within seven TeX passes')
+            checks = settle_tex(folder, book, job, engine, epoch, output, result, save)
             pdf=book/(job+'.pdf');fls=book/(job+'.fls')
             if not pdf.is_file() or not fls.is_file():raise ValueError('PDF or recorder output absent')
             inputs=read_inputs(fls,book);found,wrong=content_inputs(inputs,folder,None if reference else report['locale'])
@@ -282,17 +291,26 @@ def reference_tree(cache_root,olp_pin,out,check=False,product='slc-screen-pdf'):
             if name.startswith('.') or name.endswith('~') or name in ['CHANGELOG.md','Makefile','makereadme']:continue
             dest=(prefix+'/' if prefix else '')+name
             tree.add(dest,(source_folder/name).read_bytes(),{'source':source,'commit':pin,'path':name})
-    # The vendored LPPL package is included exactly as in the accepted pilots.
-    extra=data['reference_dependency'];snap=GitSnapshot(ROOT.parent/'repos'/extra['repository'],extra['commit'])
-    for name,body in snap.read_many(extra['files']).items():
-        tree.add('courses/'+data['book']+'/'+Path(name).name,body,{'source':'package-witness','commit':snap.commit,'path':name})
+    extra = data['reference_dependency']
+    packages = ROOT / 'data' / 'reference-packages'
+    witnesses = json.loads((packages / 'sources.json').read_bytes())
+    matches = [item for item in witnesses if (item['repository'], item['commit']) ==
+               (extra['repository'], extra['commit'])]
+    if len(matches) != 1 or set(matches[0]['files']) != set(extra['files']):
+        raise ValueError('Reference package has no matching complete source distribution')
+    for name, evidence in matches[0]['files'].items():
+        body = (packages / relative_path(evidence['file'])).read_bytes()
+        if digest(body) != evidence['sha256'] or git_blob(body) != evidence['git_blob']:
+            raise ValueError('Reference package differs from its pinned source: ' + name)
+        tree.add('courses/' + data['book'] + '/' + Path(name).name, body,
+                 {'source': 'package-witness', 'commit': extra['commit'], 'path': name})
     report={'schema':'olpkit.reference-assembly.v1','book_directory':'courses/'+data['book'],
             'pins':sources,'files':tree.origins,'unreconciled_legacy_inputs':[]}
     if 'driver' in data:report['driver']=data['driver']
     write_assembly(tree,report,out,check);return report
 
 
-def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False,book_ledger=None):
+def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False,book_ledger=None,web_profile=None):
     product_data,book=load_build_product(product)
     if not out:raise ValueError('build requires an explicit named --out directory')
     output=Path(out).resolve();boundary=(ROOT.parent/'out').resolve()
@@ -316,13 +334,12 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
     epoch=int(run_git(bare,'show','-s','--format=%ct',olp_pin).stdout.decode().strip())
     result=compile_book(source,report,engine,epoch,output,expected,english,resume)
     if not english and result.get('pdf'):
-        language=tomllib.loads((ROOT/'data/languages'/(report['locale']+'.toml')).read_text(encoding='utf-8'))
-        glyphs_ok=record_pdf_glyphs(output,result)
-        links_ok=record_pdf_links(output,result,language['links']['minimum_contrast'],language['links']['color'],
-                                  xdvipdfmx=engine=='xelatex')
-        credits_ok=record_pdf_credits(output,result,ROOT/'data/credits'/(book['source_id']+'-'+report['locale']+'.json'))
-        if not glyphs_ok or not links_ok or not credits_ok:
-            print('PDF glyph/link/credit acceptance incomplete; inspect recorded gate results',flush=True)
+        from .buildchecks import verify_native_build
+        result=verify_native_build(output,repo,cache_root,metadata_dir,web_profile)
+        if any(gate['status']=='slot_occupied' for gate in result['gates'].values()):
+            return 75
+        if any(gate['status']!='pass' for gate in result['gates'].values()):
+            print('See BUILD.json for outstanding acceptance checks.',flush=True)
             return 1
     if english and result['status']=='reference_compiled':
         registry=dict(line.split('\t')[::-1] for line in (ROOT/'data/units/olp-units.tsv').read_text().splitlines()[1:])

@@ -5,12 +5,13 @@ Requirements come from a separately reviewed policy, never from the output alone
 """
 import json
 from pathlib import Path
+import re
 import unicodedata
 
 from .assembly import digest,json_bytes
 from .cache import relative_path
 from .pdfaudit import extracted_text,file_record
-from .schemas import validate_schema
+from .schemas import ROOT, validate_schema
 
 
 CATEGORIES={'original-text','book','translation','portraits','photographs','fonts','bundled-packages'}
@@ -27,6 +28,81 @@ def member(root,name):
     if not p.is_relative_to(root) or p.is_symlink():
         raise ValueError('credit input escapes source tree: '+name)
     return p
+
+
+def font_notices(index, build):
+    root = ROOT / 'data/font-notices'
+    manifest = member(root,index['path']).read_bytes()
+    if digest(manifest)!=index['sha256']:
+        raise ValueError('font notice manifest changed')
+    packages = json.loads(manifest)
+    licensed = {}
+    outputs = {'licenses/fonts/manifest.json':manifest}
+    for package, record in packages.items():
+        if not re.fullmatch(r'[a-z0-9-]+',package) or not record['notices']:
+            raise ValueError('missing or invalid font notice package')
+        for name, hash_value in record['fonts'].items():
+            if name in licensed:
+                raise ValueError('ambiguous source for font '+name)
+            licensed[name]=hash_value
+        for name, hash_value in record['notices'].items():
+            body=member(root,package+'/'+name).read_bytes()
+            if digest(body)!=hash_value:
+                raise ValueError('font licence differs from its witness: '+package+'/'+name)
+            outputs['licenses/fonts/'+package+'/'+name]=body
+    outlines={(Path(item['path']).name,item['sha256']) for item in build['recorder_inputs']
+              if Path(item['path']).suffix.lower() in {'.otf','.ttf','.ttc','.pfb','.pfa'}}
+    if set(licensed.items()) != outlines:
+        raise ValueError('native font programs differ from the licensed inventory')
+    return outputs
+
+
+def photo_checks(source, assembly, build, policy, pages):
+    """Check each native photo attribution against its own source and reader paragraph."""
+    from .bookphotos import credit_rows
+    from .macrophases import mask_comments
+    from .build import build_job
+    pcr=assembly["book_directory"]+"/"+build_job(assembly)+".pcr"
+    observed={r["path"]:r["sha256"] for r in build["recorder_inputs"] if r["kind"]=="assembled-tree"}
+    raw=member(source,pcr).read_bytes()
+    if observed.get(pcr)!=digest(raw):
+        raise ValueError("settled photo-credit list differs from TeX recorder")
+    rows=credit_rows(raw.decode("utf-8-sig"))
+    checks={r["photo_key"]:r for r in policy if "photo_key" in r}
+    if {r["key"] for r in rows} != set(checks) or len(checks)!=len(policy):
+        raise ValueError("reader photo policy and actual photo list differ")
+    full=" ".join(pages)
+    spans=[]
+    for row in rows:
+        lead=normalized(checks[row["key"]]["paragraph_lead"])
+        starts=list(re.finditer(re.escape(lead)+r"\s+\d+\s*:",full))
+        if len(starts)!=1:
+            raise ValueError("cannot identify unique reader credit paragraph for "+row["key"])
+        spans.append(starts[0].start())
+    if spans!=sorted(spans):
+        raise ValueError("photo-credit paragraphs differ from native order")
+    spans.append(len(full))
+    result=[]
+    for i,row in enumerate(rows):
+        check=checks[row["key"]]
+        name=row["key"].removeprefix("photo-")
+        original="assets/photos/"+name+"/"+name+"-credit.tex"
+        translated="locale/"+assembly["locale"]+"/photocredits/"+name+"-credit.tex"
+        left=member(source,original).read_bytes()
+        right=member(source,translated).read_bytes()
+        def links(data):
+            return re.findall(r"\\href\s*\{([^{}]+)\}",mask_comments(data))
+        def notice(data):
+            return re.sub(r"\s+","",mask_comments(data).replace(r"\copyright",r"\textcircled{C}"))
+        paragraph=full[spans[i]:spans[i+1]]
+        ok=(observed.get(original)==digest(left) and observed.get(translated)==digest(right)
+            and notice(right.decode("utf-8-sig"))==notice(row["credit_tex"])
+            and links(left.decode("utf-8-sig"))==links(right.decode("utf-8-sig"))
+            and all(normalized(s) in paragraph for s in check["all_of"]))
+        result.append({"id":check["id"],"photo":row["key"],"pass":ok,
+                       "original_sha256":digest(left),"translation_sha256":digest(right),
+                       "pcr_sha256":digest(raw)})
+    return result
 
 
 def inspect_credits(source,policy,pdf=None,build=None):
@@ -74,8 +150,21 @@ def inspect_credits(source,policy,pdf=None,build=None):
             if component['files'] or component['reader_checks']:
                 raise ValueError('not-applicable component has requirements: '+cid)
             continue
-        if state=='specified' and not component['files']:
+        if state=='specified' and not component['files'] and 'font_manifest' not in component:
             raise ValueError('specified component lacks its source notice: '+cid)
+        if 'font_manifest' in component:
+            if component['category']!='fonts':
+                raise ValueError('only font components may specify a font manifest')
+            if build:
+                try:
+                    notices=font_notices(component['font_manifest'],b)
+                except (ValueError, OSError) as error:
+                    issues.append({'component':cid,'kind':'font_notice_mismatch','detail':str(error)})
+                else:
+                    files.extend({'component':cid,'path':name,'sha256':digest(body),'pass':True}
+                                 for name,body in notices.items())
+            else:
+                unmeasured.append({'component':cid,'kind':'native_font_recorder_required'})
         for expected in component['files']:
             name=expected['path'];p=member(source,name)
             actual=digest(p.read_bytes()) if p.is_file() else None
@@ -90,6 +179,12 @@ def inspect_credits(source,policy,pdf=None,build=None):
             matches=[i+1 for i,p in enumerate(pages) if all(normalized(s) in p for s in check['all_of'])]
             readers.append({'component':cid,'id':check['id'],'pages':matches,'pass':bool(matches)})
             if not matches:issues.append({'component':cid,'kind':'reader_credit_absent','check':check['id']})
+        photos=[r for r in component['reader_checks'] if 'photo_key' in r]
+        if photos and build and pdf:
+            bindings=photo_checks(source,report,b,photos,pages)
+            readers.extend(bindings)
+            issues.extend({'component':cid,'kind':'photo_credit_mismatch','check':r['id']}
+                          for r in bindings if not r['pass'])
     status='fail' if issues else ('incomplete' if unmeasured else 'pass')
     return {'schema':'olpkit.credits.v1','status':status,'policy_sha256':digest(json_bytes(policy)),
             'assembly':file_record(assembly),'pdf':pdf_record,'files':files,'reader_checks':readers,

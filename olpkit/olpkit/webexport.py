@@ -10,18 +10,22 @@ from .epubpackage import package_html
 from .xhtml import text_without_annotations
 from .formulaspeech import bind_speech
 from .webfonts import bind_web_fonts
+from .webprofile import load_profile
 
 
-def export_web(source,product,out,profile_path,*,check_numbers=False,check_speech=False):
+def export_web(source,product,out,profile_path,*,check_numbers=False,check_speech=False,released_speech=None):
     source=Path(source).resolve();out=Path(out).resolve()
     if out.exists():raise ValueError('web export output already exists')
     if out.is_relative_to(source):raise ValueError('export must not modify its frozen source tree')
     if product not in ('html','epub','accessible'):raise ValueError('unsupported web product')
     if check_speech and product!='accessible':raise ValueError('--check-speech requires the accessible product')
+    if released_speech is not None and (product!='accessible' or check_speech):
+        raise ValueError('released speech replay is only available for reproducing an accessible edition')
     if not profile_path:raise ValueError('web export requires an explicit language/native-witness profile')
-    profile_path=Path(profile_path);profile=json.loads(profile_path.read_text(encoding='utf-8'))
-    inputs=BookInputs(source,profile)
-    context=build_context(source,profile)
+    profile_path=Path(profile_path);profile=load_profile(profile_path)
+    declarations = profile['released_package_declarations'] if released_speech is not None else None
+    inputs=BookInputs(source,profile,released_declarations=declarations)
+    context=build_context(source,profile,released_declarations=declarations)
     # Incomplete diagram batches fail before creating a misleading reader.
     out.mkdir(parents=True)
     body,body_report=build_body(inputs,context,profile,out)
@@ -70,12 +74,21 @@ def export_web(source,product,out,profile_path,*,check_numbers=False,check_speec
         p=(out/name).resolve()
         if not p.is_relative_to(out):raise ValueError('reader resource escapes output')
         assets[name]=p.read_bytes()
-    data,html_report=reader_html(html.tostring(doc,encoding='utf-8'),ep,context['projection']['unit_order'],assets)
+    unit_rows = context['projection']['unit_order']
+    if released_speech is not None:
+        from .speechreplay import original_source_locators
+        unit_rows = original_source_locators(unit_rows, profile['released_unit_sources'])
+    data,html_report=reader_html(html.tostring(doc,encoding='utf-8'),ep,unit_rows,assets)
     speech_report=None
     if product=='accessible':
-        store_bytes=inputs.witness('formula_speech');store=json.loads(store_bytes)
-        data,speech_report=bind_speech(data,inputs.witness('formula_speech_input'),store_bytes)
-        attribution=store.get('interface',{}).get('attribution')
+        if released_speech is None:
+            store_bytes=inputs.witness('formula_speech');store=json.loads(store_bytes)
+            data,speech_report=bind_speech(data,inputs.witness('formula_speech_input'),store_bytes)
+            attribution=store.get('interface',{}).get('attribution')
+        else:
+            from .speechreplay import replay_labels
+            data,speech_report=replay_labels(data,released_speech)
+            attribution=released_speech['attribution']
         if not isinstance(attribution,str) or not attribution.strip():raise ValueError('localized speech attribution absent')
         accessible=html.document_fromstring(data,parser=html.HTMLParser(encoding='utf-8',huge_tree=True))
         credit=accessible.xpath('//*[@id="olp-native-credit-3"]')

@@ -137,10 +137,24 @@ def plan(from_ref, to_ref, out, check=False):
 
 def main(argv=None):
     p=argparse.ArgumentParser(prog='olpkit');sub=p.add_subparsers(dest='command',required=True)
+    normalize=sub.add_parser('normalize');normalize.add_argument('--unit',required=True);normalize.add_argument('--policy',required=True);normalize.add_argument('--out')
     units=sub.add_parser('units').add_subparsers(dest='action',required=True);r=units.add_parser('registry');r.add_argument('--check',action='store_true')
     sync=sub.add_parser('sync').add_subparsers(dest='action',required=True);q=sync.add_parser('plan');q.add_argument('--from',dest='from_ref');q.add_argument('--to',dest='to_ref');q.add_argument('--out');q.add_argument('--check',metavar='FOLDER')
     v=sync.add_parser('verify-vendored');v.add_argument('--repo',required=True);v.add_argument('--dir',required=True);v.add_argument('--commit',required=True);v.add_argument('--components');v.add_argument('--out')
     e=sync.add_parser('edition');e.add_argument('--repo',required=True);e.add_argument('--ref',default='HEAD');e.add_argument('--plan',required=True);e.add_argument('--out',required=True)
+    accept = sync.add_parser('accept', help='accept reviewed hub packets against a compiled candidate')
+    for option in ('repo', 'packet', 'review', 'build', 'out'):
+        accept.add_argument('--' + option, required=True)
+    accept.add_argument('--ref', default='HEAD')
+    verify = sync.add_parser('verify', help='verify one fully built product against the committed edition and sync packet')
+    for option in ('repo', 'packet', 'review', 'acceptance', 'build', 'source-export', 'package-check', 'out'):
+        verify.add_argument('--' + option, required=True)
+    verify.add_argument('--ref', default='HEAD')
+    verify.add_argument('--accepted-build', help='native build used by sync accept when the final book layout changed')
+    release = sync.add_parser('release', help='stage or publish a verified product to its edition repository')
+    release.add_argument('--job', required=True, help='release inputs and localized metadata')
+    release.add_argument('--out', required=True, help='release staging and public readback directory')
+    release.add_argument('--publish', action='store_true', help='publish the staged assets and check public downloads')
     lint=sub.add_parser('lint').add_subparsers(dest='action',required=True);l=lint.add_parser('structure');l.add_argument('--en',required=True);l.add_argument('--tr',required=True);l.add_argument('--json',action='store_true')
     for action in ('units','tokens'):
         l=lint.add_parser(action);l.add_argument('--repo');l.add_argument('--ref',default='HEAD');l.add_argument('--english',action='store_true');l.add_argument('--olp-pin');l.add_argument('--scope');l.add_argument('--out',required=True);l.add_argument('--check',action='store_true')
@@ -152,17 +166,64 @@ def main(argv=None):
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin');build.add_argument('--resume',action='store_true')
     assembly.add_argument('--book-ledger');build.add_argument('--book-ledger')
+    build.add_argument('--web-profile', help='Numbered, accessible EPUB profile bound to the native PDF')
     export=sub.add_parser('export');export.add_argument('--source',required=True);export.add_argument('--product',choices=['cumulative-tex','source-zip','html','epub','accessible'],required=True);export.add_argument('--out',required=True);export.add_argument('--profile');export.add_argument('--build');export.add_argument('--credits');export.add_argument('--instructions');export.add_argument('--check-numbers',action='store_true');export.add_argument('--check-speech',action='store_true')
     figures=sub.add_parser('figures');figures.add_argument('--source',required=True);figures.add_argument('--context',required=True);figures.add_argument('--profile',required=True);figures.add_argument('--out',required=True);figures.add_argument('--resume',action='store_true')
     pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
     for action in ('compare','links','glyphs'):
         q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
     check=sub.add_parser('check').add_subparsers(dest='action',required=True)
+    q=check.add_parser('package',help='rebuild the modular and cumulative sources from the exported ZIP')
+    q.add_argument('--export',required=True);q.add_argument('--build',required=True);q.add_argument('--out',required=True)
+    q.add_argument('--mode', choices=['both','modular','cumulative'], default='both')
+    q=check.add_parser('build');q.add_argument('--build',required=True);q.add_argument('--repo',required=True);q.add_argument('--metadata-dir')
+    q.add_argument('--web-profile')
     q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')
     q=check.add_parser('scale');q.add_argument('--pdf',required=True);q.add_argument('--specimen',required=True);q.add_argument('--language-data',required=True);q.add_argument('--out',required=True)
+    status=sub.add_parser('status',help='compare committed source, translation and released product inputs')
+    status.add_argument('--repo',required=True)
+    status.add_argument('--ref',default='HEAD',help='edition commit to inspect')
+    status.add_argument('--upstream',default=UPSTREAM,help='local upstream Git checkout or bare cache')
+    status.add_argument('--to',help='compare the edition with this upstream revision')
+    status.add_argument('--receipt',action='append',default=[],help='downloaded release.json; repeat per product')
+    status.add_argument('--json',action='store_true')
+    profile=sub.add_parser('web-profile',help='bind an existing language profile to an equivalent native book build')
+    profile.add_argument('--build', required=True)
+    profile.add_argument('--template', required=True)
+    profile.add_argument('--sync-inputs', help='verified sync receipt, edition metadata, credit policy and book decisions')
+    profile.add_argument('--out', required=True)
+    speech = sub.add_parser('speech-sync', help='carry checked math readings between numbered HTML readers')
+    for name in ('previous-reader', 'previous-packet', 'previous-store', 'reader', 'out'):
+        speech.add_argument('--' + name, required=True)
+    speech.add_argument('--review', help='editorial decisions for every changed occurrence')
+    speech.add_argument('--previous-source-map', help='source locations bound to the previous speech store')
+    offline = sub.add_parser('package-html', help='bundle a checked HTML reader with its local images and fonts')
+    offline.add_argument('--export', required=True, help='paired HTML and EPUB export receipt')
+    offline.add_argument('--out', required=True, help='destination ZIP file')
+    web_source = sub.add_parser('package-web-source', help='bundle the editable textbook and its HTML/EPUB builder')
+    for name in ('build', 'profile', 'source-export', 'web-export', 'pdf-profile', 'builder-licence', 'instructions', 'out'):
+        web_source.add_argument('--' + name, required=True)
     a=p.parse_args(argv)
     try:
-        if a.command=='figures':
+        if a.command=='package-web-source':
+            from .websource import package
+            return package(a)
+        if a.command=='package-html':
+            from .htmlarchive import package_html_reader
+            return package_html_reader(a.export, a.out)
+        if a.command=='speech-sync':
+            from .speechsync import sync_speech
+            return sync_speech(a)
+        if a.command=='web-profile':
+            from .webprofile import source_equivalent_profile
+            return source_equivalent_profile(a.build,a.template,a.out,sync_inputs=a.sync_inputs)
+        if a.command=='status':
+            from .status import status_command
+            return status_command(a.repo,a.ref,a.upstream,a.to,a.receipt,a.json)
+        if a.command=='normalize':
+            from .orthography import normalize_command
+            return normalize_command(a.unit,a.policy,a.out)
+        elif a.command=='figures':
             from .nativefigures import figures_command
             return figures_command(a.source,a.context,a.profile,a.out,resume=a.resume)
         elif a.command=='export':
@@ -173,6 +234,15 @@ def main(argv=None):
             from .sourceexport import export_command
             return export_command(a.source,a.product,a.out,a.profile,a.build,a.credits,a.instructions)
         elif a.command=='check':
+            if a.action=='package':
+                from .packagecheck import verify_package
+                return verify_package(a.export,a.build,a.out,mode_choice=a.mode)
+            if a.action=='build':
+                from .buildchecks import verify_native_build
+                report=verify_native_build(a.build,a.repo,CACHE,a.metadata_dir,a.web_profile)
+                if any(gate['status']=='slot_occupied' for gate in report['gates'].values()):
+                    return 75
+                return int(any(gate['status']!='pass' for gate in report['gates'].values()))
             if a.action=='scale':
                 from .pdfscale import scale_command
                 return scale_command(a.pdf,a.specimen,a.language_data,a.out)
@@ -192,6 +262,15 @@ def main(argv=None):
         elif a.command=='sync' and a.action=='edition':
             from .syncedition import edition_command
             return edition_command(a.repo,a.ref,a.plan,CACHE,a.out)
+        elif a.command=='sync' and a.action=='accept':
+            from .syncaccept import accept
+            return accept(a.repo, a.ref, a.packet, a.review, a.build, a.out, CACHE)
+        elif a.command=='sync' and a.action=='verify':
+            from .syncverify import verify_product
+            return verify_product(a, CACHE)
+        elif a.command=='sync' and a.action=='release':
+            from .syncrelease import publish
+            return publish(a.job, a.out, a.publish)
         elif a.command=='sync':
             from .vendored import verify
             verify(a.repo,a.dir,commit(a.commit),CACHE,a.components,a.out)
@@ -203,7 +282,7 @@ def main(argv=None):
             assemble_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.check,book_ledger=a.book_ledger)
         elif a.command=='build':
             from .build import build_command
-            return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin,a.resume,book_ledger=a.book_ledger)
+            return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin,a.resume,book_ledger=a.book_ledger,web_profile=a.web_profile)
         elif a.command=='lint' and a.action in ('units','tokens'):
             from .unitlint import lint_units
             return lint_units(a.repo,a.ref,CACHE,a.out,a.english,a.olp_pin,a.scope,a.check,a.action=='tokens')

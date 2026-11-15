@@ -93,9 +93,18 @@ def vector_logo(pdf,page,rect,destination):
         raise ValueError('expected only the logo stroke and fill in the link area')
     drawings = page.get_drawings(extended=True)
     stroke,fill = [next(d for d in drawings if d.get('seqno')==i) for i,_ in operations]
+    # pdfTeX can add a small clickable margin to a graphic. Require the
+    # same isolated, pinned form and all its paint inside the link.
+    # xdvipdfmx serializes the annotation rectangle to three decimal places.
+    # The transformed form bounds retain more precision. Allow one final
+    # decimal unit for this comparison only; the painted paths must still
+    # fit wholly inside the unexpanded link rectangle below.
+    form_bounds = rect + (-0.001, -0.001, 0.001, 0.001)
     if not any(d['type']=='group' and d.get('opacity')==1 and d.get('isolated')
-               and d.get('blendmode')=='Normal'
-               and all(abs(a-b)<.002 for a,b in zip(d['rect'],rect)) for d in drawings):
+               and d.get('blendmode')=='Normal' and form_bounds.contains(d['rect'])
+               and all(abs(a-b)<4 for a,b in zip(d['rect'],rect))
+               and d['rect'].contains(stroke['rect']) and d['rect'].contains(fill['rect'])
+               for d in drawings):
         raise ValueError('logo form is not isolated in the link rectangle')
     if (stroke.get('type')!='s' or stroke.get('stroke_opacity')!=1
             or painted_rgb(stroke['color'])!=BLACK or stroke['items'][0][0]!='re'
@@ -106,6 +115,48 @@ def vector_logo(pdf,page,rect,destination):
     return {'kind':'pinned-vector-logo','form_stream_sha256':LOGO_FORM_SHA256,
             'foreground':BLACK,'background':WHITE,'paint_sequences':[i for i,_ in operations],
             'paint_contrast':contrast(BLACK,WHITE),'raster':rendered}
+
+
+def empty_line_end(page, rect, link, following, threshold):
+    """Recognize pdfTeX's empty end-of-line fragment before a linked label wraps."""
+    if not following or link['kind'] != 'internal' or following['destination'] != link['destination']:
+        return None
+    next_rect = fitz.Rect(following['rect'])
+    if (not 0 < rect.width <= 2.1 or next_rect.x1 >= rect.x0
+            or not -1 <= next_rect.y0 - rect.y1 <= 3 or not following['text'].strip()
+            or len(following['text_rgb']) != 1 or (following['minimum_contrast'] or 0) < threshold):
+        return None
+    pix = page.get_pixmap(matrix=fitz.Matrix(8,8),clip=rect,annots=False,
+                          colorspace=fitz.csGRAY,alpha=False)
+    if not pix.samples:
+        return None
+    overhang = []
+    if min(pix.samples) != 255:
+        # The preceding (unlinked) character can extend into pdfTeX's
+        # clickable padding. Bind that ink to an actual preceding text span.
+        operations = operations_in(page,rect)
+        if any(kind != 'fill-text' for _,kind in operations):
+            return None
+        for span in page.get_texttrace():
+            for code,_,origin,box in span['chars']:
+                bounds = fitz.Rect(box)
+                if not bounds.intersects(rect):
+                    continue
+                if (origin[0] >= rect.x0 or (bounds.x0+bounds.x1)/2 >= rect.x0
+                        or bounds.x1 > (rect.x0+rect.x1)/2+.02 or span.get('opacity')!=1
+                        or span['seqno'] not in {seq for seq,_ in operations}):
+                    return None
+                overhang.append(chr(code))
+        if not overhang:
+            return None
+        right = fitz.Rect((rect.x0+rect.x1)/2+.02,rect.y0,rect.x1,rect.y1)
+        right_ink = page.get_pixmap(matrix=fitz.Matrix(8,8),clip=right,annots=False,
+                                    colorspace=fitz.csGRAY,alpha=False)
+        if not right_ink.samples or min(right_ink.samples)!=255:
+            return None
+    return {'kind':'unpainted-line-end','page':link['page'],'index':link['index'],
+            'preceding_glyphs_in_padding':overhang,
+            'painted_continuation_index':following['index'],'destination':link['destination']}
 
 
 def measure_unresolved(path,observations,unknown,threshold):
@@ -124,6 +175,12 @@ def measure_unresolved(path,observations,unknown,threshold):
             reasons = {item['reason'] for item in entries}
             page = pdf[key[0]-1]
             rect = fitz.Rect(observation['rect'])
+            if reasons == {UNKNOWN_NO_TEXT}:
+                next_key = key[0],key[1]+1
+                blank = empty_line_end(page,rect,observation,observations.get(next_key),threshold)
+                if blank and next_key not in by_area:
+                    measurements.append(blank)
+                    continue
             try:
                 if reasons=={UNKNOWN_FILL} and len(observation['text_rgb'])==1:
                     result = flat_fill_link(page,rect,tuple(observation['text_rgb'][0]))

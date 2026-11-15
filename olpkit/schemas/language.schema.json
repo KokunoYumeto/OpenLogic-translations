@@ -1,6 +1,38 @@
 {
   "type": "object",
+  "$defs": {
+    "renderedSymbol": {
+      "type":"object", "additionalProperties":false,
+      "required":["text","font","gid","program_sha256"],
+      "properties": {
+        "text":{"type":"string","minLength":1,"maxLength":1},
+        "font":{"type":"string","minLength":1},
+        "gid":{"type":"integer","minimum":1},
+        "program_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+      }
+    }
+  },
   "properties": {
+    "tables": {
+      "type": "object", "additionalProperties": false,
+      "required": ["math", "text", "token_files"],
+      "properties": {
+        "math": {"const": "ltr"},
+        "text": {"enum": ["ltr", "rtl"]},
+        "token_files": {"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},
+        "symbol_mappings":{"type":"array","items":{"type":"object","additionalProperties":false,
+          "required":["command","english","target"],"properties":{
+            "command":{"type":"string","pattern":"^[A-Za-z]+$"},
+            "english":{"$ref":"#/$defs/renderedSymbol"},"target":{"$ref":"#/$defs/renderedSymbol"}
+          }}},
+        "proof_labels": {"type":"array","items":{"type":"object","additionalProperties":false,
+          "required":["command","english","target","path","sha256"],"properties":{
+            "command":{"type":"string","pattern":"^[A-Za-z]+$"},
+            "english":{"type":"string","minLength":1},"target":{"type":"string","minLength":1},
+            "path":{"type":"string","minLength":1},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+          }}}
+      }
+    },
     "schema_version": {
       "const": 1
     },

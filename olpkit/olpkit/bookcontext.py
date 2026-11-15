@@ -22,6 +22,13 @@ from .nativefigures import extract_native_figures
 
 def sha(data):return hashlib.sha256(data).hexdigest()
 
+PACKAGE_DECLARATIONS = {
+    'glossaries.sty': [br'\newcommand{\glssentencecase}[1]{\makefirstuc{#1}}'],
+    'natbib.sty': [br'\newcommand\NAT@open{(}', br'\newcommand\NAT@close{)}', br'\newcommand\NAT@sep{;}',
+                   br'\newcommand\NAT@aysep{,}', br'\newcommand\NAT@yrsep{,}', br'\newcommand\NAT@cmt{, }'],
+    'nameref.sty': [br'\def\NR@strip@period#1.\@empty#2\@nil{#1}'],
+}
+
 
 def display_inventory(text,settings,*,native_references=None):
     """Inspect ordinary displays while retaining native objects for later binding.
@@ -44,8 +51,9 @@ def display_inventory(text,settings,*,native_references=None):
 
 
 class BookInputs:
-    def __init__(self,source,profile):
+    def __init__(self,source,profile,*,released_declarations=None):
         self.root=Path(source).resolve();self.profile=profile
+        self.released_declarations=released_declarations
         self.assembly=json.loads((self.root/'ASSEMBLY.json').read_bytes())
         self.book=self.assembly['book_directory'];self.locale=self.assembly['locale'];self.inputs={}
         if profile['locale']!=self.locale:raise ValueError('export profile locale differs from assembly')
@@ -90,6 +98,18 @@ class BookInputs:
         if sha(data)!=row['sha256']:raise ValueError('native package changed: '+name)
         return data
 
+    def package_declarations(self,name):
+        signatures=PACKAGE_DECLARATIONS[name]
+        record={'source_sha256':self.profile['packages'][name]['sha256'],
+                'declaration_sha256':[sha(line) for line in signatures]}
+        if self.released_declarations is None:
+            data=self.package(name)
+            if any(line not in data for line in signatures):
+                raise ValueError('native package declaration changed: '+name)
+        elif self.released_declarations.get(name)!=record:
+            raise ValueError('released package declarations changed: '+name)
+        return record
+
 
 def _one(pattern,text,what):
     rows=list(re.finditer(pattern,text))
@@ -109,8 +129,8 @@ def source_caption(text,language,name):
     return next(value for value in row.groups() if value is not None)
 
 
-def build_context(source,profile):
-    inputs=BookInputs(source,profile);a=inputs.assembly;b=inputs.book
+def build_context(source,profile,*,released_declarations=None):
+    inputs=BookInputs(source,profile,released_declarations=released_declarations);a=inputs.assembly;b=inputs.book
     _,imports,lock=export_import_lock(a,profile)
     prior=inputs.witness_json('projection_receipt')
     original=inputs.witness_text('projection_source',prior['projected_sha256'])
@@ -160,9 +180,7 @@ def build_context(source,profile):
         if len(title_rows)>1:raise ValueError('native glossary title ambiguous')
         insertion=glossary_insertion(text,title_rows[0][1] if title_rows else None)
         title=insertion['title']
-        package=inputs.package('glossaries.sty')
-        if br'\newcommand{\glssentencecase}[1]{\makefirstuc{#1}}' not in package:
-            raise ValueError('native glossary case rule changed')
+        package=inputs.package_declarations('glossaries.sty')
         def sentence_case(value):
             first=value[:1]
             if not first or not (re.fullmatch('[a-zA-Z]',first) or first.upper()==first):
@@ -170,7 +188,7 @@ def build_context(source,profile):
             return first.upper()+value[1:]
         glossary,glossary_receipt=glossary_tex(entries,order,title,sentence_case=sentence_case,
             evidence={'source_sha256':sha(glossary_source.encode()),'native_gls_sha256':sha(inputs.witness('gls')),
-                      'helper_sha256':sha(helper.encode()),'sentence_case_package_sha256':sha(package)})
+                      'helper_sha256':sha(helper.encode()),'sentence_case_package_sha256':package['source_sha256']})
         glossary,glossary_tokens=tokens.expand(glossary,'book-glossary.tex')
         text=insert_glossary(text,insertion,glossary)
         glossary_receipt['insertion']=insertion
@@ -188,16 +206,14 @@ def build_context(source,profile):
     for photo in photos['photos']:
         if not any(photo['name']+'-small.png' in line and line.startswith('INPUT ') for line in recorder.splitlines()):
             raise ValueError('selected biography asset not present in native recorder')
-    package=inputs.package('natbib.sty')
-    for signature in [br'\newcommand\NAT@open{(}',br'\newcommand\NAT@close{)}',br'\newcommand\NAT@sep{;}',br'\newcommand\NAT@aysep{,}',br'\newcommand\NAT@yrsep{,}',br'\newcommand\NAT@cmt{, }']:
-        if signature not in package:raise ValueError('native citation punctuation changed')
+    package=inputs.package_declarations('natbib.sty')
     if r'\setcitestyle{authoryear}' not in inputs.text('sty/open-logic.sty'):
         raise ValueError('native author-year citation style absent')
     database_sources=bibliography_sources(profile['bibliography_source'])
     database_hashes={n:sha(inputs.bytes(n)) for n in database_sources}
     bbl=inputs.witness_text('bbl');citation_labels=read_citation_labels(native_aux)
     citation_evidence={'native_aux_sha256':sha(native_aux.encode()),'native_bbl_sha256':sha(bbl.encode()),
-        'package_sha256':sha(package),'actual_bib_sha256':next(iter(database_hashes.values())) if isinstance(profile['bibliography_source'],str) else database_hashes,
+        'package_sha256':package['source_sha256'],'actual_bib_sha256':next(iter(database_hashes.values())) if isinstance(profile['bibliography_source'],str) else database_hashes,
         'actual_bst_sha256':sha(inputs.bytes(profile['bibliography_style']))}
     bibliography=read_bibliography(bbl,citation_labels,evidence=citation_evidence)
     token_config=inputs.text(profile['token_base_source'])

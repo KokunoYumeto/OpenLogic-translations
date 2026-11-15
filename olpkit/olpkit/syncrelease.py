@@ -107,10 +107,39 @@ def gh(*args):
 
 def publish(job_path, out, public=False):
     job, snapshot, url, release = stage(job_path, out)
+    notes = (Path(job_path).resolve().parent / job["notes"]).read_text("utf-8-sig")
+    return publish_staged(snapshot, url, release, out, job["title"], notes, public)
+
+
+def publish_staged(snapshot, url, release, out, title, notes, public=False):
+    """Publish the exact files a product's verifier staged, preserving existing tags and assets."""
     out = Path(out).resolve()
+    validate_schema("release", release)
+    edition = contract(snapshot)
+    if (url != edition["repository"].removesuffix(".git") or snapshot.commit != release["commit"]
+            or release["edition"] != edition["locale"] or release["product_group"] not in edition["products"]
+            or any(edition["pins"].get(key) != pin for key, pin in release["pins"].items())):
+        raise ValueError("Staged release differs from the edition at its commit")
     repo = url.removeprefix("https://github.com/")
     tag = release["tag"]
+    if not re.fullmatch(r"https://github\.com/[\w.-]+/[\w.-]+", url) or not re.fullmatch(r"[a-z0-9][a-zA-Z0-9.-]*", tag):
+        raise ValueError("Invalid edition release destination or tag")
+    if json.loads((out / "release.json").read_bytes()) != release:
+        raise ValueError("Staged release manifest differs from the verified record")
+    ledger = release["unit_ledger"]
+    ledger_name = relative_path(ledger["path"]).as_posix()
+    if digest(snapshot.read_many([ledger_name])[ledger_name]) != ledger["sha256"]:
+        raise ValueError("Staged release refers to a different unit ledger")
+    if any(gate["status"] == "fail" for gate in release["gates"]):
+        raise ValueError("A failed release check must be resolved before publication")
     files = {r["name"]: r["sha256"] for r in release["assets"]}
+    if len({name.casefold() for name in files}) != len(release["assets"]) or "release.json" in {name.casefold() for name in files}:
+        raise ValueError("Duplicate or reserved release asset name")
+    for row in release["assets"]:
+        name = row["name"]
+        if (relative_path(name).name != name or row["url"] != url + "/releases/download/" + tag + "/" + quote(name)
+                or row["bytes"] != (out / name).stat().st_size or row["sha256"] != digest((out / name).read_bytes())):
+            raise ValueError("File no longer matches the verified release manifest: " + name)
     files["release.json"] = digest((out / "release.json").read_bytes())
     if not public:
         print(f"Staged {len(files)} files for {repo} at {tag}")
@@ -135,15 +164,14 @@ def publish(job_path, out, public=False):
         pages = json.loads(gh("api", "--paginate", "--slurp", endpoint + "/releases?per_page=100"))
         return next((r for page in pages for r in page if r["tag_name"] == tag), None)
     state = find_release()
-    notes = (Path(job_path).resolve().parent / job["notes"]).resolve()
     if state is None:
-        body = {"tag_name": tag, "target_commitish": snapshot.commit, "name": job["title"],
-                "body": notes.read_text("utf-8-sig"), "draft": True}
+        body = {"tag_name": tag, "target_commitish": snapshot.commit, "name": title,
+                "body": notes, "draft": True}
         state = json.loads(subprocess.check_output(
             ["gh", "api", "--method", "POST", endpoint + "/releases", "--input", "-"],
             input=json_bytes(body)))
-    if (not state or state["name"] != job["title"]
-            or (state["body"] or "").replace("\r\n", "\n").strip() != notes.read_text("utf-8-sig").strip()):
+    if (not state or state["name"] != title
+            or (state["body"] or "").replace("\r\n", "\n").strip() != notes.replace("\r\n", "\n").strip()):
         raise ValueError("existing release description differs")
     def asset_map():
         pages = json.loads(gh("api", "--paginate", "--slurp", endpoint + f"/releases/{state['id']}/assets?per_page=100"))

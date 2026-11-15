@@ -345,25 +345,35 @@ check(marathiV14.release === `${marathiCurrent.repository}/releases/tag/complete
 check(marathiV14.bounded_format_comparison.term_reference === "16.5.1"
   && marathiV14.bounded_format_comparison.html_and_epub_proof_text_equal,
   "Preserve the historical Marathi v1.4 corrected numbering specimen");
-check(marathiCurrentBytes.mode === "public" && marathiCurrentBytes.tag === "complete-v1.5"
+const marathiV15 = JSON.parse(await read("evidence/MARATHI_T15_COMPLETE_PUBLIC_READBACK_20261114.json"));
+check(marathiV15.mode === "public" && marathiV15.tag === "complete-v1.5"
+  && marathiV15.upstream_revision === marathiUpstream && namesMatch(marathiV15.assets, completeMarathiAssetNames)
+  && marathiV15.scope.pdf_pages === 953 && marathiV15.scope.source_units === 722
+  && marathiV15.scope.epub_content_documents === 98 && marathiV15.scope.epub_mathml_expressions === 40085,
+  "Historical Marathi v1.5 scope and downloads stay bound to the T15 receipt");
+const marathiCollection = marathiCurrent.products.find(product => product.product_group === "olp-complete");
+check(marathiCurrentBytes.mode === "public" && marathiCollection?.tag === marathiCurrentBytes.tag
+  && marathiCollection.commit === marathiCurrentBytes.commit && marathiCollection.pins.olp.commit === marathiCurrentBytes.upstream_revision
   && marathiCurrent.release_tag === marathiCurrentBytes.tag && marathiCurrent.release === marathiCurrentBytes.release
-  && /^[0-9a-f]{40}$/.test(marathiCurrentBytes.commit) && marathiCurrentBytes.upstream_revision === marathiUpstream
-  && namesMatch(marathiCurrentBytes.assets, completeMarathiAssetNames),
-  "Current Marathi release requires its own exact T15 public readback");
+  && marathiCollection.release_url === marathiCurrentBytes.release && /^[0-9a-f]{40}$/.test(marathiCurrentBytes.commit),
+  "Current Marathi collection must match its own public source pin, tag and receipt");
 check(marathiCurrent.ordered_downloads.map(file => file.format).join(",") === "PDF,TEX,ZIP,EPUB"
-  && marathiCurrent.readers[0].pages === 953 && marathiCurrentBytes.scope.pdf_pages === 953,
+  && marathiCurrent.readers[0].pages === marathiCurrentBytes.scope.pdf_pages && marathiCurrentBytes.scope.pdf_pages > 0,
   "Current Marathi reader and editable-source order");
 check(marathiCurrent.standalone_reader_units === 722 && marathiCurrent.epub_reader_units === 722
-  && marathiCurrentBytes.scope.source_units === 722 && marathiCurrentBytes.scope.epub_content_documents === 98
-  && marathiCurrentBytes.scope.epub_mathml_expressions === 40085,
+  && marathiCollection.source_units === 722 && marathiCollection.reader_units === 722
+  && marathiCurrentBytes.scope.source_units === 722 && marathiCurrentBytes.scope.chapters === 79 && marathiCurrentBytes.scope.sections === 613
+  && marathiCurrentBytes.scope.epub_content_documents >= marathiCurrentBytes.scope.chapters && marathiCurrentBytes.scope.epub_mathml_expressions > 0,
   "Current Marathi cumulative reader scope");
 check(marathiCurrent.release_facts.tag === marathiCurrentBytes.tag
   && !/^slc(?:-|$)/i.test(marathiCurrent.available_release.tag)
-  && namesMatch(marathiCurrent.release_facts.assets.filter(file=>file.name!=='release.json'), completeMarathiAssetNames)
-  && marathiCurrent.release_facts.assets.filter(file=>file.name!=='release.json').every(file => matchesMarathiAsset(marathiCurrentBytes.assets, file)),
-  "Current Marathi release discovery must preserve all eight original public assets alongside the verified release manifest");
-check(marathiCurrentBytes.assets.some(asset => asset.name === "RELEASE_MANIFEST.json"
-  && asset.url === marathiCurrent.evidence.release_manifest && asset.sha256 === marathiCurrent.evidence.release_manifest_sha256),
+  && namesMatch(marathiCurrentBytes.assets, [...marathiCollection.assets.map(file=>file.name), "release.json"])
+  && namesMatch(marathiCurrent.release_facts.assets, marathiCurrentBytes.assets.map(file=>file.name))
+  && marathiCurrent.release_facts.assets.every(file => matchesMarathiAsset(marathiCurrentBytes.assets, file)),
+  "Every current Marathi release file, including chapter sources, must match anonymous readback");
+check(marathiCurrentBytes.assets.some(asset => asset.name === "release.json"
+  && asset.url === marathiCurrent.evidence.release_manifest && asset.sha256 === marathiCurrent.evidence.release_manifest_sha256
+  && asset.sha256 === marathiCollection.manifest.sha256),
   "Current Marathi release manifest must match its public readback");
 const marathiHtmlDownloads = marathiCurrent.supplementary_downloads[0].downloads.filter(file => file.format === "HTML-ZIP");
 check(marathiHtmlDownloads.length === 1, "Current Marathi offline HTML ZIP must remain available");

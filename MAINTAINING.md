@@ -79,7 +79,11 @@ node scripts/generate-catalogue.mjs all --check
 npm run check
 ```
 
-Inspect the generated reader links and commit the corresponding hub files. Verify the public hub and direct downloads after the push. The Marathi textbook for the fixed upstream comparison is published with its 176 imported units, five downloads and release manifest. [Marathi textbook release](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/slc-2026-11-15). Legacy editions with missing pins, resource indexes or product profiles need those inputs before they can complete an unattended release.
+Inspect the generated reader links and commit the corresponding hub files. Verify the public hub and direct downloads after the push.
+
+The Marathi textbook uses 176 imported units. The complete Marathi collection at the same upstream revision covers 722 units. To reproduce the collection, unpack its editable source ZIP, regenerate the cumulative TeX with `python -X utf8 tools/prepare_complete.py`, then follow the Marathi build guide for the guarded PDF build, HTML, EPUB and their checks. The release manifest lists the output hashes, including those of the 79 editable chapter extracts. [Textbook](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/slc-2026-11-15) · [Complete collection](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/complete-2026-11-15) · [Collection build guide](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/complete-2026-11-15/publication/complete-source-mr.md).
+
+Legacy editions with missing pins, resource indexes or product profiles need those inputs before they can complete an unattended release.
 
 ## Daily notification
 

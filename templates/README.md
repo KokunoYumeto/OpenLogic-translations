@@ -19,6 +19,20 @@ The [catalogue](catalogue/editions.json) retains script profiles, source version
 
 [Script and register guide](catalogue/script-surfaces.json) · [Broader mathematics programme](https://openmaths.org/)
 
+## Edition builder (olpkit)
+
+The [`olpkit/`](olpkit/) folder holds olpkit, the shared tool that builds and checks the editions: it keeps the map from English source paths to translation units, plans updates when the English sources change, records each edition's source pins and unit metadata, compares the TeX structure of a translation with the English, and builds the readers from pinned sources. Its full history is kept in this repository. [`olpkit/README.md`](olpkit/README.md) describes each command.
+
+To install it and run its tests (Python 3.11 or later):
+
+```
+cd olpkit
+python -m pip install -e .
+python -B -m unittest discover -s tests
+```
+
+The olpkit code is dedicated to the public domain under [CC0 1.0](olpkit/LICENSE). The Open Logic texts it builds keep their own licences.
+
 <!-- releases:begin -->
 <!-- releases:end -->
 

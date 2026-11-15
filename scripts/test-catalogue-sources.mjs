@@ -59,7 +59,7 @@ test('README separates source, reader and EPUB scope and preserves native labels
   const rendered=editionTable({editions:[edition]});
   assert.match(rendered,/\| A \| 26 \| 7 \| — \|/);
   assert.ok(rendered.includes('[मराठी PDF](https://example.invalid/a.pdf)'));
-  assert.ok(rendered.includes('https://doi.org/10.1234/preserved'));
+  assert.ok(!rendered.includes('https://doi.org/10.1234/preserved'));
   assert.ok(!rendered.includes('sample.epub'));
   edition.source_units_translated=0;assert.match(editionTable({editions:[edition]}),/\| A \| 0 \| 7 \| — \|/);
 });

@@ -18,7 +18,7 @@ export function editionTable(catalogue) {
     else if(e.repository)resources.push(link(e.ui_labels?.repository||'GitHub',e.repository));
     if(e.public_source_checkpoint_commit)resources.push(link('Source',`${e.repository}/tree/${e.public_source_checkpoint_commit}`));
     for(const item of e.related_editions||[])if(item.url)resources.push(link(item.label||item.name||item.title||'↗',item.url));
-    if(e.version_doi)resources.push(link(e.ui_labels?.doi||'DOI',`https://doi.org/${e.version_doi}`));
+    // No DOI links: the Zenodo records were withdrawn on 3 November 2026 (DOIs stay in the data as records).
     const scope=`${count(e.source_units_translated)} | ${count(e.standalone_reader_units)} | ${count(e.epub_reader_units)}`;
     return `| ${text(e.name)} | ${scope} | ${downloads.join(' · ')||'—'} | ${resources.join(' · ')||'—'} |`;
   });

@@ -26,11 +26,46 @@ def table_context(node, row_cache):
     return key, descriptions, indexes[cell]
 
 
+def reading_regions(doc):
+    """A formula can depend on the exercise's premise or the glossary headword."""
+    regions = {}
+    locations = {}
+
+    def record(elements, kind, locator):
+        formulas = [m for e in elements for m in e.iter('math')]
+        if not formulas:
+            return
+        parts = [{'part': e.tag, 'text': text_without_annotations(e),
+                  'tex': [a.text or '' for a in e.xpath('.//math//annotation')]} for e in elements]
+        identity = digest(json_bytes([kind, locator, parts]))
+        regions[identity] = {'kind': kind, 'locator': locator,
+                             'text': '\n'.join(part['text'] for part in parts)}
+        for formula in formulas:
+            locations.setdefault(formula, []).append(identity)
+
+    for exercise in doc.xpath('//*[contains(concat(" ",normalize-space(@class)," ")," probd ")]'):
+        record([exercise], 'deferred-exercise', exercise.get('data-native-number') or exercise.get('id'))
+    for glossary in doc.xpath('//dl[contains(concat(" ",normalize-space(@class)," ")," olp-glossary ")]'):
+        group = []
+        for child in glossary:
+            if child.tag not in ('dt','dd'):
+                continue
+            if child.tag == 'dt' and group and group[-1].tag == 'dd':
+                record(group, 'glossary-entry', group[0].get('id'))
+                group = []
+            group.append(child)
+        if group:
+            record(group, 'glossary-entry', group[0].get('id'))
+    return regions, locations
+
+
 def index_formulas(reader_bytes, language):
     doc=html.document_fromstring(reader_bytes,parser=html.HTMLParser(encoding='utf-8',huge_tree=True))
     if doc.get('lang')!=language:raise ValueError('reader speech language differs')
     formulas={};order=[];contexts={};preceding=None
     row_cache={};table_rows={};table_locations={}
+    regions, formula_regions = reading_regions(doc)
+    region_locations = {}
     context_tags={'p','h1','h2','h3','h4','h5','h6','li','td','th','figcaption','caption'}
     for node in doc.iter():
         if node.get('data-unit-id'):preceding=node.get('data-unit-id')
@@ -50,6 +85,8 @@ def index_formulas(reader_bytes, language):
              'in_navigation':bool(node.xpath('ancestor::nav')),'display':node.get('display','inline')}
         if key not in formulas:formulas[key]={'tex':tex,'occurrence_ids':[]}
         formulas[key]['occurrence_ids'].append(row['occurrence_id']);order.append(row)
+        if node in formula_regions:
+            region_locations[row['occurrence_id']] = formula_regions[node]
         table = table_context(node, row_cache)
         if table is not None:
             row_key, cells, column = table
@@ -59,6 +96,7 @@ def index_formulas(reader_bytes, language):
             'reader_sha256':hashlib.sha256(reader_bytes).hexdigest(),'formulas':formulas,'occurrences':order,'contexts':contexts,
             'unique_formulas':len(formulas),'formula_occurrences':len(order),
             'table_context':{'rows':table_rows,'occurrences':table_locations},
+            'reading_regions':{'regions':regions,'occurrences':region_locations},
             'locator_limit':'A preceding import is a locator only. Deferred exercises, footnotes, book front/back matter and navigation require their actual source context.',
             'spoken_text_produced':False}
 
@@ -80,6 +118,8 @@ def bind_speech(reader_bytes, input_bytes, store_bytes):
         if current[key]!=packet[key]:raise ValueError('speech '+key+' changed; review required')
     if 'table_context' in packet and current['table_context'] != packet['table_context']:
         raise ValueError('speech table context changed; review required')
+    if 'reading_regions' in packet and current['reading_regions'] != packet['reading_regions']:
+        raise ValueError('speech reading region changed; review required')
     rules=store.get('rules',{});rows=store.get('formulas',{})
     if set(rows)!=set(packet['formulas']):raise ValueError('speech formula coverage differs')
     for key,rule in rules.items():

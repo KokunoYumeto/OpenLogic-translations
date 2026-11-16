@@ -5,7 +5,7 @@ from pathlib import Path
 
 from lxml import html
 from .assembly import digest, json_bytes
-from .formulaspeech import bind_speech, index_formulas, table_context
+from .formulaspeech import bind_speech, index_formulas, reading_regions, table_context
 from .xhtml import text_without_annotations
 
 
@@ -15,6 +15,8 @@ def full_context_keys(data, packet):
     blocks = {}
     table_rows = {}
     keys = []
+    regions = packet.get("reading_regions", {}).get("occurrences")
+    by_node = reading_regions(doc)[1] if regions is None else {}
     for node, row in zip(doc.xpath("//math"), packet["occurrences"], strict=True):
         block = next((p for p in node.iterancestors() if p.tag in contexts), node.getparent())
         if block not in blocks:
@@ -27,7 +29,8 @@ def full_context_keys(data, packet):
         table = table_context(node, table_rows)
         position = (table[0], table[2]) if table else None
         keys.append((row["formula_sha256"], row["preceding_import_locator"], blocks[block],
-                     row["context_id"], row["in_navigation"], row["display"], position))
+                     row["context_id"], row["in_navigation"], row["display"], position,
+                     tuple(by_node.get(node, ()) if regions is None else regions.get(row["occurrence_id"], ()))))
     return keys
 
 
@@ -43,8 +46,10 @@ def speech_delta(old_html, old_packet_bytes, old_store_bytes, new_html):
             raise ValueError("previous speech packet does not reproduce: " + key)
     if "table_context" in old and old_replay["table_context"] != old["table_context"]:
         raise ValueError("previous speech packet does not reproduce: table_context")
+    if "reading_regions" in old and old_replay["reading_regions"] != old["reading_regions"]:
+        raise ValueError("previous speech packet does not reproduce: reading_regions")
     new = index_formulas(new_html, old["language"])
-    old_keys = full_context_keys(old_html, old)
+    old_keys = full_context_keys(old_html, old_replay)
     new_keys = full_context_keys(new_html, new)
     groups = defaultdict(list)
     targets = defaultdict(list)

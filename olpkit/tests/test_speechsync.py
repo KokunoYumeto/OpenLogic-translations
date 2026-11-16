@@ -47,6 +47,26 @@ class SpeechSyncTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'table_context'):
             speech_delta(reader, previous_bytes, json_bytes(store), reader)
 
+    def test_readings_follow_the_exercise_definition_and_glossary_headword(self):
+        math = '<math><mi>x</mi><annotation encoding="application/x-tex">x</annotation></math>'
+        reader = ('<html lang="xx"><body><div class="probd" data-native-number="2.4">'
+                  '<p>Let x denote a cell.</p><p>' + math + '</p></div>'
+                  '<dl class="olp-glossary"><dt id="a">Stroke</dt><dd><p>' + math + '</p></dd>'
+                  '<dt id="b">Word</dt><dd>' + math + '</dd></dl><p>' + math + '</p></body></html>').encode()
+        packet = index_formulas(reader, 'xx')
+        regions = packet.pop('reading_regions')
+        self.assertEqual(len(regions['regions']), 3)
+        for i, locator in enumerate(('2.4','a','b'), 1):
+            key, = regions['occurrences'][f'formula-{i:06d}']
+            self.assertEqual(regions['regions'][key]['locator'], locator)
+        previous_bytes = json_bytes(packet)
+        store = json.loads(self.store)
+        store.update(input_sha256=digest(previous_bytes), reader_sha256=digest(reader))
+        after = reader.replace(b'a cell', b'an input').replace(b'>Stroke<', b'>Alphabet<')
+        _, delta = speech_delta(reader, previous_bytes, json_bytes(store), after)
+        self.assertEqual(delta['review_required'], ['formula-000001', 'formula-000002'])
+        self.assertEqual(set(delta['reused']), {'formula-000003','formula-000004'})
+
     def test_variant_follows_context_when_number_changes(self):
         packet, delta = speech_delta(self.old, self.packet, self.store, self.new)
         self.assertEqual(delta['review_required'], ['formula-000001'])

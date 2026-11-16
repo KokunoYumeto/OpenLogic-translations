@@ -171,8 +171,12 @@ assembled book. It extracts active TikZ outside definitions/verbatim, prepares
 one batch using the actual book preamble, and binds vector exports to source
 and recorder hashes. It uses the shared TeX mutex and capped process runner;
 an occupied slot returns without starting an engine or copying the source tree.
-For SLC, 19 diagrams are prepared. The first attempt found the slot occupied;
-no native PDF/SVG or visual acceptance is claimed yet.
+Set `preserve_float_typography` to `true` in the figure profile for a book whose
+class sets type size or line spacing inside floats. The exporter applies the
+class's float settings to diagrams inside `figure` and `table` environments,
+including their starred forms. The individual editable figure files retain
+their exact source. Compare a multiline label with its printed counterpart
+when checking the exported figures.
 
 Reusing the recovered Turing renderer unchanged would be wrong here: its
 fixed blank/stroke symbols are `0`/`1`, whereas the SLC book configuration uses

@@ -9,6 +9,14 @@ from olpkit.nativefigures import extract_tikz,extract_native_figures, export_nat
 
 
 class NativeFigureTests(unittest.TestCase):
+    def test_float_typography_preserves_source_and_skips_literal_float_commands(self):
+        picture = r'\begin{tikzpicture}\node{A};\end{tikzpicture}'
+        source = (r'\newcommand{\unused}{\begin{figure}}' + picture
+                  + r'\begin{figure*}\verb|\end{figure*}|' + picture + r'\end{figure*}'
+                  + r'\begin{verbatim}\begin{figure}\end{verbatim}' + picture)
+        rows = extract_native_figures(source, preserve_float_typography=True)
+        self.assertEqual([r.get('float_environment') for r in rows], [None, 'figure*', None])
+        self.assertEqual([r['source_tex'] for r in rows], [picture]*3)
     def test_tableau_branches_justifications_and_closures_are_exact_source(self):
         tableau=r'\begin{oltableau}[A, just={Hypothesis}[B, close][C[D, close]]]\end{oltableau}'
         tikz=r'\begin{tikzpicture}\node{x};\end{tikzpicture}'
@@ -68,6 +76,17 @@ class NativeFigureResumeTests(unittest.TestCase):
     def export(self, **kwargs):
         return export_native_figures(self.source, {}, self.picture, 'driver.tex', self.output,
                                      epoch=123, context_evidence={'checked': 'native'}, **kwargs)
+
+    def test_float_reset_is_scoped_to_the_export_batch(self):
+        original = self.picture
+        self.picture = r'\begin{figure*}' + original + r'\end{figure*}' + original
+        result = self.export(preserve_float_typography=True)
+        batch = (self.output/'native-figures.tex').read_text()
+        self.assertEqual(batch.count(r'\csname @floatboxreset\endcsname'), 1)
+        self.assertIn(r'\expandafter\def\csname @captype\endcsname{figure}', batch)
+        self.assertIn(original+'\n'+r'\endgroup'+'\n\n'+original, batch)
+        for row in result['figures']:
+            self.assertEqual((self.output/row['source_file']).read_text(), original)
 
     def test_resume_preserves_receipt_and_prepared_files(self):
         self.export()

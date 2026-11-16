@@ -14,7 +14,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from .build import verify_assembly, log_checks
-from .macrophases import COMMAND, group, mask_comments
+from .macrophases import COMMAND, group, mask_comments, skip_space
 from .process import TeXSlot, run_job, MEMORY_LIMIT, TEX_MUTEX
 from .recorder import read_inputs, input_hashes
 from .selective import definition_end, environment_end
@@ -26,13 +26,14 @@ def sha(data): return hashlib.sha256(data).hexdigest()
 NATIVE_ENVIRONMENTS = ('tikzpicture', 'oltableau')
 
 
-def extract_native_figures(text, environments=NATIVE_ENVIRONMENTS):
+def extract_native_figures(text, environments=NATIVE_ENVIRONMENTS, *, preserve_float_typography=False):
     """Keep definition bodies/verbatim opaque and exact active source slices."""
     if (not environments or len(set(environments))!=len(environments)
             or not set(environments)<=set(NATIVE_ENVIRONMENTS)):
         raise ValueError('unsupported native figure environments')
     code = mask_comments(text)
     rows = []
+    float_environment = None
     pos = 0
     while pos < len(code):
         if code[pos] != '\\':
@@ -52,8 +53,18 @@ def extract_native_figures(text, environments=NATIVE_ENVIRONMENTS):
             if end < 0: raise ValueError('unclosed figure-stage verbatim')
             pos = end+1
             continue
+        if preserve_float_typography and match[1] == 'end' and float_environment:
+            at = skip_space(code, pos)
+            if code[at:at+1] == '{' and group(code, at)[0] == float_environment:
+                float_environment = None
+            continue
         if match[1] != 'begin': continue
         env, at = group(code, pos)
+        if preserve_float_typography and env in ('figure', 'figure*', 'table', 'table*'):
+            if float_environment:
+                raise ValueError('nested floats in native figure input')
+            float_environment = env
+            continue
         if env not in (*environments, 'verbatim', 'Verbatim', 'lstlisting', 'minted'): continue
         _, end = environment_end(code, at, env)
         if env in environments:
@@ -62,6 +73,8 @@ def extract_native_figures(text, environments=NATIVE_ENVIRONMENTS):
                          'line': text[:start].count('\n')+1,
                          'source_sha256': sha(source.encode('utf-8')), 'source_tex': source,
                          'environment':env})
+            if float_environment:
+                rows[-1]['float_environment'] = float_environment
         pos = end
     return rows
 
@@ -109,14 +122,18 @@ def figures_command(source, context_path, profile_path, output, *, resume=False)
         raise ValueError('invalid native figure source date epoch')
     evidence={**profile['configuration_evidence'],'profile_sha256':sha(profile_bytes),
               'context_input_sha256':sha(context_bytes),'verified_witnesses':witnesses}
+    preserve = profile.get('preserve_float_typography', False)
+    if not isinstance(preserve, bool):
+        raise ValueError('preserve_float_typography must be a boolean')
     result=export_native_figures(folder,assembly,text,driver,output,epoch=epoch,
-        context_evidence=evidence,engine=profile['engine'],resume=resume,environments=tuple(environments))
+        context_evidence=evidence,engine=profile['engine'],resume=resume,environments=tuple(environments),
+        preserve_float_typography=preserve)
     print(json.dumps({key:result.get(key) for key in ('status','tex_runs','mutex_acquired','pdf','error')}))
     return 0 if result['status']=='vectors_exported_pending_visual_and_semantic_checks' else 2
 
 
 def export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence,
-                          engine='pdflatex', resume=False, environments=('tikzpicture',)):
+                          engine='pdflatex', resume=False, environments=('tikzpicture',), preserve_float_typography=False):
     """Serialize one output directory; resume only a proven unstarted attempt."""
     if engine not in PREVIEW_BACKENDS:
         raise ValueError('unsupported native figure engine: '+engine)
@@ -130,12 +147,13 @@ def export_native_figures(folder, assembly, source, driver, output, *, epoch, co
     try:
         return _export_native_figures(folder, assembly, source, driver, output,
                                       epoch=epoch, context_evidence=context_evidence,
-                                      engine=engine, resume=resume,environments=environments)
+                                      engine=engine, resume=resume,environments=environments,
+                                      preserve_float_typography=preserve_float_typography)
     finally:
         lock.unlink()
 
 
-def _export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, engine, resume,environments=('tikzpicture',)):
+def _export_native_figures(folder, assembly, source, driver, output, *, epoch, context_evidence, engine, resume,environments=('tikzpicture',), preserve_float_typography=False):
     """Export exact active native figures under a verified book configuration.
 
     context_evidence must identify the actual applied configuration and local
@@ -150,7 +168,10 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
     verify_assembly(folder, assembly)
     original = native_driver.read_text(encoding='utf-8-sig')
     if original.count(r'\begin{document}') != 1: raise ValueError('ambiguous native book preamble')
-    figures = extract_tikz(source) if tuple(environments)==('tikzpicture',) else extract_native_figures(source,environments)
+    figures = extract_native_figures(source,environments,preserve_float_typography=preserve_float_typography)
+    if tuple(environments)==('tikzpicture',):
+        for row in figures:
+            del row['environment']
     if not figures: raise ValueError('no active native figures in selected environments')
     output.mkdir(parents=True, exist_ok=True)
     receipt_path = output / 'NATIVE_FIGURES.json'
@@ -161,9 +182,20 @@ def _export_native_figures(folder, assembly, source, driver, output, *, epoch, c
     preamble = original.split(r'\begin{document}', 1)[0]
     job = 'native-figures'
     backend = PREVIEW_BACKENDS[engine]
+    batch_figures = []
+    for row in figures:
+        fragment = row['source_tex']
+        if row.get('float_environment'):
+            # Apply the book class's own font and line-spacing reset locally.
+            # A real float would move the cropped preview to a different page.
+            captype = row['float_environment'].rstrip('*')
+            fragment = '\n'.join((r'\begingroup',
+                                  r'\expandafter\def\csname @captype\endcsname{'+captype+'}',
+                                  r'\csname @floatboxreset\endcsname', fragment, r'\endgroup'))
+        batch_figures.append(fragment)
     batch = (preamble + '\n' + r'\usepackage[active,tightpage,' + backend + r']{preview}' + '\n' +
              '\n'.join(r'\PreviewEnvironment{'+env+'}' for env in environments) + '\n' + r'\setlength\PreviewBorder{2pt}' + '\n' +
-             r'\begin{document}' + '\n' + '\n\n'.join(row['source_tex'] for row in figures) +
+             r'\begin{document}' + '\n' + '\n\n'.join(batch_figures) +
              '\n' + r'\end{document}' + '\n')
     tex = output / (job + '.tex')
     prepared = {tex.name: batch.encode('utf-8')}

@@ -50,6 +50,8 @@ Verify other affected products against their own builds before release.
 
 ## Update spoken mathematics after editing a textbook
 
+For the Marathi textbook, download the [speech inputs for the edition you are updating](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/tree/main/publication/speech-inputs). Its archive includes the ordinary HTML, occurrence packet, reviewed Marathi readings and source map used by the commands below.
+
 Build the revised textbook and generate its numbered HTML. Use the ordinary
 HTML files immediately before speech binding for both versions. Keep the old
 occurrence packet, speech store and source map together. The previous EPUB or

@@ -253,7 +253,11 @@ def probe_build(build_dir):
                 continue
         if not path.exists():
             path.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source / relative, path)
+            if path.suffix.lower() in {".otf", ".ttf"}:
+                # LuaTeX uses the font mtime when generating its shared HarfBuzz cache.
+                shutil.copy2(source / relative, path)
+            else:
+                shutil.copyfile(source / relative, path)
     assembly["purpose"] = "private rendered-cell measurement"
     verify_assembly(tree, assembly)
     assembly_path = tree / "ASSEMBLY.json"

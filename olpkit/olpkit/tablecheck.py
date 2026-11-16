@@ -238,6 +238,17 @@ def compare_tables(english, translation, policy, expander, block, native_pdf, de
             "confirmed_corrections":[{"location":k,"id":v} for k,v in sorted(corrections.items())]}
 
 
+def verify_proof_label_sources(labels, files, recorder_inputs):
+    recorded = {(row["path"], row["sha256"]) for row in recorder_inputs
+                if row["kind"] == "assembled-tree"}
+    for label in labels:
+        path = label["path"]
+        source_hash = files.get(path, {}).get("sha256")
+        allowed = (label["sha256"], *label.get("other_source_sha256", ()))
+        if source_hash not in allowed or (path, source_hash) not in recorded:
+            raise ValueError("proof-label policy differs from the TeX input actually read")
+
+
 def table_gate(output, assembly, build, english_dir):
     english_dir=Path(english_dir).resolve()
     en_build=json.loads((english_dir/"BUILD.json").read_bytes())
@@ -248,6 +259,7 @@ def table_gate(output, assembly, build, english_dir):
     profile=tomllib.loads((ROOT/"data/languages"/(assembly["locale"]+".toml")).read_text("utf-8"))
     if "tables" not in profile:
         return {"status":"incomplete","reason":"language table policy not configured"}
+    verify_proof_label_sources(profile["tables"].get("proof_labels", ()), assembly["files"], build["recorder_inputs"])
     en=probe_build(english_dir)
     if en.get("status")=="slot_occupied":return en
     tr=probe_build(output)
@@ -261,12 +273,6 @@ def table_gate(output, assembly, build, english_dir):
         if name not in assembly["files"]:
             raise ValueError("locale token file missing from assembly: "+name)
         tokens.configure((root/relative).read_text("utf-8-sig"),name)
-    for label in profile["tables"].get("proof_labels",[]):
-        name=label["path"]
-        if (assembly["files"].get(name,{}).get("sha256")!=label["sha256"]
-                or not any(r["kind"]=="assembled-tree" and r["path"]==name
-                           and r["sha256"]==label["sha256"] for r in build["recorder_inputs"])):
-            raise ValueError("proof-label policy differs from the TeX input actually read")
     import fitz
     with (fitz.open(output / relative_path(build["pdf"]["path"])) as pdf,
           fitz.open(english_dir / relative_path(en_build["pdf"]["path"])) as english_pdf):

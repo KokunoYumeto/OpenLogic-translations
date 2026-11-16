@@ -1,4 +1,7 @@
 import unittest
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from lxml import html
@@ -6,9 +9,45 @@ from lxml import html
 from olpkit.assembly import digest
 from olpkit.bookcontext import BookInputs, PACKAGE_DECLARATIONS
 from olpkit.speechreplay import original_source_locators, replay_labels
+from olpkit.webreplay import rebuild
 
 
 class ReleasedWebTests(unittest.TestCase):
+    def test_replay_uses_the_released_product_and_preserves_older_speech_editions(self):
+        class ExportReached(Exception):
+            pass
+
+        def check_export(source, product, stage, config, *, released_speech, replay):
+            self.assertEqual(product, expected)
+            self.assertTrue(replay)
+            self.assertEqual(released_speech, {"labels": []} if with_speech else None)
+            raise ExportReached
+
+        cases = [({}, True, "accessible"), ({"product": "epub"}, False, "epub"),
+                 ({"product": "accessible"}, False, None), ({"product": "epub"}, True, None)]
+        for fields, with_speech, expected in cases:
+            with self.subTest(fields=fields, with_speech=with_speech), TemporaryDirectory() as tmp:
+                root = Path(tmp) / "source"
+                web = root / "web"
+                web.mkdir(parents=True)
+                jar = Path(tmp) / "epubcheck.jar"
+                jar.write_bytes(b"checker")
+                (web / "profile.json").write_text(json.dumps({"epubcheck": {
+                    "path": jar.name, "sha256": digest(jar.read_bytes())}}))
+                inputs = {"web/profile.json": digest((web / "profile.json").read_bytes())}
+                if with_speech:
+                    speech = web / "speech.json"
+                    speech.write_text('{"labels": []}')
+                    inputs["web/speech.json"] = digest(speech.read_bytes())
+                (root / "WEB-EDITION.json").write_text(json.dumps({**fields, "inputs": inputs}))
+                with patch("olpkit.webreplay.project_source"), patch("olpkit.webreplay.export_web", check_export):
+                    if expected is None:
+                        with self.assertRaisesRegex(ValueError, "speech input inventory"):
+                            rebuild(root, Path(tmp) / "readers", jar)
+                    else:
+                        with self.assertRaises(ExportReached):
+                            rebuild(root, Path(tmp) / "readers", jar)
+
     def test_speech_replay_checks_context_formula_and_final_bound_bytes(self):
         reader = b'<html lang="mr"><body><p>A <math><annotation encoding="text/x-tex">x</annotation></math></p></body></html>'
         doc = html.document_fromstring(reader)

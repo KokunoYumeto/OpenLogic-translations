@@ -26,6 +26,7 @@ NUMBERED_SUMMARY = re.compile(
     r'(\\edef\s*\\slcSummaryFile\s*\{)include/summary-(\\number\s*\\value\{chapter\}\.tex)(\})'
 )
 DISPATCH = r'''\makeatletter
+\def\olpkitLocalImport{\olimport}
 \NewDocumentCommand \olpkitEmbeddedImport {m O{section}}{%
   \begingroup
   \def\ol@sectioncs{#2}%
@@ -71,7 +72,11 @@ def retarget_imports(text, source_path, modules, excluded):
             # Preserve the conditional branch. Execution is an error, never silent omission.
             excluded.add((source_path, target))
             return r'\olpkitMissingImport{' + target + '}'
-        return r'\olpkitEmbeddedImport{' + modules[target] + '}' + ('[' + section + ']' if section else '')
+        suffix = '[' + section + ']' if section else ''
+        if directory is None:
+            # With files side by side, the native import can preserve TeX's end-of-paragraph glue.
+            return r'\olpkitLocalImport' + (star or '') + '{' + modules[target] + '}' + suffix
+        return r'\olpkitEmbeddedImport{' + modules[target] + '}' + suffix
     changed=code_lines(text, lambda line: IMPORT.sub(replace, line))
     if re.search(r'\\olimport\b',without_comments(changed)):
         raise ValueError('unparsed import in '+source_path)

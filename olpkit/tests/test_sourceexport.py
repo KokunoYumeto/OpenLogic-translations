@@ -40,18 +40,18 @@ class SourceExportTests(unittest.TestCase):
         excluded=set();modules={'content/a/one.tex':'one.tex'}
         text=r'\iftag{x}{\olimport{one}[chapter]}{\olimport{other}}'
         changed=retarget_imports(text,'content/a/a.tex',modules,excluded)
-        self.assertEqual(changed,r'\iftag{x}{\olpkitEmbeddedImport{one.tex}[chapter]}{\olpkitMissingImport{content/a/other.tex}}')
+        self.assertEqual(changed,r'\iftag{x}{\olpkitLocalImport{one.tex}[chapter]}{\olpkitMissingImport{content/a/other.tex}}')
         self.assertEqual(excluded,{('content/a/a.tex','content/a/other.tex')})
 
     def test_comments_and_escaped_percent_remain_exact(self):
         text='\\% \\olimport{one}% \\olimport{wrong}\n\\\\% \\olimport{wrong}\n'
         result=retarget_imports(text,'content/a.tex',{'content/one.tex':'one.tex'},set())
-        self.assertEqual(result,'\\% \\olpkitEmbeddedImport{one.tex}% \\olimport{wrong}\n\\\\% \\olimport{wrong}\n')
+        self.assertEqual(result,'\\% \\olpkitLocalImport{one.tex}% \\olimport{wrong}\n\\\\% \\olimport{wrong}\n')
 
     def test_starred_and_about_imports_keep_source_identity(self):
         names={'content/a/one.tex':'one.tex','content/open-logic-about.tex':'about.tex'}
         text=r'\olimport*[a]{one}\olimport*{\olpath/locale/\ollangid/content/open-logic-about}'
-        self.assertEqual(retarget_imports(text,'',names,set()),r'\olpkitEmbeddedImport{one.tex}\olpkitEmbeddedImport{about.tex}')
+        self.assertEqual(retarget_imports(text,'',names,set()),r'\olpkitEmbeddedImport{one.tex}\olpkitLocalImport*{about.tex}')
         with self.assertRaisesRegex(ValueError,'escapes|unsafe'):
             retarget_imports(r'\olimport*[../../]{secret}','',names,set())
 
@@ -109,7 +109,9 @@ class SourceExportTests(unittest.TestCase):
             self.assertIn(b'The full preface.',body);self.assertIn(b'$P(x)$',body)
             self.assertNotIn(b'NOT SCREEN CONTENT',body)
             self.assertEqual(report['units'],1);self.assertEqual(report['book_files'],3)
-            self.assertNotIn(b'\\olimport',body)
+            native_dispatch = br'\def\olpkitLocalImport{\olimport}'
+            self.assertEqual(body.count(native_dispatch), 1)
+            self.assertNotIn(br'\olimport', body.replace(native_dispatch, b''))
             with self.assertRaisesRegex(ValueError,'export driver differs'):
                 cumulative(root,assembly,[('OLP-0001','content/a.tex')],dict(profile,driver='il-screen.tex'))
             (root/'locale/xx/content/a.tex').write_text('changed')

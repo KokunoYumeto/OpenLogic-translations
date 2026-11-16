@@ -13,7 +13,7 @@ from .webfonts import bind_web_fonts
 from .webprofile import load_profile
 
 
-def export_web(source,product,out,profile_path,*,check_numbers=False,check_speech=False,released_speech=None):
+def export_web(source,product,out,profile_path,*,check_numbers=False,check_speech=False,released_speech=None,replay=False):
     source=Path(source).resolve();out=Path(out).resolve()
     if out.exists():raise ValueError('web export output already exists')
     if out.is_relative_to(source):raise ValueError('export must not modify its frozen source tree')
@@ -23,7 +23,8 @@ def export_web(source,product,out,profile_path,*,check_numbers=False,check_speec
         raise ValueError('released speech replay is only available for reproducing an accessible edition')
     if not profile_path:raise ValueError('web export requires an explicit language/native-witness profile')
     profile_path=Path(profile_path);profile=load_profile(profile_path)
-    declarations = profile['released_package_declarations'] if released_speech is not None else None
+    replay = replay or released_speech is not None
+    declarations = profile['released_package_declarations'] if replay else None
     inputs=BookInputs(source,profile,released_declarations=declarations)
     context=build_context(source,profile,released_declarations=declarations)
     # Incomplete diagram batches fail before creating a misleading reader.
@@ -75,7 +76,7 @@ def export_web(source,product,out,profile_path,*,check_numbers=False,check_speec
         if not p.is_relative_to(out):raise ValueError('reader resource escapes output')
         assets[name]=p.read_bytes()
     unit_rows = context['projection']['unit_order']
-    if released_speech is not None:
+    if replay:
         from .speechreplay import original_source_locators
         unit_rows = original_source_locators(unit_rows, profile['released_unit_sources'])
     data,html_report=reader_html(html.tostring(doc,encoding='utf-8'),ep,unit_rows,assets)

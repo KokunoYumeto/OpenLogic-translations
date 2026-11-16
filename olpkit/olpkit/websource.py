@@ -109,6 +109,9 @@ def assemble(project, build_dir, profile_path, source_export, web_export, licenc
     assembly = json.loads(checked(build_dir / "source/ASSEMBLY.json", build["assembly_sha256"]))
     pdf_export = json.loads(source_export.read_bytes())
     report = json.loads(web_export.read_bytes())
+    product = report["product"]
+    if product not in ("epub", "accessible"):
+        raise ValueError("a source bundle requires the HTML reader and a validated EPUB")
     if (pdf_export["assembly_sha256"] != build["assembly_sha256"] or report["assembly_sha256"] != build["assembly_sha256"]
             or pdf_export["package"]["pdf_sha256"] != build["pdf"]["sha256"]
             or digest(Path(profile_path).read_bytes()) != report["profile_sha256"]):
@@ -172,14 +175,17 @@ def assemble(project, build_dir, profile_path, source_export, web_export, licenc
         original = json.loads(checked(row["path"], row["sha256"]))
         descriptions = {key: fields(desc, ["source_sha256", "occurrence_indices", "alt_text", "long_description"])
                         for key, desc in original["descriptions"].items()}
-        write(role, role + ".json", json_bytes({**fields(original, ["language", "provenance", "labels"]),
-                                                "descriptions": descriptions}))
+        metadata = fields(original, ["language", "labels"])
+        if "provenance" in original:
+            metadata["provenance"] = original["provenance"]
+        write(role, role + ".json", json_bytes({**metadata, "descriptions": descriptions}))
     profile["witnesses"] = witnesses
     profile["figure_exports"] = copy_figure_batches(profile, web)
     profile["packages"] = {name: {"sha256": row["sha256"]} for name, row in profile["packages"].items()}
     profile["epubcheck"]["path"] = "epubcheck.jar"
     (web / "profile.json").write_bytes(json_bytes(profile))
-    (web / "speech.json").write_bytes(json_bytes(reader_speech(web_export.parent, report)))
+    if product == "accessible":
+        (web / "speech.json").write_bytes(json_bytes(reader_speech(web_export.parent, report)))
     copy_replay_tool(project / "builder", assembly, profile, licence)
     (project / "README.md").write_bytes(Path(instructions).read_bytes())
     (project / "rebuild_web.py").write_text(
@@ -198,7 +204,7 @@ def assemble(project, build_dir, profile_path, source_export, web_export, licenc
         offline = Path(temp) / "reader-html.zip"
         package_html_reader(web_export, offline)
         outputs["reader-html.zip"] = digest(offline.read_bytes())
-    document = {"schema": "olpkit.released-web-source.v1", "outputs": outputs, "inputs": {
+    document = {"schema": "olpkit.released-web-source.v1", "product": product, "outputs": outputs, "inputs": {
         p.relative_to(project).as_posix(): digest(p.read_bytes()) for p in sorted(project.rglob("*")) if p.is_file()}}
     (project / "WEB-EDITION.json").write_bytes(json_bytes(document))
 

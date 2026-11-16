@@ -49,7 +49,13 @@ def rebuild(root, destination, jar):
         raise ValueError("EPUBCheck JAR differs from this edition's version")
     profile["epubcheck"]["path"] = str(jar.resolve())
     source = root / "source"
-    labels = json.loads((root / "web/speech.json").read_bytes())
+    # Earlier source packages always contained reviewed speech labels.
+    product = release.get("product", "accessible")
+    if product not in ("epub", "accessible"):
+        raise ValueError("unknown released web product")
+    if (product == "accessible") != ("web/speech.json" in release["inputs"]):
+        raise ValueError("speech input inventory differs from the released product")
+    labels = json.loads((root / "web/speech.json").read_bytes()) if product == "accessible" else None
     destination = destination.resolve()
     if destination.is_relative_to(root) or destination.exists():
         raise ValueError("choose a new output directory outside the source package")
@@ -60,7 +66,7 @@ def rebuild(root, destination, jar):
         config = scratch / "profile.json"
         config.write_bytes(json_bytes(profile))
         stage = scratch / "output"
-        export_web(source, "accessible", stage, config, released_speech=labels)
+        export_web(source, product, stage, config, released_speech=labels, replay=True)
         public = scratch / "readers"
         public.mkdir()
         package_html_reader(stage / "EXPORT.json", public / "reader-html.zip")

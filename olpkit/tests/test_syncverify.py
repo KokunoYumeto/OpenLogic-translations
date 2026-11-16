@@ -2,12 +2,24 @@ import json
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from olpkit.assembly import digest
-from olpkit.syncverify import checked_file, standalone_evidence, verify_projected_units, web_assets
+from olpkit.syncverify import checked_file, standalone_evidence, verify_projected_units, verify_pinned_product, web_assets
 
 
 class SyncVerificationTests(unittest.TestCase):
+
+    def test_pinned_product_rejects_a_different_revision_before_artifact_checks(self):
+        args = SimpleNamespace(repo="edition", ref="candidate", olp_pin="a"*40)
+        with patch("olpkit.syncverify.GitSnapshot"), patch("olpkit.syncverify.contract",
+                return_value={"pins": {"olp": {"commit": "b"*40}}}), patch(
+                "olpkit.syncverify.verify_edition_artifacts") as verify:
+            with self.assertRaisesRegex(ValueError, "committed edition pin"):
+                verify_pinned_product(args, Path("cache"))
+            verify.assert_not_called()
+
 
     def test_ordinary_epub_and_spoken_edition_require_distinct_evidence(self):
         with TemporaryDirectory() as folder:

@@ -66,6 +66,14 @@ For a migrated textbook, complete `olpkit sync accept`, build the native and acc
 
 For an ordinary HTML and EPUB edition, use the `epub` product for web export and packaging. Pass `--web-product epub` to `olpkit build`, `olpkit check build` and `olpkit sync verify`. These checks bind the EPUB to the native book’s imports and numbering and require a clean EPUBCheck report. For the accessible edition, use `accessible` throughout. Verification defaults to this edition and requires a spoken reading for every formula. Each source ZIP must reproduce its own edition.
 
+To publish a textbook at an already recorded upstream revision, run the following after rebuilding both editable PDF entry points and verifying the web edition. Use the full upstream commit from the edition’s `olp-edition.toml`. This checks the source and translation ledger, the book’s imports, every native build check, the editable sources and the actual web files.
+
+```sh
+olpkit check product --repo EDITION --ref EDITION_COMMIT --olp-pin UPSTREAM_COMMIT --build BUILD_DIR --source-export SOURCE_EXPORT_JSON --package-check PACKAGE_CHECK_JSON --web-product epub --out verified.json
+```
+
+Use this receipt as the `verified` field of the release job. For an upstream update, use `sync accept` and `sync verify` so the release also records the reviewed changes between the two pins.
+
 Use the [Marathi release job](olpkit/data/releases/slc-mr-job.json) as a schema example. Paths resolve from the job file. Supply the actual edition checkout, native build receipt, product verification, direct TeX, native PDF source ZIP, combined web/PDF source ZIP and cold-built readers. Set the release tag, localized title, description file, scholarly credits, component licences, gate scopes and tool versions for the new edition.
 
 ```sh

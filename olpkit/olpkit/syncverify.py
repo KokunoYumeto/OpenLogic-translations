@@ -175,7 +175,31 @@ def verify_product(args, cache):
     key = digest(packet_bytes + review_bytes + accepted_assembly)
     checks = checked_file(accepted_dir, f"sync-accept/{key}/standalone.json", accepted["standalone_sha256"])
     standalone_evidence(accepted_dir, json.loads(checks), {r["path"] for r in revised})
-    upstream = GitSnapshot(cache/"OpenLogic.git", accepted["to"])
+    if accepted["to"] != edition["pins"]["olp"]["commit"]:
+        raise ValueError("accepted delta ends at a different edition pin")
+    report, rows = verify_edition_artifacts(args, cache, snapshot, edition)
+    changed = {r["path"] for r in revised}
+    affected = {}
+    for name in edition["products"]:
+        selection = book_scope(name,snapshot,rows)
+        affected[name] = sorted(changed & selection) if selection is not None else None
+    report.update(schema="olpkit.sync-product-verification.v1", accepted_revision=accepted["to"],
+                  acceptance_sha256=digest(acceptance_bytes), changed_units_by_product=affected)
+    return write_product_report(args.out, report)
+
+
+def verify_pinned_product(args, cache):
+    snapshot = GitSnapshot(args.repo, args.ref)
+    edition = contract(snapshot)
+    if args.olp_pin != edition["pins"]["olp"]["commit"]:
+        raise ValueError("requested upstream revision differs from the committed edition pin")
+    report, _ = verify_edition_artifacts(args, cache, snapshot, edition)
+    report.update(schema="olpkit.pinned-product-verification.v1", upstream_revision=args.olp_pin)
+    return write_product_report(args.out, report)
+
+
+def verify_edition_artifacts(args, cache, snapshot, edition):
+    upstream = GitSnapshot(cache/"OpenLogic.git", edition["pins"]["olp"]["commit"])
     ledger_bytes = snapshot.read_many(["units.jsonl"])["units.jsonl"]
     ledger = [json.loads(line) for line in ledger_bytes.splitlines() if line.strip()]
     rows = compare_units(edition,snapshot,ledger,upstream,upstream)
@@ -207,21 +231,19 @@ def verify_product(args, cache):
     sources = source_assets(export_path,check_path,directory,build)
     web_product = getattr(args, "web_product", "accessible")
     web = web_assets(directory,build,gates["G-EPUB"],scope,web_product)
-    changed = {r["path"] for r in revised}
-    affected = {}
-    for name in edition["products"]:
-        selection = book_scope(name,snapshot,rows)
-        affected[name] = sorted(changed & selection) if selection is not None else None
-    report = {"schema":"olpkit.sync-product-verification.v1", "edition":edition["locale"],
+    report = {"edition":edition["locale"],
               "edition_commit":snapshot.commit, "pins":edition["pins"], "product":product,
-              "accepted_revision":accepted["to"], "acceptance_sha256":digest(acceptance_bytes),
-              "source_units":len(rows), "reader_units":len(scope), "changed_units_by_product":affected,
+              "source_units":len(rows), "reader_units":len(scope),
               "native_build_sha256":digest(build_bytes), "assembly_sha256":digest(assembly_bytes),
               "package_check_sha256":digest(check_path.read_bytes()), "pdf":pdf, "source_assets":sources,
               "web_product":web_product, "web_assets":web, "web_export_sha256":gates["G-EPUB"]["export_sha256"],
               "gates":{k:v["status"] for k,v in build["gates"].items()}, "status":"pass"}
-    out = Path(args.out)
+    return report, rows
+
+
+def write_product_report(out, report):
+    out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
     save_acceptance(out, json_bytes(report))
-    print(f"{product}: {len(scope)} reader units, {len(gates)} external gate reports, {len(rows)} current edition units")
+    print("{product}: {reader_units} reader units, {source_units} current edition units".format(**report))
     return 0

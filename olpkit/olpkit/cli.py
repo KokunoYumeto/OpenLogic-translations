@@ -173,12 +173,16 @@ def main(argv=None):
     for action in ('compare','links','glyphs'):
         q=pdf.add_parser(action);q.add_argument('--first',required=True);q.add_argument('--second');q.add_argument('--first-build');q.add_argument('--second-build');q.add_argument('--out',required=True)
     check=sub.add_parser('check').add_subparsers(dest='action',required=True)
+    product_check = check.add_parser('product', help='verify a book at its existing upstream pin')
+    for name in ('repo', 'olp-pin', 'build', 'source-export', 'package-check', 'out'):
+        product_check.add_argument('--' + name, required=True)
+    product_check.add_argument('--ref', default='HEAD')
     q=check.add_parser('package',help='rebuild the modular and cumulative sources from the exported ZIP')
     q.add_argument('--export',required=True);q.add_argument('--build',required=True);q.add_argument('--out',required=True)
     q.add_argument('--mode', choices=['both','modular','cumulative'], default='both')
     q=check.add_parser('build');q.add_argument('--build',required=True);q.add_argument('--repo',required=True);q.add_argument('--metadata-dir')
     q.add_argument('--web-profile')
-    for web_command in (build, q, verify):
+    for web_command in (build, q, verify, product_check):
         web_command.add_argument('--web-product', choices=('epub', 'accessible'), default='accessible',
                                  help='Verify the ordinary EPUB or the edition with complete formula speech')
     q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')
@@ -237,6 +241,9 @@ def main(argv=None):
             from .sourceexport import export_command
             return export_command(a.source,a.product,a.out,a.profile,a.build,a.credits,a.instructions)
         elif a.command=='check':
+            if a.action=='product':
+                from .syncverify import verify_pinned_product
+                return verify_pinned_product(a, CACHE)
             if a.action=='package':
                 from .packagecheck import verify_package
                 return verify_package(a.export,a.build,a.out,mode_choice=a.mode)

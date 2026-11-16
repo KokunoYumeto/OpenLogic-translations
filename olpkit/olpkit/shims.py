@@ -27,11 +27,12 @@ def load_shims(directory=None):
     return result
 
 
-def apply_shims(files, context, directory=None):
+def apply_shims(files, context, directory=None, *, require_file_hashes=False):
     """Return copied bytes and provenance; leave caller inputs/cache untouched.
 
     Preconditions are checked across the whole plan before returning anything.
-    A missing or repeated literal is an error, never an already-applied success.
+    For an exact-file correction, the declared output digest also identifies
+    an upstream source that already contains the correction.
     """
     for key in ('locale','engine','script'):
         if not context.get(key):
@@ -45,13 +46,25 @@ def apply_shims(files, context, directory=None):
         name = shim['path']
         if name not in output:
             raise ValueError(shim['id']+': upstream file absent: '+name)
+        if require_file_hashes and 'input_sha256' not in shim:
+            raise ValueError(shim['id']+': expected exact input and output file hashes')
         before,after = shim['before'].encode('utf-8'),shim['after'].encode('utf-8')
+        old = output[name]
+        old_hash = digest(old)
+        receipt = {'id':shim['id'],'path':name,'before_sha256':old_hash,
+                   'shim_sha256':data_hash,'reason':shim['reason'],'evidence':shim['evidence']}
+        if 'input_sha256' in shim:
+            if old_hash == shim['output_sha256']:
+                receipts.append({**receipt,'matches':0,'after_sha256':old_hash,'upstream_corrected':True})
+                continue
+            if old_hash != shim['input_sha256']:
+                raise ValueError(shim['id']+': source revision differs; review '+name)
         observed = output[name].count(before)
         if observed != 1:
             raise ValueError(f'{shim["id"]}: expected exactly one literal match, found {observed} in {name}')
-        old = output[name]
         output[name] = old.replace(before,after,1)
-        receipts.append({'id':shim['id'],'path':name,'matches':observed,'before_sha256':digest(old),
-                         'after_sha256':digest(output[name]),'shim_sha256':data_hash,
-                         'reason':shim['reason'],'evidence':shim['evidence']})
+        new_hash = digest(output[name])
+        if 'output_sha256' in shim and new_hash != shim['output_sha256']:
+            raise ValueError(shim['id']+': corrected file digest differs')
+        receipts.append({**receipt,'matches':observed,'after_sha256':new_hash})
     return output,receipts

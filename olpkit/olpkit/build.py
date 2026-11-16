@@ -15,6 +15,7 @@ from .recorder import read_inputs,content_inputs,load_imports,compare_imports,in
 from .schemas import ROOT,validate_schema
 from .edition import git_blob
 from .importlock import select_lock,write_lock,pin_key
+from .shims import apply_shims
 
 
 GATES=('G-UNITS','G-STRUCT','G-NOTE','G-TOKEN','G-ORTHO','G-ALONE','G-IMPORT','G-LOG',
@@ -57,7 +58,7 @@ def log_checks(text):
         'undefined_reference':r'(?:There were undefined (?:references|citations)|(?:Reference|Citation) .{0,200}? undefined)',
         'rerun':r'(?:Label\(s\) may have changed|Rerun to get (?:cross-references|outlines) right|Please rerun LaTeX)',
         'duplicate_label':r'(?:multiply defined|destination with the same identifier)',
-        'undefined_token':r'Token .{0,200}? undefined',
+        'undefined_token':r'(?:Package open-logic-tokenize Warning: Token (?:(?!\b(?:Warning|Error):).){1,200}?|\bToken \S+) undefined\b',
         'unmarked_import':r'requested but not marked',
         'missing_character':r'Missing character:',
         'tex_error':r'(?:^! |^.+:\d+: (?:Undefined control sequence|LaTeX Error))',
@@ -288,6 +289,16 @@ def _compile_book(folder,report,engine,epoch,output,expected=None,reference=Fals
     finally:save()
 
 
+def fetch_reference(cache_root, olp_pin, product):
+    data, _ = load_build_product(product)
+    pins = {'olp': olp_pin, **data['reference_pins']}
+    pin_key(pins)
+    cache = SourceCache(cache_root)
+    for source, pin in pins.items():
+        cache.fetch(source, pin)
+        print(source, pin)
+
+
 def reference_tree(cache_root,olp_pin,out,check=False,product='slc-screen-pdf'):
     data,_=load_build_product(product)
     pin_key({'olp':olp_pin,**data['reference_pins']})
@@ -314,6 +325,17 @@ def reference_tree(cache_root,olp_pin,out,check=False,product='slc-screen-pdf'):
                  {'source': 'package-witness', 'commit': extra['commit'], 'path': name})
     report={'schema':'olpkit.reference-assembly.v1','book_directory':'courses/'+data['book'],
             'pins':sources,'files':tree.origins,'unreconciled_legacy_inputs':[]}
+    if 'reference_corrections' in data:
+        directory = ROOT/'data/books'/data['book']/'reference-corrections'/product
+        patched, receipts = apply_shims(tree.files, {'locale':'en','script':'Latn','engine':'pdflatex'},
+                                        directory, require_file_hashes=True)
+        if [row['id'] for row in receipts] != data['reference_corrections']:
+            raise ValueError('English reference corrections differ from the book configuration')
+        for name in {row['path'] for row in receipts}:
+            if patched[name] != tree.files[name]:
+                ids = [row['id'] for row in receipts if row['path']==name and not row.get('upstream_corrected')]
+                tree.add(name, patched[name], {'source':'book-reference-correction','ids':ids}, replace=True)
+        report['reference_corrections'] = receipts
     if 'driver' in data:report['driver']=data['driver']
     write_assembly(tree,report,out,check);return report
 
@@ -355,5 +377,7 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
         body=''.join(uid+'\t'+path+'\n' for uid,path in rows).encode()
         meta={'schema':'olpkit.imports.v1','pins':report['pins'],'lock_sha256':digest(body),
               'units':len(rows),'recorder_sha256':result['recorder_sha256'],'reference_pdf_sha256':result['pdf']['sha256']}
+        if 'reference_corrections' in report:
+            meta['reference_corrections'] = report['reference_corrections']
         write_lock(lock_dir,body,meta)
     return 75 if result['status']=='slot_occupied' else 0

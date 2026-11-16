@@ -1,5 +1,25 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "bookPin": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+$"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        }
+      },
+      "required": [
+        "repository",
+        "commit"
+      ],
+      "additionalProperties": false
+    }
+  },
   "type": "object",
   "properties": {
     "upstream_tag": {
@@ -46,24 +66,9 @@
           ],
           "additionalProperties": false
         },
-        "slc": {
-          "type": "object",
-          "properties": {
-            "repository": {
-              "type": "string",
-              "pattern": "^https://github\\.com/[\\w.-]+/[\\w.-]+$"
-            },
-            "commit": {
-              "type": "string",
-              "pattern": "^[a-f0-9]{40}$"
-            }
-          },
-          "required": [
-            "repository",
-            "commit"
-          ],
-          "additionalProperties": false
-        },
+        "wi": {"$ref": "#/$defs/bookPin"},
+        "il": {"$ref": "#/$defs/bookPin"},
+        "slc": {"$ref": "#/$defs/bookPin"},
         "portraits": {
           "type": "object",
           "properties": {

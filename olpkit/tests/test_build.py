@@ -32,6 +32,14 @@ class BuildLogicTests(unittest.TestCase):
         text='Token x\n undefined. File requested but\n not marked xx. Missing character: X\nLaTeX Warning: Reference `a` undefined\nLabel(s) may have changed'
         self.assertEqual(set(log_checks(text)['issues']),{'undefined_token','unmarked_import','missing_character','undefined_reference','rerun'})
 
+    def test_pdf_string_warning_does_not_create_an_undefined_logic_token(self):
+        log=("Package hyperref Warning: Token not allowed in a PDF string (Unicode):\n"
+             "(hyperref) removing `math shift' on input line 11.\n[60]\n"
+             "LaTeX Warning: Reference `equivalenceclass' on page 1 undefined on input line 47.")
+        self.assertEqual(log_checks(log)['issues'],['undefined_reference'])
+        native="Package open-logic-tokenize Warning: Token relation symbol\n undefined on input line 12."
+        self.assertIn('undefined_token', log_checks(native)['issues'])
+
     def test_bibtex_is_not_repeated_for_only_page_label_changes(self):
         first='\\citation{A}\n\\bibdata{source}\n\\bibstyle{plain}\n\\newlabel{x}{{1}{2}}'
         self.assertEqual(bibliography_key(first),bibliography_key(first.replace('{2}','{3}')))

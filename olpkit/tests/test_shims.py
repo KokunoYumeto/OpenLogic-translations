@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -8,6 +9,23 @@ from olpkit.shims import apply_shims,load_shims
 
 
 class ShimTests(unittest.TestCase):
+    def test_exact_reference_correction_and_upstream_adoption(self):
+        original, updated = b'original statement', b'corrected statement'
+        self.record.update({'before':'original','after':'corrected',
+                            'input_sha256':hashlib.sha256(original).hexdigest(),
+                            'output_sha256':hashlib.sha256(updated).hexdigest()})
+        self.write()
+        path = self.record['path']
+        for data, expected_matches in [(original,1),(updated,0)]:
+            result, receipts = apply_shims({path:data},self.context,self.folder,require_file_hashes=True)
+            self.assertEqual(result[path], updated)
+            self.assertEqual(receipts[0]['matches'], expected_matches)
+        with self.assertRaisesRegex(ValueError,'source revision differs'):
+            apply_shims({path:original+b'!'},self.context,self.folder,require_file_hashes=True)
+        self.record['after'] = 'unexpected'
+        self.write()
+        with self.assertRaisesRegex(ValueError,'corrected file digest differs'):
+            apply_shims({path:original},self.context,self.folder,require_file_hashes=True)
     def setUp(self):
         self.boundary=Path('C:/olp-build/out/tests').resolve()
         self.boundary.mkdir(parents=True,exist_ok=True)

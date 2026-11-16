@@ -45,6 +45,22 @@ The command writes the top-level `upstream_tag` in `olp-edition.toml`. It record
 
 ## Build and check
 
+### English reference for *What If?*
+
+Audrey Yap and Richard Zach’s textbook uses `wi-screen.tex` for the screen edition. Its imports include nine Open Logic files for epistemic logic and six for temporal logic under `content/applied-modal-logic`. The textbook repository supplies the preface, introduction and short chapter on paraconsistent logics. [Textbook sources](https://github.com/rzach/what-if/tree/1ab49ac49b8038f0b007870f7289aae976f5685f)
+
+From the hub root, use a Python 3.11+ environment with the builder installed in editable mode and a Windows TeX installation providing pdfLaTeX, BibTeX and the Open Logic packages. The commands fetch all four pinned source repositories and build the English reader.
+
+```sh
+python -m pip install -e "./olpkit[pdf]"
+olpkit fetch --product wi-screen-pdf --olp-pin 9cf6715abaf33c45911c2380562fcd3d8e7636ba
+olpkit build --english --product wi-screen-pdf --olp-pin 9cf6715abaf33c45911c2380562fcd3d8e7636ba --out out/wi-english
+```
+
+Open `out/wi-english/source/courses/what-if/wi-screen.pdf`. At these revisions the reader has 350 pages and imports 172 Open Logic content files. The English reference edition corrects the link in Problem 3.4 to Proposition 3.15. The assembly records the original and corrected file hashes in `source/ASSEMBLY.json`. The source cache retains the exact upstream text. [Editorial correction](olpkit/data/books/what-if/reference-corrections/wi-screen-pdf/exercise-3-4.toml)
+
+### Translated editions
+
 Use the published edition's product profile and fonts. For modular editions install the editable builder from this same checkout. The PDF tools require Poppler (`pdftotext`, `pdfinfo`, `pdftoppm`). Install the edition's TeX distribution with its specified packages and engine. EPUB validation also uses EPUBCheck. The hub generator uses Node.js 22 and the GitHub CLI. The builder manual documents product names, font notices, pinned source inputs and the available commands. [Builder manual](olpkit/README.md)
 
 | SLC edition | TeX engine | Fonts to reproduce its typesetting |

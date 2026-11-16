@@ -161,7 +161,12 @@ def main(argv=None):
     edition=sub.add_parser('edition').add_subparsers(dest='action',required=True)
     e=edition.add_parser('validate');e.add_argument('--repo',required=True);e.add_argument('--metadata-dir')
     e=edition.add_parser('import-manifest');e.add_argument('--repo',required=True);e.add_argument('--adapter',required=True);e.add_argument('--out')
-    fetch=sub.add_parser('fetch');fetch.add_argument('--repo',required=True);fetch.add_argument('--metadata-dir')
+    fetch=sub.add_parser('fetch')
+    source=fetch.add_mutually_exclusive_group(required=True)
+    source.add_argument('--repo')
+    source.add_argument('--product',help='fetch the pinned inputs for an English textbook')
+    fetch.add_argument('--metadata-dir')
+    fetch.add_argument('--olp-pin',help='full Open Logic commit for the English textbook')
     drivers=sub.add_parser('drivers');drivers.add_argument('--repo',required=True);drivers.add_argument('--metadata-dir');drivers.add_argument('--out',required=True);drivers.add_argument('--check',action='store_true');drivers.add_argument('--book',default='sets-logic-computation')
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin');build.add_argument('--resume',action='store_true')
@@ -297,8 +302,16 @@ def main(argv=None):
             from .unitlint import lint_units
             return lint_units(a.repo,a.ref,CACHE,a.out,a.english,a.olp_pin,a.scope,a.check,a.action=='tokens')
         elif a.command=='fetch':
-            from .cache import fetch_edition
-            fetch_edition(a.repo,a.metadata_dir,CACHE)
+            if a.product:
+                if not a.olp_pin or a.metadata_dir:
+                    raise ValueError('English textbook fetch requires --product and --olp-pin')
+                from .build import fetch_reference
+                fetch_reference(CACHE,a.olp_pin,a.product)
+            else:
+                if a.olp_pin:
+                    raise ValueError('edition fetch uses the pins in olp-edition.toml')
+                from .cache import fetch_edition
+                fetch_edition(a.repo,a.metadata_dir,CACHE)
         elif a.command=='edition':
             from .edition import import_manifest,validate_edition
             if a.action=='import-manifest':import_manifest(a.repo,a.adapter,a.out,UPSTREAM)

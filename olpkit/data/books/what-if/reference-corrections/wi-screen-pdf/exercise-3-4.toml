@@ -1,0 +1,16 @@
+id = "wi-sequent-inconsistency-reference"
+path = "content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex"
+before = '\olref[fol][seq][ptn]{prop:incons}'
+after = '\olref{prop:incons}'
+input_sha256 = "91c07ed071c2f9c18d3f10665b163b35dcc8636e7e0f27b4586aa9df63177a53"
+output_sha256 = "efe5ef6ba92608de9ebf755f779817380495da78ecf1cc23719023d289e25c99"
+reason = "What If? imports this section under propositional logic. Problem 3.4 refers to Proposition 3.15 in the same section. A section-relative reference lets the deferred exercise resolve to the label actually printed in this book."
+evidence = [
+  "https://github.com/rzach/what-if/blob/1ab49ac49b8038f0b007870f7289aae976f5685f/wi.tex#L25-L52",
+  "https://github.com/OpenLogicProject/OpenLogic/blob/9cf6715abaf33c45911c2380562fcd3d8e7636ba/content/first-order-logic/sequent-calculus/proof-theoretic-notions.tex#L133-L145",
+]
+
+[[conditions]]
+locale = "en"
+engine = "pdflatex"
+script = "Latn"

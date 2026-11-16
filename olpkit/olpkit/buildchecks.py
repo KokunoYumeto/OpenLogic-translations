@@ -1,7 +1,6 @@
 """Checks that bind a settled textbook build to its source and independent replay."""
 import json
 from pathlib import Path
-import shutil
 import tomllib
 
 from .assembly import digest, json_bytes
@@ -87,7 +86,7 @@ def unit_gates(output, build, assembly, repo, cache, lock, metadata_dir=None):
 
 
 def reproducibility_gate(output, build, assembly, expected):
-    from .build import compile_book, verify_assembly
+    from .build import compile_book, copy_build_input, verify_assembly
     from .pdfaudit import compare_pdfs
     source = output / "source"
     verify_assembly(source, assembly)
@@ -103,7 +102,7 @@ def reproducibility_gate(output, build, assembly, expected):
             relative = relative_path(name)
             target = tree / relative
             target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source / relative, target)
+            copy_build_input(source / relative, target)
         (tree / "ASSEMBLY.json").write_bytes(json_bytes(assembly))
     verify_assembly(tree, assembly)
     receipt = replay / "BUILD.json"

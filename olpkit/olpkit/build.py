@@ -154,6 +154,14 @@ def validate_unstarted_attempt(previous,report,engine,epoch):
         raise ValueError('prepared build identity changed; do not resume this tree')
 
 
+def copy_build_input(source, destination):
+    # LuaTeX includes the font's mtime in its shared HarfBuzz cache.
+    if destination.suffix.lower() in {".otf", ".ttf"}:
+        shutil.copy2(source, destination)
+    else:
+        shutil.copyfile(source, destination)
+
+
 def compile_book(folder,report,engine,epoch,output,expected=None,reference=False,resume=False):
     """Serialize a build directory and preserve any resumable zero-engine receipt."""
     folder=Path(folder);output=Path(output);output.mkdir(parents=True,exist_ok=True)

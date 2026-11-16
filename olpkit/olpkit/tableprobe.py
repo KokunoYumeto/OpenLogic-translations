@@ -3,10 +3,9 @@ from collections import Counter, defaultdict
 import json
 from pathlib import Path
 import re
-import shutil
 
 from .assembly import digest, json_bytes
-from .build import compile_book, verify_assembly
+from .build import compile_book, copy_build_input, verify_assembly
 from .cache import relative_path
 from .macrophases import group, skip_space
 from .pdfaudit import compare_pdfs
@@ -253,11 +252,7 @@ def probe_build(build_dir):
                 continue
         if not path.exists():
             path.parent.mkdir(parents=True, exist_ok=True)
-            if path.suffix.lower() in {".otf", ".ttf"}:
-                # LuaTeX uses the font mtime when generating its shared HarfBuzz cache.
-                shutil.copy2(source / relative, path)
-            else:
-                shutil.copyfile(source / relative, path)
+            copy_build_input(source / relative, path)
     assembly["purpose"] = "private rendered-cell measurement"
     verify_assembly(tree, assembly)
     assembly_path = tree / "ASSEMBLY.json"

@@ -41,6 +41,25 @@ class GuardedProcessTests(unittest.TestCase):
         self.assertIn('CAPPED',(self.root/'output.txt').read_text())
         self.assertEqual(result['enforced_job_memory_bytes'],64*1024*1024)
 
+    def test_long_working_directory_keeps_the_correct_build_inputs(self):
+        directory = self.root
+        while len(str(directory)) < 265:
+            directory /= "nested-build-inputs"
+        directory.mkdir(parents=True)
+        (directory / "witness.txt").write_bytes(b"expected build source")
+        try:
+            result = run_job([sys.executable, "-c",
+                              "from pathlib import Path; print(Path('witness.txt').read_text())"],
+                             directory, self.root / "output.txt")
+        except ValueError as error:
+            # Short-name creation is optional on Windows filesystems.
+            self.assertIn("shorter checkout path", str(error))
+        else:
+            self.assertEqual(result["exit_code"], 0)
+            self.assertTrue(result["captured_before_resume"])
+            self.assertTrue(result["all_descendants_exited"])
+            self.assertEqual((self.root / "output.txt").read_text().strip(), "expected build source")
+
     def test_job_waits_for_descendant_after_leader_exits(self):
         code='import subprocess,sys;subprocess.Popen([sys.executable,"-c","import time;time.sleep(0.7)"])'
         result=self.run_python(code)

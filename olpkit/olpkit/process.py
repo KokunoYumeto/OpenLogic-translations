@@ -67,6 +67,7 @@ def kernel():
         'TerminateProcess':([W.HANDLE,W.UINT],W.BOOL),
         'GetExitCodeProcess':([W.HANDLE,C.POINTER(W.DWORD)],W.BOOL),
         'CreateFileW':([W.LPCWSTR,W.DWORD,W.DWORD,C.POINTER(Security),W.DWORD,W.DWORD,W.HANDLE],W.HANDLE),
+        'GetShortPathNameW':([W.LPCWSTR,W.LPWSTR,W.DWORD],W.DWORD),
         'CreateProcessW':([W.LPCWSTR,W.LPWSTR,C.c_void_p,C.c_void_p,W.BOOL,W.DWORD,
                            C.c_void_p,W.LPCWSTR,C.POINTER(Startup),C.POINTER(ProcessInfo)],W.BOOL),
         'ResumeThread':([W.HANDLE],W.DWORD),
@@ -104,6 +105,31 @@ class TeXSlot:
                 self.k.CloseHandle(self.handle);self.handle=None
 
 
+def process_directory(kernel, cwd):
+    """Return a working directory CreateProcessW can pass to the child."""
+    path = Path(cwd).resolve(strict=True)
+    name = str(path)
+    if len(name.encode("utf-16-le")) // 2 < 260:
+        return name
+    # CreateProcessW rejects an extended-length working directory even when
+    # normal file APIs can open it. Use the filesystem's equivalent short name.
+    extended = ("\\\\?\\UNC\\" + name[2:] if name.startswith("\\\\")
+                else "\\\\?\\" + name)
+    capacity = kernel.GetShortPathNameW(extended, None, 0)
+    if capacity:
+        buffer = C.create_unicode_buffer(capacity)
+        written = kernel.GetShortPathNameW(extended, buffer, capacity)
+        if 0 < written < capacity:
+            short = buffer.value
+            if short.startswith("\\\\?\\UNC\\"):
+                short = "\\\\" + short[8:]
+            else:
+                short = short.removeprefix("\\\\?\\")
+            if len(short.encode("utf-16-le")) // 2 < 260 and path.samefile(short):
+                return short
+    raise ValueError("Windows could not shorten the build working directory. Use a shorter checkout path.")
+
+
 def run_job(arguments,cwd,log,env=None,timeout=240,memory_limit=MEMORY_LIMIT):
     """Execute one tool in a hidden capped job and wait for all descendants."""
     if not arguments or timeout<=0 or not 0<memory_limit<=MEMORY_LIMIT:
@@ -135,7 +161,7 @@ def run_job(arguments,cwd,log,env=None,timeout=240,memory_limit=MEMORY_LIMIT):
         command=C.create_unicode_buffer(subprocess.list2cmdline([exe,*map(str,arguments[1:])]))
         environment=C.create_unicode_buffer('\0'.join(k+'='+v for k,v in sorted((env or os.environ).items(),key=lambda x:x[0].casefold()))+'\0\0')
         checked(k.CreateProcessW(exe,command,None,None,True,0x08000004|0x400,environment,
-                                  str(Path(cwd).resolve()),C.byref(si),C.byref(info)),'CreateSuspendedProcess')
+                                  process_directory(k,cwd),C.byref(si),C.byref(info)),'CreateSuspendedProcess')
         if not k.AssignProcessToJobObject(job,info.process):
             error=C.get_last_error();k.TerminateProcess(info.process,125);k.WaitForSingleObject(info.process,10000)
             raise OSError(error,'Suspended child was not captured; it never ran')

@@ -77,6 +77,21 @@ class UnitAssemblyTests(unittest.TestCase):
             locale_marks(b'\\olfileid[yy]{a}','xx')
 
 
+    def test_quoted_identifiers_remain_reader_text(self):
+        from olpkit.structure import signature
+        from olpkit.unitlint import stored_marks
+        sample = (br"\texttt{\string\olfileid\{inc\}\{req\}\{s1c\}}" + b"\r\n"
+                  + br"\verb*|%\olchapterid[old]{x}| \\olpartid{literal}" + b"\n"
+                  + br"\olchapterid % The option is on the next line." + b"\n"
+                  + br"[bn]{mth}{prf} {\olfileid{mth}{prf}{def}}")
+        expected = sample.replace(br"\olfileid{mth}", br"\olfileid[bn]{mth}")
+        self.assertEqual(locale_marks(sample, "bn"), (expected, 1))
+        self.assertEqual(locale_marks(expected, "bn"), (expected, 0))
+        self.assertEqual(stored_marks(expected.decode()), [["olchapterid", "bn"], ["olfileid", "bn"]])
+        self.assertEqual(signature(sample.decode())["identifiers"],
+                         [["olchapterid", ["mth", "prf"]], ["olfileid", ["mth", "prf", "def"]]])
+
+
 class AssemblyIOTests(unittest.TestCase):
     def setUp(self):
         boundary=ROOT.parent/'out/tests';boundary.mkdir(parents=True,exist_ok=True)

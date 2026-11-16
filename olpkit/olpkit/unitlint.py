@@ -15,7 +15,7 @@ from .orthography import inspect_orthography
 from .assembly import GitSnapshot,assemble_units,digest,json_bytes
 from .cache import SourceCache,relative_path
 from .schemas import ROOT,validate_schema
-from .structure import signature,without_comments,argument,COMMAND
+from .structure import signature,active_tex,argument,COMMAND
 
 CONTRACT_BYTES = (ROOT/'data/unit-contract.toml').read_bytes()
 CONTRACT = tomllib.loads(CONTRACT_BYTES.decode('utf-8'))
@@ -27,7 +27,7 @@ EXCEPTION_FIELDS = ['unit','rule','source_sha256','target_sha256','finding_sha25
 
 
 def kept_tokens(text):
-    text=without_comments(text)
+    text=active_tex(text)
     counts=Counter({k:0 for k in KEEP})
     for match in re.finditer(r'!![A-Za-z^]*\s*\{([^{}]+)\}',text):
         if match[1] in counts:counts[match[1]]+=1
@@ -37,7 +37,7 @@ def kept_tokens(text):
 
 
 def stored_marks(text):
-    text=without_comments(text);marks=[]
+    text=active_tex(text);marks=[]
     for match in COMMAND.finditer(text):
         if match[1] not in IDENTIFIERS:continue
         pos=match.end()
@@ -66,7 +66,7 @@ def unit_findings(source,target,locale,orthography=None,english=False):
         if tokens_a[key]!=tokens_b[key]:add('token:'+key,tokens_a[key],tokens_b[key])
     if a['footnotes']!=b['footnotes']:add('footnotes',a['footnotes'],b['footnotes'])
     note_commands = CONTRACT['notes']['commands']
-    notes = [Counter(m[1] for m in COMMAND.finditer(without_comments(text)) if m[1] in note_commands)
+    notes = [Counter(m[1] for m in COMMAND.finditer(active_tex(text)) if m[1] in note_commands)
              for text in (en, tr)]
     if notes[0] != notes[1]:
         add('note-commands', dict(notes[0]), dict(notes[1]))

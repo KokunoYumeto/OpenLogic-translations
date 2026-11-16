@@ -18,6 +18,7 @@ from .drivers import generate_drivers
 from .edition import git_blob
 from .schemas import ROOT, validate_schema
 from .shims import apply_shims
+from .structure import active_tex
 
 
 def digest(data):
@@ -94,24 +95,26 @@ class GitSnapshot:
 def locale_marks(data, locale):
     """Insert only OLP locale flags; preserve wording and ignore commented code."""
     text = data.decode('utf-8-sig')
-    count = 0
-    pattern = re.compile(r'\\ol(?:file|chapter|part)id(?![A-Za-z])(?:\[([^\]\r\n]*)\])?')
-    lines = []
-    for line in text.splitlines(keepends=True):
-        comment = re.search(r'(?<!\\)(?:\\\\)*%', line)
-        split = comment.start() if comment else len(line)
-        def mark(match):
-            nonlocal count
-            if match.group(1) not in (None, locale):
-                raise ValueError('canonical unit contains a different locale marker')
-            if match.group(1) is None:
-                count += 1
-                return match.group(0)+'['+locale+']'
-            return match.group(0)
-        lines.append(pattern.sub(mark,line[:split])+line[split:])
+    code = active_tex(text)
+    pattern = re.compile(r"\\ol(?:file|chapter|part)id(?![A-Za-z@])")
+    option_pattern = re.compile(r"\s*\[([^\]\r\n]*)\]")
+    inserts = []
+    for match in pattern.finditer(code):
+        position = match.end()
+        option = option_pattern.match(code, position)
+        if option is None:
+            inserts.append(position)
+        elif option[1] != locale:
+            raise ValueError('canonical unit contains a different locale marker')
+    pieces = []
+    start = 0
+    for position in inserts:
+        pieces.extend((text[start:position], '[' + locale + ']'))
+        start = position
+    pieces.append(text[start:])
     # Preserve a BOM if it existed; only the locale flag is an assembly change.
-    result = ''.join(lines).encode('utf-8')
-    return (b'\xef\xbb\xbf'+result if data.startswith(b'\xef\xbb\xbf') else result),count
+    result = ''.join(pieces).encode('utf-8')
+    return (b'\xef\xbb\xbf'+result if data.startswith(b'\xef\xbb\xbf') else result),len(inserts)
 
 
 def assemble_units(edition, units, english, targets, registry):

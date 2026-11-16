@@ -24,6 +24,29 @@ class SpeechSyncTests(unittest.TestCase):
                                'contextual_variants': {'formula-000002': 'second reading'}}}
         })
 
+    def test_changed_letter_name_in_adjacent_cell_requires_review_for_old_packets(self):
+        math = '<math><mi>I</mi><annotation encoding="application/x-tex">I</annotation></math>'
+        reader = ('<html lang="xx"><body><table><tr><td>Iota</td><td><p>' + math +
+                  '</p></td></tr></table><p>Input ' + math + '</p></body></html>').encode()
+        packet = index_formulas(reader, 'xx')
+        chart = packet.pop('table_context')
+        where = chart['occurrences']['formula-000001']
+        self.assertEqual(where['cell'], 1)
+        self.assertEqual(chart['rows'][where['row']][0]['text'], 'Iota')
+        self.assertNotIn('formula-000002', chart['occurrences'])
+        previous_bytes = json_bytes(packet)
+        store = json.loads(self.store)
+        store.update(input_sha256=digest(previous_bytes), reader_sha256=digest(reader))
+        _, delta = speech_delta(reader, previous_bytes, json_bytes(store), reader.replace(b'Iota', b'Latin I'))
+        self.assertEqual(delta['review_required'], ['formula-000001'])
+        self.assertEqual(delta['reused'], {'formula-000002': 'formula-000002'})
+        packet['table_context'] = chart
+        where['cell'] = 0
+        previous_bytes = json_bytes(packet)
+        store['input_sha256'] = digest(previous_bytes)
+        with self.assertRaisesRegex(ValueError, 'table_context'):
+            speech_delta(reader, previous_bytes, json_bytes(store), reader)
+
     def test_variant_follows_context_when_number_changes(self):
         packet, delta = speech_delta(self.old, self.packet, self.store, self.new)
         self.assertEqual(delta['review_required'], ['formula-000001'])

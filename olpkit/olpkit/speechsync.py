@@ -5,7 +5,7 @@ from pathlib import Path
 
 from lxml import html
 from .assembly import digest, json_bytes
-from .formulaspeech import bind_speech, index_formulas
+from .formulaspeech import bind_speech, index_formulas, table_context
 from .xhtml import text_without_annotations
 
 
@@ -13,6 +13,7 @@ def full_context_keys(data, packet):
     doc = html.document_fromstring(data, parser=html.HTMLParser(encoding="utf-8", huge_tree=True))
     contexts = {"p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "td", "th", "figcaption", "caption"}
     blocks = {}
+    table_rows = {}
     keys = []
     for node, row in zip(doc.xpath("//math"), packet["occurrences"], strict=True):
         block = next((p for p in node.iterancestors() if p.tag in contexts), node.getparent())
@@ -23,8 +24,10 @@ def full_context_keys(data, packet):
                         if a.get("encoding", "").lower() in ("application/x-tex", "text/x-tex", "application/x-latex")]
             ids = [(p.tag, p.get("id")) for p in [block, *block.iterancestors()] if p.get("id")]
             blocks[block] = digest(json_bytes([ids, text_without_annotations(block), formulas]))
+        table = table_context(node, table_rows)
+        position = (table[0], table[2]) if table else None
         keys.append((row["formula_sha256"], row["preceding_import_locator"], blocks[block],
-                     row["context_id"], row["in_navigation"], row["display"]))
+                     row["context_id"], row["in_navigation"], row["display"], position))
     return keys
 
 
@@ -38,6 +41,8 @@ def speech_delta(old_html, old_packet_bytes, old_store_bytes, new_html):
     for key in ("formulas", "occurrences", "contexts"):
         if old_replay[key] != old[key]:
             raise ValueError("previous speech packet does not reproduce: " + key)
+    if "table_context" in old and old_replay["table_context"] != old["table_context"]:
+        raise ValueError("previous speech packet does not reproduce: table_context")
     new = index_formulas(new_html, old["language"])
     old_keys = full_context_keys(old_html, old)
     new_keys = full_context_keys(new_html, new)

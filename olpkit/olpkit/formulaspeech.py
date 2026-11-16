@@ -3,12 +3,34 @@ import hashlib,json,copy
 from lxml import html
 from .xhtml import text_without_annotations
 from .epubpackage import math_signature
+from .assembly import digest, json_bytes
+
+
+def table_context(node, row_cache):
+    """Identify the HTML row and cell; an isolated A may be capital alpha."""
+    cell = next((ancestor for ancestor in node.iterancestors() if ancestor.tag in ('td', 'th')), None)
+    if cell is None or cell.getparent().tag != 'tr':
+        return None
+    row = cell.getparent()
+    if row not in row_cache:
+        cells = [child for child in row if child.tag in ('td', 'th')]
+        descriptions = []
+        for child in cells:
+            text = text_without_annotations(child)
+            tex = [a.text or '' for a in child.xpath('.//math//annotation')]
+            descriptions.append({'kind': child.tag, 'text': text[:800],
+                                 'content_sha256': digest(json_bytes([text, tex])),
+                                 'colspan': child.get('colspan', '1'), 'rowspan': child.get('rowspan', '1')})
+        row_cache[row] = (digest(json_bytes(descriptions)), descriptions, {c: i for i, c in enumerate(cells)})
+    key, descriptions, indexes = row_cache[row]
+    return key, descriptions, indexes[cell]
 
 
 def index_formulas(reader_bytes, language):
     doc=html.document_fromstring(reader_bytes,parser=html.HTMLParser(encoding='utf-8',huge_tree=True))
     if doc.get('lang')!=language:raise ValueError('reader speech language differs')
     formulas={};order=[];contexts={};preceding=None
+    row_cache={};table_rows={};table_locations={}
     context_tags={'p','h1','h2','h3','h4','h5','h6','li','td','th','figcaption','caption'}
     for node in doc.iter():
         if node.get('data-unit-id'):preceding=node.get('data-unit-id')
@@ -28,9 +50,15 @@ def index_formulas(reader_bytes, language):
              'in_navigation':bool(node.xpath('ancestor::nav')),'display':node.get('display','inline')}
         if key not in formulas:formulas[key]={'tex':tex,'occurrence_ids':[]}
         formulas[key]['occurrence_ids'].append(row['occurrence_id']);order.append(row)
+        table = table_context(node, row_cache)
+        if table is not None:
+            row_key, cells, column = table
+            table_rows[row_key] = cells
+            table_locations[row['occurrence_id']] = {'row': row_key, 'cell': column}
     return {'schema':'olpkit.formula-speech-input.v1','language':language,
             'reader_sha256':hashlib.sha256(reader_bytes).hexdigest(),'formulas':formulas,'occurrences':order,'contexts':contexts,
             'unique_formulas':len(formulas),'formula_occurrences':len(order),
+            'table_context':{'rows':table_rows,'occurrences':table_locations},
             'locator_limit':'A preceding import is a locator only. Deferred exercises, footnotes, book front/back matter and navigation require their actual source context.',
             'spoken_text_produced':False}
 
@@ -50,6 +78,8 @@ def bind_speech(reader_bytes, input_bytes, store_bytes):
     current=index_formulas(reader_bytes,packet['language'])
     for key in ('formulas','occurrences','contexts'):
         if current[key]!=packet[key]:raise ValueError('speech '+key+' changed; review required')
+    if 'table_context' in packet and current['table_context'] != packet['table_context']:
+        raise ValueError('speech table context changed; review required')
     rules=store.get('rules',{});rows=store.get('formulas',{})
     if set(rows)!=set(packet['formulas']):raise ValueError('speech formula coverage differs')
     for key,rule in rules.items():

@@ -75,6 +75,8 @@ The command writes the top-level `upstream_tag` in `olp-edition.toml`. It record
 
 ## Build and check
 
+For an edition with local changes to Open Logic’s style files, consult the [patches and their corresponding upstream settings](olpkit/data/shims/README.md) before updating the source pin.
+
 ### English reference for *What If?*
 
 Audrey Yap and Richard Zach’s textbook uses `wi-screen.tex` for the screen edition. Its imports include nine Open Logic files for epistemic logic and six for temporal logic under `content/applied-modal-logic`. The textbook repository supplies the preface, introduction and short chapter on paraconsistent logics. [Textbook sources](https://github.com/rzach/what-if/tree/1ab49ac49b8038f0b007870f7289aae976f5685f)

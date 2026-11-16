@@ -81,6 +81,22 @@ def flat_fill_link(page,rect,paint_rgb):
             'paint_contrast':contrast(paint_rgb,background),'raster':rendered}
 
 
+def isolation_comparison(pdf, page, rect, form):
+    """Compare the actual link pixels with the same form isolated on the same page."""
+    if (pdf.xref_get_key(form, 'Group/S') != ('name', '/Transparency') or
+            pdf.xref_get_key(form, 'Group/I') != ('bool', 'false')):
+        raise ValueError('logo form has no explicit non-isolated transparency group')
+    options = dict(matrix=fitz.Matrix(6, 6), clip=rect, annots=False,
+                   colorspace=fitz.csRGB, alpha=False)
+    actual = page.get_pixmap(**options)
+    with fitz.open(stream=pdf.tobytes(), filetype='pdf') as comparison:
+        comparison.xref_set_key(form, 'Group/I', 'true')
+        isolated = comparison[page.number].get_pixmap(**options)
+    if actual.irect != isolated.irect or actual.samples != isolated.samples:
+        raise ValueError('non-isolated logo paint differs from isolated form')
+    return sha256(actual.samples).hexdigest()
+
+
 def vector_logo(pdf,page,rect,destination):
     if destination not in LOGO_URIS:
         raise ValueError('no evidence-bound vector-link policy for this destination')
@@ -100,19 +116,22 @@ def vector_logo(pdf,page,rect,destination):
     # decimal unit for this comparison only; the painted paths must still
     # fit wholly inside the unexpanded link rectangle below.
     form_bounds = rect + (-0.001, -0.001, 0.001, 0.001)
-    if not any(d['type']=='group' and d.get('opacity')==1 and d.get('isolated')
-               and d.get('blendmode')=='Normal' and form_bounds.contains(d['rect'])
-               and all(abs(a-b)<4 for a,b in zip(d['rect'],rect))
-               and d['rect'].contains(stroke['rect']) and d['rect'].contains(fill['rect'])
-               for d in drawings):
-        raise ValueError('logo form is not isolated in the link rectangle')
+    groups = [d for d in drawings if d['type']=='group' and d.get('opacity')==1
+              and d.get('blendmode')=='Normal' and form_bounds.contains(d['rect'])
+              and all(abs(a-b)<4 for a,b in zip(d['rect'],rect))
+              and d['rect'].contains(stroke['rect']) and d['rect'].contains(fill['rect'])]
+    if len(groups) != 1:
+        raise ValueError('logo form bounds are absent or ambiguous in the link rectangle')
     if (stroke.get('type')!='s' or stroke.get('stroke_opacity')!=1
             or painted_rgb(stroke['color'])!=BLACK or stroke['items'][0][0]!='re'
             or fill.get('type')!='f' or fill.get('fill_opacity')!=1 or painted_rgb(fill['fill'])!=BLACK
             or not rect.contains(stroke['rect']) or not rect.contains(fill['rect'])):
         raise ValueError('logo is not black-only vector paint on unpainted paper')
     rendered = raster_check(page,rect,BLACK,WHITE)
-    return {'kind':'pinned-vector-logo','form_stream_sha256':LOGO_FORM_SHA256,
+    evidence = {}
+    if not groups[0].get('isolated'):
+        evidence['isolated_comparison_rgb_sha256'] = isolation_comparison(pdf, page, rect, forms[0])
+    return {**evidence,'kind':'pinned-vector-logo','form_stream_sha256':LOGO_FORM_SHA256,
             'foreground':BLACK,'background':WHITE,'paint_sequences':[i for i,_ in operations],
             'paint_contrast':contrast(BLACK,WHITE),'raster':rendered}
 

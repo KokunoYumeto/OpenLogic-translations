@@ -4,10 +4,50 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from olpkit.assembly import digest
-from olpkit.syncverify import checked_file, standalone_evidence, verify_projected_units
+from olpkit.syncverify import checked_file, standalone_evidence, verify_projected_units, web_assets
 
 
 class SyncVerificationTests(unittest.TestCase):
+
+    def test_ordinary_epub_and_spoken_edition_require_distinct_evidence(self):
+        with TemporaryDirectory() as folder:
+            root = Path(folder)
+            def save_json(name, data):
+                raw = json.dumps(data).encode()
+                (root / name).write_bytes(raw)
+                return digest(raw)
+
+            source = "content/logic.tex"
+            target = "locale/bn/" + source
+            unit = {"path": source, "unit": "OLP-0001", "sha256": digest(b"source"),
+                    "assembled_path": target, "html_id": "olp-unit-000001"}
+            build = {"pdf": {"sha256": digest(b"pdf")}, "assembly_sha256": digest(b"assembly"),
+                     "content_inputs": {source: [target]}, "source_inputs": {target: unit}}
+            files = {"reader.epub": b"epub", "reader.html": b"html"}
+            for name, raw in files.items():
+                (root / name).write_bytes(raw)
+            products = {name: {"sha256": digest(raw), "bytes": len(raw)} for name, raw in files.items()}
+            diagnostics = save_json("EPUBCHECK.json", {"messages": []})
+            export = {"product": "epub", "assembly_sha256": build["assembly_sha256"],
+                      "projection": {"unit_order": [unit]}, "epub": {"unit_order": ["000001"]},
+                      "native_numbers": {"total": 1, "matched": 1}, "products": products,
+                      "epubcheck": {"exit_code": 0, "diagnostics": [], "report_sha256": diagnostics}}
+            gate = {"web_product": "epub", "units": 1, "issues": [], "pdf_sha256": build["pdf"]["sha256"],
+                    "export": "EXPORT.json", "export_sha256": save_json("EXPORT.json", export),
+                    "files": {k: v["sha256"] for k, v in products.items()}, "numbers": 1,
+                    "epubcheck_sha256": diagnostics, "spoken_formulas": 0}
+            self.assertEqual(web_assets(root, build, gate, {source}, "epub"), products)
+            with self.assertRaisesRegex(ValueError, "requested product"):
+                web_assets(root, build, gate, {source})
+            gate["web_product"] = export["product"] = "accessible"
+            export["speech"] = {"formula_occurrences": 1, "with_spoken_text": 0}
+            gate["export_sha256"] = save_json("EXPORT.json", export)
+            with self.assertRaisesRegex(ValueError, "spoken mathematics"):
+                web_assets(root, build, gate, {source})
+            gate["spoken_formulas"] = export["speech"]["with_spoken_text"] = 1
+            gate["export_sha256"] = save_json("EXPORT.json", export)
+            self.assertEqual(web_assets(root, build, gate, {source}), products)
+
     def test_web_readers_must_reference_each_compiled_source(self):
         source = "content/chapter.tex"
         target = "locale/mr/" + source

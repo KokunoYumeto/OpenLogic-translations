@@ -25,7 +25,9 @@ def verify_cached_dependencies(source, profile):
             checked_asset(directory, figure["asset"], figure["svg_sha256"])
 
 
-def native_epub(output, build, assembly, profile_path=None):
+def native_epub(output, build, assembly, profile_path=None, web_product="accessible"):
+    if web_product not in ("epub", "accessible"):
+        raise ValueError("unknown web product: " + web_product)
     profile_path = Path(profile_path) if profile_path else output / "web-profile.json"
     if not profile_path.is_file():
         return {"status": "incomplete", "reason": "A web export profile bound to this PDF is required."}
@@ -44,7 +46,7 @@ def native_epub(output, build, assembly, profile_path=None):
     jar = profile["epubcheck"]
     if digest(Path(jar["path"]).read_bytes()) != jar["sha256"]:
         return {"status":"fail","reason":"EPUBCheck differs from the pinned validator."}
-    key = digest(json_bytes([build["assembly_sha256"], build["pdf"]["sha256"], digest(payload), code]))
+    key = digest(json_bytes([build["assembly_sha256"], build["pdf"]["sha256"], digest(payload), code, web_product]))
     target = output / "web" / key
     target.parent.mkdir(exist_ok=True)
     if target.exists():
@@ -52,7 +54,8 @@ def native_epub(output, build, assembly, profile_path=None):
     else:
         with TemporaryDirectory(dir=target.parent) as scratch:
             candidate = Path(scratch) / "edition"
-            export_web(output / "source", "accessible", candidate, profile_path, check_numbers=True, check_speech=True)
+            export_web(output / "source", web_product, candidate, profile_path,
+                       check_numbers=True, check_speech=(web_product == "accessible"))
             candidate.rename(target)
     raw = (target / "EXPORT.json").read_bytes()
     report = json.loads(raw)
@@ -60,9 +63,11 @@ def native_epub(output, build, assembly, profile_path=None):
     checks = report["epubcheck"]
     units = [r["html_id"].removeprefix("olp-unit-") for r in report["projection"]["unit_order"]]
     numbers = report["native_numbers"]
-    speech = report["speech"]
+    speech = report.get("speech")
     issues = []
     files = {name: digest((target / name).read_bytes()) for name in ("reader.epub","reader.html")}
+    if report["product"] != web_product:
+        issues.append("Export product differs from the requested edition.")
     if any(files[name] != report["products"][name]["sha256"] for name in files):
         issues.append("Rendered file differs from export receipt.")
     if (report["assembly_sha256"] != digest((output / "source/ASSEMBLY.json").read_bytes())
@@ -78,9 +83,9 @@ def native_epub(output, build, assembly, profile_path=None):
         issues.append("EPUBCheck reports errors or its receipt differs.")
     if numbers["matched"] != numbers["total"] or numbers["total"] == 0:
         issues.append("Numbering comparison incomplete.")
-    if speech["formula_occurrences"] != speech["with_spoken_text"]:
+    if web_product == "accessible" and (not speech or speech["formula_occurrences"] != speech["with_spoken_text"]):
         issues.append("Formula speech is incomplete.")
     return {"status":"fail" if issues else "pass", "issues":issues,
             "export":target.relative_to(output).as_posix()+"/EXPORT.json", "export_sha256":digest(raw),
             "files":files, "pdf_sha256":witness["sha256"], "epubcheck_sha256":digest(diagnostics),
-            "units":len(units), "numbers":numbers["matched"], "spoken_formulas":speech["with_spoken_text"]}
+            "units":len(units), "numbers":numbers["matched"], "web_product":web_product, "spoken_formulas":speech["with_spoken_text"] if speech else None}

@@ -120,7 +120,7 @@ def reproducibility_gate(output, build, assembly, expected):
     return {**comparison, "status": comparison["G-SAME"]["status"]}
 
 
-def verify_native_build(output, repo, cache, metadata_dir=None, web_profile=None):
+def verify_native_build(output, repo, cache, metadata_dir=None, web_profile=None, web_product="accessible"):
     from .build import load_build_product, verify_assembly
     output = Path(output).resolve()
     if not output.is_relative_to((ROOT.parent / "out").resolve()):
@@ -172,6 +172,6 @@ def verify_native_build(output, repo, cache, metadata_dir=None, web_profile=None
     from .hubcheck import check_catalogue, hub_checkout
     save_gate(output, build, "G-HUB", check_catalogue(hub_checkout(ROOT)))
     from .epubcheck import native_epub
-    save_gate(output, build, "G-EPUB", native_epub(output, build, assembly, web_profile))
+    save_gate(output, build, "G-EPUB", native_epub(output, build, assembly, web_profile, web_product))
     return build
 

@@ -310,7 +310,7 @@ def reference_tree(cache_root,olp_pin,out,check=False,product='slc-screen-pdf'):
     write_assembly(tree,report,out,check);return report
 
 
-def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False,book_ledger=None,web_profile=None):
+def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-screen-pdf',english=False,olp_pin=None,resume=False,book_ledger=None,web_profile=None,web_product="accessible"):
     product_data,book=load_build_product(product)
     if not out:raise ValueError('build requires an explicit named --out directory')
     output=Path(out).resolve();boundary=(ROOT.parent/'out').resolve()
@@ -335,7 +335,7 @@ def build_command(repo,ref,edition_ref,metadata_dir,cache_root,out,product='slc-
     result=compile_book(source,report,engine,epoch,output,expected,english,resume)
     if not english and result.get('pdf'):
         from .buildchecks import verify_native_build
-        result=verify_native_build(output,repo,cache_root,metadata_dir,web_profile)
+        result=verify_native_build(output,repo,cache_root,metadata_dir,web_profile,web_product)
         if any(gate['status']=='slot_occupied' for gate in result['gates'].values()):
             return 75
         if any(gate['status']!='pass' for gate in result['gates'].values()):

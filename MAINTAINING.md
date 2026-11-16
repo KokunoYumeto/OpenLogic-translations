@@ -64,6 +64,8 @@ Use the existing edition repository and a new release tag at the verified editio
 
 For a migrated textbook, complete `olpkit sync accept`, build the native and accessible readers, cold-build both editable PDF entry points, and run `olpkit sync verify`. Package the editable web source with `olpkit package-web-source`. Extract that ZIP and follow its localized README to reproduce the HTML, offline HTML ZIP and EPUB. The exact commands and source inputs are in the [synchronization guide](olpkit/docs/SYNC_PACKETS.md).
 
+For an ordinary HTML and EPUB edition, use the `epub` product for web export and packaging. Pass `--web-product epub` to `olpkit build`, `olpkit check build` and `olpkit sync verify`. These checks bind the EPUB to the native book’s imports and numbering and require a clean EPUBCheck report. For the accessible edition, use `accessible` throughout. Verification defaults to this edition and requires a spoken reading for every formula. Each source ZIP must reproduce its own edition.
+
 Use the [Marathi release job](olpkit/data/releases/slc-mr-job.json) as a schema example. Paths resolve from the job file. Supply the actual edition checkout, native build receipt, product verification, direct TeX, native PDF source ZIP, combined web/PDF source ZIP and cold-built readers. Set the release tag, localized title, description file, scholarly credits, component licences, gate scopes and tool versions for the new edition.
 
 ```sh

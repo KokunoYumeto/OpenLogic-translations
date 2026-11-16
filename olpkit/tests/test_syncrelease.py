@@ -20,13 +20,19 @@ class WebReleaseTests(unittest.TestCase):
             native, combined = root / "native.zip", root / "book.zip"
             with ZipFile(native, "w") as z:
                 z.writestr("book.tex", b"source")
-            def stage(source):
+            def stage(source, product=None):
                 record = {"inputs": {"source/book.tex": digest(source)}, "outputs": outputs}
+                if product is not None:
+                    record["product"] = product
                 with ZipFile(combined, "w") as z:
                     z.writestr("source/book.tex", source)
                     z.writestr("WEB-EDITION.json", json.dumps(record))
             stage(b"source")
             verify_web_bundle(combined, native, root, verified)
+            stage(b"source", "epub")
+            with self.assertRaisesRegex(ValueError, "different verified web product"):
+                verify_web_bundle(combined, native, root, verified)
+            verify_web_bundle(combined, native, root, {**verified, "web_product": "epub"})
             stage(b"different source")
             with self.assertRaisesRegex(ValueError, "preserve"):
                 verify_web_bundle(combined, native, root, verified)

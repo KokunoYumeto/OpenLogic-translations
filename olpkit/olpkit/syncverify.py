@@ -116,22 +116,27 @@ def verify_projected_units(rows, epub_order, build, scope):
             raise ValueError("web unit differs from the source used by the native reader: " + row["path"])
 
 
-def web_assets(directory, build, gate, scope):
+def web_assets(directory, build, gate, scope, web_product="accessible"):
+    if web_product not in ("accessible", "epub") or gate.get("web_product", "accessible") != web_product:
+        raise ValueError("web gate does not verify the requested product")
     if gate["pdf_sha256"] != build["pdf"]["sha256"] or gate["units"] != len(scope) or gate["issues"]:
         raise ValueError("web gate belongs to a different PDF or scope")
     raw = checked_file(directory, gate["export"], gate["export_sha256"])
     export = json.loads(raw)
     root = (directory / gate["export"]).parent
     rows = export["projection"]["unit_order"]
-    if export["assembly_sha256"] != build["assembly_sha256"] or export["product"] != "accessible":
+    if export["assembly_sha256"] != build["assembly_sha256"] or export["product"] != web_product:
         raise ValueError("web reader does not match the native imports")
     verify_projected_units(rows, export["epub"]["unit_order"], build, scope)
     if (set(gate["files"]) != {"reader.html","reader.epub"}
             or export["native_numbers"]["total"] != export["native_numbers"]["matched"]
-            or gate["numbers"] != export["native_numbers"]["total"] or not gate["numbers"]
-            or export["speech"]["with_spoken_text"] != export["speech"]["formula_occurrences"]
-            or gate["spoken_formulas"] != export["speech"]["with_spoken_text"]):
-        raise ValueError("web formats, numbering or spoken mathematics incomplete")
+            or gate["numbers"] != export["native_numbers"]["total"] or not gate["numbers"]):
+        raise ValueError("web formats or numbering incomplete")
+    if web_product == "accessible":
+        speech = export.get("speech")
+        if (not speech or speech["with_spoken_text"] != speech["formula_occurrences"]
+                or gate["spoken_formulas"] != speech["with_spoken_text"]):
+            raise ValueError("spoken mathematics incomplete in accessible edition")
     checks = export["epubcheck"]
     diagnostics = json.loads(checked_file(root, "EPUBCHECK.json", gate["epubcheck_sha256"]))
     if checks["report_sha256"] != gate["epubcheck_sha256"] or checks["exit_code"] or checks["diagnostics"] or diagnostics["messages"]:
@@ -200,7 +205,8 @@ def verify_product(args, cache):
     gates = native_gates(directory,build,scope)
     export_path, check_path = Path(args.source_export), Path(args.package_check)
     sources = source_assets(export_path,check_path,directory,build)
-    web = web_assets(directory,build,gates["G-EPUB"],scope)
+    web_product = getattr(args, "web_product", "accessible")
+    web = web_assets(directory,build,gates["G-EPUB"],scope,web_product)
     changed = {r["path"] for r in revised}
     affected = {}
     for name in edition["products"]:
@@ -212,7 +218,7 @@ def verify_product(args, cache):
               "source_units":len(rows), "reader_units":len(scope), "changed_units_by_product":affected,
               "native_build_sha256":digest(build_bytes), "assembly_sha256":digest(assembly_bytes),
               "package_check_sha256":digest(check_path.read_bytes()), "pdf":pdf, "source_assets":sources,
-              "web_assets":web, "web_export_sha256":gates["G-EPUB"]["export_sha256"],
+              "web_product":web_product, "web_assets":web, "web_export_sha256":gates["G-EPUB"]["export_sha256"],
               "gates":{k:v["status"] for k,v in build["gates"].items()}, "status":"pass"}
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)

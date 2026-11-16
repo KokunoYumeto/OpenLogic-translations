@@ -18,6 +18,9 @@ from .syncaccept import save_acceptance
 def verify_web_bundle(archive, native, cold, verification):
     with ZipFile(archive) as package, ZipFile(native) as original:
         manifest = json.loads(package.read("WEB-EDITION.json"))
+        product = manifest.get("product", "accessible")
+        if product not in ("epub", "accessible") or product != verification.get("web_product", "accessible"):
+            raise ValueError("source bundle belongs to a different verified web product")
         members = package.namelist()
         if (set(members) != set(manifest["inputs"]) | {"WEB-EDITION.json"}
                 or len({n.casefold() for n in members}) != len(members)):

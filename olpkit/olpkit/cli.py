@@ -166,7 +166,7 @@ def main(argv=None):
     assembly=sub.add_parser('assemble');assembly.add_argument('--repo',required=True);assembly.add_argument('--ref',default='HEAD');assembly.add_argument('--edition-ref');assembly.add_argument('--metadata-dir');assembly.add_argument('--product',default='slc-screen-pdf');assembly.add_argument('--out',required=True);assembly.add_argument('--check',action='store_true')
     build=sub.add_parser('build');build.add_argument('--repo');build.add_argument('--ref',default='HEAD');build.add_argument('--edition-ref');build.add_argument('--metadata-dir');build.add_argument('--product',default='slc-screen-pdf');build.add_argument('--out',required=True);build.add_argument('--english',action='store_true');build.add_argument('--olp-pin');build.add_argument('--resume',action='store_true')
     assembly.add_argument('--book-ledger');build.add_argument('--book-ledger')
-    build.add_argument('--web-profile', help='Numbered, accessible EPUB profile bound to the native PDF')
+    build.add_argument('--web-profile', help='Numbered web edition profile bound to the native PDF')
     export=sub.add_parser('export');export.add_argument('--source',required=True);export.add_argument('--product',choices=['cumulative-tex','source-zip','html','epub','accessible'],required=True);export.add_argument('--out',required=True);export.add_argument('--profile');export.add_argument('--build');export.add_argument('--credits');export.add_argument('--instructions');export.add_argument('--check-numbers',action='store_true');export.add_argument('--check-speech',action='store_true')
     figures=sub.add_parser('figures');figures.add_argument('--source',required=True);figures.add_argument('--context',required=True);figures.add_argument('--profile',required=True);figures.add_argument('--out',required=True);figures.add_argument('--resume',action='store_true')
     pdf=sub.add_parser('pdf').add_subparsers(dest='action',required=True)
@@ -178,6 +178,9 @@ def main(argv=None):
     q.add_argument('--mode', choices=['both','modular','cumulative'], default='both')
     q=check.add_parser('build');q.add_argument('--build',required=True);q.add_argument('--repo',required=True);q.add_argument('--metadata-dir')
     q.add_argument('--web-profile')
+    for web_command in (build, q, verify):
+        web_command.add_argument('--web-product', choices=('epub', 'accessible'), default='accessible',
+                                 help='Verify the ordinary EPUB or the edition with complete formula speech')
     q=check.add_parser('credits');q.add_argument('--source',required=True);q.add_argument('--policy',required=True);q.add_argument('--out',required=True);q.add_argument('--pdf');q.add_argument('--build')
     q=check.add_parser('scale');q.add_argument('--pdf',required=True);q.add_argument('--specimen',required=True);q.add_argument('--language-data',required=True);q.add_argument('--out',required=True)
     status=sub.add_parser('status',help='compare committed source, translation and released product inputs')
@@ -239,7 +242,7 @@ def main(argv=None):
                 return verify_package(a.export,a.build,a.out,mode_choice=a.mode)
             if a.action=='build':
                 from .buildchecks import verify_native_build
-                report=verify_native_build(a.build,a.repo,CACHE,a.metadata_dir,a.web_profile)
+                report=verify_native_build(a.build,a.repo,CACHE,a.metadata_dir,a.web_profile,a.web_product)
                 if any(gate['status']=='slot_occupied' for gate in report['gates'].values()):
                     return 75
                 return int(any(gate['status']!='pass' for gate in report['gates'].values()))
@@ -282,7 +285,7 @@ def main(argv=None):
             assemble_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.check,book_ledger=a.book_ledger)
         elif a.command=='build':
             from .build import build_command
-            return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin,a.resume,book_ledger=a.book_ledger,web_profile=a.web_profile)
+            return build_command(a.repo,a.ref,a.edition_ref,a.metadata_dir,CACHE,a.out,a.product,a.english,a.olp_pin,a.resume,book_ledger=a.book_ledger,web_profile=a.web_profile,web_product=a.web_product)
         elif a.command=='lint' and a.action in ('units','tokens'):
             from .unitlint import lint_units
             return lint_units(a.repo,a.ref,CACHE,a.out,a.english,a.olp_pin,a.scope,a.check,a.action=='tokens')

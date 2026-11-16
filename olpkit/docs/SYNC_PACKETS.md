@@ -94,7 +94,7 @@ the localized formula readings in a single source ZIP.
 python -m olpkit package-web-source --build build-final \
   --profile accessible-profile.json --source-export source-package/EXPORT.json \
   --web-export accessible/EXPORT.json --pdf-profile pdf-export-profile.json \
-  --builder-licence LICENSE --instructions web-build.md --out textbook-source.zip
+  --builder-licence olpkit/LICENSE --instructions web-build.md --out textbook-source.zip
 ```
 
 Extract the ZIP into a new directory and follow its README. The included

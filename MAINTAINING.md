@@ -158,7 +158,7 @@ npm run check
 
 Inspect the generated reader links and commit the corresponding hub files. Verify the public hub and direct downloads after the push.
 
-The Marathi textbook uses 176 imported units. The complete Marathi collection at the same upstream revision covers 722 units. To reproduce the collection, unpack its editable source ZIP, regenerate the cumulative TeX with `python -X utf8 tools/prepare_complete.py`, then follow the Marathi build guide for the guarded PDF build, HTML, EPUB and their checks. The release manifest lists the output hashes, including those of the 79 editable chapter extracts. [Textbook](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/slc-2026-11-15) · [Complete collection](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/releases/tag/complete-2026-11-15) · [Collection build guide](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/complete-2026-11-15/publication/complete-source-mr.md).
+The Marathi textbook uses 176 imported units. The complete collection covers 722. The [Marathi edition](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN) links to the current readers. To reproduce the collection, unpack its editable source ZIP in an empty directory and follow the included Marathi README. Compare the cumulative LaTeX, PDF, every file in the offline HTML download and the EPUB. The [collection packaging instructions](https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/main/publication/prepare-complete-release-mr.md) explain how to produce the source archive and the 79 editable chapter extracts.
 
 Legacy editions with missing pins, resource indexes or product profiles need those inputs before they can complete an unattended release.
 

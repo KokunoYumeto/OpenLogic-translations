@@ -116,7 +116,16 @@ def book_scope(book, snapshot, rows):
         return None
     data = tomllib.loads(snapshot.read_many([config])[config].decode("utf-8-sig"))
     path = book_dir+str(relative_path(data["imports_lock"]))
-    members = parse_imports(snapshot.read_many([path])[path].decode("utf-8-sig"))
+    text = snapshot.read_many([path])[path].decode("utf-8-sig")
+    if "\t" not in text:
+        # Earlier course manifests list paths alone. Bind them to the same edition ledger.
+        lines = []
+        for name in text.splitlines():
+            if name not in rows or not rows[name]["id"]:
+                raise ValueError("book imports an unrecognized unit: "+name)
+            lines.append(rows[name]["id"]+"\t"+name)
+        text = "\n".join(lines)
+    members = parse_imports(text)
     scope = set()
     for uid,path in members:
         if path not in rows or rows[path]["id"] != uid:

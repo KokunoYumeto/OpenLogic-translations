@@ -6,9 +6,9 @@ import subprocess
 import tempfile
 import unittest
 
-from olpkit.assembly import digest
+from olpkit.assembly import GitSnapshot, digest
 from olpkit.edition import git_blob
-from olpkit.status import status_command
+from olpkit.status import book_scope, status_command
 
 
 class StatusTest(unittest.TestCase):
@@ -117,6 +117,18 @@ attribution_policy = "preserve-recorded-else-unresolved"
         self.assertEqual(report["counts"],{"new":1,"stale":1,"removed":1})
         self.assertEqual(report["products"][1]["changed_units"],["content/a.tex"])
         self.assertEqual(report["products"][1]["changed_upstream_support"],["sty/open-logic.sty"])
+
+    def test_path_only_book_imports_resolve_to_unique_edition_units(self):
+        filename = "courses/sets-logic-computation/imports.lock"
+        rows = {row["path"]:row for row in self.rows}
+        def scope(contents):
+            self.put(self.target, filename, contents.encode())
+            return book_scope("slc-screen-pdf", GitSnapshot(self.target,self.commit(self.target)), rows)
+        self.assertEqual(scope("content/b.tex\ncontent/a.tex\n"), set(rows))
+        with self.assertRaisesRegex(ValueError, "duplicate"):
+            scope("content/a.tex\ncontent/a.tex\n")
+        with self.assertRaisesRegex(ValueError, "unrecognized"):
+            scope("content/unknown.tex\n")
 
     def test_current_label_cannot_hide_changed_target_or_forged_source_digest(self):
         self.rows[1]["src_sha256"]="0"*64

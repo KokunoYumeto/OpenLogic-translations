@@ -112,6 +112,15 @@ olpkit fetch --repo ../OpenLogic-mr-Deva-IN
 olpkit edition validate --repo ../OpenLogic-mr-Deva-IN
 ```
 
+For a new English revision, build the English reference once per textbook and set of source revisions. Its TeX recorder determines exactly which Open Logic units the book imports. The command stores that list under `olpkit/data/books/` for use by every language edition at the same revisions. From the hub root, use a fresh output directory beneath `out/`. Replace `UPSTREAM_COMMIT` with the full SHA from `pins.olp.commit` and use the textbook’s product ID.
+
+```sh
+olpkit fetch --product slc-screen-pdf --olp-pin UPSTREAM_COMMIT
+olpkit build --english --product slc-screen-pdf --olp-pin UPSTREAM_COMMIT --out out/english-slc-update
+```
+
+For Marathi *Sets, Logic, Computation*, set `sources.olp.commit` in `courses/sets-logic-computation/MANIFEST.json` to that same revision. Under `current_canonical_marathi_units` record the edition commit containing the reviewed units and its `mr/content` Git tree. Compare the book’s `imports.lock` with the English reference list. If the lists differ, review the added and removed units before updating the book’s list, count and checksum. Update the source link on the edition page and copyright page, retaining historical authorship references. Commit the textbook metadata before running the translated build.
+
 For a migrated textbook, select the immutable commit carrying the book layer with `--ref` and the immutable commit carrying shared units with `--edition-ref`. Use the same commit for both when both layers are present there. The CLI syntax is `olpkit build --repo EDITION --ref BOOK_COMMIT --edition-ref EDITION_COMMIT --product slc-screen-pdf --out out/slc`. A complete corpus release also needs its own full-reader build. The Marathi source tree provides `tools/prepare_complete.py` and its guarded build script. Consult the release's editable source and build instructions for the exact product. The published native builder currently provides a Windows capped TeX runner. Cross-platform packet planning and verification require no TeX installation.
 
 Compare the new English and translated structure, formulas, citations, references, coverage, Unicode and target-language spelling. Build serially with a bounded process tree. Check the actual PDF: extract the text page by page, inspect glyphs, proof trees, table alignment, scale and links, and compare a second clean build. Count overfull boxes and repair protrusions above about 2 pt through layout. Render and inspect every page that showed an overflow above 10 pt and a spread of pages across the book. Check the final HTML/EPUB numbering and destinations against the PDF, math alternatives and local navigation. Run EPUBCheck on the final EPUB. Preserve the mathematical wording during layout repairs.

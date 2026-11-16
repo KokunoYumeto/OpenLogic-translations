@@ -13,6 +13,7 @@ from .cache import relative_path
 from .schemas import validate_schema
 from .status import contract
 from .syncaccept import save_acceptance
+from .upstreamtags import monthly_tags, tag_for_commit
 
 
 def verify_web_bundle(archive, native, cold, verification):
@@ -88,6 +89,8 @@ def stage(job_path, out):
                "attribution": job["attribution"], "license": job["license"], "engine": edition["engine"],
                "unit_ledger": {"path": "units.jsonl", "sha256": digest(snapshot.read_many(["units.jsonl"])["units.jsonl"])},
                "tool_versions": job["tool_versions"]}
+    if "upstream_tag" in edition:
+        release["upstream_tag"] = edition["upstream_tag"]
     for key, (file, fmt) in payloads.items():
         name = names[key]
         if relative_path(name).name != name or name == "release.json":
@@ -120,6 +123,7 @@ def publish_staged(snapshot, url, release, out, title, notes, public=False):
     validate_schema("release", release)
     edition = contract(snapshot)
     if (url != edition["repository"].removesuffix(".git") or snapshot.commit != release["commit"]
+            or release.get("upstream_tag") != edition.get("upstream_tag")
             or release["edition"] != edition["locale"] or release["product_group"] not in edition["products"]
             or any(edition["pins"].get(key) != pin for key, pin in release["pins"].items())):
         raise ValueError("Staged release differs from the edition at its commit")
@@ -154,6 +158,16 @@ def publish_staged(snapshot, url, release, out, title, notes, public=False):
     hooks = json.loads(gh("api", "--paginate", "--slurp", endpoint + "/hooks?per_page=100"))
     if any("zenodo" in json.dumps(h).lower() for page in hooks for h in page):
         raise ValueError("a Zenodo webhook is configured on the edition repository")
+    def find_release():
+        pages = json.loads(gh("api", "--paginate", "--slurp", endpoint + "/releases?per_page=100"))
+        return next((r for page in pages for r in page if r["tag_name"] == tag), None)
+    state = find_release()
+    if state is None:
+        recorded = release.get("upstream_tag")
+        actual = tag_for_commit(monthly_tags(), edition["pins"]["olp"]["commit"], recorded)
+        if recorded != actual:
+            raise ValueError(f"New release expects upstream_tag = {actual!r}. Run maintain.py upstream-tag "
+                             "on the edition before verifying the release commit.")
     remote_tag = "refs/tags/" + tag
     existing = snapshot.run("ls-remote", url, remote_tag, remote_tag + "^{}").decode().splitlines()
     if existing and existing[-1].split()[0] != snapshot.commit:
@@ -163,10 +177,8 @@ def publish_staged(snapshot, url, release, out, title, notes, public=False):
     snapshot.run("fetch", "--no-tags", url, remote_tag + ":" + remote_tag)
     if snapshot.run("rev-parse", "--verify", remote_tag + "^{commit}").decode().strip() != snapshot.commit:
         raise ValueError("fetched release tag differs from the verified edition")
-    def find_release():
-        pages = json.loads(gh("api", "--paginate", "--slurp", endpoint + "/releases?per_page=100"))
-        return next((r for page in pages for r in page if r["tag_name"] == tag), None)
-    state = find_release()
+    if state is None:
+        state = find_release()
     if state is None:
         body = {"tag_name": tag, "target_commitish": snapshot.commit, "name": title,
                 "body": notes, "draft": True}

@@ -145,6 +145,21 @@ attribution_policy = "preserve-recorded-else-unresolved"
         with self.assertRaisesRegex(ValueError,"release commit differs"):
             self.status()
 
+    def test_monthly_source_metadata_does_not_invalidate_a_reader(self):
+        path = self.target / "olp-edition.toml"
+        path.write_bytes(b'upstream_tag = "none yet"\n' + path.read_bytes())
+        self.commit(self.target)
+        self.assertEqual([p["state"] for p in self.status()["products"]], ["current", "current"])
+        path.write_bytes(path.read_bytes().replace(b'engine = "xelatex"', b'engine = "lualatex"'))
+        self.commit(self.target)
+        self.assertIn("olp-edition.toml", self.status()["products"][0]["unresolved_edition_files"])
+
+    def test_receipt_cannot_invent_an_upstream_tag_on_a_historical_edition(self):
+        p = self.receipts[0]
+        p.write_text(json.dumps({**json.loads(p.read_bytes()), "upstream_tag": "26.11"}))
+        with self.assertRaisesRegex(ValueError, "upstream tag"):
+            self.status()
+
     def test_unmapped_translation_and_unknown_nonunit_impact(self):
         self.put(self.target,"mr/content/unlisted.tex",b"extra target")
         self.put(self.target,"book-configuration.tex",b"new configuration")

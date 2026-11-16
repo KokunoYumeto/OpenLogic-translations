@@ -18,7 +18,8 @@ from urllib.request import Request, urlopen
 
 
 HUB = Path(__file__).resolve().parent
-UPSTREAM = "https://github.com/OpenLogicProject/OpenLogic"
+sys.path.insert(0, str(HUB/"olpkit"))
+from olpkit.upstreamtags import MONTH, UPSTREAM, monthly_tags, record_tag, tag_for_commit
 FULL_SHA = re.compile(r"[0-9a-f]{40}")
 
 
@@ -199,8 +200,13 @@ def prepare(args):
     cache=upstream_cache(args.cache.resolve())
     current=git("rev-parse","refs/heads/master",cwd=cache).decode().strip()
     goal=args.to or current
+    tags = monthly_tags() if args.summary_only or MONTH.fullmatch(goal) else {}
+    if MONTH.fullmatch(goal):
+        if goal not in tags:
+            raise ValueError("No such upstream monthly release: "+goal)
+        goal = tags[goal]
     if not FULL_SHA.fullmatch(goal):
-        raise ValueError("--to must be a full immutable upstream commit")
+        raise ValueError("--to must be a full upstream commit or a published YY.MM tag")
     git("merge-base","--is-ancestor",goal,current,cwd=cache)
     destination=args.out.resolve()
     if destination.exists():
@@ -246,6 +252,9 @@ def prepare(args):
                 result["pin_evidence"]="shared catalogue freeze only"
                 result["issues"].append("verify edition-specific source pin before applying changes")
             result["from"]=old; result["to"]=goal
+            if args.summary_only:
+                result["from_upstream_tag"] = tag_for_commit(tags, old, data.get("upstream_tag"))
+                result["to_upstream_tag"] = tag_for_commit(tags, goal, args.to)
             if old not in deltas:
                 deltas[old]=changes(cache,old,goal)
             delta=deltas[old]
@@ -395,6 +404,8 @@ def watch(args):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     commands=parser.add_subparsers(dest="command",required=True)
+    tag=commands.add_parser("upstream-tag",help="record the upstream monthly tag for an edition's pinned commit")
+    tag.add_argument("--edition-dir",type=Path,required=True,help="checkout containing olp-edition.toml")
     release=commands.add_parser("release",help="stage a verified textbook or publish it and check the public downloads")
     release.add_argument("--job",required=True,type=Path,help="release metadata and input paths")
     release.add_argument("--out",required=True,type=Path,help="directory for release assets and verified download receipt")
@@ -402,7 +413,7 @@ def main():
     plan=commands.add_parser("plan",help="fetch exact sources and prepare one packet per registered edition")
     plan.add_argument("--edition",help="registry ID or locale; omitted selects all")
     plan.add_argument("--edition-commit",help="replay a packet from one immutable edition commit")
-    plan.add_argument("--to",help="full upstream commit; defaults to master")
+    plan.add_argument("--to",help="full upstream commit or published YY.MM tag; defaults to master")
     plan.add_argument("--out",required=True,type=Path)
     plan.add_argument("--cache",type=Path,default=Path(".olp-maintenance/cache"))
     plan.add_argument("--summary-only",action="store_true",help="compute the changes without downloading target units")
@@ -414,8 +425,10 @@ def main():
     check.add_argument("--cache",type=Path,default=Path(".olp-maintenance/cache"))
     check.add_argument("--publish",action="store_true",help="open the advisory in the translations hub")
     args=parser.parse_args()
+    if args.command=="upstream-tag":
+        print("upstream tag:",record_tag(args.edition_dir, monthly_tags()))
+        return 0
     if args.command=="release":
-        sys.path.insert(0,str(HUB/"olpkit"))
         from olpkit.syncrelease import publish
         return publish(args.job,args.out,args.publish)
     if args.command=="watch":

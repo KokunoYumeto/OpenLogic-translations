@@ -212,6 +212,8 @@ def product_status(snapshot, edition, product, scope, rows, comparison, receipt_
         result["missing_evidence"] = "product import scope unavailable"
         return result
     release_contract = contract(released)
+    if release_contract.get("upstream_tag") != receipt.get("upstream_tag"):
+        raise ValueError("release upstream tag differs from the tagged edition contract")
     if any(release_contract["pins"].get(source) != pin for source,pin in receipt["pins"].items()):
         raise ValueError("release source pins differ from the tagged edition contract")
     # Compare the raw translated blobs imported by this product, even if a
@@ -240,6 +242,9 @@ def product_status(snapshot, edition, product, scope, rows, comparison, receipt_
     # An unrelated translated unit can be excluded from a book with a known
     # scope. Other changed inputs require evidence from the actual product.
     exempt = {"units.jsonl"}
+    if ("upstream_tag" in edition and release_contract.get("upstream_tag") != edition["upstream_tag"]
+            and {**release_contract, "upstream_tag": edition["upstream_tag"]} == edition):
+        exempt.add("olp-edition.toml")
     differences = sorted(p for p in changed_paths(released.entries,snapshot.entries)
                          if p not in exempt and not p.startswith((old_content,new_content)))
     if differences or result["changed_upstream_support"]:

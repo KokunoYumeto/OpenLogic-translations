@@ -27,6 +27,16 @@ Each unit directory contains the English `before.tex` and `after.tex` where pres
 
 ## Translate the delta
 
+For a monthly Open Logic release, pass its published `YY.MM` tag to `plan --to`. The packet uses the exact commit behind the tag, including when Git stores it as an annotated tag. To inspect the source tags currently associated with each edition, run `python maintain.py plan --summary-only --out ../olp-tag-inventory` and read each edition’s `from_upstream_tag` beside its commit and pin evidence.
+
+Once you set `pins.olp.commit` to the reviewed source revision in the edition checkout, record its upstream tag before committing the edition metadata and verifying the build:
+
+```sh
+python maintain.py upstream-tag --edition-dir ../edition
+```
+
+The command writes the top-level `upstream_tag` in `olp-edition.toml`. It records `none yet` until the first monthly upstream release. Afterward, it records `untagged` for commits between monthly releases. The edition’s `release.json` carries this same value alongside the source commit. Its separate `tag` field identifies the translated edition’s own release. Historical manifests can predate the `upstream_tag` field.
+
 1. Clone the repository in `edition.json` and check out its recorded edition commit on a work branch. If its default branch has moved, generate a new packet against that head before merging. A `/tree/<branch>/<path>` URL identifies the edition's subdirectory in that branch.
 2. Read the entire source passage on both sides and the current target. Identify what changed mathematically. A language edition may already contain the correction. Keep that reading if it still agrees with the new source. Record additions, moves, retirements and changes to build inputs separately. Assign a stable identity to a new unit and check dependent imports and cross-references.
 3. For each changed passage consult the cited scholarship in the target language. Follow passage IDs to their source, edition and page. The automatically matched terms are suggestions based on changed English lines. For example, the Marathi entry for *set* points to MR-P001 and MR-P007. Read the relevant passages before choosing a rendering. When the packet lacks a resource, locate it in the edition's source release or obtain an appropriate scholarly source and record the exact passage. Keep the original term record and any conflicting evidence.

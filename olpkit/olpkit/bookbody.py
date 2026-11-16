@@ -128,7 +128,7 @@ def build_body(inputs,context,profile,output):
     bindings['figures']=bind_figures(doc,figure_receipt,asset_prefix='assets/native',fallback_alt=figure_name,
         descriptions={key:r['alt_text'] for key,r in descriptions.items()})
     bindings['diagram_descriptions']=attach_long_descriptions(doc,figure_receipt,descriptions,
-        labels=description_sets[0]['labels'],figure_label=figure_name)
+        labels=description_sets[0]['labels'],figure_label=figure_name,attribution=profile.get('diagram_attribution'))
     images=doc.xpath('.//span[@class="olp-native-figure"]')
     if [n.get('data-source-sha256') for n in images]!=[r['source_sha256'] for r in exported['figures']]:
         raise ValueError('full diagram order differs from source')

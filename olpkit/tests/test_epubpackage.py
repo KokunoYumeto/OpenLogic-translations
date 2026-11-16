@@ -115,6 +115,18 @@ class ReflowPackageTests(unittest.TestCase):
             doc=etree.fromstring(archive.read('OEBPS/chapter-002.xhtml'))
             self.assertEqual(doc.xpath('.//*[local-name()="img"]/@alt'),[''])
 
+    def test_details_remain_navigable_after_chapter_split(self):
+        source=self.html.replace(b'Exact text',b'<img src="a.svg" alt="Graph" aria-details="notes"/>'
+                                 b'<a href="#notes">Diagram description</a> Exact text')
+        source=source.replace(b'Retained proof.',b'<span id="notes">Two vertices.</span>')
+        data,_=self.run_package(source,assets={'a.svg':b'<svg/>'})
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            doc=etree.fromstring(archive.read('OEBPS/chapter-001.xhtml'))
+            target=doc.xpath('string(//*[@aria-details]/@aria-details)')
+            self.assertEqual(doc.xpath('string(//*[@id=$id]/@href)',id=target),'chapter-002.xhtml#notes')
+        with self.assertRaisesRegex(ValueError,'adjacent description link'):
+            self.run_package(source.replace(b'<a href="#notes">Diagram description</a>',b''),assets={'a.svg':b'<svg/>'})
+
     def test_source_scripts_and_unregistered_links_are_rejected(self):
         with self.assertRaisesRegex(ValueError,'scripts or unbound'):
             self.run_package(self.html.replace(b'Retained proof.',b'<script>example()</script>'))

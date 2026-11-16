@@ -200,7 +200,7 @@ def bind_figures(document, receipt, *, asset_prefix, fallback_alt, descriptions=
             'descriptions_pending': pending, 'reader_complete': False}
 
 
-def attach_long_descriptions(document, receipt, descriptions, *, labels, figure_label):
+def attach_long_descriptions(document, receipt, descriptions, *, labels, figure_label, attribution=None):
     """Add source-bound descriptions with visible links and return links.
 
     Keep the original mathematical paragraphs intact. Full descriptions live in
@@ -234,6 +234,10 @@ def attach_long_descriptions(document, receipt, descriptions, *, labels, figure_
         pairs.append((row,desc,nodes[0],imgs[0],figure_id))
     section=etree.Element('section',id='olp-diagram-descriptions',attrib={'class':'olp-diagram-descriptions','aria-labelledby':'olp-diagram-descriptions-heading'})
     etree.SubElement(section,'h2',id='olp-diagram-descriptions-heading').text=labels['descriptions_heading']
+    if attribution is not None:
+        if not isinstance(attribution,str) or not attribution.strip():
+            raise ValueError('empty diagram-description attribution')
+        etree.SubElement(section,'p',attrib={'class':'olp-diagram-attribution'}).text=attribution
     for row,desc,node,img,figure_id in pairs:
         target='olp-diagram-description-'+str(row['index'])
         img.set('aria-details',target)

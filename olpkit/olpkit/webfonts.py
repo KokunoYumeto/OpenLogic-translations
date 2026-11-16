@@ -19,9 +19,18 @@ def bind_web_fonts(document, config, read):
         raise ValueError('explicit regular/bold source font faces required')
     ident='olp-web-font-licence'
     if document.xpath('.//*[@id=$id]',id=ident):raise ValueError('font licence identifier already exists')
-    licence=read(config['licence_source']);title_source=read(config['title_source'])
-    title=title_source.decode('utf-8-sig').splitlines()[0]
-    if not title.startswith('# ') or not title[2:].strip():raise ValueError('native font notice heading absent')
+    licence=read(config['licence_source'])
+    if 'title_source' in config:
+        title_path=config['title_source']
+        title_source=read(title_path)
+        heading=title_source.decode('utf-8-sig').splitlines()[0]
+        if not heading.startswith('# ') or not heading[2:].strip():raise ValueError('native font notice heading absent')
+        title=heading[2:].strip()
+    else:
+        # The embedded family name is checked against every font face below.
+        title_path=faces[0]['source']
+        title_source=read(title_path)
+        title=family
     if not licence.strip():raise ValueError('native font licence absent')
     assets={};html_css=[];epub_css=[];rows=[]
     text=text_without_annotations(document)+title+licence.decode('utf-8-sig')
@@ -44,10 +53,10 @@ def bind_web_fonts(document, config, read):
     declaration='body{font-family:"'+family+'",serif;}'
     html_css.append(declaration);epub_css.append(declaration)
     section=etree.SubElement(document,'section',id=ident,attrib={'class':'olp-font-licence'})
-    etree.SubElement(section,'h1').text=title[2:].strip()
+    etree.SubElement(section,'h1').text=title
     etree.SubElement(section,'pre',lang='en').text=licence.decode('utf-8-sig')
     report={'family':family,'script':script,'faces':rows,'licence_source':config['licence_source'],
-            'licence_sha256':hashlib.sha256(licence).hexdigest(),'title_source':config['title_source'],
+            'licence_sha256':hashlib.sha256(licence).hexdigest(),'title_source':title_path,
             'title_source_sha256':hashlib.sha256(title_source).hexdigest(),'licence_html_id':ident,
             'native_licence_text_preserved':True}
     return assets,'\n'.join(html_css),'\n'.join(epub_css),report

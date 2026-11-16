@@ -44,6 +44,15 @@ class NativeWebFontTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'family differs'):
             bind_web_fonts(html.fromstring('<div><p>क</p></div>'),config,self.data.__getitem__)
 
+    def test_native_family_names_the_licence_when_no_notice_heading_exists(self):
+        config=deepcopy(self.config)
+        del config['title_source']
+        doc=html.fromstring('<div><p>क</p></div>')
+        _,_,_,record=bind_web_fonts(doc,config,self.data.__getitem__)
+        self.assertEqual(doc.xpath('.//h1')[0].text,config['family'])
+        self.assertEqual(record['title_source'],'font.ttf')
+        self.assertEqual(doc.xpath('.//pre')[0].text.encode(),self.data['OFL.txt'])
+
     def test_other_scripts_and_shared_script_punctuation_are_checked(self):
         config=deepcopy(self.config);config['script']='Beng'
         with self.assertRaisesRegex(ValueError,'lacks used Beng'):

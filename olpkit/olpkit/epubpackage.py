@@ -53,6 +53,36 @@ def math_signature(node, anchor_owners=None):
             [[math_signature(child,anchor_owners),child.tail] for child in node if isinstance(child.tag,str)]]
 
 
+def local_detail_targets(document, member, owners):
+    """An ARIA ID reference must resolve in this XHTML file after chapter splitting."""
+    for element in document.xpath('.//*[@aria-details]'):
+        resolved=[]
+        for target in element.get('aria-details').split():
+            owner=owners.get(target)
+            if owner is None:
+                raise ValueError('missing aria-details target: '+target)
+            if owner==member:
+                resolved.append(target)
+                continue
+            urls=('#'+target,owner+'#'+target)
+            links=[a for a in element.getparent().iter('{'+XHTML+'}a')
+                   if a.get('href') in urls and text_without_annotations(a).strip()]
+            if len(links)!=1:
+                raise ValueError('cross-chapter aria-details requires an adjacent description link: '+target)
+            link=links[0]
+            ident=link.get('id')
+            if not ident:
+                ident=target+'-link'
+                while ident in owners:
+                    ident+='-link'
+                link.set('id',ident)
+                owners[ident]=member
+            resolved.append(ident)
+        if not resolved:
+            raise ValueError('empty aria-details reference')
+        element.set('aria-details',' '.join(resolved))
+
+
 def package_html(source_bytes, profile, expected_units, assets, supplements):
     """Return EPUB bytes and measured preservation facts without file-system writes.
 
@@ -154,6 +184,7 @@ def package_html(source_bytes, profile, expected_units, assets, supplements):
             raise ValueError('invalid or colliding resource member')
         files[name]=data
     for name,node in documents.items():
+        local_detail_targets(node,name,id_owner)
         for image in node.xpath('.//*[local-name()="img"]'):
             original=image.get('src','');mapped=profile['resource_map'].get(original)
             if mapped is None and original in assets:mapped=original

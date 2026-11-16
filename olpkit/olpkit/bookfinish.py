@@ -4,7 +4,7 @@ import re,subprocess,collections
 from urllib.parse import unquote
 from lxml import html
 from .bookcontext import sha,source_caption
-from .bookfront import native_frontmatter,native_cover_width
+from .bookfront import native_definitions,native_frontmatter,native_cover_width
 from .bookart import bind_book_art
 from .bookheadings import read_contents,bind_headings
 from .bookcaptions import bind_captions
@@ -21,8 +21,13 @@ def finish_book(inputs,body_bytes,profile,output):
         if sha(data)!=native_manifest['files'][name]['sha256']:
             raise ValueError('native front-matter/art input differs: '+name)
         return data.decode('utf-8-sig')
+    if 'text_definitions' in f:
+        cover_text='\n'.join(native_definitions(same_native(item['source']),item['names'])
+                             for item in f['text_definitions'])
+    else:
+        cover_text=same_native(f['cover_text'])
     projection,definitions,front=native_frontmatter(same_native('sty/open-logic-book.cls'),
-        same_native(f['metadata']),same_native(profile['locale_source']),same_native(f['cover_text']),
+        same_native(f['metadata']),same_native(profile['locale_source']),cover_text,
         inputs.text(f['driver']),language=profile['babel'],evidence={'source_inputs':dict(inputs.inputs)},
         style_source=same_native('sty/open-logic.sty'))
     definitions=re.sub(r'(\[width=)(\.\d+cm\])',r'\g<1>0\2',definitions)

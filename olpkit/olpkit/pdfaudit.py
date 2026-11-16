@@ -31,8 +31,9 @@ def extracted_text(path):
     tool = shutil.which('pdftotext')
     if not tool:
         raise ValueError('pdftotext is required; no substitute extraction for equality')
-    run = subprocess.run([tool, '-enc', 'UTF-8', str(Path(path).resolve()), '-'],
-                         capture_output=True, timeout=120, check=True)
+    with Path(path).open('rb') as source:
+        run = subprocess.run([tool, '-enc', 'UTF-8', '-', '-'], stdin=source,
+                             capture_output=True, timeout=120, check=True)
     return run.stdout, run.stderr.decode('utf-8', errors='replace')
 
 

@@ -9,6 +9,7 @@ from pathlib import Path, PurePosixPath
 import re
 import subprocess
 import sys
+import tarfile
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import tomllib
@@ -116,6 +117,56 @@ def content_unit(path):
     return bool(path and path.startswith("content/") and path.endswith(".tex"))
 
 
+def upstream_content_inventory(cache, commit):
+    """Hash the actual Git blobs, without inheriting working-tree line endings."""
+    listing = git("ls-tree", "-r", "-z", commit, "--", "content", cwd=cache)
+    objects = {}
+    for entry in listing.split(b"\0")[:-1]:
+        meta, name = entry.split(b"\t", 1)
+        path = name.decode("utf-8")
+        if content_unit(path):
+            mode, kind, oid = meta.decode().split()
+            if kind != "blob" or mode not in ("100644", "100755"):
+                raise ValueError("expected a regular upstream source file: " + path)
+            objects[path] = oid
+
+    # Archive in one operation so a partial Git clone can prefetch its blobs.
+    packed = git("-c", "core.autocrlf=false", "archive", "--format=tar", commit, "--", "content", cwd=cache)
+    inventory = {}
+    with tarfile.open(fileobj=io.BytesIO(packed)) as archive:
+        members = {member.name: member for member in archive if member.isfile()}
+        for path, oid in objects.items():
+            member = members.get(path)
+            body = archive.extractfile(member).read() if member else None
+            # Git export attributes can omit or transform a blob in the archive.
+            if body is None or hashlib.sha1(b"blob " + str(len(body)).encode() + b"\0" + body).hexdigest() != oid:
+                body = git("cat-file", "blob", oid, cwd=cache)
+            inventory[path] = (len(body), sha(body))
+    return inventory
+
+
+def source_manifest_pin(raw, cache, inventories, unit_map):
+    rows = term_records(raw, "manifest.jsonl")
+    commits = {row["source_commit"] for row in rows}
+    if len(commits) != 1 or not FULL_SHA.fullmatch(next(iter(commits))):
+        raise ValueError("edition source manifest must name one upstream commit")
+    commit = commits.pop()
+    if commit not in inventories:
+        inventories[commit] = upstream_content_inventory(cache, commit)
+    expected = inventories[commit]
+    seen_paths, seen_ids = set(), set()
+    for row in rows:
+        path, unit = row["source_path"], row["unit_id"]
+        if (path in seen_paths or unit in seen_ids or not unit or unit_map.get(path, unit) != unit
+                or path not in expected or expected[path] != (row["source_bytes"], row["source_sha256"].lower())):
+            raise ValueError("edition source manifest disagrees with upstream text or unit identity: " + path)
+        seen_paths.add(path)
+        seen_ids.add(unit)
+    if seen_paths != expected.keys():
+        raise ValueError("edition source manifest omits upstream content")
+    return commit, len(rows)
+
+
 def write_technical_files(cache, old, new, delta, folder):
     """Keep build, style and data changes once per source baseline across editions."""
     folder.mkdir(parents=True)
@@ -143,7 +194,24 @@ def write_technical_files(cache, old, new, delta, folder):
     return sha(manifest)
 
 
-def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_rows, root):
+def prior_choices_by_unit(rows, segment_field):
+    """Index the edition's own segment associations, independently of English word matching."""
+    choices = {}
+    for number, row in enumerate(rows, start=1):
+        segments = row.get(segment_field, [])
+        if not isinstance(segments, list):
+            continue
+        locations = {}
+        for segment in segments:
+            match = re.match(r"^(OLP-[0-9]+)(?:$|[-.:])", segment) if isinstance(segment, str) else None
+            if match:
+                locations.setdefault(match[1], []).append(segment)
+        for unit, ids in locations.items():
+            choices.setdefault(unit, []).append({"termbase_record": number, "segments": ids})
+    return choices
+
+
+def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_rows, root, prior_choices=None):
     name=change["after"] or change["before"]
     key=unit_map.get(change["before"]) or unit_map.get(name)
     if not key:
@@ -180,6 +248,8 @@ def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_r
                 issues.append("unit ledger does not match English or current target")
     record={"unit":key,"change":change,"files":files,"diff_sha256":sha(patch),
             "term_rows":matching,"issues":issues}
+    if prior_choices is not None:
+        record["prior_segment_choices"] = prior_choices.get(key, [])
     (packet/"unit.json").write_bytes(encode(record))
     return {"unit":key,"path":name,"record_sha256":sha(encode(record)),"issues":issues}
 
@@ -212,7 +282,7 @@ def prepare(args):
     if destination.exists():
         raise ValueError("use a fresh output directory; existing packets are preserved")
     destination.parent.mkdir(parents=True,exist_ok=True)
-    heads={}; deltas={}; reports=[]; technical={}
+    heads={}; deltas={}; reports=[]; technical={}; inventories={}
     with TemporaryDirectory(dir=destination.parent,prefix="olp-plan-") as scratch:
         root=Path(scratch)/"packets";root.mkdir()
         for row in selected:
@@ -247,6 +317,14 @@ def prepare(args):
                 result["contract_sha256"]=sha(contract)
             elif old and FULL_SHA.fullmatch(old):
                 result["pin_evidence"]="edition source_revision in catalogue"
+            elif config_row.get("source_manifest") and not getattr(args, "replay_shared_freeze", False):
+                path = config_row["source_manifest"]
+                manifest = get(path)
+                old, count = source_manifest_pin(manifest, cache, inventories, unit_map)
+                result["pin_evidence"] = "edition source manifest checked against upstream Git blobs"
+                result["source_manifest"] = {"path": path, "sha256": sha(manifest), "units": count}
+                if not args.summary_only:
+                    (folder/"source-manifest.jsonl").write_bytes(manifest)
             else:
                 old=baseline
                 result["pin_evidence"]="shared catalogue freeze only"
@@ -284,7 +362,11 @@ def prepare(args):
                     result["resources"][role]={"path":path,"packet_file":name,"sha256":sha(body)}
                     if role=="termbase":
                         terms=term_records(body,path)
-                result["units"]=[unit_packet(cache,old,goal,c,paths,get,unit_map,indexes,terms,folder) for c in units]
+                segment_field = paths.get("termbase_segments")
+                prior_choices = None
+                if segment_field and not getattr(args, "replay_shared_freeze", False):
+                    prior_choices = prior_choices_by_unit(terms, segment_field)
+                result["units"]=[unit_packet(cache,old,goal,c,paths,get,unit_map,indexes,terms,folder,prior_choices) for c in units]
                 if not paths.get("content"):
                     result["issues"].append("locate the current target sources for this edition")
             (folder/"edition.json").write_bytes(encode(result))
@@ -319,7 +401,8 @@ def verify_packet(args):
     with TemporaryDirectory(prefix="olp-replay-") as scratch:
         replay = Path(scratch)/"packets"
         prepare(SimpleNamespace(edition=identity, edition_commit=record["edition_commit"],
-                                to=record["to"], cache=args.cache, out=replay, summary_only=False))
+                                to=record["to"], cache=args.cache, out=replay, summary_only=False,
+                                replay_shared_freeze=record.get("pin_evidence") == "shared catalogue freeze only"))
         count = compare_files(original, replay/identity)
         technical = Path("upstream")/record["from"]
         count += compare_files(original.parent/technical, replay/technical)

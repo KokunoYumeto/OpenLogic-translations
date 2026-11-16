@@ -25,6 +25,10 @@ Open `summary.json` first. Each edition directory contains `edition.json`. Read 
 
 Each unit directory contains the English `before.tex` and `after.tex` where present, the Git diff, and the current target where located. `unit.json` records the file identities and term matches. The edition directory includes the available terminology, spelling rules, canon passage index and canon source index. The shared `upstream/<old-commit>/files.json` describes changes to styles, images, drivers and other non-unit files. Its blob files retain the original bytes. `verify-packet` replays the original pins, detects changed or missing files, and works even after the edition advances. Keep translations and new notes outside that original packet.
 
+For French, Pakistan Punjabi, Pakistan Pashto, Tamil and Telugu, the planner can recover the starting revision from the source manifest in the edition repository. It compares every recorded English file with the corresponding upstream Git blob and checks the stable unit identifiers. The full packet includes the exact manifest. Review each changed unit against its current translation to see which upstream corrections have already been incorporated.
+
+French packets also list the earlier translation choices that the edition links to segments in each changed unit. `prior_segment_choices` points to numbered records in the accompanying terminology file, starting at one. Read the recorded rationale and cited passages before deciding whether a choice still fits the changed English. An empty list means the indexed file supplies no such choice for that unit.
+
 ## Translate the delta
 
 For a monthly Open Logic release, pass its published `YY.MM` tag to `plan --to`. The packet uses the exact commit behind the tag, including when Git stores it as an annotated tag. To inspect the source tags currently associated with each edition, run `python maintain.py plan --summary-only --out ../olp-tag-inventory` and read each edition’s `from_upstream_tag` beside its commit and pin evidence.

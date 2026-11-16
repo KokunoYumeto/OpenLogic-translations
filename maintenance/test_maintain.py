@@ -8,6 +8,44 @@ import maintain as m
 
 
 class PacketTest(unittest.TestCase):
+    def test_prior_choice_keeps_exact_segment_and_record_locations(self):
+        rows = [{}, {"segments": ["OLP-0001-B04", "OLP-0010-B07", "unassigned"]},
+                {"segments": ["OLP-0001-B08"]}]
+        links = m.prior_choices_by_unit(rows, "segments")
+        self.assertEqual(links["OLP-0001"], [{"termbase_record": 2, "segments": ["OLP-0001-B04"]},
+                                             {"termbase_record": 3, "segments": ["OLP-0001-B08"]}])
+        self.assertEqual(links["OLP-0010"], [{"termbase_record": 2, "segments": ["OLP-0010-B07"]}])
+
+    def test_source_manifest_checks_original_git_bytes_and_unit_coverage(self):
+        with TemporaryDirectory() as scratch:
+            tree = Path(scratch)
+            m.git("init", "-q", cwd=tree)
+            m.git("config", "core.autocrlf", "false", cwd=tree)
+            (tree/"content").mkdir()
+            # The archive omits one file even though Git tracks its original bytes.
+            (tree/".gitattributes").write_bytes(b"content/b.tex export-ignore\n")
+            texts = {"content/a.tex": b"first\n", "content/b.tex": b"second\r\n"}
+            for path, body in texts.items():
+                (tree/path).write_bytes(body)
+            m.git("add", ".", cwd=tree)
+            m.git("-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                  "commit", "-qm", "source", cwd=tree)
+            commit = m.git("rev-parse", "HEAD", cwd=tree).decode().strip()
+            rows = [dict(source_path=path, unit_id=f"OLP-{i:04}", source_commit=commit,
+                         source_bytes=len(body), source_sha256=m.sha(body))
+                    for i, (path, body) in enumerate(texts.items(), start=1)]
+            ids = {r["source_path"]: r["unit_id"] for r in rows}
+            inventory = {}
+            def check(items):
+                manifest = "\n".join(json.dumps(row) for row in items).encode()
+                return m.source_manifest_pin(manifest, tree, inventory, ids)
+            self.assertEqual(check(rows), (commit, 2))
+            for invalid in (rows[:1], [*rows, rows[0]], [rows[0], {**rows[1], "source_sha256": "0"*64}],
+                            [rows[0], {**rows[1], "source_commit": "0"*40}],
+                            [rows[0], {**rows[1], "unit_id": rows[0]["unit_id"]}]):
+                with self.assertRaises(ValueError):
+                    check(invalid)
+
     def test_added_removed_renamed_and_technical_inputs(self):
         with TemporaryDirectory() as scratch:
             root = Path(scratch)

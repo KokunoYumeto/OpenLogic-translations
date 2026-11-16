@@ -3,11 +3,45 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 
 import maintain as m
 
 
 class PacketTest(unittest.TestCase):
+    def test_review_rejects_a_changed_pin_source_excerpt_or_link(self):
+        with TemporaryDirectory() as scratch:
+            root = Path(scratch)
+            unit = "OLP-0018"
+            folder = root / "units" / unit
+            folder.mkdir(parents=True)
+            keys = {"id":"openlogic-fr", "from":"a"*40, "to":"b"*40, "edition_commit":"c"*40}
+            packet = {**keys, "units":[{"unit":unit}], "repository":"https://github.com/Other/Edition"}
+            (root/"edition.json").write_bytes(m.encode(packet))
+            paths = {"before":{"path":"content/x.tex"}, "after":{"path":"content/x.tex"},
+                     "current_target":{"path":"fr/x.tex"}}
+            (folder/"unit.json").write_bytes(m.encode({"files":paths}))
+            passage = {"unit":unit, "target_lines":[2,2], "excerpt_sha256":m.sha(b"passage"),
+                       "source_before":f"{m.UPSTREAM}/blob/{keys['from']}/content/x.tex",
+                       "source_after":f"{m.UPSTREAM}/blob/{keys['to']}/content/x.tex",
+                       "target":f"{packet['repository']}/blob/{keys['edition_commit']}/fr/x.tex#L2-L2"}
+            for name, field, data in (("before.tex","before_sha256",b"old"),("after.tex","after_sha256",b"new"),
+                                      ("current-target.tex","target_sha256",b"heading\r\npassage\r\n")):
+                (folder/name).write_bytes(data)
+                passage[field] = m.sha(data)
+            path = root/"review.json"
+            record = {**keys, "passages":[passage]}
+            path.write_bytes(m.encode(record))
+            self.assertEqual(m.verify_review(path, root), 1)
+            for change in ({"to":"d"*40}, {"passages":[]},
+                           *({"passages":[{**passage, **edit}]} for edit in (
+                               {"target_lines":[1,1]}, {"target_lines":[0,1]}, {"target":"wrong"},
+                               {"source_after":"wrong"}, {"target_sha256":"wrong"}, {"before_sha256":"wrong"}))):
+                path.write_bytes(m.encode({**record, **change}))
+                with self.subTest(change=change), self.assertRaises(ValueError):
+                    m.verify_review(path, root)
+
     def test_prior_choice_keeps_exact_segment_and_record_locations(self):
         rows = [{}, {"segments": ["OLP-0001-B04", "OLP-0010-B07", "unassigned"]},
                 {"segments": ["OLP-0001-B08"]}]
@@ -107,6 +141,40 @@ class PacketTest(unittest.TestCase):
 
 
 class WatchTest(unittest.TestCase):
+    def test_resolves_local_and_action_hub_from_its_own_checkout(self):
+        for remote in ("https://github.com/Other/Library.git", "git@github.com:Other/Library.git",
+                       "ssh://git@github.com/Other/Library.git"):
+            with self.subTest(remote=remote), patch.object(m, "git", return_value=remote.encode()), \
+                    patch.dict(m.os.environ, {"GITHUB_ACTIONS": "true", "GITHUB_REPOSITORY": "other/library"}):
+                self.assertEqual(m.notification_repository(), "Other/Library")
+        for remote in (m.UPSTREAM, "https://example.org/Other/Library",
+                       "https://github.com/Other/Library/tree/main/sub", "https://github.com/Wrong/Checkout"):
+            with self.subTest(remote=remote), patch.object(m, "git", return_value=remote.encode()), \
+                    patch.dict(m.os.environ, {"GITHUB_ACTIONS": "true", "GITHUB_REPOSITORY": "Other/Library"}):
+                with self.assertRaises(ValueError):
+                    m.notification_repository()
+
+    def test_watch_reads_and_posts_to_same_fork_then_recognizes_its_closed_notice(self):
+        previous, current = "b"*40, "a"*40
+        notices = [{"title": m.WATCH_TITLE+" "+previous[:12], "state": "closed",
+                    "author_association": "OWNER", "body": f"<!-- openlogic-upstream:{previous} -->"}]
+        def fork_api(repository, path, payload=None):
+            self.assertEqual(repository, "Other/Library")
+            if payload is None:
+                return notices
+            self.assertEqual(path, "issues")
+            self.assertIn("Other/Library/blob/HEAD/MAINTAINING.md", payload["body"])
+            notices.insert(0, {**payload, "state": "closed", "author_association": "OWNER"})
+            return {"html_url": "https://github.com/Other/Library/issues/2"}
+        with TemporaryDirectory() as scratch, patch.object(m, "notification_repository", return_value="Other/Library"), \
+                patch.object(m, "git", return_value=current.encode()), patch.object(m, "hub_api", side_effect=fork_api), \
+                patch.object(m, "changes", return_value=[]), patch.object(m, "prepare", return_value={"target": current, "editions": []}) as plan:
+            args = SimpleNamespace(publish=True, out=Path(scratch), cache=Path(scratch))
+            m.watch(args)
+            m.watch(args)
+            self.assertEqual(len(notices), 2)
+            plan.assert_called_once()
+
     def test_closed_verified_marker_only(self):
         commit = "a"*40
         valid = {"title": m.WATCH_TITLE+" "+commit[:12], "state":"closed",
@@ -118,7 +186,7 @@ class WatchTest(unittest.TestCase):
 
     def test_long_delta_links_the_complete_comparison(self):
         rows = [{"before":None,"after":f"content/{i}.tex","status":"A"} for i in range(120)]
-        result = m.format_advisory({"target":"a"*40,"editions":[]}, "b"*40, rows)
+        result = m.format_advisory({"target":"a"*40,"editions":[]}, "b"*40, rows, "Other/Library")
         self.assertIn("all 120 changed files",result)
         self.assertIn("79.tex",result)
         self.assertNotIn("80.tex",result)

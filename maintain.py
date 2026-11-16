@@ -1,6 +1,7 @@
 """Plan Open Logic edition maintenance using only Python 3.11+, Git and the public repositories."""
 import argparse
 import csv
+from functools import partial
 import hashlib
 import io
 import json
@@ -376,7 +377,6 @@ def prepare(args):
     return summary
 
 
-HUB_REPOSITORY = "KokunoYumeto/OpenLogic-translations"
 WATCH_TITLE = "Open Logic source update"
 MARKER = re.compile(r"<!-- openlogic-upstream:([0-9a-f]{40}) -->")
 
@@ -409,8 +409,65 @@ def verify_packet(args):
     print(f"{identity}: {count} files identical to a new source and edition replay.")
 
 
-def hub_api(path, payload=None):
-    command=["gh","api","repos/"+HUB_REPOSITORY+"/"+path]
+def verify_review(review_path, packet_dir):
+    """Bind editorial findings to the source and translated passages they describe."""
+    review = json.loads(review_path.read_bytes())
+    packet = json.loads((packet_dir / "edition.json").read_bytes())
+    for key in ("id", "from", "to", "edition_commit"):
+        if review[key] != packet[key]:
+            raise ValueError("review and edition packet differ at " + key)
+    units = {row["unit"] for row in packet["units"]}
+    repository, _, prefix = edition_location(packet["repository"])
+    if not review["passages"]:
+        raise ValueError("the review contains no passages")
+    for passage in review["passages"]:
+        unit = passage["unit"]
+        if unit not in units or not re.fullmatch(r"(?:OLP-[0-9]+|new-[a-f0-9]{12})", unit):
+            raise ValueError("review unit is absent from the packet")
+        folder = packet_dir / "units" / unit
+        files = json.loads((folder / "unit.json").read_bytes())["files"]
+        for filename, hash_field in (("before.tex", "before_sha256"), ("after.tex", "after_sha256"),
+                                     ("current-target.tex", "target_sha256")):
+            if sha((folder / filename).read_bytes()) != passage[hash_field]:
+                raise ValueError(f"{unit}: {filename} differs from the reviewed file")
+        lines = (folder / "current-target.tex").read_text(encoding="utf-8").splitlines()
+        start, end = passage["target_lines"]
+        if not 1 <= start <= end <= len(lines):
+            raise ValueError(f"{unit}: invalid target line range")
+        excerpt = "\n".join(lines[start - 1:end]).encode("utf-8")
+        if sha(excerpt) != passage["excerpt_sha256"]:
+            raise ValueError(f"{unit}: target lines differ from the reviewed excerpt")
+        for side, pin in (("before", "from"), ("after", "to")):
+            url = f"{UPSTREAM}/blob/{packet[pin]}/" + quote(files[side]["path"])
+            if passage["source_" + side] != url:
+                raise ValueError(f"{unit}: unexpected English {side} link")
+        target = (PurePosixPath(prefix) / files["current_target"]["path"]).as_posix()
+        url = f"https://github.com/{repository}/blob/{packet['edition_commit']}/{quote(target)}#L{start}-L{end}"
+        if passage["target"] != url:
+            raise ValueError(f"{unit}: unexpected target link")
+    return len(review["passages"])
+
+
+def notification_repository():
+    """Notify the hub in this checkout, including when it is a fork."""
+    origin = git("remote", "get-url", "origin", cwd=HUB).decode().strip().rstrip("/")
+    for prefix in ("git@github.com:", "ssh://git@github.com/"):
+        if origin.startswith(prefix):
+            origin = "https://github.com/" + origin.removeprefix(prefix)
+            break
+    repository, _, _ = edition_location(origin.removesuffix(".git"))
+    if origin.removesuffix(".git") != "https://github.com/" + repository:
+        raise ValueError("the hub origin must be a GitHub repository URL")
+    if repository.casefold() == UPSTREAM.removeprefix("https://github.com/").casefold():
+        raise ValueError("set the hub origin to the edition hub; upstream supplies the source")
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        if repository.casefold() != os.environ.get("GITHUB_REPOSITORY", "").casefold():
+            raise ValueError("the checked-out hub and the workflow repository differ")
+    return repository
+
+
+def hub_api(repository, path, payload=None):
+    command=["gh","api","--hostname","github.com","repos/"+repository+"/"+path]
     if payload is not None:
         command.extend(["--method","POST","--input","-"])
     run=subprocess.run(command,input=encode(payload) if payload is not None else None,
@@ -420,7 +477,7 @@ def hub_api(path, payload=None):
     return json.loads(run.stdout)
 
 
-def last_notification(api=hub_api):
+def last_notification(api):
     page=1
     while True:
         listing=api("issues?state=all&sort=created&direction=desc&per_page=100&page="+str(page))
@@ -437,7 +494,7 @@ def last_notification(api=hub_api):
         page+=1
 
 
-def format_advisory(summary, previous, updates):
+def format_advisory(summary, previous, updates, repository):
     current=summary["target"]
     body=[f"<!-- openlogic-upstream:{current} -->",
           f"[Upstream comparison]({UPSTREAM}/compare/{previous}...{current})", "",
@@ -460,15 +517,15 @@ def format_advisory(summary, previous, updates):
         if row["pin_evidence"]=="shared catalogue freeze only":
             link+=" · shared baseline, edition pin to verify"
         body.append(f"| {name} | {link} | {row['changed_units']} |")
-    body.extend(["","[Maintenance guide](https://github.com/"+HUB_REPOSITORY+"/blob/main/MAINTAINING.md)"])
+    body.extend(["","[Maintenance guide](https://github.com/"+repository+"/blob/HEAD/MAINTAINING.md)"])
     return "\n".join(body)+"\n"
 
 
 def watch(args):
-    if args.publish and os.environ.get("GITHUB_REPOSITORY",HUB_REPOSITORY).casefold()!=HUB_REPOSITORY.casefold():
-        raise ValueError("scheduled notifications belong to the translations hub")
+    repository = notification_repository()
+    api = partial(hub_api, repository)
     observed=git("ls-remote","--exit-code",UPSTREAM+".git","refs/heads/master").decode().split()[0]
-    previous=last_notification() or json.loads((HUB/"maintenance/editions.json").read_bytes())["monitor_baseline"]
+    previous=last_notification(api) or json.loads((HUB/"maintenance/editions.json").read_bytes())["monitor_baseline"]
     if observed==previous:
         print("Hub notification already covers upstream master.")
         return
@@ -477,10 +534,10 @@ def watch(args):
     args.summary_only=True
     summary=prepare(args)
     updates=changes(args.cache.resolve()/"upstream.git",previous,observed)
-    body=format_advisory(summary,previous,updates)
+    body=format_advisory(summary,previous,updates,repository)
     (args.out/"issue.md").write_text(body,encoding="utf-8",newline="\n")
-    if args.publish and last_notification()!=observed:
-        issue=hub_api("issues",{"title":WATCH_TITLE+" "+observed[:12],"body":body})
+    if args.publish and last_notification(api)!=observed:
+        issue=api("issues",{"title":WATCH_TITLE+" "+observed[:12],"body":body})
         print(issue["html_url"])
 
 
@@ -503,6 +560,9 @@ def main():
     verify=commands.add_parser("verify-packet",help="compare an original packet with a new replay at both pins")
     verify.add_argument("--packet",required=True,type=Path,help="edition directory containing edition.json")
     verify.add_argument("--cache",type=Path,default=Path(".olp-maintenance/cache"))
+    review=commands.add_parser("verify-review",help="check the source and target witnesses of a maintenance review")
+    review.add_argument("--record",required=True,type=Path)
+    review.add_argument("--packet",required=True,type=Path,help="edition directory containing edition.json")
     check=commands.add_parser("watch",help="prepare one hub advisory for a new upstream master")
     check.add_argument("--out",required=True,type=Path)
     check.add_argument("--cache",type=Path,default=Path(".olp-maintenance/cache"))
@@ -519,6 +579,10 @@ def main():
         return 0
     if args.command=="verify-packet":
         verify_packet(args)
+        return 0
+    if args.command=="verify-review":
+        count = verify_review(args.record, args.packet)
+        print(f"{count} reviewed passages match the pinned source and target files.")
         return 0
     result=prepare(args)
     for row in result["editions"]:

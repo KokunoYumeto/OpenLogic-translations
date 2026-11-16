@@ -2,6 +2,22 @@
 
 Start here when the English sources change. The [Open Logic Project](https://github.com/OpenLogicProject/OpenLogic) supplies the mathematics. This hub lists language editions in `registry.toml`. Each edition repository owns its translations, scholarly terminology, reader formats and releases. A textbook such as *Sets, Logic, Computation* selects units from that content and adds its own preface, summaries, glossary, driver and credits. A change in one unit can affect the full reader and several textbooks.
 
+## Maintaining these editions yourself
+
+The editions are maintained here, and requests are welcome through [the hub’s issues](https://github.com/KokunoYumeto/OpenLogic-translations/issues). You can also maintain an edition from your own checkout. For the translation work, a coding agent signed in through an ordinary Codex or Claude Code subscription can read and edit the packet. Packet preparation, compilation, checks and release use command-line tools. They require no model-provider API key, paid API calls, access to another maintainer’s computer or Zenodo account. The share of a subscription needed to update all editions over a monthly release cycle has yet to be measured.
+
+Install Git and Python 3.11 or later for the planner. To build and publish, use a GitHub account, the GitHub CLI and the TeX engine, fonts and format tools listed under [Build and check](#build-and-check). The native textbook build currently uses Windows. The packet tools also run on Linux.
+
+If you work from forks, fork the hub and the editions you want to publish. Clone your hub fork as `origin`. Enable Issues and GitHub Actions there, including the **Upstream source changes** workflow. It reads the original Open Logic sources and posts advisories to the hub checkout’s own repository. To publish an edition from your fork, set its repository URL in its edition contract and catalogue record, and set the corresponding URL in your hub’s `registry.toml`. For a legacy catalogue entry, update the matching file in `catalogue/legacy/`. A GitHub transfer likewise requires checking these URLs. Read back your release links and regenerate the hub. Earlier releases, original source credits and immutable source citations keep their original identities.
+
+For each new upstream release:
+
+1. [Plan the update](#find-the-changes) for the edition with `--to YY.MM` and verify the resulting packet.
+2. [Translate the delta](#translate-the-delta) against the existing edition and its cited canon. Record which passages already incorporate the correction.
+3. [Build and check](#build-and-check) the complete reader and each textbook that imports the changed units.
+4. [Stage and publish](#publish-and-regenerate-the-hub) to the edition repository you control. Verify the downloadable readers and editable sources.
+5. Regenerate the hub catalogue and check that its reading and download links lead to your edition.
+
 ## Find the changes
 
 Install Git and Python 3.11 or newer. In the commands below, use the Python interpreter that reports that version. The planner uses the standard library. A public clone suffices for preparing and verifying packets.
@@ -28,6 +44,16 @@ Each unit directory contains the English `before.tex` and `after.tex` where pres
 For French, Pakistan Punjabi, Pakistan Pashto, Tamil and Telugu, the planner can recover the starting revision from the source manifest in the edition repository. It compares every recorded English file with the corresponding upstream Git blob and checks the stable unit identifiers. The full packet includes the exact manifest. Review each changed unit against its current translation to see which upstream corrections have already been incorporated.
 
 French packets also list the earlier translation choices that the edition links to segments in each changed unit. `prior_segment_choices` points to numbered records in the accompanying terminology file, starting at one. Read the recorded rationale and cited passages before deciding whether a choice still fits the changed English. An empty list means the indexed file supplies no such choice for that unit.
+
+The [French comparison of nine corrections](maintenance/reviews/openlogic-fr/9cf6715a.json) links the English before and after each correction to the corresponding French lines. Two entries distinguish a correct French formula from a footnote that describes the older English source. To recover the passages at their recorded revisions:
+
+```sh
+python maintain.py plan --edition fr --edition-commit 0ef12147a948c09d02319e1d075b713db44e7778 --to 9cf6715abaf33c45911c2380562fcd3d8e7636ba --out ../fr-review-packet
+python maintain.py verify-packet --packet ../fr-review-packet/openlogic-fr
+python maintain.py verify-review --packet ../fr-review-packet/openlogic-fr --record maintenance/reviews/openlogic-fr/9cf6715a.json
+```
+
+The last command checks each cited file and excerpt against the record. Read the linked passages to assess the mathematical judgment or apply it to a later edition.
 
 ## Translate the delta
 

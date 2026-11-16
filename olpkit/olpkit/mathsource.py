@@ -346,7 +346,9 @@ class SourceMath:
             if series not in ('m','b','bx') or shape not in ('n','it'):
                 raise ValueError('unsupported source math alphabet weight/shape')
             body=(r'\mathit{#1}' if shape=='it' else r'\mathrm{#1}')
-            if series in ('b','bx'):body=r'\boldsymbol{'+body+'}'
+            if series in ('b','bx'):
+                # texmath lets the inner \mathit override \boldsymbol, losing the weight.
+                body = r'\mathbfit{#1}' if shape == 'it' else r'\boldsymbol{'+body+'}'
             parts.append(r'\newcommand{'+name+r'}[1]{'+body+'}')
             rows.append({**row,'mathml_style_body':body,'exact_font_face_acceptance':False})
         return '\n'.join(parts),rows

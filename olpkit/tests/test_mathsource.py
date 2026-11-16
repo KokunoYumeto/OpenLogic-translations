@@ -98,11 +98,27 @@ class SourceMathTests(unittest.TestCase):
     def test_source_alphabet_style_is_explicit_and_unknown_shapes_fail(self):
         c=self.converter();c.configure(r'\DeclareMathAlphabet{\mathbi}{OT1}{pplx}{b}{it}','font')
         preamble,rows=c.font_preamble()
-        self.assertEqual(preamble,r'\newcommand{\mathbi}[1]{\boldsymbol{\mathit{#1}}}')
+        self.assertEqual(preamble,r'\newcommand{\mathbi}[1]{\mathbfit{#1}}')
         self.assertEqual(rows[0]['origin']['source'],'font')
         self.assertFalse(rows[0]['exact_font_face_acceptance'])
         c.configure(r'\DeclareMathAlphabet{\odd}{OT1}{pplx}{m}{sc}','unknown-font')
         with self.assertRaisesRegex(ValueError,'weight/shape'):c.font_preamble()
+
+    @unittest.skipUnless(shutil.which('pandoc'), 'Pandoc is needed to check rendered MathML')
+    def test_bold_italic_model_symbol_survives_mathml(self):
+        from xml.etree import ElementTree
+
+        converter = self.converter()
+        converter.configure(r'\DeclareMathAlphabet{\mathbi}{OT1}{pplx}{b}{it}', 'font')
+        preamble, _ = converter.font_preamble()
+        source = preamble + '\n\n' + r'$\mathbi{M}$'
+        output = subprocess.run(
+            ['pandoc', '--from=latex', '--to=html5', '--mathml'],
+            input=source, text=True, encoding='utf-8', capture_output=True, check=True,
+        )
+        symbol = ElementTree.fromstring(output.stdout).find('.//{*}mi')
+        self.assertIsNotNone(symbol)
+        self.assertEqual((symbol.get('mathvariant'), symbol.text), ('bold-italic', '\U0001d474'))
 
     def test_formula_mapping_obeys_captured_symbol_aliases(self):
         c=self.converter();c.configure(r'\let\varphi\psi','symbol-alias')

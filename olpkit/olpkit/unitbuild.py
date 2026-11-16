@@ -22,7 +22,10 @@ def unit_driver(driver, unit):
     if len(markers) != 1:
         raise ValueError("expected one native document boundary")
     directory = "/".join(path.parts[1:-1])
-    return (driver[:markers[0].end()] + "\n" + r"\olimport*[" + directory + "]{"
+    # The complete book selects OLPpage in its front matter, which this driver omits.
+    # Memoir's default headings can uppercase token keys before OLP expands them.
+    page_style = r"\ifcsname ps@OLPpage\endcsname\pagestyle{OLPpage}\fi"
+    return (driver[:markers[0].end()] + "\n" + page_style + "\n" + r"\olimport*[" + directory + "]{"
             + path.stem + "}\n" + r"\end{document}" + "\n").encode("utf-8")
 
 

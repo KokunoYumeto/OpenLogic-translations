@@ -13,6 +13,8 @@ class NativeCheckTests(TestCase):
         header = "% \\begin{document} in a comment\n\\usepackage{example}\n\\begin{document}"
         wrapper = unit_driver(header + "\n\\input{whole-book}", "content/a/b/c.tex").decode()
         self.assertTrue(wrapper.startswith(header))
+        self.assertLess(wrapper.index(r"\ifcsname ps@OLPpage\endcsname\pagestyle{OLPpage}\fi"),
+                        wrapper.index(r"\olimport*"))
         self.assertIn(r"\olimport*[a/b]{c}", wrapper)
         self.assertNotIn("whole-book", wrapper)
         with self.assertRaises(ValueError):

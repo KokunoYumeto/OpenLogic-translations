@@ -12,6 +12,17 @@
     "path": {"type": "string", "minLength": 1},
     "before": {"type": "string", "minLength": 1},
     "after": {"type": "string"},
+    "upstream_setting": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "value", "phase", "use"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[A-Za-z]+$"},
+        "value": {"type": "string", "pattern": "^[A-Za-z0-9-]*$"},
+        "phase": {"enum": ["before_class", "before_olp"]},
+        "use": {"type": "string", "minLength": 1}
+      }
+    },
+    "alternate_before": {"type": "string", "minLength": 1},
     "input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "output_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "reason": {"type": "string", "minLength": 1},

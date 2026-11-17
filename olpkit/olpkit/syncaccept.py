@@ -32,6 +32,21 @@ def change_set(before, after):
     return {p for p in old if old[p] != new[p]}
 
 
+def technical_changes(cache, packet):
+    """Reconstruct a technical-only interval directly from both upstream Git trees."""
+    left, right = [GitSnapshot(Path(cache) / "OpenLogic.git", packet[key]) for key in ("from", "to")]
+    paths = sorted(path for path in left.entries.keys() | right.entries.keys()
+                   if left.entries.get(path) != right.entries.get(path))
+    if not paths or any(is_content(path) for path in paths):
+        raise ValueError("Expected changed upstream files outside the translated content tree")
+    if "files" in packet:
+        listed = {path for change in packet["files"] for path in (change["before"], change["after"]) if path}
+        if listed != set(paths):
+            raise ValueError("Technical packet file list differs from upstream")
+    return [{"path": path, "before": list(left.entries[path]) if path in left.entries else None,
+             "after": list(right.entries[path]) if path in right.entries else None} for path in paths]
+
+
 def validate_decision(row, bodies, witnesses):
     for name, body in bodies.items():
         if row["hashes"].get(name) != digest(body):
@@ -195,9 +210,8 @@ def accept(repo, ref, packet_dir, review_file, build_dir, out, cache):
     verify_assembly(build_dir / "source", assembly)
     if digest((build_dir / relative_path(native["pdf"]["path"])).read_bytes()) != native["pdf"]["sha256"]:
         raise ValueError("Native PDF differs from its build receipt")
-    rows = reviewed_units(json.loads(packet_bytes), folder, review, candidate, cache)
-    if not rows:
-        raise ValueError("No changed content units to accept")
+    packet = json.loads(packet_bytes)
+    rows = reviewed_units(packet, folder, review, candidate, cache)
     assembled = by_id(assembly["units"], "id")
     for row in rows:
         unit = assembled[row["unit"]]
@@ -207,28 +221,36 @@ def accept(repo, ref, packet_dir, review_file, build_dir, out, cache):
                 or unit["target_sha256"] != row["hashes"]["target_after"]
                 or assembly["files"][path]["sha256"] != row["assembled_sha256"]):
             raise ValueError(row["unit"] + ": compiled source differs from reviewed translation")
-    paths = [row["path"] for row in rows]
-    # Store diagnostics even on failure. Only a passing run writes the acceptance.
-    evidence = build_dir / "sync-accept" / digest(packet_bytes + review_bytes + assembly_bytes)
-    evidence.mkdir(parents=True, exist_ok=True)
-    scope = evidence / "scope.txt"
-    scope.write_bytes(("\n".join(paths) + "\n").encode())
-    if lint_units(repo, candidate.commit, cache, evidence / "lint", scope=scope):
-        raise ValueError("Source contract or orthography failed; see " + str(evidence / "lint"))
-    units = standalone_units(build_dir, native, assembly, paths)
-    if units["status"] == "slot_occupied":
-        print("Standalone compilation pending; TeX slot occupied")
-        return 75
-    (evidence / "standalone.json").write_bytes(json_bytes(units))
-    if units["status"] != "pass" or units["scope_units"] != len(rows):
-        raise ValueError("Standalone compilation failed; see " + str(evidence / "standalone.json"))
+    if rows:
+        paths = [row["path"] for row in rows]
+        # Store diagnostics even on failure. Only a passing run writes the acceptance.
+        evidence = build_dir / "sync-accept" / digest(packet_bytes + review_bytes + assembly_bytes)
+        evidence.mkdir(parents=True, exist_ok=True)
+        scope = evidence / "scope.txt"
+        scope.write_bytes(("\n".join(paths) + "\n").encode())
+        if lint_units(repo, candidate.commit, cache, evidence / "lint", scope=scope):
+            raise ValueError("Source contract or orthography failed; see " + str(evidence / "lint"))
+        units = standalone_units(build_dir, native, assembly, paths)
+        if units["status"] == "slot_occupied":
+            print("Standalone compilation pending; TeX slot occupied")
+            return 75
+        (evidence / "standalone.json").write_bytes(json_bytes(units))
+        if units["status"] != "pass" or units["scope_units"] != len(rows):
+            raise ValueError("Standalone compilation failed; see " + str(evidence / "standalone.json"))
+        delta_checks = {"standalone_sha256": digest(json_bytes(units))}
+    else:
+        delta_checks = {"technical_changes": technical_changes(cache, packet)}
     report = {"schema": "olpkit.sync-accept.v1", "edition_commit": candidate.commit,
               "from": review["from"], "to": review["to"], "model": review["model"], "effort": review["effort"],
               "packet_sha256": digest(packet_bytes), "review_sha256": digest(review_bytes),
               "assembly_sha256": digest(assembly_bytes), "native_pdf_sha256": native["pdf"]["sha256"],
-              "standalone_sha256": digest(json_bytes(units)), "units": rows}
+              "units": rows, **delta_checks}
     destination = Path(out)
     destination.parent.mkdir(parents=True, exist_ok=True)
     save_acceptance(destination, json_bytes(report))
-    print(f"Accepted {len(rows)} reviewed units at {candidate.commit[:12]}")
+    if rows:
+        print(f"Accepted {len(rows)} reviewed units at {candidate.commit[:12]}")
+    else:
+        print(f"Accepted {len(delta_checks['technical_changes'])} changed upstream files "
+              f"and zero changed content units at {candidate.commit[:12]}")
     return 0

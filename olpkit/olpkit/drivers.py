@@ -8,6 +8,7 @@ import tomllib
 
 from .cache import SourceCache, relative_path
 from .schemas import ROOT, validate_schema
+from .shims import edition_shims, upstream_settings
 
 
 def digest(data):
@@ -48,7 +49,7 @@ def render_template(text, values):
     return result
 
 
-def generate_drivers(edition, source_files, book_id='sets-logic-computation', data_root=None):
+def generate_drivers(edition, source_files, book_id='sets-logic-computation', data_root=None, *, settings=None):
     data_root = Path(data_root) if data_root else ROOT/'data'
     validate_schema('olp-edition',edition)
     if not re.fullmatch('[a-z0-9-]+',book_id):
@@ -79,7 +80,8 @@ def generate_drivers(edition, source_files, book_id='sets-logic-computation', da
     outputs = {}
     templates = []
     for phase in ('before_class','before_olp','after_olp'):
-        parts = []
+        parts = ['\\def\\' + item['name'] + '{' + item['value'] + '}\n'
+                 for item in (settings or {}).values() if item['phase'] == phase]
         for filename in policy.get('preamble',{}).get(phase,language['preamble'][phase]):
             relative_path(filename)
             template = (data_root/'preambles'/filename).read_bytes()
@@ -121,6 +123,8 @@ def generate_drivers(edition, source_files, book_id='sets-logic-computation', da
               'templates':templates,'evidence':language['evidence'],'transformations':transformations,
               'untranslated_driver_labels':0,'rendered_equivalence':'not checked by generation',
               'outputs':{name:{'bytes':len(data),'sha256':digest(data)} for name,data in sorted(outputs.items())}}
+    if settings:
+        report['upstream_settings'] = settings
     return outputs,report
 
 
@@ -159,6 +163,12 @@ def drivers_command(repo, metadata_dir, cache_root, out, check=False, book_id='s
     validate_schema('book',book)
     source,_ = SourceCache(cache_root).require(book['source_id'],edition['pins'][book['source_id']]['commit'])
     originals={name:(source/name).read_bytes() for name in book['drivers']}
-    outputs,report=generate_drivers(edition,originals,book_id)
+    records = edition_shims(edition)
+    paths = {shim['path'] for shim, _ in records if 'upstream_setting' in shim}
+    settings = {}
+    if paths:
+        olp, _ = SourceCache(cache_root).require('olp', edition['pins']['olp']['commit'])
+        settings = upstream_settings({name: (olp / name).read_bytes() for name in paths}, records)
+    outputs,report=generate_drivers(edition,originals,book_id,settings=settings)
     write_drivers(outputs,report,out,check)
     return report

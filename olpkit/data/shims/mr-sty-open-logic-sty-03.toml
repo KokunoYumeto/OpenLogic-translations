@@ -5,6 +5,8 @@ after = "  \\ifdefstring{\\ollangid}{mr}\n    {\\RequirePackage[capitalize,namei
 reason = "The locale supplies reference names because cleveref has no matching language option; preserve the pilot compatibility branch."
 evidence = ["https://github.com/KokunoYumeto/OpenLogic-mr-Deva-IN/blob/f8722cc37b93350e2f1b2e59d1b3fb783744e717/textbooks/slc/open-logic/sty/open-logic.sty"]
 
+upstream_setting = { name = "olreferencelanguage", value = "english", phase = "before_olp", use = "\\RequirePackage[capitalize,nameinlink,english,\\olreferencelanguage]{cleveref}" }
+
 [[conditions]]
 locale = "mr"
 engine = "xelatex"

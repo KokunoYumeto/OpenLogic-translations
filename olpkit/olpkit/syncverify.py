@@ -7,7 +7,7 @@ from .assembly import GitSnapshot, digest, json_bytes
 from .build import GATES, verify_assembly
 from .cache import relative_path
 from .status import book_scope, compare_units, contract
-from .syncaccept import reviewed_units, save_acceptance
+from .syncaccept import reviewed_units, save_acceptance, technical_changes
 
 
 def checked_file(root, name, checksum):
@@ -172,9 +172,12 @@ def verify_product(args, cache):
     accepted_assembly = checked_file(accepted_dir, "source/ASSEMBLY.json", accepted["assembly_sha256"])
     if json.loads(accepted_assembly)["edition_commit"] != accepted["edition_commit"]:
         raise ValueError("reviewed source assembly belongs to another edition commit")
-    key = digest(packet_bytes + review_bytes + accepted_assembly)
-    checks = checked_file(accepted_dir, f"sync-accept/{key}/standalone.json", accepted["standalone_sha256"])
-    standalone_evidence(accepted_dir, json.loads(checks), {r["path"] for r in revised})
+    if revised:
+        key = digest(packet_bytes + review_bytes + accepted_assembly)
+        checks = checked_file(accepted_dir, f"sync-accept/{key}/standalone.json", accepted["standalone_sha256"])
+        standalone_evidence(accepted_dir, json.loads(checks), {r["path"] for r in revised})
+    elif accepted.get("technical_changes") != technical_changes(cache, json.loads(packet_bytes)):
+        raise ValueError("Technical change acceptance differs from upstream")
     if accepted["to"] != edition["pins"]["olp"]["commit"]:
         raise ValueError("accepted delta ends at a different edition pin")
     report, rows = verify_edition_artifacts(args, cache, snapshot, edition)
@@ -185,6 +188,8 @@ def verify_product(args, cache):
         affected[name] = sorted(changed & selection) if selection is not None else None
     report.update(schema="olpkit.sync-product-verification.v1", accepted_revision=accepted["to"],
                   acceptance_sha256=digest(acceptance_bytes), changed_units_by_product=affected)
+    if not revised:
+        report["technical_changes"] = accepted["technical_changes"]
     return write_product_report(args.out, report)
 
 

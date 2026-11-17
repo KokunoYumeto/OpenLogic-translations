@@ -505,18 +505,18 @@ def format_advisory(summary, previous, updates, repository):
         body.append(f"- {change['status']} [`{path}`]({UPSTREAM}/blob/{at}/{quote(path)})")
     if len(updates)>80:
         body.append(f"\nThe comparison above includes all {len(updates)} changed files.")
-    body.extend(["","Edition coverage","","| Edition | Source comparison | Changed content units |",
-                 "| --- | --- | ---: |"])
+    body.extend(["","Edition coverage","","| Edition | Source comparison | Changed files | Changed content units |",
+                 "| --- | --- | ---: | ---: |"])
     for row in summary["editions"]:
         identity=row["id"]
         name=f"[{identity}]({row['repository']})" if row["repository"] else identity
         if "from" not in row:
-            body.append(f"| {name} | {row['status']} | — |")
+            body.append(f"| {name} | {row['status']} | — | — |")
             continue
         link=f"[{row['from'][:8]}…{current[:8]}]({UPSTREAM}/compare/{row['from']}...{current})"
         if row["pin_evidence"]=="shared catalogue freeze only":
             link+=" · shared baseline, edition pin to verify"
-        body.append(f"| {name} | {link} | {row['changed_units']} |")
+        body.append(f"| {name} | {link} | {row['changed_files']} | {row['changed_units']} |")
     body.extend(["","[Maintenance guide](https://github.com/"+repository+"/blob/HEAD/MAINTAINING.md)"])
     return "\n".join(body)+"\n"
 
@@ -586,7 +586,10 @@ def main():
         return 0
     result=prepare(args)
     for row in result["editions"]:
-        print(row["id"],row["status"],row.get("changed_units","—"),"changed units")
+        message = f"{row['id']} {row['status']}"
+        if 'changed_files' in row:
+            message += f": {row['changed_files']} changed files, {row['changed_units']} changed content units"
+        print(message)
     return 0
 
 

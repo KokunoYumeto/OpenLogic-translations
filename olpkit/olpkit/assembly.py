@@ -17,7 +17,7 @@ from .cache import SourceCache, relative_path
 from .drivers import generate_drivers
 from .edition import git_blob
 from .schemas import ROOT, validate_schema
-from .shims import apply_shims
+from .shims import localize_sources
 from .structure import active_tex
 
 
@@ -260,7 +260,7 @@ def prepare_assembly(repo, ref, edition_ref, metadata_dir, cache_root,
     tree = AssemblyTree()
     olp_folder,olp_receipt = sources['olp']
     english = {name:(olp_folder/name).read_bytes() for name in olp_receipt['files']}
-    patched,shims = apply_shims(english,edition,data_root/'shims')
+    patched,shims,settings = localize_sources(english,edition,data_root/'shims')
     for name,body in patched.items():
         if any(fnmatchcase(name,p) for p in profile['upstream_include']):
             tree.add(name,body,{'source':'olp','commit':edition['pins']['olp']['commit'],
@@ -317,7 +317,7 @@ def prepare_assembly(repo, ref, edition_ref, metadata_dir, cache_root,
             tree.add(destination,body,{'source':rule['source'],'commit':snapshot.commit,'path':name})
     slc_folder,_ = sources[profile['source_id']]
     driver_sources = {name:(slc_folder/name).read_bytes() for name in book['drivers']}
-    drivers,driver_report = generate_drivers(edition,driver_sources,profile['book'],data_root)
+    drivers,driver_report = generate_drivers(edition,driver_sources,profile['book'],data_root,settings=settings)
     for name,body in drivers.items():
         tree.add(book_prefix+'/'+name,body,{'source':'generated-driver','driver_report_sha256':digest(json_bytes(driver_report))})
     for name in profile['required_book_files']:

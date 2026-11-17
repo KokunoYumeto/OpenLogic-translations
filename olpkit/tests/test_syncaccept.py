@@ -1,9 +1,10 @@
+import subprocess
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from olpkit.assembly import digest
-from olpkit.syncaccept import by_id, save_acceptance, validate_decision
+from olpkit.syncaccept import by_id, save_acceptance, technical_changes, validate_decision
 
 
 class AcceptanceTests(unittest.TestCase):
@@ -28,6 +29,35 @@ class AcceptanceTests(unittest.TestCase):
     def test_review_cannot_use_a_bibliography_without_a_passage(self):
         with self.assertRaisesRegex(ValueError, "no source or locator"):
             validate_decision(self.row, self.bodies, {"term": {"source": "Book"}})
+
+    def test_style_only_update_requires_the_real_technical_delta(self):
+        with TemporaryDirectory() as folder:
+            repo = Path(folder) / "OpenLogic.git"
+            subprocess.run(["git", "init", "-q", str(repo)], check=True)
+            def commit():
+                subprocess.run(["git", "-C", str(repo), "add", "."], check=True)
+                subprocess.run(["git", "-C", str(repo), "-c", "user.name=Test",
+                                "-c", "user.email=test@example.invalid", "commit", "-qm", "test"], check=True)
+                return subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
+            style = "sty/open-logic.sty"
+            (repo / "sty").mkdir()
+            (repo / "content").mkdir()
+            (repo / style).write_bytes(b"original style")
+            (repo / "content/logic.tex").write_bytes(b"unchanged unit")
+            first = commit()
+            (repo / style).write_bytes(b"localized style")
+            second = commit()
+            packet = {"from":first, "to":second, "files":[{"before":style, "after":style}]}
+            rows = technical_changes(folder, packet)
+            self.assertEqual([row["path"] for row in rows], [style])
+            self.assertNotEqual(rows[0]["before"], rows[0]["after"])
+            with self.assertRaisesRegex(ValueError, "file list"):
+                technical_changes(folder, {**packet, "files":[]})
+            with self.assertRaisesRegex(ValueError, "Expected changed"):
+                technical_changes(folder, {**packet, "to":first})
+            (repo / "content/logic.tex").write_bytes(b"revised unit")
+            with self.assertRaisesRegex(ValueError, "content tree"):
+                technical_changes(folder, {**packet, "to":commit()})
 
     def test_duplicate_units_and_conflicting_receipts_are_rejected(self):
         with self.assertRaisesRegex(ValueError, "duplicate"):

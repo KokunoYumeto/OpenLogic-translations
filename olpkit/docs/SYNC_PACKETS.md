@@ -26,6 +26,8 @@ compare the edition's committed units and existing product receipts with a
 specified upstream revision. Retain the acceptance receipt for verification
 alongside the native reader, editable source and release artifacts.
 
+For a change confined to styles, classes or other build inputs, inspect the technical file index in the packet. Keep the source revisions and reviewer fields in the review record and use an empty list for `units`. Acceptance checks the two upstream trees, records the exact changed paths and Git objects, and checks the compiled candidate. Verification still requires the full product checks, editable-source rebuilds and web exports. An identical pair of trees does not constitute a technical update.
+
 ## Verify a rebuilt textbook
 
 Run the following from the builder checkout after generating both source

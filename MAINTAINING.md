@@ -75,7 +75,7 @@ The command writes the top-level `upstream_tag` in `olp-edition.toml`. It record
 
 ## Build and check
 
-For an edition with local changes to Open Logic’s style files, consult the [patches and their corresponding upstream settings](olpkit/data/shims/README.md) before updating the source pin.
+The planner reports changed upstream files and changed content units separately. A style-only change can affect every page of a textbook even when the content count is zero. The packet’s technical file index contains the old and new inputs. For an edition with local changes to Open Logic’s style files, consult the [patches and their corresponding upstream settings](olpkit/data/shims/README.md) before updating the source pin.
 
 ### English reference for *What If?*
 

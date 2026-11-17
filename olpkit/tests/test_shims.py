@@ -5,7 +5,7 @@ import shutil
 import tempfile
 import unittest
 
-from olpkit.shims import apply_shims,load_shims
+from olpkit.shims import apply_shims,load_shims,localize_sources
 
 
 class ShimTests(unittest.TestCase):
@@ -70,6 +70,37 @@ class ShimTests(unittest.TestCase):
             output,receipts=apply_shims(original,{**self.context,field:value},self.folder)
             self.assertEqual(original,output)
             self.assertEqual(receipts,[])
+
+    def test_merged_hook_retains_upstream_bytes_and_historical_fallback(self):
+        path = self.record['path']
+        with (self.folder/'sample.toml').open('a', encoding='utf-8') as f:
+            f.write("\n[upstream_setting]\nname = 'Language'\nvalue = 'english'\n"
+                    "phase = 'before_olp'\nuse = '\\load{\\Language}'\n")
+        definition = br'\providecommand*{\Language}{default}'
+        use = br'\load{\Language}'
+        hooked = b'\n'.join([definition, use, b'OLD in default'])
+        output, patches, settings = localize_sources({path:hooked}, self.context, self.folder)
+        self.assertEqual(output[path], hooked)
+        self.assertEqual(patches, [])
+        self.assertEqual(settings['sample-shim']['value'], 'english')
+        old = b'OLD\n% ' + definition + b'\n% ' + use
+        output, patches, settings = localize_sources({path:old}, self.context, self.folder)
+        self.assertEqual(output[path], old.replace(b'OLD', b'NEW'))
+        self.assertEqual(len(patches), 1)
+        self.assertEqual(settings, {})
+        for incomplete in (definition, use, hooked + b'\n' + use):
+            with self.subTest(incomplete=incomplete), self.assertRaisesRegex(ValueError, 'declaration or use'):
+                localize_sources({path:incomplete}, self.context, self.folder)
+
+    def test_alternative_package_call_keeps_the_bengali_screen_exception_scoped(self):
+        self.record['alternate_before'] = 'MODERN'
+        self.write()
+        for before in (b'OLD', b'MODERN'):
+            self.assertEqual(apply_shims({self.record['path']: before + b' PRINT'},
+                                         self.context, self.folder)[0][self.record['path']], b'NEW PRINT')
+        for unexpected in (b'OLD MODERN', b'OTHER', b'MODERN MODERN'):
+            with self.subTest(unexpected=unexpected), self.assertRaises(ValueError):
+                apply_shims({self.record['path']:unexpected}, self.context, self.folder)
 
     def test_unknown_key_is_rejected(self):
         self.record['reasom']='typo'

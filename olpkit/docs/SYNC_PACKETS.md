@@ -28,6 +28,26 @@ alongside the native reader, editable source and release artifacts.
 
 For a change confined to styles, classes or other build inputs, inspect the technical file index in the packet. Keep the source revisions and reviewer fields in the review record and use an empty list for `units`. Acceptance checks the two upstream trees, records the exact changed paths and Git objects, and checks the compiled candidate. Verification still requires the full product checks, editable-source rebuilds and web exports. An identical pair of trees does not constitute a technical update.
 
+## Carry a published textbook forward
+
+Download the editable source ZIP for the previous textbook and verify its SHA-256 against its release manifest. Extract it to `previous-release`. Use the EPUBCheck JAR identified by that edition. From the hub checkout, recover the input files used to make the earlier HTML and EPUB:
+
+```sh
+python -m olpkit release-web-template --source previous-release --repo edition --epubcheck-jar epubcheck.jar --out previous-web
+python -m olpkit rebind-credits --source build/source --previous-release previous-release --repo edition
+```
+
+The second command prints the path of the new credit policy. It checks changed notices against their previous Git versions and the assembled source. If a name, licence or other wording changed, review the actual change and update its evidence. Run the native build checks with the resulting policy.
+
+For the new web profile, create `web-inputs.json`. Its `acceptance`, `edition` and `credits_policy` fields each contain the relative `path` and hexadecimal `sha256` of the sync acceptance receipt, the new edition's `olp-edition.toml` and the new credit policy. Set `book_inputs` to an array. For each changed textbook input in the projection, record its `path`, `old` and `new` SHA-256s and the editorial `reason`. Use an empty array when none changed. The builder verifies translated units against the sync decision and checks changed upstream styles against the localized bytes at both Git revisions.
+
+```sh
+python -m olpkit web-profile --build build/BUILD.json --template previous-web/web-profile.json --sync-inputs web-inputs.json --out current-web
+python -m olpkit export --source build/source --product html --profile current-web/web-profile.json --out ordinary-html --check-numbers
+```
+
+Continue below to update the spoken mathematics and export the accessible formats.
+
 ## Verify a rebuilt textbook
 
 Run the following from the builder checkout after generating both source

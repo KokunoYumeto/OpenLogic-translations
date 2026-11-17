@@ -9,10 +9,38 @@ from lxml import html
 from olpkit.assembly import digest
 from olpkit.bookcontext import BookInputs, PACKAGE_DECLARATIONS
 from olpkit.speechreplay import original_source_locators, replay_labels
-from olpkit.webreplay import rebuild
+from olpkit.webreplay import rebuild, released_inputs
 
 
 class ReleasedWebTests(unittest.TestCase):
+    def test_release_manifest_covers_profile_and_its_witnesses(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp) / "release"
+            web = root / "web"
+            web.mkdir(parents=True)
+            jar = Path(tmp) / "checker.jar"
+            jar.write_bytes(b"checker")
+            witness = web / "notice.txt"
+            witness.write_bytes(b"notice")
+            record = {"epubcheck": {"path": "checker.jar", "sha256": digest(jar.read_bytes())},
+                      "witnesses": {"notice": {"path": "notice.txt", "sha256": digest(witness.read_bytes())}}}
+            profile = web / "profile.json"
+            profile.write_text(json.dumps(record))
+            manifest = {"web/profile.json": digest(profile.read_bytes()), "web/notice.txt": digest(witness.read_bytes())}
+            def write_manifest(files):
+                (root / "WEB-EDITION.json").write_text(json.dumps({"inputs": files}))
+            write_manifest(manifest)
+            _, resolved = released_inputs(root, jar)
+            self.assertEqual(Path(resolved["witnesses"]["notice"]["path"]), witness)
+            for key in manifest:
+                write_manifest({k: v for k, v in manifest.items() if k != key})
+                with self.assertRaisesRegex(ValueError, "manifest"):
+                    released_inputs(root, jar)
+            write_manifest(manifest)
+            witness.write_bytes(b"changed")
+            with self.assertRaisesRegex(ValueError, "input differs"):
+                released_inputs(root, jar)
+
     def test_replay_uses_the_released_product_and_preserves_older_speech_editions(self):
         class ExportReached(Exception):
             pass

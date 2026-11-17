@@ -199,6 +199,16 @@ def main(argv=None):
     status.add_argument('--to',help='compare the edition with this upstream revision')
     status.add_argument('--receipt',action='append',default=[],help='downloaded release.json; repeat per product')
     status.add_argument('--json',action='store_true')
+    prior = sub.add_parser('release-web-template', help='recover web sync inputs from a published editable textbook')
+    for arg in ('source', 'repo', 'epubcheck-jar', 'out'):
+        prior.add_argument('--' + arg, required=True)
+    credits = sub.add_parser('rebind-credits', help='carry unchanged scholarly notices to an updated OLP revision')
+    for arg in ('source', 'repo'):
+        credits.add_argument('--' + arg, required=True)
+    prior_credits = credits.add_mutually_exclusive_group(required=True)
+    prior_credits.add_argument('--policy', help='previous full credit policy')
+    prior_credits.add_argument('--previous-release', dest='policy', help='extracted editable public textbook ZIP')
+    credits.add_argument('--out', help='destination; defaults to the credit policy for the assembled pins')
     profile=sub.add_parser('web-profile',help='bind an existing language profile to an equivalent native book build')
     profile.add_argument('--build', required=True)
     profile.add_argument('--template', required=True)
@@ -217,6 +227,12 @@ def main(argv=None):
         web_source.add_argument('--' + name, required=True)
     a=p.parse_args(argv)
     try:
+        if a.command=='release-web-template':
+            from .webprofile import released_template
+            return released_template(a.source, a.repo, a.epubcheck_jar, a.out)
+        if a.command=='rebind-credits':
+            from .credits import rebind_credit_policy
+            return rebind_credit_policy(a.source, a.policy, a.repo, a.out)
         if a.command=='package-web-source':
             from .websource import package
             return package(a)
@@ -228,7 +244,7 @@ def main(argv=None):
             return sync_speech(a)
         if a.command=='web-profile':
             from .webprofile import source_equivalent_profile
-            return source_equivalent_profile(a.build,a.template,a.out,sync_inputs=a.sync_inputs)
+            return source_equivalent_profile(a.build,a.template,a.out,sync_inputs=a.sync_inputs,cache=CACHE)
         if a.command=='status':
             from .status import status_command
             return status_command(a.repo,a.ref,a.upstream,a.to,a.receipt,a.json)

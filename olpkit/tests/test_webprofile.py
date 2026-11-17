@@ -1,4 +1,5 @@
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,7 +8,7 @@ from unittest.mock import patch
 from olpkit.assembly import digest
 from olpkit.epubcheck import verify_cached_dependencies
 from olpkit.hubcheck import GENERATOR, hub_checkout
-from olpkit.webprofile import load_profile, reviewed_projection_changes
+from olpkit.webprofile import load_profile, projected_style_changes, reviewed_projection_changes
 
 
 class WebProfileTests(unittest.TestCase):
@@ -26,6 +27,44 @@ class WebProfileTests(unittest.TestCase):
         unit.update(canon=["passage"], assembled_sha256="other")
         with self.assertRaisesRegex(ValueError, "sync evidence"):
             reviewed_projection_changes(assembly, old, new, receipt, [])
+
+    def test_projected_style_requires_the_upstream_blob_and_localized_bytes_at_both_pins(self):
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            repo = root / "OpenLogic.git"
+            repo.mkdir()
+            def git(*args):
+                return subprocess.check_output(["git", "-C", str(repo), *args]).decode().strip()
+            git("init", "-q")
+            path = "sty/fixture.sty"
+            style = repo / path
+            style.parent.mkdir()
+            row = {"path": path}
+            acceptance = {"technical_changes": [row]}
+            projections = []
+            editions = []
+            for side, field in (("before", "from"), ("after", "to")):
+                body = side.encode()
+                style.write_bytes(body)
+                git("add", path)
+                git("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid", "commit", "-qm", side)
+                pin = git("rev-parse", "HEAD")
+                row[side] = ["100644", "blob", git("rev-parse", "HEAD:" + path)]
+                acceptance[field] = pin
+                edition = root / (side + ".toml")
+                edition.write_text(f'locale="test"\nengine="test"\nscript="test"\n[pins.olp]\ncommit="{pin}"\n')
+                editions.append(edition)
+                projections.append({"inputs": {path: {"sha256": digest(body)}}})
+            def check():
+                return projected_style_changes(root, acceptance, *editions, *projections)
+            self.assertEqual(check(), {path: row})
+            row["after"][2] = row["before"][2]
+            with self.assertRaisesRegex(ValueError, "Localized style"):
+                check()
+            row["after"][2] = git("rev-parse", "HEAD:" + path)
+            projections[0]["inputs"][path]["sha256"] = digest(b"another file")
+            with self.assertRaisesRegex(ValueError, "Localized style"):
+                check()
 
     def test_witnesses_are_relative_to_profile_location(self):
         with tempfile.TemporaryDirectory() as name:

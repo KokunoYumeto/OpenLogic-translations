@@ -27,7 +27,112 @@ def load_profile(path):
     return profile
 
 
-def reviewed_projection_changes(assembly, old, new, acceptance, book_changes):
+def released_template(source, repo, jar, out):
+    """Recover the previous native projection using an editable public release and its pinned edition."""
+    import shutil
+    import tomllib
+    from .assembly import GitSnapshot, locale_marks
+    from .schemas import ROOT
+    from .sourceexport import public_unit_bytes
+    from .webreplay import project_source, released_inputs
+
+    root, destination = Path(source).resolve(), Path(out).resolve()
+    if destination.exists() or destination.is_relative_to(root):
+        raise ValueError("Choose a new template directory outside the released sources")
+    release, profile = released_inputs(root, Path(jar))
+    source_root = root / "source"
+    if "source/ASSEMBLY.json" not in release["inputs"]:
+        raise ValueError("Released native assembly is missing from the input manifest")
+    assembly = json.loads((source_root / "ASSEMBLY.json").read_bytes())
+    edition = GitSnapshot(repo, assembly["edition_commit"])
+    contract = tomllib.loads(edition.read_many(["olp-edition.toml"])["olp-edition.toml"].decode("utf-8-sig"))
+    if (contract["locale"] != assembly["locale"]
+            or contract["pins"]["olp"]["commit"] != assembly["sources"]["olp"]["commit"]):
+        raise ValueError("Edition and released source revisions differ")
+    # Public source removes only approved private comments. Recover the native
+    # unit bytes so the next sync compares the same two editorial records.
+    origins = profile.pop("released_unit_sources", {})
+    profile.pop("released_package_declarations", None)
+    prefix = "locale/" + assembly["locale"] + "/content/"
+    paths = {}
+    for name in origins:
+        if not name.startswith(prefix) or name not in assembly["files"]:
+            raise ValueError("Unidentified native unit in the release: " + name)
+        paths[name] = contract["paths"]["content"] + "/" + name.removeprefix(prefix)
+    blobs = edition.read_many(paths.values())
+    rules = ROOT / "data" / "exports" / (assembly["product"] + "-" + assembly["locale"] + ".json")
+    comments = json.loads(rules.read_bytes()).get("private_comment_sha256") if origins else {}
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(dir=destination.parent) as temporary:
+        scratch = Path(temporary)
+        tree, stage = scratch / "source", scratch / "template"
+        stage.mkdir()
+        for name, entry in assembly["files"].items():
+            relative = relative_path(name)
+            src, dest = source_root / relative, tree / relative
+            if release["inputs"].get("source/" + name) != entry["sha256"]:
+                raise ValueError("Source manifest differs from the release: " + name)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            if name not in origins:
+                shutil.copyfile(src, dest)
+                continue
+            native = blobs[paths[name]]
+            link = origins[name]
+            if digest(native) != link["native_sha256"]:
+                native, _ = locale_marks(native, assembly["locale"])
+            if (digest(native) != link["native_sha256"] or link["editable_sha256"] != entry["sha256"]
+                    or public_unit_bytes(name, native, comments) != src.read_bytes()):
+                raise ValueError("Published and native units do not reconcile: " + name)
+            dest.write_bytes(native)
+            entry.update(bytes=len(native), sha256=digest(native))
+        body = json_bytes(assembly)
+        (tree / "ASSEMBLY.json").write_bytes(body)
+        project_source(tree, profile, stage)
+        (stage / "native-manifest.json").write_bytes(body)
+        profile["witnesses"]["native_source_manifest"]["path"] = str(stage / "native-manifest.json")
+        for record, key in locations(profile):
+            path = Path(record[key])
+            if path.is_relative_to(stage):
+                path = destination / path.relative_to(stage)
+            try:
+                record[key] = Path(os.path.relpath(path, destination)).as_posix()
+            except ValueError:
+                record[key] = str(path)
+        (stage / "web-profile.json").write_bytes(json_bytes(profile))
+        stage.rename(destination)
+    print(f"Recovered previous web inputs and {len(origins)} native unit witnesses")
+    return 0
+
+
+def projected_style_changes(cache, acceptance, previous_edition, current_edition, old, new):
+    """Replay localized styles from both accepted upstream Git trees and the registered shims."""
+    import tomllib
+    from .assembly import GitSnapshot
+    from .shims import edition_shims, localize_sources
+
+    technical = {row["path"]: row for row in acceptance.get("technical_changes", [])}
+    paths = {name for name in technical.keys() & new["inputs"].keys() & old["inputs"].keys()
+             if name.startswith("sty/") and name.endswith((".sty", ".cls"))
+             and new["inputs"][name]["sha256"] != old["inputs"][name]["sha256"]}
+    if not paths:
+        return {}
+    for side, pin_key, edition_file, projection in (("before", "from", previous_edition, old),
+                                                     ("after", "to", current_edition, new)):
+        edition = tomllib.loads(edition_file.read_bytes().decode("utf-8-sig"))
+        pin = acceptance[pin_key]
+        if edition["pins"]["olp"]["commit"] != pin:
+            raise ValueError("Projected style revision differs from the edition contract")
+        tree = GitSnapshot(Path(cache) / "OpenLogic.git", pin)
+        files = paths | {shim["path"] for shim, _ in edition_shims(edition)}
+        localized, _, _ = localize_sources(tree.read_many(files), edition)
+        for name in paths:
+            if (list(tree.entries[name]) != technical[name][side]
+                    or digest(localized[name]) != projection["inputs"][name]["sha256"]):
+                raise ValueError("Localized style differs from the accepted upstream change: " + name)
+    return {name: technical[name] for name in paths}
+
+
+def reviewed_projection_changes(assembly, old, new, acceptance, book_changes, *, styles=None):
     """Account for each projected source file changed since the previous reader."""
     if (acceptance["schema"] != "olpkit.sync-accept.v1"
             or acceptance["to"] != assembly["sources"]["olp"]["commit"]):
@@ -50,6 +155,8 @@ def reviewed_projection_changes(assembly, old, new, acceptance, book_changes):
                     or unit["hashes"]["target_before"] != before):
                 raise ValueError("changed translation lacks matching sync evidence: " + name)
             decision = unit["unit"]
+        elif styles and name in styles:
+            decision = {"upstream_style": styles[name]}
         else:
             row = reviewed.pop(name, {})
             if (not name.startswith(assembly["book_directory"] + "/") or row.get("old") != before
@@ -62,7 +169,7 @@ def reviewed_projection_changes(assembly, old, new, acceptance, book_changes):
     return changed
 
 
-def source_equivalent_profile(build_path, template_path, destination, *, sync_inputs=None):
+def source_equivalent_profile(build_path, template_path, destination, *, sync_inputs=None, cache=None):
     """Bind unchanged or explicitly reviewed source changes to the native build."""
     from .bookcontext import BookInputs
     from .bookprojection import BookProjection
@@ -79,6 +186,9 @@ def source_equivalent_profile(build_path, template_path, destination, *, sync_in
     profile = load_profile(template)
     refresh = {}
     if sync_inputs is not None:
+        prior_edition = Path(profile["witnesses"]["edition"]["path"])
+        if digest(prior_edition.read_bytes()) != profile["witnesses"]["edition"]["sha256"]:
+            raise ValueError("Previous edition metadata differs from its release")
         settings_path = Path(sync_inputs).resolve()
         refresh = json.loads(settings_path.read_bytes())
         def checked_input(role):
@@ -134,8 +244,12 @@ def source_equivalent_profile(build_path, template_path, destination, *, sync_in
             or import_order(receipt) != import_order(prior_projection)
             or receipt["initial_selection"] != prior_projection["initial_selection"]):
         raise ValueError("source projection changed; regenerate the affected language resources")
-    changes = (reviewed_projection_changes(assembly, prior_projection, receipt, acceptance, refresh["book_inputs"])
-               if refresh else [])
+    changes = []
+    if refresh:
+        styles = projected_style_changes(cache, acceptance, prior_edition, checked_input("edition"),
+                                         prior_projection, receipt)
+        changes = reviewed_projection_changes(assembly, prior_projection, receipt, acceptance,
+                                              refresh["book_inputs"], styles=styles)
     if {p for _,p in imports} != set(build["content_inputs"]):
         raise ValueError("native recorder differs from the import lock")
     tokens = TextTokens(modern_xparse=profile["modern_xparse"],resolver=inputs.resolve)

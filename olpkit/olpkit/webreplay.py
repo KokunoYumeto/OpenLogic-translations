@@ -12,7 +12,7 @@ from .htmlarchive import package_html_reader
 from .sourceexport import export_import_lock
 from .texttokens import TextTokens
 from .webexport import export_web
-from .webprofile import load_profile
+from .webprofile import load_profile, locations
 
 
 def project_source(source, profile, scratch):
@@ -37,17 +37,34 @@ def project_source(source, profile, scratch):
         profile["witnesses"][role] = {"path": str(path), "sha256": digest(payload)}
 
 
-def rebuild(root, destination, jar):
-    root = root.resolve()
+def released_inputs(root, jar):
     release = json.loads((root / "WEB-EDITION.json").read_bytes())
     for name, checksum in release["inputs"].items():
         path = (root / relative_path(name)).resolve()
         if not path.is_relative_to(root) or digest(path.read_bytes()) != checksum:
             raise ValueError("release input differs: " + name)
+    if "web/profile.json" not in release["inputs"]:
+        raise ValueError("Released profile is missing from the input manifest")
     profile = load_profile(root / "web/profile.json")
+    for record, key in locations(profile):
+        if record is profile.get("epubcheck"):
+            continue
+        path = Path(record[key])
+        checksum = record.get("sha256")
+        if key == "directory":
+            path = (path / "NATIVE_FIGURES.json").resolve()
+            checksum = record["receipt_sha256"]
+        if not path.is_relative_to(root) or release["inputs"].get(path.relative_to(root).as_posix()) != checksum or not checksum:
+            raise ValueError("Profile refers to an input outside the release manifest")
     if not jar.is_file() or digest(jar.read_bytes()) != profile["epubcheck"]["sha256"]:
         raise ValueError("EPUBCheck JAR differs from this edition's version")
     profile["epubcheck"]["path"] = str(jar.resolve())
+    return release, profile
+
+
+def rebuild(root, destination, jar):
+    root = root.resolve()
+    release, profile = released_inputs(root, jar)
     source = root / "source"
     # Earlier source packages always contained reviewed speech labels.
     product = release.get("product", "accessible")

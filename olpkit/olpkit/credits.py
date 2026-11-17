@@ -7,8 +7,9 @@ import json
 from pathlib import Path
 import re
 import unicodedata
+import tomllib
 
-from .assembly import digest,json_bytes
+from .assembly import GitSnapshot, digest, json_bytes
 from .cache import relative_path
 from .pdfaudit import extracted_text,file_record
 from .schemas import ROOT, validate_schema
@@ -192,6 +193,112 @@ def inspect_credits(source,policy,pdf=None,build=None):
             'limits':['Checks the separately specified notices, not copyright clearance.',
                       'Reader checks use actual PDF text and require the listed fragments together on a page.',
                       'Policy completeness still requires component provenance review; no language or mathematical certification.']}
+
+
+def rebind_source_links(original, upstream, before, after):
+    """Update exact source URLs and the revision labels printed by matching TeX links."""
+    base = re.escape(upstream.encode()) + rb'/(?:blob|tree)/'
+    source_url = base + re.escape(before.encode())
+    display = re.compile(rb'(\\href\{' + source_url + rb'\}\{)([a-f0-9]{7,40})\}')
+    labels = set()
+
+    def update_display(match):
+        label = match[2].decode('ascii')
+        if not before.startswith(label):
+            return match[0]
+        labels.add(label)
+        return match[1] + after[:len(label)].encode('ascii') + b'}'
+
+    original = display.sub(update_display, original)
+    links = re.compile(source_url + rb'(?=[/}#)\s"]|$)')
+    return links.sub(lambda m: m[0][:-len(before)] + after.encode('ascii'), original), labels
+
+
+def edition_credit_paths(assembly):
+    from .build import load_build_product
+    from .importlock import pin_key
+    _, book = load_build_product(assembly["product"])
+    locale = assembly["locale"]
+    if not re.fullmatch(r"[a-zA-Z0-9-]+", locale):
+        raise ValueError("Invalid credit policy locale")
+    filename = book["source_id"] + "-" + locale + ".json"
+    pins = {key: row["commit"] for key, row in assembly["sources"].items()}
+    root = ROOT / "data" / "credits"
+    return root / "pins" / pin_key(pins) / filename, root / filename
+
+
+def previous_credit_policy(previous):
+    previous = Path(previous)
+    if previous.is_file():
+        return json.loads(previous.read_bytes())
+    manifest = json.loads((previous / "WEB-EDITION.json").read_bytes())
+    def read(name):
+        raw = (previous / name).read_bytes()
+        if digest(raw) != manifest["inputs"].get(name):
+            raise ValueError("Published credit input differs from release manifest: " + name)
+        return json.loads(raw)
+    assembly = read("source/ASSEMBLY.json")
+    subset = read("web/credits.json")
+    scoped, fallback = edition_credit_paths(assembly)
+    policy = json.loads((scoped if scoped.is_file() else fallback).read_bytes())
+    checks = [{"id": c["id"], "reader_checks": c.get("reader_checks", [])} for c in policy["components"]]
+    pins = {key: row["commit"] for key, row in assembly["sources"].items()}
+    if (subset != {"components": checks} or policy["pins"] != pins
+            or policy["locale"] != assembly["locale"] or policy["product"] != assembly["product"]):
+        raise ValueError("Published credit checks differ from the registered policy for this edition")
+    return policy
+
+
+def rebind_credit_policy(source, previous, repo, out=None):
+    source = Path(source).resolve()
+    policy = previous_credit_policy(previous)
+    validate_schema('credit-policy', policy)
+    assembly = json.loads((source / 'ASSEMBLY.json').read_bytes())
+    pins = {key: row['commit'] for key, row in assembly['sources'].items()}
+    if (policy['locale'] != assembly['locale'] or policy['product'] != assembly['product']
+            or policy['pins'].keys() != pins.keys()
+            or any(value != pins[key] for key, value in policy['pins'].items() if key != 'olp')):
+        raise ValueError('Expected the same edition, textbook and companion source revisions')
+    old_pin = policy['pins']['olp']
+    snapshot = GitSnapshot(repo, assembly['edition_commit'])
+    contract = tomllib.loads(snapshot.read_many(['olp-edition.toml'])['olp-edition.toml'].decode('utf-8-sig'))
+    if any(contract['pins'][key]['commit'] != value for key, value in pins.items()):
+        raise ValueError('Assembled sources differ from the edition contract')
+    edition = contract['repository'].removesuffix('.git').rstrip('/')
+    upstream = contract['pins']['olp']['repository'].removesuffix('.git').rstrip('/')
+    book = GitSnapshot(repo, assembly['book_commit'])
+    previous_snapshots = {}
+    updated_labels = set()
+    for component in policy['components']:
+        for notice in component['files']:
+            content = member(source, notice['path']).read_bytes()
+            if digest(content) == notice['sha256']:
+                continue
+            entry = assembly['files'][notice['path']]
+            match = re.fullmatch(re.escape(edition) + r'/blob/([a-f0-9]{40})/(.+)', notice['witness'])
+            if (not match or match[2] != entry['path'] or entry['source'] != 'book'
+                    or entry['commit'] != book.commit):
+                raise ValueError('Review the changed credit notice: ' + notice['path'])
+            if match[1] not in previous_snapshots:
+                previous_snapshots[match[1]] = GitSnapshot(repo, match[1])
+            original = previous_snapshots[match[1]].read_many([match[2]])[match[2]]
+            rebound, printed_labels = rebind_source_links(original, upstream, old_pin, pins['olp'])
+            if (digest(original) != notice['sha256'] or book.read_many([match[2]])[match[2]] != content
+                    or rebound != content):
+                raise ValueError('Credit wording changed beyond its source revision: ' + notice['path'])
+            updated_labels.update(printed_labels)
+            notice.update(sha256=digest(content), witness=edition + '/blob/' + book.commit + '/' + match[2])
+    for component in policy['components']:
+        for check in component['reader_checks']:
+            check['all_of'] = [pins['olp'][:len(term)] if term in updated_labels else term
+                               for term in check['all_of']]
+    policy['pins'] = pins
+    output = Path(out) if out is not None else edition_credit_paths(assembly)[0]
+    output.parent.mkdir(parents=True, exist_ok=True)
+    from .syncaccept import save_acceptance
+    save_acceptance(output, json_bytes(policy))
+    print('Credit policy recorded in ' + str(output))
+    return 0
 
 
 def credits_command(source,policy_path,out,pdf=None,build=None):

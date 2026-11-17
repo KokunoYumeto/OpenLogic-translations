@@ -1,11 +1,49 @@
 import copy,json,tempfile,unittest
 from pathlib import Path
+from unittest.mock import patch
 from reportlab.pdfgen import canvas
 from olpkit.assembly import digest,json_bytes
-from olpkit.credits import inspect_credits,CATEGORIES
+from olpkit.credits import inspect_credits,CATEGORIES,rebind_source_links,previous_credit_policy
 
 
 class CreditTests(unittest.TestCase):
+    def test_rebinds_only_exact_source_urls_and_their_matching_printed_labels(self):
+        upstream = "https://github.com/example/source"
+        old, new = "ab" * 20, "cd" * 20
+        for n in (7, 8, 12, 40):
+            with self.subTest(length=n):
+                before = rf"\href{{{upstream}/tree/{old}}}{{{old[:n]}}}"
+                after = rf"\href{{{upstream}/tree/{new}}}{{{new[:n]}}}"
+                notice = f"Translator {old[:n]}: {before}.\n{upstream}/blob/{old}/COPYING"
+                expected = f"Translator {old[:n]}: {after}.\n{upstream}/blob/{new}/COPYING"
+                self.assertEqual(rebind_source_links(notice.encode(), upstream, old, new),
+                                 (expected.encode(), {old[:n]}))
+        notice = rf"\href{{{upstream}/tree/{old}}}{{editions}}; {upstream}/tree/{old}x"
+        self.assertEqual(rebind_source_links(notice.encode(), upstream, old, new),
+                         (notice.replace(old+"}", new+"}").encode(), set()))
+
+    def test_released_credit_checks_identify_the_full_pinned_policy(self):
+        (self.root / "web").mkdir()
+        prior = self.root / "full-policy.json"
+        prior.write_bytes(json_bytes(self.policy))
+        checks = {"components": [{"id": c["id"], "reader_checks": c["reader_checks"]}
+                                 for c in self.policy["components"]]}
+        subset = self.root / "web/credits.json"
+        def save_subset(value):
+            subset.write_bytes(json_bytes(value))
+            names = ("web/credits.json", "source/ASSEMBLY.json")
+            (self.root / "WEB-EDITION.json").write_bytes(json_bytes({
+                "inputs": {k: digest((self.root / k).read_bytes()) for k in names}}))
+        save_subset(checks)
+        with patch("olpkit.credits.edition_credit_paths", return_value=(prior, self.root / "unused")):
+            self.assertEqual(previous_credit_policy(self.root), self.policy)
+            save_subset({"components": []})
+            with self.assertRaisesRegex(ValueError, "registered policy"):
+                previous_credit_policy(self.root)
+            subset.write_bytes(b"{}")
+            with self.assertRaisesRegex(ValueError, "release manifest"):
+                previous_credit_policy(self.root)
+
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         self.root=Path(self.tmp.name);self.source=self.root/'source';self.source.mkdir()

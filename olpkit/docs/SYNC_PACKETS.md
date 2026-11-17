@@ -106,6 +106,14 @@ python -m olpkit export --source build/source --product accessible --profile acc
 python -m olpkit package-html --export accessible/EXPORT.json --out reader-html.zip
 ```
 
+After staging the release, keep the inputs for the next speech update in the edition repository. The release manifest and its editable source ZIP must be in the same folder. Use the ordinary HTML from before speech binding and the directory produced by the reviewed speech sync.
+
+~~~sh
+python -m olpkit package-speech-inputs --release release-assets/release.json --reader ordinary-html/reader.html --update update --out edition/publication/speech-inputs/RELEASE_TAG.zip
+~~~
+
+Replace `RELEASE_TAG` with the manifest's tag. The command compares every spoken formula with the published labels and the hash of the released HTML. Link this archive in the edition's speech-input guide and retain the earlier archives.
+
 ## Distribute the editable source for the web formats
 
 Use the accepted accessible export, its web profile, the PDF source export,

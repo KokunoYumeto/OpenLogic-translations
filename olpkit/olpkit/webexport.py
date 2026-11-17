@@ -1,14 +1,14 @@
 """Shared source-to-HTML/EPUB orchestration. Publication is a separate action."""
 from pathlib import Path
 import json,tomllib,subprocess
-from lxml import html,etree
+from lxml import html
 from .bookcontext import BookInputs,build_context,sha
 from .bookbody import build_body
 from .bookfinish import finish_book
 from .htmlpackage import reader_html
 from .epubpackage import package_html
 from .xhtml import text_without_annotations
-from .formulaspeech import bind_speech
+from .formulaspeech import add_speech_attribution, bind_speech
 from .webfonts import bind_web_fonts
 from .webprofile import load_profile
 
@@ -90,12 +90,7 @@ def export_web(source,product,out,profile_path,*,check_numbers=False,check_speec
             from .speechreplay import replay_labels
             data,speech_report=replay_labels(data,released_speech)
             attribution=released_speech['attribution']
-        if not isinstance(attribution,str) or not attribution.strip():raise ValueError('localized speech attribution absent')
-        accessible=html.document_fromstring(data,parser=html.HTMLParser(encoding='utf-8',huge_tree=True))
-        credit=accessible.xpath('//*[@id="olp-native-credit-3"]')
-        if len(credit)!=1:raise ValueError('native copyright/credit page absent')
-        etree.SubElement(credit[0],'p',attrib={'class':'olp-speech-attribution'}).text=attribution
-        data=html.tostring(accessible,encoding='utf-8',doctype='<!DOCTYPE html>')
+        data = add_speech_attribution(data, attribution)
         speech_report['attribution_text']=attribution
         speech_report['attributed_reader_sha256']=sha(data)
     (out/'reader.html').write_bytes(data)

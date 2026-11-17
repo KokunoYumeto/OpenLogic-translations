@@ -6,6 +6,17 @@ from .epubpackage import math_signature
 from .assembly import digest, json_bytes
 
 
+def add_speech_attribution(data, attribution):
+    if not isinstance(attribution, str) or not attribution.strip():
+        raise ValueError("Localized speech attribution absent")
+    doc = html.document_fromstring(data, parser=html.HTMLParser(encoding="utf-8", huge_tree=True))
+    credits = doc.xpath('//*[@id="olp-native-credit-3"]')
+    if len(credits) != 1:
+        raise ValueError("Native copyright/credit page absent")
+    html.etree.SubElement(credits[0], "p", attrib={"class": "olp-speech-attribution"}).text = attribution
+    return html.tostring(doc, encoding="utf-8", doctype="<!DOCTYPE html>")
+
+
 def table_context(node, row_cache):
     """Identify the HTML row and cell; an isolated A may be capital alpha."""
     cell = next((ancestor for ancestor in node.iterancestors() if ancestor.tag in ('td', 'th')), None)

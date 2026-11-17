@@ -219,6 +219,9 @@ def main(argv=None):
         speech.add_argument('--' + name, required=True)
     speech.add_argument('--review', help='editorial decisions for every changed occurrence')
     speech.add_argument('--previous-source-map', help='source locations bound to the previous speech store')
+    speech_inputs = sub.add_parser('package-speech-inputs', help='package reviewed formula readings for the next textbook update')
+    for name in ('release', 'reader', 'update', 'out'):
+        speech_inputs.add_argument('--' + name, required=True)
     offline = sub.add_parser('package-html', help='bundle a checked HTML reader with its local images and fonts')
     offline.add_argument('--export', required=True, help='paired HTML and EPUB export receipt')
     offline.add_argument('--out', required=True, help='destination ZIP file')
@@ -236,6 +239,9 @@ def main(argv=None):
         if a.command=='package-web-source':
             from .websource import package
             return package(a)
+        if a.command=='package-speech-inputs':
+            from .speecharchive import package_speech_inputs
+            return package_speech_inputs(a.release, a.reader, a.update, a.out)
         if a.command=='package-html':
             from .htmlarchive import package_html_reader
             return package_html_reader(a.export, a.out)

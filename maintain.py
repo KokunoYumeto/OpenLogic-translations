@@ -22,6 +22,7 @@ from urllib.request import Request, urlopen
 HUB = Path(__file__).resolve().parent
 sys.path.insert(0, str(HUB/"olpkit"))
 from olpkit.upstreamtags import MONTH, UPSTREAM, monthly_tags, record_tag, tag_for_commit
+from olpkit.canonlinks import compare_canon_spans, segment_index
 FULL_SHA = re.compile(r"[0-9a-f]{40}")
 
 
@@ -212,7 +213,7 @@ def prior_choices_by_unit(rows, segment_field):
     return choices
 
 
-def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_rows, root, prior_choices=None):
+def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_rows, root, prior_choices=None, canon=None):
     name=change["after"] or change["before"]
     key=unit_map.get(change["before"]) or unit_map.get(name)
     if not key:
@@ -251,6 +252,10 @@ def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_r
             "term_rows":matching,"issues":issues}
     if prior_choices is not None:
         record["prior_segment_choices"] = prior_choices.get(key, [])
+    if canon is not None:
+        source = (packet/"before.tex").read_bytes() if "before" in files else None
+        target = (packet/"current-target.tex").read_bytes() if "current_target" in files else None
+        record["prior_canon"] = compare_canon_spans(canon.get(key, []), source, target)
     (packet/"unit.json").write_bytes(encode(record))
     return {"unit":key,"path":name,"record_sha256":sha(encode(record)),"issues":issues}
 
@@ -352,7 +357,10 @@ def prepare(args):
                     result["ledger_sha256"]=sha(ledger)
                     (folder/"olp-edition.toml").write_bytes(contract)
                 result["resources"]={}
-                for role in ("termbase","orthography","canon_passages","canon_sources"):
+                roles = ["termbase", "orthography", "canon_passages", "canon_sources"]
+                if paths.get("segment_canon"):
+                    roles.append("segment_canon")
+                for role in roles:
                     path=paths.get(role)
                     body=get(path,True) if path else None
                     if body is None:
@@ -367,7 +375,11 @@ def prepare(args):
                 prior_choices = None
                 if segment_field and not getattr(args, "replay_shared_freeze", False):
                     prior_choices = prior_choices_by_unit(terms, segment_field)
-                result["units"]=[unit_packet(cache,old,goal,c,paths,get,unit_map,indexes,terms,folder,prior_choices) for c in units]
+                canon = None
+                if all(key in result["resources"] for key in ("segment_canon", "canon_passages", "canon_sources")):
+                    canon = segment_index(*((folder/result["resources"][key]["packet_file"]).read_bytes()
+                                            for key in ("segment_canon", "canon_passages", "canon_sources")))
+                result["units"]=[unit_packet(cache,old,goal,c,paths,get,unit_map,indexes,terms,folder,prior_choices,canon) for c in units]
                 if not paths.get("content"):
                     result["issues"].append("locate the current target sources for this edition")
             (folder/"edition.json").write_bytes(encode(result))

@@ -3,6 +3,7 @@ import json
 import unittest
 
 from olpkit.assembly import digest
+from olpkit.canonlinks import segment_index, compare_canon_spans
 from olpkit.edition import git_blob
 from olpkit.syncedition import checked_delta, make_packets, term_rows
 
@@ -46,6 +47,28 @@ class SyncEditionTests(unittest.TestCase):
     def test_malformed_termbase_cannot_silently_drop_context(self):
         for body in [b'en\ttarget\nmap\tx\n',b'english\ttarget\nmap\n',b'english\ttarget\n\tx\n']:
             with self.assertRaises(ValueError):term_rows(body,'+map')
+
+    def test_jsonl_terms_keep_citations_and_physical_line(self):
+        terms = b'\n{"english":"map","passages":["P"]}\n'
+        result = term_rows(terms,'-A map.','terms.jsonl')
+        self.assertEqual(result,[{'line':2,'fields':{'english':'map','passages':['P']}}])
+
+    def test_archived_canon_spans_compare_both_sides_and_whole_unit_extent(self):
+        target = 'ગણ'.encode()
+        span = {'unit':'OLP-0001','segment':'OLP-0001-U','scope':'unit','passages':['P'],
+                'source':{'bytes':[0,3],'sha256':digest(b'set')},
+                'target':{'bytes':[0,len(target)],'sha256':digest(target)}}
+        passages = b'{"passage_id":"P","source_id":"S"}'
+        sources = b'{"source_id":"S"}'
+        index = segment_index(json.dumps(span).encode(),passages,sources)
+        for english, translated, source_ok, target_ok, full in [
+                (b'set',target,True,True,True), (b'sets',target,True,True,False),
+                (b'set',target+b'.',True,True,False), (b'get',None,False,False,False)]:
+            row, = compare_canon_spans(index['OLP-0001'],english,translated)
+            self.assertEqual((row['source_matches'],row['target_matches'],row['covers_current_unit']),
+                             (source_ok,target_ok,full))
+        with self.assertRaisesRegex(ValueError,'unknown source'):
+            segment_index(json.dumps(span).encode(),passages,b'{"source_id":"other"}')
 
     def test_plan_must_include_the_build_change_and_exact_source_bytes(self):
         plan=copy.deepcopy(self.plan);plan['files'].pop()

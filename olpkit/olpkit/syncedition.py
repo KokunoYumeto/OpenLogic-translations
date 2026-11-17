@@ -8,21 +8,26 @@ import tomllib
 
 from .assembly import GitSnapshot, assemble_units, digest, json_bytes
 from .cache import SourceCache, relative_path
+from .canonlinks import compare_canon_spans, segment_index
 from .edition import git_blob
 from .schemas import ROOT, validate_schema
 
 
-def term_rows(body, hunks):
+def term_rows(body, hunks, filename='terms.tsv'):
     text=body.decode('utf-8-sig')
-    reader=csv.DictReader(io.StringIO(text), delimiter='\t')
-    if not reader.fieldnames or 'english' not in reader.fieldnames:
-        raise ValueError('termbase needs an explicit english column')
+    if filename.endswith('.jsonl'):
+        rows=((i,json.loads(line)) for i,line in enumerate(text.splitlines(),1) if line.strip())
+    else:
+        reader=csv.DictReader(io.StringIO(text), delimiter='\t')
+        if not reader.fieldnames or 'english' not in reader.fieldnames:
+            raise ValueError('termbase needs an explicit english column')
+        rows=enumerate(reader,2)
     # Match only changed hunk text, not headers or context. Token labels remain visible.
     changed='\n'.join(line[1:] for line in hunks.splitlines()
                       if line.startswith(('+','-')) and not line.startswith(('+++','---')))
     found=[]
-    for number,row in enumerate(reader,2):
-        if None in row or any(v is None for v in row.values()):
+    for number,row in rows:
+        if not isinstance(row,dict) or not isinstance(row.get('english'),str) or None in row or any(v is None for v in row.values()):
             raise ValueError('malformed termbase row '+str(number))
         term=row['english'].strip()
         if not term:raise ValueError('empty English term in termbase row '+str(number))
@@ -53,7 +58,7 @@ def checked_delta(plan, old, new):
     return entries
 
 
-def make_packets(plan, edition, units, targets, old, new, terms, orthography):
+def make_packets(plan, edition, units, targets, old, new, terms, orthography, canon=None):
     entries=checked_delta(plan,old,new)
     if edition['pins']['olp']['commit']!=plan['from']:
         raise ValueError('edition source pin differs from sync starting pin')
@@ -73,11 +78,13 @@ def make_packets(plan, edition, units, targets, old, new, terms, orthography):
                 'source_after':new[path].decode('utf-8-sig'),
                 'target_path':target_path,'target_text':target.decode('utf-8-sig'),
                 'target_sha256':digest(target),'current_ledger':unit,
-                'relevant_terms':term_rows(terms,entry['hunks']),
+                'relevant_terms':term_rows(terms,entry['hunks'],edition['paths'].get('termbase','terms.tsv')),
                 'termbase_sha256':digest(terms),'orthography_sha256':digest(orthography),
                 'orthography_file':'language/'+edition['paths']['orthography'].split('/')[-1],
                 'disposition':None,'canon_use':'Not inferred from term rows. Record actual passages consulted during this sync.',
                 'conflict_policy':'Keep both source readings and the current target; an existing correction needs an explicit disposition. No automatic replacement.'}
+        if canon is not None:
+            packet['prior_canon']=compare_canon_spans(canon.get(unit['id'],[]), old[path], target)
         packets['packets/'+unit['id']+'.json']=json_bytes(packet)
         summaries.append({'id':unit['id'],'path':path,'current_target_sha256':digest(target),
                           'relevant_term_rows':len(packet['relevant_terms']),'packet_sha256':digest(packets['packets/'+unit['id']+'.json'])})
@@ -104,8 +111,16 @@ def edition_command(repo, ref, plan_path, cache_root, out):
         folder,manifest=cache.require('olp',pin)
         trees[which]={p:(folder/p).read_bytes() for p in manifest['files']}
     language_paths=[edition['paths']['termbase'],edition['paths']['orthography']]
+    evidence_roles = ('segment_canon', 'canon_passages', 'canon_sources')
+    if 'segment_canon' in edition['paths'] and not all(k in edition['paths'] for k in evidence_roles):
+        raise ValueError('Segment canon needs both bibliographic indexes')
+    language_paths.extend(edition['paths'][k] for k in evidence_roles if k in edition['paths'])
+    if len({Path(path).name for path in language_paths}) != len(language_paths):
+        raise ValueError('Language inputs have duplicate packet filenames')
     for path in language_paths:relative_path(path)
     language=snapshot.read_many(language_paths)
+    canon = (segment_index(*(language[edition['paths'][k]] for k in evidence_roles))
+             if 'segment_canon' in edition['paths'] else None)
     target_names=[edition['paths']['content']+'/'+u['path'].removeprefix('content/')
                   for u in units if u['src']=='olp' and u['state'] not in ('retired','new')]
     targets=snapshot.read_many(target_names)
@@ -114,7 +129,7 @@ def edition_command(repo, ref, plan_path, cache_root, out):
     english={p:b for p,b in trees['old'].items() if p.startswith('content/') and p.endswith('.tex')}
     _,verified=assemble_units(edition,units,english,targets,registry)
     packets,summary=make_packets(plan,edition,units,targets,trees['old'],trees['new'],
-                                 language[language_paths[0]],language[language_paths[1]])
+                                 language[language_paths[0]],language[language_paths[1]],canon)
     files={**packets,'UPSTREAM_DELTA.json':json_bytes(plan)}
     for name,body in language.items():files['language/'+name.split('/')[-1]]=body
     report={'schema':'olpkit.sync-edition.v1','edition':edition['language_tag'],'edition_commit':snapshot.commit,

@@ -34,6 +34,26 @@ class PacketTest(unittest.TestCase):
             record = {**keys, "passages":[passage]}
             path.write_bytes(m.encode(record))
             self.assertEqual(m.verify_review(path, root), 1)
+            checkout = root/"edition"
+            translated = checkout/"fr/x.tex"
+            translated.parent.mkdir(parents=True)
+            translated.write_bytes(b"new target\n")
+            with self.assertRaisesRegex(ValueError, "no candidate_sha256"):
+                m.verify_review(path, root, checkout)
+            reviewed = {**passage, "candidate_sha256":m.sha(translated.read_bytes())}
+            path.write_bytes(m.encode({**record, "passages":[reviewed, reviewed]}))
+            self.assertEqual(m.verify_review(path, root, checkout), 2)
+            stale = {**reviewed, "candidate_sha256":m.sha(b"old target\n")}
+            path.write_bytes(m.encode({**record, "passages":[reviewed, stale]}))
+            with self.assertRaisesRegex(ValueError, "OLP-0018: edited file differs"):
+                m.verify_review(path, root, checkout)
+            path.write_bytes(m.encode({**record, "passages":[reviewed]}))
+            translated.write_bytes(b"new target\r\n")
+            with self.assertRaisesRegex(ValueError, "edited file differs"):
+                m.verify_review(path, root, checkout)
+            translated.unlink()
+            with self.assertRaisesRegex(ValueError, "candidate file missing"):
+                m.verify_review(path, root, checkout)
             for change in ({"to":"d"*40}, {"passages":[]},
                            *({"passages":[{**passage, **edit}]} for edit in (
                                {"target_lines":[1,1]}, {"target_lines":[0,1]}, {"target":"wrong"},

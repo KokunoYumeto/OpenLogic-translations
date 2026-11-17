@@ -437,7 +437,7 @@ def verify_packet(args):
     print(f"{identity}: {count} files identical to a new source and edition replay.")
 
 
-def verify_review(review_path, packet_dir):
+def verify_review(review_path, packet_dir, candidate_tree=None):
     """Bind editorial findings to the source and translated passages they describe."""
     review = json.loads(review_path.read_bytes())
     packet = json.loads((packet_dir / "edition.json").read_bytes())
@@ -446,6 +446,8 @@ def verify_review(review_path, packet_dir):
             raise ValueError("review and edition packet differ at " + key)
     units = {row["unit"] for row in packet["units"]}
     repository, _, prefix = edition_location(packet["repository"])
+    candidate_root = candidate_tree.resolve(strict=True) if candidate_tree is not None else None
+    candidate_hashes = {}
     if not review["passages"]:
         raise ValueError("the review contains no passages")
     for passage in review["passages"]:
@@ -473,6 +475,17 @@ def verify_review(review_path, packet_dir):
         url = f"https://github.com/{repository}/blob/{packet['edition_commit']}/{quote(target)}#L{start}-L{end}"
         if passage["target"] != url:
             raise ValueError(f"{unit}: unexpected target link")
+        if candidate_root is not None:
+            if target not in candidate_hashes:
+                candidate_file = (candidate_root / safe(target)).resolve()
+                if not candidate_file.is_relative_to(candidate_root) or not candidate_file.is_file():
+                    raise ValueError(f"{unit}: candidate file missing from edition checkout: {target}")
+                candidate_hashes[target] = sha(candidate_file.read_bytes())
+            expected = passage.get("candidate_sha256")
+            if expected is None:
+                raise ValueError(f"{unit}: review passage has no candidate_sha256")
+            if expected != candidate_hashes[target]:
+                raise ValueError(f"{unit}: edited file differs from candidate_sha256: {target}")
     return len(review["passages"])
 
 
@@ -591,6 +604,8 @@ def main():
     review=commands.add_parser("verify-review",help="check the source and target witnesses of a maintenance review")
     review.add_argument("--record",required=True,type=Path)
     review.add_argument("--packet",required=True,type=Path,help="edition directory containing edition.json")
+    review.add_argument("--candidate-tree",type=Path,
+                        help="also verify the reviewed final file bytes in this edition repository checkout")
     check=commands.add_parser("watch",help="prepare one hub advisory for a new upstream master")
     check.add_argument("--out",required=True,type=Path)
     check.add_argument("--cache",type=Path,default=Path(".olp-maintenance/cache"))
@@ -609,8 +624,10 @@ def main():
         verify_packet(args)
         return 0
     if args.command=="verify-review":
-        count = verify_review(args.record, args.packet)
+        count = verify_review(args.record, args.packet, args.candidate_tree)
         print(f"{count} reviewed passages match the pinned source and target files.")
+        if args.candidate_tree is not None:
+            print("The edited files for those passages also match their recorded SHA-256 hashes.")
         return 0
     result=prepare(args)
     for row in result["editions"]:

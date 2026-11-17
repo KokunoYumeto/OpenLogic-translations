@@ -55,6 +55,14 @@ python maintain.py verify-review --packet ../fr-review-packet/openlogic-fr --rec
 
 The last command checks each cited file and excerpt against the record. Read the linked passages to assess the mathematical judgment or apply it to a later edition.
 
+When preparing a release, record the SHA-256 of the complete edited unit in `candidate_sha256` on each passage you reviewed. Pass the root of the edition repository to check those hashes against the files you will build. This catches a module changed after its review, including a change in line endings. Older records can still be replayed against their original packets with the command above.
+
+```sh
+python maintain.py verify-review --packet ../update-packet/openlogic-fr --record ../review.json --candidate-tree ../OpenLogic-fr
+```
+
+The check covers the units cited in that review. Use the edition’s full unit ledger to establish coverage of the reader.
+
 ## Translate the delta
 
 Some glossaries record several expressions in one entry. For instance, a Javanese entry includes both *syntax* and *atomic formula*. The packet lists which English expression matched the changed prose and carries the complete decision with its citations. Read that decision before choosing a target term. A grouped entry can contain different translations for different contexts.

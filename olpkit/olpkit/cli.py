@@ -8,6 +8,8 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from tempfile import NamedTemporaryFile
+from urllib.request import urlopen
 
 from .structure import differences
 
@@ -54,16 +56,36 @@ def blob(oid):
 
 def manifest_maps():
     folder = CACHE / 'edition-manifests'
-    jv = json.loads((folder / 'jv.json').read_text(encoding='utf-8'))
-    gu = json.loads((folder / 'gu.json').read_text(encoding='utf-8'))
+    folder.mkdir(parents=True, exist_ok=True)
+    records = {}
+    for witness in json.loads((ROOT/'data/units/registry-sources.json').read_bytes()):
+        locale = witness['locale']
+        suffix = '.jsonl' if locale in ('bn','mr') else '.json'
+        dest = folder/(locale+suffix)
+        if dest.is_file():
+            body = dest.read_bytes()
+        else:
+            with urlopen(witness['url'],timeout=45) as response:
+                body = response.read(4*1024*1024+1)
+        if digest(body) != witness['sha256']:
+            raise ValueError('Registry source differs from its published hash: '+locale)
+        if not dest.exists():
+            with NamedTemporaryFile(dir=folder,delete=False) as temp:
+                temp.write(body)
+            os.replace(temp.name,dest)
+        records[locale] = body
+    jv = json.loads(records['jv'])
+    gu = json.loads(records['gu'])
     maps = {'jv': {x['english']['path'].removeprefix('upstream/'): x['id'] for x in jv['units']}, 'gu': {x['path']: x['id'] for x in gu['units']}}
     for locale in ['bn', 'mr']:
-        rows = [json.loads(s) for s in (folder / (locale + '.jsonl')).read_text(encoding='utf-8').splitlines() if s.strip()]
+        rows = [json.loads(s) for s in records[locale].splitlines() if s.strip()]
         maps[locale] = {x['source_path']: x['unit_id'] for x in rows}
     return maps
 
 
 def registry(check=False):
+    from .cache import SourceCache
+    SourceCache(CACHE).fetch('olp',BASE)
     maps = manifest_maps()
     source = {p for p in tree(BASE) if p.startswith('content/') and p.endswith('.tex')}
     canonical = maps['jv']
@@ -88,10 +110,30 @@ def registry(check=False):
 
 
 def delta(from_ref, to_ref):
-    before, after = commit(from_ref), commit(to_ref)
+    from .cache import SourceCache
+    from .importlock import read_lock
+    from .upstreamtags import COMMIT, MONTH, monthly_tags
+    tags = monthly_tags() if any(MONTH.fullmatch(ref) for ref in (from_ref,to_ref)) else {}
+    pins = []
+    for ref in (from_ref,to_ref):
+        if MONTH.fullmatch(ref) and ref not in tags:
+            raise ValueError('Unknown upstream monthly tag: '+ref)
+        pin = tags.get(ref,ref)
+        if not COMMIT.fullmatch(pin):
+            pin = commit(pin)
+        if pin not in pins:
+            SourceCache(CACHE).fetch('olp',pin)
+        pins.append(pin)
+    before, after = pins
     oldtree, newtree = tree(before), tree(after)
-    ids = manifest_maps()['jv']
-    scope = set((CACHE/'edition-manifests/slc-scope.txt').read_text(encoding='utf-8').splitlines())
+    with (ROOT/'data/units/olp-units.tsv').open(encoding='utf-8',newline='') as registry_file:
+        ids = {row['path']:row['id'] for row in csv.DictReader(registry_file,delimiter='\t')}
+    book = ROOT/'data/books/sets-logic-computation'
+    book_pins = json.loads((book/'imports.json').read_bytes())['pins']
+    imports, _ = read_lock(book,book_pins)
+    if any(ids.get(path)!=unit for unit,path in imports):
+        raise ValueError('Textbook import and published unit registry disagree')
+    scope = {path for _,path in imports}
     instructions = json.loads((ROOT/'data/sync-instructions.json').read_text(encoding='utf-8'))
     files = []
     packets = {}

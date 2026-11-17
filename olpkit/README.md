@@ -2,6 +2,8 @@
 
 Local source-registry, synchronization, edition-metadata and pinned-source tools. Install from this checkout with `python -m pip install -e .` using Python 3.11 or later. The data and schema files remain in this checkout.
 
+On a fresh checkout, `olpkit sync plan` takes two full upstream commits or published monthly tags. It fetches the source trees into its cache and uses the unit map and textbook import list shipped here. Set `OLPKIT_CACHE` to reuse a cache between checkouts. To audit the origin of the unit numbers, run `olpkit units registry --check`. This compares the English source tree with four independently published edition manifests and verifies their SHA-256 hashes.
+
 The glossary adapter preserves authored names, definitions, symbols and explicit plurals. It takes its order from the native book's emitted glossary and requires complete source-to-witness coverage. Glossary references retain their actual labels; sentence casing requires an evidenced language rule. HTML binding checks every entry and link before placing each destination on its term. This adapter does not translate definitions or establish full-reader acceptance.
 
 The bibliography adapter retains the native `.bbl` entries and derives author–date citation labels from the corresponding `.aux`, using evidenced natbib punctuation. Each citation occurrence remains linked to its exact entries, including citations in footnotes. Native diagram descriptions use the language owner's source-bound text, with concise image labels, visible links to the full descriptions and links back to each diagram. These components retain their source evidence separately from reader-facing text.

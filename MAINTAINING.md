@@ -57,6 +57,8 @@ The last command checks each cited file and excerpt against the record. Read the
 
 ## Translate the delta
 
+Some glossaries record several expressions in one entry. For instance, a Javanese entry includes both *syntax* and *atomic formula*. The packet lists which English expression matched the changed prose and carries the complete decision with its citations. Read that decision before choosing a target term. A grouped entry can contain different translations for different contexts.
+
 In editions that supply a segment index, each unit packet includes `prior_canon`. Each entry links a recorded passage or whole-unit choice to bibliographic passage IDs. The `source_matches` and `target_matches` fields compare the recorded UTF-8 byte ranges with the English before the update and the current translation. An earlier whole-unit review can match the opening of a longer unit. Only `covers_current_unit` checks both ends of both files. Follow the cited passages and compare the new English before making a fresh translation decision. The [Gujarati guide](https://github.com/KokunoYumeto/OpenLogic-gu-Gujr-IN/blob/main/provenance/canon/README.md) works through a term, page and source.
 
 For a monthly Open Logic release, pass its published `YY.MM` tag to `plan --to`. The packet uses the exact commit behind the tag, including when Git stores it as an annotated tag. To inspect the source tags currently associated with each edition, run `python maintain.py plan --summary-only --out ../olp-tag-inventory` and read each edition’s `from_upstream_tag` beside its commit and pin evidence.

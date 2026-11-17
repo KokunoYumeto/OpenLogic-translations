@@ -4,6 +4,7 @@ import unittest
 
 from olpkit.assembly import digest
 from olpkit.canonlinks import segment_index, compare_canon_spans
+from olpkit.termmatch import grouped_labels
 from olpkit.edition import git_blob
 from olpkit.syncedition import checked_delta, make_packets, term_rows
 
@@ -52,6 +53,14 @@ class SyncEditionTests(unittest.TestCase):
         terms = b'\n{"english":"map","passages":["P"]}\n'
         result = term_rows(terms,'-A map.','terms.jsonl')
         self.assertEqual(result,[{'line':2,'fields':{'english':'map','passages':['P']}}])
+
+    def test_grouped_term_with_olp_macro_preserves_the_full_source_decision(self):
+        row = {'english':'syntax; semantics (sense; use); atomic formula','passages':['P2','P5']}
+        terms = json.dumps(row).encode()
+        hits = term_rows(terms, '+If there is an atomic !!{formula}~$!A$', 'terms.jsonl')
+        self.assertEqual(hits,[{'line':1,'fields':row,'matched_english':['atomic formula']}])
+        self.assertEqual(term_rows(terms, '+semanticsXYZ\n no atomic !!{formula}', 'terms.jsonl'),[])
+        self.assertEqual(grouped_labels('a/b / f(x; y); $x / y$'), ['a/b','f(x; y)','$x / y$'])
 
     def test_archived_canon_spans_compare_both_sides_and_whole_unit_extent(self):
         target = 'ગણ'.encode()

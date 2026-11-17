@@ -3,12 +3,12 @@ import csv
 import io
 import json
 from pathlib import Path
-import re
 import tomllib
 
 from .assembly import GitSnapshot, assemble_units, digest, json_bytes
 from .cache import SourceCache, relative_path
 from .canonlinks import compare_canon_spans, segment_index
+from .termmatch import matched_labels, prose_for_matching
 from .edition import git_blob
 from .schemas import ROOT, validate_schema
 
@@ -26,13 +26,18 @@ def term_rows(body, hunks, filename='terms.tsv'):
     changed='\n'.join(line[1:] for line in hunks.splitlines()
                       if line.startswith(('+','-')) and not line.startswith(('+++','---')))
     found=[]
+    prose=prose_for_matching(changed)
     for number,row in rows:
         if not isinstance(row,dict) or not isinstance(row.get('english'),str) or None in row or any(v is None for v in row.values()):
             raise ValueError('malformed termbase row '+str(number))
         term=row['english'].strip()
         if not term:raise ValueError('empty English term in termbase row '+str(number))
-        if re.search(r'(?<!\w)'+re.escape(term)+r'(?!\w)',changed,re.I):
-            found.append({'line':number,'fields':row})
+        hits=matched_labels(term,changed,prose)
+        if hits:
+            result={'line':number,'fields':row}
+            if hits != [term]:
+                result['matched_english']=hits
+            found.append(result)
     return found
 
 

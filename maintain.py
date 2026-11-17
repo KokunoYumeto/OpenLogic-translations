@@ -23,6 +23,7 @@ HUB = Path(__file__).resolve().parent
 sys.path.insert(0, str(HUB/"olpkit"))
 from olpkit.upstreamtags import MONTH, UPSTREAM, monthly_tags, record_tag, tag_for_commit
 from olpkit.canonlinks import compare_canon_spans, segment_index
+from olpkit.termmatch import GROUPED, matched_labels, prose_for_matching
 FULL_SHA = re.compile(r"[0-9a-f]{40}")
 
 
@@ -213,7 +214,7 @@ def prior_choices_by_unit(rows, segment_field):
     return choices
 
 
-def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_rows, root, prior_choices=None, canon=None):
+def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_rows, root, prior_choices=None, canon=None, term_matching=None):
     name=change["after"] or change["before"]
     key=unit_map.get(change["before"]) or unit_map.get(name)
     if not key:
@@ -232,8 +233,15 @@ def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_r
     (packet/"source.diff").write_bytes(patch)
     changed="\n".join(l[1:] for l in patch.decode("utf-8").splitlines()
                       if l.startswith(("+","-")) and not l.startswith(("+++","---")))
-    matching=[r for r in term_rows if isinstance(r.get("english"),str) and r["english"].strip()
-              and re.search(r"(?<!\w)"+re.escape(r["english"].strip())+r"(?!\w)",changed,re.I)]
+    prose = prose_for_matching(changed) if term_matching == GROUPED else None
+    matching = []
+    grouped_hits = []
+    for number, row in enumerate(term_rows, 1):
+        hits = matched_labels(row.get("english"), changed, prose)
+        if hits:
+            matching.append(row)
+            if hits != [row["english"].strip()]:
+                grouped_hits.append({"termbase_record": number, "matched_english": hits})
     issues=[]
     if content_unit(change["before"]) and edition.get("content"):
         target_path=edition["content"]+"/"+change["before"].removeprefix("content/")
@@ -252,6 +260,8 @@ def unit_packet(cache, old, new, change, edition, get, unit_map, indexes, term_r
             "term_rows":matching,"issues":issues}
     if prior_choices is not None:
         record["prior_segment_choices"] = prior_choices.get(key, [])
+    if grouped_hits:
+        record["grouped_term_hits"] = grouped_hits
     if canon is not None:
         source = (packet/"before.tex").read_bytes() if "before" in files else None
         target = (packet/"current-target.tex").read_bytes() if "current_target" in files else None
@@ -379,7 +389,12 @@ def prepare(args):
                 if all(key in result["resources"] for key in ("segment_canon", "canon_passages", "canon_sources")):
                     canon = segment_index(*((folder/result["resources"][key]["packet_file"]).read_bytes()
                                             for key in ("segment_canon", "canon_passages", "canon_sources")))
-                result["units"]=[unit_packet(cache,old,goal,c,paths,get,unit_map,indexes,terms,folder,prior_choices,canon) for c in units]
+                term_matching = getattr(args, "term_matching", GROUPED) if terms else None
+                if term_matching is not None:
+                    if term_matching != GROUPED:
+                        raise ValueError("Unknown term matching rule")
+                    result["term_matching"] = term_matching
+                result["units"]=[unit_packet(cache,old,goal,c,paths,get,unit_map,indexes,terms,folder,prior_choices,canon,term_matching) for c in units]
                 if not paths.get("content"):
                     result["issues"].append("locate the current target sources for this edition")
             (folder/"edition.json").write_bytes(encode(result))
@@ -414,6 +429,7 @@ def verify_packet(args):
         replay = Path(scratch)/"packets"
         prepare(SimpleNamespace(edition=identity, edition_commit=record["edition_commit"],
                                 to=record["to"], cache=args.cache, out=replay, summary_only=False,
+                                term_matching=record.get("term_matching"),
                                 replay_shared_freeze=record.get("pin_evidence") == "shared catalogue freeze only"))
         count = compare_files(original, replay/identity)
         technical = Path("upstream")/record["from"]
